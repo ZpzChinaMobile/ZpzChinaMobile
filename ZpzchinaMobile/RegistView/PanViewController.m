@@ -68,9 +68,6 @@ static int count =5;
     textlabel = [[UILabel alloc] initWithFrame:CGRectMake(80,35, 160, 30)];
     textlabel.text = @"还需要采集5张照片";
     [self.view addSubview:textlabel];
-    
-
-
 }
 
 
@@ -126,8 +123,10 @@ static int count =5;
         [imgArr addObject:image];
         nowIMageView.image = image;
         NSLog(@"%@",imgArr);
-        textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(5-imgArr.count)];
+        textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(count-imgArr.count)];
+        count=5;
         if(imgArr.count == 5){
+            NSLog(@"%@",textlabel);
             indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
             [indicator startAnimating];
             [self.view addSubview:indicator];
@@ -183,6 +182,7 @@ static int count =5;
 
 - (void)failToRegister
 {
+    NSLog(@"failToRegister");
         [indicator stopAnimating];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"提示"
@@ -196,25 +196,24 @@ static int count =5;
 
     [imgArr removeAllObjects];
     [faceVC.view removeFromSuperview];
-
     faceVC = nil;
 
-    
+    textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(5-imgArr.count)];
 }
 
 
 -(void)viewDidAppear:(BOOL)animated{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToFormerVC) name:@"face" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToFormerVC) name:@"registerFace" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recognizeSuccess) name:@"faceLogin" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failToRegister) name:@"failLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failToRegister) name:@"failRegister" object:nil];
     
     
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"face" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"registerFace" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceLogin" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"failLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"failRegister" object:nil];
 }
 
 -(void)backToFormerVC{
@@ -222,6 +221,7 @@ static int count =5;
     [faceVC.view removeFromSuperview];
     [imgArr removeAllObjects];
     faceVC = nil;
+    textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(5-imgArr.count)];
 }
 
 
