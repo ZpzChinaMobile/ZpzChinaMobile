@@ -1,0 +1,467 @@
+//
+//  ProjectTableViewCell.m
+//  ZpzchinaMobile
+//
+//  Created by 汪洋 on 14-6-20.
+//  Copyright (c) 2014年 汪洋. All rights reserved.
+//
+
+#import "ProjectTableViewCell.h"
+
+@implementation ProjectTableViewCell
+@synthesize delegate;
+@synthesize dropDown;
+@synthesize dataArr;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag ownerArr:(NSMutableArray *)ownerArr singleDic:(NSMutableDictionary *)singleDic
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+        if(flag==0){
+            dataDic = dic;
+        }else{
+            dataDic = singleDic;
+        }
+        
+        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 550)];
+        [lingImage setBackgroundColor:[UIColor blackColor]];
+        [self addSubview:lingImage];
+        lingImage.alpha = 0.1;
+        
+        for (int i=0; i<10; i++) {
+            UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50*(i+1), 250, 1)];
+            [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+            [self addSubview:lingImage];
+        }
+        
+        
+        UITextField *ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(60,15, 200, 30)];
+        ProjectName.delegate = self;
+        ProjectName.textAlignment=NSTextAlignmentLeft;
+        ProjectName.placeholder=@"项目名称";
+        if(flag == 0){
+            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
+                [ProjectName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
+            }
+        }else{
+            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
+                [ProjectName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
+            }else{
+                if(![[singleDic objectForKey:@"projectName"] isEqualToString:@""]){
+                    [ProjectName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"projectName"]]];
+                }
+            }
+        }
+        ProjectName.returnKeyType=UIReturnKeyDone;
+        ProjectName.tag = 0;
+        //[ProjectName setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [self addSubview:ProjectName];
+        
+        ProjectAddress = [UIButton buttonWithType:UIButtonTypeCustom];
+        ProjectAddress.tag = 0;
+        ProjectAddress.frame = CGRectMake(60,65, 200, 30);
+        
+        if(flag == 0){
+            if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
+                [ProjectAddress setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landAddress"]] forState:UIControlStateNormal];
+            }else{
+                [ProjectAddress setTitle:@"项目地址" forState:UIControlStateNormal];
+            }
+        }else{
+            if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
+                [ProjectAddress setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landAddress"]] forState:UIControlStateNormal];
+            }else{
+                if(![[singleDic objectForKey:@"landAddress"] isEqualToString:@""]){
+                    [ProjectAddress setTitle:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landAddress"]] forState:UIControlStateNormal];
+                }else{
+                    [ProjectAddress setTitle:@"项目地址" forState:UIControlStateNormal];
+                }
+            }
+        }
+        [ProjectAddress setTitleColor:GrayColor forState:UIControlStateNormal];
+        ProjectAddress.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        ProjectAddress.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        [ProjectAddress addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:ProjectAddress];
+        
+        UIImageView *mapImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,65, 22.5, 22.5)];
+        [mapImage setImage:[UIImage imageNamed:@"新建项目3_03.png"]];
+        mapImage.userInteractionEnabled = YES;
+        UITapGestureRecognizer *mapImagetapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+        [mapImagetapGestureRecognizer addTarget:self action:@selector(gotoMap)];
+        [mapImagetapGestureRecognizer setNumberOfTapsRequired:1];
+        [mapImagetapGestureRecognizer setNumberOfTouchesRequired:1];
+        [mapImage addGestureRecognizer:mapImagetapGestureRecognizer];
+        [self addSubview:mapImage];
+        
+        UITextField *ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(60,115, 200, 30)];
+        ProjectMark.delegate = self;
+        ProjectMark.textAlignment=NSTextAlignmentLeft;
+        ProjectMark.placeholder=@"项目描述";
+        if(flag == 0){
+            if(![[dic objectForKey:@"description"] isEqualToString:@""]){
+                [ProjectMark setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"description"]]];
+            }
+        }else{
+            if(![[dic objectForKey:@"description"] isEqualToString:@""]){
+                [ProjectMark setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"description"]]];
+            }else{
+                if(![[singleDic objectForKey:@"description"] isEqualToString:@""]){
+                    [ProjectMark setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"description"]]];
+                }
+            }
+        }
+        ProjectMark.returnKeyType=UIReturnKeyDone;
+        ProjectMark.tag = 1;
+        //[ProjectMark setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [self addSubview:ProjectMark];
+        
+        UIButton *Owner = [UIButton buttonWithType:UIButtonTypeCustom];
+        Owner.frame = CGRectMake(60,165, 140, 30);
+        Owner.tag = 1;
+        [Owner setTitle:@"业主单位" forState:UIControlStateNormal];
+        [Owner setTitleColor:BlueColor forState:UIControlStateNormal];
+        Owner.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        Owner.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        [Owner addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:Owner];
+        
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(35,168, 20, 20)];
+        [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
+        [self addSubview:addImage];
+        
+        UIButton *startdate = [UIButton buttonWithType:UIButtonTypeCustom];
+        startdate.frame = CGRectMake(60,215, 200, 30);
+        startdate.tag = 2;
+        if(flag == 0){
+            if(![[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedStartTime"] intValue]];
+                NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+                [startdate setTitle:[NSString stringWithFormat:@"预计开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+            }else{
+                [startdate setTitle:@"预计开工时间" forState:UIControlStateNormal];
+            }
+        }else{
+            if(![[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedStartTime"] intValue]];
+                NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+                [startdate setTitle:[NSString stringWithFormat:@"预计开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+            }else{
+                if(![[singleDic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
+                    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                    [formatter setDateFormat:@"yyyy-MM-dd"];
+                    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[singleDic objectForKey:@"expectedStartTime"] intValue]];
+                    NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+                    NSLog(@"==> %@",[singleDic objectForKey:@"expectedStartTime"]);
+                    [startdate setTitle:[NSString stringWithFormat:@"预计开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                }else{
+                    [startdate setTitle:@"预计开工时间" forState:UIControlStateNormal];
+                }
+            }
+        }
+        [startdate setTitleColor:GrayColor forState:UIControlStateNormal];
+        startdate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        startdate.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        [startdate addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:startdate];
+        
+        UIButton *enddate = [UIButton buttonWithType:UIButtonTypeCustom];
+        enddate.frame = CGRectMake(60,265, 200, 30);
+        enddate.tag = 3;
+        if(flag == 0){
+            if(![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedFinishTime"] intValue]];
+                NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+                [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+            }else{
+                [enddate setTitle:@"预计竣工时间" forState:UIControlStateNormal];
+            }
+        }else{
+            if(![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedFinishTime"] intValue]];
+                NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+                [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+            }else{
+                if(![[singleDic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
+                    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                    [formatter setDateFormat:@"yyyy-MM-dd"];
+                    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[singleDic objectForKey:@"expectedFinishTime"] intValue]];
+                    NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+                    [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                }else{
+                    [enddate setTitle:@"预计竣工时间" forState:UIControlStateNormal];
+                }
+            }
+        }
+        [enddate setTitleColor:GrayColor forState:UIControlStateNormal];
+        enddate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        enddate.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        [enddate addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:enddate];
+        
+        UILabel *InvestmentLabe = [[UILabel alloc] initWithFrame:CGRectMake(60,315, 70, 30)];
+        InvestmentLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        InvestmentLabe.textColor = BlueColor;
+        InvestmentLabe.text = @"投资额:";
+        [self addSubview:InvestmentLabe];
+        
+        UITextField *Investment = [[UITextField alloc] initWithFrame:CGRectMake(150,315, 150, 30)];
+        Investment.delegate = self;
+        Investment.textAlignment=NSTextAlignmentLeft;
+        Investment.keyboardType = UIKeyboardTypeDecimalPad;
+        if(flag == 0){
+            if(![[dic objectForKey:@"investment"] isEqualToString:@""]){
+                [Investment setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]]];
+            }
+        }else{
+            if(![[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]] isEqualToString:@""]){
+                [Investment setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]]];
+            }else{
+                if(![[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"investment"]] isEqualToString:@""]){
+                    [Investment setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"investment"]]];
+                }
+            }
+        }
+        Investment.returnKeyType=UIReturnKeyDone;
+        Investment.tag = 2;
+        //[Investment setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [self addSubview:Investment];
+        
+        UILabel *GFALabe = [[UILabel alloc] initWithFrame:CGRectMake(60,365, 70, 30)];
+        GFALabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        GFALabe.textColor = BlueColor;
+        GFALabe.text = @"建筑面积:";
+        [self addSubview:GFALabe];
+        
+        UITextField *GFA = [[UITextField alloc] initWithFrame:CGRectMake(150,365, 150, 30)];
+        GFA.delegate = self;
+        GFA.keyboardType = UIKeyboardTypeDecimalPad;
+        GFA.textAlignment=NSTextAlignmentLeft;
+        if(flag == 0){
+            if(![[dic objectForKey:@"areaOfStructure"] isEqualToString:@""]){
+                [GFA setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]]];
+            }
+        }else{
+            if(![[dic objectForKey:@"areaOfStructure"] isEqualToString:@""]){
+                [GFA setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]]];
+            }else{
+                if(![[singleDic objectForKey:@"areaOfStructure"] isEqualToString:@""]){
+                    [GFA setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"areaOfStructure"]]];
+                }
+            }
+        }
+        GFA.returnKeyType=UIReturnKeyDone;
+        GFA.tag = 3;
+        //[GFA setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [self addSubview:GFA];
+        
+        UILabel *StoreybuildingLabe = [[UILabel alloc] initWithFrame:CGRectMake(60,415, 70, 30)];
+        StoreybuildingLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        StoreybuildingLabe.textColor = BlueColor;
+        StoreybuildingLabe.text = @"建筑层高:";
+        [self addSubview:StoreybuildingLabe];
+        
+        UITextField *Storeybuilding = [[UITextField alloc] initWithFrame:CGRectMake(150,415, 150, 30)];
+        Storeybuilding.delegate = self;
+        Storeybuilding.textAlignment=NSTextAlignmentLeft;
+        Storeybuilding.keyboardType = UIKeyboardTypeDecimalPad;
+        if(flag == 0){
+            if(![[dic objectForKey:@"storeyHeight"] isEqualToString:@""]){
+                [Storeybuilding setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]]];
+            }
+        }else{
+            if(![[dic objectForKey:@"storeyHeight"] isEqualToString:@""]){
+                [Storeybuilding setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]]];
+            }else{
+                if(![[singleDic objectForKey:@"storeyHeight"] isEqualToString:@""]){
+                    [Storeybuilding setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"storeyHeight"]]];
+                }
+            }
+        }
+        Storeybuilding.returnKeyType=UIReturnKeyDone;
+        Storeybuilding.tag = 4;
+        //[Storeybuilding setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [self addSubview:Storeybuilding];
+        
+        UIButton *Foreignparticipation = [UIButton buttonWithType:UIButtonTypeCustom];
+        Foreignparticipation.tag = 4;
+        Foreignparticipation.frame = CGRectMake(60,465, 200, 30);
+        if(flag == 0){
+            if(![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+                [Foreignparticipation setTitle:[NSString stringWithFormat:@"外资参与:参与"] forState:UIControlStateNormal];
+            }else{
+                [Foreignparticipation setTitle:@"外资参与:不参与" forState:UIControlStateNormal];
+            }
+        }else{
+            if([[dic objectForKey:@"foreignInvestment"] isEqualToString:@""]){
+                if([[singleDic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+                    [Foreignparticipation setTitle:@"外资参与:不参与" forState:UIControlStateNormal];
+                }else{
+                    [Foreignparticipation setTitle:[NSString stringWithFormat:@"外资参与:参与"] forState:UIControlStateNormal];
+                }
+            }else{
+                if([[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+                    [Foreignparticipation setTitle:@"外资参与:不参与" forState:UIControlStateNormal];
+                }else{
+                    [Foreignparticipation setTitle:[NSString stringWithFormat:@"外资参与:参与"] forState:UIControlStateNormal];
+                }
+            }
+        }
+        
+        [Foreignparticipation setTitleColor:BlueColor forState:UIControlStateNormal];
+        Foreignparticipation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        Foreignparticipation.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        [Foreignparticipation addTarget:self action:@selector(ForeignparticipationClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:Foreignparticipation];
+        
+        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,472, 8, 12.5)];
+        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [self addSubview:arrowImage];
+        
+        UIButton *OwnerType = [UIButton buttonWithType:UIButtonTypeCustom];
+        OwnerType.tag = 5;
+        OwnerType.frame = CGRectMake(60,515, 220, 30);
+        if(flag == 0){
+            if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
+                [OwnerType setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ownerType"]] forState:UIControlStateNormal];
+            }else{
+                [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
+            }
+        }else{
+            if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
+                [OwnerType setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ownerType"]] forState:UIControlStateNormal];
+            }else{
+                if(![[singleDic objectForKey:@"ownerType"] isEqualToString:@""]){
+                    [OwnerType setTitle:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"ownerType"]] forState:UIControlStateNormal];
+                }else{
+                    [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
+                }
+            }
+        }
+        [OwnerType setTitleColor:BlueColor forState:UIControlStateNormal];
+        OwnerType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        OwnerType.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        [OwnerType addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:OwnerType];
+        
+        UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(280,520, 8, 12.5)];
+        [arrowImage2 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [self addSubview:arrowImage2];
+        
+        self.dataArr = [NSMutableArray arrayWithArray:ownerArr];
+        if(ownerArr.count != 0){
+            for(int i=0; i<ownerArr.count;i++){
+                if(i<3){
+                    UIButton *contactBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                    [contactBtn setTitle:[[ownerArr objectAtIndex:i] objectForKey:@"contactName"] forState:UIControlStateNormal];
+                    contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+                    contactBtn.tag = i+1;
+                    [contactBtn setTitleColor:BlueColor forState:UIControlStateNormal];
+                    contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+                    [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
+                    if(i == 0){
+                        [contactBtn setFrame:CGRectMake(130, 165, 60, 30)];
+                    }else if(i == 1){
+                        [contactBtn setFrame:CGRectMake(180, 165, 60, 30)];
+                    }else{
+                        [contactBtn setFrame:CGRectMake(230, 165, 60, 30)];
+                    }
+                    [self addSubview:contactBtn];
+                }
+            }
+        }
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    textfield = nil;
+    textfield = textField;
+    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 550)];
+    closeView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *closeViewtapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+    [closeViewtapGestureRecognizer addTarget:self action:@selector(closeKeyBoard)];
+    [closeViewtapGestureRecognizer setNumberOfTapsRequired:1];
+    [closeViewtapGestureRecognizer setNumberOfTouchesRequired:1];
+    [closeView addGestureRecognizer:closeViewtapGestureRecognizer];
+    [self addSubview:closeView];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if ([delegate respondsToSelector:@selector(addContentProject:index:)]){
+        [delegate addContentProject:textField.text index:textField.tag];
+    }
+}
+
+-(void)btnClick:(UIButton *)button{
+    [textfield resignFirstResponder];
+    if ([delegate respondsToSelector:@selector(addContactViewProject:)]){
+        [delegate addContactViewProject:button.tag];
+    }
+}
+
+-(void)ForeignparticipationClick:(id)sender{
+    [textfield resignFirstResponder];
+    if(dropDown == nil) {
+        NSMutableArray *dataTempArr = [[NSMutableArray alloc]initWithObjects:@"参与",@"不参与", nil];
+        dropDown = [[NIDropDown alloc] initWithFrame:sender arr:dataTempArr tit:@"Foreignparticipation"];
+        dropDown.delegate = self;
+    }
+    else {
+        [dropDown hideDropDown:sender];
+        dropDown = nil;
+    }
+    
+}
+
+- (void) niDropDownDelegateMethod: (NIDropDown *) sender text:(NSString *)text tit:(NSString *)tit{
+    //NSLog(@"%@",text);
+    if ([delegate respondsToSelector:@selector(addforeignInvestment:)]){
+        [delegate addforeignInvestment:text];
+    }
+}
+
+-(void)closeKeyBoard{
+    [textfield resignFirstResponder];
+    [closeView removeFromSuperview];
+    closeView = nil;
+}
+
+-(void)contactBtn:(UIButton *)button{
+    if ([delegate respondsToSelector:@selector(updataOwner:index:)]){
+        [delegate updataOwner:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
+    }
+}
+
+-(void)gotoMap{
+    if ([delegate respondsToSelector:@selector(gotoMap:city:)]){
+        NSLog(@"%@",[dataDic objectForKey:@"city"]);
+        [delegate gotoMap:[dataDic objectForKey:@"landAddress"] city:[dataDic objectForKey:@"city"]];
+    }
+}
+@end

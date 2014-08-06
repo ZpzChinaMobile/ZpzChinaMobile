@@ -1,0 +1,26 @@
+//
+//  PlanAndAuctionTableViewCell.h
+//  ZpzchinaMobile
+//
+//  Created by 汪洋 on 14-6-20.
+//  Copyright (c) 2014年 汪洋. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@protocol PlanAndAuctionDelegate;
+@interface PlanAndAuctionTableViewCell : UITableViewCell<UITextFieldDelegate>{
+    id<PlanAndAuctionDelegate>delegate;
+    UITextField *textfield;
+    NSMutableArray *dataArr;
+    UIView *closeView;
+}
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic singleDic:(NSMutableDictionary *)singleDic flag:(int)flag contactArr:(NSMutableArray *)contactArr;
+-(void)updateContent:(BOOL)openRow;
+@property(nonatomic ,strong) id <PlanAndAuctionDelegate> delegate;
+@property(nonatomic,retain)NSMutableArray *dataArr;
+@end
+@protocol PlanAndAuctionDelegate <NSObject>
+-(void)addContactView:(int)index;
+-(void)addContent:(NSString *)str index:(int)index;
+-(void)updataContact:(NSMutableDictionary *)dic index:(int)index;
+@end
