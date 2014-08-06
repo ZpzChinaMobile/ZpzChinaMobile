@@ -300,9 +300,12 @@
 
 -(void)logoutSuccess{
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userName"];
-     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"passWord"];
-     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"UserToken"];
-     [[NSUserDefaults standardUserDefaults]synchronize];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"passWord"];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"UserToken"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isFaceRegisted"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentFaceCount"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"firstPassWordLogin"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];     [[NSUserDefaults standardUserDefaults]synchronize];
      [LoginSqlite insertData:@"" datakey:@"userName"];
      [LoginSqlite insertData:@"" datakey:@"passWord"];
      [LoginSqlite insertData:@"" datakey:@"UserToken"];
