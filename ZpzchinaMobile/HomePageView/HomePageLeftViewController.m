@@ -281,7 +281,8 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag == 0){
         LoginViewController *loginview = [[LoginViewController alloc] init];
-        [[AppDelegate instance] window].rootViewController = loginview;
+        UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
+        [[AppDelegate instance] window].rootViewController = naVC;
         [[[AppDelegate instance] window] makeKeyAndVisible];
     }else if(alertView.tag == 2){
         if(buttonIndex == 1){
