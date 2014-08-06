@@ -90,7 +90,7 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"face" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceRegister" object:nil];
      [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Login" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceLogin" object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"failLogin" object:nil];
@@ -101,18 +101,18 @@
 -(void)beginFaceRecoginzer
 {
 
-//    People=0;
+
     faceVC = [[FaceViewController alloc] init];
-//    faceVC.delegate = self;
+
     [self.view addSubview:faceVC.view];
 }
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    People=0;
+
     faceVC = [[FaceViewController alloc] init];
-//        faceVC.delegate = self;
+
     [self.view addSubview:faceVC.view];
 
 }
@@ -138,8 +138,8 @@
     NSLog(@"noninininoilnkkljjk");
     
     LoginViewController *loginVC = [[LoginViewController alloc] init];
-    
-    [[AppDelegate instance] window].rootViewController = loginVC;
+    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [[AppDelegate instance] window].rootViewController = naVC;
     [[[AppDelegate instance] window] makeKeyAndVisible];
     
     

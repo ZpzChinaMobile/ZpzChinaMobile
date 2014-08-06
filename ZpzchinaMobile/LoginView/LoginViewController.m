@@ -112,10 +112,7 @@ static bool FirstLogin = NO;
     
     
     
-//    event = [[LoginEvent alloc] init];
-//    event.faceIDArray = [[NSMutableArray alloc] init];
-//    event.delegate =self;
-//    imgArr = [[NSMutableArray alloc] init];
+
     
 }
 
@@ -180,27 +177,20 @@ static bool FirstLogin = NO;
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
-                NSString *str =[item objectForKey:@"userID"];
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
                 NSLog(@"mmimimiimiminbnbbbbbbbbb%@",isFaceRegisted);
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",isFaceRegisted]forKey:@"isFaceRegisted"];
                 [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"faceCount"] forKey:@"currentFaceCount"];
                 [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:@"userName"];
                 [[NSUserDefaults standardUserDefaults] setObject:self.userToken forKey:@"UserToken"];
+                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"userID"] forKey:@"userID"];
                 NSLog(@"userName8888***%@",[item objectForKey:@"userName"]);
                 
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                [LoginSqlite insertData:[item objectForKey:@"userToken"]  datakey:@"UserToken"];
                 
-                if (![str isEqual:[[NSUserDefaults standardUserDefaults] objectForKey:@"userID"]]) {
-                    FirstLogin = YES;
-                    
-                }
-//                NSLog(@"1233233434  **%@",str);
-                [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"userID"];
-                
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                if([[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"0"]){
+                if([[NSUserDefaults standardUserDefaults] objectForKey:@"firstPassWordLogin"]==nil&&[[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"0"]){
+                    [[NSUserDefaults standardUserDefaults] setObject:@"firstLogin" forKey:@"firstPassWordLogin"];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否要进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
                     
                     [alert show];

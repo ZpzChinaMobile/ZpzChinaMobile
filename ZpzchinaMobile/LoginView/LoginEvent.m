@@ -274,7 +274,7 @@ static int chanceToLoginByFace =3;
     }
     else{
        
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"failLogin" object:nil userInfo:nil];//返回到Login页面
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"failRegister" object:nil userInfo:nil];//返回到Login页面
     
     }
     
@@ -283,7 +283,7 @@ static int chanceToLoginByFace =3;
 
 -(void)detectWithImageArray:(NSMutableArray *)faceArray//没有进行脸部注册时候获取faceID
 {
-    NSLog(@"detectWithImage");
+    NSLog(@"detectWithImageArray");
      person_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
     
     for (int i =0; i<faceArray.count; i++) {
@@ -300,9 +300,10 @@ static int chanceToLoginByFace =3;
         {
             
             NSArray *a = [[result content] objectForKey:@"face"];
+            NSLog(@"%d",a.count);
             if ([a count]==0) {
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"face" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"registerFace" object:nil];//
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请将摄像头对准脸部进行照片采集" delegate:nil cancelButtonTitle:@"是" otherButtonTitles: nil ];
                 [alert show];
@@ -311,7 +312,7 @@ static int chanceToLoginByFace =3;
             }
             
            if ([a count]>=2){
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"face" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"registerFace" object:nil];
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"屏幕中只能出现一张脸" delegate:nil cancelButtonTitle:@"是" otherButtonTitles: nil ];
                 [alert show];
                 return;
@@ -378,7 +379,7 @@ static int chanceToLoginByFace =3;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"faceLogin" object:nil];
         }else{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"failLogin" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"faceRegister" object:nil];
         }
         [[NSUserDefaults standardUserDefaults] synchronize];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
