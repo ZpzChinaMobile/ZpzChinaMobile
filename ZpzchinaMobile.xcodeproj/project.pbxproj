@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0426C3231993222900CD8822 /* 面部采集_07.png in Resources */ = {isa = PBXBuildFile; fileRef = 0426C3211993222900CD8822 /* 面部采集_07.png */; };
+		0426C3241993222900CD8822 /* 面部采集_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 0426C3221993222900CD8822 /* 面部采集_11.png */; };
+		04330BDE1991F152000C21BC /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04330BDB1991F152000C21BC /* libbaidumapapi.a */; };
+		04330BDF1991F152000C21BC /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04330BDD1991F152000C21BC /* libbaidumapapi.a */; };
 		D31B227F19820D4500B05B03 /* TFIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B227E19820D4500B05B03 /* TFIndicatorView.m */; };
 		D31B25081988DCFC00B05B03 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = D31B25071988DCFC00B05B03 /* citydict.plist */; };
 		D31B264E19891F2600B05B03 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B250E19891F2500B05B03 /* GLProgram.m */; };
@@ -386,7 +390,6 @@
 		D3BB730119557D5700A3F626 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BB730019557D5700A3F626 /* OpenGLES.framework */; };
 		D3BB730319557D5F00A3F626 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BB730219557D5F00A3F626 /* QuartzCore.framework */; };
 		D3BB730519557D6F00A3F626 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BB730419557D6F00A3F626 /* CoreLocation.framework */; };
-		D3BB73CC1957C11200A3F626 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BB73CB1957C11200A3F626 /* libbaidumapapi.a */; };
 		D3BB73CF1957C20900A3F626 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3BB73CE1957C20900A3F626 /* RootViewController.mm */; };
 		D3BB73D31957D92700A3F626 /* BaiDuMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB73D21957D92700A3F626 /* BaiDuMapViewController.m */; };
 		D3BB73D81958006A00A3F626 /* AdvancedSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB73D71958006A00A3F626 /* AdvancedSearchViewController.m */; };
@@ -436,6 +439,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0426C3211993222900CD8822 /* 面部采集_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "面部采集_07.png"; sourceTree = "<group>"; };
+		0426C3221993222900CD8822 /* 面部采集_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "面部采集_11.png"; sourceTree = "<group>"; };
+		04330BDB1991F152000C21BC /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		04330BDD1991F152000C21BC /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		D31B227D19820D4500B05B03 /* TFIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFIndicatorView.h; sourceTree = "<group>"; };
 		D31B227E19820D4500B05B03 /* TFIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFIndicatorView.m; sourceTree = "<group>"; };
 		D31B25071988DCFC00B05B03 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
@@ -1141,7 +1148,6 @@
 		D3BB730019557D5700A3F626 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		D3BB730219557D5F00A3F626 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D3BB730419557D6F00A3F626 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		D3BB73CB1957C11200A3F626 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = "ZpzchinaMobile/Tools/libs/Release-iphoneos/libbaidumapapi.a"; sourceTree = "<group>"; };
 		D3BB73CD1957C20900A3F626 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		D3BB73CE1957C20900A3F626 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
 		D3BB73D11957D92700A3F626 /* BaiDuMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiDuMapViewController.h; sourceTree = "<group>"; };
@@ -1221,17 +1227,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3AAAB60196D6EC0008F9CCD /* iflyMSC.framework in Frameworks */,
-				D3BB73CC1957C11200A3F626 /* libbaidumapapi.a in Frameworks */,
 				D3BB730519557D6F00A3F626 /* CoreLocation.framework in Frameworks */,
 				D3BB730319557D5F00A3F626 /* QuartzCore.framework in Frameworks */,
 				D3BB730119557D5700A3F626 /* OpenGLES.framework in Frameworks */,
 				D3A48986195141BE00EED32D /* libsqlite3.0.dylib in Frameworks */,
 				D3A4888B194EBCA100EED32D /* AudioToolbox.framework in Frameworks */,
 				D3A48889194EBC9400EED32D /* SystemConfiguration.framework in Frameworks */,
+				04330BDF1991F152000C21BC /* libbaidumapapi.a in Frameworks */,
 				D3A48887194EBC8B00EED32D /* AddressBook.framework in Frameworks */,
 				D3A48885194EBC8100EED32D /* AVFoundation.framework in Frameworks */,
 				D3A48883194EBC7300EED32D /* AdSupport.framework in Frameworks */,
 				D3A4883D194A916B00EED32D /* CoreGraphics.framework in Frameworks */,
+				04330BDE1991F152000C21BC /* libbaidumapapi.a in Frameworks */,
 				D3A4883F194A916B00EED32D /* UIKit.framework in Frameworks */,
 				D3A4883B194A916B00EED32D /* Foundation.framework in Frameworks */,
 			);
@@ -1250,6 +1257,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04330BD91991F152000C21BC /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				04330BDA1991F152000C21BC /* Release-iphoneos */,
+				04330BDC1991F152000C21BC /* Release-iphonesimulator */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		04330BDA1991F152000C21BC /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				04330BDB1991F152000C21BC /* libbaidumapapi.a */,
+			);
+			path = "Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		04330BDC1991F152000C21BC /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				04330BDD1991F152000C21BC /* libbaidumapapi.a */,
+			);
+			path = "Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
 		D31B250C19891F2500B05B03 /* face */ = {
 			isa = PBXGroup;
 			children = (
@@ -1701,7 +1733,6 @@
 			isa = PBXGroup;
 			children = (
 				D3AAAB5F196D6EC0008F9CCD /* iflyMSC.framework */,
-				D3BB73CB1957C11200A3F626 /* libbaidumapapi.a */,
 				D3BB730419557D6F00A3F626 /* CoreLocation.framework */,
 				D3BB730219557D5F00A3F626 /* QuartzCore.framework */,
 				D3BB730019557D5700A3F626 /* OpenGLES.framework */,
@@ -1808,6 +1839,8 @@
 		D3A48895194FD95600EED32D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0426C3211993222900CD8822 /* 面部采集_07.png */,
+				0426C3221993222900CD8822 /* 面部采集_11.png */,
 				D3C58E4F197FB1B6003DD94F /* DRIBBBLE-icon45-blue-drops_03.png */,
 				D3C58E50197FB1B6003DD94F /* DRIBBBLE-icon45-blue-drops_07.png */,
 				D3C58E4D197F9733003DD94F /* 全部项目_02.png */,
@@ -1916,6 +1949,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				04330BD91991F152000C21BC /* libs */,
 				D31B250C19891F2500B05B03 /* face */,
 				D3AB1BBF19812C810046C587 /* AfNetWork */,
 				D3C58E601980BD5E003DD94F /* FaceppSDK */,
@@ -2467,6 +2501,7 @@
 				D3A488EA194FD95600EED32D /* icon__11.png in Resources */,
 				D3AA5A1B195D75DE00565078 /* 全部项目_16.png in Resources */,
 				D3A48923194FD95600EED32D /* 语音搜索_02.png in Resources */,
+				0426C3241993222900CD8822 /* 面部采集_11.png in Resources */,
 				D3C58E52197FB1B6003DD94F /* DRIBBBLE-icon45-blue-drops_07.png in Resources */,
 				D3A488E8194FD95600EED32D /* icon_04.png in Resources */,
 				D3A4884D194A916B00EED32D /* Images.xcassets in Resources */,
@@ -2485,6 +2520,7 @@
 				D3A4891B194FD95600EED32D /* 登录1_03.png in Resources */,
 				D3A48914194FD95600EED32D /* 新建项目9_06.png in Resources */,
 				D3C58E51197FB1B6003DD94F /* DRIBBBLE-icon45-blue-drops_03.png in Resources */,
+				0426C3231993222900CD8822 /* 面部采集_07.png in Resources */,
 				D3ACE9A0196009540002B038 /* controls_03.png in Resources */,
 				D3A4891C194FD95600EED32D /* 登录1_07.png in Resources */,
 				D3AAAB6C196E8E2E008F9CCD /* mapsearch-1.png in Resources */,
@@ -3007,6 +3043,8 @@
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools",
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release$(EFFECTIVE_PLATFORM_NAME)",
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/FaceppLocalDetectorSDK",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -3039,6 +3077,8 @@
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools",
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release$(EFFECTIVE_PLATFORM_NAME)",
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/FaceppLocalDetectorSDK",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release-iphonesimulator",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
