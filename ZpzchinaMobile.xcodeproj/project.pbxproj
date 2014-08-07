@@ -365,7 +365,6 @@
 		D3AECA631959261500FED616 /* draw_point.png in Resources */ = {isa = PBXBuildFile; fileRef = D3AECA601959261500FED616 /* draw_point.png */; };
 		D3AECA641959261500FED616 /* location_point.png in Resources */ = {isa = PBXBuildFile; fileRef = D3AECA611959261500FED616 /* location_point.png */; };
 		D3AECA651959261500FED616 /* reset_point.png in Resources */ = {isa = PBXBuildFile; fileRef = D3AECA621959261500FED616 /* reset_point.png */; };
-		D3B0D007196CE9DB00F31C17 /* NoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B0D006196CE9DB00F31C17 /* NoImage.png */; };
 		D3B2794D19595A150090632C /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B2794A19595A150090632C /* MJPopupBackgroundView.m */; };
 		D3B2794E19595A150090632C /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B2794C19595A150090632C /* UIViewController+MJPopupViewController.m */; };
 		D3B2795119595A640090632C /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B2795019595A640090632C /* AddContactViewController.m */; };
@@ -1045,7 +1044,6 @@
 		D3AECA601959261500FED616 /* draw_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = draw_point.png; sourceTree = "<group>"; };
 		D3AECA611959261500FED616 /* location_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location_point.png; sourceTree = "<group>"; };
 		D3AECA621959261500FED616 /* reset_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset_point.png; sourceTree = "<group>"; };
-		D3B0D006196CE9DB00F31C17 /* NoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoImage.png; sourceTree = "<group>"; };
 		D3B2794919595A150090632C /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
 		D3B2794A19595A150090632C /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
 		D3B2794B19595A150090632C /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
@@ -1846,7 +1844,6 @@
 				D3C58E4D197F9733003DD94F /* 全部项目_02.png */,
 				D3BDC1F1197381B800DE5A78 /* 地图搜索_02.png */,
 				D3AAAB6B196E8E2E008F9CCD /* mapsearch-1.png */,
-				D3B0D006196CE9DB00F31C17 /* NoImage.png */,
 				D346A02E1963D5B800CDDBDF /* 补充_03.png */,
 				D3ACE99E196009540002B038 /* controls_03.png */,
 				D3ACE99F196009540002B038 /* controls_05.png */,
@@ -2512,7 +2509,6 @@
 				D3A48935194FD95600EED32D /* 首页侧拉栏_07.png in Resources */,
 				D3AA5A12195D185E00565078 /* area.plist in Resources */,
 				D3A4891F194FD95600EED32D /* 登录_11.png in Resources */,
-				D3B0D007196CE9DB00F31C17 /* NoImage.png in Resources */,
 				D3A48901194FD95600EED32D /* 我的任务_05.png in Resources */,
 				D346A02F1963D5B800CDDBDF /* 补充_03.png in Resources */,
 				D3A48907194FD95600EED32D /* 新建项目1_06.png in Resources */,
