@@ -22,8 +22,8 @@
 @implementation PanViewController
 
 static int j =0;
-static int count =5;
-//static int tapCount =0;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -95,6 +95,7 @@ static int count =5;
 
 
 
+#pragma mark  采集照片－－－－－－－－－－
 -(void)addmMoreImage
 {
     
@@ -105,12 +106,11 @@ static int count =5;
             [self.view addSubview:faceVC.view];
             
         }
-   
-
     
 }
 
 
+#pragma mark 跳过－－－－－－－－－－
 -(void)jumpToLogin
 {
     
@@ -126,15 +126,13 @@ static int count =5;
     [drawerController setMaximumRightDrawerWidth:320-62];
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    
-    
     [[AppDelegate instance] window].rootViewController = drawerController;
     [[[AppDelegate instance] window] makeKeyAndVisible];
     
 }
 
 
--(void)addImage:(UIImage *)image{
+-(void)addImage:(UIImage *)image{   //将视频流中的image添加到数组中去
     NSLog(@"%d",j);
     [faceVC.view removeFromSuperview];
     faceVC = nil;
@@ -142,8 +140,8 @@ static int count =5;
         [imgArr addObject:image];
         nowIMageView.image = image;
         NSLog(@"%@",imgArr);
-        textlabel.text =[NSString stringWithFormat:@"%d",(count-imgArr.count)];
-        count=5;
+        textlabel.text =[NSString stringWithFormat:@"%d",(5-imgArr.count)];
+
         if(imgArr.count == 5){
             NSLog(@"%@",textlabel);
             indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
@@ -159,7 +157,7 @@ static int count =5;
     [event detectWithImageArray:imgArr];
 }
 
--(void)recognizeSuccess
+-(void)recognizeSuccess           //注册成功后登录跳转的界面
 {
     NSLog(@"asdfasdfasdfasdf");
     UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
@@ -195,11 +193,10 @@ static int count =5;
     j=0;
 
     [imgArr removeAllObjects];
-    UIButton *button =(UIButton *)[self.view viewWithTag:2014072401];
-    [button setTitle:@"注   册" forState:UIControlStateNormal];
+    
 }
 
-- (void)failToRegister
+- (void)failToRegister      //注册失败
 {
     NSLog(@"failToRegister");
         [indicator stopAnimating];
@@ -216,26 +213,25 @@ static int count =5;
     [imgArr removeAllObjects];
     [faceVC.view removeFromSuperview];
     faceVC = nil;
-
     textlabel.text =[NSString stringWithFormat:@"%d",(5-imgArr.count)];
 }
 
 
--(void)viewDidAppear:(BOOL)animated{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToFormerVC) name:@"registerFace" object:nil];
+-(void)viewDidAppear:(BOOL)animated{        // 添加观察者
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToFormerVC) name:@"registerFace" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recognizeSuccess) name:@"faceLogin" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failToRegister) name:@"failRegister" object:nil];
     
     
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{        //移除观察者
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"registerFace" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceLogin" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"failRegister" object:nil];
 }
 
--(void)backToFormerVC{
+-(void)backToFormerVC{                // 返回到panViewController
     [indicator stopAnimating];
     [faceVC.view removeFromSuperview];
     [imgArr removeAllObjects];

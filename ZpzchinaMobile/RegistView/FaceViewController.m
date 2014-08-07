@@ -7,17 +7,12 @@
 //
 
 #import "FaceViewController.h"
-
-
 #import "MMDrawerController.h"
 #import "HomePageCenterViewController.h"
 #import "HomePageLeftViewController.h"
 #import "AppDelegate.h"
-
 #import "LoginViewController.h"
 #import "FaceLoginViewController.h"
-
-
 
 @interface FaceViewController ()
 
@@ -50,27 +45,18 @@ static int People =0;
     [self.view addSubview:_cameraView];
     _imageView = [[UIImageView alloc] initWithFrame:_cameraView.frame];
     [self.view addSubview:_imageView];
-    
-    indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
-    [self.view addSubview:indicator];
-
-    [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(playIndicator) userInfo:nil repeats:NO];
+//    indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+//    [self.view addSubview:indicator];
+//    [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(playIndicator) userInfo:nil repeats:NO];
     event = [[LoginEvent alloc] init];
-
-    event.imagePicker = [[UIImagePickerController alloc] init];
-   
-    
     [self initialize];
     
-
-
-    
 }
 
--(void)playIndicator
-{
-    [indicator startAnimating];
-}
+//-(void)playIndicator
+//{
+//    [indicator startAnimating];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -183,23 +169,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     CGContextRelease(newContext);
     CGColorSpaceRelease(colorSpace);
     
-    
-    
     UIImage *image= [UIImage imageWithCGImage:newImage scale:1 orientation:UIImageOrientationLeftMirrored];
-    
     CGImageRelease(newImage);
-    
-//    image = [image fixOrientation];//图像反转
     image = [event fixOrientation:image]; //图像反转
-    
     [self performSelectorOnMainThread:@selector(detectForFacesInUIImage:)
                            withObject: (id) image waitUntilDone:NO];
     
-    
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
-    
- 
-    
     
 }
 
@@ -260,15 +236,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     m_highlitView[_index].transform = transform;
     
     m_highlitView[_index].hidden = NO;
+    
+    //开始就截图的判定条件
     if (m_highlitView[_index].center.x>80&&m_highlitView[_index].center.x<240&&m_highlitView[_index].center.y>self.view.center.y-100&&m_highlitView[_index].center.x<self.view.frame.size.height-100&&m_highlitView[_index].frame.size.width>60&&m_highlitView[_index].frame.size.width<280&&m_highlitView[_index].frame.size.height>80&&m_highlitView[_index].frame.size.height<440) {
-        
-        
         isBeginToCutFace =YES;
         [self performSelector:@selector(delayTojudge:) withObject:image afterDelay:1.0];
-       
         
     }
-    
     
 }
 
@@ -276,11 +250,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 - (void)delayTojudge:(UIImage *)image
 {
     People++;
-    //NSLog(@"*****************People%d",People);
     if (isBeginToCutFace ==YES) {
-        NSLog(@"asdfdsaf");
         isBeginToCutFace =NO;
-
         [_session stopRunning];
         _session = nil;
         _captureInput = nil;
@@ -288,21 +259,12 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         _preview = nil;
         _device = nil;
         _imageView.image = image;
-        
-        
-                    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"]);
-
         if([[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"] isEqualToString:@"1"]){//识别登录
-
                 [event detectWithImage:image With:People];
 
-            
-            
         }else{
-                        if([delegate respondsToSelector:@selector(addImage:)]){//未注册时进行
+                if([delegate respondsToSelector:@selector(addImage:)]){//未注册时进行
                 [delegate addImage:image];
-                
-
 
             }
         }
@@ -311,39 +273,39 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 }
 
 
--(void)recognizeSuccess
-{
-    [indicator stopAnimating];
-    UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
-    UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
-    
-    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-    navigationController.navigationBarHidden = YES;
-    MMDrawerController * drawerController = [[MMDrawerController alloc]
-                                             initWithCenterViewController:navigationController
-                                             leftDrawerViewController:leftViewController
-                                             rightDrawerViewController:nil];
-    [drawerController setMaximumRightDrawerWidth:320-62];
-    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.7];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:[[AppDelegate instance] window] cache:YES];
-    NSUInteger tview1 = [[self.view subviews] indexOfObject:[[AppDelegate instance] window]];
-    NSUInteger tview2 = [[self.view subviews] indexOfObject:drawerController.view];
-    [self.view exchangeSubviewAtIndex:tview2 withSubviewAtIndex:tview1];
-    [UIView setAnimationDelegate:self];
-    [UIView commitAnimations];
-    
-    
-    
-    [[AppDelegate instance] window].rootViewController = drawerController;
-    [[[AppDelegate instance] window] makeKeyAndVisible];
-}
-
+//-(void)recognizeSuccess
+//{
+//    [indicator stopAnimating];
+//    UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
+//    UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
+//    
+//    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+//    navigationController.navigationBarHidden = YES;
+//    MMDrawerController * drawerController = [[MMDrawerController alloc]
+//                                             initWithCenterViewController:navigationController
+//                                             leftDrawerViewController:leftViewController
+//                                             rightDrawerViewController:nil];
+//    [drawerController setMaximumRightDrawerWidth:320-62];
+//    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+//    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+//    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [UIView beginAnimations:nil context:context];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//    [UIView setAnimationDuration:0.7];
+//    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:[[AppDelegate instance] window] cache:YES];
+//    NSUInteger tview1 = [[self.view subviews] indexOfObject:[[AppDelegate instance] window]];
+//    NSUInteger tview2 = [[self.view subviews] indexOfObject:drawerController.view];
+//    [self.view exchangeSubviewAtIndex:tview2 withSubviewAtIndex:tview1];
+//    [UIView setAnimationDelegate:self];
+//    [UIView commitAnimations];
+//    
+//    
+//    
+//    [[AppDelegate instance] window].rootViewController = drawerController;
+//    [[[AppDelegate instance] window] makeKeyAndVisible];
+//}
+//
 
 - (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position
 {
@@ -360,10 +322,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [indicator stopAnimating];
-
-}
+//- (void)viewDidDisappear:(BOOL)animated
+//{
+//    [indicator stopAnimating];
+//
+//}
 
 @end

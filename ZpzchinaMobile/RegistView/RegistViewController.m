@@ -174,6 +174,8 @@
     NSLog(@"取消注册");
 }
 
+
+#pragma mark 注册－－－－－－－－－－
 -(void)beginToCollect//点击注册按钮触发的事件
 {
     
@@ -184,21 +186,21 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
-    if (buttonIndex==0) {
+    if (buttonIndex==0) {       //选择是开始进行脸部注册的采集
 
             [self faceCollect];//开始采集照片
 
 
 
     }
-    else if (buttonIndex==1){
+    else if (buttonIndex==1){        //选择否，直接进行登录
         [self recognizeSuccess];
 
     }
     
 }
 
--(void)faceCollect
+-(void)faceCollect         //进入到脸部信息采集到界面
 {
 
     PanViewController *panVC = [[PanViewController alloc] init];
@@ -228,21 +230,10 @@
     
     //通过网络请求判断验证码是否正确
     //*****************************
-    
-    
-    
-    //******************************
-    
-    
-    
-    //通过网络请求判断用户是否已经存在
-    //********************************
-    
+
     //进行注册
     //**********************************
 
-//    NSString *deviceType = [[UIDevice currentDevice] systemName];
-//    NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneNumberTextField.text,@"userName",passWordField.text,@"password",@"ios",@"deviceType",nil];
     NSMutableDictionary *parameters =[[NSMutableDictionary alloc] initWithObjectsAndKeys:_phoneNumberTextField.text,@"userName",passWordField.text,@"password",@"ios",@"deviceType",nil];
 //    [parameters setObject:data forKey:@"data"];
     NSLog(@"nininiiinmmmmmmmmmmmm%@",parameters);

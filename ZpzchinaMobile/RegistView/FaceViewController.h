@@ -12,7 +12,7 @@
 #import <ImageIO/ImageIO.h>
 #import "GPUImage.h"
 #import "LoginEvent.h"
-#import "TFIndicatorView.h"
+//#import "TFIndicatorView.h"
 @protocol FaceViewDelegate <NSObject>
 
 -(void)addImage:(UIImage *)image;
@@ -29,7 +29,7 @@
     UIView* m_highlitView[100];
     CGAffineTransform m_transform[100];
 id<FaceViewDelegate>delegate;
-        TFIndicatorView *indicator;
+//        TFIndicatorView *indicator;
     
 //    NSMutableArray *faceArray;
 }
