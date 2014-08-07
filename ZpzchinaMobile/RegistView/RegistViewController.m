@@ -7,8 +7,6 @@
 //
 
 #import "RegistViewController.h"
-
-
 #import "MMDrawerController.h"
 #import "HomePageCenterViewController.h"
 #import "HomePageLeftViewController.h"
@@ -16,9 +14,7 @@
 #import "LoginViewController.h"
 #import "FaceViewController.h"
 #import "LoginSqlite.h"
-
 #import "PanViewController.h"
-
 #import "ContactModel.h"
 
 @interface RegistViewController ()
@@ -26,11 +22,6 @@
 @end
 
 @implementation RegistViewController
-
-
-//static int j =0;
-static bool alertShowCount = 0;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -87,7 +78,6 @@ static bool alertShowCount = 0;
     passWordField.textAlignment=NSTextAlignmentLeft;
     passWordField.placeholder=@"请填写密码";
     passWordField.returnKeyType=UIReturnKeyDone;
-//    passWordField.secureTextEntry =YES;
     passWordField.clearButtonMode =YES;
     [panView addSubview:passWordField];
     
@@ -96,7 +86,6 @@ static bool alertShowCount = 0;
     verifyPassWordField.textAlignment=NSTextAlignmentLeft;
     verifyPassWordField.placeholder=@"请重复填写密码";
     verifyPassWordField.returnKeyType=UIReturnKeyDone;
-//    verifyPassWordField.secureTextEntry =YES;
     verifyPassWordField.clearButtonMode =YES;
     [panView addSubview:verifyPassWordField];
 
@@ -108,7 +97,6 @@ static bool alertShowCount = 0;
     registerBtn.tag =2014072401;
     [panView addSubview:registerBtn];
     
-    
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelBtn.frame = CGRectMake(134, 220, 128, 40);
     [cancelBtn setBackgroundImage:[UIImage imageNamed:@"注册_09"] forState:UIControlStateNormal];
@@ -118,12 +106,6 @@ static bool alertShowCount = 0;
     cancelBtn.titleLabel.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"注册_07"]];
     [cancelBtn addTarget:self action:@selector(cancelRegister) forControlEvents:UIControlEventTouchUpInside];
     [panView addSubview:cancelBtn];
-    
-
-
-
-    
-
     
 }
 
@@ -143,7 +125,6 @@ static bool alertShowCount = 0;
         if ([textField.text length]==0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"输入不能为空"delegate:nil cancelButtonTitle:@"是"otherButtonTitles: nil];
         [alert show];
-        
         
     }
    
@@ -166,7 +147,7 @@ static bool alertShowCount = 0;
 }
 
 
--(BOOL)phoneNoErr:(NSString *)phone
+-(BOOL)phoneNoErr:(NSString *)phone // 利用正则表达式判断用户输入的是否为手机号码
 {
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\b(1)[23458][0-9]{9}\\b" options:NSRegularExpressionCaseInsensitive error:nil];
@@ -174,7 +155,6 @@ static bool alertShowCount = 0;
     if (numberOfMatches!=1) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"手机号码不正确，请重新输入" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
-
         return NO;
     }
     return YES;
@@ -182,12 +162,12 @@ static bool alertShowCount = 0;
 }
 
 
--(void)getVerifitionCode{
+-(void)getVerifitionCode{    //验证码的获取
 
     NSLog(@"获取验证码！！");
 }
 
--(void)cancelRegister
+-(void)cancelRegister   //取消注册
 {
     [self.navigationController popViewControllerAnimated:YES];
 
@@ -198,8 +178,6 @@ static bool alertShowCount = 0;
 {
     
     [self commomRegister];
-    
-    alertShowCount++;
 
 }
 
@@ -259,30 +237,6 @@ static bool alertShowCount = 0;
     
     //通过网络请求判断用户是否已经存在
     //********************************
-//    NSMutableURLRequest *firstRequest = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/Users/cellphone=%@",serverAddress,_phoneNumberTextField.text] parameters:nil error:nil];
-//    AFHTTPRequestOperation *firstOp = [[AFHTTPRequestOperation alloc] initWithRequest:firstRequest];
-//    firstOp.responseSerializer = [AFJSONResponseSerializer serializer];
-//    [firstOp setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"nininillllllllleeeeeeeeeeJSON: %@", responseObject);
-//
-//        NSNumber *firstStatusCode =[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
-//        NSLog(@"%@",[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"]);
-//       
-//            if (![[NSString stringWithFormat:@"%@",firstStatusCode] isEqualToString:@"200"]) {
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"输入的手机号已经被注册过了，请更换手机号注册！" delegate:nil cancelButtonTitle:@"是" otherButtonTitles: nil];
-//                [alert show];
-//                return;
-//            
-//        }
-//
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//    }];
-//    [[NSOperationQueue mainQueue] addOperation:firstOp];
-    //*********************************
-    
-    
-        
     
     //进行注册
     //**********************************

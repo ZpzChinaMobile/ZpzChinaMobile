@@ -36,38 +36,61 @@ static int count =5;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
     
-   
-
-
+    UIImageView *naBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+    naBar.image = [UIImage imageNamed:@"地图搜索_01"];
+    [self.view addSubview:naBar];
     
-    nowIMageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 426)];
-    nowIMageView.center = self.view.center;
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, 320, 40)];
+    textlabel.center =naBar.center;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"面部采集";
+    titleLabel.font = [UIFont systemFontOfSize:22.0];
+    [self.view addSubview:titleLabel];
+    
+    UILabel *numLabel = [[UILabel alloc] initWithFrame:CGRectMake(80,80, 320, 30)];
+    numLabel.text = @"还需要采集  张照片";
+    numLabel.alpha =0.6;
+    [self.view addSubview:numLabel];
+    
+    textlabel = [[UILabel alloc] initWithFrame:CGRectMake(165,80, 30, 30)];
+    textlabel.text = @"5";
+    textlabel.textColor =BlueColor;
+    [self.view addSubview:textlabel];
+
+    nowIMageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 453/2, 603/2)];
+    nowIMageView.center = CGPointMake(160, kScreenHeight/2-10);
+    UIImage *defaultImg =[UIImage imageNamed:@"面部采集_03"];
+    nowIMageView.image = defaultImg;
     [self.view addSubview:nowIMageView];
     
-    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    leftBtn.frame = CGRectMake(20, self.view.frame.size.height-50, 60, 40);
-    [leftBtn setTitle:@"照片采集" forState:UIControlStateNormal];
-    [leftBtn addTarget:self action:@selector(addmMoreImage) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:leftBtn];
+    UIButton *collectBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    collectBtn.frame = CGRectMake(0, 0, 100, 40);
+    collectBtn.center = CGPointMake(160, kScreenHeight-100);
+    collectBtn.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    [collectBtn setTitle:@"照片采集" forState:UIControlStateNormal];
+    [collectBtn setBackgroundImage:[UIImage imageNamed:@"面部采集_07"] forState:UIControlStateNormal];
+    [collectBtn addTarget:self action:@selector(addmMoreImage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:collectBtn];
     
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    rightBtn.frame = CGRectMake(240, self.view.frame.size.height-50, 60, 40);
-    [rightBtn setTitle:@"跳过" forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(jumpToLogin) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rightBtn];
-    
+    UIButton *jumpBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    jumpBtn.frame = CGRectMake(0, 0, 100, 40);
+    jumpBtn.center = CGPointMake(150, kScreenHeight-30);
+    jumpBtn.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    [jumpBtn setTitle:@"跳过" forState:UIControlStateNormal];
+    [jumpBtn addTarget:self action:@selector(jumpToLogin) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:jumpBtn];
+    UIImageView *tempImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, 12)];
+    tempImgView.center = CGPointMake(180, kScreenHeight-30);
+    tempImgView.image = [UIImage imageNamed:@"面部采集_11"];
+    [self.view addSubview:tempImgView];
    
     event = [[LoginEvent alloc] init];
     event.faceIDArray = [[NSMutableArray alloc] init];
-    
     imgArr = [[NSMutableArray alloc] init];
     
-    textlabel = [[UILabel alloc] initWithFrame:CGRectMake(80,35, 160, 30)];
-    textlabel.text = @"还需要采集5张照片";
-    [self.view addSubview:textlabel];
 }
 
 
@@ -76,11 +99,7 @@ static int count =5;
 {
     
         j= 0;
-    //textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(5-imgArr.count)];
-    //count =5;
-    
-
-        if(imgArr.count < 5){
+            if(imgArr.count < 5){
             faceVC = [[FaceViewController alloc] init];
             faceVC.delegate = self;
             [self.view addSubview:faceVC.view];
@@ -123,7 +142,7 @@ static int count =5;
         [imgArr addObject:image];
         nowIMageView.image = image;
         NSLog(@"%@",imgArr);
-        textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(count-imgArr.count)];
+        textlabel.text =[NSString stringWithFormat:@"%d",(count-imgArr.count)];
         count=5;
         if(imgArr.count == 5){
             NSLog(@"%@",textlabel);
@@ -198,7 +217,7 @@ static int count =5;
     [faceVC.view removeFromSuperview];
     faceVC = nil;
 
-    textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(5-imgArr.count)];
+    textlabel.text =[NSString stringWithFormat:@"%d",(5-imgArr.count)];
 }
 
 
@@ -221,7 +240,7 @@ static int count =5;
     [faceVC.view removeFromSuperview];
     [imgArr removeAllObjects];
     faceVC = nil;
-    textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(5-imgArr.count)];
+    textlabel.text =[NSString stringWithFormat:@"%d",(5-imgArr.count)];
 }
 
 
