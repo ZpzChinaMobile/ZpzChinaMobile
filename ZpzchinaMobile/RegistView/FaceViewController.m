@@ -45,26 +45,16 @@ static int People =0;
     [self.view addSubview:_cameraView];
     _imageView = [[UIImageView alloc] initWithFrame:_cameraView.frame];
     [self.view addSubview:_imageView];
-//    indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
-//    [self.view addSubview:indicator];
-//    [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(playIndicator) userInfo:nil repeats:NO];
     event = [[LoginEvent alloc] init];
     [self initialize];
     
 }
-
-//-(void)playIndicator
-//{
-//    [indicator startAnimating];
-//}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 //初始化
 - (void) initialize
@@ -130,7 +120,6 @@ static int People =0;
     [_captureOutput setOutputSettings:outputSettings];
 	[_session addOutput:_captureOutput];
     
-    ////////////
     _preview = [AVCaptureVideoPreviewLayer layerWithSession: _session];
     _preview.frame = CGRectMake(0, 0, self.cameraView.frame.size.width, self.cameraView.frame.size.height);
     _preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
@@ -249,7 +238,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (void)delayTojudge:(UIImage *)image
 {
-    People++;
+    People++; //获取到的带有人脸的image的数量
     if (isBeginToCutFace ==YES) {
         isBeginToCutFace =NO;
         [_session stopRunning];
@@ -273,40 +262,6 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 }
 
 
-//-(void)recognizeSuccess
-//{
-//    [indicator stopAnimating];
-//    UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
-//    UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
-//    
-//    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-//    navigationController.navigationBarHidden = YES;
-//    MMDrawerController * drawerController = [[MMDrawerController alloc]
-//                                             initWithCenterViewController:navigationController
-//                                             leftDrawerViewController:leftViewController
-//                                             rightDrawerViewController:nil];
-//    [drawerController setMaximumRightDrawerWidth:320-62];
-//    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-//    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-//    
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    [UIView beginAnimations:nil context:context];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//    [UIView setAnimationDuration:0.7];
-//    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:[[AppDelegate instance] window] cache:YES];
-//    NSUInteger tview1 = [[self.view subviews] indexOfObject:[[AppDelegate instance] window]];
-//    NSUInteger tview2 = [[self.view subviews] indexOfObject:drawerController.view];
-//    [self.view exchangeSubviewAtIndex:tview2 withSubviewAtIndex:tview1];
-//    [UIView setAnimationDelegate:self];
-//    [UIView commitAnimations];
-//    
-//    
-//    
-//    [[AppDelegate instance] window].rootViewController = drawerController;
-//    [[[AppDelegate instance] window] makeKeyAndVisible];
-//}
-//
-
 - (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position
 {
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
@@ -320,12 +275,5 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     return nil;
 }
 
-
-
-//- (void)viewDidDisappear:(BOOL)animated
-//{
-//    [indicator stopAnimating];
-//
-//}
 
 @end

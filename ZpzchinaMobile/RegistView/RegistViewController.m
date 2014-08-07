@@ -170,7 +170,6 @@
 -(void)cancelRegister   //取消注册
 {
     [self.navigationController popViewControllerAnimated:YES];
-
     NSLog(@"取消注册");
 }
 
@@ -190,8 +189,6 @@
 
             [self faceCollect];//开始采集照片
 
-
-
     }
     else if (buttonIndex==1){        //选择否，直接进行登录
         [self recognizeSuccess];
@@ -204,15 +201,11 @@
 {
 
     PanViewController *panVC = [[PanViewController alloc] init];
-
     [self.navigationController pushViewController:panVC animated:NO];
-
-    
-    
 
 }
 
-- (void)commomRegister
+- (void)commomRegister    //进行注册
 {
     NSLog(@"共同注册部分");
     if (![passWordField.text isEqualToString:verifyPassWordField.text]) {
@@ -235,9 +228,6 @@
     //**********************************
 
     NSMutableDictionary *parameters =[[NSMutableDictionary alloc] initWithObjectsAndKeys:_phoneNumberTextField.text,@"userName",passWordField.text,@"password",@"ios",@"deviceType",nil];
-//    [parameters setObject:data forKey:@"data"];
-    NSLog(@"nininiiinmmmmmmmmmmmm%@",parameters);
-    
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/Register",serverAddress] parameters:parameters error:nil];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -254,16 +244,11 @@
                 [[NSUserDefaults standardUserDefaults]setObject:_phoneNumberTextField.text forKey:@"userName"];
                 [[NSUserDefaults standardUserDefaults]setObject:passWordField.text forKey:@"passWord"];
                 [[NSUserDefaults standardUserDefaults]setObject:[item objectForKey:@"userToken"] forKey:@"UserToken"];
-
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",isFaceRegisted]forKey:@"isFaceRegisted"];
-                //                NSLog(@"nininininimmmmm*************%@",item);
                 [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"faceCount"] forKey:@"currentFaceCount"];
                 [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"userID"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                
-
                 [LoginSqlite insertData:[item objectForKey:@"userToken"] datakey:@"UserToken"];
                 [LoginSqlite insertData:_phoneNumberTextField.text datakey:@"userName"];
                 [LoginSqlite insertData:passWordField.text datakey:@"passWord"];
@@ -271,12 +256,9 @@
             }
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"注册成功，是否进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
             [alert show];
-
-            
             
         }
         else{
-            
             
             NSLog(@"账号密码注册失败");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"注册失败，账号已存在" delegate:nil cancelButtonTitle:@"是" otherButtonTitles: nil];
@@ -284,22 +266,16 @@
             
         }
         
-
     }
    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"账号密码注册Error: %@", error);
     }];
 
-    
      [[NSOperationQueue mainQueue] addOperation:op];
 }
 
 
-
-
-
-
--(void)recognizeSuccess
+-(void)recognizeSuccess      //账号密码注册成功后进行登录的界面
 {
     UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
     UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
@@ -314,7 +290,6 @@
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
-    
     CGContextRef context = UIGraphicsGetCurrentContext();
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -325,9 +300,6 @@
     [self.view exchangeSubviewAtIndex:tview2 withSubviewAtIndex:tview1];
     [UIView setAnimationDelegate:self];
     [UIView commitAnimations];
-
-    
-    
     [[AppDelegate instance] window].rootViewController = drawerController;
     [[[AppDelegate instance] window] makeKeyAndVisible];
 

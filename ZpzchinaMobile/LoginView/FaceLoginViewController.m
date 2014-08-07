@@ -9,21 +9,16 @@
 #import "FaceLoginViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
-
-
 #import "MMDrawerController.h"
 #import "HomePageCenterViewController.h"
 #import "HomePageLeftViewController.h"
-
 
 @interface FaceLoginViewController ()
 
 @end
 
 @implementation FaceLoginViewController
-//static int j =0;
 
-//static int People =0;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,12 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:self.view.frame];
     [bgImgView setImage:[UIImage imageNamed:@"面部识别登录.png"]];
     bgImgView.userInteractionEnabled =YES;
     [self.view addSubview:bgImgView];
-    
     
     self.navigationController.navigationBar.hidden =YES;
     UIImageView *iconBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 190, 190)];
@@ -71,44 +64,32 @@
     detailLabel.textColor = [UIColor whiteColor];
     [bgImgView addSubview:detailLabel];
     
-    
-    
-    
-//    event = [[LoginEvent alloc] init];
-//    event.faceIDArray = [[NSMutableArray alloc] init];
-    
-//    imgArr = [[NSMutableArray alloc] init];
 }
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated{       //添加观观察者
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToFormerVC) name:@"face" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToLogin) name:@"Login" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recognizeSuccess) name:@"faceLogin" object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failToRegister) name:@"failLogin" object:nil];
-
 
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{       //移除观察者
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceRegister" object:nil];
      [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Login" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceLogin" object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"failLogin" object:nil];
 }
 
 
 
--(void)beginFaceRecoginzer
+#pragma mark   进行识别登录－－－－－－－－－－
+-(void)beginFaceRecoginzer    //开始第一次进行识别
 {
 
-
     faceVC = [[FaceViewController alloc] init];
-
     [self.view addSubview:faceVC.view];
 }
 
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event          //进行第二次，第三次的识别
 {
 
     faceVC = [[FaceViewController alloc] init];
@@ -116,20 +97,15 @@
     [self.view addSubview:faceVC.view];
 
 }
-
-
-
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
--(void)backToFormerVC{
+-(void)backToFormerVC{          //识别失败，回到前一个页面
     [faceVC.view removeFromSuperview];
-//    [imgArr removeAllObjects];
     faceVC = nil;
 }
 
@@ -142,11 +118,10 @@
     [[AppDelegate instance] window].rootViewController = naVC;
     [[[AppDelegate instance] window] makeKeyAndVisible];
     
-    
 }
 
 
--(void)recognizeSuccess
+-(void)recognizeSuccess                   //识别成功，进行登录页面的跳转
 {
     UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
     UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
@@ -172,29 +147,12 @@
     [UIView setAnimationDelegate:self];
     [UIView commitAnimations];
 
-    
-    
     [[AppDelegate instance] window].rootViewController = drawerController;
     [[[AppDelegate instance] window] makeKeyAndVisible];
     
    
     
 }
-//- (void)failToRegister
-//{
-//    UIAlertView *alert = [[UIAlertView alloc]
-//                          initWithTitle:@"提示"
-//                          message:@"注册失败"
-//                          delegate:nil
-//                          cancelButtonTitle:@"确定!"
-//                          otherButtonTitles:nil];
-//    [alert show];
-//    
-//    [faceVC.view removeFromSuperview];
-//    [imgArr removeAllObjects];
-//    faceVC = nil;
-//    
-//}
 
 
 @end

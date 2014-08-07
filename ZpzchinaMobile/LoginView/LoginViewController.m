@@ -110,10 +110,6 @@ static bool FirstLogin = NO;
     [registBtn addTarget:self action:@selector(registBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:registBtn];
     
-    
-    
-
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,16 +118,6 @@ static bool FirstLogin = NO;
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 -(void)rememberBtnClick{
     if(!_isSelect){
         [rememberView setImage:[UIImage imageNamed:@"登录1_07.png"]];
@@ -161,6 +147,7 @@ static bool FirstLogin = NO;
     [_passWordTextField resignFirstResponder];
 }
 
+#pragma mark  登录－－－－－－－－－－
 -(void)loginBtnClick{
     //测试账号:zm 密码:123
     //登录接口
@@ -171,21 +158,17 @@ static bool FirstLogin = NO;
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-                NSLog(@"mmimimiimiminbnbbbbbbbbb%@",isFaceRegisted);
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",isFaceRegisted]forKey:@"isFaceRegisted"];
                 [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"faceCount"] forKey:@"currentFaceCount"];
                 [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:@"userName"];
                 [[NSUserDefaults standardUserDefaults] setObject:self.userToken forKey:@"UserToken"];
                 [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"userID"] forKey:@"userID"];
-                NSLog(@"userName8888***%@",[item objectForKey:@"userName"]);
-                
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [LoginSqlite insertData:[item objectForKey:@"userToken"]  datakey:@"UserToken"];
                 
@@ -212,8 +195,7 @@ static bool FirstLogin = NO;
     [[NSOperationQueue mainQueue] addOperation:op];
 }
 
--(void)loginSuccess{
-    NSLog(@"sid === > %@",self.userToken);
+-(void)loginSuccess{             //登录成功
     [[NSUserDefaults standardUserDefaults]setObject:_userNameTextField.text forKey:@"userName"];
     [[NSUserDefaults standardUserDefaults]setObject:_passWordTextField.text forKey:@"passWord"];
     [[NSUserDefaults standardUserDefaults]setObject:self.userToken forKey:@"UserToken"];
@@ -224,11 +206,11 @@ static bool FirstLogin = NO;
     
     UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"登录成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     alert.tag = 20140731;
-    NSLog(@"mlmlmll %d",alert.tag);
     [alert show];
 }
 
--(void)registBtnClick{
+#pragma mark 注册－－－－－－－－－－
+-(void)registBtnClick{           //进行注册
     NSLog(@"registBtnClick");
     RegistViewController *registView = [[RegistViewController alloc] init];
     
@@ -237,7 +219,7 @@ static bool FirstLogin = NO;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
         NSLog(@"mlmlmll %d",alertView.tag);
-    if(alertView.tag ==20140731){
+    if(alertView.tag ==20140731){      //登录成功进行登录界面的跳转
         UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
         UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
         UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
@@ -250,8 +232,6 @@ static bool FirstLogin = NO;
         [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
         [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
         
-        
-        
         CGContextRef context = UIGraphicsGetCurrentContext();
         [UIView beginAnimations:nil context:context];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -263,19 +243,17 @@ static bool FirstLogin = NO;
         [UIView setAnimationDelegate:self];
         [UIView commitAnimations];
 
-        
-        
         [[AppDelegate instance] window].rootViewController = drawerController;
         [[[AppDelegate instance] window] makeKeyAndVisible];
     }
     else{
-        if (buttonIndex ==0) {
+        if (buttonIndex ==0) {      //进行脸部识别的注册
             
             PanViewController *panVC = [[PanViewController alloc] init];
             [self.navigationController pushViewController:panVC animated:NO];
             
         }
-        else if (buttonIndex ==1)
+        else if (buttonIndex ==1)         //不进行脸部识别的注册，直接登录
         {
             //跳过直接进行登录
             [self loginSuccess];
