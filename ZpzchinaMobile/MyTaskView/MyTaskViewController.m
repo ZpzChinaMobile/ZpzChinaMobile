@@ -299,21 +299,22 @@ int startIndex;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(alertView.tag == 0){
+        bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+        [bgView setBackgroundColor:[UIColor blackColor]];
+        UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        testActivityIndicator.center = CGPointMake(160, 284);//只能设置中心，不能设置大小
+        testActivityIndicator.color = [UIColor whiteColor]; // 改变圈圈的颜色为红色； iOS5引入
+        [testActivityIndicator startAnimating]; // 开始旋转
+        [bgView addSubview:testActivityIndicator];
+        [self.view addSubview:bgView];
+        NSLog(@"%@",bgView);
+        bgView.alpha = 0.5;
         self.dataArr = [ProjectSqlite loadInsertData];
         [self setServer:0];
     }
 }
 
 -(void)setServer:(NSInteger)index{
-    bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
-    [bgView setBackgroundColor:[UIColor blackColor]];
-    UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    testActivityIndicator.center = CGPointMake(160, 284);//只能设置中心，不能设置大小
-    testActivityIndicator.color = [UIColor whiteColor]; // 改变圈圈的颜色为红色； iOS5引入
-    [testActivityIndicator startAnimating]; // 开始旋转
-    [bgView addSubview:testActivityIndicator];
-    [self.view addSubview:bgView];
-    bgView.alpha = 0.5;
     if(index<self.dataArr.count){
         ProjectModel *model = [self.dataArr objectAtIndex:index];
         NSString *starttime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedStartTime];
@@ -478,6 +479,7 @@ int startIndex;
                 int j = index+1;
                 [self updataServer:j];
             }else{
+                NSLog(@"%@",bgView);
                 [bgView removeFromSuperview];
                 bgView = nil;
             }
@@ -506,6 +508,7 @@ int startIndex;
             }else{
                 [_tableView headerEndRefreshing];
             }
+            NSLog(@"%@",bgView);
             [bgView removeFromSuperview];
             bgView = nil;
         }
