@@ -22,8 +22,8 @@
 @implementation PanViewController
 
 static int j =0;
-static int count =5;
-//static int tapCount =0;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,65 +36,81 @@ static int count =5;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
     
-   
-
-
+    UIImageView *naBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+    naBar.image = [UIImage imageNamed:@"地图搜索_01"];
+    [self.view addSubview:naBar];
     
-    nowIMageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 426)];
-    nowIMageView.center = self.view.center;
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, 320, 40)];
+    textlabel.center =naBar.center;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"面部采集";
+    titleLabel.font = [UIFont systemFontOfSize:22.0];
+    [self.view addSubview:titleLabel];
+    
+    UILabel *numLabel = [[UILabel alloc] initWithFrame:CGRectMake(80,80, 320, 30)];
+    numLabel.text = @"还需要采集  张照片";
+    numLabel.alpha =0.6;
+    [self.view addSubview:numLabel];
+    
+    textlabel = [[UILabel alloc] initWithFrame:CGRectMake(165,80, 30, 30)];
+    textlabel.text = @"5";
+    textlabel.textColor =BlueColor;
+    [self.view addSubview:textlabel];
+
+    nowIMageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 453/2, 603/2)];
+    nowIMageView.center = CGPointMake(160, kScreenHeight/2-10);
+    UIImage *defaultImg =[UIImage imageNamed:@"面部采集_03"];
+    nowIMageView.image = defaultImg;
     [self.view addSubview:nowIMageView];
     
-    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    leftBtn.frame = CGRectMake(20, self.view.frame.size.height-50, 60, 40);
-    [leftBtn setTitle:@"照片采集" forState:UIControlStateNormal];
-    [leftBtn addTarget:self action:@selector(addmMoreImage) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:leftBtn];
+    UIButton *collectBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    collectBtn.frame = CGRectMake(0, 0, 100, 40);
+    collectBtn.center = CGPointMake(160, kScreenHeight-100);
+    collectBtn.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    [collectBtn setTitle:@"照片采集" forState:UIControlStateNormal];
+    [collectBtn setBackgroundImage:[UIImage imageNamed:@"面部采集_07"] forState:UIControlStateNormal];
+    [collectBtn addTarget:self action:@selector(addmMoreImage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:collectBtn];
     
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    rightBtn.frame = CGRectMake(240, self.view.frame.size.height-50, 60, 40);
-    [rightBtn setTitle:@"跳过" forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(jumpToLogin) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rightBtn];
-    
+    UIButton *jumpBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    jumpBtn.frame = CGRectMake(0, 0, 100, 40);
+    jumpBtn.center = CGPointMake(150, kScreenHeight-30);
+    jumpBtn.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    [jumpBtn setTitle:@"跳过" forState:UIControlStateNormal];
+    [jumpBtn addTarget:self action:@selector(jumpToLogin) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:jumpBtn];
+    UIImageView *tempImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, 12)];
+    tempImgView.center = CGPointMake(180, kScreenHeight-30);
+    tempImgView.image = [UIImage imageNamed:@"面部采集_11"];
+    [self.view addSubview:tempImgView];
    
     event = [[LoginEvent alloc] init];
     event.faceIDArray = [[NSMutableArray alloc] init];
-    
     imgArr = [[NSMutableArray alloc] init];
     
-    textlabel = [[UILabel alloc] initWithFrame:CGRectMake(80,35, 160, 30)];
-    textlabel.text = @"还需要采集5张照片";
-    [self.view addSubview:textlabel];
-    
-
-
 }
 
 
 
+#pragma mark  采集照片－－－－－－－－－－
 -(void)addmMoreImage
 {
     
         j= 0;
-    //textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(5-imgArr.count)];
-    //count =5;
-    
-
-        if(imgArr.count < 5){
+            if(imgArr.count < 5){
             faceVC = [[FaceViewController alloc] init];
             faceVC.delegate = self;
             [self.view addSubview:faceVC.view];
             
         }
-   
-
     
 }
 
 
+#pragma mark 跳过－－－－－－－－－－
 -(void)jumpToLogin
 {
     
@@ -110,15 +126,13 @@ static int count =5;
     [drawerController setMaximumRightDrawerWidth:320-62];
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    
-    
     [[AppDelegate instance] window].rootViewController = drawerController;
     [[[AppDelegate instance] window] makeKeyAndVisible];
     
 }
 
 
--(void)addImage:(UIImage *)image{
+-(void)addImage:(UIImage *)image{   //将视频流中的image添加到数组中去
     NSLog(@"%d",j);
     [faceVC.view removeFromSuperview];
     faceVC = nil;
@@ -126,8 +140,10 @@ static int count =5;
         [imgArr addObject:image];
         nowIMageView.image = image;
         NSLog(@"%@",imgArr);
-        textlabel.text =[NSString stringWithFormat:@"还需要采集%d张照片",(5-imgArr.count)];
+        textlabel.text =[NSString stringWithFormat:@"%d",(5-imgArr.count)];
+
         if(imgArr.count == 5){
+            NSLog(@"%@",textlabel);
             indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
             [indicator startAnimating];
             [self.view addSubview:indicator];
@@ -141,7 +157,7 @@ static int count =5;
     [event detectWithImageArray:imgArr];
 }
 
--(void)recognizeSuccess
+-(void)recognizeSuccess           //注册成功后登录跳转的界面
 {
     NSLog(@"asdfasdfasdfasdf");
     UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
@@ -177,12 +193,12 @@ static int count =5;
     j=0;
 
     [imgArr removeAllObjects];
-    UIButton *button =(UIButton *)[self.view viewWithTag:2014072401];
-    [button setTitle:@"注   册" forState:UIControlStateNormal];
+    
 }
 
-- (void)failToRegister
+- (void)failToRegister      //注册失败
 {
+    NSLog(@"failToRegister");
         [indicator stopAnimating];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"提示"
@@ -196,32 +212,31 @@ static int count =5;
 
     [imgArr removeAllObjects];
     [faceVC.view removeFromSuperview];
-
     faceVC = nil;
-
-    
+    textlabel.text =[NSString stringWithFormat:@"%d",(5-imgArr.count)];
 }
 
 
--(void)viewDidAppear:(BOOL)animated{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToFormerVC) name:@"face" object:nil];
+-(void)viewDidAppear:(BOOL)animated{        // 添加观察者
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backToFormerVC) name:@"registerFace" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recognizeSuccess) name:@"faceLogin" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failToRegister) name:@"failLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failToRegister) name:@"failRegister" object:nil];
     
     
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"face" object:nil];
+-(void)viewDidDisappear:(BOOL)animated{        //移除观察者
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"registerFace" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceLogin" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"failLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"failRegister" object:nil];
 }
 
--(void)backToFormerVC{
+-(void)backToFormerVC{                // 返回到panViewController
     [indicator stopAnimating];
     [faceVC.view removeFromSuperview];
     [imgArr removeAllObjects];
     faceVC = nil;
+    textlabel.text =[NSString stringWithFormat:@"%d",(5-imgArr.count)];
 }
 
 
@@ -231,16 +246,5 @@ static int count =5;
     // Dispose of any resources that can be recreated.
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

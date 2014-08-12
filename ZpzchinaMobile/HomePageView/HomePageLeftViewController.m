@@ -281,7 +281,8 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag == 0){
         LoginViewController *loginview = [[LoginViewController alloc] init];
-        [[AppDelegate instance] window].rootViewController = loginview;
+        UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
+        [[AppDelegate instance] window].rootViewController = naVC;
         [[[AppDelegate instance] window] makeKeyAndVisible];
     }else if(alertView.tag == 2){
         if(buttonIndex == 1){
@@ -299,9 +300,12 @@
 
 -(void)logoutSuccess{
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userName"];
-     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"passWord"];
-     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"UserToken"];
-     [[NSUserDefaults standardUserDefaults]synchronize];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"passWord"];
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"UserToken"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isFaceRegisted"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentFaceCount"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"firstPassWordLogin"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];     [[NSUserDefaults standardUserDefaults]synchronize];
      [LoginSqlite insertData:@"" datakey:@"userName"];
      [LoginSqlite insertData:@"" datakey:@"passWord"];
      [LoginSqlite insertData:@"" datakey:@"UserToken"];

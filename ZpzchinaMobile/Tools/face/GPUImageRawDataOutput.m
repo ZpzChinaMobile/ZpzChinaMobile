@@ -4,7 +4,7 @@
 #import "GLProgram.h"
 #import "GPUImageFilter.h"
 #import "GPUImageMovieWriter.h"
-
+#import "BMKOfflineMapType.h"
 @interface GPUImageRawDataOutput ()
 {
     

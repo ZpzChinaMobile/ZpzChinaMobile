@@ -22,6 +22,7 @@
 #import "RecordSqlite.h"
 #import "FaceppAPI.h"
 #import "FaceLoginViewController.h"
+
 @implementation AppDelegate
 + (AppDelegate *)instance {
 	return (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -122,7 +123,7 @@
         }
     }
 
-    return YES;
+       return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

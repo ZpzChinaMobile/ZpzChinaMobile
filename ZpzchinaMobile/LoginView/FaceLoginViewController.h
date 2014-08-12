@@ -10,7 +10,6 @@
 #import "FaceViewController.h"
 @interface FaceLoginViewController : UIViewController{
     FaceViewController *faceVC;
-
         NSMutableArray *imgArr;
 }
 @end
