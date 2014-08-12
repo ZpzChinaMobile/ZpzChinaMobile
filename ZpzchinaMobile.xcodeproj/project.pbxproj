@@ -9,6 +9,23 @@
 /* Begin PBXBuildFile section */
 		5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
 		5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
+		5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */; };
+		5B892F0F199A3BF2001F9921 /* TuDiXinXi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F03199A3BF2001F9921 /* TuDiXinXi.m */; };
+		5B892F10199A3BF2001F9921 /* ZhuTiSheJi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F05199A3BF2001F9921 /* ZhuTiSheJi.m */; };
+		5B892F11199A3BF2001F9921 /* ZhuTiShiGong.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F07199A3BF2001F9921 /* ZhuTiShiGong.m */; };
+		5B892F12199A3BF2001F9921 /* ZhuangXiu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F09199A3BF2001F9921 /* ZhuangXiu.m */; };
+		5B892F13199A3BF2001F9921 /* ProgramSelectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F0B199A3BF2001F9921 /* ProgramSelectViewCell.m */; };
+		5B892F14199A3BF2001F9921 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F0D199A3BF2001F9921 /* ScrollViewController.m */; };
+		5B892F9B199A3CF0001F9921 /* XiangMuJieDuan in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F93199A3CF0001F9921 /* XiangMuJieDuan */; };
+		5B892F9C199A3CF0001F9921 /* XiangMuXiangQing in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F94199A3CF0001F9921 /* XiangMuXiangQing */; };
+		5B892F9D199A3CF0001F9921 /* XiangMuXiangQing_1 in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F95199A3CF0001F9921 /* XiangMuXiangQing_1 */; };
+		5B892F9E199A3CF0001F9921 /* XiangMuXiangQing_2 in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F96199A3CF0001F9921 /* XiangMuXiangQing_2 */; };
+		5B892F9F199A3CF0001F9921 /* XiangMuXiangQing_3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F97199A3CF0001F9921 /* XiangMuXiangQing_3 */; };
+		5B892FA0199A3CF0001F9921 /* XiangMuXiangQing_ShaiXuan in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F98199A3CF0001F9921 /* XiangMuXiangQing_ShaiXuan */; };
+		5B892FA1199A3CF0001F9921 /* XiangMuXiangQing_TanKuang in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F99199A3CF0001F9921 /* XiangMuXiangQing_TanKuang */; };
+		5B892FA2199A3CF0001F9921 /* XinJianXiangMu in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F9A199A3CF0001F9921 /* XinJianXiangMu */; };
+		5B892FAA199A3D8F001F9921 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892FA7199A3D8F001F9921 /* CycleScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5B892FAB199A3D8F001F9921 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892FA9199A3D8F001F9921 /* ViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D31B227F19820D4500B05B03 /* TFIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B227E19820D4500B05B03 /* TFIndicatorView.m */; };
 		D31B25081988DCFC00B05B03 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = D31B25071988DCFC00B05B03 /* citydict.plist */; };
 		D31B264E19891F2600B05B03 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B250E19891F2500B05B03 /* GLProgram.m */; };
@@ -438,6 +455,32 @@
 /* Begin PBXFileReference section */
 		5B6A9F601991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		5B6A9F621991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		5B892F00199A3BF2001F9921 /* ProgramDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailViewController.h; sourceTree = "<group>"; };
+		5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDetailViewController.m; sourceTree = "<group>"; };
+		5B892F02199A3BF2001F9921 /* TuDiXinXi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDiXinXi.h; sourceTree = "<group>"; };
+		5B892F03199A3BF2001F9921 /* TuDiXinXi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDiXinXi.m; sourceTree = "<group>"; };
+		5B892F04199A3BF2001F9921 /* ZhuTiSheJi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhuTiSheJi.h; sourceTree = "<group>"; };
+		5B892F05199A3BF2001F9921 /* ZhuTiSheJi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhuTiSheJi.m; sourceTree = "<group>"; };
+		5B892F06199A3BF2001F9921 /* ZhuTiShiGong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhuTiShiGong.h; sourceTree = "<group>"; };
+		5B892F07199A3BF2001F9921 /* ZhuTiShiGong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhuTiShiGong.m; sourceTree = "<group>"; };
+		5B892F08199A3BF2001F9921 /* ZhuangXiu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhuangXiu.h; sourceTree = "<group>"; };
+		5B892F09199A3BF2001F9921 /* ZhuangXiu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhuangXiu.m; sourceTree = "<group>"; };
+		5B892F0A199A3BF2001F9921 /* ProgramSelectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramSelectViewCell.h; sourceTree = "<group>"; };
+		5B892F0B199A3BF2001F9921 /* ProgramSelectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramSelectViewCell.m; sourceTree = "<group>"; };
+		5B892F0C199A3BF2001F9921 /* ScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewController.h; sourceTree = "<group>"; };
+		5B892F0D199A3BF2001F9921 /* ScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewController.m; sourceTree = "<group>"; };
+		5B892F93199A3CF0001F9921 /* XiangMuJieDuan */ = {isa = PBXFileReference; lastKnownFileType = folder; path = XiangMuJieDuan; sourceTree = "<group>"; };
+		5B892F94199A3CF0001F9921 /* XiangMuXiangQing */ = {isa = PBXFileReference; lastKnownFileType = folder; path = XiangMuXiangQing; sourceTree = "<group>"; };
+		5B892F95199A3CF0001F9921 /* XiangMuXiangQing_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = XiangMuXiangQing_1; sourceTree = "<group>"; };
+		5B892F96199A3CF0001F9921 /* XiangMuXiangQing_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = XiangMuXiangQing_2; sourceTree = "<group>"; };
+		5B892F97199A3CF0001F9921 /* XiangMuXiangQing_3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = XiangMuXiangQing_3; sourceTree = "<group>"; };
+		5B892F98199A3CF0001F9921 /* XiangMuXiangQing_ShaiXuan */ = {isa = PBXFileReference; lastKnownFileType = folder; path = XiangMuXiangQing_ShaiXuan; sourceTree = "<group>"; };
+		5B892F99199A3CF0001F9921 /* XiangMuXiangQing_TanKuang */ = {isa = PBXFileReference; lastKnownFileType = folder; path = XiangMuXiangQing_TanKuang; sourceTree = "<group>"; };
+		5B892F9A199A3CF0001F9921 /* XinJianXiangMu */ = {isa = PBXFileReference; lastKnownFileType = folder; path = XinJianXiangMu; sourceTree = "<group>"; };
+		5B892FA6199A3D8F001F9921 /* CycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleScrollView.h; sourceTree = "<group>"; };
+		5B892FA7199A3D8F001F9921 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
+		5B892FA8199A3D8F001F9921 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		5B892FA9199A3D8F001F9921 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D31B227D19820D4500B05B03 /* TFIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFIndicatorView.h; sourceTree = "<group>"; };
 		D31B227E19820D4500B05B03 /* TFIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFIndicatorView.m; sourceTree = "<group>"; };
 		D31B25071988DCFC00B05B03 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
@@ -1229,12 +1272,10 @@
 				D3A4888B194EBCA100EED32D /* AudioToolbox.framework in Frameworks */,
 				5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */,
 				D3A48889194EBC9400EED32D /* SystemConfiguration.framework in Frameworks */,
-				04330BDF1991F152000C21BC /* libbaidumapapi.a in Frameworks */,
 				D3A48887194EBC8B00EED32D /* AddressBook.framework in Frameworks */,
 				D3A48885194EBC8100EED32D /* AVFoundation.framework in Frameworks */,
 				D3A48883194EBC7300EED32D /* AdSupport.framework in Frameworks */,
 				D3A4883D194A916B00EED32D /* CoreGraphics.framework in Frameworks */,
-				04330BDE1991F152000C21BC /* libbaidumapapi.a in Frameworks */,
 				D3A4883F194A916B00EED32D /* UIKit.framework in Frameworks */,
 				D3A4883B194A916B00EED32D /* Foundation.framework in Frameworks */,
 			);
@@ -1276,6 +1317,38 @@
 				5B6A9F621991E20B00A798BE /* libbaidumapapi.a */,
 			);
 			path = "Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
+		5B892EFF199A3BE5001F9921 /* NewProgramDetail */ = {
+			isa = PBXGroup;
+			children = (
+				5B892F00199A3BF2001F9921 /* ProgramDetailViewController.h */,
+				5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */,
+				5B892F02199A3BF2001F9921 /* TuDiXinXi.h */,
+				5B892F03199A3BF2001F9921 /* TuDiXinXi.m */,
+				5B892F04199A3BF2001F9921 /* ZhuTiSheJi.h */,
+				5B892F05199A3BF2001F9921 /* ZhuTiSheJi.m */,
+				5B892F06199A3BF2001F9921 /* ZhuTiShiGong.h */,
+				5B892F07199A3BF2001F9921 /* ZhuTiShiGong.m */,
+				5B892F08199A3BF2001F9921 /* ZhuangXiu.h */,
+				5B892F09199A3BF2001F9921 /* ZhuangXiu.m */,
+				5B892F0A199A3BF2001F9921 /* ProgramSelectViewCell.h */,
+				5B892F0B199A3BF2001F9921 /* ProgramSelectViewCell.m */,
+				5B892F0C199A3BF2001F9921 /* ScrollViewController.h */,
+				5B892F0D199A3BF2001F9921 /* ScrollViewController.m */,
+			);
+			path = NewProgramDetail;
+			sourceTree = "<group>";
+		};
+		5B892FA5199A3D8F001F9921 /* Code4appScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				5B892FA6199A3D8F001F9921 /* CycleScrollView.h */,
+				5B892FA7199A3D8F001F9921 /* CycleScrollView.m */,
+				5B892FA8199A3D8F001F9921 /* ViewController.h */,
+				5B892FA9199A3D8F001F9921 /* ViewController.m */,
+			);
+			path = Code4appScrollView;
 			sourceTree = "<group>";
 		};
 		D31B250C19891F2500B05B03 /* face */ = {
@@ -1749,6 +1822,7 @@
 		D3A48840194A916B00EED32D /* ZpzchinaMobile */ = {
 			isa = PBXGroup;
 			children = (
+				5B892EFF199A3BE5001F9921 /* NewProgramDetail */,
 				D31B2B971990992300B05B03 /* LoginView */,
 				D31B2B8D199098DC00B05B03 /* RegistView */,
 				D3BB73D01957D90B00A3F626 /* BaiDuMapView */,
@@ -1835,8 +1909,14 @@
 		D3A48895194FD95600EED32D /* images */ = {
 			isa = PBXGroup;
 			children = (
-				0426C3211993222900CD8822 /* 面部采集_07.png */,
-				0426C3221993222900CD8822 /* 面部采集_11.png */,
+				5B892F93199A3CF0001F9921 /* XiangMuJieDuan */,
+				5B892F94199A3CF0001F9921 /* XiangMuXiangQing */,
+				5B892F95199A3CF0001F9921 /* XiangMuXiangQing_1 */,
+				5B892F96199A3CF0001F9921 /* XiangMuXiangQing_2 */,
+				5B892F97199A3CF0001F9921 /* XiangMuXiangQing_3 */,
+				5B892F98199A3CF0001F9921 /* XiangMuXiangQing_ShaiXuan */,
+				5B892F99199A3CF0001F9921 /* XiangMuXiangQing_TanKuang */,
+				5B892F9A199A3CF0001F9921 /* XinJianXiangMu */,
 				D3C58E4F197FB1B6003DD94F /* DRIBBBLE-icon45-blue-drops_03.png */,
 				D3C58E50197FB1B6003DD94F /* DRIBBBLE-icon45-blue-drops_07.png */,
 				D3C58E4D197F9733003DD94F /* 全部项目_02.png */,
@@ -1944,6 +2024,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				5B892FA5199A3D8F001F9921 /* Code4appScrollView */,
 				5B6A9F5E1991E20B00A798BE /* libs */,
 				D31B250C19891F2500B05B03 /* face */,
 				D3AB1BBF19812C810046C587 /* AfNetWork */,
@@ -2491,12 +2572,13 @@
 				D3A488FA194FD95600EED32D /* 地图搜索1_09.png in Resources */,
 				D3A4892A194FD95600EED32D /* 面部采集_03.png in Resources */,
 				D3A48912194FD95600EED32D /* 新建项目5_31.png in Resources */,
+				5B892FA0199A3CF0001F9921 /* XiangMuXiangQing_ShaiXuan in Resources */,
 				D3A48929194FD95600EED32D /* 面部识别登录_07.png in Resources */,
 				D3A48931194FD95600EED32D /* 首页_10.png in Resources */,
+				5B892FA1199A3CF0001F9921 /* XiangMuXiangQing_TanKuang in Resources */,
 				D3A488EA194FD95600EED32D /* icon__11.png in Resources */,
 				D3AA5A1B195D75DE00565078 /* 全部项目_16.png in Resources */,
 				D3A48923194FD95600EED32D /* 语音搜索_02.png in Resources */,
-				0426C3241993222900CD8822 /* 面部采集_11.png in Resources */,
 				D3C58E52197FB1B6003DD94F /* DRIBBBLE-icon45-blue-drops_07.png in Resources */,
 				D3A488E8194FD95600EED32D /* icon_04.png in Resources */,
 				D3A4884D194A916B00EED32D /* Images.xcassets in Resources */,
@@ -2507,14 +2589,15 @@
 				D3A48935194FD95600EED32D /* 首页侧拉栏_07.png in Resources */,
 				D3AA5A12195D185E00565078 /* area.plist in Resources */,
 				D3A4891F194FD95600EED32D /* 登录_11.png in Resources */,
+				5B892F9C199A3CF0001F9921 /* XiangMuXiangQing in Resources */,
 				D3A48901194FD95600EED32D /* 我的任务_05.png in Resources */,
+				5B892F9B199A3CF0001F9921 /* XiangMuJieDuan in Resources */,
 				D346A02F1963D5B800CDDBDF /* 补充_03.png in Resources */,
 				D3A48907194FD95600EED32D /* 新建项目1_06.png in Resources */,
 				D3BDC1F2197381B800DE5A78 /* 地图搜索_02.png in Resources */,
 				D3A4891B194FD95600EED32D /* 登录1_03.png in Resources */,
 				D3A48914194FD95600EED32D /* 新建项目9_06.png in Resources */,
 				D3C58E51197FB1B6003DD94F /* DRIBBBLE-icon45-blue-drops_03.png in Resources */,
-				0426C3231993222900CD8822 /* 面部采集_07.png in Resources */,
 				D3ACE9A0196009540002B038 /* controls_03.png in Resources */,
 				D3A4891C194FD95600EED32D /* 登录1_07.png in Resources */,
 				D3AAAB6C196E8E2E008F9CCD /* mapsearch-1.png in Resources */,
@@ -2531,6 +2614,7 @@
 				D3A48908194FD95600EED32D /* 新建项目1_11.png in Resources */,
 				D3A48911194FD95600EED32D /* 新建项目5_27.png in Resources */,
 				D3A4892D194FD95600EED32D /* 面部采集_12.png in Resources */,
+				5B892F9F199A3CF0001F9921 /* XiangMuXiangQing_3 in Resources */,
 				D3A48927194FD95600EED32D /* 面部识别登录1_03.png in Resources */,
 				D3A488FD194FD95600EED32D /* 地图搜索_01.png in Resources */,
 				D3ACE9A1196009540002B038 /* controls_05.png in Resources */,
@@ -2551,6 +2635,7 @@
 				D3A4892B194FD95600EED32D /* 面部采集_06.png in Resources */,
 				D3A48922194FD95600EED32D /* 语音搜索_01.png in Resources */,
 				D3A48904194FD95600EED32D /* 搜索_07.png in Resources */,
+				5B892F9E199A3CF0001F9921 /* XiangMuXiangQing_2 in Resources */,
 				D3A48936194FD95600EED32D /* 首页侧拉栏_10.png in Resources */,
 				D3A48903194FD95600EED32D /* 搜索_05.png in Resources */,
 				D3B27953195A6E0A0090632C /* icon.png in Resources */,
@@ -2583,11 +2668,13 @@
 				D3A48905194FD95600EED32D /* 搜索_10.png in Resources */,
 				D3C58E4E197F9733003DD94F /* 全部项目_02.png in Resources */,
 				D3A488F5194FD95600EED32D /* 全部项目_25.png in Resources */,
+				5B892FA2199A3CF0001F9921 /* XinJianXiangMu in Resources */,
 				D3A488EE194FD95600EED32D /* 全部项目_06.png in Resources */,
 				D3A488F0194FD95600EED32D /* 全部项目_14.png in Resources */,
 				D3A488ED194FD95600EED32D /* 全部项目_03.png in Resources */,
 				D3A48937194FD95600EED32D /* 首页侧拉栏_12.png in Resources */,
 				D3A489AD1952AD1600EED32D /* 搜索1_03.png in Resources */,
+				5B892F9D199A3CF0001F9921 /* XiangMuXiangQing_1 in Resources */,
 				D3A48906194FD95600EED32D /* 新建项目1_03.png in Resources */,
 				D3AA5A1A195D75DE00565078 /* 全部项目_15.png in Resources */,
 				D3A488F3194FD95600EED32D /* 全部项目_21.png in Resources */,
@@ -2657,6 +2744,7 @@
 				D3AE4DEA19651FCF001086F9 /* ProjectLogModel.m in Sources */,
 				D3A4884B194A916B00EED32D /* AppDelegate.m in Sources */,
 				D31B26CA19891F2600B05B03 /* GPUImageSoftLightBlendFilter.m in Sources */,
+				5B892F14199A3BF2001F9921 /* ScrollViewController.m in Sources */,
 				D3BB71AD1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m in Sources */,
 				D31B26DF19891F2600B05B03 /* GPUImageTwoPassTextureSamplingFilter.m in Sources */,
 				D31B266419891F2600B05B03 /* GPUImageColorInvertFilter.m in Sources */,
@@ -2745,6 +2833,7 @@
 				D31B26B519891F2600B05B03 /* GPUImagePosterizeFilter.m in Sources */,
 				D346A00B1961259200CDDBDF /* LocationViewController.m in Sources */,
 				D31B2B96199098DC00B05B03 /* RegistViewController.m in Sources */,
+				5B892F10199A3BF2001F9921 /* ZhuTiSheJi.m in Sources */,
 				D31B268419891F2600B05B03 /* GPUImageHarrisCornerDetectionFilter.m in Sources */,
 				D31B268319891F2600B05B03 /* GPUImageHardLightBlendFilter.m in Sources */,
 				D31B26BF19891F2600B05B03 /* GPUImageSaturationFilter.m in Sources */,
@@ -2809,6 +2898,7 @@
 				D31B268119891F2600B05B03 /* GPUImageGrayscaleFilter.m in Sources */,
 				D31B265119891F2600B05B03 /* GPUImageAdaptiveThresholdFilter.m in Sources */,
 				D31B269419891F2600B05B03 /* GPUImageLightenBlendFilter.m in Sources */,
+				5B892FAA199A3D8F001F9921 /* CycleScrollView.m in Sources */,
 				D3A48891194EBD6400EED32D /* UIPlaceHolderTextView.m in Sources */,
 				D31B26EA19891F2600B05B03 /* GPUImageMovieWriter.m in Sources */,
 				D31B266619891F2600B05B03 /* GPUImageColorPackingFilter.m in Sources */,
@@ -2816,10 +2906,12 @@
 				D31B26BA19891F2600B05B03 /* GPUImageRGBDilationFilter.m in Sources */,
 				D31B269019891F2600B05B03 /* GPUImageKuwaharaRadius3Filter.m in Sources */,
 				D3A4887B194ACEF700EED32D /* MMDrawerVisualState.m in Sources */,
+				5B892F11199A3BF2001F9921 /* ZhuTiShiGong.m in Sources */,
 				D3AA5A0D195C1D7400565078 /* ContactModel.m in Sources */,
 				D3C58E991980BD5E003DD94F /* FaceppGrouping.m in Sources */,
 				D3A48941194FF02600EED32D /* GradientView.m in Sources */,
 				D346A02D1963D25300CDDBDF /* ProjectStage.m in Sources */,
+				5B892F13199A3BF2001F9921 /* ProgramSelectViewCell.m in Sources */,
 				D31B266E19891F2600B05B03 /* GPUImageDirectionalNonMaximumSuppressionFilter.m in Sources */,
 				D31B266819891F2600B05B03 /* GPUImageCropFilter.m in Sources */,
 				D3A4897819512A2600EED32D /* AFSecurityPolicy.m in Sources */,
@@ -2831,6 +2923,7 @@
 				D31B26A019891F2600B05B03 /* GPUImageMonochromeFilter.m in Sources */,
 				D31B266919891F2600B05B03 /* GPUImageCrosshairGenerator.m in Sources */,
 				D31B269119891F2600B05B03 /* GPUImageLanczosResamplingFilter.m in Sources */,
+				5B892FAB199A3D8F001F9921 /* ViewController.m in Sources */,
 				D3AE4DE41965007C001086F9 /* ResultsViewController.m in Sources */,
 				D3C58EB31980D8C9003DD94F /* ProjectContentCell.m in Sources */,
 				D31B26A719891F2600B05B03 /* GPUImageNonMaximumSuppressionFilter.m in Sources */,
@@ -2845,6 +2938,7 @@
 				D31B266A19891F2600B05B03 /* GPUImageCrosshatchFilter.m in Sources */,
 				D3C58E9C1980BD5E003DD94F /* FaceppRecognition.m in Sources */,
 				D31B268019891F2600B05B03 /* GPUImageGlassSphereFilter.m in Sources */,
+				5B892F0F199A3BF2001F9921 /* TuDiXinXi.m in Sources */,
 				D31B26E619891F2600B05B03 /* GPUImageWhiteBalanceFilter.m in Sources */,
 				D31B269519891F2600B05B03 /* GPUImageLinearBurnBlendFilter.m in Sources */,
 				D31B26CD19891F2600B05B03 /* GPUImageSphereRefractionFilter.m in Sources */,
@@ -2856,10 +2950,12 @@
 				D31B26B319891F2600B05B03 /* GPUImagePolarPixellateFilter.m in Sources */,
 				D31B266B19891F2600B05B03 /* GPUImageDarkenBlendFilter.m in Sources */,
 				D31B267C19891F2600B05B03 /* GPUImageGammaFilter.m in Sources */,
+				5B892F12199A3BF2001F9921 /* ZhuangXiu.m in Sources */,
 				D31B26B919891F2600B05B03 /* GPUImageRGBClosingFilter.m in Sources */,
 				D31B26D919891F2600B05B03 /* GPUImageToneCurveFilter.m in Sources */,
 				D346A025196281B200CDDBDF /* GTMBase64.m in Sources */,
 				D31B266119891F2600B05B03 /* GPUImageColorBlendFilter.m in Sources */,
+				5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */,
 				D31B267219891F2600B05B03 /* GPUImageEmbossFilter.m in Sources */,
 				D3A4898A1951421400EED32D /* SqliteHelper.m in Sources */,
 				D346A0441963E41400CDDBDF /* MJRefreshConst.m in Sources */,
