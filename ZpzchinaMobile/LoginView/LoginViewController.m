@@ -172,7 +172,7 @@ static bool FirstLogin = NO;
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [LoginSqlite insertData:[item objectForKey:@"userToken"]  datakey:@"UserToken"];
                 
-                if([[NSUserDefaults standardUserDefaults] objectForKey:@"firstPassWordLogin"]==nil&&[[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"0"]){
+                if([[NSUserDefaults standardUserDefaults] objectForKey:@"firstPassWordLogin"]==nil&&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){
                     [[NSUserDefaults standardUserDefaults] setObject:@"firstLogin" forKey:@"firstPassWordLogin"];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否要进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
                     
