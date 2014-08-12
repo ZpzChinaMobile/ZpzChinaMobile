@@ -260,6 +260,7 @@ int startIndex;
         _newProject = [[NewProjectViewController alloc] init];
         _newProject.fromView = 1;
         _newProject.isRelease = 0;
+        NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
         _newProject.SingleDataDic = [dataArr objectAtIndex:indexPath.section];
         [self.navigationController pushViewController:_newProject animated:YES];
     }

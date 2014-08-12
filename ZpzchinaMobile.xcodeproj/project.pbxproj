@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
+		5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
 		D31B227F19820D4500B05B03 /* TFIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B227E19820D4500B05B03 /* TFIndicatorView.m */; };
 		D31B25081988DCFC00B05B03 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = D31B25071988DCFC00B05B03 /* citydict.plist */; };
 		D31B264E19891F2600B05B03 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B250E19891F2500B05B03 /* GLProgram.m */; };
@@ -436,6 +438,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B6A9F601991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		5B6A9F621991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		D31B227D19820D4500B05B03 /* TFIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFIndicatorView.h; sourceTree = "<group>"; };
 		D31B227E19820D4500B05B03 /* TFIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFIndicatorView.m; sourceTree = "<group>"; };
 		D31B25071988DCFC00B05B03 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
@@ -1223,10 +1227,12 @@
 				D3AAAB60196D6EC0008F9CCD /* iflyMSC.framework in Frameworks */,
 				D3BB73CC1957C11200A3F626 /* libbaidumapapi.a in Frameworks */,
 				D3BB730519557D6F00A3F626 /* CoreLocation.framework in Frameworks */,
+				5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */,
 				D3BB730319557D5F00A3F626 /* QuartzCore.framework in Frameworks */,
 				D3BB730119557D5700A3F626 /* OpenGLES.framework in Frameworks */,
 				D3A48986195141BE00EED32D /* libsqlite3.0.dylib in Frameworks */,
 				D3A4888B194EBCA100EED32D /* AudioToolbox.framework in Frameworks */,
+				5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */,
 				D3A48889194EBC9400EED32D /* SystemConfiguration.framework in Frameworks */,
 				D3A48887194EBC8B00EED32D /* AddressBook.framework in Frameworks */,
 				D3A48885194EBC8100EED32D /* AVFoundation.framework in Frameworks */,
@@ -1250,6 +1256,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B6A9F5E1991E20B00A798BE /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				5B6A9F5F1991E20B00A798BE /* Release-iphoneos */,
+				5B6A9F611991E20B00A798BE /* Release-iphonesimulator */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		5B6A9F5F1991E20B00A798BE /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				5B6A9F601991E20B00A798BE /* libbaidumapapi.a */,
+			);
+			path = "Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		5B6A9F611991E20B00A798BE /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				5B6A9F621991E20B00A798BE /* libbaidumapapi.a */,
+			);
+			path = "Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
 		D31B250C19891F2500B05B03 /* face */ = {
 			isa = PBXGroup;
 			children = (
@@ -1916,6 +1947,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				5B6A9F5E1991E20B00A798BE /* libs */,
 				D31B250C19891F2500B05B03 /* face */,
 				D3AB1BBF19812C810046C587 /* AfNetWork */,
 				D3C58E601980BD5E003DD94F /* FaceppSDK */,
@@ -3007,6 +3039,10 @@
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools",
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release$(EFFECTIVE_PLATFORM_NAME)",
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/FaceppLocalDetectorSDK",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/baidu/Release-iphoneos",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/baidu/Release-iphonesimulator",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -3039,6 +3075,10 @@
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools",
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release$(EFFECTIVE_PLATFORM_NAME)",
 					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/FaceppLocalDetectorSDK",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/baidu/Release-iphoneos",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/baidu/Release-iphonesimulator",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/ZpzchinaMobile/Tools/libs/Release-iphonesimulator",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
