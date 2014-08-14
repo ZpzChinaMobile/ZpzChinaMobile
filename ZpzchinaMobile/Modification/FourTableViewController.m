@@ -9,7 +9,7 @@
 #import "FourTableViewController.h"
 
 @interface FourTableViewController ()
-
+@property (nonatomic,strong)NSArray *titleArray;
 @end
 
 @implementation FourTableViewController
@@ -26,6 +26,8 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
+    _titleArray = @[@"地勘公司",@"主体设计阶段"];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,7 +44,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 
@@ -52,14 +54,43 @@
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
-    cell.contentView.backgroundColor=[UIColor redColor];
+    
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    // Configure the cell...
+    
+    UILabel *GFALabe = [[UILabel alloc] initWithFrame:CGRectMake(20,10, 100, 30)];
+    GFALabe.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    GFALabe.text = [_titleArray objectAtIndex:indexPath.row];
+    GFALabe.textColor = BlueColor;
+    [cell addSubview:GFALabe];
+    UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(20,46,280,1)];
+    [lineImage setImage:[UIImage imageNamed:@"新建项目5_27"]];
+    [cell addSubview:lineImage];
+    
+    if (indexPath.row==0) {
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,15, 20, 20)];
+        [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
+        [cell addSubview:addImage];
+
+    }
+    else if (indexPath.row==1) {
+        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(120,15, 10, 20)];
+        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [cell addSubview:arrowImage];
+
+    }
+    
+
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
+}
+
+-(void)rightBtnClicked
+{
+
+
 }
 @end
