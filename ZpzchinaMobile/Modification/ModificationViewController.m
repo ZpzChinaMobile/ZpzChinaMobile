@@ -17,7 +17,7 @@
 #import "EightTableViewController.h"
 #import "NineTableViewController.h"
 #import "TenTableViewController.h"
-
+#import "ModificationSelectViewCell.h"
 @interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
@@ -119,7 +119,7 @@
     //小阶段标题label
     self.smallStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(170, 10, 110, 30)];
     self.smallStageLabel.text=@"土地规划/拍卖";
-    self.smallStageLabel.textColor=[UIColor grayColor];
+    self.smallStageLabel.textColor=BlueColor;
     self.smallStageLabel.font=[UIFont systemFontOfSize:14];
     self.smallStageLabel.textAlignment=NSTextAlignmentRight;
     [tempView addSubview:self.smallStageLabel];
@@ -132,7 +132,7 @@
     //上导航栏themeView第二部分,上导航下方阴影
     UIImageView* shadowView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 48.5, 320, 1.5)];
     shadowView.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-top.png"];
-    shadowView.alpha=.5;
+    shadowView.alpha=.2;
     [view addSubview:shadowView];
     
     //使该view被点击可以触发
@@ -144,10 +144,18 @@
 -(void)change{
     NSLog(@"用户选择了筛选");
     //暂时移除观察者,避免加新view时有动画
-    
     [self.view addSubview:self.myTableView];
     [UIView animateWithDuration:1 animations:^{
         self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
+    }];
+}
+
+//筛选界面拉回去
+-(void)selectCancel{
+    [UIView animateWithDuration:1 animations:^{
+        self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
+    } completion:^(BOOL finished){
+        [self.myTableView removeFromSuperview];
     }];
 }
 
@@ -156,15 +164,87 @@
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;
     self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
-    //[self.myTableView registerClass:[ProgramSelectViewCell class] forCellReuseIdentifier:@"Cell"];
+    [self.myTableView registerClass:[ModificationSelectViewCell class] forCellReuseIdentifier:@"Cell"];
     self.myTableView.showsVerticalScrollIndicator=NO;
     self.myTableView.scrollEnabled=NO;
     self.myTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    self.myTableView.backgroundColor=[UIColor colorWithWhite:1 alpha:.95];
-    
-    self.myTableView.backgroundColor=[UIColor redColor];
+   //self.myTableView.backgroundColor=[UIColor colorWithWhite:1 alpha:.95];
+    self.myTableView.backgroundColor=[UIColor whiteColor];
     //用于存放使sectionHeader可以被点击的button的array
     //self.sectionButtonArray=[NSMutableArray array];
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ModificationSelectViewCell* cell=[ModificationSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath nowTableView:10];
+    //cell.contentView.backgroundColor=[UIColor redColor];
+    NSLog(@"22");
+    return cell;
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    NSString* mainPath=@"XiangMuJieDuan";
+    NSArray* path=@[@"map2@x.png",@"pen@2x.png",@"Subject@2x.png",@"paint@2x.png"];
+    
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 37.5)];
+    view.backgroundColor=RGBCOLOR(234,234,234);
+    
+    
+    UIImage* image=[UIImage imageNamed:[mainPath stringByAppendingPathComponent:path[section]]];
+    CGRect frame=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
+    imageView.center=CGPointMake(23.5, 37.5*.5);
+    imageView.image=image;
+    [view addSubview:imageView];
+    
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(47, 12, 200, 16)];
+    NSArray* ary=@[@"土地信息阶段",@"主体设计阶段",@"主体施工阶段",@"装修阶段"];
+    label.text=ary[section];
+    label.font=[UIFont systemFontOfSize:16];
+    label.textColor=RGBCOLOR(150, 150, 150);
+    [view addSubview:label];
+   
+    return view;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 34;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 37.5;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    switch (section) {
+        case 0:
+            return 2;
+            break;
+        case 1:
+            return 3;
+            break;
+        case 2:
+            return 4;
+            break;
+        default:
+            return 1;
+            break;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    int a[4]={0,2,5,9};
+    NSLog(@"%d",a[indexPath.section]+indexPath.row);
+    UITableViewController* tvc=self.tvcArray[a[indexPath.section]+indexPath.row];
+    [self.tableViewSpace addSubview:tvc.tableView];
+    [self selectCancel];
+    
+    self.bigStageLabel.text=@[@"土地信息",@"主体设计阶段",@"主体施工阶段",@"装修阶段"][indexPath.section];
+    self.smallStageLabel.text=@[@"土地规划/拍卖",@"项目立项",@"地勘阶段",@"设计阶段",@"出图阶段",@"地平",@"桩基基坑",@"立体施工",@"消防/景观绿化",@"装修阶段"][a[indexPath.section]+indexPath.row];
 }
 
 -(void)initNavi{
@@ -174,18 +254,5 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

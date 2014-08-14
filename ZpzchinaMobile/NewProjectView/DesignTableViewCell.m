@@ -15,32 +15,30 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 100)];
-        [lingImage setBackgroundColor:[UIColor blackColor]];
-        [self addSubview:lingImage];
-        lingImage.alpha = 0.1;
+
+        for (int i=0; i<2; i++) {
+            UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
+            [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+            [self addSubview:lingImage];
+        }
         
-        UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50, 250, 1)];
-        [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
-        [self addSubview:lingImage2];
-        
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(35,15, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,15, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
         UIButton *Company = [UIButton buttonWithType:UIButtonTypeCustom];
-        Company.frame = CGRectMake(60,10, 140, 30);
-        [Company setTitle:@"设计院" forState:UIControlStateNormal];
+        Company.frame = CGRectMake(20,10, 140, 30);
+        [Company setTitle:@"地勘公司" forState:UIControlStateNormal];
         [Company setTitleColor:BlueColor forState:UIControlStateNormal];
         Company.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         Company.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         [Company addTarget:self action:@selector(Company) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Company];
         
-        dataArr = [NSMutableArray arrayWithArray:Arr];
+               dataArr = [NSMutableArray arrayWithArray:Arr];
         if(Arr.count != 0){
             for(int i=0; i<Arr.count;i++){
-                if(i<3){
+                if(i<2){
                     UIButton *contactBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                     [contactBtn setTitle:[[Arr objectAtIndex:i] objectForKey:@"contactName"] forState:UIControlStateNormal];
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -52,7 +50,8 @@
                         [contactBtn setFrame:CGRectMake(130, 10, 60, 30)];
                     }else if(i == 1){
                         [contactBtn setFrame:CGRectMake(180, 10, 60, 30)];
-                    }else{
+                    }
+                        else{
                         [contactBtn setFrame:CGRectMake(230, 10, 60, 30)];
                     }
                     [self addSubview:contactBtn];
@@ -61,7 +60,7 @@
         }
         
         UIButton *Bodydesign = [UIButton buttonWithType:UIButtonTypeCustom];
-        Bodydesign.frame = CGRectMake(60,65, 200, 30);
+        Bodydesign.frame = CGRectMake(20,65, 200, 30);
         if(flag == 0){
             if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
                 [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
@@ -70,7 +69,7 @@
             }
         }else{
             if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
-                [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
+                [Bodydesign setTitle:@"主体设计阶段" forState:UIControlStateNormal];
             }else{
                 if(![[singleDic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
                     [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
@@ -85,7 +84,7 @@
         [Bodydesign addTarget:self action:@selector(Bodydesign) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Bodydesign];
         
-        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,70, 8, 12.5)];
+        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(130,70, 10, 18)];
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage];
     }

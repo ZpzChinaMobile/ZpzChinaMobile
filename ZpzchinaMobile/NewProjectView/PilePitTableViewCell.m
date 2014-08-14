@@ -15,17 +15,22 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 50)];
-        [lingImage setBackgroundColor:[UIColor blackColor]];
-        [self addSubview:lingImage];
-        lingImage.alpha = 0.1;
+//        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 50)];
+//        [lingImage setBackgroundColor:[UIColor blackColor]];
+//        [self addSubview:lingImage];
+//        lingImage.alpha = 0.1;
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(35,15, 20, 20)];
+        
+        UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 280, 1)];
+        [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+        [self addSubview:lingImage2];
+        
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(125,15, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
         UIButton *Company = [UIButton buttonWithType:UIButtonTypeCustom];
-        Company.frame = CGRectMake(60,10, 140, 30);
+        Company.frame = CGRectMake(20,10, 140, 30);
         [Company setTitle:@"桩基分包单位" forState:UIControlStateNormal];
         [Company setTitleColor:BlueColor forState:UIControlStateNormal];
         Company.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
