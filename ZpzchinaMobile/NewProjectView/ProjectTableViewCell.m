@@ -328,16 +328,16 @@
         OwnerType.frame = CGRectMake(20,515, 220, 30);
         if(flag == 0){
             if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
-                [OwnerType setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ownerType"]] forState:UIControlStateNormal];
+                [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
             }else{
                 [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
             }
         }else{
             if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
-                [OwnerType setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ownerType"]] forState:UIControlStateNormal];
+                [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
             }else{
                 if(![[singleDic objectForKey:@"ownerType"] isEqualToString:@""]){
-                    [OwnerType setTitle:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"ownerType"]] forState:UIControlStateNormal];
+                    [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
                 }else{
                     [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
                 }
