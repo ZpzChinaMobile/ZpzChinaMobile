@@ -21,6 +21,7 @@
 #import "CameraModel.h"
 #import "CameraSqlite.h"
 #import "GTMBase64.h"
+#import "ModificationViewController.h"
 @interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate>
 
 @property(nonatomic,strong)UIScrollView* myScrollView;
@@ -49,6 +50,7 @@
 @property(nonatomic)CGFloat thirdViewThirdStage;//主体施工阶段 主体施工
 @property(nonatomic)CGFloat thirdViewFourthStage;//主体施工阶段 消防/景观绿化
 
+@property(nonatomic,strong)UIView* spaceView;//用来在加载新页面时,下方开始圈圈动画的时候,页面无法点击
 
 //以下4属性用于sectionHeader被点击时所需要传参数时用的东西
 @property(nonatomic,strong)NSMutableArray* sectionButtonArray;
@@ -100,37 +102,39 @@
     return self;
 }
 
+//跳转至滚动的图片库里
+-(void)gotoScrollImageViewWithImageAry:(NSArray*)imageAry{
+    ViewController* vc=[[ViewController alloc]init];
+  
+    //将base64的图放入CameraModel,然后放入GTMBase64里转出image,然后放入数组
+    for (int i=0; i<imageAry.count; i++) {
+        CameraModel *model = imageAry[i];
+        UIImage *aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        [vc.imagesArray addObject:aimage];
+    }
+    [self presentViewController:vc animated:NO completion:nil];
+
+}
 
 -(void)userChangeImageWithButtons:(UIButton *)button{
     NSLog(@"userChangeImage");
     if (button==self.firstStageButton1) {
-        ViewController* vc=[[ViewController alloc]init];
-        CameraModel *model = self.horizonImageArr[0];
-        UIImage *aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-        NSArray *a = [[NSArray alloc] initWithObjects:aimage, nil];
-        vc.imagesArray= [a mutableCopy];
-        [self presentViewController:vc animated:NO completion:nil];
-        
+        [self gotoScrollImageViewWithImageAry:self.horizonImageArr];
         NSLog(@"firstStageButton1");
     }else if(button==self.secondStageButton1){
-        ScrollViewController* vc=[[ScrollViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self gotoScrollImageViewWithImageAry:self.explorationImageArr];
         NSLog(@"secondStageButton1");
     }else if(button==self.thirdStageButton1){
-        ScrollViewController* vc=[[ScrollViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self gotoScrollImageViewWithImageAry:self.horizonImageArr];
         NSLog(@"thirdStageButton1");
     }else if(button==self.thirdStageButton2){
-        ScrollViewController* vc=[[ScrollViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self gotoScrollImageViewWithImageAry:self.pilePitImageArr];
         NSLog(@"thirdStageButton2");
     }else if(button==self.thirdStageButton3){
-        ScrollViewController* vc=[[ScrollViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self gotoScrollImageViewWithImageAry:self.mainConstructionImageArr];
         NSLog(@"thirdStageButton3");
     }else if(button==self.fourthStageButton1){
-        ScrollViewController* vc=[[ScrollViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self gotoScrollImageViewWithImageAry:self.electroweakImageArr];
         NSLog(@"fourthStageButton1");
     }
 }
@@ -315,7 +319,6 @@
 
             
             [self initNaviAndScrollView];//初始navi,创建返回Button,初始scrollView,初始加载新view的动画
-            [self addBackButton];
             
             [self initThemeView];//主体view初始
             
@@ -340,16 +343,6 @@
         NSLog(@"Error: %@", error);
     }];
     [[NSOperationQueue mainQueue] addOperation:op];
-    
-    
-    /*============================================================*/
-    /*============================================================*/
-    /*============================================================*/
-    /*============================================================*/
-    /*============================================================*/
-    /*============================================================*/
-    /*============================================================*/
-    
 }
 
 
@@ -589,7 +582,7 @@
         [self.myScrollView addSubview:label];
         
         //动画时不让用户选择筛选界面中的选项，否则会出现bug
-        self.myTableView.allowsSelection=NO;
+        [self.myTableView addSubview:self.spaceView];
         
         //触发动画,不位移，不延迟2秒
         CGRect frame=self.animationView.frame;
@@ -601,7 +594,7 @@
             [self.animationView stopAnimating];
             [self setOriginToView:detailView];
             //动画时不让用户选择筛选界面中的选项，否则会出现bug,动画结束后的现在可以选择
-            self.myTableView.allowsSelection=YES;
+            [self.spaceView removeFromSuperview];
         }];
     }else{
         [self setOriginToView:detailView];
@@ -663,15 +656,28 @@
     NSLog(@"用户选择了筛选");
     //暂时移除观察者,避免加新view时有动画
     
-    //self.myTableView.allowsSelection=NO;
     [self.view addSubview:self.myTableView];
     [UIView animateWithDuration:1 animations:^{
         self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
-        //self.myTableView.allowsSelection=YES;
     }];
 }
 
+-(void)gotoModificationVC{
+    ModificationViewController* modiVC=[[ModificationViewController alloc]init];
+    [self.navigationController pushViewController:modiVC animated:YES];
+}
+
 -(void)initNaviAndScrollView{
+    [self addBackButton];
+    
+    CGRect frame=CGRectMake(285,30,25.5,22.5);
+    UIButton* modificationButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    modificationButton.frame=frame;
+    [modificationButton setImage:[UIImage imageNamed:@"XiangMuXiangQing/more_01@2x.png"] forState:UIControlStateNormal];
+    [modificationButton addTarget:self action:@selector(gotoModificationVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.topView addSubview:modificationButton];
+    
+    
     //scrollView初始
     NSLog(@"============%f",self.contentView.frame.size.height);
     self.myScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.contentView.frame.size.height)];
@@ -687,10 +693,10 @@
     //动画view控制初始
     self.animationView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.animationView.color=[UIColor blackColor];
-}
-
--(void)show{
-    NSLog(@"%f",self.myScrollView.contentOffset.y);
+    
+    //用来在加载新页面时,下方开始圈圈动画的时候,页面无法点击 该view初始
+    self.spaceView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
+    self.spaceView.backgroundColor=[UIColor clearColor];
 }
 
 -(void)dealloc{

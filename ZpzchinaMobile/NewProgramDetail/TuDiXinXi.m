@@ -45,15 +45,15 @@ static NSDictionary* dataDic;
     
     //获取预计施工时间以及预计竣工时间
     NSMutableArray* tempAry=[NSMutableArray array];
-   // NSLog(@"========%@",dataDic[@"expectedStartTime"]);
+    // NSLog(@"========%@",dataDic[@"expectedStartTime"]);
     NSArray* timeTempArray=@[dataDic[@"expectedStartTime"],dataDic[@"expectedFinishTime"]];
     for (int i=0; i<2; i++) {
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd"];
         NSString *confromTimespStr ;
-            NSDate* confromTimesp = [NSDate dateWithTimeIntervalSince1970:[timeTempArray[i] intValue]];
-            confromTimespStr = [formatter stringFromDate:confromTimesp];
-
+        NSDate* confromTimesp = [NSDate dateWithTimeIntervalSince1970:[timeTempArray[i] intValue]];
+        confromTimespStr = [formatter stringFromDate:confromTimesp];
+        
         [tempAry addObject:confromTimespStr];
     }
     
@@ -117,17 +117,19 @@ static NSDictionary* dataDic;
     [view addSubview:imageView];
     
     //图片数量label
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 70, 30)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 160, 70, 30)];
     label.text=[NSString stringWithFormat:@"%d张",imageNumber];
     label.textAlignment=NSTextAlignmentCenter;
     label.textColor=[UIColor whiteColor];
-    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
+    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.7];
     [view addSubview:label];
     
     //添加选中图片时的触发
-    myDelegate.firstStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    [myDelegate.firstStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:myDelegate.firstStageButton1];
+    if (myDelegate.explorationImageArr.count) {
+        myDelegate.firstStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
+        [myDelegate.firstStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:myDelegate.firstStageButton1];
+    }
 }
 
 
@@ -147,7 +149,7 @@ static NSDictionary* dataDic;
     
     NSLog(@"city=%@ description=%@ district=%@ landAddress=%@ landName=%@ ownerType=%@ projectName=%@ usage=%@ province=%@",dataDic[@"city"],dataDic[@"description"],dataDic[@"district"],dataDic[@"landAddress"],dataDic[@"landName"],dataDic[@"ownerType"],dataDic[@"projectName"],dataDic[@"usage"],dataDic[@"province"]);
     //图片imageView
-    [self getImageView:72];
+    [self getImageView:myDelegate.explorationImageArr.count];
     
     //建立3个2行的label
     NSArray* ary1=@[@"土地面积",@"土地容积率",@"地块用途"];

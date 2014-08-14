@@ -68,7 +68,7 @@ static NSDictionary* dataDic;
     }
     
     [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"出图阶段" programTitle:@[@"预计施工时间",@"预计竣工时间"] address:timeArray detailAddress:nil]];
-
+    
     //3个联系人Label
     NSArray* array1=myDelegate.ownerAry;
     for (int i=0,j=myDelegate.ownerAry.count; i<3; i++) {
@@ -84,7 +84,7 @@ static NSDictionary* dataDic;
         tempView.center=CGPointMake(160, height+60);
         height+=120;
     }
-
+    
     
     //电梯,空调,供暖方式,外墙材料,钢结构,yes or no的几个view
     NSArray* tempAry=@[@"电梯",@"空调",@"供暖方式",@"外墙材料",@"钢结构"];
@@ -164,17 +164,19 @@ static NSDictionary* dataDic;
     [view addSubview:imageView];
     
     //图片数量label
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 70, 30)];
-    label.text=[NSString stringWithFormat:@"%ld张",imageNumber];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 160, 70, 30)];
+    label.text=[NSString stringWithFormat:@"%d张",imageNumber];
     label.textAlignment=NSTextAlignmentCenter;
     label.textColor=[UIColor whiteColor];
-    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
+    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.7];
     [view addSubview:label];
     
     //添加选中图片时的触发
-    myDelegate.secondStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    [myDelegate.secondStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:myDelegate.secondStageButton1];
+    if (myDelegate.explorationImageArr.count) {
+        myDelegate.secondStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
+        [myDelegate.secondStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:myDelegate.secondStageButton1];
+    }
     
 }
 
@@ -188,7 +190,7 @@ static NSDictionary* dataDic;
      */
     
     //图片imageView
-    [self getImageView:22];
+    [self getImageView:myDelegate.explorationImageArr.count];
     
     //联系人信息3个label
     NSArray* array1=myDelegate.explorationAry;
@@ -205,7 +207,7 @@ static NSDictionary* dataDic;
         tempView.center=CGPointMake(160, height+60);
         height+=120;
     }
-
+    
     
 }
 
@@ -301,25 +303,25 @@ static NSDictionary* dataDic;
     [titleView addSubview:line1];
     
     for (int i=0; i<programTitle.count; i++) {
-    //项目名称部分
-    UILabel* programName=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
-    programName.center=CGPointMake(320*1.0/programTitle.count*(i+.5), 85);
-    programName.text=programTitle[i];
-    programName.font=[UIFont systemFontOfSize:16];
-    programName.textAlignment=NSTextAlignmentCenter;
-    [titleView addSubview:programName];
-    
-    //项目地点部分
-    UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
-    areaLabel.center=CGPointMake(320*1.0/programTitle.count*(i+.5), 105);
-    areaLabel.text=address[i];
-    areaLabel.font=[UIFont systemFontOfSize:14];
-    areaLabel.textColor=RGBCOLOR(125, 125, 125);
-    areaLabel.textAlignment=NSTextAlignmentCenter;
-    [titleView addSubview:areaLabel];
+        //项目名称部分
+        UILabel* programName=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
+        programName.center=CGPointMake(320*1.0/programTitle.count*(i+.5), 85);
+        programName.text=programTitle[i];
+        programName.font=[UIFont systemFontOfSize:16];
+        programName.textAlignment=NSTextAlignmentCenter;
+        [titleView addSubview:programName];
+        
+        //项目地点部分
+        UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
+        areaLabel.center=CGPointMake(320*1.0/programTitle.count*(i+.5), 105);
+        areaLabel.text=address[i];
+        areaLabel.font=[UIFont systemFontOfSize:14];
+        areaLabel.textColor=RGBCOLOR(125, 125, 125);
+        areaLabel.textAlignment=NSTextAlignmentCenter;
+        [titleView addSubview:areaLabel];
     }
-        
-        
+    
+    
     //项目详细地点
     if (detailAddress) {
         UILabel* areaDetailLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 70)];

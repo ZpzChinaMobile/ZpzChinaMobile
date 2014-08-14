@@ -54,20 +54,22 @@ static NSDictionary* dataDic;
     //myDelegate.horizonImageArr;
     imageView.image=aimage;
     [view addSubview:imageView];
-
+    
     
     //图片数量label
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 70, 30)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 160, 70, 30)];
     label.text=[NSString stringWithFormat:@"%d张",imageNumber];
     label.textAlignment=NSTextAlignmentCenter;
     label.textColor=[UIColor whiteColor];
-    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
+    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.7];
     [view addSubview:label];
     
     //添加选中图片时的触发
-    myDelegate.fourthStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    [myDelegate.fourthStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:myDelegate.fourthStageButton1];
+    if (myDelegate.electroweakImageArr.count) {
+        myDelegate.fourthStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
+        [myDelegate.fourthStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:myDelegate.fourthStageButton1];
+    }
 }
 
 +(void)getFirstView{
@@ -79,7 +81,7 @@ static NSDictionary* dataDic;
      *
      */
     //图片imageView
-    [self getImageView:108];
+    [self getImageView:myDelegate.electroweakImageArr.count];
     
     for (int i=0; i<3; i++) {
         //项目名称部分
@@ -107,21 +109,21 @@ static NSDictionary* dataDic;
 //+(UIView*)getSeperatedLine{
 //    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 290, 1)];
 //    view.backgroundColor=[UIColor grayColor];
-//    
+//
 //    return view;
 //}
 
 ////竖着的3个view,联系人,职位,地点,单位,手机
 //+(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel sequence:(int)sequence{
 //    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 150)];
-//    
+//
 //    //分割线1
 //    if (sequence!=0) {
 //        UIView* line1=[self getSeperatedLine];
 //        line1.center=CGPointMake(160, 10);
 //        [view addSubview:line1];
 //    }
-//    
+//
 //    //名字
 //    UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(20, 20, 200, 40)];
 //    labelName.text=name;
@@ -129,13 +131,13 @@ static NSDictionary* dataDic;
 //    labelName.textColor=RGBCOLOR(82, 125, 237);
 //    labelName.font=[UIFont systemFontOfSize:17];
 //    [view addSubview:labelName];
-//    
+//
 //    //职位
 //    UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 50, 150, 30)];
 //    jobLabel.text=job;
 //    jobLabel.font=[UIFont systemFontOfSize:14];
 //    [view addSubview:jobLabel];
-//    
+//
 //    //单位名称
 //    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 70, 250, 30)];
 //    companyNameLabel.text=firstStr;
@@ -143,7 +145,7 @@ static NSDictionary* dataDic;
 //    companyNameLabel.textAlignment=NSTextAlignmentLeft;
 //    companyNameLabel.font=[UIFont systemFontOfSize:14];
 //    [view addSubview:companyNameLabel];
-//    
+//
 //    //地址
 //    UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 90, 250, 30)];
 //    addressLabel.text=secondStr;
@@ -151,19 +153,19 @@ static NSDictionary* dataDic;
 //    addressLabel.textAlignment=NSTextAlignmentLeft;
 //    addressLabel.font=[UIFont systemFontOfSize:14];
 //    [view addSubview:addressLabel];
-//    
+//
 //    //电话图标
 //    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(190, 40, 25, 25)];
 //    imageView.image=[UIImage imageNamed:@"地图搜索_01.png"];
 //    [view addSubview:imageView];
-//    
+//
 //    //电话号码
 //    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(215, 40, 100, 25)];
 //    label.text=tel;
 //    label.font=[UIFont systemFontOfSize:14];
 //    label.textColor=[UIColor grayColor];
 //    [view addSubview:label];
-//    
+//
 //    return view;
 //}
 
@@ -187,7 +189,7 @@ static NSDictionary* dataDic;
 }
 
 //+(UIView*)getProgramViewWithTitleImage:(UIImage*)titleImage stageTitle:(NSString*)stageTitle programTitle:(NSArray*)programTitle address:(NSArray*)address detailAddress:(NSArray*)detailAddress{
-//    
+//
 //    //项目title及项目名称的画布
 //    CGFloat  tempHeight=175;
 //    if (!detailAddress) {
@@ -199,7 +201,7 @@ static NSDictionary* dataDic;
 //    UIView* titleView=[[UIView alloc]initWithFrame:CGRectMake(0, height, 320, tempHeight)];
 //    titleView.backgroundColor=RGBCOLOR(229, 229, 229);
 //    height+=tempHeight;
-//    
+//
 //    ///title部分
 //    //图片
 //    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 18.5, 18.5)];
@@ -215,13 +217,13 @@ static NSDictionary* dataDic;
 //    tuDiLabel.textColor=RGBCOLOR(82, 125, 237);
 //    [titleView addSubview:tuDiLabel];
 //    //==================================
-//    
+//
 //    if (programTitle) {
 //        //分割线1
 //        UIView* line1=[self getSeperatedLine];
 //        line1.center=CGPointMake(160, 65);
 //        [titleView addSubview:line1];
-//        
+//
 //        for (int i=0; i<programTitle.count; i++) {
 //            //项目名称部分
 //            UILabel* programName=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
@@ -230,7 +232,7 @@ static NSDictionary* dataDic;
 //            programName.font=[UIFont systemFontOfSize:16];
 //            programName.textAlignment=NSTextAlignmentCenter;
 //            [titleView addSubview:programName];
-//            
+//
 //            //项目地点部分
 //            UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
 //            areaLabel.center=CGPointMake(320*1.0/programTitle.count*(i+.5), 115);
@@ -241,7 +243,7 @@ static NSDictionary* dataDic;
 //            [titleView addSubview:areaLabel];
 //        }
 //    }
-//    
+//
 //    //项目详细地点
 //    if (detailAddress) {
 //        UILabel* areaDetailLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 70)];

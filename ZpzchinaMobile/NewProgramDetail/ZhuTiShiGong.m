@@ -74,32 +74,29 @@ static __weak ProgramDetailViewController* myDelegate;
     [view addSubview:imageView];
     
     //图片数量label
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 70, 30)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 160, 70, 30)];
     label.text=[NSString stringWithFormat:@"%d张",imageNumber];
     label.textAlignment=NSTextAlignmentCenter;
     label.textColor=[UIColor whiteColor];
-    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
+    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.7];
     [view addSubview:label];
     
     //添加选中图片时的触发
     
-    if (sequence==1) {
+    if (sequence==1&&myDelegate.horizonImageArr.count) {
         myDelegate.thirdStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         [myDelegate.thirdStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.thirdStageButton1];
-        
-    }else if(sequence==2){
+    }else if(sequence==2&&myDelegate.pilePitImageArr.count){
         myDelegate.thirdStageButton2=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         [myDelegate.thirdStageButton2 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.thirdStageButton2];
         
-    }else{
+    }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
         myDelegate.thirdStageButton3=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         [myDelegate.thirdStageButton3 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.thirdStageButton3];
-        
     }
-    
 }
 
 +(void)getFourthView{
@@ -144,7 +141,7 @@ static __weak ProgramDetailViewController* myDelegate;
     [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"主体施工" programTitle:nil address:nil detailAddress:nil]];
     
     //图片imageView
-    [self getImageView:55 imageViewSequence:3];
+    [self getImageView:myDelegate.mainConstructionImageArr.count imageViewSequence:3];
 }
 
 +(void)getSecondView{
@@ -158,7 +155,7 @@ static __weak ProgramDetailViewController* myDelegate;
     [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"桩基基坑" programTitle:nil address:nil detailAddress:nil]];
     
     //图片imageView
-    [self getImageView:12 imageViewSequence:2];
+    [self getImageView:myDelegate.pilePitImageArr.count imageViewSequence:2];
     
     
     //联系人信息3个label
@@ -201,7 +198,7 @@ static __weak ProgramDetailViewController* myDelegate;
     [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"地平阶段" programTitle:@[@"实际开工时间"] address:@[confromTimespStr] detailAddress:nil]];
     
     //图片view
-    [self getImageView:25 imageViewSequence:1];
+    [self getImageView:myDelegate.horizonImageArr.count imageViewSequence:1];
     
     //联系人信息3个label
     NSArray* array1=myDelegate.horizonAry;
