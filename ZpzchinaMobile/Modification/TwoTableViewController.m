@@ -7,7 +7,7 @@
 //
 
 #import "TwoTableViewController.h"
-
+#import "ProjectTableViewCell.h"
 @interface TwoTableViewController ()
 
 @end
@@ -48,11 +48,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    
+    NSString *stringcell = @"ProjectTableViewCell";
+    ProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    if(!cell){
+        cell = [[ProjectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 ownerArr:nil singleDic:nil] ;
     }
-    cell.contentView.backgroundColor=[UIColor redColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
     
@@ -60,6 +61,6 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 550;
 }
 @end

@@ -222,6 +222,8 @@
 		D346A0481963E41400CDDBDF /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A03F1963E41400CDDBDF /* UIScrollView+MJRefresh.m */; };
 		D346A0491963E41400CDDBDF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A0411963E41400CDDBDF /* UIView+Extension.m */; };
 		D346A04C1963ED5500CDDBDF /* PendulumView.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A04B1963ED5500CDDBDF /* PendulumView.m */; };
+		D37639D1199C7E5C0052E775 /* 面部采集_07.png in Resources */ = {isa = PBXBuildFile; fileRef = D37639CF199C7E5C0052E775 /* 面部采集_07.png */; };
+		D37639D2199C7E5C0052E775 /* 面部采集_11.png in Resources */ = {isa = PBXBuildFile; fileRef = D37639D0199C7E5C0052E775 /* 面部采集_11.png */; };
 		D3A4883B194A916B00EED32D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A4883A194A916B00EED32D /* Foundation.framework */; };
 		D3A4883D194A916B00EED32D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A4883C194A916B00EED32D /* CoreGraphics.framework */; };
 		D3A4883F194A916B00EED32D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A4883E194A916B00EED32D /* UIKit.framework */; };
@@ -887,6 +889,8 @@
 		D346A0411963E41400CDDBDF /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		D346A04A1963ED5500CDDBDF /* PendulumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendulumView.h; sourceTree = "<group>"; };
 		D346A04B1963ED5500CDDBDF /* PendulumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendulumView.m; sourceTree = "<group>"; };
+		D37639CF199C7E5C0052E775 /* 面部采集_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "面部采集_07.png"; sourceTree = "<group>"; };
+		D37639D0199C7E5C0052E775 /* 面部采集_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "面部采集_11.png"; sourceTree = "<group>"; };
 		D3A48837194A916B00EED32D /* ZpzchinaMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZpzchinaMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A4883A194A916B00EED32D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D3A4883C194A916B00EED32D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1977,6 +1981,8 @@
 		D3A48895194FD95600EED32D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D37639CF199C7E5C0052E775 /* 面部采集_07.png */,
+				D37639D0199C7E5C0052E775 /* 面部采集_11.png */,
 				5B892F93199A3CF0001F9921 /* XiangMuJieDuan */,
 				5B892F94199A3CF0001F9921 /* XiangMuXiangQing */,
 				5B892F95199A3CF0001F9921 /* XiangMuXiangQing_1 */,
@@ -2706,9 +2712,11 @@
 				5B892F9E199A3CF0001F9921 /* XiangMuXiangQing_2 in Resources */,
 				D3A48936194FD95600EED32D /* 首页侧拉栏_10.png in Resources */,
 				D3A48903194FD95600EED32D /* 搜索_05.png in Resources */,
+				D37639D1199C7E5C0052E775 /* 面部采集_07.png in Resources */,
 				D3B27953195A6E0A0090632C /* icon.png in Resources */,
 				D3A48933194FD95600EED32D /* 首页侧拉栏_01.png in Resources */,
 				D3A4892F194FD95600EED32D /* 首页_05.png in Resources */,
+				D37639D2199C7E5C0052E775 /* 面部采集_11.png in Resources */,
 				D3A488F6194FD95600EED32D /* 全部项目_27.png in Resources */,
 				D3A4890B194FD95600EED32D /* 新建项目5_03.png in Resources */,
 				D3A488F2194FD95600EED32D /* 全部项目_19.png in Resources */,
@@ -3198,8 +3206,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libstdc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yao YuLong (P9HT3W7WH6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yao YuLong (P9HT3W7WH6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZpzchinaMobile/lib",
@@ -3234,8 +3242,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libstdc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yao YuLong (P9HT3W7WH6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yao YuLong (P9HT3W7WH6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZpzchinaMobile/lib",
