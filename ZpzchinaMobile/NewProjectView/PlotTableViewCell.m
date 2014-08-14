@@ -15,26 +15,23 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 400)];
-        [lingImage setBackgroundColor:[UIColor blackColor]];
-        [self addSubview:lingImage];
-        lingImage.alpha = 0.1;
         
-        for (int i=0; i<7; i++) {
-            UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50*(i+1), 250, 1)];
+        
+        for (int i=0; i<8; i++) {
+            UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
             [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
             [self addSubview:lingImage];
         }
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(35,15, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,15, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
         UIButton *Owner = [UIButton buttonWithType:UIButtonTypeCustom];
-        Owner.frame = CGRectMake(60,10, 140, 30);
+        Owner.frame = CGRectMake(20,10, 140, 30);
         Owner.tag = 0;
-        if(![[dic objectForKey:@"owner"] isEqualToString:@""]){
-            [Owner setTitle:[NSString stringWithFormat:@"业主单位:%@",[dic objectForKey:@"owner"]] forState:UIControlStateNormal];
+        if(![[dic objectForKey:@"owner"] isEqualToString:@""]){//[NSString stringWithFormat:@"业主单位:      %@",[dic objectForKey:@"owner"]
+            [Owner setTitle:@"业主单位" forState:UIControlStateNormal];
         }else{
             [Owner setTitle:@"业主单位" forState:UIControlStateNormal];
         }
@@ -45,7 +42,7 @@
         [self addSubview:Owner];
         
         UIButton *startdate = [UIButton buttonWithType:UIButtonTypeCustom];
-        startdate.frame = CGRectMake(60,65, 200, 30);
+        startdate.frame = CGRectMake(20,65, 200, 30);
         startdate.tag = 1;
         if(flag == 0){
             if(![[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
@@ -83,7 +80,7 @@
         [self addSubview:startdate];
         
         UIButton *enddate = [UIButton buttonWithType:UIButtonTypeCustom];
-        enddate.frame = CGRectMake(60,115, 200, 30);
+        enddate.frame = CGRectMake(20,115, 200, 30);
         enddate.tag = 2;
         if(flag == 0){
             if(![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
@@ -121,7 +118,7 @@
         [self addSubview:enddate];
         
         UIButton *Elevator = [UIButton buttonWithType:UIButtonTypeCustom];
-        Elevator.frame = CGRectMake(60,165, 140, 30);
+        Elevator.frame = CGRectMake(20,165, 140, 30);
         [Elevator setTitle:@"电梯" forState:UIControlStateNormal];
         [Elevator setTitleColor:BlueColor forState:UIControlStateNormal];
         Elevator.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -130,7 +127,7 @@
         [self addSubview:Elevator];
         
         UIButton *Airconditioning = [UIButton buttonWithType:UIButtonTypeCustom];
-        Airconditioning.frame = CGRectMake(60,215, 140, 30);
+        Airconditioning.frame = CGRectMake(20,215, 140, 30);
         [Airconditioning setTitle:@"空调" forState:UIControlStateNormal];
         [Airconditioning setTitleColor:BlueColor forState:UIControlStateNormal];
         Airconditioning.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -139,7 +136,7 @@
         [self addSubview:Airconditioning];
         
         UIButton *Heatingmode = [UIButton buttonWithType:UIButtonTypeCustom];
-        Heatingmode.frame = CGRectMake(60,265, 140, 30);
+        Heatingmode.frame = CGRectMake(20,265, 140, 30);
         [Heatingmode setTitle:@"供暖方式" forState:UIControlStateNormal];
         [Heatingmode setTitleColor:BlueColor forState:UIControlStateNormal];
         Heatingmode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -148,7 +145,7 @@
         [self addSubview:Heatingmode];
         
         UIButton *Exteriormaterials = [UIButton buttonWithType:UIButtonTypeCustom];
-        Exteriormaterials.frame = CGRectMake(60,315, 140, 30);
+        Exteriormaterials.frame = CGRectMake(20,315, 140, 30);
         [Exteriormaterials setTitle:@"外墙材料" forState:UIControlStateNormal];
         [Exteriormaterials setTitleColor:BlueColor forState:UIControlStateNormal];
         Exteriormaterials.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -157,7 +154,7 @@
         [self addSubview:Exteriormaterials];
         
         UIButton *Steel = [UIButton buttonWithType:UIButtonTypeCustom];
-        Steel.frame = CGRectMake(60,365, 140, 30);
+        Steel.frame = CGRectMake(20,365, 140, 30);
         [Steel setTitle:@"刚结构" forState:UIControlStateNormal];
         [Steel setTitleColor:BlueColor forState:UIControlStateNormal];
         Steel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

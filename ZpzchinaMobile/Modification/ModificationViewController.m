@@ -81,8 +81,7 @@
     [self initNavi];
     [self initThemeView];
     [self initTableViewSpace];
-    [self.tableViewSpace addSubview:self.oneTVC.tableView];
-    [self initTableView];
+    [self.tableViewSpace addSubview:self.twoTVC.tableView];
     // Do any additional setup after loading the view.
 }
 

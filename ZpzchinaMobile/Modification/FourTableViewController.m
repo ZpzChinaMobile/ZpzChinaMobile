@@ -7,9 +7,9 @@
 //
 
 #import "FourTableViewController.h"
-
+#import "DesignTableViewCell.h"
 @interface FourTableViewController ()
-@property (nonatomic,strong)NSArray *titleArray;
+
 @end
 
 @implementation FourTableViewController
@@ -26,7 +26,7 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
-    _titleArray = @[@"地勘公司",@"主体设计阶段"];
+
 
 }
 
@@ -44,48 +44,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+   static NSString *stringcell = @"ProjectTableViewCell";
+    DesignTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    if(!cell){
+        cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:nil flag:1 Arr:nil singleDic:nil];
     }
-    
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    
-    UILabel *GFALabe = [[UILabel alloc] initWithFrame:CGRectMake(20,10, 100, 30)];
-    GFALabe.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
-    GFALabe.text = [_titleArray objectAtIndex:indexPath.row];
-    GFALabe.textColor = BlueColor;
-    [cell addSubview:GFALabe];
-    UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(20,46,280,1)];
-    [lineImage setImage:[UIImage imageNamed:@"新建项目5_27"]];
-    [cell addSubview:lineImage];
-    
-    if (indexPath.row==0) {
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,15, 20, 20)];
-        [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
-        [cell addSubview:addImage];
-
-    }
-    else if (indexPath.row==1) {
-        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(120,15, 10, 20)];
-        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
-        [cell addSubview:arrowImage];
-
-    }
-    
-
+    // Configure the cell...
     
     return cell;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 100;
 }
 
 -(void)rightBtnClicked

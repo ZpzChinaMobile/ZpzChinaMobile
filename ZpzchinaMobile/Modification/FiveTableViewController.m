@@ -7,9 +7,9 @@
 //
 
 #import "FiveTableViewController.h"
-
+#import "PlotTableViewCell.h"
 @interface FiveTableViewController ()
-
+@property (nonatomic,strong)NSArray *titleArray;
 @end
 
 @implementation FiveTableViewController
@@ -26,6 +26,7 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
+    _titleArray = @[@"业主单位",@"预计施工时间",@"预计竣工时间",@"电梯",@"空调",@"供暖方式",@"外墙材料",@"钢结构"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,19 +49,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    
+    static NSString *stringcell = @"ProjectTableViewCell";
+    PlotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    if(!cell){
+        cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:nil flag:1 Arr:nil singleDic:nil];
     }
-    cell.contentView.backgroundColor=[UIColor redColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
     
     return cell;
+ 
+    
+    return cell;
 }
 
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 400;
 }
 
 @end
