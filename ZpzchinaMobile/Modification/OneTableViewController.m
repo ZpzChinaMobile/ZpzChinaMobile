@@ -52,7 +52,7 @@
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
-    cell.contentView.backgroundColor=[UIColor redColor];
+    cell.contentView.backgroundColor=[UIColor yellowColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
     

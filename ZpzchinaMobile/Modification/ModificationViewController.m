@@ -38,6 +38,7 @@
 @property(nonatomic,strong)NineTableViewController* nineTVC;
 @property(nonatomic,strong)TenTableViewController* tenTVC;
 
+@property(nonatomic,strong)NSArray* tvcArray;
 @end
 
 @implementation ModificationViewController
@@ -63,6 +64,13 @@
         self.eightTVC=[[EightTableViewController alloc]init];
         self.nineTVC=[[NineTableViewController alloc]init];
         self.tenTVC=[[TenTableViewController alloc]init];
+        
+        self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
+        
+        for (int i=0; i<10; i++) {
+            UITableViewController* tvc=self.tvcArray[i];
+            tvc.tableView.frame=CGRectMake(0, 0, 320, 568-64.5-50);
+        }
     }
     return self;
 }
