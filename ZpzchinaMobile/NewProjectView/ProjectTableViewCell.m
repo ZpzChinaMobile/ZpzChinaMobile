@@ -293,7 +293,7 @@
         Foreignparticipation.frame = CGRectMake(20,465, 200, 30);
         if(flag == 0){
             if(![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
-                [Foreignparticipation setTitle:[NSString stringWithFormat:@"外资参与"] forState:UIControlStateNormal];
+                [Foreignparticipation setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]] forState:UIControlStateNormal];
             }else{
                 [Foreignparticipation setTitle:@"外资参与" forState:UIControlStateNormal];
             }
