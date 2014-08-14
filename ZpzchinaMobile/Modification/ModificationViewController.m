@@ -18,7 +18,7 @@
 #import "NineTableViewController.h"
 #import "TenTableViewController.h"
 
-@interface ModificationViewController ()
+@interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
 @property(nonatomic,strong)UIImageView* bigStageImageView;//上导航中大阶段图片
@@ -162,6 +162,7 @@
     self.myTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.myTableView.backgroundColor=[UIColor colorWithWhite:1 alpha:.95];
     
+    self.myTableView.backgroundColor=[UIColor redColor];
     //用于存放使sectionHeader可以被点击的button的array
     //self.sectionButtonArray=[NSMutableArray array];
 }

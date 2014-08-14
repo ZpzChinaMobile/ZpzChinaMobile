@@ -37,6 +37,7 @@
 		5BE93BC7199C705600E2FF67 /* EightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BC6199C705600E2FF67 /* EightTableViewController.m */; };
 		5BE93BCA199C706000E2FF67 /* NineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BC9199C706000E2FF67 /* NineTableViewController.m */; };
 		5BE93BCD199C70B800E2FF67 /* TenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BCC199C70B800E2FF67 /* TenTableViewController.m */; };
+		5BE93BD3199C8A2600E2FF67 /* ModificationSelectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BD2199C8A2600E2FF67 /* ModificationSelectViewCell.m */; };
 		D31B227F19820D4500B05B03 /* TFIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B227E19820D4500B05B03 /* TFIndicatorView.m */; };
 		D31B25081988DCFC00B05B03 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = D31B25071988DCFC00B05B03 /* citydict.plist */; };
 		D31B264E19891F2600B05B03 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B250E19891F2500B05B03 /* GLProgram.m */; };
@@ -516,6 +517,8 @@
 		5BE93BC9199C706000E2FF67 /* NineTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NineTableViewController.m; sourceTree = "<group>"; };
 		5BE93BCB199C70B800E2FF67 /* TenTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenTableViewController.h; sourceTree = "<group>"; };
 		5BE93BCC199C70B800E2FF67 /* TenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TenTableViewController.m; sourceTree = "<group>"; };
+		5BE93BD1199C8A2600E2FF67 /* ModificationSelectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModificationSelectViewCell.h; sourceTree = "<group>"; };
+		5BE93BD2199C8A2600E2FF67 /* ModificationSelectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModificationSelectViewCell.m; sourceTree = "<group>"; };
 		D31B227D19820D4500B05B03 /* TFIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFIndicatorView.h; sourceTree = "<group>"; };
 		D31B227E19820D4500B05B03 /* TFIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFIndicatorView.m; sourceTree = "<group>"; };
 		D31B25071988DCFC00B05B03 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
@@ -1393,6 +1396,8 @@
 			children = (
 				5BE93B8B199C6BCA00E2FF67 /* ModificationViewController.h */,
 				5BE93B8C199C6BCA00E2FF67 /* ModificationViewController.m */,
+				5BE93BD1199C8A2600E2FF67 /* ModificationSelectViewCell.h */,
+				5BE93BD2199C8A2600E2FF67 /* ModificationSelectViewCell.m */,
 				5BE93BB0199C6FFB00E2FF67 /* OneTableViewController.h */,
 				5BE93BB1199C6FFB00E2FF67 /* OneTableViewController.m */,
 				5BE93BB3199C700B00E2FF67 /* TwoTableViewController.h */,
@@ -3022,6 +3027,7 @@
 				5BE93BC1199C703F00E2FF67 /* SixTableViewController.m in Sources */,
 				D31B26E619891F2600B05B03 /* GPUImageWhiteBalanceFilter.m in Sources */,
 				D31B269519891F2600B05B03 /* GPUImageLinearBurnBlendFilter.m in Sources */,
+				5BE93BD3199C8A2600E2FF67 /* ModificationSelectViewCell.m in Sources */,
 				D31B26CD19891F2600B05B03 /* GPUImageSphereRefractionFilter.m in Sources */,
 				D3A4897519512A2600EED32D /* AFHTTPRequestOperationManager.m in Sources */,
 				D31B265F19891F2600B05B03 /* GPUImageChromaKeyFilter.m in Sources */,

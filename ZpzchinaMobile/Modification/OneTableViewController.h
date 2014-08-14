@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OneTableViewController : UITableViewController
-
+@property(nonatomic,strong)NSArray* images;
 @end
