@@ -54,7 +54,7 @@
         [zone addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:zone];
         
-        UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 65, 220, 30)];
+        UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 62, 220, 30)];
         zoneLabel.textColor = GrayColor;
         zoneLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         zoneLabel.textAlignment = NSTextAlignmentLeft;
@@ -162,28 +162,35 @@
         UIButton *landuse = [UIButton buttonWithType:UIButtonTypeCustom];
         landuse.frame = CGRectMake(20,260, 220, 30);
         landuse.tag = 1;
-        if(flag == 0){
-            if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
-                [landuse setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"usage"]] forState:UIControlStateNormal];
-            }else{
-                [landuse setTitle:@"地块用途" forState:UIControlStateNormal];
-            }
-        }else{
-            if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
-                [landuse setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"usage"]] forState:UIControlStateNormal];
-            }else{
-                if(![[singleDic objectForKey:@"usage"] isEqualToString:@""]){
-                    [landuse setTitle:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"usage"]] forState:UIControlStateNormal];
-                }else{
-                    [landuse setTitle:@"地块用途" forState:UIControlStateNormal];
-                }
-            }
-        }
+        [landuse setTitle:@"地块用途" forState:UIControlStateNormal];
         [landuse setTitleColor:BlueColor forState:UIControlStateNormal];
         landuse.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         landuse.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
         [landuse addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:landuse];
+        
+        UILabel *landuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 257, 220, 30)];
+        landuseLabel.textColor = GrayColor;
+        landuseLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        landuseLabel.textAlignment = NSTextAlignmentLeft;
+        if(flag == 0){
+            if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
+                [landuseLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"usage"]] ];
+            }else{
+                [landuseLabel setText:@"地块用途"];
+            }
+        }else{
+            if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
+                [landuseLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"usage"]]];
+            }else{
+                if(![[singleDic objectForKey:@"usage"] isEqualToString:@""]){
+                    [landuseLabel setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"usage"]]];
+                }else{
+                    [landuseLabel setText:@"地块用途"];
+                }
+            }
+        }
+        [self addSubview:landuseLabel];
         
         UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(90,268, 8, 12.5)];
         [arrowImage2 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
@@ -199,7 +206,7 @@
         [auctionunit addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:auctionunit];
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(135,317, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,318, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
