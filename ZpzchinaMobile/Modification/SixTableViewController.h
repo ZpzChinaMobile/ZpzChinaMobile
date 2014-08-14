@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SixTableViewController : UITableViewController
-
+@property(nonatomic,strong)NSArray* images;
 @end

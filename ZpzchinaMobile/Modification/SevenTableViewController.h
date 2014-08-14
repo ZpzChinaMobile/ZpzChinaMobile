@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SevenTableViewController : UITableViewController
-
+@property(nonatomic,strong)NSArray* images;
 @end
