@@ -133,7 +133,7 @@
     //上导航栏themeView第二部分,上导航下方阴影
     UIImageView* shadowView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 48.5, 320, 1.5)];
     shadowView.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-top.png"];
-    shadowView.alpha=.5;
+    shadowView.alpha=.2;
     [view addSubview:shadowView];
     
     //使该view被点击可以触发
