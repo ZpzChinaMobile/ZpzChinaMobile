@@ -7,7 +7,7 @@
 //
 
 #import "TenTableViewController.h"
-
+#import "ClearFireCell.h"
 @interface TenTableViewController ()
 
 @end
@@ -48,19 +48,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    static NSString *stringcell = @"ProjectTableViewCell";
+    ClearFireCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    if(!cell){
+        cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
     }
-    cell.contentView.backgroundColor=[UIColor redColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    // Configure the cell...
-    
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 100;
 }
 
 @end

@@ -53,7 +53,7 @@
     static NSString *stringcell = @"ProjectTableViewCell";
     PlotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
-        cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:nil flag:1 Arr:nil singleDic:nil];
+        cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
@@ -67,7 +67,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 400;
 }
 
 @end

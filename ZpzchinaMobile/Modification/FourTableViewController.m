@@ -53,7 +53,7 @@
    static NSString *stringcell = @"ProjectTableViewCell";
     DesignTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
-        cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:nil flag:1 Arr:nil singleDic:nil];
+        cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
@@ -63,7 +63,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 100;
 }
 
 -(void)rightBtnClicked

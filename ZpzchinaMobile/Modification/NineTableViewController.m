@@ -7,7 +7,7 @@
 //
 
 #import "NineTableViewController.h"
-
+#import "WeakElectricityCell.h"
 @interface NineTableViewController ()
 
 @end
@@ -48,11 +48,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    static NSString *stringcell = @"ProjectTableViewCell";
+    WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    if(!cell){
+        cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
     }
-    cell.contentView.backgroundColor=[UIColor redColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
     
@@ -60,6 +60,6 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+    return 150;
 }
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7131199CB71E0095D05B /* WeakElectricityCell.m */; };
+		043F7135199CC5380095D05B /* ClearFireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7134199CC5380095D05B /* ClearFireCell.m */; };
 		5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
 		5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
 		5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */; };
@@ -467,6 +469,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		043F7130199CB71E0095D05B /* WeakElectricityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeakElectricityCell.h; sourceTree = "<group>"; };
+		043F7131199CB71E0095D05B /* WeakElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakElectricityCell.m; sourceTree = "<group>"; };
+		043F7133199CC5380095D05B /* ClearFireCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearFireCell.h; sourceTree = "<group>"; };
+		043F7134199CC5380095D05B /* ClearFireCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearFireCell.m; sourceTree = "<group>"; };
 		5B6A9F601991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		5B6A9F621991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		5B892F00199A3BF2001F9921 /* ProgramDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailViewController.h; sourceTree = "<group>"; };
@@ -2153,6 +2159,10 @@
 				D3BB71BB1953E05D00A3F626 /* HorizonTableViewCell.m */,
 				D3BB71BD1953E14300A3F626 /* PilePitTableViewCell.h */,
 				D3BB71BE1953E14300A3F626 /* PilePitTableViewCell.m */,
+				043F7130199CB71E0095D05B /* WeakElectricityCell.h */,
+				043F7131199CB71E0095D05B /* WeakElectricityCell.m */,
+				043F7133199CC5380095D05B /* ClearFireCell.h */,
+				043F7134199CC5380095D05B /* ClearFireCell.m */,
 				D3BB71C01953E32500A3F626 /* MainConstructionTableViewCell.h */,
 				D3BB71C11953E32500A3F626 /* MainConstructionTableViewCell.m */,
 				D3BB71C31953E35700A3F626 /* FirefightingTableViewCell.h */,
@@ -2830,6 +2840,7 @@
 				D31B26DE19891F2600B05B03 /* GPUImageTwoPassFilter.m in Sources */,
 				D31B26CC19891F2600B05B03 /* GPUImageSourceOverBlendFilter.m in Sources */,
 				D346A01C1962807200CDDBDF /* CameraSqlite.m in Sources */,
+				043F7135199CC5380095D05B /* ClearFireCell.m in Sources */,
 				D31B26BE19891F2600B05B03 /* GPUImageSaturationBlendFilter.m in Sources */,
 				D31B26C119891F2600B05B03 /* GPUImageSepiaFilter.m in Sources */,
 				D31B26DB19891F2600B05B03 /* GPUImageTransformFilter.m in Sources */,
@@ -2893,6 +2904,7 @@
 				D31B26BC19891F2600B05B03 /* GPUImageRGBFilter.m in Sources */,
 				D3AA5A21195D897A00565078 /* MChoiceTableViewCell.m in Sources */,
 				5BE93BB5199C700B00E2FF67 /* TwoTableViewController.m in Sources */,
+				043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */,
 				D31B26C719891F2600B05B03 /* GPUImageSmoothToonFilter.m in Sources */,
 				D3C58E961980BD5E003DD94F /* FaceppDetection.m in Sources */,
 				D31B26AE19891F2600B05B03 /* GPUImagePerlinNoiseFilter.m in Sources */,
