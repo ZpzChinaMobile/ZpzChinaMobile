@@ -14,6 +14,15 @@
 
 @implementation SevenTableViewController
 //桩基基坑
+
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+    if ([super init]) {
+        self.singleDic=singleDic;
+        self.dataDic=dataDic;
+    }
+    return self;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];

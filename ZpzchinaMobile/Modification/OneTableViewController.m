@@ -22,7 +22,13 @@
     return self;
 }
 
-
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+    if ([super init]) {
+        self.singleDic=singleDic;
+        self.dataDic=dataDic;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -80,7 +86,7 @@
     }else{
         PlanAndAuctionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
         if (!cell) {
-            cell=[[PlanAndAuctionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:nil singleDic:nil flag:1 contactArr:nil];
+            cell=[[PlanAndAuctionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:nil];
         }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...

@@ -14,6 +14,15 @@
 
 @implementation SixTableViewController
 //地平阶段
+
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+    if ([super init]) {
+        self.singleDic=singleDic;
+        self.dataDic=dataDic;
+    }
+    return self;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -78,7 +87,7 @@
     }else{
         HorizonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HorizonTableViewCell"];
         if (!cell) {
-            cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:nil flag:1 Arr:nil singleDic:nil];
+            cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
             
             
             //cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" flag:1 Arr:nil explorationImageArr:nil];

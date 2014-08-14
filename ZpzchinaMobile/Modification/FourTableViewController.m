@@ -22,6 +22,14 @@
     return self;
 }
 
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+    if ([super init]) {
+        self.singleDic=singleDic;
+        self.dataDic=dataDic;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -53,7 +61,7 @@
    static NSString *stringcell = @"ProjectTableViewCell";
     DesignTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
-        cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:nil flag:1 Arr:nil singleDic:nil];
+        cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...

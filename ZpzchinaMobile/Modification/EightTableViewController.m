@@ -22,7 +22,13 @@
     return self;
 }
 
-
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+    if ([super init]) {
+        self.singleDic=singleDic;
+        self.dataDic=dataDic;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {

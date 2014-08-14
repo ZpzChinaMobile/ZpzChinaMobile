@@ -52,25 +52,10 @@
     return self;
 }
 
--(instancetype)init{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic{
     if ([super init]) {
-        self.oneTVC=[[OneTableViewController alloc]init];
-        self.twoTVC=[[TwoTableViewController alloc]init];
-        self.threeTVC=[[ThreeTableViewController alloc]init];
-        self.fourTVC=[[FourTableViewController alloc]init];
-        self.fiveTVC=[[FiveTableViewController alloc]init];
-        self.sixTVC=[[SixTableViewController alloc]init];
-        self.sevenTVC=[[SevenTableViewController alloc]init];
-        self.eightTVC=[[EightTableViewController alloc]init];
-        self.nineTVC=[[NineTableViewController alloc]init];
-        self.tenTVC=[[TenTableViewController alloc]init];
-        
-        self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
-        
-        for (int i=0; i<10; i++) {
-            UITableViewController* tvc=self.tvcArray[i];
-            tvc.tableView.frame=CGRectMake(0, 0, 320, 568-64.5-50);
-        }
+        self.singleDic=singleDic;
+        self.dataDic=[NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -78,11 +63,38 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initdataDic];
+    
+    [self initTVC];
+    
     [self initNavi];
+   // [self initTableView];
     [self initThemeView];
     [self initTableViewSpace];
-    [self.tableViewSpace addSubview:self.twoTVC.tableView];
+    [self.tableViewSpace addSubview:self.oneTVC.tableView];
     // Do any additional setup after loading the view.
+}
+
+-(void)initTVC{
+    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    NSLog(@"***********************%@***********************",self.singleDic);
+    self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.fourTVC=[[FourTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.fiveTVC=[[FiveTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.sixTVC=[[SixTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.nineTVC=[[NineTableViewController alloc]init];
+    self.tenTVC=[[TenTableViewController alloc]init];
+    
+    self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
+    
+    for (int i=0; i<10; i++) {
+        UITableViewController* tvc=self.tvcArray[i];
+        tvc.tableView.frame=CGRectMake(0, 0, 320, 568-64.5-50);
+    }
+
 }
 
 -(void)initTableViewSpace{
@@ -144,6 +156,8 @@
 -(void)change{
     NSLog(@"用户选择了筛选");
     //暂时移除观察者,避免加新view时有动画
+    [self initTableView];
+    
     [self.view addSubview:self.myTableView];
     [UIView animateWithDuration:1 animations:^{
         self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
@@ -175,7 +189,22 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ModificationSelectViewCell* cell=[ModificationSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath nowTableView:10];
+    
+    NSMutableArray* ary=[NSMutableArray array];
+    for (int i=0; i<10; i++) {
+        UITableView* tv=[self.tvcArray[i] tableView];
+        [ary addObject:tv];
+    }
+    NSLog(@"%@",[[self.tableViewSpace.subviews lastObject] class]);
+    NSInteger a=[ary indexOfObject:[self.tableViewSpace.subviews lastObject]];
+    
+    
+    NSLog(@"a=%d",a);
+    ModificationSelectViewCell* cell=[ModificationSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath nowTableView:a];
+    
+    
+    
+    //[self.tvcArray lastObject];
     //cell.contentView.backgroundColor=[UIColor redColor];
     NSLog(@"22");
     return cell;
@@ -244,12 +273,81 @@
     [self selectCancel];
     
     self.bigStageLabel.text=@[@"土地信息",@"主体设计阶段",@"主体施工阶段",@"装修阶段"][indexPath.section];
-    self.smallStageLabel.text=@[@"土地规划/拍卖",@"项目立项",@"地勘阶段",@"设计阶段",@"出图阶段",@"地平",@"桩基基坑",@"立体施工",@"消防/景观绿化",@"装修阶段"][a[indexPath.section]+indexPath.row];
+    self.smallStageLabel.text=@[@"土地规划/拍卖",@"项目立项",@"地勘阶段",@"设计阶段",@"出图阶段",@"地平",@"桩基基坑",@"主体施工",@"消防/景观绿化",@"装修阶段"][a[indexPath.section]+indexPath.row];
 }
 
 -(void)initNavi{
     [self addBackButton];
 }
+
+-(void)initdataDic{
+    int value = (arc4random() % 9999999) + 1000000;
+    //土地规划/拍卖
+    [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
+    [self.dataDic setObject:@"" forKey:@"landName"];
+    [self.dataDic setObject:@"" forKey:@"district"];
+    [self.dataDic setObject:@"" forKey:@"province"];
+    [self.dataDic setObject:@"" forKey:@"landAddress"];
+    [self.dataDic setObject:@"" forKey:@"city"];
+    [self.dataDic setObject:@"" forKey:@"usage"];
+    [self.dataDic setObject:@"" forKey:@"auctionUnit"];
+    //建立项目
+    [self.dataDic setObject:@"" forKey:@"projectID"];
+    [self.dataDic setObject:@"" forKey:@"projectCode"];
+    [self.dataDic setObject:@"" forKey:@"projectName"];
+    [self.dataDic setObject:@"" forKey:@"projectVersion"];
+    [self.dataDic setObject:@"" forKey:@"description"];
+    [self.dataDic setObject:@"" forKey:@"owner"];
+    [self.dataDic setObject:@"" forKey:@"expectedStartTime"];
+    [self.dataDic setObject:@"" forKey:@"expectedFinishTime"];
+    [self.dataDic setObject:@"" forKey:@"ownerType"];
+    //地勘阶段
+    [self.dataDic setObject:@"" forKey:@"mainDesignStage"];
+    //地平
+    [self.dataDic setObject:@"" forKey:@"actualStartTime"];
+    //消防
+    [self.dataDic setObject:@"" forKey:@"fireControl"];
+    //景观绿化
+    [self.dataDic setObject:@"" forKey:@"green"];
+    //装修阶段
+    [self.dataDic setObject:@"" forKey:@"electroweakInstallation"];
+    [self.dataDic setObject:@"" forKey:@"decorationSituation"];
+    [self.dataDic setObject:@"" forKey:@"decorationProgress"];
+    [self.dataDic setObject:@"" forKey:@"url"];
+    
+    /*if(self.fromView == 0){
+        [self.dataDic setObject:@"0" forKey:@"area"];
+        [self.dataDic setObject:@"0" forKey:@"plotRatio"];
+        [self.dataDic setObject:@"0" forKey:@"investment"];
+        [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
+        [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
+        [self.dataDic setObject:@"0" forKey:@"foreignInvestment"];
+        [self.dataDic setObject:@"0" forKey:@"longitude"];
+        [self.dataDic setObject:@"0" forKey:@"latitude"];
+        //出图阶段
+        [self.dataDic setObject:@"0" forKey:@"propertyElevator"];
+        [self.dataDic setObject:@"0" forKey:@"propertyAirCondition"];
+        [self.dataDic setObject:@"0" forKey:@"propertyHeating"];
+        [self.dataDic setObject:@"0" forKey:@"propertyExternalWallMeterial"];
+        [self.dataDic setObject:@"0" forKey:@"propertyStealStructure"];
+    }else{*/
+        [self.dataDic setObject:@"" forKey:@"area"];
+        [self.dataDic setObject:@"" forKey:@"plotRatio"];
+        [self.dataDic setObject:@"" forKey:@"investment"];
+        [self.dataDic setObject:@"" forKey:@"areaOfStructure"];
+        [self.dataDic setObject:@"" forKey:@"storeyHeight"];
+        [self.dataDic setObject:@"" forKey:@"foreignInvestment"];
+        [self.dataDic setObject:@"" forKey:@"longitude"];
+        [self.dataDic setObject:@"" forKey:@"latitude"];
+        //出图阶段
+        [self.dataDic setObject:@"" forKey:@"propertyElevator"];
+        [self.dataDic setObject:@"" forKey:@"propertyAirCondition"];
+        [self.dataDic setObject:@"" forKey:@"propertyHeating"];
+        [self.dataDic setObject:@"" forKey:@"propertyExternalWallMeterial"];
+        [self.dataDic setObject:@"" forKey:@"propertyStealStructure"];
+    //}
+}
+
 
 - (void)didReceiveMemoryWarning
 {

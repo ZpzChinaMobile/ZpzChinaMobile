@@ -22,7 +22,13 @@
     return self;
 }
 
-
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+    if ([super init]) {
+        self.singleDic=singleDic;
+        self.dataDic=dataDic;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -79,17 +85,12 @@
         GeologicalSurveyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
         if (!cell) {
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:1 Arr:nil explorationImageArr:nil];
-            
-//            cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:nil singleDic:nil flag:1 contactArr:nil];
         }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         
         return cell;
     }
-    // cell.contentView.backgroundColor=[UIColor yellowColor];
-    //cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    // return cell;
 }
 
 -(UIView*)getImageViewsWithImages:(NSArray*)images{

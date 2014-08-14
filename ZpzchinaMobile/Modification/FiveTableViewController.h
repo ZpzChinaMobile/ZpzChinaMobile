@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FiveTableViewController : UITableViewController
-
+@property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
+@property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic;
 @end

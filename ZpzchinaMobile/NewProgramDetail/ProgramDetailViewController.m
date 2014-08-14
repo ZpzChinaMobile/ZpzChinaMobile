@@ -200,7 +200,7 @@
 -(void)getStageName{
     NSArray* ary0=@[@"土地规划/拍卖",@"项目立项"];
     NSArray* ary1=@[@"地勘阶段",@"设计阶段",@"出图阶段"];
-    NSArray* ary2=@[@"地平",@"桩基基坑",@"立体施工",@"消防/景观绿化"];
+    NSArray* ary2=@[@"地平",@"桩基基坑",@"主体施工",@"消防/景观绿化"];
     NSArray* ary3=@[@""];
     
     CGFloat firstArray[2]={self.firstViewFirstStage,self.firstViewSecondStage};
@@ -663,7 +663,8 @@
 }
 
 -(void)gotoModificationVC{
-    ModificationViewController* modiVC=[[ModificationViewController alloc]init];
+    ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy]];
+
     [self.navigationController pushViewController:modiVC animated:YES];
 }
 

@@ -14,6 +14,15 @@
 
 @implementation FiveTableViewController
 //出图阶段
+
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+    if ([super init]) {
+        self.singleDic=singleDic;
+        self.dataDic=dataDic;
+    }
+    return self;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -53,7 +62,7 @@
     static NSString *stringcell = @"ProjectTableViewCell";
     PlotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
-        cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:nil flag:1 Arr:nil singleDic:nil];
+        cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
