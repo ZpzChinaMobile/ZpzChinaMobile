@@ -7,7 +7,7 @@
 //
 
 #import "OneTableViewController.h"
-
+#import "PlanAndAuctionTableViewCell.h"
 @interface OneTableViewController ()
 
 @end
@@ -59,27 +59,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    }
-    if (indexPath.row==0) {
+    if(indexPath.row == 0){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        if (!cell) {
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        }
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [cell.contentView addSubview:[self getImageViewsWithImages:self.images]];
-    
+        cell.contentView.backgroundColor=[UIColor yellowColor];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        // Configure the cell...
+        
+        return cell;
+    }else{
+        PlanAndAuctionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
+        if (!cell) {
+            cell=[[PlanAndAuctionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:nil singleDic:nil flag:1 contactArr:nil];
+        }
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        // Configure the cell...
+        
+        return cell;
     }
-    
-    cell.contentView.backgroundColor=[UIColor yellowColor];
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    // Configure the cell...
-    
-    return cell;
 }
 
 -(UIView*)getImageViewsWithImages:(NSArray*)images{
@@ -108,6 +115,6 @@
     if (indexPath.row==0) {
     return ((self.images.count-1)/3+1)*120;
     }
-    return 50;
+    return 350;
 }
 @end
