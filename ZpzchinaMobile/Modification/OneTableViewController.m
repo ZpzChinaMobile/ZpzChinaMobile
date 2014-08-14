@@ -74,11 +74,8 @@
         [cell.contentView addSubview:[self getImageViewsWithImages:self.images]];
     
     }
-    
     cell.contentView.backgroundColor=[UIColor yellowColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    // Configure the cell...
-    
     return cell;
 }
 

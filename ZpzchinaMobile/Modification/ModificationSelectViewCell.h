@@ -10,5 +10,5 @@
 
 @interface ModificationSelectViewCell : UITableViewCell
 @property(nonatomic,strong)UILabel* stageLabel;
-+(ModificationSelectViewCell*)dequeueReusableCellWithTabelView:(UITableView*)tableView identifier:(NSString*)identifier indexPath:(NSIndexPath*)indexPath firstIcon:(BOOL)firstIcon secondIcon:(BOOL)secondIcon thirdIcon:(BOOL)thirdIcon;
++(ModificationSelectViewCell*)dequeueReusableCellWithTabelView:(UITableView*)tableView identifier:(NSString*)identifier indexPath:(NSIndexPath*)indexPath nowTableView:(NSInteger)number;
 @end
