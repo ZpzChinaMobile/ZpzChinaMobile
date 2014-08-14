@@ -40,7 +40,7 @@
     UIImage* imageLast=[UIImage imageNamed:@"地图搜索_18.png"];
     self.images=@[image1,image2,image3,image4,image5,image6,image7,image8];
     NSLog(@"image stage 1 = %d",self.images.count);
-    self.images=@[image1];
+    //self.images=@[image1];
     self.images=[self.images arrayByAddingObject:imageLast];
     NSLog(@"image stage 2 = %d",self.images.count);
 }
@@ -87,9 +87,9 @@
         
         return cell;
     }
-    cell.contentView.backgroundColor=[UIColor yellowColor];
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    return cell;
+   // cell.contentView.backgroundColor=[UIColor yellowColor];
+    //cell.selectionStyle=UITableViewCellSelectionStyleNone;
+   // return cell;
 }
 
 -(UIView*)getImageViewsWithImages:(NSArray*)images{

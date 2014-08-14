@@ -15,17 +15,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 100)];
-        [lingImage setBackgroundColor:[UIColor blackColor]];
-        [self addSubview:lingImage];
-        lingImage.alpha = 0.1;
+//        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 100)];
+//        [lingImage setBackgroundColor:[UIColor blackColor]];
+//        [self addSubview:lingImage];
+//        lingImage.alpha = 0.1;
         
-        UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50, 250, 1)];
+        UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 280, 1)];
         [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
         [self addSubview:lingImage2];
         
         UIButton *startdate = [UIButton buttonWithType:UIButtonTypeCustom];
-        startdate.frame = CGRectMake(60,10, 200, 30);
+        startdate.frame = CGRectMake(20,10, 200, 30);
         startdate.tag = 0;
         if(flag == 0){
             if(![[dic objectForKey:@"actualStartTime"] isEqualToString:@""]){
@@ -62,12 +62,12 @@
         [startdate addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:startdate];
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(35,68, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(115,68, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
         UIButton *contractor = [UIButton buttonWithType:UIButtonTypeCustom];
-        contractor.frame = CGRectMake(60,65, 140, 30);
+        contractor.frame = CGRectMake(20,65, 140, 30);
         contractor.tag = 1;
         [contractor setTitle:@"施工总承包" forState:UIControlStateNormal];
         [contractor setTitleColor:BlueColor forState:UIControlStateNormal];

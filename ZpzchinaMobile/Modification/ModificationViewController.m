@@ -120,7 +120,7 @@
     //小阶段标题label
     self.smallStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(170, 10, 110, 30)];
     self.smallStageLabel.text=@"土地规划/拍卖";
-    self.smallStageLabel.textColor=[UIColor grayColor];
+    self.smallStageLabel.textColor=BlueColor;
     self.smallStageLabel.font=[UIFont systemFontOfSize:14];
     self.smallStageLabel.textAlignment=NSTextAlignmentRight;
     [tempView addSubview:self.smallStageLabel];

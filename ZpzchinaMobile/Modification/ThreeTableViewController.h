@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ThreeTableViewController : UITableViewController
-
+@property(nonatomic,strong)NSArray* images;
 @end
