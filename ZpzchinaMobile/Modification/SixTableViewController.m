@@ -121,7 +121,7 @@
     if (indexPath.row==0) {
         return ((self.images.count-1)/3+1)*120;
     }
-    return 50;
+    return 100;
 }
 
 @end
