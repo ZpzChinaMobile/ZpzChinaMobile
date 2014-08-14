@@ -74,7 +74,7 @@
             self.window.backgroundColor = [UIColor whiteColor];
             [self.window makeKeyAndVisible];
         }else{
-            UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
+            /*UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
             UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
             UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
             navigationController.navigationBarHidden = YES;
@@ -87,9 +87,9 @@
             [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
             [self.window setRootViewController:drawerController];
             self.window.backgroundColor = [UIColor whiteColor];
-            [self.window makeKeyAndVisible];
+            [self.window makeKeyAndVisible];*/
             
-           /* if([[networkConnect sharedInstance] connectedToNetwork]){
+            if([[networkConnect sharedInstance] connectedToNetwork]){
                 NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"]);
                 if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"] isEqualToString:@"0"]) {
                     LoginViewController *loginview = [[LoginViewController alloc] init];
@@ -119,7 +119,7 @@
                  [self.window setRootViewController:drawerController];
                  self.window.backgroundColor = [UIColor whiteColor];
                  [self.window makeKeyAndVisible];
-            }*/
+            }
         }
     }
 

@@ -143,7 +143,7 @@
     intlabel1.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:13];
     intlabel1.textColor = [UIColor whiteColor];
     intlabel1.text = @"32";
-    [newProjectView addSubview:intlabel1];
+    //[newProjectView addSubview:intlabel1];
     
     UIButton *newProjectBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     newProjectBtn.tag = 0;
@@ -178,7 +178,7 @@
     intlabel2.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:13];
     intlabel2.textColor = [UIColor whiteColor];
     intlabel2.text = @"25";
-    [allProjectView addSubview:intlabel2];
+    //[allProjectView addSubview:intlabel2];
     
     UIButton *allProjectBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     allProjectBtn.tag = 1;
@@ -213,7 +213,7 @@
     intlabel3.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:13];
     intlabel3.textColor = [UIColor whiteColor];
     intlabel3.text = @"25";
-    [myTask addSubview:intlabel3];
+    //[myTask addSubview:intlabel3];
     
     UIButton *myTaskBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     myTaskBtn.tag = 2;
