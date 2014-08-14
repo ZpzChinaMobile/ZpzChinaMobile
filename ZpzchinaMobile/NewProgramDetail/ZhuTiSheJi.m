@@ -7,18 +7,26 @@
 //
 
 #import "ZhuTiSheJi.h"
+#import "CameraModel.h"
+#import "GTMBase64.h"
 @implementation ZhuTiSheJi
 static CGFloat height = 0;//统计总高
-static ProgramDetailViewController* myDelegate;
-UIView* totalView;
+static __weak ProgramDetailViewController* myDelegate;
+static UIView* totalView;
+static NSDictionary* dataDic;
 
 +(UIView*)zhuTiSheJiWithFirstViewHeight:(CGFloat*)firstViewHeight secondView:(CGFloat*)secondViewHeight delegate:(ProgramDetailViewController*)delegate{
+    //数值初始
+    height=0;
+    totalView=nil;
+    
     //totalView初始
     totalView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 0)];
     totalView.backgroundColor=[UIColor whiteColor];
     
     //设置委托
     myDelegate=delegate;
+    dataDic=myDelegate.dataDic;
     
     //获得第一个大view, 地勘阶段
     [self getFirstView];
@@ -43,16 +51,35 @@ UIView* totalView;
      *
      *
      */
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"出图阶段" programTitle:@[@"预计施工时间",@"预计竣工时间"] address:@[@"2012-12-12",@"2014-12-12"] detailAddress:nil]];
+    //获取预计施工时间以及预计竣工时间
+    NSMutableArray* timeArray=[NSMutableArray array];
+    NSArray* timeTempArray=@[dataDic[@"expectedStartTime"],dataDic[@"expectedFinishTime"]];
+    for (int i=0; i<2; i++) {
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *confromTimespStr ;
+        if (![timeTempArray[i] isEqualToString:@""]) {
+            NSDate* confromTimesp = [NSDate dateWithTimeIntervalSince1970:[@[dataDic[@"expectedStartTime"],dataDic[@"expectedFinishTime"]][i] intValue]];
+            confromTimespStr = [formatter stringFromDate:confromTimesp];
+        }else {
+            confromTimespStr=@"";
+        }
+        [timeArray addObject:confromTimespStr];
+    }
+    
+    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"出图阶段" programTitle:@[@"预计施工时间",@"预计竣工时间"] address:timeArray detailAddress:nil]];
 
-    //联系人信息3个label
-    NSArray* array1=@[@"赵某某",@"孙某某",@"习某某"];
-    NSArray* array2=@[@"项目经理",@"项目总监",@"项目监督"];
-    NSArray* array3=@[@"00业主单位-中技桩业有限公司",@"11业主单位-中技桩业有限公司",@"22业主单位-中技桩业有限公司"];
-    NSArray* array4=@[@"00地址:上海市 虹口区 汶水东路928号",@"11地址:上海市 虹口区 汶水东路928号",@"22地址:上海市 虹口区 汶水东路928号"];
-    NSArray* array5=@[@"18888888888",@"13988888888",@"13888888888"];
-    for (int i=0; i<3; i++) {
-        UIView* tempView=[self personLable:array1[i] job:array2[i] firstStr:array3[i] secondStr:array4[i] tel:array5[i] sequence:i];
+    //3个联系人Label
+    NSArray* array1=myDelegate.ownerAry;
+    for (int i=0,j=myDelegate.ownerAry.count; i<3; i++) {
+        UIView* tempView;
+        if (j) {
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i];
+            j--;
+        }else {
+            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+        }
+        
         [totalView addSubview:tempView];
         tempView.center=CGPointMake(160, height+60);
         height+=120;
@@ -61,7 +88,7 @@ UIView* totalView;
     
     //电梯,空调,供暖方式,外墙材料,钢结构,yes or no的几个view
     NSArray* tempAry=@[@"电梯",@"空调",@"供暖方式",@"外墙材料",@"钢结构"];
-    BOOL tempArray[5]={YES,NO,NO,YES,YES};
+    NSArray* tempArray=@[dataDic[@"propertyElevator"],dataDic[@"propertyAirCondition"],dataDic[@"propertyHeating"],dataDic[@"propertyExternalWallMeterial"],dataDic[@"propertyStealStructure"]];
     for (int i=0; i<tempAry.count; i++) {
         UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, height, 320, 30)];
         
@@ -73,10 +100,10 @@ UIView* totalView;
         
         //yes or no的label
         UILabel* label1=[[UILabel alloc]initWithFrame:CGRectMake(250, 5, 50, 20)];
-        label1.text=tempArray[i]?@"YES":@"NO";
+        label1.text=[tempArray[i] isEqualToString:@"1"]?@"YES":@"NO";
         label1.font=[UIFont systemFontOfSize:14];
         label1.textAlignment=NSTextAlignmentRight;
-        label1.textColor=tempArray[i]?[UIColor redColor]:[UIColor grayColor];
+        label1.textColor=[tempArray[i] isEqualToString:@"1"]?[UIColor redColor]:[UIColor grayColor];
         [view addSubview:label1];
         
         //分割线
@@ -101,14 +128,16 @@ UIView* totalView;
      */
     [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"设计阶段" programTitle:@[@"主体设计阶段"] address:@[@"结构"] detailAddress:nil]];
     
-    //联系人信息3个label
-    NSArray* array1=@[@"赵某某",@"孙某某",@"习某某"];
-    NSArray* array2=@[@"项目经理",@"项目总监",@"项目监督"];
-    NSArray* array3=@[@"00业主单位-中技桩业有限公司",@"11业主单位-中技桩业有限公司",@"22业主单位-中技桩业有限公司"];
-    NSArray* array4=@[@"00地址:上海市 虹口区 汶水东路928号",@"11地址:上海市 虹口区 汶水东路928号",@"22地址:上海市 虹口区 汶水东路928号"];
-    NSArray* array5=@[@"18888888888",@"13988888888",@"13888888888"];
-    for (int i=0; i<3; i++) {
-        UIView* tempView=[self personLable:array1[i] job:array2[i] firstStr:array3[i] secondStr:array4[i] tel:array5[i] sequence:i];
+    NSArray* array1=myDelegate.designAry;
+    for (int i=0,j=myDelegate.designAry.count; i<3; i++) {
+        UIView* tempView;
+        if (j) {
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i];
+            j--;
+        }else {
+            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+        }
+        
         [totalView addSubview:tempView];
         tempView.center=CGPointMake(160, height+60);
         height+=120;
@@ -122,8 +151,16 @@ UIView* totalView;
     height+=215.5;
     
     //图片imageView
+    UIImage *aimage;
+    if (myDelegate.explorationImageArr.count) {
+        CameraModel *model = myDelegate.explorationImageArr[0];
+        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+    }else{
+        aimage=[UIImage imageNamed:@"首页_16.png"];
+    }
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing_1/picture.png"];
+    //myDelegate.horizonImageArr;
+    imageView.image=aimage;
     [view addSubview:imageView];
     
     //图片数量label
@@ -154,17 +191,21 @@ UIView* totalView;
     [self getImageView:22];
     
     //联系人信息3个label
-    NSArray* array1=@[@"赵某某",@"孙某某",@"习某某"];
-    NSArray* array2=@[@"项目经理",@"项目总监",@"项目监督"];
-    NSArray* array3=@[@"00拍卖单位-中技桩业有限公司",@"11拍卖单位-中技桩业有限公司",@"22拍卖单位-中技桩业有限公司"];
-    NSArray* array4=@[@"00地址:上海市 虹口区 汶水东路928号",@"11地址:上海市 虹口区 汶水东路928号",@"22地址:上海市 虹口区 汶水东路928号"];
-    NSArray* array5=@[@"18888888888",@"13988888888",@"13888888888"];
-    for (int i=0; i<3; i++) {
-        UIView* tempView=[self personLable:array1[i] job:array2[i] firstStr:array3[i] secondStr:array4[i] tel:array5[i] sequence:i];
+    NSArray* array1=myDelegate.explorationAry;
+    for (int i=0,j=myDelegate.explorationAry.count; i<3; i++) {
+        UIView* tempView;
+        if (j) {
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i];
+            j--;
+        }else {
+            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+        }
+        
         [totalView addSubview:tempView];
         tempView.center=CGPointMake(160, height+60);
         height+=120;
     }
+
     
 }
 

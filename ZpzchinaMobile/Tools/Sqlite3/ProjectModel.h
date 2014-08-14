@@ -42,7 +42,7 @@
 @property (nonatomic,strong) NSString *a_owner;
 //预计开工时间
 @property (nonatomic,strong) NSString *a_expectedStartTime;
-//预计开工时间
+//预计竣工时间
 @property (nonatomic,strong) NSString *a_expectedFinishTime;
 //投资额
 @property (nonatomic,strong) NSString *a_investment;

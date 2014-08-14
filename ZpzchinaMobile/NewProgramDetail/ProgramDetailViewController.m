@@ -14,8 +14,13 @@
 #import "ProgramSelectViewCell.h"
 #import "ScrollViewController.h"
 #import "ViewController.h"
-
-
+#import "AFAppDotNetAPIClient.h"
+#import "ProjectModel.h"
+#import "ProjectSqlite.h"
+#import "ProjectStage.h"
+#import "CameraModel.h"
+#import "CameraSqlite.h"
+#import "GTMBase64.h"
 @interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate>
 
 @property(nonatomic,strong)UIScrollView* myScrollView;
@@ -57,11 +62,11 @@
 
 -(CGFloat)loadNewViewStandardY{
     if (!self.zhuTiSheJi) {
-        return 50+56+self.tuDiXinXi.frame.size.height-568;//50和76分别为themeView和给之后预留的动画view的高,568为屏幕高
+        return 50+56+self.tuDiXinXi.frame.size.height-568+64.5;//50和76分别为themeView和给之后预留的动画view的高,568为屏幕高,64.5为伪navi高
     }else if(!self.zhuTiShiGong){
-        return 50+56+self.tuDiXinXi.frame.size.height-568+self.zhuTiSheJi.frame.size.height;
+        return 50+56+self.tuDiXinXi.frame.size.height-568+self.zhuTiSheJi.frame.size.height+64.5;
     }else if(!self.zhuangXiu){
-        return 50+56+self.tuDiXinXi.frame.size.height-568+self.zhuTiSheJi.frame.size.height+self.zhuTiShiGong.frame.size.height;
+        return 50+56+self.tuDiXinXi.frame.size.height-568+self.zhuTiSheJi.frame.size.height+self.zhuTiShiGong.frame.size.height+64.5;
     }else{
         //所有view 加载完成，无需再进行加载新view
         return CGFLOAT_MAX;
@@ -76,10 +81,34 @@
     return self;
 }
 
+-(instancetype)init{
+    if ([super init]) {
+        self.contactAry=[NSMutableArray array];
+        self.ownerAry=[NSMutableArray array];
+        self.explorationAry=[NSMutableArray array];
+        self.horizonAry=[NSMutableArray array];
+        self.designAry=[NSMutableArray array];
+        self.pileAry=[NSMutableArray array];
+        
+        self.horizonImageArr=[NSMutableArray array];
+        self.pilePitImageArr=[NSMutableArray array];
+        self.mainConstructionImageArr=[NSMutableArray array];
+        self.explorationImageArr=[NSMutableArray array];
+        self.fireControlImageArr=[NSMutableArray array];
+        self.electroweakImageArr=[NSMutableArray array];
+    }
+    return self;
+}
+
+
 -(void)userChangeImageWithButtons:(UIButton *)button{
     NSLog(@"userChangeImage");
     if (button==self.firstStageButton1) {
         ViewController* vc=[[ViewController alloc]init];
+        CameraModel *model = self.horizonImageArr[0];
+        UIImage *aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        NSArray *a = [[NSArray alloc] initWithObjects:aimage, nil];
+        vc.imagesArray= [a mutableCopy];
         [self presentViewController:vc animated:NO completion:nil];
         
         NSLog(@"firstStageButton1");
@@ -173,9 +202,9 @@
     CGFloat firstArray[2]={self.firstViewFirstStage,self.firstViewSecondStage};
     CGFloat secondArray[3]={self.secondViewFirstStage,self.secondViewSecondStage,self.secondViewThirdStage};
     CGFloat thirdArray[4]={self.thirdViewFirstStage,self.thirdViewSecondStage,self.thirdViewThirdStage,self.thirdViewFourthStage};
-    CGFloat fourthArray[1]={self.zhuangXiu.frame.origin.y};
+    //    CGFloat fourthArray[1]={self.zhuangXiu.frame.origin.y-50};
     
-    if (self.zhuangXiu&&self.myScrollView.contentOffset.y>=fourthArray[0]-568) {
+    if (self.zhuangXiu&&self.myScrollView.contentOffset.y>=self.zhuangXiu.frame.origin.y-568+64.5) {
         self.bigStageLabel.text=@"装修阶段";//大标题
         
         UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing_3/paint_01@2x.png"];
@@ -183,7 +212,7 @@
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
         
         self.smallStageLabel.text=ary3[0];//小标题
-    }else if(self.zhuTiShiGong&&self.myScrollView.contentOffset.y>=self.zhuTiShiGong.frame.origin.y-568){
+    }else if(self.zhuTiShiGong&&self.myScrollView.contentOffset.y>=self.zhuTiShiGong.frame.origin.y-568+64.5){
         self.bigStageLabel.text=@"主体施工阶段";//大标题
         
         UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_01@2x.png"];
@@ -191,12 +220,12 @@
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
         
         for (int i=3; i>=0; i--) {//小标题
-            if (self.myScrollView.contentOffset.y>=thirdArray[i]+50-568) {
+            if (self.myScrollView.contentOffset.y>=thirdArray[i]+50-568+64.5) {
                 self.smallStageLabel.text=ary2[i];
                 break;
             }
         }
-    }else if(self.zhuTiSheJi&&self.myScrollView.contentOffset.y>=self.zhuTiSheJi.frame.origin.y-568){
+    }else if(self.zhuTiSheJi&&self.myScrollView.contentOffset.y>=self.zhuTiSheJi.frame.origin.y-568+64.5){
         self.bigStageLabel.text=@"主体设计阶段";//大标题
         
         UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing_1/pen_01@2x.png"];
@@ -204,7 +233,7 @@
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
         
         for (int i=2; i>=0; i--) {//小标题
-            if (self.myScrollView.contentOffset.y>=secondArray[i]+50-568) {
+            if (self.myScrollView.contentOffset.y>=secondArray[i]+50-568+64.5) {
                 self.smallStageLabel.text=ary1[i];
                 break;
             }
@@ -217,7 +246,7 @@
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
         
         for (int i=1; i>=0; i--) {//小标题
-            if (self.myScrollView.contentOffset.y>=firstArray[i]+50-568) {
+            if (self.myScrollView.contentOffset.y>=firstArray[i]+50-568+64.5) {
                 self.smallStageLabel.text=ary0[i];
                 break;
             }
@@ -228,28 +257,134 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,self.url] parameters:nil error:nil];
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    op.responseSerializer = [AFJSONResponseSerializer serializer];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSLog(@"JSON: %@", responseObject);
+        NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
+        if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
+            NSArray *zz = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
+            for(NSDictionary *item in zz){
+                ProjectModel *model = [[ProjectModel alloc] init];
+                [model loadWithDictionary:item];
+                self.dataDic = [ProjectStage JudgmentStr:model];
+                //NSLog(@"%@",self.dataDic);
+                //NSLog(@"contactItem%d",[[item objectForKey:@"baseContacts"] count]);
+                
+                
+                for(NSDictionary *contactItem in [item objectForKey:@"baseContacts"]){
+                    NSMutableArray *resultArr = [[NSMutableArray alloc]init];
+                    for (NSMutableDictionary *contactItem2 in [contactItem objectForKey:@"data"]) {
+                        NSLog(@"contactItem2 ==> %@",contactItem2);
+                        ContactModel *model = [[ContactModel alloc] init];
+                        [model loadWithDictionary:contactItem2];
+                        [resultArr addObject:model];
+                    }
+                    //NSLog(@"%@",self.contactArr);
+                    [self addArray:resultArr projectID:self.dataDic[@"projectID"]];
+                }
+                
+                
+                for(NSDictionary *imageItem in [item objectForKey:@"projectImgs"]){
+                   // NSLog(@"*******************%@",[imageItem objectForKey:@"data"]);
+                    //NSMutableArray *resultArr = [[NSMutableArray alloc]init];
+                    for (NSMutableDictionary *imageItem2 in [imageItem objectForKey:@"data"]) {
+                        CameraModel *model = [[CameraModel alloc] init];
+                        [model loadWithDictionary:imageItem2];
+                        NSLog(@"--------------%@",imageItem2);
+                        if([[imageItem2 objectForKey:@"category"] isEqualToString:@"horizon"]){
+                            [self.horizonImageArr addObject:model];
+                        }else if([[imageItem2 objectForKey:@"category"] isEqualToString:@"pileFoundation"]){
+                            [self.pilePitImageArr addObject:model];
+                        }else if([[imageItem2 objectForKey:@"category"] isEqualToString:@"mainPart"]){
+                            [self.mainConstructionImageArr addObject:model];
+                        }else if([[imageItem2 objectForKey:@"category"] isEqualToString:@"exploration"]){
+                            [self.explorationImageArr addObject:model];
+                        }else if([[imageItem2 objectForKey:@"category"] isEqualToString:@"fireControl"]){
+                            [self.fireControlImageArr addObject:model];
+                        }else if([[imageItem2 objectForKey:@"category"] isEqualToString:@"electroweak"]){
+                            [self.electroweakImageArr addObject:model];
+                        }
+                    }
+                }
+            }
+            
+            //NSLog(@"*******************%@",self.horizonImageArr[0]);
+            
+
+            
+            [self initNaviAndScrollView];//初始navi,创建返回Button,初始scrollView,初始加载新view的动画
+            [self addBackButton];
+            
+            [self initThemeView];//主体view初始
+            
+            CGFloat a;
+            self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
+            self.firstViewFirstStage=0;
+            self.firstViewSecondStage=a;
+            
+            [self setOriginToView:self.tuDiXinXi];
+            
+            [self initTableView];
+            
+            [self.myScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+            
+            
+        }else{
+            NSLog(@"%@",[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail");
+        
+        NSLog(@"Error: %@", error);
+    }];
+    [[NSOperationQueue mainQueue] addOperation:op];
     
-    [self initNaviAndScrollView];//初始navi,创建返回Button,初始scrollView,初始加载新view的动画
-    [self initThemeView];//主体view初始
     
-    CGFloat a;
-    self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
-    self.firstViewFirstStage=0;
-    self.firstViewSecondStage=a;
+    /*============================================================*/
+    /*============================================================*/
+    /*============================================================*/
+    /*============================================================*/
+    /*============================================================*/
+    /*============================================================*/
+    /*============================================================*/
     
-    [self setOriginToView:self.tuDiXinXi];
+}
+
+
+-(void)addArray:(NSMutableArray *)list projectID:(NSString *)projectID{
+    NSLog(@"=======>%lu",(unsigned long)list.count);
     
-    [self initTableView];
-    
-    [self.myScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    for(int i=0;i<list.count;i++){
+        NSMutableDictionary *contactDic = [[NSMutableDictionary alloc] init];
+        ContactModel *model = [list objectAtIndex:i];
+        contactDic = [ProjectStage JudgmentContactStr:model];
+        [contactDic setValue:model.a_baseContactID forKeyPath:@"id"];
+        [contactDic setValue:projectID forKeyPath:@"localProjectId"];
+        NSLog(@"=================%@",model.a_contactName);
+        if([model.a_category isEqualToString:@"auctionUnitContacts"]){
+            [self.contactAry addObject:contactDic];
+        }else if([model.a_category isEqualToString:@"ownerUnitContacts"]){
+            [self.ownerAry addObject:contactDic];
+        }else if([model.a_category isEqualToString:@"explorationUnitContacts"]){
+            [self.explorationAry addObject:contactDic];
+        }else if([model.a_category isEqualToString:@"contractorUnitContacts"]){
+            [self.horizonAry addObject:contactDic];
+        }else if([model.a_category isEqualToString:@"designInstituteContacts"]){
+            [self.designAry addObject:contactDic];
+        }else if([model.a_category isEqualToString:@"pileFoundationUnitContacts"]){
+            [self.pileAry addObject:contactDic];
+        }
+    }
 }
 
 
 -(void)initTableView{
-    self.myTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64) style:UITableViewStylePlain];
+    self.myTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5) style:UITableViewStylePlain];
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;
-    self.myTableView.center=CGPointMake(160, -(568-64)*.5);
+    self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
     [self.myTableView registerClass:[ProgramSelectViewCell class] forCellReuseIdentifier:@"Cell"];
     self.myTableView.showsVerticalScrollIndicator=NO;
     self.myTableView.scrollEnabled=NO;
@@ -328,7 +463,7 @@
 
 //判断用户点击的是哪个sectionHeader,然后将section传过去
 -(void)selectSection:(id)button{
-    NSLog(@"%ld",[self.sectionButtonArray indexOfObject:button]);
+    NSLog(@"%d",[self.sectionButtonArray indexOfObject:button]);
     [self didchangeStageSection:[self.sectionButtonArray indexOfObject:button] row:0];
 }
 
@@ -348,6 +483,8 @@
 
 
 -(void)didchangeStageSection:(NSInteger)section row:(NSInteger)row{
+    NSLog(@"=======%f",self.myScrollView.contentOffset.y);
+    
     CGFloat a,b,c;
     for (int i=1; i<=section; i++) {//土地信息阶段必存在，不用判断和操作
         if (!self.zhuTiSheJi&&i==1) {
@@ -387,18 +524,21 @@
     CGFloat fourthViewFirstStage=self.zhuangXiu.frame.origin.y-50;
     CGFloat fourthArray[1]={fourthViewFirstStage};
     CGFloat* ary[4]={firstArray,secondArray,thirdArray,fourthArray};
-    //遍历不太好，后期可改进
-    for (int i=0; i<sizeof(firstArray)/sizeof(CGFloat); i++) {
-        firstArray[i]-=64;
-    }
-    for (int i=0; i<sizeof(secondArray)/sizeof(CGFloat); i++) {
-        secondArray[i]-=64;
-    }
-    for (int i=0; i<sizeof(thirdArray)/sizeof(CGFloat); i++) {
-        thirdArray[i]-=64;
-    }
-    fourthArray[0]-=64;
     
+    //因去除了真navi,所以不用减64.5这个自定义伪navi高了
+    /*
+     //遍历不太好，后期可改进
+     for (int i=0; i<sizeof(firstArray)/sizeof(CGFloat); i++) {
+     firstArray[i]-=64.5;
+     }
+     for (int i=0; i<sizeof(secondArray)/sizeof(CGFloat); i++) {
+     secondArray[i]-=64.5;
+     }
+     for (int i=0; i<sizeof(thirdArray)/sizeof(CGFloat); i++) {
+     thirdArray[i]-=64.5;
+     }
+     fourthArray[0]-=64.5;
+     */
     
     [self.myScrollView  setContentOffset:CGPointMake(0, ary[section][row]) animated:YES];
     [self selectCancel];
@@ -409,7 +549,7 @@
 //筛选界面拉回去
 -(void)selectCancel{
     [UIView animateWithDuration:1 animations:^{
-        self.myTableView.center=CGPointMake(160, -(568-64)*.5);
+        self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
     } completion:^(BOOL finished){
         [self.myTableView removeFromSuperview];
     }];
@@ -448,6 +588,8 @@
         label.center=CGPointMake(160, self.myScrollView.contentSize.height-55+40);
         [self.myScrollView addSubview:label];
         
+        //动画时不让用户选择筛选界面中的选项，否则会出现bug
+        self.myTableView.allowsSelection=NO;
         
         //触发动画,不位移，不延迟2秒
         CGRect frame=self.animationView.frame;
@@ -458,6 +600,8 @@
         } completion:^(BOOL finished){
             [self.animationView stopAnimating];
             [self setOriginToView:detailView];
+            //动画时不让用户选择筛选界面中的选项，否则会出现bug,动画结束后的现在可以选择
+            self.myTableView.allowsSelection=YES;
         }];
     }else{
         [self setOriginToView:detailView];
@@ -467,9 +611,9 @@
 
 -(void)initThemeView{
     //画布themeView初始,因为上导航栏下方的阴影需要半透明,而上方部分不需要透明,所以该view分2块
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 64, 320, 50)];
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     //themeView.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:view];
+    [self.contentView addSubview:view];
     
     //上导航栏第一部分，非透明部分
     UIView* tempView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 48.5)];
@@ -519,40 +663,21 @@
     NSLog(@"用户选择了筛选");
     //暂时移除观察者,避免加新view时有动画
     
-    self.myTableView.allowsSelection=NO;
+    //self.myTableView.allowsSelection=NO;
     [self.view addSubview:self.myTableView];
     [UIView animateWithDuration:1 animations:^{
-        self.myTableView.center=CGPointMake(160, (568-64)*.5+64);
-        self.myTableView.allowsSelection=YES;
+        self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
+        //self.myTableView.allowsSelection=YES;
     }];
 }
 
 -(void)initNaviAndScrollView{
-    //navi初始
-    self.title = @"项目详情";
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"地图搜索_01.png"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,[UIFont fontWithName:@"GurmukhiMN-Bold" size:19], NSFontAttributeName,nil]];
-    
-    //返回button初始
-    UIButton* button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25.5, 22.5)];
-    [button setImage:[UIImage imageNamed:@"XiangMuXiangQing/more@2x.png"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(show) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:button];
-    
-    //navi的右边3个点 more button初始
-    UIButton* tempButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25.5, 22.5)];
-    [tempButton setImage:[UIImage imageNamed:@"XiangMuXiangQing/more_01@2x.png"] forState:UIControlStateNormal];
-    [tempButton addTarget:self action:@selector(show) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:tempButton];
-    
-    
     //scrollView初始
-    // CGRect frame=self.view.frame;
-    
-    self.myScrollView=[[UIScrollView alloc]initWithFrame:self.view.frame];
+    NSLog(@"============%f",self.contentView.frame.size.height);
+    self.myScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.contentView.frame.size.height)];
     self.myScrollView.backgroundColor=RGBCOLOR(229, 229, 229);
     self.myScrollView.showsVerticalScrollIndicator=NO;
-    [self.view addSubview:self.myScrollView];
+    [self.contentView addSubview:self.myScrollView];
     
     CGSize size=self.myScrollView.bounds.size;
     //预留下方动画高度
@@ -566,6 +691,10 @@
 
 -(void)show{
     NSLog(@"%f",self.myScrollView.contentOffset.y);
+}
+
+-(void)dealloc{
+    [self.myScrollView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
 - (void)didReceiveMemoryWarning

@@ -19,6 +19,13 @@
 //    return YES;
 //}
 
+-(instancetype)init{
+    if ([super init]) {
+        self.imagesArray=[NSMutableArray array];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -26,9 +33,10 @@
     self.title = [NSString stringWithFormat:@"第%d张", 1];
     
 	// Do any additional setup after loading the view, typically from a nib.
-    NSMutableArray *picArray = [[NSMutableArray alloc] init];
-    [picArray addObject:[UIImage imageNamed:@"0.JPG"]];
-    [picArray addObject:[UIImage imageNamed:@"1.JPG"]];
+    NSMutableArray *picArray =self.imagesArray;
+    //[[NSMutableArray alloc] init];
+    //[picArray addObject:[UIImage imageNamed:@"0.JPG"]];
+    //[picArray addObject:[UIImage imageNamed:@"1.JPG"]];
     //[picArray addObject:[UIImage imageNamed:@"2.JPG"]];
    // [picArray addObject:[UIImage imageNamed:@"3.JPG"]];
     

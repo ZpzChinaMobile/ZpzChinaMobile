@@ -7,18 +7,25 @@
 //
 
 #import "ZhuTiShiGong.h"
-
+#import "CameraModel.h"
+#import "GTMBase64.h"
 @implementation ZhuTiShiGong
+static NSDictionary* dataDic;
 
 static CGFloat height = 0;//统计总高
-UIView* totalView;
-static ProgramDetailViewController* myDelegate;
+static UIView* totalView;
+static __weak ProgramDetailViewController* myDelegate;
 +(UIView*)zhuTiShiGongWithFirstViewHeight:(CGFloat*)firstViewHeight secondView:(CGFloat*)secondViewHeight thirdViewHeight:(CGFloat*)thirdViewHeight delegate:(ProgramDetailViewController*)delegate{
+    //数值初始
+    height=0;
+    totalView=nil;
+    
     //totalView初始
     totalView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 0)];
     totalView.backgroundColor=[UIColor whiteColor];
     
     myDelegate=delegate;
+    dataDic=myDelegate.dataDic;
     
     //获得第一个大view, 地平阶段
     [self getFirstView];
@@ -46,35 +53,51 @@ static ProgramDetailViewController* myDelegate;
     height+=215.5;
     
     //图片imageView
+    
+    
+    UIImage *aimage;
+    CameraModel *model;
+    if(sequence==1&&myDelegate.horizonImageArr.count){
+        model=myDelegate.horizonImageArr[0];
+        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+    }else if (sequence==2&&myDelegate.pilePitImageArr.count){
+        model=myDelegate.pilePitImageArr[0];
+        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+    }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
+        model=myDelegate.mainConstructionImageArr[0];
+        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+    }else{
+        aimage=[UIImage imageNamed:@"首页_16.png"];
+    }
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing_2/picture.png"];
+    imageView.image=aimage;
     [view addSubview:imageView];
     
     //图片数量label
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 70, 30)];
-    label.text=[NSString stringWithFormat:@"%ld张",imageNumber];
+    label.text=[NSString stringWithFormat:@"%d张",imageNumber];
     label.textAlignment=NSTextAlignmentCenter;
     label.textColor=[UIColor whiteColor];
     label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
     [view addSubview:label];
     
     //添加选中图片时的触发
-
+    
     if (sequence==1) {
         myDelegate.thirdStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         [myDelegate.thirdStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.thirdStageButton1];
-
+        
     }else if(sequence==2){
         myDelegate.thirdStageButton2=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         [myDelegate.thirdStageButton2 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.thirdStageButton2];
-
+        
     }else{
         myDelegate.thirdStageButton3=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         [myDelegate.thirdStageButton3 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.thirdStageButton3];
-
+        
     }
     
 }
@@ -101,7 +124,7 @@ static ProgramDetailViewController* myDelegate;
         //项目地点部分
         UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 45)];
         areaLabel.center=CGPointMake(320*1.0/2*(i+.5), height+42.5);
-        areaLabel.text=@[@"正在施工",@"招标"][i];
+        areaLabel.text=@[dataDic[@"fireControl"],dataDic[@"green"]][i];
         areaLabel.font=[UIFont systemFontOfSize:14];
         areaLabel.textColor=RGBCOLOR(125, 125, 125);
         areaLabel.textAlignment=NSTextAlignmentCenter;
@@ -136,16 +159,19 @@ static ProgramDetailViewController* myDelegate;
     
     //图片imageView
     [self getImageView:12 imageViewSequence:2];
-
+    
     
     //联系人信息3个label
-    NSArray* array1=@[@"赵某某",@"孙某某",@"习某某"];
-    NSArray* array2=@[@"项目经理",@"项目总监",@"项目监督"];
-    NSArray* array3=@[@"00业主单位-中技桩业有限公司",@"11业主单位-中技桩业有限公司",@"22业主单位-中技桩业有限公司"];
-    NSArray* array4=@[@"00地址:上海市 虹口区 汶水东路928号",@"11地址:上海市 虹口区 汶水东路928号",@"22地址:上海市 虹口区 汶水东路928号"];
-    NSArray* array5=@[@"18888888888",@"13988888888",@"13888888888"];
-    for (int i=0; i<3; i++) {
-        UIView* tempView=[self personLable:array1[i] job:array2[i] firstStr:array3[i] secondStr:array4[i] tel:array5[i] sequence:i];
+    NSArray* array1=myDelegate.pileAry;
+    for (int i=0,j=myDelegate.pileAry.count; i<3; i++) {
+        UIView* tempView;
+        if (j) {
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i];
+            j--;
+        }else {
+            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+        }
+        
         [totalView addSubview:tempView];
         tempView.center=CGPointMake(160, height+60);
         height+=120;
@@ -160,24 +186,38 @@ static ProgramDetailViewController* myDelegate;
      *
      *
      */
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"地平阶段" programTitle:@[@"实际开工时间"] address:@[@"2014-12-14"] detailAddress:nil]];
+    //获取预计施工时间以及预计竣工时间
+    NSString *confromTimespStr;
+    if (![dataDic[@"actualStartTime"] isEqualToString:@""]) {
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate* confromTimesp = [NSDate dateWithTimeIntervalSince1970:[dataDic[@"actualStartTime"] intValue]];
+        confromTimespStr = [formatter stringFromDate:confromTimesp];
+    }else{
+        confromTimespStr=@"";
+    }
+    
+    
+    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"地平阶段" programTitle:@[@"实际开工时间"] address:@[confromTimespStr] detailAddress:nil]];
     
     //图片view
     [self getImageView:25 imageViewSequence:1];
     
     //联系人信息3个label
-    NSArray* array1=@[@"赵某某",@"孙某某",@"习某某"];
-    NSArray* array2=@[@"项目经理",@"项目总监",@"项目监督"];
-    NSArray* array3=@[@"00拍卖单位-中技桩业有限公司",@"11拍卖单位-中技桩业有限公司",@"22拍卖单位-中技桩业有限公司"];
-    NSArray* array4=@[@"00地址:上海市 虹口区 汶水东路928号",@"11地址:上海市 虹口区 汶水东路928号",@"22地址:上海市 虹口区 汶水东路928号"];
-    NSArray* array5=@[@"18888888888",@"13988888888",@"13888888888"];
-    for (int i=0; i<3; i++) {
-        UIView* tempView=[self personLable:array1[i] job:array2[i] firstStr:array3[i] secondStr:array4[i] tel:array5[i] sequence:i];
+    NSArray* array1=myDelegate.horizonAry;
+    for (int i=0,j=myDelegate.horizonAry.count; i<3; i++) {
+        UIView* tempView;
+        if (j) {
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i];
+            j--;
+        }else {
+            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+        }
+        
         [totalView addSubview:tempView];
         tempView.center=CGPointMake(160, height+60);
         height+=120;
-    }
-}
+    }}
 
 +(UIView*)getSeperatedLine{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 290, 1)];
@@ -246,14 +286,14 @@ static ProgramDetailViewController* myDelegate;
 ////竖着的3个view,联系人,职位,地点,单位,手机
 //+(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel sequence:(int)sequence{
 //    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 150)];
-//    
+//
 //    //分割线1
 //    if (sequence!=0) {
 //        UIView* line1=[self getSeperatedLine];
 //        line1.center=CGPointMake(160, 10);
 //        [view addSubview:line1];
 //    }
-//    
+//
 //    //名字
 //    UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(20, 20, 200, 40)];
 //    labelName.text=name;
@@ -261,13 +301,13 @@ static ProgramDetailViewController* myDelegate;
 //    labelName.textColor=RGBCOLOR(82, 125, 237);
 //    labelName.font=[UIFont systemFontOfSize:17];
 //    [view addSubview:labelName];
-//    
+//
 //    //职位
 //    UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 50, 150, 30)];
 //    jobLabel.text=job;
 //    jobLabel.font=[UIFont boldSystemFontOfSize:15];
 //    [view addSubview:jobLabel];
-//    
+//
 //    //单位名称
 //    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 70, 250, 30)];
 //    companyNameLabel.text=firstStr;
@@ -275,7 +315,7 @@ static ProgramDetailViewController* myDelegate;
 //    companyNameLabel.textAlignment=NSTextAlignmentLeft;
 //    companyNameLabel.font=[UIFont systemFontOfSize:14];
 //    [view addSubview:companyNameLabel];
-//    
+//
 //    //地址
 //    UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 90, 250, 30)];
 //    addressLabel.text=secondStr;
@@ -283,19 +323,19 @@ static ProgramDetailViewController* myDelegate;
 //    addressLabel.textAlignment=NSTextAlignmentLeft;
 //    addressLabel.font=[UIFont systemFontOfSize:14];
 //    [view addSubview:addressLabel];
-//    
+//
 //    //电话图标
 //    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(197, 46, 12.5, 12.5)];
 //    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing_2/phone@2x.png"];
 //    [view addSubview:imageView];
-//    
+//
 //    //电话号码
 //    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(215, 40, 100, 25)];
 //    label.text=tel;
 //    label.font=[UIFont systemFontOfSize:14];
 //    label.textColor=[UIColor grayColor];
 //    [view addSubview:label];
-//    
+//
 //    return view;
 //}
 

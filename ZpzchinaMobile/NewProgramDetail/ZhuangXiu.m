@@ -7,19 +7,27 @@
 //
 
 #import "ZhuangXiu.h"
-
+#import "CameraModel.h"
+#import "GTMBase64.h"
 @implementation ZhuangXiu
 
 static CGFloat height = 0;//统计总高
-static ProgramDetailViewController* myDelegate;
-UIView* totalView;
+static __weak ProgramDetailViewController* myDelegate;
+static UIView* totalView;
+static NSDictionary* dataDic;
 
 +(UIView*)zhuangXiuWithdelegate:(ProgramDetailViewController*)delegate{
+    //数值初始
+    height=0;
+    totalView=nil;
+    
     //totalView初始
     totalView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 0)];
     totalView.backgroundColor=[UIColor whiteColor];
     
     myDelegate=delegate;
+    dataDic=myDelegate.dataDic;
+    
     //获得第一个大view, 地平阶段
     [self getFirstView];
     
@@ -34,13 +42,23 @@ UIView* totalView;
     height+=215.5;
     
     //图片imageView
+    //图片imageView
+    UIImage *aimage;
+    if (myDelegate.electroweakImageArr.count) {
+        CameraModel *model = myDelegate.electroweakImageArr[0];
+        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+    }else{
+        aimage=[UIImage imageNamed:@"首页_16.png"];
+    }
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing_3/picture.png"];
+    //myDelegate.horizonImageArr;
+    imageView.image=aimage;
     [view addSubview:imageView];
+
     
     //图片数量label
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 120, 70, 30)];
-    label.text=[NSString stringWithFormat:@"%ld张",imageNumber];
+    label.text=[NSString stringWithFormat:@"%d张",imageNumber];
     label.textAlignment=NSTextAlignmentCenter;
     label.textColor=[UIColor whiteColor];
     label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:.3];
@@ -75,7 +93,7 @@ UIView* totalView;
         //项目地点部分
         UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320*1.0/3, 45)];
         areaLabel.center=CGPointMake(320*1.0/3*(i+.5), height+42.5);
-        areaLabel.text=@[@"正在施工",@"无装修",@"招标"][i];
+        areaLabel.text=@[dataDic[@"electroweakInstallation"],dataDic[@"decorationSituation"],dataDic[@"decorationProgress"]][i];
         areaLabel.font=[UIFont systemFontOfSize:14];
         areaLabel.textColor=RGBCOLOR(125, 125, 125);
         areaLabel.textAlignment=NSTextAlignmentCenter;

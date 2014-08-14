@@ -7,13 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ProgramDetailViewController : UIViewController
+#import "BaseViewController.h"
+@interface ProgramDetailViewController : BaseViewController
 @property(nonatomic,strong)UIButton* firstStageButton1;//11 第1大阶段第一个imageView的触发
 @property(nonatomic,strong)UIButton* secondStageButton1;//21 第2大阶段第1个imageView的触发
 @property(nonatomic,strong)UIButton* thirdStageButton1;//31 第3大阶段第1个imageView的触发
 @property(nonatomic,strong)UIButton* thirdStageButton2;//32 第3大阶段第2个imageView的触发
 @property(nonatomic,strong)UIButton* thirdStageButton3;//33 第3大阶段第3个imageView的触发
 @property(nonatomic,strong)UIButton* fourthStageButton1;//41 第4大阶段第1个imageView的触发
+@property(nonatomic,strong)NSDictionary* dataDic;//数据信息
+@property(nonatomic,copy)NSString* url;//数据信息的url
+@property(nonatomic,strong)NSMutableArray* contactAry;
+@property(nonatomic,strong)NSMutableArray* ownerAry;
+@property(nonatomic,strong)NSMutableArray* explorationAry;
+@property(nonatomic,strong)NSMutableArray* horizonAry;
+@property(nonatomic,strong)NSMutableArray* designAry;
+@property(nonatomic,strong)NSMutableArray* pileAry;
+
+@property(nonatomic,strong)NSMutableArray* horizonImageArr;
+@property(nonatomic,strong)NSMutableArray* pilePitImageArr;
+@property(nonatomic,strong)NSMutableArray* mainConstructionImageArr;
+@property(nonatomic,strong)NSMutableArray* explorationImageArr;
+@property(nonatomic,strong)NSMutableArray* fireControlImageArr;
+@property(nonatomic,strong)NSMutableArray* electroweakImageArr;
+
 -(void)userChangeImageWithButtons:(UIButton *)button;
 @end

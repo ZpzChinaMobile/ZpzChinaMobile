@@ -16,6 +16,7 @@
 #import "MJRefresh.h"
 #import "RecordSqlite.h"
 #import "AFAppDotNetAPIClient.h"
+#import "ProgramDetailViewController.h"
 @interface AllProjuctViewController ()
 
 @end
@@ -256,13 +257,18 @@ int startIndex;
                                               otherButtonTitles:nil,nil];
         [alert show];
     }else{
-        _newProject = nil;
-        _newProject = [[NewProjectViewController alloc] init];
-        _newProject.fromView = 1;
-        _newProject.isRelease = 0;
-        NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
-        _newProject.SingleDataDic = [dataArr objectAtIndex:indexPath.section];
-        [self.navigationController pushViewController:_newProject animated:YES];
+//        _newProject = nil;
+//        _newProject = [[NewProjectViewController alloc] init];
+//        _newProject.fromView = 1;
+//        _newProject.isRelease = 0;
+//        NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
+     
+//      以下为新vc的数据
+//        _newProject.SingleDataDic = [dataArr objectAtIndex:indexPath.section];
+       // NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
+        ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
+        vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

@@ -44,6 +44,7 @@
 }
 
 +(NSMutableDictionary *)JudgmentStr:(ProjectModel *)model{
+    NSLog(@"expectedFinishTime ===>%@",model.a_expectedFinishTime);
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     //[dic setObject:model.a_id forKey:@"id"];
     if([[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"(null)"]){
@@ -167,7 +168,8 @@
             NSString *astr =  [model.a_expectedFinishTime stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
             astr =  [astr stringByReplacingOccurrencesOfString:@"+0800)/" withString:@""];
             if([astr isEqualToString:@"0"]){
-                [dic setObject:[NSString stringWithFormat:@"%@",model.a_expectedFinishTime] forKey:@"expectedStartTime"];
+                NSLog(@"[astr isEqualToString:@0]");
+                [dic setObject:[NSString stringWithFormat:@"%@",model.a_expectedFinishTime] forKey:@"expectedFinishTime"];
             }else{
                 [dic setObject:[NSString stringWithFormat:@"%@",[model.a_expectedFinishTime substringWithRange:NSMakeRange(6,10)]] forKey:@"expectedFinishTime"];
             }
@@ -493,7 +495,7 @@
                     NSLog(@"asdfasdfasdf");
                     [dic setObject:[NSString stringWithFormat:@"%@",astr] forKey:@"expectedStartTime"];
                 }else{
-                    [dic setObject:[NSString stringWithFormat:@"%@",[[oldDic objectForKey:@"expectedStartTime"] substringWithRange:NSMakeRange(6,10)]] forKey:@"expectedFinishTime"];
+                    [dic setObject:[NSString stringWithFormat:@"%@",[[oldDic objectForKey:@"expectedStartTime"] substringWithRange:NSMakeRange(6,10)]] forKey:@"expectedStartTime"];
                 }
             }
         }
@@ -502,7 +504,7 @@
     }
     
     if([[newDic objectForKey:@"expectedFinishTime"] isEqualToString:@""]||[[NSString stringWithFormat:@"%@",[newDic objectForKey:@"expectedFinishTime"]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",[newDic objectForKey:@"expectedFinishTime"]] isEqualToString:@"(null)"]){
-        if([[oldDic objectForKey:@"expectedStartTime"] isEqualToString:@""]||[[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"expectedFinishTime"]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"expectedFinishTime"]] isEqualToString:@"(null)"]){
+        if([[oldDic objectForKey:@"expectedFinishTime"] isEqualToString:@""]||[[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"expectedFinishTime"]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"expectedFinishTime"]] isEqualToString:@"(null)"]){
             [dic setObject:@"" forKey:@"expectedFinishTime"];
         }else{
             if([[oldDic objectForKey:@"expectedFinishTime"] length] == 10 || [[oldDic objectForKey:@"expectedFinishTime"] length] == 0){
