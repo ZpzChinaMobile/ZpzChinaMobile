@@ -22,10 +22,11 @@
     return self;
 }
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
+        self.contacts=contacts;
     }
     return self;
 }
@@ -84,7 +85,7 @@
     }else{
         GeologicalSurveyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
         if (!cell) {
-            cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:1 Arr:nil explorationImageArr:nil];
+            cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:1 Arr:self.contacts explorationImageArr:nil];
         }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...

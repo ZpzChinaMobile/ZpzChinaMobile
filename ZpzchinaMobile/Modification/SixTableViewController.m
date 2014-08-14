@@ -15,10 +15,11 @@
 @implementation SixTableViewController
 //地平阶段
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
+        self.contacts=contacts;
     }
     return self;
 }
@@ -87,7 +88,7 @@
     }else{
         HorizonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HorizonTableViewCell"];
         if (!cell) {
-            cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
+            cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
             
             
             //cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" flag:1 Arr:nil explorationImageArr:nil];

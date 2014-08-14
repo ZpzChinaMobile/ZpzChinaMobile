@@ -22,10 +22,11 @@
     return self;
 }
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
+        self.contacts=contacts;
     }
     return self;
 }

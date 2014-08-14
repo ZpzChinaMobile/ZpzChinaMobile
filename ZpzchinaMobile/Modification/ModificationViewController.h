@@ -11,5 +11,5 @@
 @interface ModificationViewController : BaseViewController
 @property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic;
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts;
 @end

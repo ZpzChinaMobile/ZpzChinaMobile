@@ -663,7 +663,7 @@
 }
 
 -(void)gotoModificationVC{
-    ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy]];
+    ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry]];
 
     [self.navigationController pushViewController:modiVC animated:YES];
 }

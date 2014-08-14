@@ -37,7 +37,8 @@
 @property(nonatomic,strong)EightTableViewController* eightTVC;
 @property(nonatomic,strong)NineTableViewController* nineTVC;
 @property(nonatomic,strong)TenTableViewController* tenTVC;
-
+@property(nonatomic,strong)NSArray* contacts;//联系人数组
+@property(nonatomic,strong)NSArray* images;//图片数组
 @property(nonatomic,strong)NSArray* tvcArray;
 @end
 
@@ -52,10 +53,11 @@
     return self;
 }
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts images:(NSArray*)images{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=[NSMutableDictionary dictionary];
+        self.contacts=contacts;
     }
     return self;
 }
@@ -72,19 +74,20 @@
     [self initThemeView];
     [self initTableViewSpace];
     [self.tableViewSpace addSubview:self.oneTVC.tableView];
+    [self initTableView];
     // Do any additional setup after loading the view.
 }
 
 -(void)initTVC{
-    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[0]];
     NSLog(@"***********************%@***********************",self.singleDic);
-    self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
-    self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
-    self.fourTVC=[[FourTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
-    self.fiveTVC=[[FiveTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
-    self.sixTVC=[[SixTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
-    self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
-    self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic];
+    self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[1]];
+    self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[2]];
+    self.fourTVC=[[FourTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[4]];
+    self.fiveTVC=[[FiveTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[1]];
+    self.sixTVC=[[SixTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[3]];
+    self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[5]];
+    self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil];
     self.nineTVC=[[NineTableViewController alloc]init];
     self.tenTVC=[[TenTableViewController alloc]init];
     
