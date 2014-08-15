@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TenTableViewController : UITableViewController
-
+#import "SinglePickerView.h"
+#import "ClearFireCell.h"
+@interface TenTableViewController : UITableViewController<ClearFireDelegate>
+{
+    SinglePickerView *singlepickerview;
+    UIViewController *bgviewcontroller;
+  
+}
 @end

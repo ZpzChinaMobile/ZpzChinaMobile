@@ -10,6 +10,7 @@
 
 @implementation ClearFireCell
 
+@synthesize delegate;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -73,7 +74,10 @@
 
 -(void)tempBtnClicked:(UIButton *)button
 {
-    
+        if ([delegate respondsToSelector:@selector(addContactViewFirefighting)]){
+            [delegate addContactViewFirefighting];
+        }
+
     
 }
 
