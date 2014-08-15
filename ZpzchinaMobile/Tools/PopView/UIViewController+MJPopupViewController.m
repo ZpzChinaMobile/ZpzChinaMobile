@@ -75,7 +75,7 @@
     overlayView.backgroundColor = [UIColor clearColor];
     
     // BackgroundView
-    MJPopupBackgroundView *backgroundView = [[MJPopupBackgroundView alloc] initWithFrame:sourceView.bounds];
+    MJPopupBackgroundView *backgroundView = [[MJPopupBackgroundView alloc] initWithFrame:CGRectMake(0, 0, 320, 454)];
     backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     backgroundView.tag = kMJBackgroundViewTag;
     backgroundView.backgroundColor = [UIColor blackColor];
@@ -85,12 +85,13 @@
     // Make the Background Clickable
     UIButton * dismissButton = [UIButton buttonWithType:UIButtonTypeCustom];
     dismissButton.backgroundColor = [UIColor clearColor];
-    dismissButton.frame = sourceView.bounds;
+    dismissButton.frame = CGRectMake(0, 0, 320, 454);
     [overlayView addSubview:dismissButton];
     
     popupView.alpha = 0.0f;
     [overlayView addSubview:popupView];
     [sourceView addSubview:overlayView];
+    NSLog(@"%d",animationType);
     if(animationType == MJPopupViewAnimationSlideBottomTop) {
         [dismissButton addTarget:self action:@selector(dismissPopupViewControllerWithanimationTypeSlideBottomTop) forControlEvents:UIControlEventTouchUpInside];
         [self slideViewIn:popupView sourceView:sourceView overlayView:overlayView withAnimationType:animationType];
@@ -162,12 +163,12 @@
                                     popupSize.width, 
                                     popupSize.height);*/
         popupStartRect = CGRectMake(sourceSize.width,
-                                    40,
+                                    0,
                                     popupSize.width,
                                     popupSize.height);
     }
     CGRect popupEndRect = CGRectMake((sourceSize.width - popupSize.width) / 2,
-                                     40,
+                                     0,
                                      popupSize.width, 
                                      popupSize.height);
     

@@ -130,8 +130,8 @@
 }
 
 -(void)gotoMoreExploration{
-    if ([delegate respondsToSelector:@selector(moreImage:)]){
-        [delegate moreImage:3];
-    }
+//    if ([delegate respondsToSelector:@selector(moreImage:)]){
+//        [delegate moreImage:3];
+//    }
 }
 @end
