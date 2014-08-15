@@ -98,7 +98,6 @@
             [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
             [self addSubview:lingImage];
             
-                       
         }
     }
     return self;

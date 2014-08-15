@@ -10,18 +10,100 @@
 #import "HorizonTableViewCell.h"
 #import "CameraModel.h"
 #import "GTMBase64.h"
-@interface SixTableViewController ()<HorizonDelegate>
+#import "AddContactViewController.h"
+#import "DatePickerView.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "OwnerTypeViewController.h"
+#import "LocationViewController.h"
+#import "SinglePickerView.h"
+@interface SixTableViewController ()<HorizonDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
+    DatePickerView* datepickerview;
+    AddContactViewController* addcontactView;
+    LocationViewController* locateview;
+}
 
 @end
 
 @implementation SixTableViewController
 //地平阶段
 
--(void)addContactViewHorizon:(int)index{
-    NSLog(@"11");
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(self.timeflag == 0){
+        [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedStartTime"];
+    }else if(self.timeflag == 1){
+        [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedFinishTime"];
+    }else{
+        [self.dataDic setObject:datepickerview.timeSp forKey:@"actualStartTime"];
+    }
+    [self.tableView reloadData];
 }
+
+-(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
+    
+    [dic setValue:@"contractorUnitContacts" forKey:@"category"];
+    if(btnTag != 0){
+        [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
+    }else{
+        [self.contacts addObject:dic];
+    }
+    
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.tableView reloadData];
+}
+
+-(void)addContactViewHorizon:(int)index{
+    [datepickerview removeFromSuperview];
+    datepickerview = nil;
+    switch (index) {
+        case 0:
+            if(datepickerview == nil){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[self.dataDic objectForKey:@"actualStartTime"] intValue]];
+                if([[self.dataDic objectForKey:@"actualStartTime"] isEqualToString:@""]){
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:nil];
+                }else{
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:confromTimesp];
+                }
+                datepickerview.tag = 1;
+                [datepickerview showInView:self.tableView.superview];
+            }
+            self.timeflag = 2;
+            break;
+        case 1:
+            //self.flag = 4;
+            if(self.contacts.count <3){
+                addcontactView = [[AddContactViewController alloc] init];
+                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+                addcontactView.delegate = self;
+                if(self.fromView == 0){
+                    [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
+                }else{
+                    [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
+                }
+                [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
 -(void)updataContractorUnitContacts:(NSMutableDictionary *)dic index:(int)index{
-    NSLog(@"11");
+   // self.flag = 4;
+    addcontactView = [[AddContactViewController alloc] init];
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+    addcontactView.delegate = self;
+    [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
+//    if(self.fromView == 1){
+//        if(self.isRelease == 0){
+//            [addcontactView setenabled:horizonArr];
+//        }
+//    }
+    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
 
 
@@ -90,10 +172,10 @@
         return cell;
     }else{
         HorizonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HorizonTableViewCell"];
-        if (!cell) {
+       // if (!cell) {
             cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
             cell.delegate=self;
-        }
+       // }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         

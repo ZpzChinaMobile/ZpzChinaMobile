@@ -208,6 +208,7 @@
     }else{
         [self.dataDic setObject:@"0" forKey:@"foreignInvestment"];
     }
+    [self.tableView reloadData];
 }
 
 -(void)updataOwner:(NSMutableDictionary *)dic index:(int)index{
@@ -289,7 +290,7 @@
     NSString *stringcell = @"ProjectTableViewCell";
     ProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     //if(!cell){
-    cell = [[ProjectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 ownerArr:nil singleDic:self.singleDic] ;
+    cell = [[ProjectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 ownerArr:self.contacts singleDic:self.singleDic] ;
     cell.delegate=self;
     //}
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
