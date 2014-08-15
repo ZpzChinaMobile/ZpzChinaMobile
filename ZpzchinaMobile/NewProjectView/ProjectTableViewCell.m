@@ -204,13 +204,13 @@
         [enddate addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:enddate];
         
-        UILabel *InvestmentLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,315, 70, 30)];
+        UILabel *InvestmentLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,315, 60, 30)];
         InvestmentLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         InvestmentLabe.textColor = GrayColor;
         InvestmentLabe.text = @"投资额:";
         [self addSubview:InvestmentLabe];
         
-        UITextField *Investment = [[UITextField alloc] initWithFrame:CGRectMake(150,315, 150, 30)];
+        UITextField *Investment = [[UITextField alloc] initWithFrame:CGRectMake(75,316, 150, 30)];
         Investment.delegate = self;
         Investment.textAlignment=NSTextAlignmentLeft;
         Investment.keyboardType = UIKeyboardTypeDecimalPad;
@@ -238,7 +238,7 @@
         GFALabe.text = @"建筑面积:";
         [self addSubview:GFALabe];
         
-        UITextField *GFA = [[UITextField alloc] initWithFrame:CGRectMake(150,365, 150, 30)];
+        UITextField *GFA = [[UITextField alloc] initWithFrame:CGRectMake(90,366, 150, 30)];
         GFA.delegate = self;
         GFA.keyboardType = UIKeyboardTypeDecimalPad;
         GFA.textAlignment=NSTextAlignmentLeft;
@@ -266,7 +266,7 @@
         StoreybuildingLabe.text = @"建筑层高:";
         [self addSubview:StoreybuildingLabe];
         
-        UITextField *Storeybuilding = [[UITextField alloc] initWithFrame:CGRectMake(150,415, 150, 30)];
+        UITextField *Storeybuilding = [[UITextField alloc] initWithFrame:CGRectMake(90,416, 150, 30)];
         Storeybuilding.delegate = self;
         Storeybuilding.textAlignment=NSTextAlignmentLeft;
         Storeybuilding.keyboardType = UIKeyboardTypeDecimalPad;
@@ -290,42 +290,50 @@
         
         UIButton *Foreignparticipation = [UIButton buttonWithType:UIButtonTypeCustom];
         Foreignparticipation.tag = 4;
-        Foreignparticipation.frame = CGRectMake(20,465, 200, 30);
-        if(flag == 0){
-            if(![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
-                [Foreignparticipation setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]] forState:UIControlStateNormal];
-            }else{
-                [Foreignparticipation setTitle:@"外资参与" forState:UIControlStateNormal];
-            }
-        }else{
-            if([[dic objectForKey:@"foreignInvestment"] isEqualToString:@""]){
-                if([[singleDic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
-                    [Foreignparticipation setTitle:@"外资参与" forState:UIControlStateNormal];
-                }else{
-                    [Foreignparticipation setTitle:[NSString stringWithFormat:@"外资参与"] forState:UIControlStateNormal];
-                }
-            }else{
-                if([[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
-                    [Foreignparticipation setTitle:@"外资参与" forState:UIControlStateNormal];
-                }else{
-                    [Foreignparticipation setTitle:[NSString stringWithFormat:@"外资参与"] forState:UIControlStateNormal];
-                }
-            }
-        }
-        
+        Foreignparticipation.frame = CGRectMake(20,465, 100, 30);
+        [Foreignparticipation setTitle:@"外资参与" forState:UIControlStateNormal];
         [Foreignparticipation setTitleColor:BlueColor forState:UIControlStateNormal];
         Foreignparticipation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         Foreignparticipation.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         [Foreignparticipation addTarget:self action:@selector(ForeignparticipationClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Foreignparticipation];
         
-        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,472, 8, 12.5)];
+        foreignparticipationLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,465, 100, 30)];
+        foreignparticipationLabel.textColor = GrayColor;
+        foreignparticipationLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        foreignparticipationLabel.textAlignment = NSTextAlignmentLeft;
+        if(flag == 0){
+            if(![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+                [foreignparticipationLabel setText:@"参与"];
+            }else{
+                [foreignparticipationLabel setText:@"不参与"];
+            }
+        }else{
+            if([[dic objectForKey:@"foreignInvestment"] isEqualToString:@""]){
+                if([[singleDic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+                    [foreignparticipationLabel setText:@"不参与"];
+                }else{
+                    [foreignparticipationLabel setText:@"参与"];
+                }
+            }else{
+                if([[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+                    [foreignparticipationLabel setText:@"不参与"];
+                }else{
+                    [foreignparticipationLabel setText:@"参与"];
+                }
+            }
+        }
+        [self addSubview:foreignparticipationLabel];
+        
+        
+        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,473, 8, 12.5)];
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage];
         
         UIButton *OwnerType = [UIButton buttonWithType:UIButtonTypeCustom];
         OwnerType.tag = 5;
-        OwnerType.frame = CGRectMake(20,515, 220, 30);
+        OwnerType.frame = CGRectMake(20,515, 100, 30);
+        [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
         if(flag == 0){
             if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
                 [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
@@ -349,7 +357,30 @@
         [OwnerType addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:OwnerType];
         
-        UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(90,520, 8, 12.5)];
+        UILabel *ownerLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,512, 220, 30)];
+        ownerLabel.textColor = GrayColor;
+        ownerLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        ownerLabel.textAlignment = NSTextAlignmentLeft;
+        if(flag == 0){
+            if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
+                [ownerLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ownerType"]]];
+            }else{
+                [ownerLabel setText:@""];
+            }
+        }else{
+            if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
+                [ownerLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ownerType"]]];
+            }else{
+                if(![[singleDic objectForKey:@"ownerType"] isEqualToString:@""]){
+                    [ownerLabel setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"ownerType"]]];
+                }else{
+                    [ownerLabel setText:@""];
+                }
+            }
+        }
+        [self addSubview:ownerLabel];
+        
+        UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(90,522, 8, 12.5)];
         [arrowImage2 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage2];
         

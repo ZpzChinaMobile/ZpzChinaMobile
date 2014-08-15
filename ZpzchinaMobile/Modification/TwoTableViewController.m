@@ -208,6 +208,7 @@
     }else{
         [self.dataDic setObject:@"0" forKey:@"foreignInvestment"];
     }
+    [self.tableView reloadData];
 }
 
 -(void)updataOwner:(NSMutableDictionary *)dic index:(int)index{
