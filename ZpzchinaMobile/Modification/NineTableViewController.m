@@ -48,7 +48,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *stringcell = @"ProjectTableViewCell";
+    static NSString *stringcell = @"WeakElectricityCell";
     WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
         cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
@@ -60,6 +60,6 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;
+    return 100;
 }
 @end

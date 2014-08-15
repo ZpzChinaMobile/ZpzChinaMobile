@@ -48,7 +48,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *stringcell = @"ProjectTableViewCell";
+    static NSString *stringcell = @"ClearFireCell";
     ClearFireCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
         cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
@@ -58,7 +58,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 150;
 }
 
 @end
