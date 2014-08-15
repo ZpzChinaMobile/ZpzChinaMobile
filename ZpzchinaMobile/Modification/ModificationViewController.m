@@ -97,37 +97,51 @@
     //contactAry flag 0
     self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[0] mutableCopy] images:self.explorationImageArr];
     self.oneTVC.fromView=self.fromView;
+    self.oneTVC.superVC=self;
     NSLog(@"***********************%@***********************",self.singleDic);
     //ownerAry flag 1
     self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[1] mutableCopy] images:nil];
     self.twoTVC.fromView=self.fromView;
+    self.twoTVC.superVC=self;
+
     //explorationAry flag 2
     self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[2] mutableCopy] images:self.explorationImageArr];
     self.threeTVC.fromView=self.fromView;
+    self.threeTVC.superVC=self;
+
     //designAry flag 3
     self.fourTVC=[[FourTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[4] mutableCopy] images:nil];
     self.fourTVC.fromView=self.fromView;
+    self.fourTVC.superVC=self;
+
     //ownerAry flag 1
     self.fiveTVC=[[FiveTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[1] mutableCopy] images:nil];
     self.fiveTVC.fromView=self.fromView;
+    self.fiveTVC.superVC=self;
+
 
     //horizonAry flag 4
     self.sixTVC=[[SixTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[3] mutableCopy] images:self.horizonImageArr];
     self.sixTVC.fromView=self.fromView;
+    self.sixTVC.superVC=self;
 
     //pileAry flag 5
     self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[5] mutableCopy] images:self.pilePitImageArr];
     self.sevenTVC.fromView=self.fromView;
+    self.sevenTVC.superVC=self;
 
     self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil images:[self.images[2] mutableCopy]];
     self.eightTVC.fromView=self.fromView;
+    self.eightTVC.superVC=self;
 
     self.nineTVC=[[NineTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic images:self.fireControlImageArr];
     self.nineTVC.fromView=self.fromView;
+    self.nineTVC.superVC=self;
 
     self.tenTVC=[[TenTableViewController alloc] initWithSingle:self.singleDic dataDic:self.dataDic images:self.electroweakImageArr];
     self.tenTVC.fromView=self.fromView;
-    
+    self.tenTVC.superVC=self;
+
     self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
     
     for (int i=0; i<10; i++) {
