@@ -26,9 +26,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
-        
-        
         UIImageView *arrowImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(63,16, 10, 18)];
         [arrowImage1 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage1];
@@ -39,9 +36,6 @@
         
         NSArray *titleArray = @[@"消防",@"景观绿化"];
         for (int i =0; i<2; i++) {
-            
-            
-            
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
             [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
             [self addSubview:lingImage];
@@ -53,28 +47,22 @@
                 tempBtn.frame = CGRectMake(15,10+50*i, 80, 30);
 
             }
-
-
+            NSLog(@"444");
             tempBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
             [tempBtn setTitle:[titleArray objectAtIndex:i] forState:UIControlStateNormal];
             [tempBtn setTitleColor:BlueColor forState:UIControlStateNormal];
             [tempBtn addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:tempBtn];
-            
-            
+            [self.contentView addSubview:tempBtn];
         }
-        
-        
-        
     }
     return self;
-    
-    
 }
 
 -(void)tempBtnClicked:(UIButton *)button
 {
+    NSLog(@"22");
         if ([delegate respondsToSelector:@selector(addContactViewFirefighting)]){
+            NSLog(@"33");
             [delegate addContactViewFirefighting];
         }
 

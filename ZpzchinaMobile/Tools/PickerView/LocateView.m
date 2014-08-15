@@ -74,7 +74,7 @@
 }
 */
 
-- (void)showInView:(UITableView *) view
+- (void)showInView:(UIView *) view
 {
     CATransition *animation = [CATransition  animation];
     animation.delegate = self;
@@ -86,7 +86,7 @@
     [self.layer addAnimation:animation forKey:@"LocateView"];
     
     NSLog(@"%f",view.frame.size.height);
-    self.frame=CGRectMake(0, view.contentSize.height-self.frame.size.height, self.frame.size.width, self.frame.size.height);
+    self.frame=CGRectMake(0, view.frame.size.height-self.frame.size.height, self.frame.size.width, self.frame.size.height);
    // self.frame = CGRectMake(0, view.frame.size.height - self.frame.size.height, self.frame.size.width, self.frame.size.height);
     
     [view addSubview:self];

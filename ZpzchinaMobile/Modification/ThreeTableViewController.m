@@ -10,8 +10,14 @@
 #import "GeologicalSurveyTableViewCell.h"
 #import "CameraModel.h"
 #import "GTMBase64.h"
-
-@interface ThreeTableViewController ()<GeologicalSurveyDelegate>
+#import "AddContactViewController.h"
+#import "DatePickerView.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "OwnerTypeViewController.h"
+#import "LocationViewController.h"
+@interface ThreeTableViewController ()<GeologicalSurveyDelegate,AddContactViewDelegate>{
+    AddContactViewController* addcontactView;
+}
 
 @end
 
@@ -19,7 +25,22 @@
 //地勘阶段
 
 -(void)addContactViewGeologicalSurvey{
-    NSLog(@"11");
+    //self.flag = 2;
+    if(self.contacts.count <3){
+        addcontactView = [[AddContactViewController alloc] init];
+        [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+        addcontactView.delegate = self;
+        if(self.fromView == 0){
+            [addcontactView setlocalProjectId:[dataDic objectForKey:@"id"]];
+        }else{
+            [addcontactView setlocalProjectId:[self.SingleDataDic objectForKey:@"projectID"]];
+        }
+        [bgviewcontroller presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+    }else{
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+
 }
 -(void)updataExplorationUnitContacts:(NSMutableDictionary *)dic index:(int)index{
     NSLog(@"11");

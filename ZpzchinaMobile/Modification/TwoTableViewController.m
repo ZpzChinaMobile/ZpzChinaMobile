@@ -14,7 +14,7 @@
 #import "UIViewController+MJPopupViewController.h"
 #import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
-@interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,OwnerTypeViewDelegate,LocationViewDelegate>{
+@interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,OwnerTypeViewDelegate,LocationViewDelegate,UIActionSheetDelegate>{
     AddContactViewController* addcontactView;
     DatePickerView* datepickerview;
     OwnerTypeViewController* ownertypeview;
@@ -25,6 +25,64 @@
 
 @implementation TwoTableViewController
 //项目立项
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+        datepickerview = (DatePickerView *)actionSheet;
+        if(buttonIndex == 0) {
+            NSLog(@"Cancel");
+        }else {
+  //          _isUpdata = YES;
+            if(self.timeflag == 0){
+                [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedStartTime"];
+            }else if(self.timeflag == 1){
+                [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedFinishTime"];
+            }else{
+                //[self.dataDic setObject:datepickerview.timeSp forKey:@"actualStartTime"];
+            }
+        }
+        [self.tableView reloadData];
+}
+
+-(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
+    //   _isUpdata = YES;
+    //    NSLog(@"==>%d",self.flag);
+    [dic setValue:@"ownerUnitContacts" forKeyPath:@"category"];
+    if(btnTag != 0){
+        NSLog(@"==>%@",[dic objectForKey:@"accountName"]);
+        [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
+    }else{
+        [self.contacts addObject:dic];
+    }
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.tableView reloadData];
+}
+
+-(void)locationBack:(NSString *)address testLocation:(CLLocationCoordinate2D)testLocation{
+    //    _isUpdata = YES;
+    [self.dataDic setObject:address forKey:@"landAddress"];
+    [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.longitude] forKey:@"longitude"];
+    [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.latitude] forKey:@"latitude"];
+    [self.tableView reloadData];
+}
+
+-(void)backOwnerTypeViewController{
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+}
+
+-(void)choiceDataOwnerType:(NSMutableArray *)arr{
+    NSMutableString *string = [[NSMutableString alloc] init];
+    for(int i=0;i<arr.count;i++){
+        if(![[arr objectAtIndex:i] isEqualToString:@""]){
+            [string appendString:[NSString stringWithFormat:@"%@,",[arr objectAtIndex:i]]];
+        }
+    }
+    NSString *aStr=[string substringToIndex:([string length]-1)];
+    [self.dataDic setObject:aStr forKey:@"ownerType"];
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop];
+    [self.tableView reloadData];
+    
+}
 
 -(void)addContactViewProject:(int)index{
     [datepickerview removeFromSuperview];
@@ -60,9 +118,10 @@
                     datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:confromTimesp];
                 }
                 datepickerview.tag = 1;
-                [datepickerview showInView:self.view];
+                [datepickerview showInView:self.tableView.superview];
+                [self.tableView scrollRectToVisible:CGRectMake(0, 200, 320, 500) animated:YES];
             }
-            //self.timeflag = 0;
+            self.timeflag = 0;
             break;
         case 3:
             if(datepickerview == nil){
@@ -75,9 +134,11 @@
                     datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:confromTimesp];
                 }
                 datepickerview.tag = 1;
-                [datepickerview showInView:self.view];
+                [datepickerview showInView:self.tableView.superview];
+                //将tableview滚动至可以看到参考内容的rect
+                [self.tableView scrollRectToVisible:CGRectMake(0, 200, 320, self.tableView.contentSize.height-200) animated:YES];
             }
-            //self.timeflag = 1;
+            self.timeflag = 1;
             break;
         case 4:
             
@@ -92,6 +153,7 @@
             break;
     }
 }
+
 -(void)addContentProject:(NSString *)str index:(int)index{
     //_isUpdata = YES;
     switch (index) {
@@ -147,17 +209,18 @@
         [self.dataDic setObject:@"0" forKey:@"foreignInvestment"];
     }
 }
+
 -(void)updataOwner:(NSMutableDictionary *)dic index:(int)index{
-//    self.flag = 1;
+    //    self.flag = 1;
     addcontactView = [[AddContactViewController alloc] init];
     [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
-//    if(self.fromView == 1){
-//        if(self.isRelease == 0){
-//            [addcontactView setenabled:self.ownerArr];
-//        }
-//    }
+    //    if(self.fromView == 1){
+    //        if(self.isRelease == 0){
+    //            [addcontactView setenabled:self.ownerArr];
+    //        }
+    //    }
     [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
 
@@ -193,6 +256,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    self.bgVC=[[UIViewController alloc]init];
+//    self.bgVC.view.frame=CGRectMake(0, 568-64.5-431, 320, 431);
+//    [self.tableView.superview addSubview:self.bgVC.view];
+    //self.bgVC.view.frame=;
+    
     self.fromView=1;
     self.tableView.separatorStyle=NO;
 }

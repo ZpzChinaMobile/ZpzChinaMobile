@@ -89,7 +89,8 @@
             locateview.tag = 0;
           //  [self.tableView.superview];
           //  NSLog(@"%@",self.tableView.superview);
-            [locateview showInView:self.tableView];
+            [locateview showInView:self.tableView.superview];
+            
             //[locateview showInView:self.view];
         }
     }else if(index == 1){
