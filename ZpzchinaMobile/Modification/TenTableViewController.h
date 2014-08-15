@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SinglePickerView.h"
-#import "ClearFireCell.h"
-@interface TenTableViewController : UITableViewController<ClearFireDelegate>
+#import "WeakElectricityCell.h"
+@interface TenTableViewController : UITableViewController<WeakElectricityDelegate>
 {
     SinglePickerView *singlepickerview;
     UIViewController *bgviewcontroller;

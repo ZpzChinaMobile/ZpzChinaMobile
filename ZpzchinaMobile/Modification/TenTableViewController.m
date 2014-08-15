@@ -54,11 +54,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *stringcell = @"ProjectTableViewCell";
-    ClearFireCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
-        cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
+        cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.delegate = self;
     return cell;
 }
 
