@@ -46,6 +46,7 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
+    
 }
 
 - (void)didReceiveMemoryWarning
