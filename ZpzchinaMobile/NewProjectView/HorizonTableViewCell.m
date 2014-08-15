@@ -62,7 +62,7 @@
         [startdate addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:startdate];
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,68, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(105,68, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
@@ -89,7 +89,7 @@
                     contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
-                        [contactBtn setFrame:CGRectMake(150, 65, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(140, 65, 60, 30)];
                     }else if(i == 1){
                         [contactBtn setFrame:CGRectMake(200, 65, 60, 30)];
                     }else{

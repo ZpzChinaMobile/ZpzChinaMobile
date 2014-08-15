@@ -25,7 +25,7 @@
         [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
         [self addSubview:lingImage2];
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(125,15, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(120,15, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
@@ -50,9 +50,9 @@
                     contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
-                        [contactBtn setFrame:CGRectMake(170, 10, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(150, 10, 60, 30)];
                     }else if(i == 1){
-                        [contactBtn setFrame:CGRectMake(210, 10, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(200, 10, 60, 30)];
                     }else{
                         [contactBtn setFrame:CGRectMake(250, 10, 60, 30)];
                     }
