@@ -268,6 +268,7 @@ int startIndex;
        // NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
         ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
         vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
+        vc.fromView=1;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

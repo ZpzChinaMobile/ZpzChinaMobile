@@ -68,7 +68,7 @@
 
 //新建数据
 +(void)InsertData:(NSDictionary *)dic{
-    //NSLog(@"==>%@",dic);
+    NSLog(@"==>%@",dic);
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
 	if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,status) VALUES (?,?,?,?,?,?,?,?,?,'2');",

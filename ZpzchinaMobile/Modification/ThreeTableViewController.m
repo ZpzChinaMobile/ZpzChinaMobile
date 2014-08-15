@@ -15,8 +15,11 @@
 #import "UIViewController+MJPopupViewController.h"
 #import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
-@interface ThreeTableViewController ()<GeologicalSurveyDelegate,AddContactViewDelegate>{
+#import "Camera.h"
+#import "CameraSqlite.h"
+@interface ThreeTableViewController ()<GeologicalSurveyDelegate,AddContactViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate>{
     AddContactViewController* addcontactView;
+    Camera* camera;
 }
 
 @end
@@ -81,14 +84,7 @@
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.contacts=contacts;
-        self.images=[NSMutableArray array];
-        
-        for (int i=0; i<images.count; i++) {
-            CameraModel* model= images[i];
-            UIImage *aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            [self.images addObject:aimage];
-        }
-        [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
+        self.images=images;
     }
     return self;
 }
@@ -143,30 +139,82 @@
 }
 
 -(UIView*)getImageViewsWithImages:(NSArray*)images{
-    CGFloat cellHeight=120;
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((images.count-1)/3+1))];
-    
+    NSMutableArray* imageAry=[NSMutableArray array];
     for (int i=0; i<images.count; i++) {
+        CameraModel* model= images[i];
+        UIImage *aimage;
+        if ([model.a_device isEqualToString:@"localios"]) {
+            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        }
+        [imageAry addObject:aimage];
+    }
+    [imageAry addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
+    
+    CGFloat cellHeight=120;
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
+    
+    for (int i=0; i<imageAry.count; i++) {
         UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
-        imageView.image=images[i];
+        imageView.image=imageAry[i];
         [view addSubview:imageView];
         
-        UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
-        button.tag=i;
-        [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
+        if (i==imageAry.count-1) {
+            UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
+            [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+            [view addSubview:button];
+        }
     }
     return view;
 }
 
+
 -(void)tap:(UIButton*)button{
-    NSLog(@"%d",button.tag);
+    camera=[[Camera alloc]init];
+    camera.delegate=self;
+    if(self.fromView == 1){
+        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+            [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"id"]];
+        }else{
+            [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"projectID"]];
+        }
+    }else{
+        [camera getCameraView:self.superVC flag:6 aid:[self.dataDic objectForKey:@"id"]];
+    }
+}
+
+-(void)backCamera{
+    if (!self.images.count) {
+        self.images=[NSMutableArray array];
+    }
+    
+    if(self.fromView == 0){
+        [self.images removeAllObjects];
+        self.images = [CameraSqlite loadPlanList:[self.dataDic objectForKey:@"id"]];
+    }else{
+        // if(isRelease == 0){
+        // if(cameraflag == 0){
+        if([CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+            [self.images insertObject:[[CameraSqlite loadPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+        }
+        //        //  }else{
+        //        [self.images removeAllObjects];
+        //
+        //        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"id"]];
+        //
+        //        }else{
+        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"projectID"]];
+        //        }
+    }
+    [self.tableView reloadData];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==0) {
-        return ((self.images.count-1)/3+1)*120;
+        return ((self.images.count)/3+1)*120;
     }
     return 50;
 }
