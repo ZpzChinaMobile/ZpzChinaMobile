@@ -10,19 +10,62 @@
 #import "PilePitTableViewCell.h"
 #import "CameraModel.h"
 #import "GTMBase64.h"
-
-@interface SevenTableViewController ()<PilePitDelegate>
+#import "AddContactViewController.h"
+#import "DatePickerView.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "OwnerTypeViewController.h"
+#import "LocationViewController.h"
+#import "SinglePickerView.h"
+@interface SevenTableViewController ()<PilePitDelegate,AddContactViewDelegate>{
+    AddContactViewController* addcontactView;
+}
 
 @end
 
 @implementation SevenTableViewController
 //桩基基坑
 
--(void)addContactViewPilePit{
-    NSLog(@"11");
+-(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
+    [dic setValue:@"pileFoundationUnitContacts" forKey:@"category"];
+    if(btnTag != 0){
+        [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
+    }else{
+        [self.contacts addObject:dic];
+    }
+    
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.tableView reloadData];
 }
+
+-(void)addContactViewPilePit{
+    if(self.contacts.count <3){
+        addcontactView = [[AddContactViewController alloc] init];
+        [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+        addcontactView.delegate = self;
+        if(self.fromView == 0){
+            [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
+        }else{
+            [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
+        }
+        [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+    }else{
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
 -(void)updataPileFoundationUnitContacts:(NSMutableDictionary *)dic index:(int)index{
-    NSLog(@"11");
+    //  self.flag = 5;
+    addcontactView = [[AddContactViewController alloc] init];
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+    addcontactView.delegate = self;
+    [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
+    //    if(self.fromView == 1){
+    //        if(self.isRelease == 0){
+    //            [addcontactView setenabled:pileFoundationUnitArr];
+    //        }
+    //    }
+    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray *)images{
@@ -90,10 +133,10 @@
         return cell;
     }else{
         PilePitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PilePitTableViewCell"];
-        if (!cell) {
-            cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:1 Arr:self.contacts];
-            cell.delegate=self;
-        }
+        // if (!cell) {
+        cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:1 Arr:self.contacts];
+        cell.delegate=self;
+        // }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         

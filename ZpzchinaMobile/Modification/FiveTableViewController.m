@@ -192,10 +192,10 @@
     
     static NSString *stringcell = @"ProjectTableViewCell";
     PlotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
-    if(!cell){
+    //if(!cell){
         cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
         cell.delegate=self;
-    }
+    //}
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
     
