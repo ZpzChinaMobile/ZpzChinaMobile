@@ -33,9 +33,31 @@
         [tempBtn1 setTitle:@"弱电安装" forState:UIControlStateNormal];
         [tempBtn1 setTitleColor:BlueColor forState:UIControlStateNormal];
         [tempBtn1 addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        tempBtn1.tag = 0;
         [self.contentView addSubview:tempBtn1];
         
         UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(130,10, 120, 30)];
+        if(flag == 0){
+            if(![[dic objectForKey:@"electroweakInstallation"] isEqualToString:@""]){
+                [label1 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"electroweakInstallation"]]];
+            }else{
+                [label1 setText:@""];
+            }
+        }else{
+            NSLog(@"==>%@",[dic objectForKey:@"electroweakInstallation"]);
+            if(![[dic objectForKey:@"electroweakInstallation"] isEqualToString:@""]){
+                [label1 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"electroweakInstallation"]]];
+            }else{
+                if(![[singleDic objectForKey:@"electroweakInstallation"] isEqualToString:@""]){
+                    [label1 setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"electroweakInstallation"]]];
+                }else{
+                    [label1 setText:@""];
+                }
+            }
+        }
+        label1.textColor = GrayColor;
+        label1.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        label1.textAlignment = NSTextAlignmentLeft;
         [self addSubview:label1];
         
         UIButton *tempBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -43,6 +65,7 @@
         [tempBtn2 setTitle:@"装修情况" forState:UIControlStateNormal];
         [tempBtn2 setTitleColor:BlueColor forState:UIControlStateNormal];
         [tempBtn2 addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        tempBtn2.tag = 1;
         [self.contentView addSubview:tempBtn2];
         
         UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(130,10+50, 120, 30)];
@@ -54,6 +77,7 @@
         [tempBtn3 setTitle:@"装修进度" forState:UIControlStateNormal];
         [tempBtn3 setTitleColor:BlueColor forState:UIControlStateNormal];
         [tempBtn3 addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        tempBtn3.tag = 2;
         [self.contentView addSubview:tempBtn3];
         
         UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(130,10+100, 120, 30)];

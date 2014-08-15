@@ -57,12 +57,6 @@
                 tempBtn.frame = CGRectMake(15,10+50*i, 80, 30);
 
             }
-            NSLog(@"444");
-            tempBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
-            [tempBtn setTitle:[titleArray objectAtIndex:i] forState:UIControlStateNormal];
-            [tempBtn setTitleColor:BlueColor forState:UIControlStateNormal];
-            [tempBtn addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-            [self.contentView addSubview:tempBtn];
         }
     }
     return self;
