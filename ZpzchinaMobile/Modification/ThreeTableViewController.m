@@ -8,12 +8,26 @@
 
 #import "ThreeTableViewController.h"
 #import "GeologicalSurveyTableViewCell.h"
-@interface ThreeTableViewController ()
+#import "CameraModel.h"
+#import "GTMBase64.h"
+
+@interface ThreeTableViewController ()<GeologicalSurveyDelegate>
 
 @end
 
 @implementation ThreeTableViewController
 //地勘阶段
+
+-(void)addContactViewGeologicalSurvey{
+    NSLog(@"11");
+}
+-(void)updataExplorationUnitContacts:(NSMutableDictionary *)dic index:(int)index{
+    NSLog(@"11");
+}
+-(void)moreImage:(int)index{
+    NSLog(@"11");
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -22,11 +36,19 @@
     return self;
 }
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.contacts=contacts;
+        self.images=[NSMutableArray array];
+        
+        for (int i=0; i<images.count; i++) {
+            CameraModel* model= images[i];
+            UIImage *aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            [self.images addObject:aimage];
+        }
+        [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
     }
     return self;
 }
@@ -35,21 +57,6 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
-    UIImage* image1=[UIImage imageNamed:@"全部项目_13.png"];
-    UIImage* image2=[UIImage imageNamed:@"全部项目_15.png"];
-    UIImage* image3=[UIImage imageNamed:@"全部项目_16.png"];
-    UIImage* image4=[UIImage imageNamed:@"全部项目_13.png"];
-    UIImage* image5=[UIImage imageNamed:@"全部项目_15.png"];
-    UIImage* image6=[UIImage imageNamed:@"全部项目_16.png"];
-    UIImage* image7=[UIImage imageNamed:@"全部项目_13.png"];
-    UIImage* image8=[UIImage imageNamed:@"全部项目_15.png"];
-    
-    UIImage* imageLast=[UIImage imageNamed:@"地图搜索_18.png"];
-    self.images=@[image1,image2,image3,image4,image5,image6,image7,image8];
-    NSLog(@"image stage 1 = %d",self.images.count);
-    self.images=@[image1];
-    self.images=[self.images arrayByAddingObject:imageLast];
-    NSLog(@"image stage 2 = %d",self.images.count);
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +93,7 @@
         GeologicalSurveyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
         if (!cell) {
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:1 Arr:self.contacts explorationImageArr:nil];
+            cell.delegate=self;
         }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...

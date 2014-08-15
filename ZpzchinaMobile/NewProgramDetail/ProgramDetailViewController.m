@@ -663,8 +663,13 @@
 }
 
 -(void)gotoModificationVC{
-    ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry]];
-
+    NSArray* array=@[self.horizonImageArr,self.pilePitImageArr,self.mainConstructionImageArr,self.explorationImageArr,self.fireControlImageArr,self.electroweakImageArr];
+    
+    
+    
+    ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry] horizonImageArr:self.horizonImageArr pilePitImageArr:self.pilePitImageArr mainConstructionImageArr:self.mainConstructionImageArr explorationImageArr:self.explorationImageArr fireControlImageArr:self.fireControlImageArr electroweakImageArr:self.electroweakImageArr];
+    
+    
     [self.navigationController pushViewController:modiVC animated:YES];
 }
 

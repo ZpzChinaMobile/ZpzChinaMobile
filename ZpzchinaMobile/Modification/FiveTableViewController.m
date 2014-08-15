@@ -8,14 +8,24 @@
 
 #import "FiveTableViewController.h"
 #import "PlotTableViewCell.h"
-@interface FiveTableViewController ()
+@interface FiveTableViewController ()<PlotDelegate>
 @property (nonatomic,strong)NSArray *titleArray;
 @end
 
 @implementation FiveTableViewController
 //出图阶段
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts{
+-(void)addContactViewPlot:(int)index{
+    NSLog(@"11");
+}
+-(void)updataPlotOwner:(NSMutableDictionary *)dic index:(int)index{
+    NSLog(@"11");
+}
+-(void)addSwitchValue:(int)index value:(BOOL)value{
+    NSLog(@"11");
+}
+
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray *)images{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
@@ -64,6 +74,7 @@
     PlotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
         cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
+        cell.delegate=self;
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...

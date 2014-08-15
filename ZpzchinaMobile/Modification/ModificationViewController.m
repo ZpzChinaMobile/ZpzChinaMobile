@@ -53,11 +53,17 @@
     return self;
 }
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts images:(NSArray*)images{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts horizonImageArr:(NSMutableArray*)horizonImageArr pilePitImageArr:(NSMutableArray*)pilePitImageArr mainConstructionImageArr:(NSMutableArray*)mainConstructionImageArr explorationImageArr:(NSMutableArray*)explorationImageArr fireControlImageArr:(NSMutableArray*)fireControlImageArr electroweakImageArr:(NSMutableArray*)electroweakImageArr{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=[NSMutableDictionary dictionary];
         self.contacts=contacts;
+        self.horizonImageArr=horizonImageArr;
+        self.pilePitImageArr=pilePitImageArr;
+        self.mainConstructionImageArr=mainConstructionImageArr;
+        self.explorationImageArr=explorationImageArr;
+        self.fireControlImageArr=fireControlImageArr;
+        self.electroweakImageArr=electroweakImageArr;
     }
     return self;
 }
@@ -79,15 +85,23 @@
 }
 
 -(void)initTVC{
-    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[0]];
+    //contactAry flag 0
+    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[0] mutableCopy] images:self.explorationImageArr];
     NSLog(@"***********************%@***********************",self.singleDic);
-    self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[1]];
-    self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[2]];
-    self.fourTVC=[[FourTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[4]];
-    self.fiveTVC=[[FiveTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[1]];
-    self.sixTVC=[[SixTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[3]];
-    self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:self.contacts[5]];
-    self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil];
+    //ownerAry flag 1
+    self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[1] mutableCopy] images:nil];
+    //explorationAry flag 2
+    self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[2] mutableCopy] images:self.explorationImageArr];
+    //designAry flag 3
+    self.fourTVC=[[FourTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[4] mutableCopy] images:nil];
+    //ownerAry flag 1
+    self.fiveTVC=[[FiveTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[1] mutableCopy] images:nil];
+    //horizonAry flag 4
+    self.sixTVC=[[SixTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[3] mutableCopy] images:self.horizonImageArr];
+    //pileAry flag 5
+    self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[5] mutableCopy] images:self.pilePitImageArr];
+    
+    self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil images:[self.images[2] mutableCopy]];
     self.nineTVC=[[NineTableViewController alloc]init];
     self.tenTVC=[[TenTableViewController alloc]init];
     

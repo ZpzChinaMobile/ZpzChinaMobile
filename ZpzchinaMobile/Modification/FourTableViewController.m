@@ -8,12 +8,23 @@
 
 #import "FourTableViewController.h"
 #import "DesignTableViewCell.h"
-@interface FourTableViewController ()
+@interface FourTableViewController ()<DesignDelegate>
 
 @end
 
 @implementation FourTableViewController
 //设计阶段
+
+-(void)addContactViewDesign{
+    NSLog(@"11");
+}
+-(void)updataDesignInstituteContacts:(NSMutableDictionary *)dic index:(int)index{
+    NSLog(@"11");
+}
+-(void)addSinglePickerView{
+    NSLog(@"11");
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -22,7 +33,7 @@
     return self;
 }
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray *)images{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
@@ -63,6 +74,7 @@
     DesignTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
         cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
+        cell.delegate=self;
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...

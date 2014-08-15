@@ -13,5 +13,5 @@
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
 @property(nonatomic,strong)NSMutableArray* contacts;
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts;
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images;
 @end
