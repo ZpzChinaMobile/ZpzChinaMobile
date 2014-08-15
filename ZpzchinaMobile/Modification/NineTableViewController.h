@@ -12,8 +12,9 @@
 @interface NineTableViewController : UITableViewController<ClearFireDelegate>
 {
     SinglePickerView *singlepickerview;
-    UIViewController *bgviewcontroller;
+ 
     
 }
 @property(nonatomic,strong)NSMutableArray* images;
+
 @end
