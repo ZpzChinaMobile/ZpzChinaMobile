@@ -7,7 +7,8 @@
 //
 
 #import "NineTableViewController.h"
-
+#import "CameraModel.h"
+#import "GTMBase64.h"
 @interface NineTableViewController ()
 
 @end
@@ -21,6 +22,25 @@
     }
     return self;
 }
+
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic images:(NSMutableArray*)images{
+    if ([super init]) {
+        self.singleDic=singleDic;
+        self.dataDic=dataDic;
+        self.images=[NSMutableArray array];
+        
+        for (int i=0; i<images.count; i++) {
+            CameraModel* model= images[i];
+            UIImage *aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            [self.images addObject:aimage];
+        }
+        
+        [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
+        
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad
 {
@@ -49,11 +69,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     static NSString *stringcell = @"ClearFireCell";
     ClearFireCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
-    if(!cell){
-        cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
-    }
+    //if(!cell){
+        cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
+    //}
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.delegate =self;
    
@@ -66,18 +88,28 @@
     return 100;
 }
 
--(void)addContactViewFirefighting{
+-(void)addContactViewFirefighting:(int)index{
+    flag = index;
     [singlepickerview removeFromSuperview];
     singlepickerview = nil;
     NSArray *arr = [[NSArray alloc] initWithObjects:@"招标",@"正在施工",@"施工完成",nil];
     singlepickerview = [[SinglePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:nil Arr:arr delegate:self];
-    singlepickerview.tag = 3;
-    [singlepickerview showInView:self.view];
+    [singlepickerview showInView:self.tableView.superview];
 }
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+    singlepickerview = (SinglePickerView *)actionSheet;
+    NSLog(@"%@",singlepickerview.selectStr);
+    if(buttonIndex == 0) {
+        NSLog(@"Cancel");
+    }else {
+        if(flag == 0){
+            [self.dataDic setObject:singlepickerview.selectStr forKey:@"fireControl"];
+        }else if(flag == 1){
+            [self.dataDic setObject:singlepickerview.selectStr forKey:@"green"];
+        }
+    }
+    [self.tableView reloadData];
 }
 
 

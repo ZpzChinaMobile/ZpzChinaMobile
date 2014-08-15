@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "SinglePickerView.h"
 #import "ClearFireCell.h"
-@interface NineTableViewController : UITableViewController<ClearFireDelegate>
+@interface NineTableViewController : UITableViewController<ClearFireDelegate,UIActionSheetDelegate>
 {
     SinglePickerView *singlepickerview;
- 
+ int flag;//0.消防  1.景观绿化
     
 }
 @property(nonatomic,strong)NSMutableArray* images;
+@property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
+@property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic images:(NSMutableArray*)images;
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "TenTableViewController.h"
-#import "ClearFireCell.h"
 #import "CameraModel.h"
 #import "GTMBase64.h"
 @interface TenTableViewController ()
@@ -146,7 +145,6 @@
     singlepickerview = nil;
     NSArray *arr = [[NSArray alloc] initWithObjects:@"招标",@"正在施工",@"施工完成",nil];
     singlepickerview = [[SinglePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:nil Arr:arr delegate:self];
-    singlepickerview.tag = 3;
     [singlepickerview showInView:self.tableView.superview];
 }
 

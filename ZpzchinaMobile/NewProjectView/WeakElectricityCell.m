@@ -69,7 +69,31 @@
         [self.contentView addSubview:tempBtn2];
         
         UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(130,10+50, 120, 30)];
+        label2.textColor = GrayColor;
+        label2.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        label2.textAlignment = NSTextAlignmentLeft;
+
         [self addSubview:label2];
+        
+        if(flag == 0){
+            if(![[dic objectForKey:@"decorationSituation"] isEqualToString:@""]){
+                [label2 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"decorationSituation"]]];
+            }else{
+                [label2 setText:@""];
+            }
+        }else{
+            NSLog(@"==>%@",[dic objectForKey:@"decorationSituation"]);
+            if(![[dic objectForKey:@"decorationSituation"] isEqualToString:@""]){
+                [label2 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"decorationSituation"]]];
+            }else{
+                if(![[singleDic objectForKey:@"decorationSituation"] isEqualToString:@""]){
+                    [label2 setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"decorationSituation"]]];
+                }else{
+                    [label2 setText:@""];
+                }
+            }
+        }
+
 
         
         UIButton *tempBtn3 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -81,7 +105,28 @@
         [self.contentView addSubview:tempBtn3];
         
         UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(130,10+100, 120, 30)];
+        label3.textColor = GrayColor;
+        label3.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        label3.textAlignment = NSTextAlignmentLeft;
         [self addSubview:label3];
+        if(flag == 0){
+            if(![[dic objectForKey:@"decorationProgress"] isEqualToString:@""]){
+                [label3 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"decorationProgress"]]];
+            }else{
+                [label3 setText:@""];
+            }
+        }else{
+            NSLog(@"==>%@",[dic objectForKey:@"decorationProgress"]);
+            if(![[dic objectForKey:@"decorationProgress"] isEqualToString:@""]){
+                [label3 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"decorationProgress"]]];
+            }else{
+                if(![[singleDic objectForKey:@"decorationProgress"] isEqualToString:@""]){
+                    [label3 setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"decorationProgress"]]];
+                }else{
+                    [label3 setText:@""];
+                }
+            }
+        }
 
         
         

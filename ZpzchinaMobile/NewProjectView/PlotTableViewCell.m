@@ -299,11 +299,11 @@
                     contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
-                        [contactBtn setFrame:CGRectMake(130, 10, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(120, 10, 60, 30)];
                     }else if(i == 1){
                         [contactBtn setFrame:CGRectMake(180, 10, 60, 30)];
                     }else{
-                        [contactBtn setFrame:CGRectMake(230, 10, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(240, 10, 60, 30)];
                     }
                     [self addSubview:contactBtn];
                 }
