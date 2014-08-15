@@ -8,7 +8,12 @@
 
 #import "TwoTableViewController.h"
 #import "ProjectTableViewCell.h"
-@interface TwoTableViewController ()<ProjectDelegate>
+
+#import "AddContactViewController.h"
+
+@interface TwoTableViewController ()<ProjectDelegate>{
+    AddContactViewController* addcontactView;
+}
 
 @end
 
@@ -16,7 +21,71 @@
 //项目立项
 
 -(void)addContactViewProject:(int)index{
-    NSLog(@"2");
+    [datepickerview removeFromSuperview];
+    datepickerview = nil;
+    switch (index) {
+        case 0:
+            
+            break;
+        case 1:
+            self.flag = 1;
+            if(ownerArr.count <3){
+                addcontactView = [[AddContactViewController alloc] init];
+                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+                addcontactView.delegate = self;
+                if(self.fromView == 0){
+                    [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
+                }else{
+                    [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
+                }
+                [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            break;
+        case 2:
+            if(datepickerview == nil){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[self.dataDic objectForKey:@"expectedStartTime"] intValue]];
+                if([[self.dataDic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:nil];
+                }else{
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:confromTimesp];
+                }
+                datepickerview.tag = 1;
+                [datepickerview showInView:bgviewcontroller.view];
+            }
+            self.timeflag = 0;
+            break;
+        case 3:
+            if(datepickerview == nil){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[self.dataDic objectForKey:@"expectedFinishTime"] intValue]];
+                if([[self.dataDic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:nil];
+                }else{
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:confromTimesp];
+                }
+                datepickerview.tag = 1;
+                [datepickerview showInView:bgviewcontroller.view];
+            }
+            self.timeflag = 1;
+            break;
+        case 4:
+            
+            break;
+        case 5:
+            ownertypeview = [[OwnerTypeViewController alloc] init];
+            [ownertypeview.view setFrame:CGRectMake(0, 0, 262, 431)];
+            ownertypeview.delegate = self;
+            [bgviewcontroller presentPopupViewController:ownertypeview animationType:MJPopupViewAnimationSlideBottomBottom];
+            break;
+        default:
+            break;
+    }
 }
 -(void)addContentProject:(NSString *)str index:(int)index{
     NSLog(@"2");
