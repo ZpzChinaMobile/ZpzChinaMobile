@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol WeakElectricityDelegate <NSObject>
+
+-(void)addContactViewFirefighting;
+
+@end
+
 @interface WeakElectricityCell : UITableViewCell
+
+@property(nonatomic ,strong) id <WeakElectricityDelegate> delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag Arr:(NSMutableArray *)Arr singleDic:(NSMutableDictionary *)singleDic;
 

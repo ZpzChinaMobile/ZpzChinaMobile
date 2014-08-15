@@ -9,7 +9,7 @@
 #import "WeakElectricityCell.h"
 
 @implementation WeakElectricityCell
-
+@synthesize delegate;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag Arr:(NSMutableArray *)Arr singleDic:(NSMutableDictionary *)singleDic;
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -56,6 +56,9 @@
 -(void)tempBtnClicked:(UIButton *)button
 {
 
+    if ([delegate respondsToSelector:@selector(addContactViewFirefighting)]){
+        [delegate addContactViewFirefighting];
+    }
 
 }
 
