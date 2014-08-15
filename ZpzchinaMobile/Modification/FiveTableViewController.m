@@ -8,21 +8,141 @@
 
 #import "FiveTableViewController.h"
 #import "PlotTableViewCell.h"
-@interface FiveTableViewController ()<PlotDelegate>
+#import "AddContactViewController.h"
+#import "DatePickerView.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "OwnerTypeViewController.h"
+#import "LocationViewController.h"
+#import "SinglePickerView.h"
+
+@interface FiveTableViewController ()<PlotDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
+    DatePickerView* datepickerview;
+    AddContactViewController* addcontactView;
+}
 @property (nonatomic,strong)NSArray *titleArray;
 @end
 
 @implementation FiveTableViewController
 //出图阶段
 
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    datepickerview = (DatePickerView *)actionSheet;
+    if(buttonIndex == 0) {
+        NSLog(@"Cancel");
+    }else {
+        //_isUpdata = YES;
+        if(self.timeflag == 0){
+            [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedStartTime"];
+        }else if(self.timeflag == 1){
+            [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedFinishTime"];
+        }else{
+            [self.dataDic setObject:datepickerview.timeSp forKey:@"actualStartTime"];
+        }
+    }
+    [self.tableView reloadData];
+}
+
+-(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
+    [dic setValue:@"ownerUnitContacts" forKeyPath:@"category"];
+    if(btnTag != 0){
+        NSLog(@"==>%@",[dic objectForKey:@"accountName"]);
+        [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
+    }else{
+        [self.contacts addObject:dic];
+    }
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.tableView reloadData];
+}
+
 -(void)addContactViewPlot:(int)index{
-    NSLog(@"11");
+    [datepickerview removeFromSuperview];
+    datepickerview = nil;
+    switch (index) {
+        case 0:
+            //self.flag = 1;
+            if(self.contacts.count <3){
+                addcontactView = [[AddContactViewController alloc] init];
+                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+                addcontactView.delegate = self;
+                if(self.fromView == 0){
+                    [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
+                }else{
+                    [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
+                }
+                [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            break;
+        case 1:
+            if(datepickerview == nil){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[self.dataDic objectForKey:@"expectedStartTime"] intValue]];
+                if([[self.dataDic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:nil];
+                }else{
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:confromTimesp];
+                }
+                datepickerview.tag = 1;
+                [datepickerview showInView:self.tableView.superview];
+            }
+            self.timeflag = 0;
+            break;
+        case  2:
+            if(datepickerview == nil){
+                NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[self.dataDic objectForKey:@"expectedFinishTime"] intValue]];
+                if([[self.dataDic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:nil];
+                }else{
+                    datepickerview = [[DatePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) delegate:self date:confromTimesp];
+                }
+                datepickerview.tag = 1;
+                [datepickerview showInView:self.tableView.superview];
+            }
+            self.timeflag = 1;
+            break;
+        default:
+            break;
+    }
 }
 -(void)updataPlotOwner:(NSMutableDictionary *)dic index:(int)index{
-    NSLog(@"11");
+    addcontactView = [[AddContactViewController alloc] init];
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+    addcontactView.delegate = self;
+    [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
+    //    if(self.fromView == 1){
+    //        if(self.isRelease == 0){
+    //            [addcontactView setenabled:self.ownerArr];
+    //        }
+    //    }
+    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
 -(void)addSwitchValue:(int)index value:(BOOL)value{
-    NSLog(@"11");
+    //   _isUpdata = YES;
+    switch (index) {
+        case 0:
+            [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"propertyElevator"];
+            break;
+        case 1:
+            [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"propertyAirCondition"];
+            break;
+        case 2:
+            [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"propertyHeating"];
+            break;
+        case 3:
+            [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"propertyExternalWallMeterial"];
+            break;
+        case 4:
+            [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"propertyStealStructure"];
+            break;
+        default:
+            break;
+    }
 }
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray *)images{
@@ -80,7 +200,7 @@
     // Configure the cell...
     
     return cell;
- 
+    
     
     return cell;
 }
