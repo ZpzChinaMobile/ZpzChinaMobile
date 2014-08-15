@@ -8,21 +8,84 @@
 
 #import "FourTableViewController.h"
 #import "DesignTableViewCell.h"
-@interface FourTableViewController ()<DesignDelegate>
+#import "AddContactViewController.h"
+#import "DatePickerView.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "OwnerTypeViewController.h"
+#import "LocationViewController.h"
+#import "SinglePickerView.h"
+@interface FourTableViewController ()<DesignDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
+    AddContactViewController* addcontactView;
+    SinglePickerView* singlepickerview;
+}
 
 @end
 
 @implementation FourTableViewController
 //设计阶段
 
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    singlepickerview = (SinglePickerView *)actionSheet;
+    if(buttonIndex == 0) {
+        NSLog(@"Cancel");
+    }else {
+        //           _isUpdata = YES;
+        [self.dataDic setObject:singlepickerview.selectStr forKey:@"mainDesignStage"];
+    }
+    NSLog(@"222%@",self.dataDic);
+    [self.tableView reloadData];
+}
+
+-(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
+    
+    [dic setValue:@"designInstituteContacts" forKey:@"category"];
+    if(btnTag != 0){
+        [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
+    }else{
+        [self.contacts addObject:dic];
+    }
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.tableView reloadData];
+}
+
 -(void)addContactViewDesign{
-    NSLog(@"11");
+    //self.flag = 3;
+    if(self.contacts.count <3){
+        addcontactView = [[AddContactViewController alloc] init];
+        [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+        addcontactView.delegate = self;
+        if(self.fromView == 0){
+            [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
+        }else{
+            [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
+        }
+        [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+    }else{
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 -(void)updataDesignInstituteContacts:(NSMutableDictionary *)dic index:(int)index{
-    NSLog(@"11");
+    addcontactView = [[AddContactViewController alloc] init];
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+    addcontactView.delegate = self;
+    [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
+    //    if(self.fromView == 1){
+    //        if(self.isRelease == 0){
+    //            [addcontactView setenabled:self.designInstituteArr];
+    //        }
+    //    }
+    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
+
 -(void)addSinglePickerView{
-    NSLog(@"11");
+    [singlepickerview removeFromSuperview];
+    singlepickerview = nil;
+    NSArray *arr = [[NSArray alloc] initWithObjects:@"结构",@"立面",@"幕墙",@"暖通",@"扩初",@"蓝图",@"送审",@"审结",nil];
+    singlepickerview = [[SinglePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:@"主体设计" Arr:arr delegate:self];
+    singlepickerview.tag = 2;
+    [singlepickerview showInView:self.tableView.superview];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -46,8 +109,8 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
-
-
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,12 +133,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   static NSString *stringcell = @"ProjectTableViewCell";
+    static NSString *stringcell = @"ProjectTableViewCell";
     DesignTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
-    if(!cell){
-        cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
+   // if(!cell){
+        cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
         cell.delegate=self;
-    }
+    NSLog(@"%@",self.dataDic);
+   // }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
     
@@ -89,7 +153,7 @@
 
 -(void)rightBtnClicked
 {
-
-
+    
+    
 }
 @end

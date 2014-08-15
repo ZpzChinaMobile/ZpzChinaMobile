@@ -19,5 +19,5 @@
 @protocol GeologicalSurveyDelegate <NSObject>
 -(void)addContactViewGeologicalSurvey;
 -(void)updataExplorationUnitContacts:(NSMutableDictionary *)dic index:(int)index;
--(void)moreImage:(int)index;
+//-(void)moreImage:(int)index;
 @end

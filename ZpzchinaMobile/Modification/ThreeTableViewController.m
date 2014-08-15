@@ -24,6 +24,18 @@
 @implementation ThreeTableViewController
 //地勘阶段
 
+-(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
+    //   _isUpdata = YES;
+    [dic setValue:@"explorationUnitContacts" forKey:@"category"];
+    if(btnTag != 0){
+        [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
+    }else{
+        [self.contacts addObject:dic];
+    }
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.tableView reloadData];
+}
+
 -(void)addContactViewGeologicalSurvey{
     //self.flag = 2;
     if(self.contacts.count <3){
@@ -31,22 +43,29 @@
         [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
         addcontactView.delegate = self;
         if(self.fromView == 0){
-            [addcontactView setlocalProjectId:[dataDic objectForKey:@"id"]];
+            [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
         }else{
-            [addcontactView setlocalProjectId:[self.SingleDataDic objectForKey:@"projectID"]];
+            [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
         }
-        [bgviewcontroller presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+        [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
     }else{
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
+}
 
-}
 -(void)updataExplorationUnitContacts:(NSMutableDictionary *)dic index:(int)index{
-    NSLog(@"11");
-}
--(void)moreImage:(int)index{
-    NSLog(@"11");
+    //self.flag = 2;
+    addcontactView = [[AddContactViewController alloc] init];
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
+    addcontactView.delegate = self;
+    [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
+    //    if(self.fromView == 1){
+    //        if(self.isRelease == 0){
+    //            [addcontactView setenabled:self.explorationUnitArr];
+    //        }
+    //    }
+    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -112,10 +131,10 @@
         return cell;
     }else{
         GeologicalSurveyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
-        if (!cell) {
+       // if (!cell) {
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:1 Arr:self.contacts explorationImageArr:nil];
             cell.delegate=self;
-        }
+        //}
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         

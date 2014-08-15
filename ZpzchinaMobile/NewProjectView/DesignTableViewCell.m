@@ -62,6 +62,7 @@
         UIButton *Bodydesign = [UIButton buttonWithType:UIButtonTypeCustom];
         Bodydesign.frame = CGRectMake(20,65, 200, 30);
         if(flag == 0){
+            //NSLog(@"========");
             if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
                 [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
             }else{
@@ -69,7 +70,7 @@
             }
         }else{
             if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
-                [Bodydesign setTitle:@"主体设计阶段" forState:UIControlStateNormal];
+                [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
             }else{
                 if(![[singleDic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
                     [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
