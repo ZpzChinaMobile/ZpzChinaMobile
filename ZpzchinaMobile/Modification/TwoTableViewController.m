@@ -96,6 +96,7 @@
                 addcontactView = [[AddContactViewController alloc] init];
                 [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
                 addcontactView.delegate = self;
+                
                 if(self.fromView == 0){
                     [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
                 }else{

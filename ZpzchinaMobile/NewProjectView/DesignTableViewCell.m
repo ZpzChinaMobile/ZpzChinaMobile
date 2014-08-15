@@ -51,7 +51,7 @@
                     }else if(i == 1){
                         [contactBtn setFrame:CGRectMake(180, 10, 60, 30)];
                     }
-                        else{
+                    else{
                         [contactBtn setFrame:CGRectMake(240, 10, 60, 30)];
                     }
                     [self addSubview:contactBtn];

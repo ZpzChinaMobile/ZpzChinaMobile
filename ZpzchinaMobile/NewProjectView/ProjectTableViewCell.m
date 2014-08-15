@@ -123,7 +123,7 @@
         [Owner addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Owner];
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,168, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,168, 20, 20)];//添加按钮
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
