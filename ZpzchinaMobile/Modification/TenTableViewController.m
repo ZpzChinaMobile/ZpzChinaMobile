@@ -46,6 +46,7 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,9 +84,7 @@
     }else{
         static NSString *stringcell = @"WeakElectricityCell";
         WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
-        if(!cell){
-            cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
-        }
+        cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         return cell;
@@ -125,6 +124,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     singlepickerview = (SinglePickerView *)actionSheet;
+    NSLog(@"%@",singlepickerview.selectStr);
     if(buttonIndex == 0) {
         NSLog(@"Cancel");
     }else {
