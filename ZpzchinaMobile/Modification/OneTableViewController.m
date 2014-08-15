@@ -198,9 +198,7 @@
             UIImage *aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
             [self.images addObject:aimage];
         }
-        for (int i=0; i<10; i++) {
-            [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
-        }
+        [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
     }
     return self;
 }
