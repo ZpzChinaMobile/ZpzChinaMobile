@@ -7,7 +7,7 @@
 //
 
 #import "NineTableViewController.h"
-#import "WeakElectricityCell.h"
+
 @interface NineTableViewController ()
 
 @end
@@ -26,6 +26,11 @@
 {
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
+    bgviewcontroller = [[UIViewController alloc] init];
+    [bgviewcontroller.view setFrame:CGRectMake(0, 0, 320, kContentHeight)];
+    
+    [self.view addSubview:bgviewcontroller.view];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,12 +53,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     static NSString *stringcell = @"ProjectTableViewCell";
-    WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    ClearFireCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
-        cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
+        cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.delegate =self;
+   
     // Configure the cell...
     
     return cell;
@@ -62,4 +70,14 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 150;
 }
+
+-(void)addContactViewFirefighting{
+    [singlepickerview removeFromSuperview];
+    singlepickerview = nil;
+    NSArray *arr = [[NSArray alloc] initWithObjects:@"招标",@"正在施工",@"施工完成",nil];
+    singlepickerview = [[SinglePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:nil Arr:arr delegate:self];
+    singlepickerview.tag = 3;
+    [singlepickerview showInView:bgviewcontroller.view];
+}
+
 @end

@@ -79,7 +79,7 @@
    // [self initTableView];
     [self initThemeView];
     [self initTableViewSpace];
-    [self.tableViewSpace addSubview:self.oneTVC.tableView];
+    [self.tableViewSpace addSubview:self.tenTVC.tableView];
     [self initTableView];
     // Do any additional setup after loading the view.
 }

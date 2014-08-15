@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TenTableViewController : UITableViewController
+#import "SinglePickerView.h"
+#import "WeakElectricityCell.h"
+@interface TenTableViewController : UITableViewController<WeakElectricityDelegate>
+{
+    SinglePickerView *singlepickerview;
+    UIViewController *bgviewcontroller;
+  
+}
 @property(nonatomic,strong)NSMutableArray* images;
-
 @end
