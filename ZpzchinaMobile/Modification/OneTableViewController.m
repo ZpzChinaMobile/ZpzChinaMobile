@@ -16,10 +16,11 @@
 #import "AddContactViewController.h"
 #import "Camera.h"
 
-@interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
+@interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate>{
     LocateView* locateview;
     MultipleChoiceViewController* muview;
     AddContactViewController* addcontactView;
+    Camera* camera;
     // BOOL _isUpdata;
 }
 @end
@@ -33,7 +34,7 @@
     if(buttonIndex == 0) {
         NSLog(@"Cancel");
     }else {
-        //            _isUpdata = YES;
+        //_isUpdata = YES;
         locateview = (LocateView *)actionSheet;
         [self.dataDic setObject:[locateview.proviceDictionary objectForKey:@"provice"] forKey:@"province"];
         [self.dataDic setObject:[locateview.proviceDictionary objectForKey:@"city"] forKey:@"city"];
@@ -81,21 +82,11 @@
     [locateview removeFromSuperview];
     locateview = nil;
     
-    //    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.contentSize.height-260, 320, 260)];
-    //    view.backgroundColor=[UIColor redColor];
-    //    [self.tableView addSubview:view];
-    //
-    
-    
     if(index == 0){
         if(locateview == nil){
             locateview = [[LocateView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:@"定位城市" delegate:self];
             locateview.tag = 0;
-            //  [self.tableView.superview];
-            //  NSLog(@"%@",self.tableView.superview);
             [locateview showInView:self.tableView.superview];
-            
-            //[locateview showInView:self.view];
         }
     }else if(index == 1){
         muview = [[MultipleChoiceViewController alloc] init];
@@ -103,7 +94,6 @@
         muview.delegate = self;
         [self presentPopupViewController:muview animationType:MJPopupViewAnimationSlideBottomBottom];
     }else{
-        //self.flag = 0;
         if(self.contacts.count <3){
             addcontactView = [[AddContactViewController alloc] init];
             [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
@@ -123,9 +113,6 @@
 }
 
 -(void)addContent:(NSString *)str index:(int)index{
-    
-    NSLog(@"222");
-    
     switch (index) {
         case 0:
             [self.dataDic setObject:str forKey:@"landName"];
@@ -159,11 +146,9 @@
             break;
     }
     [self.tableView reloadData];
-    // NSLog(@"%@",self.dataDic);
 }
 
 -(void)updataContact:(NSMutableDictionary *)dic index:(int)index{
-    //    self.flag = 0;
     addcontactView = [[AddContactViewController alloc] init];
     [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
@@ -275,8 +260,13 @@
     return view;
 }
 
+-(void)backCamera{
+}
+
+
+
 -(void)tap:(UIButton*)button{
-    Camera* camera=[[Camera alloc]init];
+    camera=[[Camera alloc]init];
     if(self.fromView == 1){
         if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
             [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"id"]];

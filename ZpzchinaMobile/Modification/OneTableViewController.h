@@ -16,6 +16,7 @@
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 @property(nonatomic,strong)UIViewController* superVC;
 
+
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images;
 -(void)addContactView:(int)index;
 -(void)addContent:(NSString *)str index:(int)index;

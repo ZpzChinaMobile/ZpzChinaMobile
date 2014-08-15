@@ -309,6 +309,8 @@
                             [self.fireControlImageArr addObject:model];
                         }else if([[imageItem2 objectForKey:@"category"] isEqualToString:@"electroweak"]){
                             [self.electroweakImageArr addObject:model];
+                        }else if([[imageItem2 objectForKey:@"category"] isEqualToString:@"plan"]){
+                            [self.planImageArr addObject:model];
                         }
                     }
                 }
@@ -667,7 +669,7 @@
     
     
     
-    ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry] horizonImageArr:self.horizonImageArr pilePitImageArr:self.pilePitImageArr mainConstructionImageArr:self.mainConstructionImageArr explorationImageArr:self.explorationImageArr fireControlImageArr:self.fireControlImageArr electroweakImageArr:self.electroweakImageArr];
+    ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry] horizonImageArr:self.horizonImageArr pilePitImageArr:self.pilePitImageArr mainConstructionImageArr:self.mainConstructionImageArr explorationImageArr:self.explorationImageArr fireControlImageArr:self.fireControlImageArr electroweakImageArr:self.electroweakImageArr planImageArr:self.planImageArr];
     
     
     [self.navigationController pushViewController:modiVC animated:YES];

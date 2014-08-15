@@ -30,6 +30,8 @@
 @property(nonatomic,strong)NSMutableArray* explorationImageArr;
 @property(nonatomic,strong)NSMutableArray* fireControlImageArr;
 @property(nonatomic,strong)NSMutableArray* electroweakImageArr;
+@property(nonatomic,strong)NSMutableArray* planImageArr;
+
 
 -(void)userChangeImageWithButtons:(UIButton *)button;
 @end

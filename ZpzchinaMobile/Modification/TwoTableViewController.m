@@ -263,12 +263,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.bgVC=[[UIViewController alloc]init];
-//    self.bgVC.view.frame=CGRectMake(0, 568-64.5-431, 320, 431);
-//    [self.tableView.superview addSubview:self.bgVC.view];
-    //self.bgVC.view.frame=;
-    
-    //self.fromView=1;
     self.tableView.separatorStyle=NO;
 }
 

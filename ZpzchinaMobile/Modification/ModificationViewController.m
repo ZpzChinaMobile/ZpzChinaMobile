@@ -24,7 +24,7 @@
 #import "CameraSqlite.h"
 #import "CameraModel.h"
 #import "GetBigImage.h"
-@interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
 @property(nonatomic,strong)UIImageView* bigStageImageView;//上导航中大阶段图片
@@ -59,7 +59,7 @@
     return self;
 }
 
--(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts horizonImageArr:(NSMutableArray*)horizonImageArr pilePitImageArr:(NSMutableArray*)pilePitImageArr mainConstructionImageArr:(NSMutableArray*)mainConstructionImageArr explorationImageArr:(NSMutableArray*)explorationImageArr fireControlImageArr:(NSMutableArray*)fireControlImageArr electroweakImageArr:(NSMutableArray*)electroweakImageArr{
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts horizonImageArr:(NSMutableArray*)horizonImageArr pilePitImageArr:(NSMutableArray*)pilePitImageArr mainConstructionImageArr:(NSMutableArray*)mainConstructionImageArr explorationImageArr:(NSMutableArray*)explorationImageArr fireControlImageArr:(NSMutableArray*)fireControlImageArr electroweakImageArr:(NSMutableArray*)electroweakImageArr planImageArr:(NSMutableArray*)planImageArr{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=[NSMutableDictionary dictionary];
@@ -70,6 +70,7 @@
         self.explorationImageArr=explorationImageArr;
         self.fireControlImageArr=fireControlImageArr;
         self.electroweakImageArr=electroweakImageArr;
+        self.planImageArr=planImageArr;
     }
     return self;
 }
@@ -92,7 +93,7 @@
 
 -(void)initTVC{
     //contactAry flag 0
-    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[0] mutableCopy] images:self.explorationImageArr];
+    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[0] mutableCopy] images:self.planImageArr];
     self.oneTVC.fromView=self.fromView;
     self.oneTVC.superVC=self;
     NSLog(@"***********************%@***********************",self.singleDic);
