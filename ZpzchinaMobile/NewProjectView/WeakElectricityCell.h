@@ -11,7 +11,7 @@
 
 @protocol WeakElectricityDelegate <NSObject>
 
--(void)addContactViewFirefighting;
+-(void)addContactViewFirefighting:(int)index;
 
 @end
 

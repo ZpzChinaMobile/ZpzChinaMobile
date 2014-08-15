@@ -53,8 +53,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *stringcell = @"WeakElectricityCell";
-    WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    static NSString *stringcell = @"ClearFireCell";
+    ClearFireCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     if(!cell){
         cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:nil flag:1 Arr:nil singleDic:nil];
     }

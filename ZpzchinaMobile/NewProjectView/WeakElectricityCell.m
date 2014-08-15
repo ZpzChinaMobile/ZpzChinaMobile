@@ -15,11 +15,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
-        
-        
-           
-            
             NSArray *titleArray = @[@"弱电安装",@"装修情况",@"装修进度"];
             for (int i =0; i<3; i++) {
                 
@@ -33,14 +28,12 @@
                 
                 UIButton *tempBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 tempBtn.frame = CGRectMake(15,10+50*i, 80, 30);
-                tempBtn.tag = 20140814+i;
+                tempBtn.tag = i;
                 
                 [tempBtn setTitle:[titleArray objectAtIndex:i] forState:UIControlStateNormal];
                 [tempBtn setTitleColor:BlueColor forState:UIControlStateNormal];
                 [tempBtn addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-                [self addSubview:tempBtn];
-                
-       
+                [self.contentView addSubview:tempBtn];
         }
         
         
@@ -55,9 +48,8 @@
 
 -(void)tempBtnClicked:(UIButton *)button
 {
-
-    if ([delegate respondsToSelector:@selector(addContactViewFirefighting)]){
-        [delegate addContactViewFirefighting];
+    if ([delegate respondsToSelector:@selector(addContactViewFirefighting:)]){
+        [delegate addContactViewFirefighting:button.tag];
     }
 
 }

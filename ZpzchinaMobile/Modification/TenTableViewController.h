@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "SinglePickerView.h"
 #import "WeakElectricityCell.h"
-@interface TenTableViewController : UITableViewController<WeakElectricityDelegate>
+@interface TenTableViewController : UITableViewController<WeakElectricityDelegate,UIActionSheetDelegate>
 {
     SinglePickerView *singlepickerview;
-    UIViewController *bgviewcontroller;
-  
+    int flag;//0弱电安装，1装修情况 2装卸进度
 }
 @property(nonatomic,strong)NSMutableArray* images;
+@property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
+@property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
+-(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic images:(NSMutableArray*)images;
 @end

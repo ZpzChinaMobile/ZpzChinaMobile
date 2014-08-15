@@ -103,7 +103,7 @@
     
     self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil images:[self.images[2] mutableCopy]];
     self.nineTVC=[[NineTableViewController alloc]init];
-    self.tenTVC=[[TenTableViewController alloc]init];
+    self.tenTVC=[[TenTableViewController alloc] initWithSingle:self.singleDic dataDic:self.dataDic images:self.electroweakImageArr];
     
     self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
     
