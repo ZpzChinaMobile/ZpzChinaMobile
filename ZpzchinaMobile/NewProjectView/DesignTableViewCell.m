@@ -61,29 +61,36 @@
         
         UIButton *Bodydesign = [UIButton buttonWithType:UIButtonTypeCustom];
         Bodydesign.frame = CGRectMake(20,65, 200, 30);
-        if(flag == 0){
-            //NSLog(@"========");
-            if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
-                [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
-            }else{
-                [Bodydesign setTitle:@"主体设计阶段" forState:UIControlStateNormal];
-            }
-        }else{
-            if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
-                [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
-            }else{
-                if(![[singleDic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
-                    [Bodydesign setTitle:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"mainDesignStage"]] forState:UIControlStateNormal];
-                }else{
-                    [Bodydesign setTitle:@"主体设计阶段" forState:UIControlStateNormal];
-                }
-            }
-        }
+        [Bodydesign setTitle:@"主体设计阶段" forState:UIControlStateNormal];
         [Bodydesign setTitleColor:BlueColor forState:UIControlStateNormal];
         Bodydesign.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         Bodydesign.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         [Bodydesign addTarget:self action:@selector(Bodydesign) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Bodydesign];
+        
+        UILabel *BodydesignLabel = [[UILabel alloc] initWithFrame:CGRectMake(150,65, 200, 30)];
+        BodydesignLabel.textColor = GrayColor;
+        BodydesignLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        BodydesignLabel.textAlignment = NSTextAlignmentLeft;
+        if(flag == 0){
+            //NSLog(@"========");
+            if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
+                [BodydesignLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"mainDesignStage"]]];
+            }else{
+                [BodydesignLabel setText:@""];
+            }
+        }else{
+            if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
+                [BodydesignLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"mainDesignStage"]]];
+            }else{
+                if(![[singleDic objectForKey:@"mainDesignStage"] isEqualToString:@""]){
+                    [BodydesignLabel setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"mainDesignStage"]]];
+                }else{
+                    [BodydesignLabel setText:@""];
+                }
+            }
+        }
+        [self addSubview:BodydesignLabel];
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(130,70, 10, 18)];
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];

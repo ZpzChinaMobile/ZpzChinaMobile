@@ -33,7 +33,7 @@
                 [formatter setDateFormat:@"yyyy-MM-dd"];
                 NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"actualStartTime"] intValue]];
                 NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                [startdate setTitle:[NSString stringWithFormat:@"实际开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                [startdate setTitle:[NSString stringWithFormat:@"实际开工时间: %@",confromTimespStr] forState:UIControlStateNormal];
             }else{
                 [startdate setTitle:@"实际开工时间" forState:UIControlStateNormal];
             }
@@ -43,14 +43,14 @@
                 [formatter setDateFormat:@"yyyy-MM-dd"];
                 NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"actualStartTime"] intValue]];
                 NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                [startdate setTitle:[NSString stringWithFormat:@"实际开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                [startdate setTitle:[NSString stringWithFormat:@"实际开工时间: %@",confromTimespStr] forState:UIControlStateNormal];
             }else{
                 if(![[singleDic objectForKey:@"actualStartTime"] isEqualToString:@""]){
                     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
                     [formatter setDateFormat:@"yyyy-MM-dd"];
                     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[singleDic objectForKey:@"actualStartTime"] intValue]];
                     NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                    [startdate setTitle:[NSString stringWithFormat:@"实际开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                    [startdate setTitle:[NSString stringWithFormat:@"实际开工时间:        %@",confromTimespStr] forState:UIControlStateNormal];
                 }else{
                     [startdate setTitle:@"实际开工时间" forState:UIControlStateNormal];
                 }

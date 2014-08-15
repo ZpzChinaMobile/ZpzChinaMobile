@@ -50,7 +50,7 @@
                 [formatter setDateFormat:@"yyyy-MM-dd"];
                 NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedStartTime"] intValue]];
                 NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                [startdate setTitle:[NSString stringWithFormat:@"预计开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                [startdate setTitle:[NSString stringWithFormat:@"预计开工时间: %@",confromTimespStr] forState:UIControlStateNormal];
             }else{
                 [startdate setTitle:@"预计开工时间" forState:UIControlStateNormal];
             }
@@ -60,14 +60,14 @@
                 [formatter setDateFormat:@"yyyy-MM-dd"];
                 NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedStartTime"] intValue]];
                 NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                [startdate setTitle:[NSString stringWithFormat:@"预计开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                [startdate setTitle:[NSString stringWithFormat:@"预计开工时间: %@",confromTimespStr] forState:UIControlStateNormal];
             }else{
                 if(![[singleDic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
                     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
                     [formatter setDateFormat:@"yyyy-MM-dd"];
                     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[singleDic objectForKey:@"expectedStartTime"] intValue]];
                     NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                    [startdate setTitle:[NSString stringWithFormat:@"预计开工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                    [startdate setTitle:[NSString stringWithFormat:@"预计开工时间: %@",confromTimespStr] forState:UIControlStateNormal];
                 }else{
                     [startdate setTitle:@"预计开工时间" forState:UIControlStateNormal];
                 }
@@ -88,7 +88,7 @@
                 [formatter setDateFormat:@"yyyy-MM-dd"];
                 NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedFinishTime"] intValue]];
                 NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间: %@",confromTimespStr] forState:UIControlStateNormal];
             }else{
                 [enddate setTitle:@"预计竣工时间" forState:UIControlStateNormal];
             }
@@ -98,14 +98,14 @@
                 [formatter setDateFormat:@"yyyy-MM-dd"];
                 NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedFinishTime"] intValue]];
                 NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间: %@",confromTimespStr] forState:UIControlStateNormal];
             }else{
                 if(![[singleDic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
                     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
                     [formatter setDateFormat:@"yyyy-MM-dd"];
                     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[singleDic objectForKey:@"expectedFinishTime"] intValue]];
                     NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-                    [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间:%@",confromTimespStr] forState:UIControlStateNormal];
+                    [enddate setTitle:[NSString stringWithFormat:@"预计竣工时间: %@",confromTimespStr] forState:UIControlStateNormal];
                 }else{
                     [enddate setTitle:@"预计竣工时间" forState:UIControlStateNormal];
                 }
