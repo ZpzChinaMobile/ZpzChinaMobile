@@ -268,7 +268,7 @@
 //    [self.tableView.superview addSubview:self.bgVC.view];
     //self.bgVC.view.frame=;
     
-    self.fromView=1;
+    //self.fromView=1;
     self.tableView.separatorStyle=NO;
 }
 

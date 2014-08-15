@@ -14,7 +14,7 @@
 #import "MultipleChoiceViewController.h"
 #import "UIViewController+MJPopupViewController.h"
 #import "AddContactViewController.h"
-
+#import "Camera.h"
 
 @interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
     LocateView* locateview;
@@ -81,18 +81,18 @@
     [locateview removeFromSuperview];
     locateview = nil;
     
-//    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.contentSize.height-260, 320, 260)];
-//    view.backgroundColor=[UIColor redColor];
-//    [self.tableView addSubview:view];
-//    
+    //    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.contentSize.height-260, 320, 260)];
+    //    view.backgroundColor=[UIColor redColor];
+    //    [self.tableView addSubview:view];
+    //
     
     
     if(index == 0){
         if(locateview == nil){
             locateview = [[LocateView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:@"定位城市" delegate:self];
             locateview.tag = 0;
-          //  [self.tableView.superview];
-          //  NSLog(@"%@",self.tableView.superview);
+            //  [self.tableView.superview];
+            //  NSLog(@"%@",self.tableView.superview);
             [locateview showInView:self.tableView.superview];
             
             //[locateview showInView:self.view];
@@ -199,6 +199,7 @@
             [self.images addObject:aimage];
         }
         [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
+        
     }
     return self;
 }
@@ -206,7 +207,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.fromView=1;
+    //self.fromView=1;
     self.tableView.separatorStyle=NO;
 }
 
@@ -244,10 +245,10 @@
         return cell;
     }else{
         PlanAndAuctionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
-       // if (!cell) {
-            cell=[[PlanAndAuctionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:self.contacts];
-            cell.delegate=self;
-      //  }
+        // if (!cell) {
+        cell=[[PlanAndAuctionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:self.contacts];
+        cell.delegate=self;
+        //  }
         NSLog(@"cell被调 %d",cell.subviews.count);
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
@@ -275,6 +276,20 @@
 }
 
 -(void)tap:(UIButton*)button{
+    Camera* camera=[[Camera alloc]init];
+    if(self.fromView == 1){
+        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+            [camera getCameraView:self flag:6 aid:[self.singleDic objectForKey:@"id"]];
+        }else{
+            [camera getCameraView:self flag:6 aid:[self.singleDic objectForKey:@"projectID"]];
+        }
+    }else{
+        [camera getCameraView:self flag:6 aid:[self.dataDic objectForKey:@"id"]];
+    }
+    
+    
+    
+    
     NSLog(@"%d",button.tag);
 }
 

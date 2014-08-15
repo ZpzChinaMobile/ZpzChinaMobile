@@ -19,5 +19,7 @@
 @property(nonatomic,strong)NSMutableArray* fireControlImageArr;
 @property(nonatomic,strong)NSMutableArray* electroweakImageArr;
 
+@property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
+
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts horizonImageArr:(NSArray*)horizonImageArr pilePitImageArr:(NSArray*)pilePitImageArr mainConstructionImageArr:(NSArray*)mainConstructionImageArr explorationImageArr:(NSArray*)explorationImageArr fireControlImageArr:(NSArray*)fireControlImageArr electroweakImageArr:(NSArray*)electroweakImageArr;
 @end
