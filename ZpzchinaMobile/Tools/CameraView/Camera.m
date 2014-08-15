@@ -22,8 +22,10 @@
         type = @"exploration";
     }else if(flag == 4){
         type = @"fireControl";
-    }else{
+    }else if(flag == 5){
         type = @"electroweak";
+    }else{
+        type = @"plan";
     }
     projectID = aid;
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;

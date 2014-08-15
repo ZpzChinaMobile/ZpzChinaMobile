@@ -18,6 +18,12 @@
 #import "NineTableViewController.h"
 #import "TenTableViewController.h"
 #import "ModificationSelectViewCell.h"
+#import "ProjectStage.h"
+#import "ProjectSqlite.h"
+#import "ContactSqlite.h"
+#import "CameraSqlite.h"
+#import "CameraModel.h"
+#import "GetBigImage.h"
 @interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
@@ -79,32 +85,63 @@
    // [self initTableView];
     [self initThemeView];
     [self initTableViewSpace];
-    [self.tableViewSpace addSubview:self.tenTVC.tableView];
-    [self initTableView];
+    [self.tableViewSpace addSubview:self.twoTVC.tableView];
+   // [self initTableView];
+    
+   // NSLog(@"**********%@",self.dataDic);
+
     // Do any additional setup after loading the view.
 }
 
 -(void)initTVC{
     //contactAry flag 0
     self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[0] mutableCopy] images:self.explorationImageArr];
+    self.oneTVC.fromView=self.fromView;
+    self.oneTVC.superVC=self;
     NSLog(@"***********************%@***********************",self.singleDic);
     //ownerAry flag 1
     self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[1] mutableCopy] images:nil];
+    self.twoTVC.fromView=self.fromView;
+    self.twoTVC.superVC=self;
+
     //explorationAry flag 2
     self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[2] mutableCopy] images:self.explorationImageArr];
+    self.threeTVC.fromView=self.fromView;
+    self.threeTVC.superVC=self;
+
     //designAry flag 3
     self.fourTVC=[[FourTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[4] mutableCopy] images:nil];
+    self.fourTVC.fromView=self.fromView;
+    self.fourTVC.superVC=self;
+
     //ownerAry flag 1
     self.fiveTVC=[[FiveTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[1] mutableCopy] images:nil];
+    self.fiveTVC.fromView=self.fromView;
+    self.fiveTVC.superVC=self;
+
+
     //horizonAry flag 4
     self.sixTVC=[[SixTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[3] mutableCopy] images:self.horizonImageArr];
+    self.sixTVC.fromView=self.fromView;
+    self.sixTVC.superVC=self;
+
     //pileAry flag 5
     self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[5] mutableCopy] images:self.pilePitImageArr];
-    
+    self.sevenTVC.fromView=self.fromView;
+    self.sevenTVC.superVC=self;
+
     self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil images:[self.images[2] mutableCopy]];
+    self.eightTVC.fromView=self.fromView;
+    self.eightTVC.superVC=self;
+
     self.nineTVC=[[NineTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic images:self.fireControlImageArr];
+    self.nineTVC.fromView=self.fromView;
+    self.nineTVC.superVC=self;
+
     self.tenTVC=[[TenTableViewController alloc] initWithSingle:self.singleDic dataDic:self.dataDic images:self.electroweakImageArr];
-    
+    self.tenTVC.fromView=self.fromView;
+    self.tenTVC.superVC=self;
+
     self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
     
     for (int i=0; i<10; i++) {
@@ -187,6 +224,7 @@
         self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
     } completion:^(BOOL finished){
         [self.myTableView removeFromSuperview];
+        self.myTableView=nil;
     }];
 }
 
@@ -286,6 +324,8 @@
     int a[4]={0,2,5,9};
     NSLog(@"%d",a[indexPath.section]+indexPath.row);
     UITableViewController* tvc=self.tvcArray[a[indexPath.section]+indexPath.row];
+    [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     [self.tableViewSpace addSubview:tvc.tableView];
     [self selectCancel];
     
@@ -295,6 +335,104 @@
 
 -(void)initNavi{
     [self addBackButton];
+    
+    [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
+}
+
+-(void)rightAction{
+    NSMutableDictionary *dic = [ProjectStage JudgmentUpdataProjectStr:self.singleDic newDic:self.dataDic];
+    [dic setValue:[self.singleDic objectForKey:@"projectID"] forKeyPath:@"id"];
+    NSLog(@"%@",dic);
+    
+    //保存图片至数据库
+    for(int i=0;i<self.horizonImageArr.count;i++){
+        CameraModel *model = [self.horizonImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }
+    }
+    for(int i=0;i<self.pilePitImageArr.count;i++){
+        CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }
+    }
+    
+    for(int i=0;i<self.mainConstructionImageArr.count;i++){
+        CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }
+    }
+    
+    for(int i=0;i<self.explorationImageArr.count;i++){
+        CameraModel *model = [self.explorationImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }
+    }
+    
+    for(int i=0;i<self.fireControlImageArr.count;i++){
+        CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }
+    }
+    
+    for(int i=0;i<self.electroweakImageArr.count;i++){
+        CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }
+    }
+    
+    //保存项目
+    [ProjectSqlite InsertUpdataServerData:dic];
+
+    
+    //保存联系人
+    if([self.contacts[0] count] !=0){
+        for(int i=0; i<[self.contacts[0] count];i++){
+            [ContactSqlite InsertUpdataServerData:[self.contacts[0] objectAtIndex:i]];
+        }
+    }
+    
+    if([self.contacts[1] count] !=0){
+        for(int i=0; i<[self.contacts[1] count];i++){
+            [ContactSqlite InsertUpdataServerData:[self.contacts[1] objectAtIndex:i]];
+        }
+    }
+    
+    if([self.contacts[2] count] !=0){
+        for(int i=0; i<[self.contacts[2] count];i++){
+            [ContactSqlite InsertUpdataServerData:[self.contacts[2] objectAtIndex:i]];
+        }
+    }
+    
+    if([self.contacts[4] count] !=0){
+        for(int i=0; i<[self.contacts[4] count];i++){
+            [ContactSqlite InsertData:[self.contacts[4] objectAtIndex:i]];
+        }
+    }
+    
+    if([self.contacts[3] count] !=0){
+        for(int i=0; i<[self.contacts[3] count];i++){
+            [ContactSqlite InsertData:[self.contacts[3] objectAtIndex:i]];
+        }
+    }
+    
+    if([self.contacts[5] count] !=0){
+        for(int i=0; i<[self.contacts[5] count];i++){
+            [ContactSqlite InsertData:[self.contacts[5] objectAtIndex:i]];
+        }
+    }
+
+//    if (self.fromView==0) {
+//        <#statements#>
+//    }else{
+//    
+//    }
+    
 }
 
 -(void)initdataDic{
@@ -332,7 +470,7 @@
     [self.dataDic setObject:@"" forKey:@"decorationProgress"];
     [self.dataDic setObject:@"" forKey:@"url"];
     
-    /*if(self.fromView == 0){
+    if(self.fromView == 0){
         [self.dataDic setObject:@"0" forKey:@"area"];
         [self.dataDic setObject:@"0" forKey:@"plotRatio"];
         [self.dataDic setObject:@"0" forKey:@"investment"];
@@ -347,7 +485,7 @@
         [self.dataDic setObject:@"0" forKey:@"propertyHeating"];
         [self.dataDic setObject:@"0" forKey:@"propertyExternalWallMeterial"];
         [self.dataDic setObject:@"0" forKey:@"propertyStealStructure"];
-    }else{*/
+    }else{
         [self.dataDic setObject:@"" forKey:@"area"];
         [self.dataDic setObject:@"" forKey:@"plotRatio"];
         [self.dataDic setObject:@"" forKey:@"investment"];
@@ -362,7 +500,7 @@
         [self.dataDic setObject:@"" forKey:@"propertyHeating"];
         [self.dataDic setObject:@"" forKey:@"propertyExternalWallMeterial"];
         [self.dataDic setObject:@"" forKey:@"propertyStealStructure"];
-    //}
+    }
 }
 
 
