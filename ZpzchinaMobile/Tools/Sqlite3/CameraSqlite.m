@@ -90,6 +90,49 @@
 	}
     return list;
 }
++(NSMutableArray *)loadPlanList:(NSString *)projectID{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+	if ([sqlite open:DataBaseName]) {
+        NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Camera WHERE localProjectId = '%@' AND type = 'plan' AND status <>'1' order by rowid DESC limit 3",projectID]];
+        for (NSDictionary * dict in results) {
+            CameraModel *model = [[CameraModel alloc]init];
+            [model loadWithDB:dict];
+            [list addObject:model];
+        }
+	}
+    return list;
+}
+
+
++(NSMutableArray *) loadPlanSingleList:(NSString *)projectID{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+	if ([sqlite open:DataBaseName]) {
+        NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Camera WHERE localProjectId = '%@' AND type = 'plan' AND status <>'1' order by rowid DESC limit 1",projectID]];
+        for (NSDictionary * dict in results) {
+            CameraModel *model = [[CameraModel alloc]init];
+            [model loadWithDB:dict];
+            [list addObject:model];
+        }
+	}
+    return list;
+}
+
++(NSMutableArray *)loadAllPlanList:(NSString *)projectID{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+	if ([sqlite open:DataBaseName]) {
+        NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Camera WHERE localProjectId = '%@' AND type = 'plan' AND status <>'1' order by rowid DESC",projectID]];
+        for (NSDictionary * dict in results) {
+            CameraModel *model = [[CameraModel alloc]init];
+            [model loadWithDB:dict];
+            [list addObject:model];
+        }
+	}
+    return list;
+}
+
 
 //地平图片
 +(NSMutableArray *)loadHorizonList:(NSString *)projectID{
