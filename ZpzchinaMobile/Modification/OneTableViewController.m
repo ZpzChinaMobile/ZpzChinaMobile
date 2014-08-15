@@ -279,17 +279,14 @@
     Camera* camera=[[Camera alloc]init];
     if(self.fromView == 1){
         if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-            [camera getCameraView:self flag:6 aid:[self.singleDic objectForKey:@"id"]];
+            [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"id"]];
         }else{
-            [camera getCameraView:self flag:6 aid:[self.singleDic objectForKey:@"projectID"]];
+            [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"projectID"]];
         }
     }else{
-        [camera getCameraView:self flag:6 aid:[self.dataDic objectForKey:@"id"]];
+        [camera getCameraView:self.superVC flag:6 aid:[self.dataDic objectForKey:@"id"]];
     }
-    
-    
-    
-    
+
     NSLog(@"%d",button.tag);
 }
 
