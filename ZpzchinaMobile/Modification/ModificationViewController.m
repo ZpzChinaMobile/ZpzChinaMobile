@@ -79,7 +79,7 @@
    // [self initTableView];
     [self initThemeView];
     [self initTableViewSpace];
-    [self.tableViewSpace addSubview:self.oneTVC.tableView];
+    [self.tableViewSpace addSubview:self.tenTVC.tableView];
     [self initTableView];
     // Do any additional setup after loading the view.
 }
@@ -102,7 +102,7 @@
     self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[5] mutableCopy] images:self.pilePitImageArr];
     
     self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil images:[self.images[2] mutableCopy]];
-    self.nineTVC=[[NineTableViewController alloc]init];
+    self.nineTVC=[[NineTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic images:self.fireControlImageArr];
     self.tenTVC=[[TenTableViewController alloc] initWithSingle:self.singleDic dataDic:self.dataDic images:self.electroweakImageArr];
     
     self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
