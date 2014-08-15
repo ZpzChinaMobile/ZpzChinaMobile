@@ -55,6 +55,7 @@
 
 -(void)tempBtnClicked:(UIButton *)button
 {
+    NSLog(@"button的tag值%d",button.tag);
 
     if ([delegate respondsToSelector:@selector(addContactViewFirefighting)]){
         [delegate addContactViewFirefighting];

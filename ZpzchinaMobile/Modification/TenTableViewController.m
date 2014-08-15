@@ -27,10 +27,6 @@
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
     
-    bgviewcontroller = [[UIViewController alloc] init];
-    [bgviewcontroller.view setFrame:CGRectMake(0, 0, 320, kContentHeight)];
-    
-    [self.view addSubview:bgviewcontroller.view];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,7 +60,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 150;
 }
 
 
@@ -80,7 +76,7 @@
     NSArray *arr = [[NSArray alloc] initWithObjects:@"招标",@"正在施工",@"施工完成",nil];
     singlepickerview = [[SinglePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:nil Arr:arr delegate:self];
     singlepickerview.tag = 3;
-    [singlepickerview showInView:bgviewcontroller.view];
+    [singlepickerview showInView:self.view];
 }
 
 

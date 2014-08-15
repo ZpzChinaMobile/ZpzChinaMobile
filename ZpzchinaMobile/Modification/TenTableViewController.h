@@ -12,8 +12,9 @@
 @interface TenTableViewController : UITableViewController<WeakElectricityDelegate>
 {
     SinglePickerView *singlepickerview;
-    UIViewController *bgviewcontroller;
+
   
 }
 @property(nonatomic,strong)NSMutableArray* images;
+
 @end
