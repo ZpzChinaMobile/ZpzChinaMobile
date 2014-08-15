@@ -18,5 +18,5 @@
 @property (nonatomic, strong) NSMutableArray *lastChoose;
 @property (nonatomic, strong) NSMutableDictionary *proviceDictionary;
 - (id)initWithTitle:(CGRect)frame title:(NSString *)title delegate:(id /*<UIActionSheetDelegate>*/)delegate;
-- (void)showInView:(UIView *)view;
+- (void)showInView:(UITableView *)view;
 @end

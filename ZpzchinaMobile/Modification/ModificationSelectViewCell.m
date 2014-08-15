@@ -32,7 +32,7 @@
     int a[4]={0,2,5,9};
     number=number-a[indexPath.section];
     
-    if (indexPath.row==number-1) {
+    if (indexPath.row==number) {
         UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(270, 9, 16, 16)];
         imageView.image=[UIImage imageNamed:@"XiangMuXiangQing_ShaiXuan/right@2x.png"];
         [cell.contentView addSubview:imageView];
