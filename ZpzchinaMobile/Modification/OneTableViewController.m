@@ -14,7 +14,7 @@
 #import "MultipleChoiceViewController.h"
 #import "UIViewController+MJPopupViewController.h"
 #import "AddContactViewController.h"
-
+#import "Camera.h"
 
 @interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
     LocateView* locateview;
@@ -198,9 +198,8 @@
             UIImage *aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
             [self.images addObject:aimage];
         }
-        for (int i=0; i<10; i++) {
-            [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
-        }
+        [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
+        
     }
     return self;
 }
@@ -208,7 +207,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.fromView=1;
+    //self.fromView=1;
     self.tableView.separatorStyle=NO;
 }
 
@@ -277,6 +276,10 @@
 }
 
 -(void)tap:(UIButton*)button{
+    Camera* camera=[[Camera alloc]init];
+    
+    
+    
     NSLog(@"%d",button.tag);
 }
 

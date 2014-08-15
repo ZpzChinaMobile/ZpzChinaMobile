@@ -14,6 +14,8 @@
 @property(nonatomic,strong)NSMutableArray* contacts;
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 @property(nonatomic)NSInteger timeflag;
+@property(nonatomic,strong)UIViewController* superVC;
+
 
 @property(nonatomic,strong)UIViewController* bgVC;
 

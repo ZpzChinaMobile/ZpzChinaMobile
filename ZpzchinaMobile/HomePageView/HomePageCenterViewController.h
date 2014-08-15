@@ -11,6 +11,7 @@
 #import "MyTaskViewController.h"
 #import "AllProjuctViewController.h"
 #import "Album.h"
+#import "ModificationViewController.h"
 @interface HomePageCenterViewController : UIViewController<UIActionSheetDelegate>{
     NewProjectViewController *_newProject;
     MyTaskViewController *_myTask;
@@ -19,5 +20,6 @@
     UIView *bgView;
     UIButton *btn;
     Album *album;
+    ModificationViewController* modifiVC;
 }
 @end
