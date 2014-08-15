@@ -65,11 +65,15 @@
             [string appendString:[NSString stringWithFormat:@"%@,",[arr objectAtIndex:i]]];
         }
     }
-    NSString *aStr=[string substringToIndex:([string length]-1)];
-    [self.dataDic setObject:aStr forKey:@"usage"];
+    
+    if(string.length !=0){
+        NSString *aStr=[string substringToIndex:([string length]-1)];
+        [self.dataDic setObject:aStr forKey:@"usage"];
+    }else{
+        [self.dataDic setObject:@"" forKey:@"usage"];
+    }
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop];
     [self.tableView reloadData];
-    
 }
 
 -(void)addContactView:(int)index{

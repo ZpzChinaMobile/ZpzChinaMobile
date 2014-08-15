@@ -77,8 +77,13 @@
             [string appendString:[NSString stringWithFormat:@"%@,",[arr objectAtIndex:i]]];
         }
     }
-    NSString *aStr=[string substringToIndex:([string length]-1)];
-    [self.dataDic setObject:aStr forKey:@"ownerType"];
+    
+    if(string.length !=0){
+        NSString *aStr=[string substringToIndex:([string length]-1)];
+        [self.dataDic setObject:aStr forKey:@"ownerType"];
+    }else{
+        [self.dataDic setObject:@"" forKey:@"ownerType"];
+    }
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop];
     [self.tableView reloadData];
     
