@@ -116,12 +116,10 @@
 }
 
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSLog(@"asdfasdf");
     [self selectIndex:row];
 }
 
 - (void)selectIndex:(NSInteger)index {
-    NSLog(@"===> %@",[dataArr objectAtIndex:index]);
     self.selectStr = [dataArr objectAtIndex:index];
 }
 @end
