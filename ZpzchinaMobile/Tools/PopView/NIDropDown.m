@@ -29,7 +29,7 @@
         // Initialization code
         CGRect btn = b.frame;
 
-        self.frame = CGRectMake(btn.origin.x*2+30, btn.origin.y, 150, 0);
+        self.frame = CGRectMake(130, btn.origin.y, 150, 0);
         self.list = [NSArray arrayWithArray:arr];
         self.layer.masksToBounds = NO;
         self.layer.cornerRadius = 8;
@@ -45,7 +45,7 @@
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.2];
-        self.frame = CGRectMake(btn.origin.x*2+30, btn.origin.y, 150, arr.count*40);
+        self.frame = CGRectMake(130, btn.origin.y, 150, arr.count*40);
         table.frame = CGRectMake(0, 0, 150, arr.count*40);
         [UIView commitAnimations];
         
@@ -62,7 +62,7 @@
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.1];
-    self.frame = CGRectMake(btn.origin.x*2+30, btn.origin.y, 150, 0);
+    self.frame = CGRectMake(130, btn.origin.y, 150, 0);
     table.frame = CGRectMake(0, 0, 150, 0);
     [UIView commitAnimations];
 }
@@ -102,7 +102,7 @@
     UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];
     NSLog(@"====>%@",c.textLabel.text);
     str = c.textLabel.text;
-    [btnSender setTitle:[NSString stringWithFormat:@"外资参与:%@",str] forState:UIControlStateNormal];
+    //[btnSender setTitle:[NSString stringWithFormat:@"外资参与:%@",str] forState:UIControlStateNormal];
     [self myDelegate];
 }
 
