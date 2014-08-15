@@ -215,7 +215,7 @@
                 }
             }
             
-    
+            
             if(horizonArr.count !=0){
                 for(int i=0; i<horizonArr.count;i++){
                     [ContactSqlite InsertData:[horizonArr objectAtIndex:i]];
