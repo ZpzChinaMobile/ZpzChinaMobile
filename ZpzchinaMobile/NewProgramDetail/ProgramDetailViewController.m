@@ -665,7 +665,7 @@
 }
 
 -(void)gotoModificationVC{
-    NSArray* array=@[self.horizonImageArr,self.pilePitImageArr,self.mainConstructionImageArr,self.explorationImageArr,self.fireControlImageArr,self.electroweakImageArr];
+    //NSArray* array=@[self.horizonImageArr,self.pilePitImageArr,self.mainConstructionImageArr,self.explorationImageArr,self.fireControlImageArr,self.electroweakImageArr];
     
     
     

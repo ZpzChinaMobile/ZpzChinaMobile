@@ -176,12 +176,12 @@
     camera.delegate=self;
     if(self.fromView == 1){
         if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-            [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"id"]];
+            [camera getCameraView:self.superVC flag:3 aid:[self.singleDic objectForKey:@"id"]];
         }else{
-            [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"projectID"]];
+            [camera getCameraView:self.superVC flag:3 aid:[self.singleDic objectForKey:@"projectID"]];
         }
     }else{
-        [camera getCameraView:self.superVC flag:6 aid:[self.dataDic objectForKey:@"id"]];
+        [camera getCameraView:self.superVC flag:3 aid:[self.dataDic objectForKey:@"id"]];
     }
 }
 
@@ -192,12 +192,12 @@
     
     if(self.fromView == 0){
         [self.images removeAllObjects];
-        self.images = [CameraSqlite loadPlanList:[self.dataDic objectForKey:@"id"]];
+        self.images = [CameraSqlite loadexplorationList:[self.dataDic objectForKey:@"id"]];
     }else{
         // if(isRelease == 0){
         // if(cameraflag == 0){
-        if([CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-            [self.images insertObject:[[CameraSqlite loadPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+        if([CameraSqlite loadexplorationSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+            [self.images insertObject:[[CameraSqlite loadexplorationList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
         }
         //        //  }else{
         //        [self.images removeAllObjects];

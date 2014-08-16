@@ -16,7 +16,7 @@
 #import "AddContactViewController.h"
 #import "Camera.h"
 #import "CameraSqlite.h"
-@interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate>{
+@interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate,UIScrollViewDelegate>{
     LocateView* locateview;
     MultipleChoiceViewController* muview;
     AddContactViewController* addcontactView;
@@ -27,6 +27,12 @@
 
 @implementation OneTableViewController
 //土地规划/拍卖
+
+//测试代码
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"22");
+}
+
 
 //选择框
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

@@ -128,7 +128,7 @@
     self.sevenTVC.fromView=self.fromView;
     self.sevenTVC.superVC=self;
 
-    self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil images:[self.images[2] mutableCopy]];
+    self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil images:self.mainConstructionImageArr];
     self.eightTVC.fromView=self.fromView;
     self.eightTVC.superVC=self;
 
@@ -208,22 +208,25 @@
 -(void)change{
     NSLog(@"用户选择了筛选");
     //暂时移除观察者,避免加新view时有动画
-    [self initTableView];
-    
-    [self.view addSubview:self.myTableView];
-    [UIView animateWithDuration:1 animations:^{
-        self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
-    }];
+    //table没有出现的时候才进行添加,避免反复添加
+    if (![self.view.subviews containsObject:self.myTableView]) {
+        [self.view addSubview:self.myTableView];
+        [UIView animateWithDuration:1 animations:^{
+            self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
+        }];
+    }
 }
 
 //筛选界面拉回去
 -(void)selectCancel{
-    [UIView animateWithDuration:1 animations:^{
-        self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
-    } completion:^(BOOL finished){
-        [self.myTableView removeFromSuperview];
-        self.myTableView=nil;
-    }];
+    //table出现的时候才进行拉回去的以及移除的操作,避免反复移除
+    if ([self.view.subviews containsObject:self.myTableView]) {
+        [UIView animateWithDuration:1 animations:^{
+            self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
+        } completion:^(BOOL finished){
+            [self.myTableView removeFromSuperview];
+        }];
+    }
 }
 
 -(void)initTableView{
@@ -248,18 +251,13 @@
         UITableView* tv=[self.tvcArray[i] tableView];
         [ary addObject:tv];
     }
-    NSLog(@"%@",[[self.tableViewSpace.subviews lastObject] class]);
+
     NSInteger a=[ary indexOfObject:[self.tableViewSpace.subviews lastObject]];
     
     
     NSLog(@"a=%d",a);
     ModificationSelectViewCell* cell=[ModificationSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath nowTableView:a];
-    
-    
-    
-    //[self.tvcArray lastObject];
-    //cell.contentView.backgroundColor=[UIColor redColor];
-    NSLog(@"22");
+
     return cell;
 }
 
@@ -319,6 +317,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.myTableView reloadData];
+    
     int a[4]={0,2,5,9};
     NSLog(@"%d",a[indexPath.section]+indexPath.row);
     UITableViewController* tvc=self.tvcArray[a[indexPath.section]+indexPath.row];
