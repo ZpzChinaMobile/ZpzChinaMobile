@@ -94,7 +94,6 @@
     int last = [self validPageValue:curPage+1];
     
     if([curImages count] != 0) [curImages removeAllObjects];
-    
     [curImages addObject:[imagesArray objectAtIndex:pre-1]];
     [curImages addObject:[imagesArray objectAtIndex:curPage-1]];
     [curImages addObject:[imagesArray objectAtIndex:last-1]];

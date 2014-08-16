@@ -32,6 +32,8 @@
 @property(nonatomic,strong)NSMutableArray* electroweakImageArr;
 @property(nonatomic,strong)NSMutableArray* planImageArr;
 
+@property(nonatomic)int isRelease;
+@property(nonatomic,copy)NSString* ID;
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 
 

@@ -18,6 +18,25 @@ static AppModel* singleton;
     return singleton;
 }
 
+-(void)getNew{
+    self.contactAry=[NSMutableArray array];
+    self.ownerAry=[NSMutableArray array];
+    self.explorationAry=[NSMutableArray array];
+    self.horizonAry=[NSMutableArray array];
+    self.designAry=[NSMutableArray array];
+    self.pileAry=[NSMutableArray array];
+
+    self.horizonImageArr=[NSMutableArray array];
+    self.pilePitImageArr=[NSMutableArray array];
+    self.mainConstructionImageArr=[NSMutableArray array];
+    self.explorationImageArr=[NSMutableArray array];
+    self.fireControlImageArr=[NSMutableArray array];
+    self.electroweakImageArr=[NSMutableArray array];
+    self.planImageArr=[NSMutableArray array];
+   
+    self.singleDic=[NSMutableDictionary dictionary];//修改用字典
+}
+
 -(NSMutableArray *)contactAry{
     if (!_contactAry) {
         _contactAry=[NSMutableArray array];

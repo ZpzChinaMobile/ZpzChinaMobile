@@ -185,7 +185,7 @@
         self.dataDic=dataDic;
         self.contacts=contacts;
         self.images=images;
-        NSLog(@"******%@",dataDic);
+        NSLog(@"******%@\n************%@",dataDic,singleDic);
     }
     return self;
 }
@@ -197,6 +197,7 @@
     if (self.fromView==0) {
         AppModel* appModel=[AppModel sharedInstance];
        appModel.contactAry =[NSMutableArray array];
+        [appModel.planImageArr removeAllObjects];
         self.contacts=appModel.contactAry;
     }
     self.tableView.separatorStyle=NO;

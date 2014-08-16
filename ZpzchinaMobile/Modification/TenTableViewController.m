@@ -11,6 +11,7 @@
 #import "GTMBase64.h"
 #import "Camera.h"
 #import "CameraSqlite.h"
+#import "AppModel.h"
 @interface TenTableViewController ()<CameraDelegate>{
     Camera* camera;
 }
@@ -40,6 +41,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.fromView==0) {
+        AppModel* appModel=[AppModel sharedInstance];
+        [appModel.electroweakImageArr removeAllObjects];
+    }
     self.tableView.separatorStyle=NO;
     
 }

@@ -236,23 +236,56 @@ int startIndex;
     if(flag == 0){
         ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        NSLog(@"11111111%@",model);
+
         dic = [ProjectStage JudgmentStr:model];
-        _newProject = [[NewProjectViewController alloc] init];
-        _newProject.fromView = 1;
-        _newProject.isRelease =0;
-        _newProject.SingleDataDic = dic;
+        NSLog(@"2222222%@",dic);
+//        _newProject = [[NewProjectViewController alloc] init];
+//        _newProject.fromView = 1;
+//        _newProject.isRelease =0;
+//        _newProject.SingleDataDic = dic;
+        
+        //        _newProject = nil;
+        //        _newProject = [[NewProjectViewController alloc] init];
+        //        _newProject.fromView = 1;
+        //        _newProject.isRelease = 0;
+        //        NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
+        
+        //      以下为新vc的数据
+        //        _newProject.SingleDataDic = [dataArr objectAtIndex:indexPath.section];
+        // NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
+        ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
+        vc.url=dic[@"url"];
+        vc.isRelease=0;
+       // vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
+        vc.fromView=1;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
         [self.navigationController pushViewController:_newProject animated:YES];
     }else{
+        NSLog(@"本地本地");
         [self.showArr removeAllObjects];
         self.showArr = [ProjectSqlite loadList];
         ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         dic = [ProjectStage JudgmentStr:model];
-        _newProject = [[NewProjectViewController alloc] init];
-        _newProject.fromView = 1;
-        _newProject.isRelease =1;
-        _newProject.SingleDataDic = dic;
-        [self.navigationController pushViewController:_newProject animated:YES];
+//        _newProject = [[NewProjectViewController alloc] init];
+//        _newProject.fromView = 1;
+//        _newProject.isRelease =1;
+//        _newProject.SingleDataDic = dic;
+//        [self.navigationController pushViewController:_newProject animated:YES];
+        ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
+        vc.url=dic[@"url"];
+        vc.dataDic=dic;
+        NSLog(@"&&&&&&&&&&&&&&&&%@",dic);
+        // vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
+        vc.fromView=1;
+        vc.isRelease=1;
+        [self.navigationController pushViewController:vc animated:YES];
+
     }
 }
 

@@ -92,6 +92,28 @@
 {
     [super viewDidLoad];
     AppModel* appModel=[AppModel sharedInstance];
+    NSLog(@"viewDidLoad");
+    if (self.isRelease) {
+        [appModel.contactAry removeAllObjects];
+        [appModel.ownerAry removeAllObjects];
+        [appModel.explorationAry removeAllObjects];
+        [appModel.horizonAry removeAllObjects];
+        [appModel.designAry removeAllObjects];
+        [appModel.pileAry removeAllObjects];
+        
+        [appModel.horizonImageArr removeAllObjects];
+        [appModel.pilePitImageArr removeAllObjects];
+        [appModel.mainConstructionImageArr removeAllObjects];
+        [appModel.explorationImageArr removeAllObjects];
+        [appModel.fireControlImageArr removeAllObjects];
+        [appModel.electroweakImageArr removeAllObjects];
+        [appModel.planImageArr removeAllObjects];
+
+       // appModel.singleDic=[NSMutableDictionary dictionary];
+    }
+    
+    
+    
     self.singleDic=appModel.singleDic;
     // NSLog(@"222222%@",self.dataDic);
     self.contacts=[NSArray arrayWithObjects:appModel.contactAry,appModel.ownerAry,appModel.explorationAry,appModel.horizonAry,appModel.designAry,appModel.pileAry, nil];
@@ -105,6 +127,8 @@
     self.planImageArr=appModel.planImageArr;
     
     self.dataDic=[NSMutableDictionary dictionary];
+    
+    
     
     //AppModel* appModel=[AppModel sharedInstance];
     //appModel.dataDic=self.dataDic;
@@ -126,7 +150,7 @@
     //contactAry flag 0
     AppModel* appModel=[AppModel sharedInstance];
     
-    
+    NSLog(@"initTVC====%@",self.singleDic);
     self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.contactAry images:self.planImageArr];
     //    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[0] mutableCopy] images:self.planImageArr];
     
@@ -429,57 +453,63 @@
         [alert show];
     }else{
         NSMutableDictionary *dic = [ProjectStage JudgmentUpdataProjectStr:self.singleDic newDic:self.dataDic];
-        [dic setValue:[self.singleDic objectForKey:@"projectID"] forKeyPath:@"id"];
-        NSLog(@"%@",dic);
+        if (!self.isRelease) {
+            [dic setValue:[self.singleDic objectForKey:@"projectID"] forKeyPath:@"id"];
+            NSLog(@"%@",dic);
+            
+            //保存图片至数据库
+            for(int i=0;i<self.horizonImageArr.count;i++){
+                CameraModel *model = [self.horizonImageArr objectAtIndex:i];
+                if([model.a_device isEqualToString:@"ios"]){
+                    [GetBigImage getbigimage:model.a_url];
+                }
+            }
+            for(int i=0;i<self.pilePitImageArr.count;i++){
+                CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
+                if([model.a_device isEqualToString:@"ios"]){
+                    [GetBigImage getbigimage:model.a_url];
+                }
+            }
+            
+            for(int i=0;i<self.mainConstructionImageArr.count;i++){
+                CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
+                if([model.a_device isEqualToString:@"ios"]){
+                    [GetBigImage getbigimage:model.a_url];
+                }
+            }
+            
+            for(int i=0;i<self.explorationImageArr.count;i++){
+                CameraModel *model = [self.explorationImageArr objectAtIndex:i];
+                if([model.a_device isEqualToString:@"ios"]){
+                    [GetBigImage getbigimage:model.a_url];
+                }
+            }
+            
+            for(int i=0;i<self.fireControlImageArr.count;i++){
+                CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
+                if([model.a_device isEqualToString:@"ios"]){
+                    [GetBigImage getbigimage:model.a_url];
+                }
+            }
+            
+            for(int i=0;i<self.electroweakImageArr.count;i++){
+                CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
+                if([model.a_device isEqualToString:@"ios"]){
+                    [GetBigImage getbigimage:model.a_url];
+                }
+            }
+            
+            for(int i=0;i<self.planImageArr.count;i++){
+                CameraModel *model = [self.planImageArr objectAtIndex:i];
+                if([model.a_device isEqualToString:@"ios"]){
+                    [GetBigImage getbigimage:model.a_url];
+                }
+            }
+        }else{
+            NSLog(@"singleDic==========%@",self.singleDic);
+            [dic setValue:[self.singleDic objectForKey:@"id"] forKeyPath:@"id"];
+        }
         
-        //保存图片至数据库
-        for(int i=0;i<self.horizonImageArr.count;i++){
-            CameraModel *model = [self.horizonImageArr objectAtIndex:i];
-            if([model.a_device isEqualToString:@"ios"]){
-                [GetBigImage getbigimage:model.a_url];
-            }
-        }
-        for(int i=0;i<self.pilePitImageArr.count;i++){
-            CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
-            if([model.a_device isEqualToString:@"ios"]){
-                [GetBigImage getbigimage:model.a_url];
-            }
-        }
-        
-        for(int i=0;i<self.mainConstructionImageArr.count;i++){
-            CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
-            if([model.a_device isEqualToString:@"ios"]){
-                [GetBigImage getbigimage:model.a_url];
-            }
-        }
-        
-        for(int i=0;i<self.explorationImageArr.count;i++){
-            CameraModel *model = [self.explorationImageArr objectAtIndex:i];
-            if([model.a_device isEqualToString:@"ios"]){
-                [GetBigImage getbigimage:model.a_url];
-            }
-        }
-        
-        for(int i=0;i<self.fireControlImageArr.count;i++){
-            CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
-            if([model.a_device isEqualToString:@"ios"]){
-                [GetBigImage getbigimage:model.a_url];
-            }
-        }
-        
-        for(int i=0;i<self.electroweakImageArr.count;i++){
-            CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
-            if([model.a_device isEqualToString:@"ios"]){
-                [GetBigImage getbigimage:model.a_url];
-            }
-        }
-        
-        for(int i=0;i<self.planImageArr.count;i++){
-            CameraModel *model = [self.planImageArr objectAtIndex:i];
-            if([model.a_device isEqualToString:@"ios"]){
-                [GetBigImage getbigimage:model.a_url];
-            }
-        }
         
         //保存项目
         [ProjectSqlite InsertUpdataServerData:dic];
@@ -527,6 +557,7 @@
 }
 
 -(void)initdataDic{
+    NSLog(@"initdataDic");
     int value = (arc4random() % 9999999) + 1000000;
     //土地规划/拍卖
     
