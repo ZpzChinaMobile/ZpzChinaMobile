@@ -18,6 +18,8 @@
 #import "SinglePickerView.h"
 #import "Camera.h"
 #import "CameraSqlite.h"
+#import "AppModel.h"
+
 @interface SixTableViewController ()<HorizonDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate>{
     DatePickerView* datepickerview;
     AddContactViewController* addcontactView;
@@ -133,6 +135,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.fromView==0) {
+        AppModel* appModel=[AppModel sharedInstance];
+        appModel.horizonAry =[NSMutableArray array];
+        self.contacts=appModel.horizonAry;
+    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -169,9 +176,14 @@
     }else{
         HorizonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HorizonTableViewCell"];
        // if (!cell) {
+        if(self.fromView == 0){
+            cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:0 Arr:self.contacts singleDic:nil];
+        }else{
             cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
-            cell.delegate=self;
-       // }
+
+        }
+        cell.delegate=self;
+
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         

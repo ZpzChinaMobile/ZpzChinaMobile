@@ -17,6 +17,7 @@
 #import "LocationViewController.h"
 #import "Camera.h"
 #import "CameraSqlite.h"
+#import "AppModel.h"
 @interface ThreeTableViewController ()<GeologicalSurveyDelegate,AddContactViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate>{
     AddContactViewController* addcontactView;
     Camera* camera;
@@ -92,6 +93,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.fromView==0) {
+        AppModel* appModel=[AppModel sharedInstance];
+        appModel.explorationAry =[NSMutableArray array];
+        self.contacts=appModel.explorationAry;
+    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -128,9 +134,13 @@
     }else{
         GeologicalSurveyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
        // if (!cell) {
+        if(self.fromView == 0){
+            //AppModel* appModel=[AppModel sharedInstance];
+            cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:self.fromView Arr:self.contacts explorationImageArr:nil];
+        }else{
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:1 Arr:self.contacts explorationImageArr:nil];
-            cell.delegate=self;
-        //}
+        }
+        cell.delegate=self;
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         

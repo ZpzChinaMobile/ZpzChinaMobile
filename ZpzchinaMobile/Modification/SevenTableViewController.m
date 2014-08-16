@@ -18,6 +18,7 @@
 #import "SinglePickerView.h"
 #import "Camera.h"
 #import "CameraSqlite.h"
+#import "AppModel.h"
 @interface SevenTableViewController ()<PilePitDelegate,AddContactViewDelegate,CameraDelegate>{
     AddContactViewController* addcontactView;
     Camera* camera;
@@ -94,6 +95,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.fromView==0) {
+        AppModel* appModel=[AppModel sharedInstance];
+        appModel.pileAry =[NSMutableArray array];
+        self.contacts=appModel.pileAry;
+    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -130,7 +136,12 @@
     }else{
         PilePitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PilePitTableViewCell"];
         // if (!cell) {
-        cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:1 Arr:self.contacts];
+        if(self.fromView == 0){
+        cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:0 Arr:self.contacts];
+        }else{
+            cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:1 Arr:self.contacts];
+
+        }
         cell.delegate=self;
         // }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;

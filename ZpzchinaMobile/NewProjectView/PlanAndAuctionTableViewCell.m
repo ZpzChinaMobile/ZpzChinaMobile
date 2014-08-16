@@ -26,6 +26,8 @@
         LotName.delegate = self;
         LotName.textAlignment=NSTextAlignmentLeft;
         LotName.placeholder=@"地块名称";
+        NSLog(@"%d",flag);
+        NSLog(@"%@",dic);
         if(flag == 0){
             if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
                 [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];

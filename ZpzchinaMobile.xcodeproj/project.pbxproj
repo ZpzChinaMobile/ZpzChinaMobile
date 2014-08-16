@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7131199CB71E0095D05B /* WeakElectricityCell.m */; };
 		043F7135199CC5380095D05B /* ClearFireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7134199CC5380095D05B /* ClearFireCell.m */; };
+		5B0CC39E199F09290036F94B /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CC39D199F09290036F94B /* AppModel.m */; };
 		5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
 		5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
 		5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */; };
@@ -473,6 +474,8 @@
 		043F7131199CB71E0095D05B /* WeakElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakElectricityCell.m; sourceTree = "<group>"; };
 		043F7133199CC5380095D05B /* ClearFireCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearFireCell.h; sourceTree = "<group>"; };
 		043F7134199CC5380095D05B /* ClearFireCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearFireCell.m; sourceTree = "<group>"; };
+		5B0CC39C199F09290036F94B /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		5B0CC39D199F09290036F94B /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		5B6A9F601991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		5B6A9F621991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		5B892F00199A3BF2001F9921 /* ProgramDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailViewController.h; sourceTree = "<group>"; };
@@ -1340,6 +1343,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B0CC39B199F090F0036F94B /* AppModel */ = {
+			isa = PBXGroup;
+			children = (
+				5B0CC39C199F09290036F94B /* AppModel.h */,
+				5B0CC39D199F09290036F94B /* AppModel.m */,
+			);
+			path = AppModel;
+			sourceTree = "<group>";
+		};
 		5B6A9F5E1991E20B00A798BE /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -2104,6 +2116,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				5B0CC39B199F090F0036F94B /* AppModel */,
 				5B892FA5199A3D8F001F9921 /* Code4appScrollView */,
 				5B6A9F5E1991E20B00A798BE /* libs */,
 				D31B250C19891F2500B05B03 /* face */,
@@ -2983,6 +2996,7 @@
 				D31B266C19891F2600B05B03 /* GPUImageDifferenceBlendFilter.m in Sources */,
 				D31B26E719891F2600B05B03 /* GPUImageXYDerivativeFilter.m in Sources */,
 				D3AAAB65196D6F1E008F9CCD /* ASRDialogViewController.m in Sources */,
+				5B0CC39E199F09290036F94B /* AppModel.m in Sources */,
 				D3BB71B01953DE9100A3F626 /* ProjectTableViewCell.m in Sources */,
 				D31B26DA19891F2600B05B03 /* GPUImageToonFilter.m in Sources */,
 				D31B268A19891F2600B05B03 /* GPUImageHoughTransformLineDetector.m in Sources */,

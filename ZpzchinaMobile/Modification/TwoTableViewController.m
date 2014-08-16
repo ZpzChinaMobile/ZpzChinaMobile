@@ -14,6 +14,7 @@
 #import "UIViewController+MJPopupViewController.h"
 #import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
+#import "AppModel.h"
 @interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,OwnerTypeViewDelegate,LocationViewDelegate,UIActionSheetDelegate>{
     AddContactViewController* addcontactView;
     DatePickerView* datepickerview;
@@ -263,6 +264,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.fromView==0) {
+        AppModel* appModel=[AppModel sharedInstance];
+        appModel.ownerAry =[NSMutableArray array];
+        self.contacts=appModel.ownerAry;
+    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -290,8 +296,14 @@
     NSString *stringcell = @"ProjectTableViewCell";
     ProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     //if(!cell){
-    cell = [[ProjectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 ownerArr:self.contacts singleDic:self.singleDic] ;
-    cell.delegate=self;
+    
+    if(self.fromView == 0){
+        cell=[[ProjectTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:self.fromView ownerArr:self.contacts singleDic:nil];
+    }else{
+        cell = [[ProjectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 ownerArr:self.contacts singleDic:self.singleDic] ;
+
+    }
+        cell.delegate=self;
     //}
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...

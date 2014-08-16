@@ -79,7 +79,12 @@
     }else{
         static NSString *stringcell = @"ClearFireCell";
         ClearFireCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
-        cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
+        if(self.fromView == 0){
+        cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:0 Arr:nil singleDic:nil];
+        }else{
+            cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
+
+        }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.delegate =self;
         

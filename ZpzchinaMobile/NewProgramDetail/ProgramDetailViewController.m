@@ -22,6 +22,8 @@
 #import "CameraSqlite.h"
 #import "GTMBase64.h"
 #import "ModificationViewController.h"
+#import "AppModel.h"
+
 @interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate>
 
 @property(nonatomic,strong)UIScrollView* myScrollView;
@@ -261,6 +263,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    AppModel* appModel=[AppModel sharedInstance];
+    
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,self.url] parameters:nil error:nil];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -273,6 +277,8 @@
                 ProjectModel *model = [[ProjectModel alloc] init];
                 [model loadWithDictionary:item];
                 self.dataDic = [ProjectStage JudgmentStr:model];
+                
+                appModel.singleDic=self.dataDic;
                 //NSLog(@"%@",self.dataDic);
                 //NSLog(@"contactItem%d",[[item objectForKey:@"baseContacts"] count]);
                 
@@ -317,7 +323,20 @@
             }
             
             //NSLog(@"*******************%@",self.horizonImageArr[0]);
+            appModel.contactAry=self.contactAry;
+            appModel.ownerAry=self.ownerAry;
+            appModel.explorationAry=self.explorationAry;
+            appModel.horizonAry=self.horizonAry;
+            appModel.designAry=self.designAry;
+            appModel.pileAry=self.pileAry;
             
+            appModel.horizonImageArr=self.horizonImageArr;
+            appModel.pilePitImageArr=self.pilePitImageArr;
+            appModel.mainConstructionImageArr=self.mainConstructionImageArr;
+            appModel.explorationImageArr=self.explorationImageArr;
+            appModel.fireControlImageArr=self.fireControlImageArr;
+            appModel.electroweakImageArr=self.electroweakImageArr;
+            appModel.planImageArr=self.planImageArr;
 
             
             [self initNaviAndScrollView];//初始navi,创建返回Button,初始scrollView,初始加载新view的动画

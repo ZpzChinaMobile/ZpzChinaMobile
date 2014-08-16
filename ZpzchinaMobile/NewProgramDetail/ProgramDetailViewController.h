@@ -15,7 +15,7 @@
 @property(nonatomic,strong)UIButton* thirdStageButton2;//32 第3大阶段第2个imageView的触发
 @property(nonatomic,strong)UIButton* thirdStageButton3;//33 第3大阶段第3个imageView的触发
 @property(nonatomic,strong)UIButton* fourthStageButton1;//41 第4大阶段第1个imageView的触发
-@property(nonatomic,strong)NSDictionary* dataDic;//数据信息
+@property(nonatomic,strong)NSMutableDictionary* dataDic;//数据信息
 @property(nonatomic,copy)NSString* url;//数据信息的url
 @property(nonatomic,strong)NSMutableArray* contactAry;
 @property(nonatomic,strong)NSMutableArray* ownerAry;

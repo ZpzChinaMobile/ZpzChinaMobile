@@ -16,6 +16,7 @@
 #import "AddContactViewController.h"
 #import "Camera.h"
 #import "CameraSqlite.h"
+#import "AppModel.h"
 @interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate,UIScrollViewDelegate>{
     LocateView* locateview;
     MultipleChoiceViewController* muview;
@@ -55,12 +56,13 @@
 
 -(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
     [dic setValue:@"auctionUnitContacts" forKeyPath:@"category"];
+    NSLog(@"*********%d",btnTag);
     if(btnTag !=0){
         [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
     }else{
         [self.contacts addObject:dic];
     }
-    
+    NSLog(@"77777777777777777%@",self.contacts);
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
     [self.tableView reloadData];
 }
@@ -183,9 +185,7 @@
         self.dataDic=dataDic;
         self.contacts=contacts;
         self.images=images;
-        
-        
-        
+        NSLog(@"******%@",dataDic);
     }
     return self;
 }
@@ -193,7 +193,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.fromView=1;
+    
+    if (self.fromView==0) {
+        AppModel* appModel=[AppModel sharedInstance];
+       appModel.contactAry =[NSMutableArray array];
+        self.contacts=appModel.contactAry;
+    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -232,7 +237,15 @@
     }else{
         PlanAndAuctionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
         // if (!cell) {
-        cell=[[PlanAndAuctionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:self.contacts];
+        
+        if(self.fromView == 0){
+            //AppModel* appModel=[AppModel sharedInstance];
+            cell = [[PlanAndAuctionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:nil flag:self.fromView contactArr:self.contacts] ;
+        }else{
+            cell=[[PlanAndAuctionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:self.contacts];
+            NSLog(@"9999999999999%@",self.contacts);
+        }
+
         cell.delegate=self;
         //  }
         NSLog(@"cell被调 %d",cell.subviews.count);
