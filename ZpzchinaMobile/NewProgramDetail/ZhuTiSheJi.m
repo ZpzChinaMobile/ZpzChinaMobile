@@ -153,13 +153,23 @@ static NSDictionary* dataDic;
     //图片imageView
     UIImage *aimage;
     if (myDelegate.explorationImageArr.count) {
-        CameraModel *model = myDelegate.explorationImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        CameraModel *model;
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.explorationImageArr[0];
+        }else{
+            model=myDelegate.imgDic[@"explorationImageArr"];
+        }
+        
+        if([model.a_device isEqualToString:@"localios"]){
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        }
+        
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    //myDelegate.horizonImageArr;
     imageView.image=aimage;
     [view addSubview:imageView];
     

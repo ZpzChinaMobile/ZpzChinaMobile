@@ -179,7 +179,7 @@
             if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
                 [landuseLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"usage"]] ];
             }else{
-                [landuseLabel setText:@"地块用途"];
+                [landuseLabel setText:@""];
             }
         }else{
             if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
@@ -188,7 +188,7 @@
                 if(![[singleDic objectForKey:@"usage"] isEqualToString:@""]){
                     [landuseLabel setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"usage"]]];
                 }else{
-                    [landuseLabel setText:@"地块用途"];
+                    [landuseLabel setText:@""];
                 }
             }
         }

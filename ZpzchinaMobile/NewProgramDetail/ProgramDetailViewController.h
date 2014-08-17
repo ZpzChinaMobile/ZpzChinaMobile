@@ -37,6 +37,8 @@
 @property(nonatomic,copy)NSString* ID;
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 
+@property(nonatomic,strong)NSMutableDictionary* imgDic;//保存该页面的大图字典,键为@"horizonImageArr",@"pilePitImageArr",@"mainConstructionImageArr",@"explorationImageArr",@"fireControlImageArr",@"electroweakImageArr",@"planImageArr"
+
 
 -(void)userChangeImageWithButtons:(UIButton *)button;
 @end

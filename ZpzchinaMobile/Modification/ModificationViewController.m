@@ -25,7 +25,7 @@
 #import "CameraModel.h"
 #import "GetBigImage.h"
 #import "AppModel.h"
-@interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
 @property(nonatomic,strong)UIImageView* bigStageImageView;//上导航中大阶段图片
@@ -47,6 +47,8 @@
 @property(nonatomic,strong)NSArray* contacts;//联系人数组
 @property(nonatomic,strong)NSArray* images;//图片数组
 @property(nonatomic,strong)NSArray* tvcArray;
+
+@property(nonatomic,strong)UIView* shadowView;//保存到数据库,直到用户点击确认之后才消失的背景
 @end
 
 @implementation ModificationViewController
@@ -106,7 +108,6 @@
     self.singleDic=appModel.singleDic;
     
     self.contacts=[NSArray arrayWithObjects:appModel.contactAry,appModel.ownerAry,appModel.explorationAry,appModel.horizonAry,appModel.designAry,appModel.pileAry, nil];
-    NSLog(@"=========== %d",self.contacts.count);
     self.horizonImageArr=appModel.horizonImageArr;
     self.pilePitImageArr=appModel.pilePitImageArr;
     self.mainConstructionImageArr=appModel.mainConstructionImageArr;
@@ -388,6 +389,11 @@
 }
 
 -(void)rightAction{
+    self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
+    self.shadowView.backgroundColor=[UIColor blackColor];
+    self.shadowView.alpha=.5;
+    [self.contentView addSubview:self.shadowView];
+    
     AppModel* appModel=[AppModel sharedInstance];
     
     if (self.fromView==0) {
@@ -540,9 +546,50 @@
                 [ContactSqlite InsertData:[self.contacts[5] objectAtIndex:i]];
             }
         }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"保存完毕，请到本地保存项目查看！"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil,nil];
+        [alert show];
     }
     
     
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self.shadowView removeFromSuperview];
+    if (!self.fromView) {
+        AppModel* appModel=[AppModel sharedInstance];
+        [appModel getNew];
+        //singleDic赋值只针对修改，新建页面无用
+        self.singleDic=appModel.singleDic;
+        
+        self.contacts=[NSArray arrayWithObjects:appModel.contactAry,appModel.ownerAry,appModel.explorationAry,appModel.horizonAry,appModel.designAry,appModel.pileAry, nil];
+        self.horizonImageArr=appModel.horizonImageArr;
+        self.pilePitImageArr=appModel.pilePitImageArr;
+        self.mainConstructionImageArr=appModel.mainConstructionImageArr;
+        self.explorationImageArr=appModel.explorationImageArr;
+        self.fireControlImageArr=appModel.fireControlImageArr;
+        self.electroweakImageArr=appModel.electroweakImageArr;
+        self.planImageArr=appModel.planImageArr;
+        
+        self.dataDic=[NSMutableDictionary dictionary];
+        
+        [self initdataDic];
+        
+        [self initTVC];
+        
+        [self initNavi];
+        // [self initTableView];
+        [self initThemeView];
+        [self initTableViewSpace];
+        [self.tableViewSpace addSubview:self.oneTVC.tableView];
+        [self initTableView];
+
+    }
 }
 
 -(void)initdataDic{

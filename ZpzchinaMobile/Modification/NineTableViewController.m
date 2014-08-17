@@ -76,7 +76,6 @@
         }
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [cell.contentView addSubview:[self getImageViewsWithImages:[self.images copy]]];
-        cell.contentView.backgroundColor=[UIColor yellowColor];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         
