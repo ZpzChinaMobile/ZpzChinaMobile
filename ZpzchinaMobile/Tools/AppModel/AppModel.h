@@ -29,4 +29,5 @@
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
 
 +(AppModel*)sharedInstance;
+-(void)getNew;
 @end

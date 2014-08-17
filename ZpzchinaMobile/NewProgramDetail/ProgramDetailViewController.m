@@ -109,7 +109,7 @@
 -(void)gotoScrollImageViewWithImageAry:(NSArray*)imageAry{
     ViewController* vc=[[ViewController alloc]init];
     [vc.imagesArray removeAllObjects];
-  
+    
     //将base64的图放入CameraModel,然后放入GTMBase64里转出image,然后放入数组
     for (int i=0; i<imageAry.count; i++) {
         CameraModel *model = imageAry[i];
@@ -122,7 +122,7 @@
         [vc.imagesArray addObject:aimage];
     }
     [self presentViewController:vc animated:NO completion:nil];
-
+    
 }
 
 -(void)userChangeImageWithButtons:(UIButton *)button{
@@ -270,6 +270,8 @@
 {
     [super viewDidLoad];
     AppModel* appModel=[AppModel sharedInstance];
+    
+    //如果修改用字典不存在,则初始化,如果是从 需要读取 本地数据库 的页面进来，则会有内容,如果是网络则无
     if (!self.dataDic) {
         self.dataDic=[NSMutableDictionary dictionary];
     }
@@ -277,6 +279,7 @@
     NSLog(@"%d",self.isRelease);
     
     if (!self.isRelease) {
+        //网络加载
         
         NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,self.url] parameters:nil error:nil];
         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -291,7 +294,6 @@
                     [model loadWithDictionary:item];
                     self.dataDic = [ProjectStage JudgmentStr:model];
                     
-                    appModel.singleDic=self.dataDic;
                     //NSLog(@"%@",self.dataDic);
                     //NSLog(@"contactItem%d",[[item objectForKey:@"baseContacts"] count]);
                     
@@ -335,11 +337,13 @@
                     }
                 }
                 
-                //NSLog(@"*******************%@",self.horizonImageArr[0]);
-                            }else{
+            }else{
                 NSLog(@"%@",[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
             }
             
+            
+            appModel.singleDic=self.dataDic;
+
             appModel.contactAry=self.contactAry;
             appModel.ownerAry=self.ownerAry;
             appModel.explorationAry=self.explorationAry;
@@ -376,29 +380,29 @@
         }];
         [[NSOperationQueue mainQueue] addOperation:op];
     }else{
-        //NSLog(@"%@",[])
+        //本地加载
         [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
         [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
     }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    AppModel* appModel=[AppModel sharedInstance];
-    
-    appModel.contactAry=self.contactAry;
-    appModel.ownerAry=self.ownerAry;
-    appModel.explorationAry=self.explorationAry;
-    appModel.horizonAry=self.horizonAry;
-    appModel.designAry=self.designAry;
-    appModel.pileAry=self.pileAry;
-    
-    appModel.horizonImageArr=self.horizonImageArr;
-    appModel.pilePitImageArr=self.pilePitImageArr;
-    appModel.mainConstructionImageArr=self.mainConstructionImageArr;
-    appModel.explorationImageArr=self.explorationImageArr;
-    appModel.fireControlImageArr=self.fireControlImageArr;
-    appModel.electroweakImageArr=self.electroweakImageArr;
-    appModel.planImageArr=self.planImageArr;
+//    AppModel* appModel=[AppModel sharedInstance];
+//    
+//    appModel.contactAry=self.contactAry;
+//    appModel.ownerAry=self.ownerAry;
+//    appModel.explorationAry=self.explorationAry;
+//    appModel.horizonAry=self.horizonAry;
+//    appModel.designAry=self.designAry;
+//    appModel.pileAry=self.pileAry;
+//    
+//    appModel.horizonImageArr=self.horizonImageArr;
+//    appModel.pilePitImageArr=self.pilePitImageArr;
+//    appModel.mainConstructionImageArr=self.mainConstructionImageArr;
+//    appModel.explorationImageArr=self.explorationImageArr;
+//    appModel.fireControlImageArr=self.fireControlImageArr;
+//    appModel.electroweakImageArr=self.electroweakImageArr;
+//    appModel.planImageArr=self.planImageArr;
 }
 
 -(void)loadLocalImage:(NSString *)localProjectId{
@@ -436,6 +440,25 @@
     [self initTableView];
     
     [self.myScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    
+    
+    AppModel* appModel=[AppModel sharedInstance];
+    appModel.singleDic=self.dataDic;
+    
+    appModel.contactAry=self.contactAry;
+    appModel.ownerAry=self.ownerAry;
+    appModel.explorationAry=self.explorationAry;
+    appModel.horizonAry=self.horizonAry;
+    appModel.designAry=self.designAry;
+    appModel.pileAry=self.pileAry;
+    
+    appModel.horizonImageArr=self.horizonImageArr;
+    appModel.pilePitImageArr=self.pilePitImageArr;
+    appModel.mainConstructionImageArr=self.mainConstructionImageArr;
+    appModel.explorationImageArr=self.explorationImageArr;
+    appModel.fireControlImageArr=self.fireControlImageArr;
+    appModel.electroweakImageArr=self.electroweakImageArr;
+    appModel.planImageArr=self.planImageArr;
 }
 
 
@@ -461,7 +484,7 @@
             [self.pileAry addObject:contactDic];
         }
     }
-   // [_tableView reloadData];
+    // [_tableView reloadData];
 }
 
 -(void)addArray:(NSMutableArray *)list projectID:(NSString *)projectID{

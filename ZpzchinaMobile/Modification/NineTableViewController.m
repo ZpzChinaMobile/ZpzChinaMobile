@@ -41,10 +41,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.fromView==0) {
-        AppModel* appModel=[AppModel sharedInstance];
-        [appModel.fireControlImageArr removeAllObjects];
-    }
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        [appModel.fireControlImageArr removeAllObjects];
+//    }
     self.tableView.separatorStyle=NO;
 
 }

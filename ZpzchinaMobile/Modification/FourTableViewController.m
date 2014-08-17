@@ -109,11 +109,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.fromView==0) {
-        AppModel* appModel=[AppModel sharedInstance];
-        appModel.designAry =[NSMutableArray array];
-        self.contacts=appModel.designAry;
-    }
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        appModel.designAry =[NSMutableArray array];
+//        self.contacts=appModel.designAry;
+//    }
     self.tableView.separatorStyle=NO;
     
     

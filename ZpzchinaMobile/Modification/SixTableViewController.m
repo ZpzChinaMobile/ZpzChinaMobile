@@ -135,12 +135,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.fromView==0) {
-        AppModel* appModel=[AppModel sharedInstance];
-        appModel.horizonAry =[NSMutableArray array];
-        [appModel.horizonImageArr removeAllObjects];
-        self.contacts=appModel.horizonAry;
-    }
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        appModel.horizonAry =[NSMutableArray array];
+//        [appModel.horizonImageArr removeAllObjects];
+//        self.contacts=appModel.horizonAry;
+//    }
     self.tableView.separatorStyle=NO;
 }
 

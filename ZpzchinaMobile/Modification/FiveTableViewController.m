@@ -165,11 +165,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.fromView==0) {
-        AppModel* appModel=[AppModel sharedInstance];
-        appModel.ownerAry =[NSMutableArray array];
-        self.contacts=appModel.ownerAry;
-    }
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        appModel.ownerAry =[NSMutableArray array];
+//        self.contacts=appModel.ownerAry;
+//    }
     self.tableView.separatorStyle=NO;
     _titleArray = @[@"业主单位",@"预计施工时间",@"预计竣工时间",@"电梯",@"空调",@"供暖方式",@"外墙材料",@"钢结构"];
 }

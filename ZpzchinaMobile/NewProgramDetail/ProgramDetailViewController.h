@@ -15,8 +15,7 @@
 @property(nonatomic,strong)UIButton* thirdStageButton2;//32 第3大阶段第2个imageView的触发
 @property(nonatomic,strong)UIButton* thirdStageButton3;//33 第3大阶段第3个imageView的触发
 @property(nonatomic,strong)UIButton* fourthStageButton1;//41 第4大阶段第1个imageView的触发
-@property(nonatomic,strong)NSMutableDictionary* dataDic;//数据信息
-@property(nonatomic,copy)NSString* url;//数据信息的url
+
 @property(nonatomic,strong)NSMutableArray* contactAry;
 @property(nonatomic,strong)NSMutableArray* ownerAry;
 @property(nonatomic,strong)NSMutableArray* explorationAry;
@@ -32,6 +31,8 @@
 @property(nonatomic,strong)NSMutableArray* electroweakImageArr;
 @property(nonatomic,strong)NSMutableArray* planImageArr;
 
+@property(nonatomic,strong)NSMutableDictionary* dataDic;//修改用 网络数据信息或者本地数据库信息
+@property(nonatomic,copy)NSString* url;//数据信息的url
 @property(nonatomic)int isRelease;
 @property(nonatomic,copy)NSString* ID;
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1

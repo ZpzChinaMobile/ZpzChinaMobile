@@ -93,29 +93,18 @@
     [super viewDidLoad];
     AppModel* appModel=[AppModel sharedInstance];
     NSLog(@"viewDidLoad");
-    if (self.isRelease) {
-        [appModel.contactAry removeAllObjects];
-        [appModel.ownerAry removeAllObjects];
-        [appModel.explorationAry removeAllObjects];
-        [appModel.horizonAry removeAllObjects];
-        [appModel.designAry removeAllObjects];
-        [appModel.pileAry removeAllObjects];
-        
-        [appModel.horizonImageArr removeAllObjects];
-        [appModel.pilePitImageArr removeAllObjects];
-        [appModel.mainConstructionImageArr removeAllObjects];
-        [appModel.explorationImageArr removeAllObjects];
-        [appModel.fireControlImageArr removeAllObjects];
-        [appModel.electroweakImageArr removeAllObjects];
-        [appModel.planImageArr removeAllObjects];
-
+    
+    //此处判断是用户选择的时 修改还是新增 ,如果是新增页面进 则初始化model
+   // if (self.isRelease) {
+    if (!self.fromView) {
+        [appModel getNew];
        // appModel.singleDic=[NSMutableDictionary dictionary];
     }
     
     
-    
+    //singleDic赋值只针对修改，新建页面无用
     self.singleDic=appModel.singleDic;
-    // NSLog(@"222222%@",self.dataDic);
+    
     self.contacts=[NSArray arrayWithObjects:appModel.contactAry,appModel.ownerAry,appModel.explorationAry,appModel.horizonAry,appModel.designAry,appModel.pileAry, nil];
     NSLog(@"=========== %d",self.contacts.count);
     self.horizonImageArr=appModel.horizonImageArr;
@@ -404,42 +393,42 @@
     if (self.fromView==0) {
         
         [ProjectSqlite InsertData:self.dataDic];
-        for (int i=0; i<self.contacts.count; i++) {
-            NSLog(@"========%d",[self.contacts[i] count]);
-        }
+//        for (int i=0; i<self.contacts.count; i++) {
+//            NSLog(@"========%d",[self.contacts[i] count]);
+//        }
         
-        if(appModel.contactAry.count !=0){
+        if(appModel.contactAry.count){
             for(int i=0; i<appModel.contactAry.count;i++){
                 [ContactSqlite InsertData:[appModel.contactAry objectAtIndex:i]];
             }
         }
         
-        if(appModel.ownerAry.count !=0){
+        if(appModel.ownerAry.count){
             for(int i=0; i<appModel.ownerAry.count;i++){
                 [ContactSqlite InsertData:[appModel.ownerAry objectAtIndex:i]];
             }
         }
         
-        if(appModel.explorationAry.count !=0){
+        if(appModel.explorationAry.count){
             for(int i=0; i<appModel.explorationAry.count;i++){
                 [ContactSqlite InsertData:[appModel.explorationAry objectAtIndex:i]];
             }
         }
         
-        if(appModel.designAry.count !=0){
+        if(appModel.designAry.count){
             for(int i=0; i<appModel.designAry.count;i++){
                 [ContactSqlite InsertData:[appModel.designAry objectAtIndex:i]];
             }
         }
         
         
-        if(appModel.horizonAry.count !=0){
+        if(appModel.horizonAry.count){
             for(int i=0; i<appModel.horizonAry.count;i++){
                 [ContactSqlite InsertData:[appModel.horizonAry objectAtIndex:i]];
             }
         }
         
-        if(appModel.pileAry.count !=0){
+        if(appModel.pileAry.count){
             for(int i=0; i<appModel.pileAry.count;i++){
                 [ContactSqlite InsertData:[appModel.pileAry objectAtIndex:i]];
             }

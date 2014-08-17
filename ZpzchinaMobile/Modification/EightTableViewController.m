@@ -41,10 +41,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.fromView==0) {
-        AppModel* appModel=[AppModel sharedInstance];
-        [appModel.mainConstructionImageArr removeAllObjects];
-    }
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        [appModel.mainConstructionImageArr removeAllObjects];
+//    }
     self.tableView.separatorStyle=NO;
 }
 

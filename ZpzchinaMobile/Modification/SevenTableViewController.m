@@ -95,12 +95,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.fromView==0) {
-        AppModel* appModel=[AppModel sharedInstance];
-        appModel.pileAry =[NSMutableArray array];
-        [appModel.pilePitImageArr removeAllObjects];
-        self.contacts=appModel.pileAry;
-    }
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        appModel.pileAry =[NSMutableArray array];
+//        [appModel.pilePitImageArr removeAllObjects];
+//        self.contacts=appModel.pileAry;
+//    }
     self.tableView.separatorStyle=NO;
 }
 

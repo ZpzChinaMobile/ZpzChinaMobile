@@ -194,12 +194,12 @@
 {
     [super viewDidLoad];
     
-    if (self.fromView==0) {
-        AppModel* appModel=[AppModel sharedInstance];
-       appModel.contactAry =[NSMutableArray array];
-        [appModel.planImageArr removeAllObjects];
-        self.contacts=appModel.contactAry;
-    }
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//       appModel.contactAry =[NSMutableArray array];
+//        [appModel.planImageArr removeAllObjects];
+//        self.contacts=appModel.contactAry;
+//    }
     self.tableView.separatorStyle=NO;
 }
 
