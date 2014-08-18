@@ -249,14 +249,14 @@ int startIndex;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"==>%@",[[dataArr objectAtIndex:indexPath.section] objectForKey:@"projectID"]);
-    if([ProjectSqlite loadUpdataDataStatus:[[dataArr objectAtIndex:indexPath.section] objectForKey:@"projectID"]].count !=0){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"此项目已在本地保存项目中"
-                                                       delegate:self
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil,nil];
-        [alert show];
-    }else{
+//    if([ProjectSqlite loadUpdataDataStatus:[[dataArr objectAtIndex:indexPath.section] objectForKey:@"projectID"]].count !=0){
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+//                                                        message:@"此项目已在本地保存项目中"
+//                                                       delegate:self
+//                                              cancelButtonTitle:@"确定"
+//                                              otherButtonTitles:nil,nil];
+//        [alert show];
+//    }else{
 //        _newProject = nil;
 //        _newProject = [[NewProjectViewController alloc] init];
 //        _newProject.fromView = 1;
@@ -270,8 +270,9 @@ int startIndex;
         vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
         vc.isRelease=0;
         vc.fromView=1;
+    vc.ID=[[dataArr objectAtIndex:indexPath.section] objectForKey:@"projectID"];
         [self.navigationController pushViewController:vc animated:YES];
-    }
+   // }
 }
 
 -(void)searchBtnClick{

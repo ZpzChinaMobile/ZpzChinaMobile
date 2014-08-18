@@ -24,6 +24,7 @@
 #import "ModificationViewController.h"
 #import "AppModel.h"
 #import "ContactSqlite.h"
+
 @interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate,backToProgramDetailDelegate>
 
 @property(nonatomic,strong)UIScrollView* myScrollView;
@@ -938,11 +939,20 @@
 
 -(void)gotoModificationVC{
     
-    ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry] horizonImageArr:self.horizonImageArr pilePitImageArr:self.pilePitImageArr mainConstructionImageArr:self.mainConstructionImageArr explorationImageArr:self.explorationImageArr fireControlImageArr:self.fireControlImageArr electroweakImageArr:self.electroweakImageArr planImageArr:self.planImageArr];
-    modiVC.isRelease=self.isRelease;
-    modiVC.fromView=self.fromView;
-    modiVC.delegate=self;
-    [self.navigationController pushViewController:modiVC animated:YES];
+    if([ProjectSqlite loadUpdataDataStatus:self.ID].count !=0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"此项目已在本地保存项目中"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil,nil];
+        [alert show];
+    }else{
+        ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry] horizonImageArr:self.horizonImageArr pilePitImageArr:self.pilePitImageArr mainConstructionImageArr:self.mainConstructionImageArr explorationImageArr:self.explorationImageArr fireControlImageArr:self.fireControlImageArr electroweakImageArr:self.electroweakImageArr planImageArr:self.planImageArr];
+        modiVC.isRelease=self.isRelease;
+        modiVC.fromView=self.fromView;
+        modiVC.delegate=self;
+        [self.navigationController pushViewController:modiVC animated:YES];
+    }
 }
 
 -(void)initNaviAndScrollView{
