@@ -115,26 +115,27 @@
     for (int i=0; i<imageAry.count; i++) {
         CameraModel *model = imageAry[i];
         UIImage *aimage;
-        if([model.a_device isEqualToString:@"localios"]){
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        if (self.isRelease) {
+            if([model.a_device isEqualToString:@"localios"]){
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+            }else{
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            }
         }else{
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
+        
         [vc.imagesArray addObject:aimage];
     }
     [self presentViewController:vc animated:NO completion:nil];
     
 }
 
--(NSArray*)getImages:(NSMutableArray*)array{
-    NSMutableArray* images=[NSMutableArray array];
-    for (int i=0; i<array.count; i++) {
-        CameraModel* modelTemp=array[i];
-        [images addObject:modelTemp.a_url];
-    }
+-(void)getImages:(NSMutableArray*)array{
+    // NSMutableArray* images=[NSMutableArray array];
     
-    if (images.count) {
-        NSMutableURLRequest *requestSecond = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,images[0]] parameters:nil error:nil];
+    if (array.count) {
+        NSMutableURLRequest *requestSecond = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,array[0]] parameters:nil error:nil];
         AFHTTPRequestOperation *opSecond = [[AFHTTPRequestOperation alloc] initWithRequest:requestSecond];
         opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
         [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
@@ -143,14 +144,16 @@
             //将高清图的cameraModel放进字典
             CameraModel* camera=[[CameraModel alloc]init];
             [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];
-
+            
             [self.highImages addObject:camera];
             //[imgDic removeObjectForKey:imgDic.allKeys[0]];
             //[self doNetWorkSecondImgDic:imgDic];
-            [images removeObjectAtIndex:0];
-            [self getImages:images];
-            if (images.count==0) {
-                //image图片全部加载完之后初始化页面
+            [array removeObjectAtIndex:0];
+            [self getImages:array];
+            if (array.count==0) {
+                NSLog(@"gotogto");
+                [self gotoScrollImageViewWithImageAry:self.highImages];
+                
             }
             
         }failure:^(AFHTTPRequestOperation *operationSecond, NSError *errorSecond){
@@ -158,37 +161,92 @@
             NSLog(@"Error: %@", errorSecond);
         }];
         [[NSOperationQueue mainQueue] addOperation:opSecond];
-
+        
     }
-    return nil;
 }
 
 -(void)userChangeImageWithButtons:(UIButton *)button{
     NSLog(@"userChangeImage");
     NSMutableArray* ary=[NSMutableArray array];
-
+    
     if (button==self.firstStageButton1) {
-//        for (int i=0; i<self.planImageArr; <#increment#>) {
-//            <#statements#>
-//        }
-//        [self getImages:<#(NSMutableArray *)#>]
+        if (!self.isRelease) {
+            for (int i=0; i<self.planImageArr.count; i++) {
+                CameraModel* camera=self.planImageArr[i];
+                [ary addObject:camera.a_url];
+            }
+            self.highImages=[NSMutableArray array];
+            [self getImages:ary];
+        }else{
+            [self gotoScrollImageViewWithImageAry:self.planImageArr];
+        }
         
-        [self gotoScrollImageViewWithImageAry:self.planImageArr];
         NSLog(@"firstStageButton1");
     }else if(button==self.secondStageButton1){
-        [self gotoScrollImageViewWithImageAry:self.explorationImageArr];
+        if (!self.isRelease) {
+            for (int i=0; i<self.explorationImageArr.count; i++) {
+                CameraModel* camera=self.explorationImageArr[i];
+                [ary addObject:camera.a_url];
+            }
+            self.highImages=[NSMutableArray array];
+            [self getImages:ary];
+        }else{
+            [self gotoScrollImageViewWithImageAry:self.explorationImageArr];
+        }
+        
         NSLog(@"secondStageButton1");
     }else if(button==self.thirdStageButton1){
-        [self gotoScrollImageViewWithImageAry:self.horizonImageArr];
+        if (!self.isRelease) {
+            for (int i=0; i<self.horizonImageArr.count; i++) {
+                CameraModel* camera=self.horizonImageArr[i];
+                [ary addObject:camera.a_url];
+            }
+            self.highImages=[NSMutableArray array];
+            [self getImages:ary];
+        }else{
+            [self gotoScrollImageViewWithImageAry:self.horizonImageArr];
+        }
+        
         NSLog(@"thirdStageButton1");
     }else if(button==self.thirdStageButton2){
-        [self gotoScrollImageViewWithImageAry:self.pilePitImageArr];
+        if (!self.isRelease) {
+            
+            for (int i=0; i<self.pilePitImageArr.count; i++) {
+                CameraModel* camera=self.pilePitImageArr[i];
+                [ary addObject:camera.a_url];
+            }
+            self.highImages=[NSMutableArray array];
+            [self getImages:ary];
+        }else{
+            [self gotoScrollImageViewWithImageAry:self.pilePitImageArr];
+        }
+        
         NSLog(@"thirdStageButton2");
     }else if(button==self.thirdStageButton3){
-        [self gotoScrollImageViewWithImageAry:self.mainConstructionImageArr];
+        if (!self.isRelease) {
+            for (int i=0; i<self.mainConstructionImageArr.count; i++) {
+                CameraModel* camera=self.mainConstructionImageArr[i];
+                [ary addObject:camera.a_url];
+            }
+            self.highImages=[NSMutableArray array];
+            [self getImages:ary];
+        }else{
+            [self gotoScrollImageViewWithImageAry:self.mainConstructionImageArr];
+        }
+        
         NSLog(@"thirdStageButton3");
     }else if(button==self.fourthStageButton1){
-        [self gotoScrollImageViewWithImageAry:self.electroweakImageArr];
+        if (!self.isRelease) {
+            for (int i=0; i<self.electroweakImageArr.count; i++) {
+                CameraModel* camera=self.electroweakImageArr[i];
+                [ary addObject:camera.a_url];
+            }
+            self.highImages=[NSMutableArray array];
+            [self getImages:ary];
+        }else{
+            [self gotoScrollImageViewWithImageAry:self.electroweakImageArr];
+        }
+        
         NSLog(@"fourthStageButton1");
     }
 }
@@ -315,7 +373,7 @@
 {
     [super viewDidLoad];
     
-
+    
     
     if (!self.isRelease) {
         //如果是从 需要读取 本地数据库 的页面进来，则会有内容,如果是网络则无
@@ -434,7 +492,7 @@
                 [imgDic setObject:imgTempDic.allValues[i] forKey:imgTempDic.allKeys[i]];
             }
         }
-       // NSLog(@"responseObjectSecond%@",imgDic);
+        // NSLog(@"responseObjectSecond%@",imgDic);
         [self doNetWorkSecondImgDic:imgDic];
         if (!imgDic.allKeys.count) {
             [self loadSelf];
@@ -492,13 +550,13 @@
     [self.fireControlImageArr removeAllObjects];
     [self.electroweakImageArr removeAllObjects];
     [self.planImageArr removeAllObjects];
-    self.horizonImageArr = [CameraSqlite loadHorizonList:localProjectId];
-    self.pilePitImageArr = [CameraSqlite loadPilePitList:localProjectId];
-    self.mainConstructionImageArr = [CameraSqlite loadMainConstructionList:localProjectId];
-    self.explorationImageArr = [CameraSqlite loadexplorationList:localProjectId];
-    self.fireControlImageArr = [CameraSqlite loadfireControlList:localProjectId];
-    self.electroweakImageArr = [CameraSqlite loadelectroweakList:localProjectId];
-    self.planImageArr=[CameraSqlite loadPlanList:localProjectId];
+    self.horizonImageArr = [CameraSqlite loadAllHorizonList:localProjectId];
+    self.pilePitImageArr = [CameraSqlite loadAllPilePitList:localProjectId];
+    self.mainConstructionImageArr = [CameraSqlite loadAllMainConstructionList:localProjectId];
+    self.explorationImageArr = [CameraSqlite loadAllexplorationList:localProjectId];
+    self.fireControlImageArr = [CameraSqlite loadAllfireControlList:localProjectId];
+    self.electroweakImageArr = [CameraSqlite loadAllelectroweakList:localProjectId];
+    self.planImageArr=[CameraSqlite loadAllPlanList:localProjectId];
 }
 
 
@@ -843,39 +901,39 @@
 }
 
 -(void)backToPro{
-   // NSDictionary* dic=[NSDictionary dictionaryWithObjectsAndKeys:self.tuDiXinXi,@"tuDiXinXi",self.zhuTiSheJi,@"zhuTiSheJi",self.zhuTiShiGong,@"zhuTiShiGong",self.zhuangXiu,@"zhuangXiu", nil];
-   // NSArray* array=@[self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu];
+    // NSDictionary* dic=[NSDictionary dictionaryWithObjectsAndKeys:self.tuDiXinXi,@"tuDiXinXi",self.zhuTiSheJi,@"zhuTiSheJi",self.zhuTiShiGong,@"zhuTiShiGong",self.zhuangXiu,@"zhuangXiu", nil];
+    // NSArray* array=@[self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu];
     /*
-    AppModel* app=[AppModel sharedInstance];
-    NSLog(@"%@",self.dataDic);
-    NSLog(@"%@",app.singleDic);
-    //为了下面api不崩
-    CGFloat a=0;
-    if (self.tuDiXinXi) {
-        CGRect frame=self.tuDiXinXi.frame;
-        self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
-        self.tuDiXinXi.frame=frame;
-        [self.myScrollView addSubview:self.tuDiXinXi];
-    }
-    if (self.zhuTiSheJi) {
-        CGRect frame=self.zhuTiSheJi.frame;
-        self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&a delegate:self];
-        self.zhuTiSheJi.frame=frame;
-        [self.myScrollView addSubview:self.zhuTiSheJi];
-    }
-    if (self.zhuTiShiGong) {
-        CGRect frame=self.zhuTiShiGong.frame;
-        self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&a thirdViewHeight:&a delegate:self];
-        self.zhuTiShiGong.frame=frame;
-        [self.myScrollView addSubview:self.zhuTiShiGong];
-    }
-    if (self.zhuangXiu) {
-        CGRect frame=self.zhuangXiu.frame;
-        self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self ];
-        self.zhuangXiu.frame=frame;
-        [self.myScrollView addSubview:self.zhuangXiu];
-    }
- */
+     AppModel* app=[AppModel sharedInstance];
+     NSLog(@"%@",self.dataDic);
+     NSLog(@"%@",app.singleDic);
+     //为了下面api不崩
+     CGFloat a=0;
+     if (self.tuDiXinXi) {
+     CGRect frame=self.tuDiXinXi.frame;
+     self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
+     self.tuDiXinXi.frame=frame;
+     [self.myScrollView addSubview:self.tuDiXinXi];
+     }
+     if (self.zhuTiSheJi) {
+     CGRect frame=self.zhuTiSheJi.frame;
+     self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&a delegate:self];
+     self.zhuTiSheJi.frame=frame;
+     [self.myScrollView addSubview:self.zhuTiSheJi];
+     }
+     if (self.zhuTiShiGong) {
+     CGRect frame=self.zhuTiShiGong.frame;
+     self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&a thirdViewHeight:&a delegate:self];
+     self.zhuTiShiGong.frame=frame;
+     [self.myScrollView addSubview:self.zhuTiShiGong];
+     }
+     if (self.zhuangXiu) {
+     CGRect frame=self.zhuangXiu.frame;
+     self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self ];
+     self.zhuangXiu.frame=frame;
+     [self.myScrollView addSubview:self.zhuangXiu];
+     }
+     */
 }
 
 -(void)gotoModificationVC{
