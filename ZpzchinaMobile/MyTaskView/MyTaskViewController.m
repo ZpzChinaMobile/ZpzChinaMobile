@@ -259,7 +259,10 @@ int startIndex;
         vc.isRelease=0;
        // vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
         vc.fromView=1;
-        vc.ID=[[dataArr objectAtIndex:indexPath.section] objectForKey:@"projectID"];
+        NSLog(@"uitableviewcell%@",self.showArr);
+       // if ([[self.showArr objectAtIndex:indexPath.section] objectForKey:@"projectID"]) {
+            vc.ID=dic[@"projectID"];
+       // }
         [self.navigationController pushViewController:vc animated:YES];
         
         
@@ -282,7 +285,7 @@ int startIndex;
         vc.url=dic[@"url"];
         vc.dataDic=dic;
         NSLog(@"&&&&&&&&&&&&&&&&%@",dic);
-        vc.ID=[[dataArr objectAtIndex:indexPath.section] objectForKey:@"projectID"];
+        vc.ID=dic[@"projectID"];
         // vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
         vc.fromView=1;
         vc.isRelease=1;

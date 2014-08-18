@@ -788,6 +788,25 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    BOOL first,second,third;
+//    if (indexPath.section==0) {
+//        if (indexPath.row==0) {
+//            <#statements#>
+//        }else{
+//        
+//        }
+//    }else if (indexPath.section==1){
+//        if (indexPath.row==0) {
+//            <#statements#>
+//        }else if (indexPath.row==1){
+//        
+//        }else{
+//        
+//        }
+//    }else{
+//        if (indexPath.row)
+//    }
+    
     ProgramSelectViewCell* cell=[ProgramSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath firstIcon:YES secondIcon:YES thirdIcon:YES];
     cell.delegate=self;
     
