@@ -59,6 +59,7 @@
 
 @property(nonatomic,strong)UIActivityIndicatorView* animationView;//加载新view时的菊花动画
 
+@property(nonatomic,strong)NSMutableArray* highImages;//存放用于放进scrollView翻滚的图片cameraModel数组
 @end
 
 @implementation ProgramDetailViewController
@@ -125,9 +126,53 @@
     
 }
 
+-(NSArray*)getImages:(NSMutableArray*)array{
+    NSMutableArray* images=[NSMutableArray array];
+    for (int i=0; i<array.count; i++) {
+        CameraModel* modelTemp=array[i];
+        [images addObject:modelTemp.a_url];
+    }
+    
+    if (images.count) {
+        NSMutableURLRequest *requestSecond = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,images[0]] parameters:nil error:nil];
+        AFHTTPRequestOperation *opSecond = [[AFHTTPRequestOperation alloc] initWithRequest:requestSecond];
+        opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
+        [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
+            NSLog(@"responseObjectSecond%@",responseObjectSecond[@"d"][@"data"][0]);
+            
+            //将高清图的cameraModel放进字典
+            CameraModel* camera=[[CameraModel alloc]init];
+            [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];
+
+            [self.highImages addObject:camera];
+            //[imgDic removeObjectForKey:imgDic.allKeys[0]];
+            //[self doNetWorkSecondImgDic:imgDic];
+            [images removeObjectAtIndex:0];
+            [self getImages:images];
+            if (images.count==0) {
+                //image图片全部加载完之后初始化页面
+            }
+            
+        }failure:^(AFHTTPRequestOperation *operationSecond, NSError *errorSecond){
+            NSLog(@"fail");
+            NSLog(@"Error: %@", errorSecond);
+        }];
+        [[NSOperationQueue mainQueue] addOperation:opSecond];
+
+    }
+    return nil;
+}
+
 -(void)userChangeImageWithButtons:(UIButton *)button{
     NSLog(@"userChangeImage");
+    NSMutableArray* ary=[NSMutableArray array];
+
     if (button==self.firstStageButton1) {
+//        for (int i=0; i<self.planImageArr; <#increment#>) {
+//            <#statements#>
+//        }
+//        [self getImages:<#(NSMutableArray *)#>]
+        
         [self gotoScrollImageViewWithImageAry:self.planImageArr];
         NSLog(@"firstStageButton1");
     }else if(button==self.secondStageButton1){
@@ -391,6 +436,9 @@
         }
        // NSLog(@"responseObjectSecond%@",imgDic);
         [self doNetWorkSecondImgDic:imgDic];
+        if (!imgDic.allKeys.count) {
+            [self loadSelf];
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail");

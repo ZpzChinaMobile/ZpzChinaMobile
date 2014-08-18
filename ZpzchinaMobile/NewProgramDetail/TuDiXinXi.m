@@ -110,15 +110,17 @@ static NSDictionary* dataDic;
         CameraModel *model;
         if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
             model = myDelegate.planImageArr[0];
+            if([model.a_device isEqualToString:@"localios"]){
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+            }else{
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            }
+            
         }else{
             model=myDelegate.imgDic[@"planImageArr"];
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
 
-        if([model.a_device isEqualToString:@"localios"]){
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-        }else{
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-        }
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }
