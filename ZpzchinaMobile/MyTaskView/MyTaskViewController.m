@@ -265,7 +265,7 @@ int startIndex;
         
         
         
-        [self.navigationController pushViewController:_newProject animated:YES];
+        //[self.navigationController pushViewController:_newProject animated:YES];
     }else{
         NSLog(@"本地本地");
         [self.showArr removeAllObjects];
