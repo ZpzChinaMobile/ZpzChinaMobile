@@ -28,17 +28,18 @@
         
         UIButton *Company = [UIButton buttonWithType:UIButtonTypeCustom];
         Company.frame = CGRectMake(20,10, 140, 30);
-        [Company setTitle:@"地勘公司" forState:UIControlStateNormal];
+        [Company setTitle:@"设计院" forState:UIControlStateNormal];
         [Company setTitleColor:BlueColor forState:UIControlStateNormal];
         Company.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         Company.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         [Company addTarget:self action:@selector(Company) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Company];
         
-               dataArr = [NSMutableArray arrayWithArray:Arr];
+        dataArr = [NSMutableArray arrayWithArray:Arr];
+        NSLog(@"%@",Arr);
         if(Arr.count != 0){
             for(int i=0; i<Arr.count;i++){
-                if(i<2){
+                if(i<3){
                     UIButton *contactBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                     [contactBtn setTitle:[[Arr objectAtIndex:i] objectForKey:@"contactName"] forState:UIControlStateNormal];
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

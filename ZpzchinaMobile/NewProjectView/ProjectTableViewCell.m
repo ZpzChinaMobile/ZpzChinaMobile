@@ -488,7 +488,7 @@
 
 -(void)gotoMap{
     if ([delegate respondsToSelector:@selector(gotoMap:city:)]){
-        NSLog(@"%@",[dataDic objectForKey:@"city"]);
+        NSLog(@"===%@",[dataDic objectForKey:@"city"]);
         [delegate gotoMap:[dataDic objectForKey:@"landAddress"] city:[dataDic objectForKey:@"city"]];
     }
 }

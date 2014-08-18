@@ -673,7 +673,7 @@
 
 //筛选界面拉回去
 -(void)selectCancel{
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
     } completion:^(BOOL finished){
         [self.myTableView removeFromSuperview];
@@ -789,7 +789,7 @@
     //暂时移除观察者,避免加新view时有动画
     
     [self.view addSubview:self.myTableView];
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
     }];
 }
