@@ -58,14 +58,44 @@ static __weak ProgramDetailViewController* myDelegate;
     UIImage *aimage;
     CameraModel *model;
     if(sequence==1&&myDelegate.horizonImageArr.count){
-        model=myDelegate.horizonImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.horizonImageArr[0];
+        }else{
+            model=myDelegate.imgDic[@"horizonImageArr"];
+        }
+        
+        if([model.a_device isEqualToString:@"localios"]){
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        }
+        
     }else if (sequence==2&&myDelegate.pilePitImageArr.count){
-        model=myDelegate.pilePitImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.pilePitImageArr[0];
+        }else{
+            model=myDelegate.imgDic[@"pilePitImageArr"];
+        }
+        
+        if([model.a_device isEqualToString:@"localios"]){
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        }
+        
     }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
-        model=myDelegate.mainConstructionImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.mainConstructionImageArr[0];
+        }else{
+            model=myDelegate.imgDic[@"mainConstructionImageArr"];
+        }
+        
+        if([model.a_device isEqualToString:@"localios"]){
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        }
+        
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }

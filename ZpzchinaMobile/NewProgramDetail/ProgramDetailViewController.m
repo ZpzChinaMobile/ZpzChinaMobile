@@ -24,7 +24,7 @@
 #import "ModificationViewController.h"
 #import "AppModel.h"
 #import "ContactSqlite.h"
-@interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate>
+@interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate,backToProgramDetailDelegate>
 
 @property(nonatomic,strong)UIScrollView* myScrollView;
 @property(nonatomic,strong)UIView* tuDiXinXi;//土地信息大模块
@@ -794,12 +794,48 @@
     }];
 }
 
+-(void)backToPro{
+   // NSDictionary* dic=[NSDictionary dictionaryWithObjectsAndKeys:self.tuDiXinXi,@"tuDiXinXi",self.zhuTiSheJi,@"zhuTiSheJi",self.zhuTiShiGong,@"zhuTiShiGong",self.zhuangXiu,@"zhuangXiu", nil];
+   // NSArray* array=@[self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu];
+    /*
+    AppModel* app=[AppModel sharedInstance];
+    NSLog(@"%@",self.dataDic);
+    NSLog(@"%@",app.singleDic);
+    //为了下面api不崩
+    CGFloat a=0;
+    if (self.tuDiXinXi) {
+        CGRect frame=self.tuDiXinXi.frame;
+        self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
+        self.tuDiXinXi.frame=frame;
+        [self.myScrollView addSubview:self.tuDiXinXi];
+    }
+    if (self.zhuTiSheJi) {
+        CGRect frame=self.zhuTiSheJi.frame;
+        self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&a delegate:self];
+        self.zhuTiSheJi.frame=frame;
+        [self.myScrollView addSubview:self.zhuTiSheJi];
+    }
+    if (self.zhuTiShiGong) {
+        CGRect frame=self.zhuTiShiGong.frame;
+        self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&a thirdViewHeight:&a delegate:self];
+        self.zhuTiShiGong.frame=frame;
+        [self.myScrollView addSubview:self.zhuTiShiGong];
+    }
+    if (self.zhuangXiu) {
+        CGRect frame=self.zhuangXiu.frame;
+        self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self ];
+        self.zhuangXiu.frame=frame;
+        [self.myScrollView addSubview:self.zhuangXiu];
+    }
+ */
+}
+
 -(void)gotoModificationVC{
     
     ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry] horizonImageArr:self.horizonImageArr pilePitImageArr:self.pilePitImageArr mainConstructionImageArr:self.mainConstructionImageArr explorationImageArr:self.explorationImageArr fireControlImageArr:self.fireControlImageArr electroweakImageArr:self.electroweakImageArr planImageArr:self.planImageArr];
     modiVC.isRelease=self.isRelease;
     modiVC.fromView=self.fromView;
-    
+    modiVC.delegate=self;
     [self.navigationController pushViewController:modiVC animated:YES];
 }
 

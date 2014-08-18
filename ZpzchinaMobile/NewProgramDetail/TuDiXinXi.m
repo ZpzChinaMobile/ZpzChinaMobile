@@ -107,7 +107,13 @@ static NSDictionary* dataDic;
     
     UIImage *aimage;
     if (myDelegate.planImageArr.count) {
-        CameraModel *model = myDelegate.planImageArr[0];
+        CameraModel *model;
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.planImageArr[0];
+        }else{
+            model=myDelegate.imgDic[@"planImageArr"];
+        }
+
         if([model.a_device isEqualToString:@"localios"]){
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }else{

@@ -8,7 +8,14 @@
 
 #import "BaseViewController.h"
 
+@protocol backToProgramDetailDelegate <NSObject>
+
+-(void)backToPro;
+
+@end
 @interface ModificationViewController : BaseViewController
+
+@property(nonatomic,weak)id <backToProgramDetailDelegate> delegate;
 @property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
 
