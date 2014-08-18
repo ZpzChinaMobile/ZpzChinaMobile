@@ -235,12 +235,12 @@
 -(void)gotoMap:(NSString *)address city:(NSString *)city{
     //[locateview removeFromSuperview];
     //locateview = nil;
-    NSLog(@"%@",city);
+    NSLog(@"====>%@",city);
     locationView = [[LocationViewController alloc] init];
     locationView.delegate = self;
     locationView.baseAddress = address;
     locationView.baseCity = city;
-    [self.navigationController pushViewController:locationView animated:YES];
+    [self.superVC.navigationController pushViewController:locationView animated:YES];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

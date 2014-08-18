@@ -46,6 +46,7 @@
     }else{
         [self.contacts addObject:dic];
     }
+     NSLog(@"%@",self.contacts);
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
     [self.tableView reloadData];
 }

@@ -267,7 +267,7 @@
     //table没有出现的时候才进行添加,避免反复添加
     if (![self.view.subviews containsObject:self.myTableView]) {
         [self.view addSubview:self.myTableView];
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
         }];
     }
@@ -277,7 +277,7 @@
 -(void)selectCancel{
     //table出现的时候才进行拉回去的以及移除的操作,避免反复移除
     if ([self.view.subviews containsObject:self.myTableView]) {
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
         } completion:^(BOOL finished){
             [self.myTableView removeFromSuperview];

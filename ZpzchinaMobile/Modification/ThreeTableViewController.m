@@ -36,12 +36,14 @@
     }else{
         [self.contacts addObject:dic];
     }
+    NSLog(@"%@",self.contacts);
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
     [self.tableView reloadData];
 }
 
 -(void)addContactViewGeologicalSurvey{
     //self.flag = 2;
+    NSLog(@"=====》%@",self.contacts);
     if(self.contacts.count <3){
         addcontactView = [[AddContactViewController alloc] init];
         [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];

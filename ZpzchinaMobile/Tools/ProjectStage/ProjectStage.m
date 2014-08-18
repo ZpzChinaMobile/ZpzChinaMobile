@@ -44,7 +44,6 @@
 }
 
 +(NSMutableDictionary *)JudgmentStr:(ProjectModel *)model{
-    //NSLog(@"expectedFinishTime ===>%@",model.a_expectedFinishTime);
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     //[dic setObject:model.a_id forKey:@"id"];
     if([[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"(null)"]){
