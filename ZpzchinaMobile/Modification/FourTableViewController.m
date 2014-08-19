@@ -168,4 +168,7 @@
     
     
 }
+-(void)dealloc{
+    NSLog(@"fourDealloc");
+}
 @end

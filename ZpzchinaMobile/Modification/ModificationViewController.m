@@ -696,6 +696,9 @@
     }
 }
 
+-(void)dealloc{
+    NSLog(@"modifiDealloc");
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -220,5 +220,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 400;
 }
-
+-(void)dealloc{
+    NSLog(@"fiveDealloc");
+}
 @end

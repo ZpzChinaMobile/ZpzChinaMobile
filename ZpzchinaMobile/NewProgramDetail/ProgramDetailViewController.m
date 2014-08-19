@@ -1036,6 +1036,7 @@
 
 -(void)dealloc{
     [self.myScrollView removeObserver:self forKeyPath:@"contentOffset"];
+    NSLog(@"programDealloc");
 }
 
 - (void)didReceiveMemoryWarning

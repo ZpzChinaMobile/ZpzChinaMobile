@@ -108,12 +108,12 @@
     
     if(self.fromView == 0){
         [self.images removeAllObjects];
-        self.images = [CameraSqlite loadelectroweakList:[self.dataDic objectForKey:@"id"]];
+        self.images = [CameraSqlite loadAllelectroweakList:[self.dataDic objectForKey:@"id"]];
     }else{
         // if(isRelease == 0){
         // if(cameraflag == 0){
         if([CameraSqlite loadelectroweakSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-            [self.images insertObject:[[CameraSqlite loadelectroweakList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            [self.images insertObject:[[CameraSqlite loadAllelectroweakList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
         }
         //        //  }else{
         //        [self.images removeAllObjects];
@@ -207,5 +207,7 @@
     [singlepickerview showInView:self.tableView.superview];
 }
 
-
+-(void)dealloc{
+    NSLog(@"tenDealloc");
+}
 @end

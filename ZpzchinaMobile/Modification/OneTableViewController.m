@@ -306,7 +306,7 @@
     NSLog(@"%d",self.fromView);
     if(self.fromView == 0){
         [self.images removeAllObjects];
-        self.images = [CameraSqlite loadPlanList:[self.dataDic objectForKey:@"id"]];
+        self.images = [CameraSqlite loadAllPlanList:[self.dataDic objectForKey:@"id"]];
     }else{
         // if(isRelease == 0){
         // if(cameraflag == 0){
@@ -314,8 +314,8 @@
         NSLog(@"goto2===proID=====%@",[CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]]);
         if([CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
             NSLog(@"goto1===proID=====%@",[self.singleDic objectForKey:@"projectID"]);
-            NSLog(@"==>%@",[CameraSqlite loadPlanList:[self.singleDic objectForKey:@"projectID"]]);
-            [self.images insertObject:[[CameraSqlite loadPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            NSLog(@"==>%@",[CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]]);
+            [self.images insertObject:[[CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
         }
         //        //  }else{
         //        [self.images removeAllObjects];
@@ -350,5 +350,8 @@
         return (self.images.count/3+1)*120;
     }
     return 350;
+}
+-(void)dealloc{
+    NSLog(@"oneDealloc");
 }
 @end

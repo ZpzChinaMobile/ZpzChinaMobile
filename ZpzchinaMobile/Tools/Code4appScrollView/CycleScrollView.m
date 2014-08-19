@@ -171,6 +171,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"cycleScrollViewDealloc");
     [imagesArray release];
     [curImages release];
     

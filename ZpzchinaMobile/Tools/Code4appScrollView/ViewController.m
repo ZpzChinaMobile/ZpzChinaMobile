@@ -70,6 +70,7 @@
 {
     
     [super dealloc];
+    NSLog(@"viewControllerDealloc");
 }
 
 @end

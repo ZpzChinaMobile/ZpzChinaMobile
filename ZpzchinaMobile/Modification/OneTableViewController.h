@@ -20,7 +20,7 @@
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
 @property(nonatomic,strong)NSMutableArray* contacts;
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
-@property(nonatomic,strong)UIViewController* superVC;
+@property(nonatomic,weak)UIViewController* superVC;
 @property(nonatomic,weak)id<OneTVCDelegate>delegate;
 
 

@@ -112,12 +112,12 @@
     
     if(self.fromView == 0){
         [self.images removeAllObjects];
-        self.images = [CameraSqlite loadfireControlList:[self.dataDic objectForKey:@"id"]];
+        self.images = [CameraSqlite loadAllfireControlList:[self.dataDic objectForKey:@"id"]];
     }else{
         // if(isRelease == 0){
         // if(cameraflag == 0){
         if([CameraSqlite loadfireControlSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-            [self.images insertObject:[[CameraSqlite loadfireControlList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            [self.images insertObject:[[CameraSqlite loadAllfireControlList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
         }
         //        //  }else{
         //        [self.images removeAllObjects];
@@ -206,5 +206,7 @@
     [self.tableView reloadData];
 }
 
-
+-(void)dealloc{
+    NSLog(@"nineDealloc");
+}
 @end
