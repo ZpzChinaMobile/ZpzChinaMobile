@@ -205,7 +205,11 @@
     [self.tableView reloadData];
 }
 
--(void)dealloc{
-    NSLog(@"nineDealloc");
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.fireControlImageArr=self.images;
+    }
+    NSLog(@"nineDisappear");
 }
 @end

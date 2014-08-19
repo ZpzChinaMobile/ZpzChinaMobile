@@ -229,7 +229,11 @@
     }
     return 50;
 }
--(void)dealloc{
-    NSLog(@"threeDealloc");
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.explorationImageArr=self.images;
+    }
+    NSLog(@"threeDisappear");
 }
 @end

@@ -142,7 +142,7 @@
         AFHTTPRequestOperation *opSecond = [[AFHTTPRequestOperation alloc] initWithRequest:requestSecond];
         opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
         [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
-            NSLog(@"responseObjectSecond%@",responseObjectSecond[@"d"][@"data"][0]);
+           // NSLog(@"responseObjectSecond%@",responseObjectSecond[@"d"][@"data"][0]);
             
             //将高清图的cameraModel放进字典
             CameraModel* camera=[[CameraModel alloc]init];
@@ -168,7 +168,8 @@
 -(void)userChangeImageWithButtons:(UIButton *)button{
     NSLog(@"userChangeImage");
     NSMutableArray* ary=[NSMutableArray array];
-    
+    AppModel* app=[AppModel sharedInstance];
+
     if (button==self.firstStageButton1) {
         NSLog(@"firstStageButton1==%d",self.planImageArr.count);
 
@@ -180,22 +181,23 @@
             self.highImages=[NSMutableArray array];
             [self getImages:ary];
         }else{
-            [self gotoScrollImageViewWithImageAry:self.planImageArr];
+            [self gotoScrollImageViewWithImageAry:app.planImageArr];//self.planImageArr];
         }
         
     }else if(button==self.secondStageButton1){
         if (!self.isRelease) {
             for (int i=0; i<self.explorationImageArr.count; i++) {
                 CameraModel* camera=self.explorationImageArr[i];
-                [ary addObject:camera.a_url];
+                if (camera.a_url) {
+                    [ary addObject:camera.a_url];
+                }
             }
             self.highImages=[NSMutableArray array];
             [self getImages:ary];
         }else{
-            [self gotoScrollImageViewWithImageAry:self.explorationImageArr];
+            [self gotoScrollImageViewWithImageAry:app.explorationImageArr];//self.explorationImageArr];
         }
         
-        NSLog(@"secondStageButton1");
     }else if(button==self.thirdStageButton1){
         if (!self.isRelease) {
             for (int i=0; i<self.horizonImageArr.count; i++) {
@@ -205,7 +207,7 @@
             self.highImages=[NSMutableArray array];
             [self getImages:ary];
         }else{
-            [self gotoScrollImageViewWithImageAry:self.horizonImageArr];
+            [self gotoScrollImageViewWithImageAry:app.horizonImageArr];//self.horizonImageArr];
         }
         
         NSLog(@"thirdStageButton1");
@@ -219,7 +221,7 @@
             self.highImages=[NSMutableArray array];
             [self getImages:ary];
         }else{
-            [self gotoScrollImageViewWithImageAry:self.pilePitImageArr];
+            [self gotoScrollImageViewWithImageAry:app.pilePitImageArr];//self.pilePitImageArr];
         }
         
         NSLog(@"thirdStageButton2");
@@ -232,7 +234,7 @@
             self.highImages=[NSMutableArray array];
             [self getImages:ary];
         }else{
-            [self gotoScrollImageViewWithImageAry:self.mainConstructionImageArr];
+            [self gotoScrollImageViewWithImageAry:app.mainConstructionImageArr];//self.mainConstructionImageArr];
         }
         
         NSLog(@"thirdStageButton3");
@@ -245,7 +247,7 @@
             self.highImages=[NSMutableArray array];
             [self getImages:ary];
         }else{
-            [self gotoScrollImageViewWithImageAry:self.electroweakImageArr];
+            [self gotoScrollImageViewWithImageAry:app.electroweakImageArr];//self.electroweakImageArr];
         }
         
         NSLog(@"fourthStageButton1");

@@ -158,7 +158,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return (self.images.count/3+1)*120;
 }
--(void)dealloc{
-    NSLog(@"eightDealloc");
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.mainConstructionImageArr=self.images;
+    }
+    NSLog(@"eightDisappear");
 }
 @end

@@ -234,7 +234,11 @@
     }
     return 50;
 }
--(void)dealloc{
-    NSLog(@"sevenDealloc");
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.pilePitImageArr=self.images;
+    }
+    NSLog(@"sevenDisappear");
 }
 @end

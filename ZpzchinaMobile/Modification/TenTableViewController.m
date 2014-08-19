@@ -206,7 +206,11 @@
     [singlepickerview showInView:self.tableView.superview];
 }
 
--(void)dealloc{
-    NSLog(@"tenDealloc");
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.electroweakImageArr=self.images;
+    }
+    NSLog(@"tenDisappear");
 }
 @end

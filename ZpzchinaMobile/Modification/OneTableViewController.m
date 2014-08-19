@@ -347,7 +347,11 @@
     }
     return 350;
 }
--(void)dealloc{
-    NSLog(@"oneDealloc");
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.planImageArr=self.images;
+    }
+    NSLog(@"oneDisappear");
 }
 @end

@@ -274,7 +274,11 @@
     }
     return 100;
 }
--(void)dealloc{
-    NSLog(@"sixDealloc");
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.horizonImageArr=self.images;
+    }
+    NSLog(@"sixDisappear");
 }
 @end
