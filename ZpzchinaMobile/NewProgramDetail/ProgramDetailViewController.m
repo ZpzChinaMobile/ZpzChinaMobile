@@ -149,14 +149,11 @@
             [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];
             
             [self.highImages addObject:camera];
-            //[imgDic removeObjectForKey:imgDic.allKeys[0]];
-            //[self doNetWorkSecondImgDic:imgDic];
             [array removeObjectAtIndex:0];
             [self getImages:array];
+            
             if (array.count==0) {
-                NSLog(@"gotogto");
                 [self gotoScrollImageViewWithImageAry:self.highImages];
-                
             }
             
         }failure:^(AFHTTPRequestOperation *operationSecond, NSError *errorSecond){
