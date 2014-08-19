@@ -31,6 +31,7 @@
 
 //测试代码
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"%d",scrollView==self.tableView);
     NSLog(@"22");
 }
 
@@ -56,13 +57,11 @@
 
 -(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
     [dic setValue:@"auctionUnitContacts" forKeyPath:@"category"];
-    NSLog(@"*********%d",btnTag);
     if(btnTag !=0){
         [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
     }else{
         [self.contacts addObject:dic];
     }
-    NSLog(@"77777777777777777%@",self.contacts);
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
     [self.tableView reloadData];
 }
@@ -200,6 +199,7 @@
 //        [appModel.planImageArr removeAllObjects];
 //        self.contacts=appModel.contactAry;
 //    }
+
     self.tableView.separatorStyle=NO;
 }
 
@@ -254,6 +254,18 @@
     }
 }
 
+-(void)beginEditWithHeight:(CGFloat)height{
+    NSLog(@"beginEdit");
+    CGFloat a=height+((self.images.count)/3+1)*120-self.tableView.contentOffset.y;
+    if (a>=250) {
+        [self.delegate upTVCSpaceWithHeight:a-250+50];
+    }
+}
+
+-(void)endEdit{
+    [self.delegate downTVCSpace];
+}
+
 -(UIView*)getImageViewsWithImages:(NSArray*)images{
     NSMutableArray* imageAry=[NSMutableArray array];
     for (int i=0; i<images.count; i++) {
@@ -266,7 +278,7 @@
         }
         [imageAry addObject:aimage];
     }
-    [imageAry addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
+    [imageAry addObject:[UIImage imageNamed:@"新建项目－6_03.png"]];
     
     CGFloat cellHeight=120;
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
@@ -318,9 +330,6 @@
     NSLog(@"%d",self.images.count);
     [self.tableView reloadData];
 }
-
-
-
 
 -(void)tap:(UIButton*)button{
     camera=[[Camera alloc]init];

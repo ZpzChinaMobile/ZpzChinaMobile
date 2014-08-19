@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7131199CB71E0095D05B /* WeakElectricityCell.m */; };
 		043F7135199CC5380095D05B /* ClearFireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7134199CC5380095D05B /* ClearFireCell.m */; };
+		5B0726D319A1D5A80050DF5B /* 新建项目－6_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */; };
 		5B0CC39E199F09290036F94B /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CC39D199F09290036F94B /* AppModel.m */; };
 		5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
 		5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
@@ -474,6 +475,7 @@
 		043F7131199CB71E0095D05B /* WeakElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakElectricityCell.m; sourceTree = "<group>"; };
 		043F7133199CC5380095D05B /* ClearFireCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearFireCell.h; sourceTree = "<group>"; };
 		043F7134199CC5380095D05B /* ClearFireCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearFireCell.m; sourceTree = "<group>"; };
+		5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目－6_03.png"; sourceTree = "<group>"; };
 		5B0CC39C199F09290036F94B /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		5B0CC39D199F09290036F94B /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		5B6A9F601991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
@@ -1999,6 +2001,7 @@
 		D3A48895194FD95600EED32D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */,
 				D37639CF199C7E5C0052E775 /* 面部采集_07.png */,
 				D37639D0199C7E5C0052E775 /* 面部采集_11.png */,
 				5B892F93199A3CF0001F9921 /* XiangMuJieDuan */,
@@ -2719,6 +2722,7 @@
 				D3AECA641959261500FED616 /* location_point.png in Resources */,
 				D3A48920194FD95600EED32D /* 登录_15.png in Resources */,
 				D3A488EF194FD95600EED32D /* 全部项目_10.png in Resources */,
+				5B0726D319A1D5A80050DF5B /* 新建项目－6_03.png in Resources */,
 				D3AA5A25195D89FF00565078 /* Unselected.png in Resources */,
 				D3AA5A19195D75DE00565078 /* 全部项目_13.png in Resources */,
 				D3A48939194FD95600EED32D /* 首页侧拉栏_17.png in Resources */,

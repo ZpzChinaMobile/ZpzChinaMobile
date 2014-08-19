@@ -25,7 +25,7 @@
 #import "CameraModel.h"
 #import "GetBigImage.h"
 #import "AppModel.h"
-@interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
+@interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,OneTVCDelegate,TwoTVCDelegate>
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
 @property(nonatomic,strong)UIImageView* bigStageImageView;//上导航中大阶段图片
@@ -53,10 +53,11 @@
 
 @implementation ModificationViewController
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.delegate backToPro];
-}
+//-(void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:animated];
+//    NSLog(@"back");
+//    //[self.delegate backToPro];
+//}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -136,9 +137,24 @@
     // [self initTableView];
     [self initThemeView];
     [self initTableViewSpace];
+    [self.tableViewSpace addSubview:self.twoTVC.tableView];
     [self.tableViewSpace addSubview:self.oneTVC.tableView];
     [self initTableView];
     // Do any additional setup after loading the view.
+}
+
+-(void)upTVCSpaceWithHeight:(CGFloat)height{
+    [UIView animateWithDuration:.5 animations:^{
+        CGPoint point=self.tableViewSpace.center;
+        point.y-=height;
+        self.tableViewSpace.center=point;
+    }];
+}
+
+-(void)downTVCSpace{
+    [UIView animateWithDuration:.5 animations:^{
+        self.tableViewSpace.center=CGPointMake(160, 50+(568-64.5-50)*.5);
+    }];
 }
 
 -(void)initTVC{
@@ -148,15 +164,15 @@
     NSLog(@"initTVC====%@",self.singleDic);
     self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.contactAry images:self.planImageArr];
     //    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[0] mutableCopy] images:self.planImageArr];
-    
-    NSLog(@"-----------%@",[NSMutableDictionary dictionary]);
     self.oneTVC.fromView=self.fromView;
     self.oneTVC.superVC=self;
-    NSLog(@"***********************%@***********************",self.singleDic);
+    self.oneTVC.delegate=self;
+    
     //ownerAry flag 1
     self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.ownerAry images:nil];
     self.twoTVC.fromView=self.fromView;
     self.twoTVC.superVC=self;
+    self.twoTVC.delegate=self;
     
     //explorationAry flag 2
     self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.explorationAry images:self.explorationImageArr];
@@ -207,8 +223,9 @@
 
 -(void)initTableViewSpace{
     self.tableViewSpace=[[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, 568-64.5-50)];
-    self.tableViewSpace.backgroundColor=[UIColor redColor];
-    [self.contentView addSubview:self.tableViewSpace];
+    self.tableViewSpace.backgroundColor=[UIColor clearColor];
+    [self.contentView insertSubview:self.tableViewSpace atIndex:0];
+    //[self.contentView addSubview:self.tableViewSpace];
 }
 
 -(void)initThemeView{
@@ -311,7 +328,7 @@
     NSInteger a=[ary indexOfObject:[self.tableViewSpace.subviews lastObject]];
     
     
-    NSLog(@"a=%d",a);
+    //NSLog(@"a=%d",a);
     ModificationSelectViewCell* cell=[ModificationSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath nowTableView:a];
     
     return cell;
@@ -376,10 +393,11 @@
     [self.myTableView reloadData];
     
     int a[4]={0,2,5,9};
-    NSLog(@"%d",a[indexPath.section]+indexPath.row);
+    //NSLog(@"%d",a[indexPath.section]+indexPath.row);
+    NSLog(@"%d",self.tableViewSpace.subviews.count);
     UITableViewController* tvc=self.tvcArray[a[indexPath.section]+indexPath.row];
-    [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+   // [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+
     [self.tableViewSpace addSubview:tvc.tableView];
     [self selectCancel];
     
@@ -389,9 +407,19 @@
 
 -(void)initNavi{
     [self addBackButton];
-    
     [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
+
 }
+
+//-(void)leftAction
+//{
+//    NSLog(@"self");
+//    if ([self.delegate respondsToSelector:@selector(backToPro)]) {
+//        [self.delegate backToPro];
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//
+//}
 
 -(void)rightAction{
     self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];

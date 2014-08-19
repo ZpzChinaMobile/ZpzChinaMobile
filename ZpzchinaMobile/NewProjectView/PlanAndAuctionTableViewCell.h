@@ -23,4 +23,6 @@
 -(void)addContactView:(int)index;
 -(void)addContent:(NSString *)str index:(int)index;
 -(void)updataContact:(NSMutableDictionary *)dic index:(int)index;
+-(void)beginEditWithHeight:(CGFloat)height;
+-(void)endEdit;
 @end

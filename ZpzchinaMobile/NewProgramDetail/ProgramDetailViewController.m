@@ -25,7 +25,7 @@
 #import "AppModel.h"
 #import "ContactSqlite.h"
 
-@interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate,backToProgramDetailDelegate>
+@interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate>
 
 @property(nonatomic,strong)UIScrollView* myScrollView;
 @property(nonatomic,strong)UIView* tuDiXinXi;//土地信息大模块
@@ -61,6 +61,8 @@
 @property(nonatomic,strong)UIActivityIndicatorView* animationView;//加载新view时的菊花动画
 
 @property(nonatomic,strong)NSMutableArray* highImages;//存放用于放进scrollView翻滚的图片cameraModel数组
+
+@property(nonatomic,strong)UIActivityIndicatorView* loadAnimationView;//viewDidLoad时等待网络下载资源时转菊花
 @end
 
 @implementation ProgramDetailViewController
@@ -374,8 +376,13 @@
 {
     [super viewDidLoad];
     
-    
-    
+    //加载时的等待菊花
+    self.loadAnimationView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.loadAnimationView.color=[UIColor blackColor];
+    self.loadAnimationView.center=CGPointMake(160, self.contentView.frame.size.height*.5);
+    [self.contentView addSubview:self.loadAnimationView];
+    [self.loadAnimationView startAnimating];
+
     if (!self.isRelease) {
         //如果是从 需要读取 本地数据库 的页面进来，则会有内容,如果是网络则无
         self.dataDic=[NSMutableDictionary dictionary];
@@ -391,7 +398,14 @@
     }
 }
 
+
+
 -(void)loadSelf{
+    if (self.loadAnimationView) {
+        [self.loadAnimationView stopAnimating];
+        self.loadAnimationView=nil;
+    }
+    
     AppModel* appModel=[AppModel sharedInstance];
     appModel.singleDic=self.dataDic;
     
@@ -661,12 +675,12 @@
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    NSString* mainPath=@"XiangMuXiangQing_ShaiXuan";
-    NSArray* path=@[@"map@2x.png",@"pen_01@2x.png",@"Subject@2x.png",@"paint@2x.png"];
+    //NSString* mainPath=@"XiangMuXiangQing_ShaiXuan";
+    NSArray* path=@[@"XiangMuXiangQing_ShaiXuan/map@2x.png",@"XiangMuXiangQing_ShaiXuan/pen_01@2x.png",@"XiangMuXiangQing_2/Subject_01@2x.png",@"XiangMuXiangQing_3/paint_01@2x.png"];
     
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 37.5)];
     
-    UIImage* image=[UIImage imageNamed:[mainPath stringByAppendingPathComponent:path[section]]];
+    UIImage* image=[UIImage imageNamed:path[section]];
     CGRect frame=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
     imageView.center=CGPointMake(23.5, 37.5*.5);
@@ -788,26 +802,43 @@
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    BOOL first,second,third;
-//    if (indexPath.section==0) {
-//        if (indexPath.row==0) {
-//            <#statements#>
-//        }else{
-//        
-//        }
-//    }else if (indexPath.section==1){
-//        if (indexPath.row==0) {
-//            <#statements#>
-//        }else if (indexPath.row==1){
-//        
-//        }else{
-//        
-//        }
-//    }else{
-//        if (indexPath.row)
-//    }
+    BOOL first,second;
+    if (indexPath.section==0) {
+        if (indexPath.row==0) {
+            first=self.contactAry.count?YES:NO;
+            second=self.planImageArr.count?YES:NO;
+        }else{
+            first=self.ownerAry.count?YES:NO;
+            second=NO;
+        }
+    }else if (indexPath.section==1){
+        if (indexPath.row==0) {
+            first=self.explorationAry.count?YES:NO;
+            second=self.explorationImageArr.count?YES:NO;
+        }else if (indexPath.row==1){
+            first=self.designAry.count?YES:NO;
+            second=NO;
+        }else{
+            first=self.ownerAry.count?YES:NO;
+            second=NO;
+        }
+    }else{
+        if (indexPath.row==0){
+            first=self.horizonAry.count?YES:NO;
+            second=self.horizonImageArr.count?YES:NO;
+        }else if (indexPath.row==1){
+            first=self.pileAry.count?YES:NO;
+            second=self.pilePitImageArr.count?YES:NO;
+        }else if (indexPath.row==2){
+            first=NO;
+            second=self.mainConstructionImageArr.count?YES:NO;
+        }else{
+            first=NO;
+            second=NO;
+        }
+    }
     
-    ProgramSelectViewCell* cell=[ProgramSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath firstIcon:YES secondIcon:YES thirdIcon:YES];
+    ProgramSelectViewCell* cell=[ProgramSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath firstIcon:first secondIcon:second];
     cell.delegate=self;
     
     return cell;
@@ -954,11 +985,12 @@
      [self.myScrollView addSubview:self.zhuangXiu];
      }
      */
+        //NSLog(@"backToPro");
 }
 
 -(void)gotoModificationVC{
     
-    if([ProjectSqlite loadUpdataDataStatus:self.ID].count !=0){
+    if(([ProjectSqlite loadUpdataDataStatus:self.ID].count !=0)&&!self.isRelease){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                         message:@"此项目已在本地保存项目中"
                                                        delegate:self
@@ -969,7 +1001,6 @@
         ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry] horizonImageArr:self.horizonImageArr pilePitImageArr:self.pilePitImageArr mainConstructionImageArr:self.mainConstructionImageArr explorationImageArr:self.explorationImageArr fireControlImageArr:self.fireControlImageArr electroweakImageArr:self.electroweakImageArr planImageArr:self.planImageArr];
         modiVC.isRelease=self.isRelease;
         modiVC.fromView=self.fromView;
-        modiVC.delegate=self;
         [self.navigationController pushViewController:modiVC animated:YES];
     }
 }

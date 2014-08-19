@@ -30,4 +30,6 @@
 -(void)addforeignInvestment:(NSString *)str;
 -(void)updataOwner:(NSMutableDictionary *)dic index:(int)index;
 -(void)gotoMap:(NSString *)address city:(NSString *)city;
+-(void)beginEditWithHeight:(CGFloat)height;
+-(void)endEdit;
 @end

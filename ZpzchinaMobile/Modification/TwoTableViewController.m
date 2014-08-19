@@ -311,6 +311,18 @@
     return cell;
 }
 
+-(void)beginEditWithHeight:(CGFloat)height{
+    NSLog(@"beginEdit");
+    CGFloat a=height-self.tableView.contentOffset.y;
+    if (a>=250) {
+        [self.delegate upTVCSpaceWithHeight:a-250+50];
+    }
+}
+
+-(void)endEdit{
+    [self.delegate downTVCSpace];
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 550;
 }

@@ -19,4 +19,6 @@
 -(void)addContactViewPlot:(int)index;
 -(void)updataPlotOwner:(NSMutableDictionary *)dic index:(int)index;
 -(void)addSwitchValue:(int)index value:(BOOL)value;
+-(void)beginEdit;
+-(void)endEdit;
 @end

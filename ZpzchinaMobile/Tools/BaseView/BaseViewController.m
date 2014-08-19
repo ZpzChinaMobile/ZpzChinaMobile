@@ -35,7 +35,7 @@
     UIView *contentView=[[UIView alloc] initWithFrame:CGRectMake(0,64.5,kScreenWidth,kContentHeight)];
     contentView.backgroundColor=[UIColor whiteColor];
     self.contentView=contentView;
-    [self.view addSubview:contentView];
+    [self.view insertSubview:contentView atIndex:0];
 }
 
 - (void)didReceiveMemoryWarning

@@ -84,6 +84,7 @@ static __weak ProgramDetailViewController* myDelegate;
         }
        
     }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
+        NSLog(@"mainConstructionImageArr%d",myDelegate.mainConstructionImageArr.count);
         if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
             model = myDelegate.mainConstructionImageArr[0];
             if([model.a_device isEqualToString:@"localios"]){

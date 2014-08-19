@@ -264,16 +264,22 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
+    CGFloat heights[4]={50,150,200,250};
+    
+    [self.delegate beginEditWithHeight:heights[textField.tag]];
+    
     textfield = nil;
     textfield = textField;
-    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 350)];
+    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];//350)];
     closeView.userInteractionEnabled = YES;
+    closeView.backgroundColor=[UIColor clearColor];
+
     UITapGestureRecognizer *closeViewtapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     [closeViewtapGestureRecognizer addTarget:self action:@selector(closeKeyBoard)];
     [closeViewtapGestureRecognizer setNumberOfTapsRequired:1];
     [closeViewtapGestureRecognizer setNumberOfTouchesRequired:1];
     [closeView addGestureRecognizer:closeViewtapGestureRecognizer];
-    [self addSubview:closeView];
+    [self.superview.superview.superview.superview addSubview:closeView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -282,9 +288,12 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+
     if ([delegate respondsToSelector:@selector(addContent:index:)]){
         [delegate addContent:textField.text index:textField.tag];
     }
+    [self.delegate endEdit];
 }
 
 -(void)contactBtn:(UIButton *)button{

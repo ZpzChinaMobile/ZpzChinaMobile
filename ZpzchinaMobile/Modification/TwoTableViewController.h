@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TwoTVCDelegate <NSObject>
+-(void)upTVCSpaceWithHeight:(CGFloat)height;
+-(void)downTVCSpace;
+@end
+
 @interface TwoTableViewController : UITableViewController
 @property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
@@ -16,8 +21,8 @@
 @property(nonatomic)NSInteger timeflag;
 @property(nonatomic,strong)UIViewController* superVC;
 
-
 @property(nonatomic,strong)UIViewController* bgVC;
 
+@property(nonatomic,weak)id<TwoTVCDelegate>delegate;
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images;
 @end
