@@ -41,10 +41,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    if (self.fromView==0) {
-//        AppModel* appModel=[AppModel sharedInstance];
-//        [appModel.mainConstructionImageArr removeAllObjects];
-//    }
+    //    if (self.fromView==0) {
+    //        AppModel* appModel=[AppModel sharedInstance];
+    //        [appModel.mainConstructionImageArr removeAllObjects];
+    //    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -68,14 +68,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        if (!cell) {
-            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        }
-        [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [cell.contentView addSubview:[self getImageViewsWithImages:self.images]];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        return cell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (!cell) {
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    }
+    [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [cell.contentView addSubview:[self getImageViewsWithImages:self.images]];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    return cell;
     
 }
 
@@ -88,20 +88,19 @@
         [self.images removeAllObjects];
         self.images = [CameraSqlite loadAllMainConstructionList:[self.dataDic objectForKey:@"id"]];
     }else{
-        // if(isRelease == 0){
-        // if(cameraflag == 0){
-        if([CameraSqlite loadMainConstructionSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-            [self.images insertObject:[[CameraSqlite loadAllMainConstructionList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+        if(self.superVC.isRelease == 0){
+            // if(cameraflag == 0){
+            if([CameraSqlite loadMainConstructionSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+                [self.images insertObject:[[CameraSqlite loadAllMainConstructionList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            }
+        }else{
+            [self.images removeAllObjects];
+            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                self.images = [CameraSqlite loadAllMainConstructionList:[self.singleDic objectForKey:@"id"]];
+            }else{
+                self.images = [CameraSqlite loadAllMainConstructionList:[self.singleDic objectForKey:@"projectID"]];
+            }
         }
-        //        //  }else{
-        //        [self.images removeAllObjects];
-        //
-        //        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"id"]];
-        //
-        //        }else{
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"projectID"]];
-        //        }
     }
     [self.tableView reloadData];
 }
@@ -157,7 +156,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-        return (self.images.count/3+1)*120;
+    return (self.images.count/3+1)*120;
 }
 -(void)dealloc{
     NSLog(@"eightDealloc");

@@ -98,16 +98,16 @@
 }
 
 -(void)updataContractorUnitContacts:(NSMutableDictionary *)dic index:(int)index{
-   // self.flag = 4;
+    // self.flag = 4;
     addcontactView = [[AddContactViewController alloc] init];
     [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
-//    if(self.fromView == 1){
-//        if(self.isRelease == 0){
-//            [addcontactView setenabled:horizonArr];
-//        }
-//    }
+    //    if(self.fromView == 1){
+    //        if(self.isRelease == 0){
+    //            [addcontactView setenabled:horizonArr];
+    //        }
+    //    }
     [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
 
@@ -135,12 +135,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    if (self.fromView==0) {
-//        AppModel* appModel=[AppModel sharedInstance];
-//        appModel.horizonAry =[NSMutableArray array];
-//        [appModel.horizonImageArr removeAllObjects];
-//        self.contacts=appModel.horizonAry;
-//    }
+    //    if (self.fromView==0) {
+    //        AppModel* appModel=[AppModel sharedInstance];
+    //        appModel.horizonAry =[NSMutableArray array];
+    //        [appModel.horizonImageArr removeAllObjects];
+    //        self.contacts=appModel.horizonAry;
+    //    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -175,15 +175,15 @@
         return cell;
     }else{
         HorizonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HorizonTableViewCell"];
-       // if (!cell) {
+        // if (!cell) {
         if(self.fromView == 0){
             cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:0 Arr:self.contacts singleDic:nil];
         }else{
             cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
-
+            
         }
         cell.delegate=self;
-
+        
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         
@@ -251,20 +251,19 @@
         [self.images removeAllObjects];
         self.images = [CameraSqlite loadAllHorizonList:[self.dataDic objectForKey:@"id"]];
     }else{
-        // if(isRelease == 0){
-        // if(cameraflag == 0){
-        if([CameraSqlite loadHorizonSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-            [self.images insertObject:[[CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+        if(self.superVC.isRelease == 0){
+            // if(cameraflag == 0){
+            if([CameraSqlite loadHorizonSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+                [self.images insertObject:[[CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            }else{
+                [self.images removeAllObjects];
+                if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                    self.images = [CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"id"]];
+                }else{
+                    self.images = [CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"projectID"]];
+                }
+            }
         }
-        //        //  }else{
-        //        [self.images removeAllObjects];
-        //
-        //        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"id"]];
-        //
-        //        }else{
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"projectID"]];
-        //        }
     }
     [self.tableView reloadData];
 }

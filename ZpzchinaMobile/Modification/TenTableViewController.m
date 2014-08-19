@@ -41,10 +41,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    if (self.fromView==0) {
-//        AppModel* appModel=[AppModel sharedInstance];
-//        [appModel.electroweakImageArr removeAllObjects];
-//    }
+    //    if (self.fromView==0) {
+    //        AppModel* appModel=[AppModel sharedInstance];
+    //        [appModel.electroweakImageArr removeAllObjects];
+    //    }
     self.tableView.separatorStyle=NO;
     
 }
@@ -110,20 +110,19 @@
         [self.images removeAllObjects];
         self.images = [CameraSqlite loadAllelectroweakList:[self.dataDic objectForKey:@"id"]];
     }else{
-        // if(isRelease == 0){
-        // if(cameraflag == 0){
-        if([CameraSqlite loadelectroweakSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-            [self.images insertObject:[[CameraSqlite loadAllelectroweakList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+        if(self.superVC.isRelease == 0){
+            // if(cameraflag == 0){
+            if([CameraSqlite loadelectroweakSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+                [self.images insertObject:[[CameraSqlite loadAllelectroweakList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            }
+        }else{
+            [self.images removeAllObjects];
+            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                self.images = [CameraSqlite loadAllelectroweakList:[self.singleDic objectForKey:@"id"]];
+            }else{
+                self.images = [CameraSqlite loadAllelectroweakList:[self.singleDic objectForKey:@"projectID"]];
+            }
         }
-        //        //  }else{
-        //        [self.images removeAllObjects];
-        //
-        //        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"id"]];
-        //
-        //        }else{
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"projectID"]];
-        //        }
     }
     [self.tableView reloadData];
 }

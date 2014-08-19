@@ -95,12 +95,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    if (self.fromView==0) {
-//        AppModel* appModel=[AppModel sharedInstance];
-//        appModel.pileAry =[NSMutableArray array];
-//        [appModel.pilePitImageArr removeAllObjects];
-//        self.contacts=appModel.pileAry;
-//    }
+    //    if (self.fromView==0) {
+    //        AppModel* appModel=[AppModel sharedInstance];
+    //        appModel.pileAry =[NSMutableArray array];
+    //        [appModel.pilePitImageArr removeAllObjects];
+    //        self.contacts=appModel.pileAry;
+    //    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -137,10 +137,10 @@
         PilePitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PilePitTableViewCell"];
         // if (!cell) {
         if(self.fromView == 0){
-        cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:0 Arr:self.contacts];
+            cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:0 Arr:self.contacts];
         }else{
             cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:1 Arr:self.contacts];
-
+            
         }
         cell.delegate=self;
         // }
@@ -163,20 +163,19 @@
         [self.images removeAllObjects];
         self.images = [CameraSqlite loadAllPilePitList:[self.dataDic objectForKey:@"id"]];
     }else{
-        // if(isRelease == 0){
-        // if(cameraflag == 0){
-        if([CameraSqlite loadPilePitSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-            [self.images insertObject:[[CameraSqlite loadAllPilePitList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+        if(self.superVC.isRelease == 0){
+            // if(cameraflag == 0){
+            if([CameraSqlite loadPilePitSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+                [self.images insertObject:[[CameraSqlite loadAllPilePitList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            }
+        }else{
+            [self.images removeAllObjects];
+            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                self.images = [CameraSqlite loadAllPilePitList:[self.singleDic objectForKey:@"id"]];
+            }else{
+                self.images = [CameraSqlite loadAllPilePitList:[self.singleDic objectForKey:@"projectID"]];
+            }
         }
-        //        //  }else{
-        //        [self.images removeAllObjects];
-        //
-        //        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"id"]];
-        //
-        //        }else{
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"projectID"]];
-        //        }
     }
     [self.tableView reloadData];
 }

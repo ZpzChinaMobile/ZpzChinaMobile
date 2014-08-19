@@ -948,43 +948,6 @@
     }];
 }
 
--(void)backToPro{
-    // NSDictionary* dic=[NSDictionary dictionaryWithObjectsAndKeys:self.tuDiXinXi,@"tuDiXinXi",self.zhuTiSheJi,@"zhuTiSheJi",self.zhuTiShiGong,@"zhuTiShiGong",self.zhuangXiu,@"zhuangXiu", nil];
-    // NSArray* array=@[self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu];
-    /*
-     AppModel* app=[AppModel sharedInstance];
-     NSLog(@"%@",self.dataDic);
-     NSLog(@"%@",app.singleDic);
-     //为了下面api不崩
-     CGFloat a=0;
-     if (self.tuDiXinXi) {
-     CGRect frame=self.tuDiXinXi.frame;
-     self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
-     self.tuDiXinXi.frame=frame;
-     [self.myScrollView addSubview:self.tuDiXinXi];
-     }
-     if (self.zhuTiSheJi) {
-     CGRect frame=self.zhuTiSheJi.frame;
-     self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&a delegate:self];
-     self.zhuTiSheJi.frame=frame;
-     [self.myScrollView addSubview:self.zhuTiSheJi];
-     }
-     if (self.zhuTiShiGong) {
-     CGRect frame=self.zhuTiShiGong.frame;
-     self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&a thirdViewHeight:&a delegate:self];
-     self.zhuTiShiGong.frame=frame;
-     [self.myScrollView addSubview:self.zhuTiShiGong];
-     }
-     if (self.zhuangXiu) {
-     CGRect frame=self.zhuangXiu.frame;
-     self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self ];
-     self.zhuangXiu.frame=frame;
-     [self.myScrollView addSubview:self.zhuangXiu];
-     }
-     */
-        //NSLog(@"backToPro");
-}
-
 -(void)gotoModificationVC{
     
     if(([ProjectSqlite loadUpdataDataStatus:self.ID].count !=0)&&!self.isRelease){

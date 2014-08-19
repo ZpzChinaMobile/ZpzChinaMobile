@@ -95,12 +95,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    if (self.fromView==0) {
-//        AppModel* appModel=[AppModel sharedInstance];
-//        appModel.explorationAry =[NSMutableArray array];
-//        [appModel.explorationImageArr removeAllObjects];
-//        self.contacts=appModel.explorationAry;
-//    }
+    //    if (self.fromView==0) {
+    //        AppModel* appModel=[AppModel sharedInstance];
+    //        appModel.explorationAry =[NSMutableArray array];
+    //        [appModel.explorationImageArr removeAllObjects];
+    //        self.contacts=appModel.explorationAry;
+    //    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -135,7 +135,7 @@
         return cell;
     }else{
         GeologicalSurveyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
-       // if (!cell) {
+        // if (!cell) {
         if(self.fromView == 0){
             //AppModel* appModel=[AppModel sharedInstance];
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:self.fromView Arr:self.contacts explorationImageArr:nil];
@@ -206,20 +206,19 @@
         [self.images removeAllObjects];
         self.images = [CameraSqlite loadAllexplorationList:[self.dataDic objectForKey:@"id"]];
     }else{
-        // if(isRelease == 0){
-        // if(cameraflag == 0){
-        if([CameraSqlite loadexplorationSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-            [self.images insertObject:[[CameraSqlite loadAllexplorationList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+        if(self.superVC.isRelease == 0){
+            // if(cameraflag == 0){
+            if([CameraSqlite loadexplorationSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+                [self.images insertObject:[[CameraSqlite loadAllexplorationList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            }
+        }else{
+            [self.images removeAllObjects];
+            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                self.images = [CameraSqlite loadAllexplorationList:[self.singleDic objectForKey:@"id"]];
+            }else{
+                self.images = [CameraSqlite loadAllexplorationList:[self.singleDic objectForKey:@"projectID"]];
+            }
         }
-        //        //  }else{
-        //        [self.images removeAllObjects];
-        //
-        //        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"id"]];
-        //
-        //        }else{
-        //            self.images = [CameraSqlite loadHorizonList:[self.singleDic objectForKey:@"projectID"]];
-        //        }
     }
     [self.tableView reloadData];
 }
