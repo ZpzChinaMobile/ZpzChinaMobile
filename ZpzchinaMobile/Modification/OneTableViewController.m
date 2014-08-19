@@ -323,7 +323,7 @@
         }
         
     }
-    NSLog(@"%d",self.images.count);
+    NSLog(@"=====%d",self.images.count);
     [self.tableView reloadData];
 }
 

@@ -170,6 +170,8 @@
     NSMutableArray* ary=[NSMutableArray array];
     
     if (button==self.firstStageButton1) {
+        NSLog(@"firstStageButton1==%d",self.planImageArr.count);
+
         if (!self.isRelease) {
             for (int i=0; i<self.planImageArr.count; i++) {
                 CameraModel* camera=self.planImageArr[i];
@@ -181,7 +183,6 @@
             [self gotoScrollImageViewWithImageAry:self.planImageArr];
         }
         
-        NSLog(@"firstStageButton1");
     }else if(button==self.secondStageButton1){
         if (!self.isRelease) {
             for (int i=0; i<self.explorationImageArr.count; i++) {
