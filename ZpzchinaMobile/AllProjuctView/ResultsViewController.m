@@ -12,6 +12,7 @@
 #import "ProjectModel.h"
 #import "MJRefresh.h"
 #import "ProjectStage.h"
+#import "ProgramDetailViewController.h"
 @interface ResultsViewController ()
 
 @end
@@ -58,15 +59,15 @@ int startIndex;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 /**
  *  集成刷新控件
  */
@@ -156,14 +157,21 @@ int startIndex;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //新建项目页面
-    ProjectModel *model = [showArr objectAtIndex:indexPath.section];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic = [ProjectStage JudgmentStr:model];
-    
-    _newProject = [[NewProjectViewController alloc] init];
-    _newProject.fromView = 1;
-    _newProject.SingleDataDic = dic;
-    [self.navigationController pushViewController:_newProject animated:YES];
+    //    ProjectModel *model = [showArr objectAtIndex:indexPath.section];
+    //    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //    dic = [ProjectStage JudgmentStr:model];
+    //
+    //    _newProject = [[NewProjectViewController alloc] init];
+    //    _newProject.fromView = 1;
+    //    _newProject.SingleDataDic = dic;
+    //[self.navigationController pushViewController:_newProject animated:YES];
+    //
+    ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
+    vc.url=[showArr objectAtIndex:indexPath.section][@"url"];
+    vc.isRelease=0;
+    vc.fromView=1;
+    vc.ID=[[showArr objectAtIndex:indexPath.section] objectForKey:@"projectID"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
