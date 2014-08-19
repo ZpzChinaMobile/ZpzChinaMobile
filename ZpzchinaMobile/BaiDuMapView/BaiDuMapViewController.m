@@ -250,7 +250,7 @@ int j;
 	annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
     annotationView.annotation = annotation;
     // 单击弹出泡泡，弹出泡泡前提annotation必须实现title属性
-	annotationView.canShowCallout = YES;
+	annotationView.canShowCallout = NO;
     // 设置是否可以拖拽
     annotationView.draggable = NO;
     j++;

@@ -166,11 +166,14 @@ int startIndex;
     //    _newProject.SingleDataDic = dic;
     //[self.navigationController pushViewController:_newProject animated:YES];
     //
+    ProjectModel *model = [showArr objectAtIndex:indexPath.section];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    dic = [ProjectStage JudgmentStr:model];
     ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
-    vc.url=[showArr objectAtIndex:indexPath.section][@"url"];
+    vc.url=dic[@"url"];
     vc.isRelease=0;
     vc.fromView=1;
-    vc.ID=[[showArr objectAtIndex:indexPath.section] objectForKey:@"projectID"];
+    vc.ID=dic[@"projectID"];//[[showArr objectAtIndex:indexPath.section] objectForKey:@"projectID"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

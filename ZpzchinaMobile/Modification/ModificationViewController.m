@@ -624,6 +624,9 @@
         [self initTableView];
 
     }
+    if (!self.isRelease&&self.fromView) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 -(void)initdataDic{

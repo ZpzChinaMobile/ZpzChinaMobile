@@ -114,7 +114,7 @@
     UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(50,115,60,20)];
     zoneLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     zoneLabel.textColor = BlueColor;
-    zoneLabel.text = @"华南区 -";
+    zoneLabel.text = @"华南区 - ";
     [bgImgView addSubview:zoneLabel];
     
     UILabel *addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(100,115,160,20)];

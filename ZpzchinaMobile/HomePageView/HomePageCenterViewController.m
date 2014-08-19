@@ -317,7 +317,7 @@
 //            [self.navigationController pushViewController:_newProject animated:YES];
             modifiVC=[[ModificationViewController alloc] init];
             modifiVC.fromView=0;
-            //modifiVC.isRelease=1;
+            //modifiVC.isRelease=;
             [self.navigationController pushViewController:modifiVC animated:YES];
             break;
         case 1:

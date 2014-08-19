@@ -40,6 +40,11 @@
     //[picArray addObject:[UIImage imageNamed:@"2.JPG"]];
    // [picArray addObject:[UIImage imageNamed:@"3.JPG"]];
     
+    UIButton* button=[[UIButton alloc]initWithFrame:self.view.frame];
+    button.backgroundColor=[UIColor clearColor];
+    [button addTarget:self action:@selector(cycleScrollViewDelegate:didSelectImageView:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
     CycleScrollView *cycle = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)
                                                      cycleDirection:CycleDirectionLandscape
                                                            pictures:picArray];
@@ -49,6 +54,9 @@
     self.view.backgroundColor=[UIColor blackColor];
     
     [self.view addSubview:cycle];
+    
+    
+    
     [cycle release];
     
     [picArray release];
