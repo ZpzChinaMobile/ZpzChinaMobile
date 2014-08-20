@@ -165,4 +165,7 @@
     }
     NSLog(@"eightDisappear");
 }
+-(void)dealloc{
+    NSLog(@"eightdealloc");
+}
 @end

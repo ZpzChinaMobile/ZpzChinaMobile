@@ -700,16 +700,16 @@
 }
 
 -(void)dealloc{
-    self.oneTVC=nil;
-    self.twoTVC=nil;
-    self.threeTVC=nil;
-    self.fourTVC=nil;
-    self.fiveTVC=nil;
-    self.sixTVC=nil;
-    self.sevenTVC=nil;
-    self.eightTVC=nil;
-    self.nineTVC=nil;
-    self.tenTVC=nil;
+//    self.oneTVC=nil;
+//    self.twoTVC=nil;
+//    self.threeTVC=nil;
+//    self.fourTVC=nil;
+//    self.fiveTVC=nil;
+//    self.sixTVC=nil;
+//    self.sevenTVC=nil;
+//    self.eightTVC=nil;
+//    self.nineTVC=nil;
+//    self.tenTVC=nil;
     NSLog(@"modifiDealloc");
 }
 

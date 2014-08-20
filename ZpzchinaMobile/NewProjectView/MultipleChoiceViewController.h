@@ -12,11 +12,10 @@
     UITableView *_tableView;
     NSMutableArray *showArr;
     NSMutableArray *dataArr;
-    id<MChoiceViewDelegate>delegate;
 }
 @property(retain,nonatomic)NSMutableArray *showArr;
 @property(retain,nonatomic)NSMutableArray *dataArr;
-@property(nonatomic ,strong)id<MChoiceViewDelegate>delegate;
+@property(nonatomic ,weak)id<MChoiceViewDelegate>delegate;
 @end
 @protocol MChoiceViewDelegate <NSObject>
 -(void)choiceData:(NSMutableArray *)arr;

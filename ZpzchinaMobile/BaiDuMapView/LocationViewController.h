@@ -20,9 +20,8 @@
     NSString *baseAddress;
     NSString *baseCity;
     CLLocationCoordinate2D testLocation;
-    id<LocationViewDelegate>delegate;
 }
-@property(nonatomic ,strong) id <LocationViewDelegate> delegate;
+@property(nonatomic ,weak) id <LocationViewDelegate> delegate;
 @property(nonatomic ,retain) NSString *baseAddress;
 @property(nonatomic ,retain) NSString *baseCity;
 @end

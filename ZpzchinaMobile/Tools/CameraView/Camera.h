@@ -14,10 +14,9 @@
     NSString* _filePath;
     UIImagePickerController *pickerController;
     NSString *type;
-    id<CameraDelegate>delegate;
     NSString *projectID;
 }
-@property(nonatomic ,strong) id <CameraDelegate> delegate;
+@property(nonatomic ,weak) id <CameraDelegate> delegate;
 -(void)getCameraView:(UIViewController *)viewController flag:(int)flag aid:(NSString *)aid;
 @end
 @protocol CameraDelegate <NSObject>

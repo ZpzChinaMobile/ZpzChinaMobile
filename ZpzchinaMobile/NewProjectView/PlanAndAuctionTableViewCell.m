@@ -8,7 +8,6 @@
 
 #import "PlanAndAuctionTableViewCell.h"
 @implementation PlanAndAuctionTableViewCell
-@synthesize delegate;
 @synthesize dataArr;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic singleDic:(NSMutableDictionary *)singleDic flag:(int)flag contactArr:(NSMutableArray *)contactArr
 {
@@ -29,15 +28,15 @@
         NSLog(@"%d",flag);
         NSLog(@"%@",dic);
         if(flag == 0){
-            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
+            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
+                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
             }
         }else{
-            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
+            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
+                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
             }else{
-                if(![[singleDic objectForKey:@"landName"] isEqualToString:@""]){
-                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landName"]]];
+                if(![[singleDic objectForKey:@"projectName"] isEqualToString:@""]){
+                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"projectName"]]];
                 }
             }
         }
@@ -258,8 +257,8 @@
 
 -(void)BtnClick:(UIButton *)button{
     [textfield resignFirstResponder];
-    if ([delegate respondsToSelector:@selector(addContactView:)]){
-        [delegate addContactView:button.tag];
+    if ([self.delegate respondsToSelector:@selector(addContactView:)]){
+        [self.delegate addContactView:button.tag];
     }
 }
 
@@ -290,16 +289,16 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
 
-    if ([delegate respondsToSelector:@selector(addContent:index:)]){
-        [delegate addContent:textField.text index:textField.tag];
+    if ([self.delegate respondsToSelector:@selector(addContent:index:)]){
+        [self.delegate addContent:textField.text index:textField.tag];
     }
     [self.delegate endEdit];
 }
 
 -(void)contactBtn:(UIButton *)button{
     //NSLog(@"button ===> %@",[self.dataArr objectAtIndex:button.tag-1]);
-    if ([delegate respondsToSelector:@selector(updataContact:index:)]){
-        [delegate updataContact:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
+    if ([self.delegate respondsToSelector:@selector(updataContact:index:)]){
+        [self.delegate updataContact:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
     }
 }
 

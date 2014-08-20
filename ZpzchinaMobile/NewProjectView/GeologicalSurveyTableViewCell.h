@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 @protocol GeologicalSurveyDelegate;
 @interface GeologicalSurveyTableViewCell : UITableViewCell{
-    id<GeologicalSurveyDelegate>delegate;
     NSMutableArray *dataArr;
     NSMutableArray *imageArr;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier flag:(int)flag Arr:(NSMutableArray *)Arr explorationImageArr:(NSMutableArray *)explorationImageArr;
-@property(nonatomic ,strong) id <GeologicalSurveyDelegate> delegate;
+@property(nonatomic ,weak) id <GeologicalSurveyDelegate> delegate;
 @end
 @protocol GeologicalSurveyDelegate <NSObject>
 -(void)addContactViewGeologicalSurvey;

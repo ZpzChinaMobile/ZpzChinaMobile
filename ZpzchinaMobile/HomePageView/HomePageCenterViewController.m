@@ -309,6 +309,7 @@
 }
 
 -(void)AllBtnClick:(UIButton *)button{
+    ModificationViewController* modifiVC;
     switch (button.tag) {
         case 0:
             //新建项目页面

@@ -10,7 +10,6 @@
 #import "NIDropDown.h"
 @protocol ProjectDelegate;
 @interface ProjectTableViewCell : UITableViewCell<UITextFieldDelegate,NIDropDownDelegate>{
-    id<ProjectDelegate>delegate;
     UITextField *textfield;
     NIDropDown *dropDown;
     NSMutableArray *dataArr;
@@ -20,7 +19,7 @@
     UILabel *foreignparticipationLabel;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag ownerArr:(NSMutableArray *)ownerArr singleDic:(NSMutableDictionary *)singleDic;
-@property(nonatomic ,strong) id <ProjectDelegate> delegate;
+@property(nonatomic ,weak) id <ProjectDelegate> delegate;
 @property(retain,nonatomic)NIDropDown *dropDown;
 @property(nonatomic,retain)NSMutableArray *dataArr;
 @end

@@ -10,7 +10,6 @@
 #import "CameraSqlite.h"
 #import "GTMBase64.h"
 @implementation Camera
-@synthesize delegate;
 -(void)getCameraView:(UIViewController *)viewController flag:(int)flag aid:(NSString *)aid{
     if(flag == 0){
         type = @"horizon";
@@ -48,8 +47,8 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    if ([delegate respondsToSelector:@selector(backCamera)]){
-        [delegate backCamera];
+    if ([self.delegate respondsToSelector:@selector(backCamera)]){
+        [self.delegate backCamera];
     }
     [picker dismissViewControllerAnimated:YES completion:Nil];
     
@@ -102,8 +101,8 @@
     [dic setValue:projectID forKey:@"localProjectId"];
     [dic setValue:@"localios" forKey:@"device"];
     [CameraSqlite InsertData:dic];
-    if ([delegate respondsToSelector:@selector(backCamera)]){
-        [delegate backCamera];
+    if ([self.delegate respondsToSelector:@selector(backCamera)]){
+        [self.delegate backCamera];
     }
     [pickerController dismissViewControllerAnimated:YES completion:Nil];
 }

@@ -213,4 +213,7 @@
     }
     NSLog(@"tenDisappear");
 }
+-(void)dealloc{
+    NSLog(@"tenDealloc");
+}
 @end

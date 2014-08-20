@@ -20,6 +20,5 @@
     UIView *bgView;
     UIButton *btn;
     Album *album;
-    ModificationViewController* modifiVC;
 }
 @end

@@ -281,4 +281,7 @@
     }
     NSLog(@"sixDisappear");
 }
+-(void)dealloc{
+    NSLog(@"sixDealloc");
+}
 @end

@@ -9,7 +9,6 @@
 #import "ProjectTableViewCell.h"
 
 @implementation ProjectTableViewCell
-@synthesize delegate;
 @synthesize dropDown;
 @synthesize dataArr;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag ownerArr:(NSMutableArray *)ownerArr singleDic:(NSMutableDictionary *)singleDic
@@ -445,16 +444,16 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([delegate respondsToSelector:@selector(addContentProject:index:)]){
-        [delegate addContentProject:textField.text index:textField.tag];
+    if ([self.delegate respondsToSelector:@selector(addContentProject:index:)]){
+        [self.delegate addContentProject:textField.text index:textField.tag];
     }
     [self.delegate endEdit];
 }
 
 -(void)btnClick:(UIButton *)button{
     [textfield resignFirstResponder];
-    if ([delegate respondsToSelector:@selector(addContactViewProject:)]){
-        [delegate addContactViewProject:button.tag];
+    if ([self.delegate respondsToSelector:@selector(addContactViewProject:)]){
+        [self.delegate addContactViewProject:button.tag];
     }
 }
 
@@ -474,8 +473,8 @@
 
 - (void) niDropDownDelegateMethod: (NIDropDown *) sender text:(NSString *)text tit:(NSString *)tit{
     //NSLog(@"%@",text);
-    if ([delegate respondsToSelector:@selector(addforeignInvestment:)]){
-        [delegate addforeignInvestment:text];
+    if ([self.delegate respondsToSelector:@selector(addforeignInvestment:)]){
+        [self.delegate addforeignInvestment:text];
     }
 }
 
@@ -486,15 +485,15 @@
 }
 
 -(void)contactBtn:(UIButton *)button{
-    if ([delegate respondsToSelector:@selector(updataOwner:index:)]){
-        [delegate updataOwner:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
+    if ([self.delegate respondsToSelector:@selector(updataOwner:index:)]){
+        [self.delegate updataOwner:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
     }
 }
 
 -(void)gotoMap{
-    if ([delegate respondsToSelector:@selector(gotoMap:city:)]){
+    if ([self.delegate respondsToSelector:@selector(gotoMap:city:)]){
         NSLog(@"===%@",[dataDic objectForKey:@"city"]);
-        [delegate gotoMap:[dataDic objectForKey:@"landAddress"] city:[dataDic objectForKey:@"city"]];
+        [self.delegate gotoMap:[dataDic objectForKey:@"landAddress"] city:[dataDic objectForKey:@"city"]];
     }
 }
 @end

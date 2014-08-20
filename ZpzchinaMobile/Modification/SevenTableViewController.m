@@ -241,4 +241,7 @@
     }
     NSLog(@"sevenDisappear");
 }
+-(void)dealloc{
+    NSLog(@"sevendealloc");
+}
 @end

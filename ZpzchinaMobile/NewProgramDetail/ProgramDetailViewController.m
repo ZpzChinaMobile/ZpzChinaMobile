@@ -477,7 +477,7 @@
                     [self addArray:resultArr projectID:self.dataDic[@"projectID"]];
                 }
                 
-                
+                NSLog(@"===>%d",[[item objectForKey:@"projectImgs"] count]);
                 for(NSDictionary *imageItem in [item objectForKey:@"projectImgs"]){
                     // NSLog(@"*******************%@",[imageItem objectForKey:@"data"]);
                     //NSMutableArray *resultArr = [[NSMutableArray alloc]init];

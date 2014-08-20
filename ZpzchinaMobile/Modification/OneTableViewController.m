@@ -122,7 +122,7 @@
 -(void)addContent:(NSString *)str index:(int)index{
     switch (index) {
         case 0:
-            [self.dataDic setObject:str forKey:@"landName"];
+            [self.dataDic setObject:str forKey:@"projectName"];
             break;
         case 1:
             [self.dataDic setObject:str forKey:@"landAddress"];
@@ -352,6 +352,9 @@
     if (self.images.count) {
         model.planImageArr=self.images;
     }
-    NSLog(@"oneDisappear");
 }
+-(void)dealloc{
+    NSLog(@"oneDealloc");
+}
+
 @end

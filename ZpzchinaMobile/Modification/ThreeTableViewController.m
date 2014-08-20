@@ -236,4 +236,7 @@
     }
     NSLog(@"threeDisappear");
 }
+-(void)dealloc{
+    NSLog(@"threeDealloc");
+}
 @end

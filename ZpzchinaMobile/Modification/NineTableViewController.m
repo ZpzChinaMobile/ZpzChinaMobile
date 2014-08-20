@@ -212,4 +212,7 @@
     }
     NSLog(@"nineDisappear");
 }
+-(void)dealloc{
+    NSLog(@"nineDealloc");
+}
 @end
