@@ -11,4 +11,5 @@
 
 @interface ZhuTiShiGong : NSObject
 +(UIView*)zhuTiShiGongWithFirstViewHeight:(CGFloat*)firstViewHeight secondView:(CGFloat*)secondViewHeight thirdViewHeight:(CGFloat*)thirdViewHeight delegate:(ProgramDetailViewController*)delegate;
++(void)myDealloc;
 @end

@@ -700,16 +700,22 @@
 }
 
 -(void)dealloc{
-//    self.oneTVC=nil;
-//    self.twoTVC=nil;
-//    self.threeTVC=nil;
-//    self.fourTVC=nil;
-//    self.fiveTVC=nil;
-//    self.sixTVC=nil;
-//    self.sevenTVC=nil;
-//    self.eightTVC=nil;
-//    self.nineTVC=nil;
-//    self.tenTVC=nil;
+    if (!self.fromView) {
+        AppModel* app=[AppModel sharedInstance];
+        app=nil;
+    }
+    self.oneTVC=nil;
+    self.twoTVC=nil;
+    self.threeTVC=nil;
+    self.fourTVC=nil;
+    self.fiveTVC=nil;
+    self.sixTVC=nil;
+    self.sevenTVC=nil;
+    self.eightTVC=nil;
+    self.nineTVC=nil;
+    self.tenTVC=nil;
+    
+
     NSLog(@"modifiDealloc");
 }
 

@@ -15,6 +15,12 @@ static NSDictionary* dataDic;
 static CGFloat height = 0;//统计总高
 static UIView* totalView;
 static __weak ProgramDetailViewController* myDelegate;
+
++(void)myDealloc{
+    totalView=nil;
+    dataDic=nil;
+}
+
 +(UIView*)zhuTiShiGongWithFirstViewHeight:(CGFloat*)firstViewHeight secondView:(CGFloat*)secondViewHeight thirdViewHeight:(CGFloat*)thirdViewHeight delegate:(ProgramDetailViewController*)delegate{
     //数值初始
     height=0;

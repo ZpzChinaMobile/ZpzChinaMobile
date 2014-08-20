@@ -31,8 +31,8 @@
 
 //测试代码
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"%d",scrollView==self.tableView);
-    NSLog(@"22");
+//    NSLog(@"%d",scrollView==self.tableView);
+//    NSLog(@"22");
 }
 
 
@@ -282,6 +282,7 @@
     
     CGFloat cellHeight=120;
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
+    view.backgroundColor=RGBCOLOR(229, 229, 229);
     
     for (int i=0; i<imageAry.count; i++) {
         UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];

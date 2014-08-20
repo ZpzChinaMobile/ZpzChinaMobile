@@ -14,7 +14,14 @@ static CGFloat height;//统计总高
 static UIView* totalView;
 static __weak ProgramDetailViewController* myDelegate;
 static NSDictionary* dataDic;
-+(UIView*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate {
+
++(void)myDealloc{
+    totalView=nil;
+    dataDic=nil;
+}
+
++(UIView*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate {    
+    
     //数值初始
     height=0;
     totalView=nil;

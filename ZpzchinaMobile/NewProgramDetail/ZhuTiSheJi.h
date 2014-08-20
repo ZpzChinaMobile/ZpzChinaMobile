@@ -10,4 +10,5 @@
 #import "ProgramDetailViewController.h"
 @interface ZhuTiSheJi : NSObject
 +(UIView*)zhuTiSheJiWithFirstViewHeight:(CGFloat*)firstViewHeight secondView:(CGFloat*)secondViewHeight delegate:(ProgramDetailViewController*)delegate;
++(void)myDealloc;
 @end

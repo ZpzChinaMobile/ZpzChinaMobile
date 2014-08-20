@@ -11,4 +11,5 @@
 
 @interface ZhuangXiu : NSObject
 +(UIView*)zhuangXiuWithdelegate:(ProgramDetailViewController*)delegate;
++(void)myDealloc;
 @end

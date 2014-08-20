@@ -1010,38 +1010,19 @@
 
 -(void)dealloc{
     [self.myScrollView removeObserver:self forKeyPath:@"contentOffset"];
-    self.contactAry=nil;
-    self.ownerAry=nil;
-    self.explorationAry=nil;
-    self.horizonAry=nil;
-    self.designAry=nil;
-    self.pileAry=nil;
-    
-    self.horizonImageArr=nil;
-    self.pilePitImageArr=nil;
-    self.mainConstructionImageArr=nil;
-    self.explorationImageArr=nil;
-    self.fireControlImageArr=nil;
-    self.electroweakImageArr=nil;
-    self.planImageArr=nil;
-    self.dataDic=nil;
+    if (self.tuDiXinXi) {
+        [TuDiXinXi myDealloc];
+    }
+    if (self.zhuTiSheJi) {
+        [ZhuTiSheJi myDealloc];
+    }
+    if (self.zhuTiShiGong) {
+        [ZhuTiShiGong myDealloc];
+    }
+    if (self.zhuangXiu) {
+        [ZhuangXiu myDealloc];
+    }
     AppModel* appModel=[AppModel sharedInstance];
-    appModel.singleDic=nil;
-    
-    appModel.contactAry=nil;
-    appModel.ownerAry=nil;
-    appModel.explorationAry=nil;
-    appModel.horizonAry=nil;
-    appModel.designAry=nil;
-    appModel.pileAry=nil;
-    
-    appModel.horizonImageArr=nil;
-    appModel.pilePitImageArr=nil;
-    appModel.mainConstructionImageArr=nil;
-    appModel.explorationImageArr=nil;
-    appModel.fireControlImageArr=nil;
-    appModel.electroweakImageArr=nil;
-    appModel.planImageArr=nil;
     appModel=nil;
     NSLog(@"programDealloc");
 }

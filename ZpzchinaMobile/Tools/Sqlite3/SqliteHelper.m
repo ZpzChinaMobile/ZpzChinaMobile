@@ -15,8 +15,8 @@
 - (void) bindObject:(id)obj toColumn:(int)idx inStatament:(sqlite3_stmt *)stmt;
 
 - (BOOL)hasData:(sqlite3_stmt *)stmt;
-- (id)columnData:(sqlite3_stmt *)stmt columnIndex:(int)index;
-- (NSString *)columnName:(sqlite3_stmt *)stmt columnIndex:(int)index;
+- (id)columnData:(sqlite3_stmt *)stmt columnIndex:(NSInteger)index;
+- (NSString *)columnName:(sqlite3_stmt *)stmt columnIndex:(NSInteger)index;
 
 
 @end
@@ -31,7 +31,7 @@
 	CFUUIDRef uuidRef = CFUUIDCreate(NULL);
 	CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
 	CFRelease(uuidRef);
-	return((__bridge NSString *) uuidStringRef);
+	return([(NSString *) uuidStringRef autorelease]);
 }
 
 
@@ -57,6 +57,10 @@
 	return self;
 }
 
+- (void)dealloc {
+	[self close];	
+	[super dealloc];
+}
 
 
 - (BOOL)open:(NSString *)filename {
@@ -77,7 +81,8 @@
 	if (sqlite3_open([path fileSystemRepresentation], &_db) != SQLITE_OK) {
 		NSLog(@"SQLite Opening Error: %s", sqlite3_errmsg(_db));
 		return NO;
-	}
+	}	
+	filePath = [path retain];
 	return YES;
 }
 
@@ -106,6 +111,7 @@
 		}
 	} while (numOfRetries++ > busyRetryTimeout);
 	
+	[filePath release];
 	filePath = nil;
 	_db = nil;
 }
@@ -137,6 +143,7 @@
 	
 	NSArray *result = [self executeQuery:sql arguments:argsArray];
 	
+	[argsArray release];
 	return result;
 }
 
@@ -152,7 +159,7 @@
 	while (i++ < queryParamCount)
 		[self bindObject:[args objectAtIndex:(i - 1)] toColumn:i inStatament:sqlStmt];
 	
-	NSMutableArray *arrayList = [[NSMutableArray alloc] init];
+	NSMutableArray *arrayList = [[[NSMutableArray alloc] init] autorelease];
 	int columnCount = sqlite3_column_count(sqlStmt);
 	while ([self hasData:sqlStmt]) {
 		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
@@ -164,7 +171,7 @@
 			}
 			[dictionary setObject:columnData forKey:columnName];
 		}
-		[arrayList addObject:dictionary ];
+		[arrayList addObject:[dictionary autorelease]];
 	}
 	
 	sqlite3_finalize(sqlStmt);
@@ -188,6 +195,7 @@
 	
 	BOOL success = [self executeNonQuery:sql arguments:argsArray];
 	
+	[argsArray release];
 	return success;
 }
 
@@ -290,7 +298,7 @@
 	if (obj == nil || obj == [NSNull null]) {
 		sqlite3_bind_null(stmt, idx);
 	} else if ([obj isKindOfClass:[NSData class]]) {
-		sqlite3_bind_blob(stmt, idx, [obj bytes], (int)[obj length], SQLITE_STATIC);
+		sqlite3_bind_blob(stmt, idx, [obj bytes], [obj length], SQLITE_STATIC);
 	} else if ([obj isKindOfClass:[NSDate class]]) {
 		sqlite3_bind_double(stmt, idx, [obj timeIntervalSince1970]);
 	} else if ([obj isKindOfClass:[NSNumber class]]) {
@@ -340,7 +348,7 @@
 	return NO;
 }
 
-- (id)columnData:(sqlite3_stmt *)stmt columnIndex:(int)index {
+- (id)columnData:(sqlite3_stmt *)stmt columnIndex:(NSInteger)index {
 	int columnType = sqlite3_column_type(stmt, index);
 	
 	if (columnType == SQLITE_NULL)
@@ -369,7 +377,7 @@
 	return nil;
 }
 
-- (NSString *)columnName:(sqlite3_stmt *)stmt columnIndex:(int)index {
+- (NSString *)columnName:(sqlite3_stmt *)stmt columnIndex:(NSInteger)index {
 	return [NSString stringWithUTF8String:sqlite3_column_name(stmt, index)];
 }
 

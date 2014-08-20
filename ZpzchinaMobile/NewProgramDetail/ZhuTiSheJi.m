@@ -15,6 +15,11 @@ static __weak ProgramDetailViewController* myDelegate;
 static UIView* totalView;
 static NSDictionary* dataDic;
 
++(void)myDealloc{
+    totalView=nil;
+    dataDic=nil;
+}
+
 +(UIView*)zhuTiSheJiWithFirstViewHeight:(CGFloat*)firstViewHeight secondView:(CGFloat*)secondViewHeight delegate:(ProgramDetailViewController*)delegate{
     //数值初始
     height=0;

@@ -10,4 +10,5 @@
 #import "ProgramDetailViewController.h"
 @interface TuDiXinXi : NSObject
 +(UIView*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate;
++(void)myDealloc;
 @end

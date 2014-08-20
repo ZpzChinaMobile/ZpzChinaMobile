@@ -357,7 +357,7 @@
 		D3A4898319512A2600EED32D /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4897119512A2600EED32D /* UIRefreshControl+AFNetworking.m */; };
 		D3A4898419512A2600EED32D /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4897319512A2600EED32D /* UIWebView+AFNetworking.m */; };
 		D3A48986195141BE00EED32D /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A48985195141BE00EED32D /* libsqlite3.0.dylib */; };
-		D3A4898A1951421400EED32D /* SqliteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489891951421400EED32D /* SqliteHelper.m */; };
+		D3A4898A1951421400EED32D /* SqliteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489891951421400EED32D /* SqliteHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3A4898D1951447400EED32D /* LoginSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4898C1951447400EED32D /* LoginSqlite.m */; };
 		D3A4899519515C9700EED32D /* MyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4899419515C9700EED32D /* MyTaskViewController.m */; };
 		D3A4899E1951753E00EED32D /* CellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4899D1951753E00EED32D /* CellContentView.m */; };
