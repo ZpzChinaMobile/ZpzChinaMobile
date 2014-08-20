@@ -61,7 +61,7 @@
         if(imageArr.count !=0){
             for(int i=0;i<imageArr.count;i++){
                 CameraModel *model = [imageArr objectAtIndex:i];
-                UIImage *aimage = [[UIImage alloc] init];
+                UIImage *aimage = nil;
                 if(flag == 0){
                     aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
                 }else{

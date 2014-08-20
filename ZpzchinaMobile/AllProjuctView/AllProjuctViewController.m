@@ -394,9 +394,8 @@ int startIndex;
             [self.showArr addObjectsFromArray:posts];
             [dataArr removeAllObjects];
             for(int i=0;i<self.showArr.count;i++){
-                NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
                 ProjectModel *model = [self.showArr objectAtIndex:i];
-                dic = [ProjectStage JudgmentStr:model];
+                NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
                 [dataArr addObject:dic];
             }
             [_tableView reloadData];

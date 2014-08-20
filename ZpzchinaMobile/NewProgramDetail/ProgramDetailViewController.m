@@ -586,10 +586,9 @@
 //本地创建的联系人
 -(void)loadLocalContact:(NSString *)localProjectId{
     NSMutableArray *a = [ContactSqlite loadList:[self.dataDic objectForKey:@"id"]];
-    NSMutableDictionary *contactDic = [[NSMutableDictionary alloc] init];
     for (int i=0; i<a.count; i++) {
         ContactModel *model = [a objectAtIndex:i];
-        contactDic = [ProjectStage JudgmentContactStr:model];
+        NSMutableDictionary *contactDic = [ProjectStage JudgmentContactStr:model];
         [contactDic setValue:localProjectId forKeyPath:@"localProjectId"];
         if([model.a_category isEqualToString:@"auctionUnitContacts"]){
             [self.contactAry addObject:contactDic];
@@ -611,9 +610,8 @@
     NSLog(@"=======>%lu",(unsigned long)list.count);
     
     for(int i=0;i<list.count;i++){
-        NSMutableDictionary *contactDic = [[NSMutableDictionary alloc] init];
         ContactModel *model = [list objectAtIndex:i];
-        contactDic = [ProjectStage JudgmentContactStr:model];
+        NSMutableDictionary *contactDic = [ProjectStage JudgmentContactStr:model];
         [contactDic setValue:model.a_baseContactID forKeyPath:@"id"];
         [contactDic setValue:projectID forKeyPath:@"localProjectId"];
         NSLog(@"=================%@",model.a_contactName);
