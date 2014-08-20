@@ -1022,6 +1022,7 @@
     if (self.zhuangXiu) {
         [ZhuangXiu myDealloc];
     }
+    self.contentView=nil;
     AppModel* appModel=[AppModel sharedInstance];
     appModel=nil;
     NSLog(@"programDealloc");
