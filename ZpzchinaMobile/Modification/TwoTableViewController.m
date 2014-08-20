@@ -65,6 +65,7 @@
     [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.longitude] forKey:@"longitude"];
     [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.latitude] forKey:@"latitude"];
     [self.tableView reloadData];
+    NSLog(@"222");
 }
 
 -(void)backOwnerTypeViewController{

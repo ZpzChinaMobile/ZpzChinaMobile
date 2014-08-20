@@ -460,11 +460,13 @@
 -(void)ForeignparticipationClick:(id)sender{
     [textfield resignFirstResponder];
     if(dropDown == nil) {
+        NSLog(@"ForeignparticipationClick");
         NSMutableArray *dataTempArr = [[NSMutableArray alloc]initWithObjects:@"参与",@"不参与", nil];
         dropDown = [[NIDropDown alloc] initWithFrame:sender arr:dataTempArr tit:@"Foreignparticipation"];
         dropDown.delegate = self;
     }
     else {
+        NSLog(@"消失");
         [dropDown hideDropDown:sender];
         dropDown = nil;
     }

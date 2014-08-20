@@ -107,6 +107,7 @@ int j;
 
 -(void)viewWillDisappear:(BOOL)animated {
     //[_mapView viewWillDisappear];
+    NSLog(@"baidumapDis");
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
     _geocodesearch.delegate = nil;

@@ -355,6 +355,7 @@
     }
 }
 -(void)dealloc{
+    //camera=nil;
     NSLog(@"oneDealloc");
 }
 
