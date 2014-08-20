@@ -32,7 +32,8 @@
     PendulumView *pendulum;
     int flag;
     UIView *bgView;
-    TFIndicatorView *indicator;
+    UIActivityIndicatorView *indicator;
+    UIView* coverView;//当左button在加载网络时,覆盖在右button上,不让点击
 }
 @property(retain,nonatomic)NSMutableArray *showArr;
 @property(retain,nonatomic)NSMutableArray *dataArr;

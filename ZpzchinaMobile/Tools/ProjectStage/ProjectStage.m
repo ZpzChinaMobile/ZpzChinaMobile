@@ -167,7 +167,6 @@
             NSString *astr =  [model.a_expectedFinishTime stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
             astr =  [astr stringByReplacingOccurrencesOfString:@"+0800)/" withString:@""];
             if([astr isEqualToString:@"0"]){
-                NSLog(@"[astr isEqualToString:@0]");
                 [dic setObject:[NSString stringWithFormat:@"%@",model.a_expectedFinishTime] forKey:@"expectedFinishTime"];
             }else{
                 [dic setObject:[NSString stringWithFormat:@"%@",[model.a_expectedFinishTime substringWithRange:NSMakeRange(6,10)]] forKey:@"expectedFinishTime"];
@@ -485,13 +484,11 @@
             [dic setObject:@"" forKey:@"expectedStartTime"];
         }else{
             if([[oldDic objectForKey:@"expectedStartTime"] length] == 10 || [[oldDic objectForKey:@"expectedStartTime"] length] == 0){
-                NSLog(@"%@",[oldDic objectForKey:@"expectedStartTime"]);
                 [dic setObject:[oldDic objectForKey:@"expectedStartTime"] forKey:@"expectedStartTime"];
             }else{
                 NSString *astr =  [[oldDic objectForKey:@"expectedStartTime"] stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
                 astr =  [astr stringByReplacingOccurrencesOfString:@"+0800)/" withString:@""];
                 if([astr isEqualToString:@"0"]){
-                    NSLog(@"asdfasdfasdf");
                     [dic setObject:[NSString stringWithFormat:@"%@",astr] forKey:@"expectedStartTime"];
                 }else{
                     [dic setObject:[NSString stringWithFormat:@"%@",[[oldDic objectForKey:@"expectedStartTime"] substringWithRange:NSMakeRange(6,10)]] forKey:@"expectedStartTime"];
@@ -507,7 +504,6 @@
             [dic setObject:@"" forKey:@"expectedFinishTime"];
         }else{
             if([[oldDic objectForKey:@"expectedFinishTime"] length] == 10 || [[oldDic objectForKey:@"expectedFinishTime"] length] == 0){
-                NSLog(@"%@",[oldDic objectForKey:@"expectedFinishTime"]);
                 [dic setObject:[oldDic objectForKey:@"expectedFinishTime"] forKey:@"expectedFinishTime"];
             }else{
                 NSString *astr =  [[oldDic objectForKey:@"expectedFinishTime"] stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
@@ -606,7 +602,6 @@
             [dic setObject:@"" forKey:@"actualStartTime"];
         }else{
             if([[oldDic objectForKey:@"actualStartTime"] length] == 10 || [[oldDic objectForKey:@"actualStartTime"] length] == 0){
-                NSLog(@"%@",[oldDic objectForKey:@"actualStartTime"]);
                 [dic setObject:[oldDic objectForKey:@"actualStartTime"] forKey:@"actualStartTime"];
             }else{
                 NSString *astr =  [[oldDic objectForKey:@"actualStartTime"] stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];

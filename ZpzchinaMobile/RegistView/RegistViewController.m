@@ -55,13 +55,14 @@
     _phoneNumberTextField.placeholder=@"请填写手机号";
     _phoneNumberTextField.returnKeyType=UIReturnKeyDone;
     _phoneNumberTextField.keyboardType =UIKeyboardTypePhonePad;
-    //_phoneNumberTextField.clearButtonMode =YES;
+    _phoneNumberTextField.clearButtonMode = UITextFieldViewModeAlways;
     [panView addSubview:_phoneNumberTextField];
     _yzmTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,45,255,45)];
     _yzmTextField.delegate = self;
     _yzmTextField.textAlignment=NSTextAlignmentLeft;
     _yzmTextField.placeholder=@"请填输入验证码";
     _yzmTextField.returnKeyType=UIReturnKeyDone;
+    _yzmTextField.clearButtonMode = UITextFieldViewModeAlways;
     [panView addSubview:_yzmTextField];
     
     UIButton *getCodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -78,7 +79,7 @@
     passWordField.textAlignment=NSTextAlignmentLeft;
     passWordField.placeholder=@"请填写密码";
     passWordField.returnKeyType=UIReturnKeyDone;
-    //passWordField.clearButtonMode =YES;
+    passWordField.clearButtonMode = UITextFieldViewModeAlways;
     passWordField.secureTextEntry = YES;
     [panView addSubview:passWordField];
     
@@ -87,7 +88,7 @@
     verifyPassWordField.textAlignment=NSTextAlignmentLeft;
     verifyPassWordField.placeholder=@"请重复填写密码";
     verifyPassWordField.returnKeyType=UIReturnKeyDone;
-    //verifyPassWordField.clearButtonMode =YES;
+    verifyPassWordField.clearButtonMode =UITextFieldViewModeAlways;
     verifyPassWordField.secureTextEntry = YES;
     [panView addSubview:verifyPassWordField];
 
