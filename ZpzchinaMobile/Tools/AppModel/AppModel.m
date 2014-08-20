@@ -125,4 +125,9 @@ static AppModel* singleton;
     }
     return _planImageArr;
 }
+
+-(void)dealloc{
+    NSLog(@"appModelDealloc");
+}
+
 @end

@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 @protocol DesignDelegate;
 @interface DesignTableViewCell : UITableViewCell{
-    id<DesignDelegate>delegate;
     NSMutableArray *dataArr;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag Arr:(NSMutableArray *)Arr singleDic:(NSMutableDictionary *)singleDic;
-@property(nonatomic ,strong) id <DesignDelegate> delegate;
+@property(nonatomic ,weak) id <DesignDelegate> delegate;
 @end
 @protocol DesignDelegate <NSObject>
 -(void)addContactViewDesign;

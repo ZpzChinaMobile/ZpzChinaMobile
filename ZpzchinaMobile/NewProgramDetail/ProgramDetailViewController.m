@@ -91,20 +91,20 @@
 
 -(instancetype)init{
     if ([super init]) {
-        self.contactAry=[NSMutableArray array];
-        self.ownerAry=[NSMutableArray array];
-        self.explorationAry=[NSMutableArray array];
-        self.horizonAry=[NSMutableArray array];
-        self.designAry=[NSMutableArray array];
-        self.pileAry=[NSMutableArray array];
+        self.contactAry=[[NSMutableArray alloc]init];
+        self.ownerAry=[[NSMutableArray alloc]init];
+        self.explorationAry=[[NSMutableArray alloc]init];
+        self.horizonAry=[[NSMutableArray alloc]init];
+        self.designAry=[[NSMutableArray alloc]init];
+        self.pileAry=[[NSMutableArray alloc]init];
         
-        self.horizonImageArr=[NSMutableArray array];
-        self.pilePitImageArr=[NSMutableArray array];
-        self.mainConstructionImageArr=[NSMutableArray array];
-        self.explorationImageArr=[NSMutableArray array];
-        self.fireControlImageArr=[NSMutableArray array];
-        self.electroweakImageArr=[NSMutableArray array];
-        self.planImageArr=[NSMutableArray array];
+        self.horizonImageArr=[[NSMutableArray alloc]init];
+        self.pilePitImageArr=[[NSMutableArray alloc]init];
+        self.mainConstructionImageArr=[[NSMutableArray alloc]init];
+        self.explorationImageArr=[[NSMutableArray alloc]init];
+        self.fireControlImageArr=[[NSMutableArray alloc]init];
+        self.electroweakImageArr=[[NSMutableArray alloc]init];
+        self.planImageArr=[[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -393,7 +393,7 @@
     
     if (!self.isRelease) {
         //如果是从 需要读取 本地数据库 的页面进来，则会有内容,如果是网络则无
-        self.dataDic=[NSMutableDictionary dictionary];
+        self.dataDic=[[NSMutableDictionary alloc]init];
         
         //网络加载,初始哈页面在加载中,因为网络加载为异步,所以需要写在加载完后的block里
         [self doNetWorkFirst];
@@ -1010,6 +1010,39 @@
 
 -(void)dealloc{
     [self.myScrollView removeObserver:self forKeyPath:@"contentOffset"];
+    self.contactAry=nil;
+    self.ownerAry=nil;
+    self.explorationAry=nil;
+    self.horizonAry=nil;
+    self.designAry=nil;
+    self.pileAry=nil;
+    
+    self.horizonImageArr=nil;
+    self.pilePitImageArr=nil;
+    self.mainConstructionImageArr=nil;
+    self.explorationImageArr=nil;
+    self.fireControlImageArr=nil;
+    self.electroweakImageArr=nil;
+    self.planImageArr=nil;
+    self.dataDic=nil;
+    AppModel* appModel=[AppModel sharedInstance];
+    appModel.singleDic=nil;
+    
+    appModel.contactAry=nil;
+    appModel.ownerAry=nil;
+    appModel.explorationAry=nil;
+    appModel.horizonAry=nil;
+    appModel.designAry=nil;
+    appModel.pileAry=nil;
+    
+    appModel.horizonImageArr=nil;
+    appModel.pilePitImageArr=nil;
+    appModel.mainConstructionImageArr=nil;
+    appModel.explorationImageArr=nil;
+    appModel.fireControlImageArr=nil;
+    appModel.electroweakImageArr=nil;
+    appModel.planImageArr=nil;
+    appModel=nil;
     NSLog(@"programDealloc");
 }
 
