@@ -36,11 +36,11 @@ int startIndex;
     NSLog(@"%@",self.dataDic);
     startIndex = 0;
     showArr = [[NSMutableArray alloc] init];
-    UIColor *ballColor = [UIColor colorWithRed:0.47 green:0.60 blue:0.89 alpha:1];
-    pendulum = [[PendulumView alloc] initWithFrame:CGRectMake(0, 55, 320, 513) ballColor:ballColor];
+    indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+    [indicator startAnimating];
     [self addBackButton];
     [self addtittle:@"高级搜索结果"];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 55, 320, 513) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 513) style:UITableViewStyleGrouped];
     [_tableView setBackgroundColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -49,7 +49,7 @@ int startIndex;
     [self loadServer:self.dataDic startIndex:startIndex];
     //集成刷新控件
     [self setupRefresh];
-    [self.view addSubview:pendulum];
+    [self.view addSubview:indicator];
 }
 
 - (void)didReceiveMemoryWarning
@@ -199,8 +199,7 @@ int startIndex;
         
         //NSLog(@"%@",self.showArr);
         [_tableView reloadData];
-        [pendulum removeFromSuperview];
-        pendulum = nil;
+        [indicator stopAnimating];
         if(startIndex !=0){
             [_tableView footerEndRefreshing];
         }else{

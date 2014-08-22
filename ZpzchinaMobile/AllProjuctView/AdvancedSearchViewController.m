@@ -97,7 +97,7 @@
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [cell.contentView addSubview:arrowImage];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

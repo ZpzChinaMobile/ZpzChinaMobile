@@ -11,7 +11,6 @@
 #import "CellContentView.h"
 #import "SearchViewController.h"
 #import "NewProjectViewController.h"
-#import "PendulumView.h"
 #import "toolBarView.h"
 #import "BaiDuMapViewController.h"
 #import "AdvancedSearchViewController.h"
@@ -27,7 +26,6 @@
     NewProjectViewController *_newProject;
     NSMutableArray *showArr;
     NSMutableArray *dataArr;
-    PendulumView *pendulum;
     UISearchBar *_searchbar;
     UIButton *cancelBtn;
     UIView *topBgView;

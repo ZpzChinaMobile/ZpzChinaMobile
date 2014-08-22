@@ -7,13 +7,13 @@
 //
 
 #import "BaseViewController.h"
-#import "PendulumView.h"
 #import "CellContentView.h"
 #import "NewProjectViewController.h"
+#import "TFIndicatorView.h"
 @interface ResultsViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,CellContentViewDelegate,UIActionSheetDelegate>{
     NSMutableArray *showArr;
     UITableView *_tableView;
-    PendulumView *pendulum;
+    TFIndicatorView *indicator;
     NSMutableDictionary *dataDic;
     CellContentView *_cellContent;
     UIActionSheet *_myActionSheet;
