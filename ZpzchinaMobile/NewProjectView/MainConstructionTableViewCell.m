@@ -37,7 +37,7 @@
         if(horizonArr.count !=0){
             for(int i=0;i<horizonArr.count;i++){
                 CameraModel *model = [horizonArr objectAtIndex:i];
-                UIImage *aimage = [[UIImage alloc] init];
+                UIImage *aimage = nil;
                 if(flag == 0){
                     aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
                 }else{
@@ -81,7 +81,7 @@
         if(pilePitArr.count !=0){
             for(int i=0;i<pilePitArr.count;i++){
                 CameraModel *model = [pilePitArr objectAtIndex:i];
-                UIImage *aimage = [[UIImage alloc] init];
+                UIImage *aimage = nil;
                 if(flag == 0){
                     aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
                 }else{
@@ -123,7 +123,7 @@
         if(mainConstructionArr.count !=0){
             for(int i=0;i<mainConstructionArr.count;i++){
                 CameraModel *model = [mainConstructionArr objectAtIndex:i];
-                UIImage *aimage = [[UIImage alloc] init];
+                UIImage *aimage = nil;
                 if(flag == 0){
                     aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
                 }else{

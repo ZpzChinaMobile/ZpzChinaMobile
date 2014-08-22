@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+MJPopupViewController.h"
-#import "PendulumView.h"
 @interface BaseViewController : UIViewController{
     UIButton*  rightButton;
 }

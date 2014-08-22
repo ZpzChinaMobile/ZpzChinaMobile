@@ -12,6 +12,7 @@
 #import "ProjectModel.h"
 #import "ProjectStage.h"
 #import "AppDelegate.h"
+#import <MapKit/MapKit.h>
 @interface BaiDuMapViewController ()
 
 @end
@@ -43,6 +44,7 @@ int j;
     logArr = [[NSMutableArray alloc] init];
     latArr = [[NSMutableArray alloc] init];
     pointArr = [[NSMutableArray alloc] init];
+    coordinates = [[NSMutableArray alloc] init];
     [self loadServer];
     [self addBackButton];
     [self addtittle:@"地图搜索"];
@@ -280,7 +282,7 @@ int j;
         
         CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 4);
         
-        
+        [coordinates removeAllObjects];
         [self removeAnnotationsOnTheMap];
     }else{
         [imageView removeFromSuperview];
@@ -320,6 +322,9 @@ int j;
     
     CGPathMoveToPoint(pathRef, NULL, location.x, location.y);
     
+    CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+    [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -341,10 +346,15 @@ int j;
     
     CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
     
+    CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+    [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView:imageView];
+    CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+    [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
     CGPathCloseSubpath(pathRef);
     //NSLog(@"==>%@",pathRef);
     int count = 0;
@@ -374,6 +384,55 @@ int j;
             topCount++;
         }
     }
+    
+    NSInteger numberOfPoints = [coordinates count];
+    
+    if (numberOfPoints > 2)
+    {
+        CLLocationCoordinate2D points[numberOfPoints];
+        for (NSInteger i = 0; i < numberOfPoints; i++) {
+            points[i] = [coordinates[i] MKCoordinateValue];
+        }
+        polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
+        [_mapView addOverlay:polygon];
+    }
+}
+
+//根据overlay生成对应的View
+- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay
+{
+	if ([overlay isKindOfClass:[BMKCircle class]])
+    {
+        BMKCircleView* circleView = [[BMKCircleView alloc] initWithOverlay:overlay];
+        circleView.fillColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
+        circleView.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
+        circleView.lineWidth = 5.0;
+		return circleView;
+    }
+    
+    if ([overlay isKindOfClass:[BMKPolyline class]])
+    {
+        BMKPolylineView* polylineView = [[BMKPolylineView alloc] initWithOverlay:overlay];
+        polylineView.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:1];
+        polylineView.lineWidth = 3.0;
+		return polylineView;
+    }
+	
+	if ([overlay isKindOfClass:[BMKPolygon class]])
+    {
+        BMKPolygonView* polygonView = [[BMKPolygonView alloc] initWithOverlay:overlay];
+        polygonView.strokeColor = [[UIColor redColor] colorWithAlphaComponent:1];
+        polygonView.fillColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
+        polygonView.lineWidth =3.5;
+        [self drawFunction];
+		return polygonView;
+    }
+    if ([overlay isKindOfClass:[BMKGroundOverlay class]])
+    {
+        BMKGroundOverlayView* groundView = [[BMKGroundOverlayView alloc] initWithOverlay:overlay];
+		return groundView;
+    }
+	return nil;
 }
 
 - (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view{
@@ -387,8 +446,7 @@ int j;
     [bgView addGestureRecognizer:bgViewtapGestureRecognizer];
     [self.view addSubview:bgView];
     ProjectModel *model = [showArr objectAtIndex:view.tag];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic = [ProjectStage JudgmentStr:model];
+    NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
     _MapContent = [[MapContentView alloc] initWithFrame:CGRectMake(0, 568, 320, 190) dic:dic number:[numberArr objectAtIndex:view.tag]];
     [self.view addSubview:_MapContent];
     [UIView animateWithDuration:0.5 animations:^{
@@ -400,6 +458,7 @@ int j;
 {
     NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
     [_mapView removeAnnotations: annArray];
+    [_mapView removeOverlay:polygon];
 }
 
 

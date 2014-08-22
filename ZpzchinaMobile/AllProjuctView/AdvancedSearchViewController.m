@@ -97,7 +97,7 @@
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [cell.contentView addSubview:arrowImage];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -146,7 +146,7 @@
     UITableViewCell *newCell2 = (UITableViewCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     UITextField *newText2 = (UITextField *)[newCell2.contentView viewWithTag:101];
     [newText2 resignFirstResponder];
-    NSArray *arr = [[NSArray alloc] init];
+    NSArray *arr = nil;
     NSString *path = [[NSBundle mainBundle]pathForResource:@"area" ofType:@"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
     NSMutableArray *allCityArray = [[NSMutableArray alloc] init];
@@ -163,7 +163,7 @@
     }else if(button.tag == 103){
         NSString *path=[[NSBundle mainBundle] pathForResource:@"citydict"
                                                        ofType:@"plist"];
-        NSMutableDictionary *cities = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *cities = nil;
         cities = [NSMutableDictionary dictionaryWithContentsOfFile:path];
         NSMutableArray *keys = [[NSMutableArray alloc] initWithArray:[cities allKeys]];
         NSMutableArray *cityArr = [[NSMutableArray alloc] init];

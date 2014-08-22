@@ -35,6 +35,8 @@
     int topCount;
     UIView *topBgView;
     UILabel *countLabel;
+    NSMutableArray *coordinates;
+    BMKPolygon* polygon;
 }
 
 @end

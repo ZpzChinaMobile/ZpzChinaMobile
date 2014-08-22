@@ -254,10 +254,8 @@ int startIndex;
     //新建项目页面
     if(flag == 0){
         ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
         NSLog(@"11111111%@",model);
-
-        dic = [ProjectStage JudgmentStr:model];
         NSLog(@"2222222%@",dic);
 //        _newProject = [[NewProjectViewController alloc] init];
 //        _newProject.fromView = 1;
@@ -293,8 +291,7 @@ int startIndex;
         [self.showArr removeAllObjects];
         self.showArr = [ProjectSqlite loadList];
         ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        dic = [ProjectStage JudgmentStr:model];
+        NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
 //        _newProject = [[NewProjectViewController alloc] init];
 //        _newProject.fromView = 1;
 //        _newProject.isRelease =1;

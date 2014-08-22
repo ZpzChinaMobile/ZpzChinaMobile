@@ -209,9 +209,8 @@
     op.responseSerializer = [AFJSONResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        NSString *projectId = [[NSString alloc]init];
-        NSString *projectCode = [[NSString alloc]init];
-        NSString *projectName = [[NSString alloc]init];
+        NSString *projectId = nil;
+        NSString *projectName = nil;
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
@@ -219,7 +218,6 @@
                 NSLog(@"%@",[item objectForKey:@"projectCode"]);
                 NSLog(@"%@",[item objectForKey:@"projectID"]);
                 projectId = [item objectForKey:@"projectID"];
-                projectCode = [item objectForKey:@"projectCode"];
                 projectName = [item objectForKey:@"projectName"];
                 [ContactSqlite UpdataProjectId:projectId aid:aid projectName:projectName];
                 [CameraSqlite UpdataProjectId:projectId aid:aid projectName:projectName];

@@ -12,7 +12,6 @@
 #import "Reachability.h"
 #import "GetProject.h"
 #import "NewProjectViewController.h"
-#import "PendulumView.h"
 #import "ProjectContentCell.h"
 #import "TFIndicatorView.h"
 @interface MyTaskViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,CellContentViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate>{
@@ -29,7 +28,6 @@
     NSMutableArray *updataProjectArr;
     NSMutableArray *updataContactArr;
     NewProjectViewController *_newProject;
-    PendulumView *pendulum;
     int flag;
     UIView *bgView;
     UIActivityIndicatorView *indicator;
