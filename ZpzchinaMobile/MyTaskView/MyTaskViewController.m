@@ -41,7 +41,9 @@ int startIndex;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];//[[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+    indicator.center=CGPointMake(160,305);
+    indicator.color=[UIColor blackColor];
     [indicator startAnimating];
     flag =0;
     [self addBackButton];
@@ -79,6 +81,11 @@ int startIndex;
     [localProjuctBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [localProjuctBtn addTarget:self action:@selector(localProjuctBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:localProjuctBtn];
+    
+    coverView=[[UIView alloc]init];//网络加载时不让点
+    coverView.frame=CGRectMake(0, 64.5, 320, 50);
+    coverView.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:coverView];
     
     _lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(44, 112.5, 71.5, 2)];
     [_lineImage setImage:[UIImage imageNamed:@"我的任务_03.png"]];
@@ -151,6 +158,10 @@ int startIndex;
 }
 
 -(void)releaseProjuctBtnClick{
+    if (![self.view.subviews containsObject:coverView]) {
+        [self.view addSubview:coverView];
+    }
+    [indicator startAnimating];
     flag = 0;
     [self removeRightBtn];
     [self.showArr removeAllObjects];
@@ -159,10 +170,14 @@ int startIndex;
     [self loadServer:startIndex];
     [UIView animateWithDuration:0.5 animations:^{
         [_lineImage setFrame:CGRectMake(44, 112.5, 71.5, 2)];
+    }completion:^(BOOL finish){
     }];
 }
 
 -(void)localProjuctBtnClick{
+    if (![self.view.subviews containsObject:coverView]) {
+        [self.view addSubview:coverView];
+    }
     flag = 1;
     [_tableView removeHeader];
     [_tableView removeFooter];
@@ -172,6 +187,10 @@ int startIndex;
     [_tableView reloadData];
     [UIView animateWithDuration:0.5 animations:^{
         [_lineImage setFrame:CGRectMake(205, 112.5, 71.5, 2)];
+    }completion:^(BOOL finish){
+        if ([self.view.subviews containsObject:coverView]) {
+            [coverView removeFromSuperview];
+        }
     }];
     [indicator stopAnimating];
 }
@@ -547,6 +566,8 @@ int startIndex;
             NSLog(@"%@",bgView);
             [bgView removeFromSuperview];
             bgView = nil;
+            [coverView removeFromSuperview];
+            
         }
     } index:startIndex];
 }

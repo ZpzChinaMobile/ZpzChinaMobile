@@ -63,7 +63,7 @@ static bool FirstLogin = NO;
     _userNameTextField.placeholder=@"请填写用户名/手机号";
     _userNameTextField.returnKeyType=UIReturnKeyDone;
     _userNameTextField.font =  [UIFont systemFontOfSize:15];
-    [_userNameTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    _userNameTextField.clearButtonMode = UITextFieldViewModeAlways;
     [textView addSubview:_userNameTextField];
     _passWordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,43,254,43)];
     _passWordTextField.delegate = self;
@@ -72,7 +72,7 @@ static bool FirstLogin = NO;
     _passWordTextField.returnKeyType=UIReturnKeyDone;
     _passWordTextField.secureTextEntry = YES;
     _passWordTextField.font =  [UIFont systemFontOfSize:15];
-    [_passWordTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    _passWordTextField.clearButtonMode = UITextFieldViewModeAlways;
     [textView addSubview:_passWordTextField];
     [self.view addSubview:textView];
     
