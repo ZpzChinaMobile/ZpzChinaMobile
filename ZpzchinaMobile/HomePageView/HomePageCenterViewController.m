@@ -309,14 +309,16 @@
 }
 
 -(void)AllBtnClick:(UIButton *)button{
+    ModificationViewController* modifiVC;
     switch (button.tag) {
         case 0:
             //新建项目页面
 //            _newProject = [[NewProjectViewController alloc] init];
 //            _newProject.fromView = 0;
 //            [self.navigationController pushViewController:_newProject animated:YES];
-             modifiVC=[[ModificationViewController alloc] init];
+            modifiVC=[[ModificationViewController alloc] init];
             modifiVC.fromView=0;
+            //modifiVC.isRelease=;
             [self.navigationController pushViewController:modifiVC animated:YES];
             break;
         case 1:

@@ -12,6 +12,9 @@
 +(ModificationSelectViewCell*)dequeueReusableCellWithTabelView:(UITableView*)tableView identifier:(NSString*)identifier indexPath:(NSIndexPath*)indexPath nowTableView:(NSInteger)number{
     
     ModificationSelectViewCell* cell=[tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     cell.backgroundColor=[UIColor clearColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
@@ -32,10 +35,11 @@
     int a[4]={0,2,5,9};
     number=number-a[indexPath.section];
     
+    //cell.sureImageView=nil;
     if (indexPath.row==number) {
-        UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(270, 9, 16, 16)];
-        imageView.image=[UIImage imageNamed:@"XiangMuXiangQing_ShaiXuan/right@2x.png"];
-        [cell.contentView addSubview:imageView];
+        cell.sureImageView=[[UIImageView alloc]initWithFrame:CGRectMake(270, 9, 16, 16)];
+        cell.sureImageView.image=[UIImage imageNamed:@"XiangMuXiangQing_ShaiXuan/right@2x.png"];
+        [cell.contentView addSubview:cell.sureImageView];
     }
     return cell;
 }

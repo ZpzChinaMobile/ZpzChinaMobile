@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 @protocol PilePitDelegate;
 @interface PilePitTableViewCell : UITableViewCell{
-    id<PilePitDelegate>delegate;
     NSMutableArray *dataArr;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier flag:(int)flag Arr:(NSMutableArray *)Arr;
-@property(nonatomic ,strong) id <PilePitDelegate> delegate;
+@property(nonatomic ,weak) id <PilePitDelegate> delegate;
 @end
 @protocol PilePitDelegate <NSObject>
 -(void)addContactViewPilePit;

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7131199CB71E0095D05B /* WeakElectricityCell.m */; };
 		043F7135199CC5380095D05B /* ClearFireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7134199CC5380095D05B /* ClearFireCell.m */; };
+		5B0726D319A1D5A80050DF5B /* 新建项目－6_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */; };
+		5B0CC39E199F09290036F94B /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CC39D199F09290036F94B /* AppModel.m */; };
 		5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
 		5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
 		5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */; };
@@ -207,6 +209,7 @@
 		D31B2B9E1990992300B05B03 /* FaceLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B2B991990992300B05B03 /* FaceLoginViewController.m */; };
 		D31B2B9F1990992300B05B03 /* LoginEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B2B9B1990992300B05B03 /* LoginEvent.m */; };
 		D31B2BA01990992300B05B03 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B2B9D1990992300B05B03 /* LoginViewController.m */; };
+		D3311C2819A59CE6003B2682 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3311C2719A59CE6003B2682 /* MapKit.framework */; };
 		D346A00B1961259200CDDBDF /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A00A1961259200CDDBDF /* LocationViewController.m */; };
 		D346A00E196166D800CDDBDF /* SinglePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A00D196166D800CDDBDF /* SinglePickerView.m */; };
 		D346A01919618DE100CDDBDF /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A01819618DE100CDDBDF /* Camera.m */; };
@@ -223,7 +226,6 @@
 		D346A0471963E41400CDDBDF /* UIScrollView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A03D1963E41400CDDBDF /* UIScrollView+Extension.m */; };
 		D346A0481963E41400CDDBDF /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A03F1963E41400CDDBDF /* UIScrollView+MJRefresh.m */; };
 		D346A0491963E41400CDDBDF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A0411963E41400CDDBDF /* UIView+Extension.m */; };
-		D346A04C1963ED5500CDDBDF /* PendulumView.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A04B1963ED5500CDDBDF /* PendulumView.m */; };
 		D37639D1199C7E5C0052E775 /* 面部采集_07.png in Resources */ = {isa = PBXBuildFile; fileRef = D37639CF199C7E5C0052E775 /* 面部采集_07.png */; };
 		D37639D2199C7E5C0052E775 /* 面部采集_11.png in Resources */ = {isa = PBXBuildFile; fileRef = D37639D0199C7E5C0052E775 /* 面部采集_11.png */; };
 		D3A4883B194A916B00EED32D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A4883A194A916B00EED32D /* Foundation.framework */; };
@@ -355,7 +357,7 @@
 		D3A4898319512A2600EED32D /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4897119512A2600EED32D /* UIRefreshControl+AFNetworking.m */; };
 		D3A4898419512A2600EED32D /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4897319512A2600EED32D /* UIWebView+AFNetworking.m */; };
 		D3A48986195141BE00EED32D /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A48985195141BE00EED32D /* libsqlite3.0.dylib */; };
-		D3A4898A1951421400EED32D /* SqliteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489891951421400EED32D /* SqliteHelper.m */; };
+		D3A4898A1951421400EED32D /* SqliteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489891951421400EED32D /* SqliteHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3A4898D1951447400EED32D /* LoginSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4898C1951447400EED32D /* LoginSqlite.m */; };
 		D3A4899519515C9700EED32D /* MyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4899419515C9700EED32D /* MyTaskViewController.m */; };
 		D3A4899E1951753E00EED32D /* CellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4899D1951753E00EED32D /* CellContentView.m */; };
@@ -473,6 +475,9 @@
 		043F7131199CB71E0095D05B /* WeakElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakElectricityCell.m; sourceTree = "<group>"; };
 		043F7133199CC5380095D05B /* ClearFireCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearFireCell.h; sourceTree = "<group>"; };
 		043F7134199CC5380095D05B /* ClearFireCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearFireCell.m; sourceTree = "<group>"; };
+		5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目－6_03.png"; sourceTree = "<group>"; };
+		5B0CC39C199F09290036F94B /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		5B0CC39D199F09290036F94B /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		5B6A9F601991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		5B6A9F621991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		5B892F00199A3BF2001F9921 /* ProgramDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailViewController.h; sourceTree = "<group>"; };
@@ -860,6 +865,7 @@
 		D31B2B9B1990992300B05B03 /* LoginEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginEvent.m; sourceTree = "<group>"; };
 		D31B2B9C1990992300B05B03 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D31B2B9D1990992300B05B03 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D3311C2719A59CE6003B2682 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D346A0091961259200CDDBDF /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
 		D346A00A1961259200CDDBDF /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
 		D346A00C196166D800CDDBDF /* SinglePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePickerView.h; sourceTree = "<group>"; };
@@ -893,8 +899,6 @@
 		D346A03F1963E41400CDDBDF /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		D346A0401963E41400CDDBDF /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		D346A0411963E41400CDDBDF /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		D346A04A1963ED5500CDDBDF /* PendulumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendulumView.h; sourceTree = "<group>"; };
-		D346A04B1963ED5500CDDBDF /* PendulumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendulumView.m; sourceTree = "<group>"; };
 		D37639CF199C7E5C0052E775 /* 面部采集_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "面部采集_07.png"; sourceTree = "<group>"; };
 		D37639D0199C7E5C0052E775 /* 面部采集_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "面部采集_11.png"; sourceTree = "<group>"; };
 		D3A48837194A916B00EED32D /* ZpzchinaMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZpzchinaMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1309,6 +1313,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3311C2819A59CE6003B2682 /* MapKit.framework in Frameworks */,
 				D3AAAB60196D6EC0008F9CCD /* iflyMSC.framework in Frameworks */,
 				D3BB730519557D6F00A3F626 /* CoreLocation.framework in Frameworks */,
 				5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */,
@@ -1340,6 +1345,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B0CC39B199F090F0036F94B /* AppModel */ = {
+			isa = PBXGroup;
+			children = (
+				5B0CC39C199F09290036F94B /* AppModel.h */,
+				5B0CC39D199F09290036F94B /* AppModel.m */,
+			);
+			path = AppModel;
+			sourceTree = "<group>";
+		};
 		5B6A9F5E1991E20B00A798BE /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1827,8 +1841,6 @@
 			children = (
 				D31B227D19820D4500B05B03 /* TFIndicatorView.h */,
 				D31B227E19820D4500B05B03 /* TFIndicatorView.m */,
-				D346A04A1963ED5500CDDBDF /* PendulumView.h */,
-				D346A04B1963ED5500CDDBDF /* PendulumView.m */,
 			);
 			path = WaittingView;
 			sourceTree = "<group>";
@@ -1878,6 +1890,7 @@
 		D3A48839194A916B00EED32D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3311C2719A59CE6003B2682 /* MapKit.framework */,
 				D3AAAB5F196D6EC0008F9CCD /* iflyMSC.framework */,
 				D3BB730419557D6F00A3F626 /* CoreLocation.framework */,
 				D3BB730219557D5F00A3F626 /* QuartzCore.framework */,
@@ -1987,6 +2000,7 @@
 		D3A48895194FD95600EED32D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */,
 				D37639CF199C7E5C0052E775 /* 面部采集_07.png */,
 				D37639D0199C7E5C0052E775 /* 面部采集_11.png */,
 				5B892F93199A3CF0001F9921 /* XiangMuJieDuan */,
@@ -2104,6 +2118,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				5B0CC39B199F090F0036F94B /* AppModel */,
 				5B892FA5199A3D8F001F9921 /* Code4appScrollView */,
 				5B6A9F5E1991E20B00A798BE /* libs */,
 				D31B250C19891F2500B05B03 /* face */,
@@ -2706,6 +2721,7 @@
 				D3AECA641959261500FED616 /* location_point.png in Resources */,
 				D3A48920194FD95600EED32D /* 登录_15.png in Resources */,
 				D3A488EF194FD95600EED32D /* 全部项目_10.png in Resources */,
+				5B0726D319A1D5A80050DF5B /* 新建项目－6_03.png in Resources */,
 				D3AA5A25195D89FF00565078 /* Unselected.png in Resources */,
 				D3AA5A19195D75DE00565078 /* 全部项目_13.png in Resources */,
 				D3A48939194FD95600EED32D /* 首页侧拉栏_17.png in Resources */,
@@ -2983,6 +2999,7 @@
 				D31B266C19891F2600B05B03 /* GPUImageDifferenceBlendFilter.m in Sources */,
 				D31B26E719891F2600B05B03 /* GPUImageXYDerivativeFilter.m in Sources */,
 				D3AAAB65196D6F1E008F9CCD /* ASRDialogViewController.m in Sources */,
+				5B0CC39E199F09290036F94B /* AppModel.m in Sources */,
 				D3BB71B01953DE9100A3F626 /* ProjectTableViewCell.m in Sources */,
 				D31B26DA19891F2600B05B03 /* GPUImageToonFilter.m in Sources */,
 				D31B268A19891F2600B05B03 /* GPUImageHoughTransformLineDetector.m in Sources */,
@@ -3091,7 +3108,6 @@
 				D3C58E9E1980BD5E003DD94F /* FaceppError.m in Sources */,
 				D31B26C319891F2600B05B03 /* GPUImageShiTomasiFeatureDetectionFilter.m in Sources */,
 				D31B26DD19891F2600B05B03 /* GPUImageTwoInputFilter.m in Sources */,
-				D346A04C1963ED5500CDDBDF /* PendulumView.m in Sources */,
 				D31B2B94199098DC00B05B03 /* FaceViewController.m in Sources */,
 				D3AA5A01195BBD1300565078 /* networkConnect.m in Sources */,
 				D31B26D819891F2600B05B03 /* GPUImageTiltShiftFilter.m in Sources */,

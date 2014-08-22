@@ -78,7 +78,7 @@ NSString *const MJCollectionViewCellIdentifier = @"Cell";
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MJCollectionViewCellIdentifier forIndexPath:indexPath];
     CameraModel *model = [self.showArr objectAtIndex:indexPath.row];
-    UIImage *aimage = [[UIImage alloc] init];
+    UIImage *aimage = nil;
     if(self.flag == 0){
         aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
     }else{
@@ -102,7 +102,7 @@ NSString *const MJCollectionViewCellIdentifier = @"Cell";
     CameraModel *model = [self.showArr objectAtIndex:indexPath.row];
     NSLog(@"%d",self.flag);
     if(self.flag == 0){
-        UIImage *aimage = [[UIImage alloc] init];
+        UIImage *aimage = nil;
         aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         UIButton *secondTap = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         secondTap.frame = CGRectMake(0, 80, 320, 320);
@@ -115,7 +115,7 @@ NSString *const MJCollectionViewCellIdentifier = @"Cell";
         [self.view addSubview:panView];
     }else{
        if([model.a_device isEqualToString:@"localios"]){
-           UIImage *aimage = [[UIImage alloc] init];
+           UIImage *aimage = nil;
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
            UIButton *secondTap = [UIButton buttonWithType:UIButtonTypeRoundedRect];
            secondTap.frame = CGRectMake(0, 80, 320, 320);
@@ -149,8 +149,7 @@ NSString *const MJCollectionViewCellIdentifier = @"Cell";
         for (NSMutableDictionary *item in a) {
             CameraModel *model = [[CameraModel alloc] init];
             [model loadWithDictionary:item];
-            UIImage *aimage = [[UIImage alloc] init];
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+            UIImage *aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
             UIButton *secondTap = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             secondTap.frame = CGRectMake(0, 80, 320, 320);
             [secondTap setBackgroundImage:aimage forState:UIControlStateNormal];

@@ -14,6 +14,7 @@
 #import "UIViewController+MJPopupViewController.h"
 #import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
+#import "AppModel.h"
 @interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,OwnerTypeViewDelegate,LocationViewDelegate,UIActionSheetDelegate>{
     AddContactViewController* addcontactView;
     DatePickerView* datepickerview;
@@ -64,6 +65,7 @@
     [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.longitude] forKey:@"longitude"];
     [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.latitude] forKey:@"latitude"];
     [self.tableView reloadData];
+    NSLog(@"222");
 }
 
 -(void)backOwnerTypeViewController{
@@ -234,12 +236,12 @@
 -(void)gotoMap:(NSString *)address city:(NSString *)city{
     //[locateview removeFromSuperview];
     //locateview = nil;
-    NSLog(@"%@",city);
+    NSLog(@"====>%@",city);
     locationView = [[LocationViewController alloc] init];
     locationView.delegate = self;
     locationView.baseAddress = address;
     locationView.baseCity = city;
-    [self.navigationController pushViewController:locationView animated:YES];
+    [self.superVC.navigationController pushViewController:locationView animated:YES];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -263,12 +265,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.bgVC=[[UIViewController alloc]init];
-//    self.bgVC.view.frame=CGRectMake(0, 568-64.5-431, 320, 431);
-//    [self.tableView.superview addSubview:self.bgVC.view];
-    //self.bgVC.view.frame=;
-    
-    //self.fromView=1;
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        appModel.ownerAry =[NSMutableArray array];
+//        self.contacts=appModel.ownerAry;
+//    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -296,8 +297,14 @@
     NSString *stringcell = @"ProjectTableViewCell";
     ProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     //if(!cell){
-    cell = [[ProjectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 ownerArr:self.contacts singleDic:self.singleDic] ;
-    cell.delegate=self;
+    
+    if(self.fromView == 0){
+        cell=[[ProjectTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:self.fromView ownerArr:self.contacts singleDic:nil];
+    }else{
+        cell = [[ProjectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 ownerArr:self.contacts singleDic:self.singleDic] ;
+
+    }
+        cell.delegate=self;
     //}
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
@@ -305,7 +312,22 @@
     return cell;
 }
 
+-(void)beginEditWithHeight:(CGFloat)height{
+    NSLog(@"beginEdit");
+    CGFloat a=height-self.tableView.contentOffset.y;
+    if (a>=250) {
+        [self.delegate upTVCSpaceWithHeight:a-250+50];
+    }
+}
+
+-(void)endEdit{
+    [self.delegate downTVCSpace];
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 550;
+}
+-(void)dealloc{
+    NSLog(@"twoDealloc");
 }
 @end

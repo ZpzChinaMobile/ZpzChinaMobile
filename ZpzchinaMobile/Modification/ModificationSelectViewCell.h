@@ -10,5 +10,6 @@
 
 @interface ModificationSelectViewCell : UITableViewCell
 @property(nonatomic,strong)UILabel* stageLabel;
+@property(nonatomic,strong)UIImageView* sureImageView;
 +(ModificationSelectViewCell*)dequeueReusableCellWithTabelView:(UITableView*)tableView identifier:(NSString*)identifier indexPath:(NSIndexPath*)indexPath nowTableView:(NSInteger)number;
 @end

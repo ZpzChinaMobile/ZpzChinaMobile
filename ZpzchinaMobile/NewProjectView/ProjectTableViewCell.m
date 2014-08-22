@@ -9,7 +9,6 @@
 #import "ProjectTableViewCell.h"
 
 @implementation ProjectTableViewCell
-@synthesize delegate;
 @synthesize dropDown;
 @synthesize dataArr;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag ownerArr:(NSMutableArray *)ownerArr singleDic:(NSMutableDictionary *)singleDic
@@ -428,39 +427,46 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
+    CGFloat heights[5]={50,150,350,400,450};
+    
+    
+    [self.delegate beginEditWithHeight:heights[textField.tag]];
     textfield = nil;
     textfield = textField;
-    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 550)];
+    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];//350)];
     closeView.userInteractionEnabled = YES;
     UITapGestureRecognizer *closeViewtapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     [closeViewtapGestureRecognizer addTarget:self action:@selector(closeKeyBoard)];
     [closeViewtapGestureRecognizer setNumberOfTapsRequired:1];
     [closeViewtapGestureRecognizer setNumberOfTouchesRequired:1];
     [closeView addGestureRecognizer:closeViewtapGestureRecognizer];
-    [self addSubview:closeView];
+    [self.superview.superview.superview.superview addSubview:closeView];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([delegate respondsToSelector:@selector(addContentProject:index:)]){
-        [delegate addContentProject:textField.text index:textField.tag];
+    if ([self.delegate respondsToSelector:@selector(addContentProject:index:)]){
+        [self.delegate addContentProject:textField.text index:textField.tag];
     }
+    [self.delegate endEdit];
 }
 
 -(void)btnClick:(UIButton *)button{
     [textfield resignFirstResponder];
-    if ([delegate respondsToSelector:@selector(addContactViewProject:)]){
-        [delegate addContactViewProject:button.tag];
+    if ([self.delegate respondsToSelector:@selector(addContactViewProject:)]){
+        [self.delegate addContactViewProject:button.tag];
     }
 }
 
 -(void)ForeignparticipationClick:(id)sender{
     [textfield resignFirstResponder];
     if(dropDown == nil) {
+        NSLog(@"ForeignparticipationClick");
         NSMutableArray *dataTempArr = [[NSMutableArray alloc]initWithObjects:@"参与",@"不参与", nil];
         dropDown = [[NIDropDown alloc] initWithFrame:sender arr:dataTempArr tit:@"Foreignparticipation"];
         dropDown.delegate = self;
     }
     else {
+        NSLog(@"消失");
         [dropDown hideDropDown:sender];
         dropDown = nil;
     }
@@ -469,8 +475,8 @@
 
 - (void) niDropDownDelegateMethod: (NIDropDown *) sender text:(NSString *)text tit:(NSString *)tit{
     //NSLog(@"%@",text);
-    if ([delegate respondsToSelector:@selector(addforeignInvestment:)]){
-        [delegate addforeignInvestment:text];
+    if ([self.delegate respondsToSelector:@selector(addforeignInvestment:)]){
+        [self.delegate addforeignInvestment:text];
     }
 }
 
@@ -481,15 +487,15 @@
 }
 
 -(void)contactBtn:(UIButton *)button{
-    if ([delegate respondsToSelector:@selector(updataOwner:index:)]){
-        [delegate updataOwner:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
+    if ([self.delegate respondsToSelector:@selector(updataOwner:index:)]){
+        [self.delegate updataOwner:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
     }
 }
 
 -(void)gotoMap{
-    if ([delegate respondsToSelector:@selector(gotoMap:city:)]){
-        NSLog(@"%@",[dataDic objectForKey:@"city"]);
-        [delegate gotoMap:[dataDic objectForKey:@"landAddress"] city:[dataDic objectForKey:@"city"]];
+    if ([self.delegate respondsToSelector:@selector(gotoMap:city:)]){
+        NSLog(@"===%@",[dataDic objectForKey:@"city"]);
+        [self.delegate gotoMap:[dataDic objectForKey:@"landAddress"] city:[dataDic objectForKey:@"city"]];
     }
 }
 @end

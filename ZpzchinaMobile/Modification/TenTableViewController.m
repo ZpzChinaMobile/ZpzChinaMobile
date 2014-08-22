@@ -9,7 +9,12 @@
 #import "TenTableViewController.h"
 #import "CameraModel.h"
 #import "GTMBase64.h"
-@interface TenTableViewController ()
+#import "Camera.h"
+#import "CameraSqlite.h"
+#import "AppModel.h"
+@interface TenTableViewController ()<CameraDelegate>{
+    Camera* camera;
+}
 
 @end
 
@@ -27,15 +32,7 @@
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
-        self.images=[NSMutableArray array];
-        
-        for (int i=0; i<images.count; i++) {
-            CameraModel* model= images[i];
-            UIImage *aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            [self.images addObject:aimage];
-        }
-        
-        [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
+        self.images=images;
         
     }
     return self;
@@ -44,6 +41,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //    if (self.fromView==0) {
+    //        AppModel* appModel=[AppModel sharedInstance];
+    //        [appModel.electroweakImageArr removeAllObjects];
+    //    }
     self.tableView.separatorStyle=NO;
     
 }
@@ -75,7 +76,6 @@
         }
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [cell.contentView addSubview:[self getImageViewsWithImages:[self.images copy]]];
-        cell.contentView.backgroundColor=[UIColor yellowColor];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         
@@ -83,7 +83,11 @@
     }else{
         static NSString *stringcell = @"WeakElectricityCell";
         WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
-        cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
+        if(self.fromView == 0){
+            cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:0 Arr:nil singleDic:nil];
+        }else{
+            cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:nil singleDic:self.singleDic];
+        }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         return cell;
@@ -92,32 +96,87 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==0) {
-        return ((self.images.count-1)/3+1)*120;
+        return (self.images.count/3+1)*120;
     }
     return 150;
 }
 
--(UIView*)getImageViewsWithImages:(NSArray*)images{
-    CGFloat cellHeight=120;
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((images.count-1)/3+1))];
+-(void)backCamera{
+    if (!self.images.count) {
+        self.images=[NSMutableArray array];
+    }
     
+    if(self.fromView == 0){
+        [self.images removeAllObjects];
+        self.images = [CameraSqlite loadAllelectroweakList:[self.dataDic objectForKey:@"id"]];
+    }else{
+        if(self.superVC.isRelease == 0){
+            // if(cameraflag == 0){
+            if([CameraSqlite loadelectroweakSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+                [self.images insertObject:[[CameraSqlite loadAllelectroweakList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            }
+        }else{
+            [self.images removeAllObjects];
+            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                self.images = [CameraSqlite loadAllelectroweakList:[self.singleDic objectForKey:@"id"]];
+            }else{
+                self.images = [CameraSqlite loadAllelectroweakList:[self.singleDic objectForKey:@"projectID"]];
+            }
+        }
+    }
+    [self.tableView reloadData];
+}
+
+
+
+-(UIView*)getImageViewsWithImages:(NSArray*)images{
+    NSMutableArray* imageAry=[NSMutableArray array];
     for (int i=0; i<images.count; i++) {
+        CameraModel* model= images[i];
+        UIImage *aimage;
+        if ([model.a_device isEqualToString:@"localios"]) {
+            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        }
+        [imageAry addObject:aimage];
+    }
+    [imageAry addObject:[UIImage imageNamed:@"新建项目－6_03.png"]];
+    
+    CGFloat cellHeight=120;
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
+    view.backgroundColor=RGBCOLOR(229, 229, 229);
+
+    for (int i=0; i<imageAry.count; i++) {
         UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
-        imageView.image=images[i];
+        imageView.image=imageAry[i];
         [view addSubview:imageView];
         
-        UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
-        button.tag=i;
-        [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
+        if (i==imageAry.count-1) {
+            UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
+            [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+            [view addSubview:button];
+        }
     }
     return view;
 }
 
+
 -(void)tap:(UIButton*)button{
-    NSLog(@"%d",button.tag);
+    camera=[[Camera alloc]init];
+    camera.delegate=self;
+    if(self.fromView == 1){
+        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+            [camera getCameraView:self.superVC flag:5 aid:[self.singleDic objectForKey:@"id"]];
+        }else{
+            [camera getCameraView:self.superVC flag:5 aid:[self.singleDic objectForKey:@"projectID"]];
+        }
+    }else{
+        [camera getCameraView:self.superVC flag:5 aid:[self.dataDic objectForKey:@"id"]];
+    }
 }
+
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -148,5 +207,14 @@
     [singlepickerview showInView:self.tableView.superview];
 }
 
-
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.electroweakImageArr=self.images;
+    }
+    NSLog(@"tenDisappear");
+}
+-(void)dealloc{
+    NSLog(@"tenDealloc");
+}
 @end

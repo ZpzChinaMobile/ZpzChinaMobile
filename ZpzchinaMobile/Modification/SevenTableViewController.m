@@ -16,8 +16,12 @@
 #import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
 #import "SinglePickerView.h"
-@interface SevenTableViewController ()<PilePitDelegate,AddContactViewDelegate>{
+#import "Camera.h"
+#import "CameraSqlite.h"
+#import "AppModel.h"
+@interface SevenTableViewController ()<PilePitDelegate,AddContactViewDelegate,CameraDelegate>{
     AddContactViewController* addcontactView;
+    Camera* camera;
 }
 
 @end
@@ -73,14 +77,7 @@
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.contacts=contacts;
-        self.images=[NSMutableArray array];
-        
-        for (int i=0; i<images.count; i++) {
-            CameraModel* model= images[i];
-            UIImage *aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            [self.images addObject:aimage];
-        }
-        [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
+        self.images=images;
     }
     return self;
 }
@@ -98,6 +95,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //    if (self.fromView==0) {
+    //        AppModel* appModel=[AppModel sharedInstance];
+    //        appModel.pileAry =[NSMutableArray array];
+    //        [appModel.pilePitImageArr removeAllObjects];
+    //        self.contacts=appModel.pileAry;
+    //    }
     self.tableView.separatorStyle=NO;
 }
 
@@ -128,13 +131,17 @@
         }
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [cell.contentView addSubview:[self getImageViewsWithImages:self.images]];
-        cell.contentView.backgroundColor=[UIColor yellowColor];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         return cell;
     }else{
         PilePitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PilePitTableViewCell"];
         // if (!cell) {
-        cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:1 Arr:self.contacts];
+        if(self.fromView == 0){
+            cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:0 Arr:self.contacts];
+        }else{
+            cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:1 Arr:self.contacts];
+            
+        }
         cell.delegate=self;
         // }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -147,32 +154,95 @@
     // return cell;
 }
 
--(UIView*)getImageViewsWithImages:(NSArray*)images{
-    CGFloat cellHeight=120;
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((images.count-1)/3+1))];
+-(void)backCamera{
+    if (!self.images.count) {
+        self.images=[NSMutableArray array];
+    }
     
+    if(self.fromView == 0){
+        [self.images removeAllObjects];
+        self.images = [CameraSqlite loadAllPilePitList:[self.dataDic objectForKey:@"id"]];
+    }else{
+        if(self.superVC.isRelease == 0){
+            // if(cameraflag == 0){
+            if([CameraSqlite loadPilePitSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+                [self.images insertObject:[[CameraSqlite loadAllPilePitList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            }
+        }else{
+            [self.images removeAllObjects];
+            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                self.images = [CameraSqlite loadAllPilePitList:[self.singleDic objectForKey:@"id"]];
+            }else{
+                self.images = [CameraSqlite loadAllPilePitList:[self.singleDic objectForKey:@"projectID"]];
+            }
+        }
+    }
+    [self.tableView reloadData];
+}
+
+
+-(UIView*)getImageViewsWithImages:(NSArray*)images{
+    NSMutableArray* imageAry=[NSMutableArray array];
     for (int i=0; i<images.count; i++) {
+        CameraModel* model= images[i];
+        UIImage *aimage;
+        if ([model.a_device isEqualToString:@"localios"]) {
+            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        }
+        [imageAry addObject:aimage];
+    }
+    [imageAry addObject:[UIImage imageNamed:@"新建项目－6_03.png"]];
+    
+    CGFloat cellHeight=120;
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
+    view.backgroundColor=RGBCOLOR(229, 229, 229);
+
+    for (int i=0; i<imageAry.count; i++) {
         UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
-        imageView.image=images[i];
+        imageView.image=imageAry[i];
         [view addSubview:imageView];
         
-        UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
-        button.tag=i;
-        [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
+        if (i==imageAry.count-1) {
+            UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
+            [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+            [view addSubview:button];
+        }
     }
     return view;
 }
 
+
 -(void)tap:(UIButton*)button{
-    NSLog(@"%d",button.tag);
+    camera=[[Camera alloc]init];
+    camera.delegate=self;
+    if(self.fromView == 1){
+        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+            [camera getCameraView:self.superVC flag:1 aid:[self.singleDic objectForKey:@"id"]];
+        }else{
+            [camera getCameraView:self.superVC flag:1 aid:[self.singleDic objectForKey:@"projectID"]];
+        }
+    }else{
+        [camera getCameraView:self.superVC flag:1 aid:[self.dataDic objectForKey:@"id"]];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==0) {
-        return ((self.images.count-1)/3+1)*120;
+        return (self.images.count/3+1)*120;
     }
     return 50;
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.pilePitImageArr=self.images;
+    }
+    NSLog(@"sevenDisappear");
+}
+-(void)dealloc{
+    NSLog(@"sevendealloc");
 }
 @end

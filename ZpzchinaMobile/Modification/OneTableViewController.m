@@ -15,11 +15,13 @@
 #import "UIViewController+MJPopupViewController.h"
 #import "AddContactViewController.h"
 #import "Camera.h"
-
-@interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
+#import "CameraSqlite.h"
+#import "AppModel.h"
+@interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate,UIScrollViewDelegate>{
     LocateView* locateview;
     MultipleChoiceViewController* muview;
     AddContactViewController* addcontactView;
+    Camera* camera;
     // BOOL _isUpdata;
 }
 @end
@@ -27,13 +29,20 @@
 @implementation OneTableViewController
 //土地规划/拍卖
 
+//测试代码
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    NSLog(@"%d",scrollView==self.tableView);
+//    NSLog(@"22");
+}
+
+
 //选择框
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 0) {
         NSLog(@"Cancel");
     }else {
-        //            _isUpdata = YES;
+        //_isUpdata = YES;
         locateview = (LocateView *)actionSheet;
         [self.dataDic setObject:[locateview.proviceDictionary objectForKey:@"provice"] forKey:@"province"];
         [self.dataDic setObject:[locateview.proviceDictionary objectForKey:@"city"] forKey:@"city"];
@@ -53,7 +62,6 @@
     }else{
         [self.contacts addObject:dic];
     }
-    
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
     [self.tableView reloadData];
 }
@@ -81,21 +89,11 @@
     [locateview removeFromSuperview];
     locateview = nil;
     
-    //    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, self.tableView.contentSize.height-260, 320, 260)];
-    //    view.backgroundColor=[UIColor redColor];
-    //    [self.tableView addSubview:view];
-    //
-    
-    
     if(index == 0){
         if(locateview == nil){
             locateview = [[LocateView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:@"定位城市" delegate:self];
             locateview.tag = 0;
-            //  [self.tableView.superview];
-            //  NSLog(@"%@",self.tableView.superview);
             [locateview showInView:self.tableView.superview];
-            
-            //[locateview showInView:self.view];
         }
     }else if(index == 1){
         muview = [[MultipleChoiceViewController alloc] init];
@@ -103,7 +101,6 @@
         muview.delegate = self;
         [self presentPopupViewController:muview animationType:MJPopupViewAnimationSlideBottomBottom];
     }else{
-        //self.flag = 0;
         if(self.contacts.count <3){
             addcontactView = [[AddContactViewController alloc] init];
             [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
@@ -123,12 +120,9 @@
 }
 
 -(void)addContent:(NSString *)str index:(int)index{
-    
-    NSLog(@"222");
-    
     switch (index) {
         case 0:
-            [self.dataDic setObject:str forKey:@"landName"];
+            [self.dataDic setObject:str forKey:@"projectName"];
             break;
         case 1:
             [self.dataDic setObject:str forKey:@"landAddress"];
@@ -159,11 +153,9 @@
             break;
     }
     [self.tableView reloadData];
-    // NSLog(@"%@",self.dataDic);
 }
 
 -(void)updataContact:(NSMutableDictionary *)dic index:(int)index{
-    //    self.flag = 0;
     addcontactView = [[AddContactViewController alloc] init];
     [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
@@ -191,15 +183,8 @@
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.contacts=contacts;
-        self.images=[NSMutableArray array];
-        
-        for (int i=0; i<images.count; i++) {
-            CameraModel* model= images[i];
-            UIImage *aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            [self.images addObject:aimage];
-        }
-        [self.images addObject:[UIImage imageNamed:@"新建项目1_06.png"]];
-        
+        self.images=images;
+        NSLog(@"******%@\n************%@",dataDic,singleDic);
     }
     return self;
 }
@@ -207,7 +192,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.fromView=1;
+    
+    //    if (self.fromView==0) {
+    //        AppModel* appModel=[AppModel sharedInstance];
+    //       appModel.contactAry =[NSMutableArray array];
+    //        [appModel.planImageArr removeAllObjects];
+    //        self.contacts=appModel.contactAry;
+    //    }
+    
     self.tableView.separatorStyle=NO;
 }
 
@@ -233,12 +225,11 @@
 {
     if(indexPath.row == 0){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        if (!cell) {
-            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        }
+        // if (!cell) {
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        //}
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [cell.contentView addSubview:[self getImageViewsWithImages:[self.images copy]]];
-        cell.contentView.backgroundColor=[UIColor yellowColor];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         // Configure the cell...
         
@@ -246,57 +237,126 @@
     }else{
         PlanAndAuctionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
         // if (!cell) {
-        cell=[[PlanAndAuctionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:self.contacts];
+        
+        if(self.fromView == 0){
+            //AppModel* appModel=[AppModel sharedInstance];
+            cell = [[PlanAndAuctionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:nil flag:self.fromView contactArr:self.contacts] ;
+        }else{
+            cell=[[PlanAndAuctionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:self.contacts];
+            NSLog(@"9999999999999%@",self.contacts);
+        }
+        
         cell.delegate=self;
         //  }
         NSLog(@"cell被调 %d",cell.subviews.count);
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        // Configure the cell...
-        
         return cell;
     }
 }
 
+-(void)beginEditWithHeight:(CGFloat)height{
+    NSLog(@"beginEdit");
+    CGFloat a=height+((self.images.count)/3+1)*120-self.tableView.contentOffset.y;
+    if (a>=250) {
+        [self.delegate upTVCSpaceWithHeight:a-250+50];
+    }
+}
+
+-(void)endEdit{
+    [self.delegate downTVCSpace];
+}
+
 -(UIView*)getImageViewsWithImages:(NSArray*)images{
-    CGFloat cellHeight=120;
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((images.count-1)/3+1))];
-    
+    NSMutableArray* imageAry=[NSMutableArray array];
     for (int i=0; i<images.count; i++) {
+        CameraModel* model= images[i];
+        UIImage *aimage;
+        if ([model.a_device isEqualToString:@"localios"]) {
+            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        }
+        [imageAry addObject:aimage];
+    }
+    [imageAry addObject:[UIImage imageNamed:@"新建项目－6_03.png"]];
+    
+    CGFloat cellHeight=120;
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
+    view.backgroundColor=RGBCOLOR(229, 229, 229);
+    
+    for (int i=0; i<imageAry.count; i++) {
         UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
-        imageView.image=images[i];
+        imageView.image=imageAry[i];
         [view addSubview:imageView];
         
-        UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
-        button.tag=i;
-        [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
+        if (i==imageAry.count-1) {
+            UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
+            [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
+            [view addSubview:button];
+        }
     }
     return view;
 }
 
--(void)tap:(UIButton*)button{
-    Camera* camera=[[Camera alloc]init];
-    if(self.fromView == 1){
-        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-            [camera getCameraView:self flag:6 aid:[self.singleDic objectForKey:@"id"]];
-        }else{
-            [camera getCameraView:self flag:6 aid:[self.singleDic objectForKey:@"projectID"]];
-        }
-    }else{
-        [camera getCameraView:self flag:6 aid:[self.dataDic objectForKey:@"id"]];
+-(void)backCamera{
+    if (!self.images.count) {
+        self.images=[NSMutableArray array];
     }
     
-    
-    
-    
-    NSLog(@"%d",button.tag);
+    NSLog(@"%d",self.fromView);
+    if(self.fromView == 0){
+        [self.images removeAllObjects];
+        self.images = [CameraSqlite loadAllPlanList:[self.dataDic objectForKey:@"id"]];
+    }else{
+        if(self.superVC.isRelease==0){
+            // if(cameraflag == 0){
+            if([CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+                [self.images insertObject:[[CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            }
+        }else{
+            [self.images removeAllObjects];
+            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"id"]];
+            }else{
+                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]];
+            }
+        }
+        
+    }
+    NSLog(@"=====%d",self.images.count);
+    [self.tableView reloadData];
+}
+
+-(void)tap:(UIButton*)button{
+    camera=[[Camera alloc]init];
+    camera.delegate=self;
+    if(self.fromView == 1){
+        if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+            [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"id"]];
+        }else{
+            [camera getCameraView:self.superVC flag:6 aid:[self.singleDic objectForKey:@"projectID"]];
+        }
+    }else{
+        [camera getCameraView:self.superVC flag:6 aid:[self.dataDic objectForKey:@"id"]];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==0) {
-        return ((self.images.count-1)/3+1)*120;
+        return (self.images.count/3+1)*120;
     }
     return 350;
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    AppModel* model=[AppModel sharedInstance];
+    if (self.images.count) {
+        model.planImageArr=self.images;
+    }
+}
+-(void)dealloc{
+    //camera=nil;
+    NSLog(@"oneDealloc");
+}
+
 @end

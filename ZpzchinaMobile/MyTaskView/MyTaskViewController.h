@@ -12,7 +12,6 @@
 #import "Reachability.h"
 #import "GetProject.h"
 #import "NewProjectViewController.h"
-#import "PendulumView.h"
 #import "ProjectContentCell.h"
 #import "TFIndicatorView.h"
 @interface MyTaskViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,CellContentViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate>{
@@ -29,10 +28,10 @@
     NSMutableArray *updataProjectArr;
     NSMutableArray *updataContactArr;
     NewProjectViewController *_newProject;
-    PendulumView *pendulum;
     int flag;
     UIView *bgView;
-    TFIndicatorView *indicator;
+    UIActivityIndicatorView *indicator;
+    UIView* coverView;//当左button在加载网络时,覆盖在右button上,不让点击
 }
 @property(retain,nonatomic)NSMutableArray *showArr;
 @property(retain,nonatomic)NSMutableArray *dataArr;

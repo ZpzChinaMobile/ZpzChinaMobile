@@ -12,6 +12,7 @@
 #import "ProjectModel.h"
 #import "MJRefresh.h"
 #import "ProjectStage.h"
+#import "ProgramDetailViewController.h"
 @interface ResultsViewController ()
 
 @end
@@ -35,11 +36,11 @@ int startIndex;
     NSLog(@"%@",self.dataDic);
     startIndex = 0;
     showArr = [[NSMutableArray alloc] init];
-    UIColor *ballColor = [UIColor colorWithRed:0.47 green:0.60 blue:0.89 alpha:1];
-    pendulum = [[PendulumView alloc] initWithFrame:CGRectMake(0, 55, 320, 513) ballColor:ballColor];
+    indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+    [indicator startAnimating];
     [self addBackButton];
     [self addtittle:@"高级搜索结果"];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 55, 320, 513) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 513) style:UITableViewStyleGrouped];
     [_tableView setBackgroundColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -48,7 +49,7 @@ int startIndex;
     [self loadServer:self.dataDic startIndex:startIndex];
     //集成刷新控件
     [self setupRefresh];
-    [self.view addSubview:pendulum];
+    [self.view addSubview:indicator];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,15 +59,15 @@ int startIndex;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 /**
  *  集成刷新控件
  */
@@ -118,8 +119,7 @@ int startIndex;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
         cell.backgroundColor = [UIColor clearColor];
         ProjectModel *model = [showArr objectAtIndex:indexPath.section];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        dic = [ProjectStage JudgmentStr:model];
+        NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
         _cellContent = [[CellContentView alloc] initWithFrame:CGRectMake(14, 0, 291.5, 260) dic:dic];
         _cellContent.delegate = self;
         [cell.contentView addSubview:_cellContent];
@@ -156,14 +156,23 @@ int startIndex;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //新建项目页面
+    //    ProjectModel *model = [showArr objectAtIndex:indexPath.section];
+    //    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //    dic = [ProjectStage JudgmentStr:model];
+    //
+    //    _newProject = [[NewProjectViewController alloc] init];
+    //    _newProject.fromView = 1;
+    //    _newProject.SingleDataDic = dic;
+    //[self.navigationController pushViewController:_newProject animated:YES];
+    //
     ProjectModel *model = [showArr objectAtIndex:indexPath.section];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic = [ProjectStage JudgmentStr:model];
-    
-    _newProject = [[NewProjectViewController alloc] init];
-    _newProject.fromView = 1;
-    _newProject.SingleDataDic = dic;
-    [self.navigationController pushViewController:_newProject animated:YES];
+    NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
+    ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
+    vc.url=dic[@"url"];
+    vc.isRelease=0;
+    vc.fromView=1;
+    vc.ID=dic[@"projectID"];//[[showArr objectAtIndex:indexPath.section] objectForKey:@"projectID"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -190,8 +199,7 @@ int startIndex;
         
         //NSLog(@"%@",self.showArr);
         [_tableView reloadData];
-        [pendulum removeFromSuperview];
-        pendulum = nil;
+        [indicator stopAnimating];
         if(startIndex !=0){
             [_tableView footerEndRefreshing];
         }else{

@@ -130,8 +130,8 @@
 //新建数据
 +(void)InsertData:(NSDictionary *)dic{
     NSLog(@"==>%@",[dic objectForKey:@"id"]);
-    NSString *aid = [[NSString alloc] init];
-    NSString *status = [[NSString alloc] init];
+    NSString *aid = nil;
+    NSString *status = nil;
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
 	if ([sqlite open:DataBaseName]) {
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]*$" options:NSRegularExpressionCaseInsensitive error:nil];

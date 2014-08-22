@@ -8,7 +8,6 @@
 
 #import "PlanAndAuctionTableViewCell.h"
 @implementation PlanAndAuctionTableViewCell
-@synthesize delegate;
 @synthesize dataArr;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic singleDic:(NSMutableDictionary *)singleDic flag:(int)flag contactArr:(NSMutableArray *)contactArr
 {
@@ -26,16 +25,18 @@
         LotName.delegate = self;
         LotName.textAlignment=NSTextAlignmentLeft;
         LotName.placeholder=@"地块名称";
+        NSLog(@"%d",flag);
+        NSLog(@"%@",dic);
         if(flag == 0){
-            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
+            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
+                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
             }
         }else{
-            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
+            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
+                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
             }else{
-                if(![[singleDic objectForKey:@"landName"] isEqualToString:@""]){
-                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landName"]]];
+                if(![[singleDic objectForKey:@"projectName"] isEqualToString:@""]){
+                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"projectName"]]];
                 }
             }
         }
@@ -177,7 +178,7 @@
             if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
                 [landuseLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"usage"]] ];
             }else{
-                [landuseLabel setText:@"地块用途"];
+                [landuseLabel setText:@""];
             }
         }else{
             if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
@@ -186,7 +187,7 @@
                 if(![[singleDic objectForKey:@"usage"] isEqualToString:@""]){
                     [landuseLabel setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"usage"]]];
                 }else{
-                    [landuseLabel setText:@"地块用途"];
+                    [landuseLabel setText:@""];
                 }
             }
         }
@@ -256,22 +257,28 @@
 
 -(void)BtnClick:(UIButton *)button{
     [textfield resignFirstResponder];
-    if ([delegate respondsToSelector:@selector(addContactView:)]){
-        [delegate addContactView:button.tag];
+    if ([self.delegate respondsToSelector:@selector(addContactView:)]){
+        [self.delegate addContactView:button.tag];
     }
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
+    CGFloat heights[4]={50,150,200,250};
+    
+    [self.delegate beginEditWithHeight:heights[textField.tag]];
+    
     textfield = nil;
     textfield = textField;
-    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 350)];
+    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];//350)];
     closeView.userInteractionEnabled = YES;
+    closeView.backgroundColor=[UIColor clearColor];
+
     UITapGestureRecognizer *closeViewtapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     [closeViewtapGestureRecognizer addTarget:self action:@selector(closeKeyBoard)];
     [closeViewtapGestureRecognizer setNumberOfTapsRequired:1];
     [closeViewtapGestureRecognizer setNumberOfTouchesRequired:1];
     [closeView addGestureRecognizer:closeViewtapGestureRecognizer];
-    [self addSubview:closeView];
+    [self.superview.superview.superview.superview addSubview:closeView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -280,15 +287,18 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([delegate respondsToSelector:@selector(addContent:index:)]){
-        [delegate addContent:textField.text index:textField.tag];
+    
+
+    if ([self.delegate respondsToSelector:@selector(addContent:index:)]){
+        [self.delegate addContent:textField.text index:textField.tag];
     }
+    [self.delegate endEdit];
 }
 
 -(void)contactBtn:(UIButton *)button{
     //NSLog(@"button ===> %@",[self.dataArr objectAtIndex:button.tag-1]);
-    if ([delegate respondsToSelector:@selector(updataContact:index:)]){
-        [delegate updataContact:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
+    if ([self.delegate respondsToSelector:@selector(updataContact:index:)]){
+        [self.delegate updataContact:[self.dataArr objectAtIndex:button.tag-1] index:button.tag];
     }
 }
 

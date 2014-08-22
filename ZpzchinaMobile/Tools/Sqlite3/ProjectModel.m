@@ -97,7 +97,7 @@
 }
 
 + (NSURLSessionDataTask *)globalSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block str:(NSString *)str index:(int)index{
-    NSString *urlStr = [NSString stringWithFormat:@"zpzserver/ZPZChina.svc/projects/%@?keywords=%@&startIndex=%d&pageSize=5",[[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"],str,index];
+    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?keywords=%@&startIndex=%d&pageSize=5",[[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"],str,index];
     NSLog(@"%@",urlStr);
     NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)urlStr, NULL, NULL,  kCFStringEncodingUTF8 ));
     return [[AFAppDotNetAPIClient sharedClient] GET:encodedString parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
@@ -134,7 +134,7 @@
 }
 
 + (NSURLSessionDataTask *)globalMyProjectWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block index:(int)index{
-    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"zpzserver/ZPZChina.svc/projects/%@?myProjects=true&startIndex=%d&pageSize=5",[[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"],index] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?myProjects=true&startIndex=%d&pageSize=5",[[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"],index] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
         NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];
         NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
         NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
@@ -169,7 +169,7 @@
 }
 
 + (NSURLSessionDataTask *)globalProjectValueWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block url:(NSString *)url{
-    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"zpzserver/ZPZChina.svc/%@",url] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"/ZPZChina.svc/%@",url] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
         NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];
         NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
         NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
@@ -209,9 +209,8 @@
     op.responseSerializer = [AFJSONResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        NSString *projectId = [[NSString alloc]init];
-        NSString *projectCode = [[NSString alloc]init];
-        NSString *projectName = [[NSString alloc]init];
+        NSString *projectId = nil;
+        NSString *projectName = nil;
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
@@ -219,7 +218,6 @@
                 NSLog(@"%@",[item objectForKey:@"projectCode"]);
                 NSLog(@"%@",[item objectForKey:@"projectID"]);
                 projectId = [item objectForKey:@"projectID"];
-                projectCode = [item objectForKey:@"projectCode"];
                 projectName = [item objectForKey:@"projectName"];
                 [ContactSqlite UpdataProjectId:projectId aid:aid projectName:projectName];
                 [CameraSqlite UpdataProjectId:projectId aid:aid projectName:projectName];

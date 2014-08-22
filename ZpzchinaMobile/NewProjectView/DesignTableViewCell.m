@@ -28,7 +28,7 @@
         
         UIButton *Company = [UIButton buttonWithType:UIButtonTypeCustom];
         Company.frame = CGRectMake(20,10, 140, 30);
-        [Company setTitle:@"地勘公司" forState:UIControlStateNormal];
+        [Company setTitle:@"设计院" forState:UIControlStateNormal];
         [Company setTitleColor:BlueColor forState:UIControlStateNormal];
         Company.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         Company.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];

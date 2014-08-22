@@ -204,8 +204,7 @@ int startIndex;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
         cell.backgroundColor = [UIColor clearColor];
         ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        dic = [ProjectStage JudgmentStr:model];
+        NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
         _cellContent = [[CellContentView alloc] initWithFrame:CGRectMake(14, 0, 291.5, 260) dic:dic];
         _cellContent.delegate = self;
         [cell.contentView addSubview:_cellContent];
@@ -244,8 +243,7 @@ int startIndex;
 {
     //新建项目页面
     ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    dic = [ProjectStage JudgmentStr:model];
+    NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
     
     _newProject = [[NewProjectViewController alloc] init];
     _newProject.fromView = 1;

@@ -16,6 +16,11 @@ static __weak ProgramDetailViewController* myDelegate;
 static UIView* totalView;
 static NSDictionary* dataDic;
 
++(void)myDealloc{
+    totalView=nil;
+    dataDic=nil;
+}
+
 +(UIView*)zhuangXiuWithdelegate:(ProgramDetailViewController*)delegate{
     //数值初始
     height=0;
@@ -42,11 +47,27 @@ static NSDictionary* dataDic;
     height+=215.5;
     
     //图片imageView
-    //图片imageView
     UIImage *aimage;
     if (myDelegate.electroweakImageArr.count) {
-        CameraModel *model = myDelegate.electroweakImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        CameraModel* model;
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.electroweakImageArr[0];
+            if([model.a_device isEqualToString:@"localios"]){
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+            }else{
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            }
+
+        }else{
+            model=myDelegate.imgDic[@"electroweakImageArr"];
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }
+
+//        if([model.a_device isEqualToString:@"localios"]){
+//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//        }else{
+//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+//        }
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }

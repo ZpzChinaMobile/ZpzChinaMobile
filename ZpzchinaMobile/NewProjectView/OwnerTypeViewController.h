@@ -12,12 +12,11 @@
     UITableView *_tableView;
     NSMutableArray *showArr;
     NSMutableArray *dataArr;
-    id<OwnerTypeViewDelegate>delegate;
 }
 
 @property(retain,nonatomic)NSMutableArray *showArr;
 @property(retain,nonatomic)NSMutableArray *dataArr;
-@property(nonatomic ,strong)id<OwnerTypeViewDelegate>delegate;
+@property(nonatomic ,weak)id<OwnerTypeViewDelegate>delegate;
 @end
 @protocol OwnerTypeViewDelegate <NSObject>
 -(void)choiceDataOwnerType:(NSMutableArray *)arr;

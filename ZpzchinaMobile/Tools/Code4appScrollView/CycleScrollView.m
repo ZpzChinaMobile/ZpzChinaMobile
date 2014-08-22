@@ -94,7 +94,6 @@
     int last = [self validPageValue:curPage+1];
     
     if([curImages count] != 0) [curImages removeAllObjects];
-    
     [curImages addObject:[imagesArray objectAtIndex:pre-1]];
     [curImages addObject:[imagesArray objectAtIndex:curPage-1]];
     [curImages addObject:[imagesArray objectAtIndex:last-1]];
@@ -114,7 +113,7 @@
     
     int x = aScrollView.contentOffset.x;
     int y = aScrollView.contentOffset.y;
-    NSLog(@"did  x=%d  y=%d", x, y);
+    //NSLog(@"did  x=%d  y=%d", x, y);
     
     // 水平滚动
     if(scrollDirection == CycleDirectionLandscape) {
@@ -152,7 +151,7 @@
     int x = aScrollView.contentOffset.x;
     int y = aScrollView.contentOffset.y;
     
-    NSLog(@"--end  x=%d  y=%d", x, y);
+    //NSLog(@"--end  x=%d  y=%d", x, y);
     
     if (scrollDirection == CycleDirectionLandscape) {
             [scrollView setContentOffset:CGPointMake(scrollFrame.size.width, 0) animated:YES];
@@ -172,6 +171,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"cycleScrollViewDealloc");
     [imagesArray release];
     [curImages release];
     

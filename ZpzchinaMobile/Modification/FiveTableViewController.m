@@ -14,7 +14,7 @@
 #import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
 #import "SinglePickerView.h"
-
+#import "AppModel.h"
 @interface FiveTableViewController ()<PlotDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
     DatePickerView* datepickerview;
     AddContactViewController* addcontactView;
@@ -165,6 +165,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        appModel.ownerAry =[NSMutableArray array];
+//        self.contacts=appModel.ownerAry;
+//    }
     self.tableView.separatorStyle=NO;
     _titleArray = @[@"业主单位",@"预计施工时间",@"预计竣工时间",@"电梯",@"空调",@"供暖方式",@"外墙材料",@"钢结构"];
 }
@@ -193,8 +198,13 @@
     static NSString *stringcell = @"ProjectTableViewCell";
     PlotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     //if(!cell){
-        cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
-        cell.delegate=self;
+    if(self.fromView == 0){
+        cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:0 Arr:self.contacts singleDic:nil];
+    }else{
+        cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
+    }
+    
+    cell.delegate=self;
     //}
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
@@ -210,5 +220,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 400;
 }
-
+-(void)dealloc{
+    NSLog(@"fiveDealloc");
+}
 @end

@@ -15,6 +15,12 @@ static NSDictionary* dataDic;
 static CGFloat height = 0;//统计总高
 static UIView* totalView;
 static __weak ProgramDetailViewController* myDelegate;
+
++(void)myDealloc{
+    totalView=nil;
+    dataDic=nil;
+}
+
 +(UIView*)zhuTiShiGongWithFirstViewHeight:(CGFloat*)firstViewHeight secondView:(CGFloat*)secondViewHeight thirdViewHeight:(CGFloat*)thirdViewHeight delegate:(ProgramDetailViewController*)delegate{
     //数值初始
     height=0;
@@ -58,14 +64,45 @@ static __weak ProgramDetailViewController* myDelegate;
     UIImage *aimage;
     CameraModel *model;
     if(sequence==1&&myDelegate.horizonImageArr.count){
-        model=myDelegate.horizonImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.horizonImageArr[0];
+            if([model.a_device isEqualToString:@"localios"]){
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+            }else{
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            }
+        }else{
+            model=myDelegate.imgDic[@"horizonImageArr"];
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }
+        
     }else if (sequence==2&&myDelegate.pilePitImageArr.count){
-        model=myDelegate.pilePitImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.pilePitImageArr[0];
+            if([model.a_device isEqualToString:@"localios"]){
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+            }else{
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            }
+        }else{
+            model=myDelegate.imgDic[@"pilePitImageArr"];
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }
+       
     }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
-        model=myDelegate.mainConstructionImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+        NSLog(@"mainConstructionImageArr%d",myDelegate.mainConstructionImageArr.count);
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.mainConstructionImageArr[0];
+            if([model.a_device isEqualToString:@"localios"]){
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+            }else{
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            }
+        }else{
+            model=myDelegate.imgDic[@"mainConstructionImageArr"];
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }
+        
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }

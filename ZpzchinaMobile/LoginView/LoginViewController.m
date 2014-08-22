@@ -63,7 +63,7 @@ static bool FirstLogin = NO;
     _userNameTextField.placeholder=@"请填写用户名/手机号";
     _userNameTextField.returnKeyType=UIReturnKeyDone;
     _userNameTextField.font =  [UIFont systemFontOfSize:15];
-    [_userNameTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    _userNameTextField.clearButtonMode = UITextFieldViewModeAlways;
     [textView addSubview:_userNameTextField];
     _passWordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,43,254,43)];
     _passWordTextField.delegate = self;
@@ -72,7 +72,7 @@ static bool FirstLogin = NO;
     _passWordTextField.returnKeyType=UIReturnKeyDone;
     _passWordTextField.secureTextEntry = YES;
     _passWordTextField.font =  [UIFont systemFontOfSize:15];
-    [_passWordTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    _passWordTextField.clearButtonMode = UITextFieldViewModeAlways;
     [textView addSubview:_passWordTextField];
     [self.view addSubview:textView];
     
@@ -155,9 +155,11 @@ static bool FirstLogin = NO;
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:_userNameTextField.text,@"userName",_passWordTextField.text,@"password" ,@"ios",@"deviceType",nil];
     NSLog(@"%@",parameters);
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/login",serverAddress] parameters:parameters error:nil];
+    NSLog(@"%@",[NSString stringWithFormat:@"%s/Users/login",serverAddress]);
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];

@@ -20,6 +20,7 @@
 #import "ProjectStage.h"
 #import "MJRefresh.h"
 #import "AFAppDotNetAPIClient.h"
+#import "ProgramDetailViewController.h"
 @interface MyTaskViewController ()
 
 @end
@@ -40,7 +41,9 @@ int startIndex;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];//[[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+    indicator.center=CGPointMake(160,305);
+    indicator.color=[UIColor blackColor];
     [indicator startAnimating];
     flag =0;
     [self addBackButton];
@@ -78,6 +81,11 @@ int startIndex;
     [localProjuctBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [localProjuctBtn addTarget:self action:@selector(localProjuctBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:localProjuctBtn];
+    
+    coverView=[[UIView alloc]init];//网络加载时不让点
+    coverView.frame=CGRectMake(0, 64.5, 320, 50);
+    coverView.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:coverView];
     
     _lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(44, 112.5, 71.5, 2)];
     [_lineImage setImage:[UIImage imageNamed:@"我的任务_03.png"]];
@@ -150,6 +158,10 @@ int startIndex;
 }
 
 -(void)releaseProjuctBtnClick{
+    if (![self.view.subviews containsObject:coverView]) {
+        [self.view addSubview:coverView];
+    }
+    [indicator startAnimating];
     flag = 0;
     [self removeRightBtn];
     [self.showArr removeAllObjects];
@@ -158,10 +170,14 @@ int startIndex;
     [self loadServer:startIndex];
     [UIView animateWithDuration:0.5 animations:^{
         [_lineImage setFrame:CGRectMake(44, 112.5, 71.5, 2)];
+    }completion:^(BOOL finish){
     }];
 }
 
 -(void)localProjuctBtnClick{
+    if (![self.view.subviews containsObject:coverView]) {
+        [self.view addSubview:coverView];
+    }
     flag = 1;
     [_tableView removeHeader];
     [_tableView removeFooter];
@@ -171,6 +187,10 @@ int startIndex;
     [_tableView reloadData];
     [UIView animateWithDuration:0.5 animations:^{
         [_lineImage setFrame:CGRectMake(205, 112.5, 71.5, 2)];
+    }completion:^(BOOL finish){
+        if ([self.view.subviews containsObject:coverView]) {
+            [coverView removeFromSuperview];
+        }
     }];
     [indicator stopAnimating];
 }
@@ -234,24 +254,59 @@ int startIndex;
     //新建项目页面
     if(flag == 0){
         ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        dic = [ProjectStage JudgmentStr:model];
-        _newProject = [[NewProjectViewController alloc] init];
-        _newProject.fromView = 1;
-        _newProject.isRelease =0;
-        _newProject.SingleDataDic = dic;
-        [self.navigationController pushViewController:_newProject animated:YES];
+        NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
+        NSLog(@"11111111%@",model);
+        NSLog(@"2222222%@",dic);
+//        _newProject = [[NewProjectViewController alloc] init];
+//        _newProject.fromView = 1;
+//        _newProject.isRelease =0;
+//        _newProject.SingleDataDic = dic;
+        
+        //        _newProject = nil;
+        //        _newProject = [[NewProjectViewController alloc] init];
+        //        _newProject.fromView = 1;
+        //        _newProject.isRelease = 0;
+        //        NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
+        
+        //      以下为新vc的数据
+        //        _newProject.SingleDataDic = [dataArr objectAtIndex:indexPath.section];
+        // NSLog(@"%@",[dataArr objectAtIndex:indexPath.section]);
+        ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
+        vc.url=dic[@"url"];
+        vc.isRelease=0;
+       // vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
+        vc.fromView=1;
+        NSLog(@"uitableviewcell%@",self.showArr);
+       // if ([[self.showArr objectAtIndex:indexPath.section] objectForKey:@"projectID"]) {
+            vc.ID=dic[@"projectID"];
+       // }
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+        
+        //[self.navigationController pushViewController:_newProject animated:YES];
     }else{
+        NSLog(@"本地本地");
         [self.showArr removeAllObjects];
         self.showArr = [ProjectSqlite loadList];
         ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        dic = [ProjectStage JudgmentStr:model];
-        _newProject = [[NewProjectViewController alloc] init];
-        _newProject.fromView = 1;
-        _newProject.isRelease =1;
-        _newProject.SingleDataDic = dic;
-        [self.navigationController pushViewController:_newProject animated:YES];
+        NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
+//        _newProject = [[NewProjectViewController alloc] init];
+//        _newProject.fromView = 1;
+//        _newProject.isRelease =1;
+//        _newProject.SingleDataDic = dic;
+//        [self.navigationController pushViewController:_newProject animated:YES];
+        ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
+        vc.url=dic[@"url"];
+        vc.dataDic=dic;
+        NSLog(@"&&&&&&&&&&&&&&&&%@",dic);
+        vc.ID=dic[@"projectID"];
+        // vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
+        vc.fromView=1;
+        vc.isRelease=1;
+        [self.navigationController pushViewController:vc animated:YES];
+
     }
 }
 
@@ -511,6 +566,8 @@ int startIndex;
             NSLog(@"%@",bgView);
             [bgView removeFromSuperview];
             bgView = nil;
+            [coverView removeFromSuperview];
+            
         }
     } index:startIndex];
 }

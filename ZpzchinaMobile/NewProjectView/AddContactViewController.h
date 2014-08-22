@@ -10,7 +10,6 @@
 #import "NIDropDown.h"
 @protocol AddContactViewDelegate;
 @interface AddContactViewController : UIViewController<UITextFieldDelegate,NIDropDownDelegate>{
-    id<AddContactViewDelegate>delegate;
     NSMutableDictionary *dataDic;
     NSString *localProjectId;
     UITextField *addName;
@@ -24,7 +23,7 @@
     UITextField *textfield;
     UIView *closeView;
 }
-@property(nonatomic ,strong) id <AddContactViewDelegate> delegate;
+@property(nonatomic ,weak) id <AddContactViewDelegate> delegate;
 @property(retain,nonatomic)NSMutableDictionary *dataDic;
 @property(retain,nonatomic)NIDropDown *dropDown;
 @property(assign,nonatomic)int btnTag;

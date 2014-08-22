@@ -14,6 +14,7 @@
 #import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
 #import "SinglePickerView.h"
+#import "AppModel.h"
 @interface FourTableViewController ()<DesignDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
     AddContactViewController* addcontactView;
     SinglePickerView* singlepickerview;
@@ -45,6 +46,7 @@
     }else{
         [self.contacts addObject:dic];
     }
+     NSLog(@"%@",self.contacts);
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
     [self.tableView reloadData];
 }
@@ -108,6 +110,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    if (self.fromView==0) {
+//        AppModel* appModel=[AppModel sharedInstance];
+//        appModel.designAry =[NSMutableArray array];
+//        self.contacts=appModel.designAry;
+//    }
     self.tableView.separatorStyle=NO;
     
     
@@ -136,10 +143,15 @@
     static NSString *stringcell = @"ProjectTableViewCell";
     DesignTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
    // if(!cell){
+    if(self.fromView == 0){
+        //AppModel* appModel=[AppModel sharedInstance];
+        cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:self.fromView Arr:self.contacts singleDic:nil];
+    }else{
+    
         cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
-        cell.delegate=self;
     NSLog(@"%@",self.dataDic);
-   // }
+    }        cell.delegate=self;
+
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...
     
@@ -155,5 +167,8 @@
 {
     
     
+}
+-(void)dealloc{
+    NSLog(@"fourDealloc");
 }
 @end

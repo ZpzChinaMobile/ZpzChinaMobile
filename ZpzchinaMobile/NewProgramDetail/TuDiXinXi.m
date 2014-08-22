@@ -14,7 +14,14 @@ static CGFloat height;//统计总高
 static UIView* totalView;
 static __weak ProgramDetailViewController* myDelegate;
 static NSDictionary* dataDic;
-+(UIView*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate {
+
++(void)myDealloc{
+    totalView=nil;
+    dataDic=nil;
+}
+
++(UIView*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate {    
+    
     //数值初始
     height=0;
     totalView=nil;
@@ -106,9 +113,21 @@ static NSDictionary* dataDic;
     
     
     UIImage *aimage;
-    if (myDelegate.explorationImageArr.count) {
-        CameraModel *model = myDelegate.explorationImageArr[0];
-        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+    if (myDelegate.planImageArr.count) {
+        CameraModel *model;
+        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = myDelegate.planImageArr[0];
+            if([model.a_device isEqualToString:@"localios"]){
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+            }else{
+                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+            }
+            
+        }else{
+            model=myDelegate.imgDic[@"planImageArr"];
+            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }
+
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }
@@ -125,7 +144,7 @@ static NSDictionary* dataDic;
     [view addSubview:label];
     
     //添加选中图片时的触发
-    if (myDelegate.explorationImageArr.count) {
+    if (myDelegate.planImageArr.count) {
         myDelegate.firstStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         [myDelegate.firstStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.firstStageButton1];
@@ -142,18 +161,18 @@ static NSDictionary* dataDic;
      *
      *
      */
-    
     //项目名称view
     [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"土地规划/拍卖" programTitle:dataDic[@"projectName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"province"],dataDic[@"city"],dataDic[@"district"]] detailAddress:dataDic[@"landAddress"]]];
     
-    
     NSLog(@"city=%@ description=%@ district=%@ landAddress=%@ landName=%@ ownerType=%@ projectName=%@ usage=%@ province=%@",dataDic[@"city"],dataDic[@"description"],dataDic[@"district"],dataDic[@"landAddress"],dataDic[@"landName"],dataDic[@"ownerType"],dataDic[@"projectName"],dataDic[@"usage"],dataDic[@"province"]);
     //图片imageView
-    [self getImageView:myDelegate.explorationImageArr.count];
+    [self getImageView:myDelegate.planImageArr.count];
     
     //建立3个2行的label
     NSArray* ary1=@[@"土地面积",@"土地容积率",@"地块用途"];
+    //NSArray* ary2=@[@"",@"",@""];
     NSArray* ary2=@[[NSString stringWithFormat:@"%@㎡",dataDic[@"area"]],[NSString stringWithFormat:@"%@%%",dataDic[@"plotRatio"]],dataDic[@"usage"]];
+    NSLog(@"==========%@,%@,%@",dataDic[@"area"],dataDic[@"plotRatio"],dataDic[@"usage"]);
     for (int i=0; i<3; i++) {
         UIView* tempView=[self twoLineLable:ary1[i] secondStr:ary2[i]];
         tempView.center=CGPointMake(tempView.frame.size.width*(i+.5), height+30) ;

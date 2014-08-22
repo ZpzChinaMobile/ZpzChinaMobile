@@ -97,6 +97,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [_mapView viewWillDisappear];
+    NSLog(@"locationDis");
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
     _geocodesearch.delegate = nil;
@@ -168,9 +169,13 @@
     [_mapView addAnnotation:annotationPoint];
     [_mapView setZoomLevel:14];
     [_mapView selectAnnotation:annotationPoint animated:NO];
+    if (result.address) {
+        address = result.address;
+    }else{
+        address = baseAddress;
+    }
     testLocation.latitude=result.location.latitude;//设定测试点的坐标是当前位置
     testLocation.longitude=result.location.longitude;
-    address = result.address;
 }
 
 - (void)onGetGeocodeResult:(BMKGeocodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
@@ -193,7 +198,11 @@
     [_mapView selectAnnotation:annotationPoint animated:NO];
     testLocation.latitude=result.location.latitude;//设定测试点的坐标是当前位置
     testLocation.longitude=result.location.longitude;
-    address = result.address;
+    if (result.address) {
+        address = result.address;
+    }else{
+        address = baseAddress;
+    }
 }
 
 /**

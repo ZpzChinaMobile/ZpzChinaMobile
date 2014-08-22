@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModificationViewController.h"
 
 @interface SevenTableViewController : UITableViewController
 @property(nonatomic,strong)NSMutableArray* images;
@@ -15,7 +16,7 @@
 @property(nonatomic,strong)NSMutableArray* contacts;
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 @property(nonatomic)NSInteger timeflag;
-@property(nonatomic,strong)UIViewController* superVC;
+@property(nonatomic,weak)ModificationViewController* superVC;
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images;
 @end
