@@ -36,9 +36,10 @@
         [self addSubview:Company];
         
                dataArr = [NSMutableArray arrayWithArray:Arr];
+        NSLog(@"123343435454545---------------arr   %@",dataArr);
         if(Arr.count != 0){
             for(int i=0; i<Arr.count;i++){
-                if(i<2){
+                if(i<3){
                     UIButton *contactBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                     [contactBtn setTitle:[[Arr objectAtIndex:i] objectForKey:@"contactName"] forState:UIControlStateNormal];
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -53,6 +54,7 @@
                     }
                     else{
                         [contactBtn setFrame:CGRectMake(240, 10, 60, 30)];
+                       
                     }
                     [self addSubview:contactBtn];
                 }
