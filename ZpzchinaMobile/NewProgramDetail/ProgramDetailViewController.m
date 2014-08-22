@@ -63,6 +63,8 @@
 @property(nonatomic,strong)NSMutableArray* highImages;//存放用于放进scrollView翻滚的图片cameraModel数组
 
 @property(nonatomic,strong)UIActivityIndicatorView* loadAnimationView;//viewDidLoad时等待网络下载资源时转菊花
+@property(nonatomic,strong)UIView* enterToScrollView;//进无限滚时的动画
+
 @end
 
 @implementation ProgramDetailViewController
@@ -169,6 +171,11 @@
     NSLog(@"userChangeImage");
     NSMutableArray* ary=[NSMutableArray array];
     AppModel* app=[AppModel sharedInstance];
+    
+    if (!self.enterToScrollView) {
+        self.enterToScrollView=[[UIView alloc]initWithFrame:self.view.frame];
+    }
+    
     
     if (button==self.firstStageButton1) {
         NSLog(@"firstStageButton1");

@@ -21,7 +21,7 @@
             [self addSubview:lingImage];
         }
         
-        UITextField *LotName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 200, 30)];
+        UITextField *LotName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
         LotName.delegate = self;
         LotName.textAlignment=NSTextAlignmentLeft;
         LotName.placeholder=@"地块名称";
@@ -82,7 +82,7 @@
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage];
         
-        UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 200, 30)];
+        UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 280, 30)];
         address.delegate = self;
         address.textAlignment=NSTextAlignmentLeft;
         address.placeholder=@"地块地址";

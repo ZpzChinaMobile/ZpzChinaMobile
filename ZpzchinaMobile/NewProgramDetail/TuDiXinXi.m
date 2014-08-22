@@ -39,7 +39,7 @@ static NSDictionary* dataDic;
     [self getFirstView];
     *firstViewHeight=height;
     [self getSecondView];
-    
+
     
     totalView.frame=CGRectMake(0, 0, 320, height);
     return totalView;
@@ -48,7 +48,9 @@ static NSDictionary* dataDic;
 +(void)getSecondView{
     [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"项目立项" programTitle:dataDic[@"projectName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"city"],dataDic[@"district"],dataDic[@"landAddress"]] detailAddress:dataDic[@"description"]]];
     
-    
+    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, height-175, 320, 3.5)];
+    shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
+    [totalView addSubview:shadow];
     
     //获取预计施工时间以及预计竣工时间
     NSMutableArray* tempAry=[NSMutableArray array];

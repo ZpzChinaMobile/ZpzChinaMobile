@@ -406,6 +406,11 @@ static __weak ProgramDetailViewController* myDelegate;
     titleView.backgroundColor=RGBCOLOR(229, 229, 229);
     height+=tempHeight;
     
+    //阴影
+    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 3.5)];
+    shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
+    [titleView addSubview:shadow];
+    
     ///title部分
     //图片
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 18.5, 18.5)];

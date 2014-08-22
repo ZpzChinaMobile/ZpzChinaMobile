@@ -22,6 +22,7 @@
         curPage = 1;                                    // 显示的是图片数组里的第一张图片
         curImages = [[NSMutableArray alloc] init];
         imagesArray = [[NSArray alloc] initWithArray:pictureArray];
+        pictureArray=nil;
         
         scrollView = [[UIScrollView alloc] initWithFrame:frame];
         scrollView.backgroundColor = [UIColor blackColor];
@@ -29,7 +30,7 @@
         scrollView.showsVerticalScrollIndicator = NO;
         scrollView.pagingEnabled = YES;
         scrollView.delegate = self;
-        [self addSubview:scrollView];
+        //[self addSubview:scrollView];
         
         // 在水平方向滚动
         if(scrollDirection == CycleDirectionLandscape) {
@@ -79,6 +80,7 @@
         
         
         [scrollView addSubview:imageView];
+        imageView=nil;
     }
     if (scrollDirection == CycleDirectionLandscape) {
         [scrollView setContentOffset:CGPointMake(scrollFrame.size.width, 0)];
@@ -174,6 +176,7 @@
     NSLog(@"cycleScrollViewDealloc");
     [imagesArray release];
     [curImages release];
+    //[scrollView release];
     
     [super dealloc];
 }
