@@ -74,21 +74,21 @@
             self.window.backgroundColor = [UIColor whiteColor];
             [self.window makeKeyAndVisible];
         }else{
-//            UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
-//            UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
-//            UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-//            navigationController.navigationBarHidden = YES;
-//            drawerController = [[MMDrawerController alloc]
-//                                                     initWithCenterViewController:navigationController
-//                                                     leftDrawerViewController:leftViewController
-//                                                     rightDrawerViewController:nil];
-//            [drawerController setMaximumRightDrawerWidth:320-62];
-//            [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-//            [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-//            [self.window setRootViewController:drawerController];
-//            self.window.backgroundColor = [UIColor whiteColor];
-//            [self.window makeKeyAndVisible];
-            
+            UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
+            UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
+            UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+            navigationController.navigationBarHidden = YES;
+            drawerController = [[MMDrawerController alloc]
+                                                     initWithCenterViewController:navigationController
+                                                     leftDrawerViewController:leftViewController
+                                                     rightDrawerViewController:nil];
+            [drawerController setMaximumRightDrawerWidth:320-62];
+            [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+            [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+            [self.window setRootViewController:drawerController];
+            self.window.backgroundColor = [UIColor whiteColor];
+            [self.window makeKeyAndVisible];
+            /*
             if([[networkConnect sharedInstance] connectedToNetwork]){
                 NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"]);
                 if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"] isEqualToString:@"0"]) {
@@ -119,7 +119,7 @@
                  [self.window setRootViewController:drawerController];
                  self.window.backgroundColor = [UIColor whiteColor];
                  [self.window makeKeyAndVisible];
-            }
+            }*/
         }
     }
 

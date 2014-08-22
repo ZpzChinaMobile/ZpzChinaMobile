@@ -10,7 +10,7 @@
 #import "CameraSqlite.h"
 @implementation GetBigImage
 +(void)getbigimage:(NSString *)url{
-    //NSLog(@"%@",url);
+    NSLog(@"*****%@",url);
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,url] parameters:nil error:nil];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];

@@ -148,12 +148,18 @@ static NSDictionary* dataDic;
     //添加选中图片时的触发
     if (myDelegate.planImageArr.count) {
         myDelegate.firstStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-        [myDelegate.firstStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
+        myDelegate.firstStageButton1.tag=0;
+        [myDelegate.firstStageButton1 addTarget:self action:@selector(tapImage:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.firstStageButton1];
     }
 }
 
-
++(void)tapImage:(UIButton*)button{
+    if (button.tag==0) {
+        //UIView animateWithDuration:.5 animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>
+        [myDelegate userChangeImageWithButtons:button];
+    }
+}
 
 +(void)getFirstView{
     /*
