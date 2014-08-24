@@ -35,8 +35,8 @@
         [Company addTarget:self action:@selector(Company) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Company];
         
-        dataArr = [NSMutableArray arrayWithArray:Arr];
-        NSLog(@"%@",Arr);
+               dataArr = [NSMutableArray arrayWithArray:Arr];
+        NSLog(@"123343435454545---------------arr   %@",dataArr);
         if(Arr.count != 0){
             for(int i=0; i<Arr.count;i++){
                 if(i<3){
@@ -54,6 +54,7 @@
                     }
                     else{
                         [contactBtn setFrame:CGRectMake(240, 10, 60, 30)];
+                       
                     }
                     [self addSubview:contactBtn];
                 }

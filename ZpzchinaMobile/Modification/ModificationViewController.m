@@ -137,9 +137,11 @@
     // [self initTableView];
     [self initThemeView];
     [self initTableViewSpace];
-    [self.tableViewSpace addSubview:self.twoTVC.tableView];
     [self.tableViewSpace addSubview:self.oneTVC.tableView];
-    [self initTableView];
+   // [self initTableView];
+    
+   // NSLog(@"**********%@",self.dataDic);
+
     // Do any additional setup after loading the view.
 }
 
