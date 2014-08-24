@@ -133,8 +133,12 @@ static NSDictionary* dataDic;
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }
+    CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+    CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+    aimage=[UIImage imageWithCGImage:CGImageCreateWithImageInRect([aimage CGImage], frame)];
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
+
     [view addSubview:imageView];
     
     //图片数量label
@@ -149,17 +153,17 @@ static NSDictionary* dataDic;
     if (myDelegate.planImageArr.count) {
         myDelegate.firstStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         myDelegate.firstStageButton1.tag=0;
-        [myDelegate.firstStageButton1 addTarget:self action:@selector(tapImage:) forControlEvents:UIControlEventTouchUpInside];
+        [myDelegate.firstStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.firstStageButton1];
     }
 }
 
-+(void)tapImage:(UIButton*)button{
-    if (button.tag==0) {
-        //UIView animateWithDuration:.5 animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>
-        [myDelegate userChangeImageWithButtons:button];
-    }
-}
+//+(void)tapImage:(UIButton*)button{
+//    if (button.tag==0) {
+//        //UIView animateWithDuration:.5 animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>
+//        [myDelegate userChangeImageWithButtons:button withImageView:[totalView.subviews[1] subviews][0]];
+//    }
+//}
 
 +(void)getFirstView{
     /*

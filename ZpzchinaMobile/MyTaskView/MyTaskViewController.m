@@ -563,7 +563,7 @@ int startIndex;
             }else{
                 [_tableView headerEndRefreshing];
             }
-            NSLog(@"%@",bgView);
+            //NSLog(@"%@",bgView);
             [bgView removeFromSuperview];
             bgView = nil;
             [coverView removeFromSuperview];

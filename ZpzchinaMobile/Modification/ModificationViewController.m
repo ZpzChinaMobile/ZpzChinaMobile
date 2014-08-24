@@ -580,17 +580,24 @@
             }
         }
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"保存完毕，请到本地保存项目查看！"
-                                                       delegate:self
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil,nil];
-        [alert show];
+        
+        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(loadAlertView) userInfo:nil repeats:NO];
+        
+        
     }
     
     
 }
 
+
+-(void)loadAlertView{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"保存完毕，请到本地保存项目查看！"
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil,nil];
+    [alert show];
+}
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.shadowView removeFromSuperview];

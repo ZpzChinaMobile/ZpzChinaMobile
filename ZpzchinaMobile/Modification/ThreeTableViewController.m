@@ -238,6 +238,8 @@
     NSLog(@"threeDisappear");
 }
 -(void)dealloc{
+    addcontactView=nil;
+    camera=nil;
     NSLog(@"threeDealloc");
 }
 @end

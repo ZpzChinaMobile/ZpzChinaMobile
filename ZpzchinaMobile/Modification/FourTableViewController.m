@@ -169,6 +169,8 @@
     
 }
 -(void)dealloc{
+    addcontactView=nil;
+    singlepickerview=nil;
     NSLog(@"fourDealloc");
 }
 @end

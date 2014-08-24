@@ -13,7 +13,7 @@
 @interface ResultsViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,CellContentViewDelegate,UIActionSheetDelegate>{
     NSMutableArray *showArr;
     UITableView *_tableView;
-    TFIndicatorView *indicator;
+    UIActivityIndicatorView *indicator;
     NSMutableDictionary *dataDic;
     CellContentView *_cellContent;
     UIActionSheet *_myActionSheet;

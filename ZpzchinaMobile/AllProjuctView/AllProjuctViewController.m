@@ -37,7 +37,11 @@ int startIndex;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];//[[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+    indicator.center=CGPointMake(160,305);
+    indicator.color=[UIColor blackColor];
+    
+    //indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
     [indicator startAnimating];
     
     [self addBackButton];

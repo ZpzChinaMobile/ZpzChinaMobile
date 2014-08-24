@@ -356,6 +356,12 @@
 }
 -(void)dealloc{
     //camera=nil;
+    
+    locateview=nil;
+    muview=nil;
+    addcontactView=nil;
+    camera=nil;
+    
     NSLog(@"oneDealloc");
 }
 

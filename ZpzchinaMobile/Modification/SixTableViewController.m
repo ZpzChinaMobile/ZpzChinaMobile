@@ -213,7 +213,7 @@
     CGFloat cellHeight=120;
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
     view.backgroundColor=RGBCOLOR(229, 229, 229);
-
+    
     for (int i=0; i<imageAry.count; i++) {
         UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
@@ -256,16 +256,18 @@
             // if(cameraflag == 0){
             if([CameraSqlite loadHorizonSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
                 [self.images insertObject:[[CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
-            }else{
-                [self.images removeAllObjects];
-                if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-                    self.images = [CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"id"]];
-                }else{
-                    self.images = [CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"projectID"]];
-                }
             }
+        }else{
+            [self.images removeAllObjects];
+            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+                self.images = [CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"id"]];
+            }else{
+                self.images = [CameraSqlite loadAllHorizonList:[self.singleDic objectForKey:@"projectID"]];
+            }
+            
         }
     }
+    NSLog(@"=====%d",self.images.count);
     [self.tableView reloadData];
 }
 
@@ -283,6 +285,10 @@
     NSLog(@"sixDisappear");
 }
 -(void)dealloc{
+    datepickerview=nil;
+    addcontactView=nil;
+    locateview=nil;
+    camera=nil;
     NSLog(@"sixDealloc");
 }
 @end

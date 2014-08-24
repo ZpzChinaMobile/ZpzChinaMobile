@@ -176,8 +176,8 @@
         self.enterToScrollView=[[UIView alloc]initWithFrame:self.view.frame];
     }
     
-    
     if (button==self.firstStageButton1) {
+        
         NSLog(@"firstStageButton1");
         if (!self.isRelease) {
             for (int i=0; i<self.planImageArr.count; i++) {
@@ -191,6 +191,10 @@
         }else{
             [self gotoScrollImageViewWithImageAry:app.planImageArr];//self.planImageArr];
         }
+        
+        
+        
+        
         
     }else if(button==self.secondStageButton1){
         NSLog(@"secondStageButton1");

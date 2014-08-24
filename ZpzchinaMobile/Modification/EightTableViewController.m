@@ -167,6 +167,7 @@
     NSLog(@"eightDisappear");
 }
 -(void)dealloc{
+    camera=nil;
     NSLog(@"eightdealloc");
 }
 @end

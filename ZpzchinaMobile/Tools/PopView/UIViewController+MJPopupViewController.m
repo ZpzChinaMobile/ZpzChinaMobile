@@ -195,13 +195,17 @@
                                   popupSize.width, 
                                   popupSize.height);
     } else if(animationType == MJPopupViewAnimationSlideBottomBottom) {
-        popupEndRect = CGRectMake((sourceSize.width - popupSize.width) / 2, 
+        /*popupEndRect = CGRectMake((sourceSize.width - popupSize.width) / 2,
                                   sourceSize.height, 
                                   popupSize.width, 
+                                  popupSize.height);*/
+        popupEndRect = CGRectMake(29,
+                                  sourceSize.height,
+                                  popupSize.width,
                                   popupSize.height);
     } else {
         /*popupEndRect = CGRectMake(-popupSize.width,
-                                  popupView.frame.origin.y, 
+                                  popupView.frame.origin.y,
                                   popupSize.width, 
                                   popupSize.height);*/
         popupEndRect = CGRectMake(320,

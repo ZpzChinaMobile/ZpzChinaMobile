@@ -35,7 +35,7 @@
     ASRDialogViewController *ASRDialogview;
     RecordView *_recordView;
     UIView *lineBgView;
-    TFIndicatorView *indicator;
+    UIActivityIndicatorView *indicator;
 }
 @property(retain,nonatomic)NSMutableArray *showArr;
 @end
