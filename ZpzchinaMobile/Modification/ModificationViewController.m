@@ -138,7 +138,7 @@
     [self initThemeView];
     [self initTableViewSpace];
     [self.tableViewSpace addSubview:self.oneTVC.tableView];
-   // [self initTableView];
+    [self initTableView];
     
    // NSLog(@"**********%@",self.dataDic);
 
