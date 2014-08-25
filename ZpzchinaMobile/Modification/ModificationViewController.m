@@ -566,29 +566,31 @@
         
         if([self.contacts[4] count] !=0){
             for(int i=0; i<[self.contacts[4] count];i++){
-                [ContactSqlite InsertData:[self.contacts[4] objectAtIndex:i]];
+                [ContactSqlite InsertUpdataServerData:[self.contacts[4] objectAtIndex:i]];
             }
         }
         
+//        if([self.contacts[4] count] !=0){
+//            for(int i=0; i<[self.contacts[4] count];i++){
+//                [ContactSqlite InsertData:[self.contacts[4] objectAtIndex:i]];
+//            }
+//        }
+        
         if([self.contacts[3] count] !=0){
             for(int i=0; i<[self.contacts[3] count];i++){
-                [ContactSqlite InsertData:[self.contacts[3] objectAtIndex:i]];
+                [ContactSqlite InsertUpdataServerData:[self.contacts[3] objectAtIndex:i]];
             }
         }
         
         if([self.contacts[5] count] !=0){
             for(int i=0; i<[self.contacts[5] count];i++){
-                [ContactSqlite InsertData:[self.contacts[5] objectAtIndex:i]];
+                [ContactSqlite InsertUpdataServerData:[self.contacts[5] objectAtIndex:i]];
             }
         }
         
-        
-        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(loadAlertView) userInfo:nil repeats:NO];
-        
-        
+        [self loadAlertView];
+        //[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(loadAlertView) userInfo:nil repeats:NO];
     }
-    
-    
 }
 
 
