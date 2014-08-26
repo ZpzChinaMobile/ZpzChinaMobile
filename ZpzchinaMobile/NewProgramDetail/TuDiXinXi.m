@@ -95,17 +95,44 @@ static NSDictionary* dataDic;
         height+=120;
     }
     
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(15, height+5, 21, 21)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing/logo@2x.png"];
-    [totalView addSubview:imageView];
     
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(45, height+5, 200, 25)];
-    label.text=@"外商独资";
-    label.font=[UIFont systemFontOfSize:17];
-    [totalView addSubview:label];
-    height+=40;
+    UIView* tempView=[self getOwnerTypeViewWithImage:[UIImage imageNamed:@"XiangMuXiangQing/logo@2x.png"] owners:[dataDic[@"ownerType"] componentsSeparatedByString:@","]];
+    CGRect frame=tempView.frame;
+    frame.origin.y=height;
+    tempView.frame=frame;
+    
+    [totalView addSubview:tempView];
+//    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(15, height+5, 21, 21)];
+//    imageView.image=;
+//    [totalView addSubview:imageView];
+//    
+//    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(45, height+5, 200, 25)];
+//    label.text=@"外商独资";
+//    label.font=[UIFont systemFontOfSize:17];
+//    [totalView addSubview:label];
+    height+=tempView.frame.size.height;
     
 }
+
++(UIView*)getOwnerTypeViewWithImage:(UIImage*)image owners:(NSArray*)owners{
+    UIView* view=[[UIView alloc]initWithFrame:CGRectZero];
+    view.backgroundColor=[UIColor whiteColor];
+    
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(15, 0, 21, 21)];//CGRectMake(15, height+5, 21, 21)];
+    imageView.image=image;
+    [view addSubview:imageView];
+    
+    for (int i=0; i<owners.count; i++) {
+        UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(45+i%3*((320-45)*1.0/3), i/3*30, 200, 20)];//CGRectMake(45, height+5, 200, 25)];
+        label.text=owners[i];
+        label.font=[UIFont systemFontOfSize:17];
+        [view addSubview:label];
+    }
+    
+    view.frame=CGRectMake(0, 0, 320, 35+(owners.count>0?(owners.count-1)/3*30:0));
+    return view;
+}
+
 
 +(void)getImageView:(NSInteger)imageNumber{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
@@ -165,6 +192,48 @@ static NSDictionary* dataDic;
 //    }
 //}
 
+//第一行蓝，第二行黑，专门为土地信息做的view
++(UIView*)getBlueThreeTypesTwoLinesWithFirstStr:(NSArray*)firstStrs secondStr:(NSArray*)secondStrs{
+    UIView* view=[[UIView alloc]initWithFrame:CGRectZero];
+    view.backgroundColor=[UIColor whiteColor];
+    
+    for (int i=0; i<2; i++) {
+        UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(i*160, 10, 160, 20)];
+        firstLabel.text=firstStrs[i];
+        firstLabel.textColor=RGBCOLOR(82, 125, 237);
+        firstLabel.font=[UIFont systemFontOfSize:14];
+        firstLabel.textAlignment=NSTextAlignmentCenter;
+        [view addSubview:firstLabel];
+        
+        UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectMake(i*160, 30, 160, 20)];
+        secondLabel.text=secondStrs[i];
+        secondLabel.textColor=RGBCOLOR(125, 125, 125);
+        secondLabel.font=[UIFont systemFontOfSize:14];
+        secondLabel.textAlignment=NSTextAlignmentCenter;
+        [view addSubview:secondLabel];
+    }
+    UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 10+60, 160, 20)];
+    firstLabel.text=firstStrs[2];
+    firstLabel.textColor=RGBCOLOR(82, 125, 237);
+    firstLabel.font=[UIFont systemFontOfSize:14];
+    firstLabel.textAlignment=NSTextAlignmentCenter;
+    [view addSubview:firstLabel];
+    
+    UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectZero];
+    secondLabel.text=secondStrs[2];
+    secondLabel.numberOfLines=0;
+    secondLabel.textColor=RGBCOLOR(125, 125, 125);
+    secondLabel.font=[UIFont systemFontOfSize:14];
+    secondLabel.textAlignment=NSTextAlignmentLeft;
+    CGRect bounds=[secondLabel.text boundingRectWithSize:CGSizeMake( 305-52, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:14] forKey:NSFontAttributeName] context:nil];
+    secondLabel.frame=CGRectMake(52, 30+60, 305-52, bounds.size.height);
+    [view addSubview:secondLabel];
+    
+    view.frame=CGRectMake(0, 0, 320, 2*60+(bounds.size.height-20));
+    return view;
+}
+
+
 +(void)getFirstView{
     /*
      *
@@ -182,19 +251,14 @@ static NSDictionary* dataDic;
     
     //建立3个2行的label
     NSArray* ary1=@[@"土地面积",@"土地容积率",@"地块用途"];
-    //NSArray* ary2=@[@"",@"",@""];
     NSArray* ary2=@[[NSString stringWithFormat:@"%@㎡",dataDic[@"area"]],[NSString stringWithFormat:@"%@%%",dataDic[@"plotRatio"]],dataDic[@"usage"]];
-    NSLog(@"==========%@,%@,%@",dataDic[@"area"],dataDic[@"plotRatio"],dataDic[@"usage"]);
-    for (int i=0; i<3; i++) {
-        UIView* tempView=[self twoLineLable:ary1[i] secondStr:ary2[i]];
-        tempView.center=CGPointMake(tempView.frame.size.width*(i+.5), height+30) ;
-        [totalView addSubview:tempView];
-    }
-    height+=60;
+    UIView* tempViewNew=[self getBlueThreeTypesTwoLinesWithFirstStr:ary1 secondStr:ary2];
+    CGRect tempFrame=tempViewNew.frame;
+    tempFrame.origin.y=height;
+    tempViewNew.frame=tempFrame;
+    [totalView addSubview:tempViewNew];
+    height+=tempViewNew.frame.size.height;
     
-    NSLog(@"%@",myDelegate.contactAry);
-    //联系人信息3个label
-    //[contactBtn setTitle:[[contactArr objectAtIndex:i] objectForKey:@"contactName"] forState:UIControlStateNormal];
     NSArray* array1=myDelegate.contactAry;
     for (int i=0,j=myDelegate.contactAry.count; i<3; i++) {
         UIView* tempView;
