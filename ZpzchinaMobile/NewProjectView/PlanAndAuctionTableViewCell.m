@@ -28,15 +28,15 @@
         NSLog(@"%d",flag);
         NSLog(@"%@",dic);
         if(flag == 0){
-            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
+            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
+                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
             }
         }else{
-            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
+            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
+                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
             }else{
-                if(![[singleDic objectForKey:@"projectName"] isEqualToString:@""]){
-                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"projectName"]]];
+                if(![[singleDic objectForKey:@"landName"] isEqualToString:@""]){
+                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landName"]]];
                 }
             }
         }
