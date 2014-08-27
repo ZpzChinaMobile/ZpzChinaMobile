@@ -122,7 +122,7 @@
 -(void)addContent:(NSString *)str index:(int)index{
     switch (index) {
         case 0:
-            [self.dataDic setObject:str forKey:@"projectName"];
+            [self.dataDic setObject:str forKey:@"landName"];
             break;
         case 1:
             [self.dataDic setObject:str forKey:@"landAddress"];
