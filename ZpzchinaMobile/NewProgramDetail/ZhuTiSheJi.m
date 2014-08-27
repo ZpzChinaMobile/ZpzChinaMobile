@@ -131,7 +131,7 @@ static NSDictionary* dataDic;
      *
      *
      */
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"设计阶段" programTitle:@[@"主体设计阶段"] address:@[@"结构"] detailAddress:nil]];
+    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"设计阶段" programTitle:@[@"主体设计阶段"] address:@[dataDic[@"mainDesignStage"]] detailAddress:nil]];
     
     NSArray* array1=myDelegate.designAry;
     for (int i=0,j=myDelegate.designAry.count; i<3; i++) {
