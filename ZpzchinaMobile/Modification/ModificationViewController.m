@@ -411,6 +411,7 @@
 -(void)initNavi{
     [self addBackButton];
     [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
+    [self addtittle:self.fromView?@"修改项目":@"新建项目"];
 
 }
 

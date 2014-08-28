@@ -1015,6 +1015,8 @@
     //用来在加载新页面时,下方开始圈圈动画的时候,页面无法点击 该view初始
     self.spaceView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
     self.spaceView.backgroundColor=[UIColor clearColor];
+    
+    [self addtittle:@"项目详情"];
 }
 
 -(void)dealloc{
