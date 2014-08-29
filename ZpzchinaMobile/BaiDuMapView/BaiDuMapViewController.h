@@ -10,10 +10,10 @@
 #import "BaseViewController.h"
 #import "BMapKit.h"
 #import "MapContentView.h"
-@interface BaiDuMapViewController : BaseViewController<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeocodeSearchDelegate>{
+@interface BaiDuMapViewController : BaseViewController<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>{
     BMKMapView* _mapView;
     BMKLocationService* _locService;
-    BMKGeocodeSearch* _geocodesearch;
+    BMKGeoCodeSearch* _geocodesearch;
     BMKAnnotationView* newAnnotation;
     BMKPointAnnotation* annotationPoint;
     UIImageView *imageView;//绘画层
