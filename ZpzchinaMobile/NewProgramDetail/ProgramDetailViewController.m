@@ -63,6 +63,8 @@
 @property(nonatomic,strong)NSMutableArray* highImages;//存放用于放进scrollView翻滚的图片cameraModel数组
 
 @property(nonatomic,strong)UIActivityIndicatorView* loadAnimationView;//viewDidLoad时等待网络下载资源时转菊花
+@property(nonatomic,strong)UIView* enterToScrollView;//进无限滚时的动画
+
 @end
 
 @implementation ProgramDetailViewController
@@ -170,7 +172,12 @@
     NSMutableArray* ary=[NSMutableArray array];
     AppModel* app=[AppModel sharedInstance];
     
+    if (!self.enterToScrollView) {
+        self.enterToScrollView=[[UIView alloc]initWithFrame:self.view.frame];
+    }
+    
     if (button==self.firstStageButton1) {
+        
         NSLog(@"firstStageButton1");
         if (!self.isRelease) {
             for (int i=0; i<self.planImageArr.count; i++) {
@@ -184,6 +191,10 @@
         }else{
             [self gotoScrollImageViewWithImageAry:app.planImageArr];//self.planImageArr];
         }
+        
+        
+        
+        
         
     }else if(button==self.secondStageButton1){
         NSLog(@"secondStageButton1");
@@ -262,7 +273,6 @@
     }
 }
 
-
 //在scrollView添加view,并将scrollView的contentSize.height增加该view的height,如果是加载装修阶段view,则取消最下方的动画区域
 -(void)setOriginToView:(UIView*)view{
     CGRect frame=view.frame;
@@ -281,7 +291,6 @@
     }
     self.myScrollView.contentSize=size;
 }
-
 
 //观察contentOffset的值判断加载哪个新view
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -317,7 +326,6 @@
     [self getStageName];
     
 }
-
 
 //判断上导航栏的大标题和小标题
 -(void)getStageName{
@@ -405,8 +413,6 @@
         [self loadSelf];
     }
 }
-
-
 
 -(void)loadSelf{
     if (self.loadAnimationView) {
@@ -528,7 +534,6 @@
     [[NSOperationQueue mainQueue] addOperation:op];
 }
 
-
 -(void)doNetWorkSecondImgDic:(NSMutableDictionary*)imgDic{
     if (!self.imgDic) {
         self.imgDic=[NSMutableDictionary dictionary];
@@ -582,7 +587,6 @@
     self.planImageArr=[CameraSqlite loadAllPlanList:localProjectId];
 }
 
-
 //本地创建的联系人
 -(void)loadLocalContact:(NSString *)localProjectId{
     NSMutableArray *a = [ContactSqlite loadList:[self.dataDic objectForKey:@"id"]];
@@ -630,7 +634,6 @@
         }
     }
 }
-
 
 -(void)initTableView{
     self.myTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5) style:UITableViewStylePlain];
@@ -732,8 +735,6 @@
     [self didchangeStageSection:indexPath.section row:indexPath.row];
 }
 
-
-
 -(void)didchangeStageSection:(NSInteger)section row:(NSInteger)row{
     NSLog(@"=======%f",self.myScrollView.contentOffset.y);
     
@@ -796,7 +797,6 @@
     [self selectCancel];
     
 }
-
 
 //筛选界面拉回去
 -(void)selectCancel{
@@ -895,7 +895,6 @@
         [self setOriginToView:detailView];
     }
 }
-
 
 -(void)initThemeView{
     //画布themeView初始,因为上导航栏下方的阴影需要半透明,而上方部分不需要透明,所以该view分2块
@@ -1004,6 +1003,8 @@
     //用来在加载新页面时,下方开始圈圈动画的时候,页面无法点击 该view初始
     self.spaceView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
     self.spaceView.backgroundColor=[UIColor clearColor];
+    
+    [self addtittle:@"项目详情"];
 }
 
 -(void)dealloc{

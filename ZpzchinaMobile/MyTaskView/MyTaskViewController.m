@@ -52,7 +52,6 @@ int startIndex;
     startIndex = 0;
     getproject = [[GetProject alloc] init];
     self.showArr = [[NSMutableArray alloc] init];
-    [self loadServer:startIndex];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88.5, 320, 503.5) style:UITableViewStyleGrouped];
     [_tableView setBackgroundColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
@@ -60,6 +59,9 @@ int startIndex;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:_tableView];
+    
+    [self loadServer:startIndex];
+
     
     UIView *bgView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 50)];
     [bgView2 setBackgroundColor:[UIColor whiteColor]];
@@ -83,7 +85,7 @@ int startIndex;
     [self.view addSubview:localProjuctBtn];
     
     coverView=[[UIView alloc]init];//网络加载时不让点
-    coverView.frame=CGRectMake(0, 64.5, 320, 50);
+    coverView.frame=CGRectMake(0, 64.5, 320, 568-64.5);
     coverView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:coverView];
     
@@ -161,7 +163,9 @@ int startIndex;
     if (![self.view.subviews containsObject:coverView]) {
         [self.view addSubview:coverView];
     }
-    [indicator startAnimating];
+    if (!indicator.isAnimating) {
+        [indicator startAnimating];
+    }
     flag = 0;
     [self removeRightBtn];
     [self.showArr removeAllObjects];
@@ -557,13 +561,15 @@ int startIndex;
         if (!error) {
             [self.showArr addObjectsFromArray:posts];
             [_tableView reloadData];
-            [indicator stopAnimating];
+            if (indicator.isAnimating) {
+                [indicator stopAnimating];
+            }
             if(startIndex !=0){
                 [_tableView footerEndRefreshing];
             }else{
                 [_tableView headerEndRefreshing];
             }
-            NSLog(@"%@",bgView);
+            //NSLog(@"%@",bgView);
             [bgView removeFromSuperview];
             bgView = nil;
             [coverView removeFromSuperview];

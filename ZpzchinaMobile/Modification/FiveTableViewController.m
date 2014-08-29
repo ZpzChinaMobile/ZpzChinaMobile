@@ -221,6 +221,8 @@
     return 400;
 }
 -(void)dealloc{
+    datepickerview=nil;
+    addcontactView=nil;
     NSLog(@"fiveDealloc");
 }
 @end

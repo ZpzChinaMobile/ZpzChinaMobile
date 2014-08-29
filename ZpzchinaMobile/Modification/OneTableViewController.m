@@ -122,7 +122,7 @@
 -(void)addContent:(NSString *)str index:(int)index{
     switch (index) {
         case 0:
-            [self.dataDic setObject:str forKey:@"projectName"];
+            [self.dataDic setObject:str forKey:@"landName"];
             break;
         case 1:
             [self.dataDic setObject:str forKey:@"landAddress"];
@@ -356,6 +356,12 @@
 }
 -(void)dealloc{
     //camera=nil;
+    
+    locateview=nil;
+    muview=nil;
+    addcontactView=nil;
+    camera=nil;
+    
     NSLog(@"oneDealloc");
 }
 

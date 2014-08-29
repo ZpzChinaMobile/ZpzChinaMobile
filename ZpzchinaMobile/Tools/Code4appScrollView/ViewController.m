@@ -29,17 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = [NSString stringWithFormat:@"第%d张", 1];
-    
-	// Do any additional setup after loading the view, typically from a nib.
-    NSMutableArray *picArray =self.imagesArray;
-    //[[NSMutableArray alloc] init];
-    //[picArray addObject:[UIImage imageNamed:@"0.JPG"]];
-    //[picArray addObject:[UIImage imageNamed:@"1.JPG"]];
-    //[picArray addObject:[UIImage imageNamed:@"2.JPG"]];
-   // [picArray addObject:[UIImage imageNamed:@"3.JPG"]];
-    
+        
     UIButton* button=[[UIButton alloc]initWithFrame:self.view.frame];
     button.backgroundColor=[UIColor clearColor];
     [button addTarget:self action:@selector(cycleScrollViewDelegate:didSelectImageView:) forControlEvents:UIControlEventTouchUpInside];
@@ -47,7 +37,7 @@
     
     CycleScrollView *cycle = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)
                                                      cycleDirection:CycleDirectionLandscape
-                                                           pictures:picArray];
+                                                           pictures:self.imagesArray];
     cycle.center=CGPointMake(160, 250);
     cycle.delegate = self;
     
@@ -59,7 +49,7 @@
     
     [cycle release];
     
-    [picArray release];
+    //[picArray release];
 }
 
 #pragma mark - CycleScrollViewDelegate
@@ -76,7 +66,7 @@
 
 - (void)dealloc
 {
-    
+    self.imagesArray=nil;
     [super dealloc];
     NSLog(@"viewControllerDealloc");
 }

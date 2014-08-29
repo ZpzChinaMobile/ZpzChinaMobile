@@ -330,6 +330,7 @@ static int chanceToLoginByFace =3;
         [[NSUserDefaults standardUserDefaults] synchronize];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:nil];//返回前登录界面
     }];
     [[NSOperationQueue mainQueue] addOperation:op];
 

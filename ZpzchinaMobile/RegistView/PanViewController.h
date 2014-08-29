@@ -16,7 +16,7 @@
     FaceViewController *faceVC;
     LoginEvent *event;
     UIImageView *nowIMageView;
-    TFIndicatorView *indicator;
+    UIActivityIndicatorView *indicator;
     UILabel *textlabel;
 }
 @end

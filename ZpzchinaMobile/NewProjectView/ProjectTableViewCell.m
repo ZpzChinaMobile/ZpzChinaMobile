@@ -31,7 +31,7 @@
         }
         
         
-        UITextField *ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 200, 30)];
+        UITextField *ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
         ProjectName.delegate = self;
         ProjectName.textAlignment=NSTextAlignmentLeft;
         ProjectName.placeholder=@"项目名称";
@@ -55,7 +55,7 @@
         
         ProjectAddress = [UIButton buttonWithType:UIButtonTypeCustom];
         ProjectAddress.tag = 0;
-        ProjectAddress.frame = CGRectMake(20,65, 200, 30);
+        ProjectAddress.frame = CGRectMake(20,65, 260, 30);
         
         if(flag == 0){
             if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
@@ -90,7 +90,7 @@
         [mapImage addGestureRecognizer:mapImagetapGestureRecognizer];
         [self addSubview:mapImage];
         
-        UITextField *ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 200, 30)];
+        UITextField *ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 280, 30)];
         ProjectMark.delegate = self;
         ProjectMark.textAlignment=NSTextAlignmentLeft;
         ProjectMark.placeholder=@"项目描述";

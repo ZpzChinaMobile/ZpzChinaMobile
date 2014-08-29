@@ -131,7 +131,7 @@ static NSDictionary* dataDic;
      *
      *
      */
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"设计阶段" programTitle:@[@"主体设计阶段"] address:@[@"结构"] detailAddress:nil]];
+    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"设计阶段" programTitle:@[@"主体设计阶段"] address:@[dataDic[@"mainDesignStage"]] detailAddress:nil]];
     
     NSArray* array1=myDelegate.designAry;
     for (int i=0,j=myDelegate.designAry.count; i<3; i++) {
@@ -177,8 +177,12 @@ static NSDictionary* dataDic;
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }
+    CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+    CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+    aimage=[UIImage imageWithCGImage:CGImageCreateWithImageInRect([aimage CGImage], frame)];
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
+
     [view addSubview:imageView];
     
     //图片数量label
@@ -300,6 +304,11 @@ static NSDictionary* dataDic;
     titleView.backgroundColor=RGBCOLOR(229, 229, 229);
     height+=detailAddress?175:125;
     
+    //阴影
+    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 3.5)];
+    shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
+    [titleView addSubview:shadow];
+    
     ///title部分
     //图片
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 18.5, 18.5)];
@@ -351,6 +360,7 @@ static NSDictionary* dataDic;
         areaDetailLabel.textAlignment=NSTextAlignmentCenter;
         [titleView addSubview:areaDetailLabel];
     }
+    
     return titleView;
 }
 

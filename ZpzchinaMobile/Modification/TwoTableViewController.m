@@ -328,6 +328,10 @@
     return 550;
 }
 -(void)dealloc{
+    addcontactView=nil;
+    datepickerview=nil;
+    ownertypeview=nil;
+    locationView=nil;
     NSLog(@"twoDealloc");
 }
 @end

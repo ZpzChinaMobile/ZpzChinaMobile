@@ -144,8 +144,14 @@ static int j =0;
 
         if(imgArr.count == 5){
             NSLog(@"%@",textlabel);
-            indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+            indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];//[[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+            indicator.center=CGPointMake(160,305);
+            indicator.color=[UIColor blackColor];
             [indicator startAnimating];
+
+            
+            //indicator = [[TFIndicatorView alloc]initWithFrame:CGRectMake(135, 280, 50, 50)];
+            //[indicator startAnimating];
             [self.view addSubview:indicator];
             [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector: @selector(startLunch)  userInfo:nil repeats:NO];
         }

@@ -106,8 +106,12 @@ static __weak ProgramDetailViewController* myDelegate;
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }
+    CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+    CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+    aimage=[UIImage imageWithCGImage:CGImageCreateWithImageInRect([aimage CGImage], frame)];
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
+
     [view addSubview:imageView];
     
     //图片数量label
@@ -405,6 +409,11 @@ static __weak ProgramDetailViewController* myDelegate;
     UIView* titleView=[[UIView alloc]initWithFrame:CGRectMake(0, height, 320, tempHeight)];
     titleView.backgroundColor=RGBCOLOR(229, 229, 229);
     height+=tempHeight;
+    
+    //阴影
+    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 3.5)];
+    shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
+    [titleView addSubview:shadow];
     
     ///title部分
     //图片

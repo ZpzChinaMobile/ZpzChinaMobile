@@ -243,6 +243,8 @@
     NSLog(@"sevenDisappear");
 }
 -(void)dealloc{
+    addcontactView=nil;
+    camera=nil;
     NSLog(@"sevendealloc");
 }
 @end

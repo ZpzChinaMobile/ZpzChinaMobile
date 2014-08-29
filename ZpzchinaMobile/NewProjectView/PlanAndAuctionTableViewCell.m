@@ -21,22 +21,22 @@
             [self addSubview:lingImage];
         }
         
-        UITextField *LotName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 200, 30)];
+        UITextField *LotName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
         LotName.delegate = self;
         LotName.textAlignment=NSTextAlignmentLeft;
         LotName.placeholder=@"地块名称";
         NSLog(@"%d",flag);
         NSLog(@"%@",dic);
         if(flag == 0){
-            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
+            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
+                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
             }
         }else{
-            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
+            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
+                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
             }else{
-                if(![[singleDic objectForKey:@"projectName"] isEqualToString:@""]){
-                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"projectName"]]];
+                if(![[singleDic objectForKey:@"landName"] isEqualToString:@""]){
+                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landName"]]];
                 }
             }
         }
@@ -82,7 +82,7 @@
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage];
         
-        UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 200, 30)];
+        UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 280, 30)];
         address.delegate = self;
         address.textAlignment=NSTextAlignmentLeft;
         address.placeholder=@"地块地址";

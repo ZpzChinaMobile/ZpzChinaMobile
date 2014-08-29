@@ -74,7 +74,7 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{       //移除观察者
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceRegister" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"face" object:nil];
      [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Login" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"faceLogin" object:nil];
 }

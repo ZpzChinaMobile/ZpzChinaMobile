@@ -140,6 +140,9 @@
     [self.tableViewSpace addSubview:self.twoTVC.tableView];
     [self.tableViewSpace addSubview:self.oneTVC.tableView];
     [self initTableView];
+    
+   // NSLog(@"**********%@",self.dataDic);
+
     // Do any additional setup after loading the view.
 }
 
@@ -408,6 +411,7 @@
 -(void)initNavi{
     [self addBackButton];
     [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
+    [self addtittle:self.fromView?@"修改项目":@"新建项目"];
 
 }
 
@@ -564,33 +568,42 @@
         
         if([self.contacts[4] count] !=0){
             for(int i=0; i<[self.contacts[4] count];i++){
-                [ContactSqlite InsertData:[self.contacts[4] objectAtIndex:i]];
+                [ContactSqlite InsertUpdataServerData:[self.contacts[4] objectAtIndex:i]];
             }
         }
         
+//        if([self.contacts[4] count] !=0){
+//            for(int i=0; i<[self.contacts[4] count];i++){
+//                [ContactSqlite InsertData:[self.contacts[4] objectAtIndex:i]];
+//            }
+//        }
+        
         if([self.contacts[3] count] !=0){
             for(int i=0; i<[self.contacts[3] count];i++){
-                [ContactSqlite InsertData:[self.contacts[3] objectAtIndex:i]];
+                [ContactSqlite InsertUpdataServerData:[self.contacts[3] objectAtIndex:i]];
             }
         }
         
         if([self.contacts[5] count] !=0){
             for(int i=0; i<[self.contacts[5] count];i++){
-                [ContactSqlite InsertData:[self.contacts[5] objectAtIndex:i]];
+                [ContactSqlite InsertUpdataServerData:[self.contacts[5] objectAtIndex:i]];
             }
         }
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"保存完毕，请到本地保存项目查看！"
-                                                       delegate:self
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil,nil];
-        [alert show];
+        [self loadAlertView];
+        //[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(loadAlertView) userInfo:nil repeats:NO];
     }
-    
-    
 }
 
+
+-(void)loadAlertView{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"保存完毕，请到本地保存项目查看！"
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil,nil];
+    [alert show];
+}
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.shadowView removeFromSuperview];

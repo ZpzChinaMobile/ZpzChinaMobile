@@ -215,6 +215,7 @@
     NSLog(@"tenDisappear");
 }
 -(void)dealloc{
+    camera=nil;
     NSLog(@"tenDealloc");
 }
 @end
