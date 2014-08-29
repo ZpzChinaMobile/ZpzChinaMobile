@@ -273,7 +273,6 @@
     }
 }
 
-
 //在scrollView添加view,并将scrollView的contentSize.height增加该view的height,如果是加载装修阶段view,则取消最下方的动画区域
 -(void)setOriginToView:(UIView*)view{
     CGRect frame=view.frame;
@@ -292,7 +291,6 @@
     }
     self.myScrollView.contentSize=size;
 }
-
 
 //观察contentOffset的值判断加载哪个新view
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -328,7 +326,6 @@
     [self getStageName];
     
 }
-
 
 //判断上导航栏的大标题和小标题
 -(void)getStageName{
@@ -416,8 +413,6 @@
         [self loadSelf];
     }
 }
-
-
 
 -(void)loadSelf{
     if (self.loadAnimationView) {
@@ -539,7 +534,6 @@
     [[NSOperationQueue mainQueue] addOperation:op];
 }
 
-
 -(void)doNetWorkSecondImgDic:(NSMutableDictionary*)imgDic{
     if (!self.imgDic) {
         self.imgDic=[NSMutableDictionary dictionary];
@@ -593,7 +587,6 @@
     self.planImageArr=[CameraSqlite loadAllPlanList:localProjectId];
 }
 
-
 //本地创建的联系人
 -(void)loadLocalContact:(NSString *)localProjectId{
     NSMutableArray *a = [ContactSqlite loadList:[self.dataDic objectForKey:@"id"]];
@@ -641,7 +634,6 @@
         }
     }
 }
-
 
 -(void)initTableView{
     self.myTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5) style:UITableViewStylePlain];
@@ -743,8 +735,6 @@
     [self didchangeStageSection:indexPath.section row:indexPath.row];
 }
 
-
-
 -(void)didchangeStageSection:(NSInteger)section row:(NSInteger)row{
     NSLog(@"=======%f",self.myScrollView.contentOffset.y);
     
@@ -807,7 +797,6 @@
     [self selectCancel];
     
 }
-
 
 //筛选界面拉回去
 -(void)selectCancel{
@@ -906,7 +895,6 @@
         [self setOriginToView:detailView];
     }
 }
-
 
 -(void)initThemeView{
     //画布themeView初始,因为上导航栏下方的阴影需要半透明,而上方部分不需要透明,所以该view分2块

@@ -30,7 +30,6 @@
         scrollView.showsVerticalScrollIndicator = NO;
         scrollView.pagingEnabled = YES;
         scrollView.delegate = self;
-        //[self addSubview:scrollView];
         
         // 在水平方向滚动
         if(scrollDirection == CycleDirectionLandscape) {
@@ -116,7 +115,7 @@
     int x = aScrollView.contentOffset.x;
     int y = aScrollView.contentOffset.y;
     //NSLog(@"did  x=%d  y=%d", x, y);
-    
+
     // 水平滚动
     if(scrollDirection == CycleDirectionLandscape) {
         // 往下翻一张
@@ -154,7 +153,6 @@
     int y = aScrollView.contentOffset.y;
     
     //NSLog(@"--end  x=%d  y=%d", x, y);
-    
     if (scrollDirection == CycleDirectionLandscape) {
             [scrollView setContentOffset:CGPointMake(scrollFrame.size.width, 0) animated:YES];
     }

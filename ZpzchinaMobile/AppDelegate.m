@@ -42,10 +42,10 @@
     //[[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     // 要使用百度地图，请先启动BaiduMapManager
 	_mapManager = [[BMKMapManager alloc]init];
-	BOOL ret = [_mapManager start:@"MecXvKFw99hZYi9i4eGs2IMf" generalDelegate:self];
-	if (!ret) {
-		NSLog(@"manager start failed!");
-	}
+//	BOOL ret = [_mapManager start:@"MecXvKFw99hZYi9i4eGs2IMf" generalDelegate:self];
+//	if (!ret) {
+//		NSLog(@"manager start failed!");
+//	}
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
      [LoginSqlite opensql];
