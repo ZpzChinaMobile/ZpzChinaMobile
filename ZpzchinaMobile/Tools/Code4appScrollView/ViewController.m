@@ -9,15 +9,11 @@
 #import "ViewController.h"
 #import "CycleScrollView.h"
 
-@interface ViewController ()
+@interface ViewController ()<CycleScrollViewDelegate>
 
 @end
 
 @implementation ViewController
-
-//-(BOOL)prefersStatusBarHidden{
-//    return YES;
-//}
 
 -(instancetype)init{
     if ([super init]) {
@@ -45,11 +41,6 @@
     
     [self.view addSubview:cycle];
     
-    
-    
-    [cycle release];
-    
-    //[picArray release];
 }
 
 #pragma mark - CycleScrollViewDelegate
@@ -66,8 +57,8 @@
 
 - (void)dealloc
 {
-    self.imagesArray=nil;
-    [super dealloc];
+    //self.imagesArray=nil;
+    //[super dealloc];
     NSLog(@"viewControllerDealloc");
 }
 

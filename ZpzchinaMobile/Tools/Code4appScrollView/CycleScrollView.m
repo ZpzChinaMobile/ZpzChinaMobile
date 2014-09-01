@@ -9,7 +9,7 @@
 #import "CycleScrollView.h"
 
 @implementation CycleScrollView
-@synthesize delegate;
+//@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame cycleDirection:(CycleDirection)direction pictures:(NSArray *)pictureArray
 {
@@ -22,7 +22,6 @@
         curPage = 1;                                    // 显示的是图片数组里的第一张图片
         curImages = [[NSMutableArray alloc] init];
         imagesArray = [[NSArray alloc] initWithArray:pictureArray];
-        pictureArray=nil;
         
         scrollView = [[UIScrollView alloc] initWithFrame:frame];
         scrollView.backgroundColor = [UIColor blackColor];
@@ -66,7 +65,6 @@
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handleTap:)];
         [imageView addGestureRecognizer:singleTap];
-        [singleTap release];
         
         // 水平滚动
         if(scrollDirection == CycleDirectionLandscape) {
@@ -79,7 +77,6 @@
         
         
         [scrollView addSubview:imageView];
-        imageView=nil;
     }
     if (scrollDirection == CycleDirectionLandscape) {
         [scrollView setContentOffset:CGPointMake(scrollFrame.size.width, 0)];
@@ -142,16 +139,12 @@
         }
     }
     
-    if ([delegate respondsToSelector:@selector(cycleScrollViewDelegate:didScrollImageView:)]) {
-        [delegate cycleScrollViewDelegate:self didScrollImageView:curPage];
+    if ([self.delegate respondsToSelector:@selector(cycleScrollViewDelegate:didScrollImageView:)]) {
+        [self.delegate cycleScrollViewDelegate:self didScrollImageView:curPage];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView {
-    
-    int x = aScrollView.contentOffset.x;
-    int y = aScrollView.contentOffset.y;
-    
     //NSLog(@"--end  x=%d  y=%d", x, y);
     if (scrollDirection == CycleDirectionLandscape) {
             [scrollView setContentOffset:CGPointMake(scrollFrame.size.width, 0) animated:YES];
@@ -163,8 +156,8 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)tap {
     
-    if ([delegate respondsToSelector:@selector(cycleScrollViewDelegate:didSelectImageView:)]) {
-        [delegate cycleScrollViewDelegate:self didSelectImageView:curPage];
+    if ([self.delegate respondsToSelector:@selector(cycleScrollViewDelegate:didSelectImageView:)]) {
+        [self.delegate cycleScrollViewDelegate:self didSelectImageView:curPage];
     }
 }
 
@@ -172,11 +165,7 @@
 - (void)dealloc
 {
     NSLog(@"cycleScrollViewDealloc");
-    [imagesArray release];
-    [curImages release];
-    //[scrollView release];
-    
-    [super dealloc];
+
 }
 
 @end
