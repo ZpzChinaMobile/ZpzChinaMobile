@@ -1124,6 +1124,8 @@
 		D3AB326E196BD5D800F0FC02 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		D3ACE99E196009540002B038 /* controls_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controls_03.png; sourceTree = "<group>"; };
 		D3ACE99F196009540002B038 /* controls_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controls_05.png; sourceTree = "<group>"; };
+		D3AD62B819B46B2E001FD483 /* BMKGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKGradient.h; sourceTree = "<group>"; };
+		D3AD62B919B46B2E001FD483 /* BMKHeatMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKHeatMap.h; sourceTree = "<group>"; };
 		D3AE4DE21965007C001086F9 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
 		D3AE4DE31965007C001086F9 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		D3AE4DE519651FBE001086F9 /* ProjectLogSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectLogSqlite.h; sourceTree = "<group>"; };
@@ -2408,6 +2410,8 @@
 		D3BB72C019557D3100A3F626 /* inc */ = {
 			isa = PBXGroup;
 			children = (
+				D3AD62B819B46B2E001FD483 /* BMKGradient.h */,
+				D3AD62B919B46B2E001FD483 /* BMKHeatMap.h */,
 				D3BB72C119557D3100A3F626 /* BMapKit.h */,
 				D3BB72C219557D3100A3F626 /* BMKActionPaopaoView.h */,
 				D3BB72C319557D3100A3F626 /* BMKAnnotation.h */,
