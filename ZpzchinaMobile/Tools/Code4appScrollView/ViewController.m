@@ -57,8 +57,6 @@
 
 - (void)dealloc
 {
-    //self.imagesArray=nil;
-    //[super dealloc];
     NSLog(@"viewControllerDealloc");
 }
 
