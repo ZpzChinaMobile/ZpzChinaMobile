@@ -16,7 +16,7 @@
     BOOL _isSelect;
     UIImageView *rememberView;
     NSMutableArray *imgArr;
-
+    UIButton* loginBtn;
 }
 @property(retain,nonatomic)NSString *userToken;
 @property(nonatomic, assign) BOOL isLogin;
