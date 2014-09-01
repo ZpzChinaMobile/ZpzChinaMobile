@@ -9,9 +9,9 @@
 #import "BaseViewController.h"
 #import "BMapKit.h"
 @protocol LocationViewDelegate;
-@interface LocationViewController : BaseViewController<BMKMapViewDelegate,BMKGeocodeSearchDelegate,BMKLocationServiceDelegate,UIAlertViewDelegate>{
+@interface LocationViewController : BaseViewController<BMKMapViewDelegate,BMKGeoCodeSearchDelegate,BMKLocationServiceDelegate,UIAlertViewDelegate>{
     BMKMapView* _mapView;
-    BMKGeocodeSearch* _geocodesearch;
+    BMKGeoCodeSearch* _geocodesearch;
     BMKLocationService* _locService;
     BMKAnnotationView* newAnnotation;
     BMKPointAnnotation* annotationPoint;

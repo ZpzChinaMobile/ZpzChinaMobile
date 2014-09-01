@@ -11,8 +11,6 @@
 		043F7135199CC5380095D05B /* ClearFireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7134199CC5380095D05B /* ClearFireCell.m */; };
 		5B0726D319A1D5A80050DF5B /* 新建项目－6_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */; };
 		5B0CC39E199F09290036F94B /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CC39D199F09290036F94B /* AppModel.m */; };
-		5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
-		5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
 		5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */; };
 		5B892F0F199A3BF2001F9921 /* TuDiXinXi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F03199A3BF2001F9921 /* TuDiXinXi.m */; };
 		5B892F10199A3BF2001F9921 /* ZhuTiSheJi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F05199A3BF2001F9921 /* ZhuTiSheJi.m */; };
@@ -392,6 +390,8 @@
 		D3AB326F196BD5D800F0FC02 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AB326E196BD5D800F0FC02 /* CollectionViewController.m */; };
 		D3ACE9A0196009540002B038 /* controls_03.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ACE99E196009540002B038 /* controls_03.png */; };
 		D3ACE9A1196009540002B038 /* controls_05.png in Resources */ = {isa = PBXBuildFile; fileRef = D3ACE99F196009540002B038 /* controls_05.png */; };
+		D3AD620419B041FF001FD483 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
+		D3AD620519B0420F001FD483 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
 		D3AE4DE41965007C001086F9 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE31965007C001086F9 /* ResultsViewController.m */; };
 		D3AE4DE719651FBE001086F9 /* ProjectLogSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE619651FBE001086F9 /* ProjectLogSqlite.m */; };
 		D3AE4DEA19651FCF001086F9 /* ProjectLogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE919651FCF001086F9 /* ProjectLogModel.m */; };
@@ -1313,15 +1313,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3AD620519B0420F001FD483 /* libbaidumapapi.a in Frameworks */,
+				D3AD620419B041FF001FD483 /* libbaidumapapi.a in Frameworks */,
 				D3311C2819A59CE6003B2682 /* MapKit.framework in Frameworks */,
 				D3AAAB60196D6EC0008F9CCD /* iflyMSC.framework in Frameworks */,
 				D3BB730519557D6F00A3F626 /* CoreLocation.framework in Frameworks */,
-				5B6A9F641991E20B00A798BE /* libbaidumapapi.a in Frameworks */,
 				D3BB730319557D5F00A3F626 /* QuartzCore.framework in Frameworks */,
 				D3BB730119557D5700A3F626 /* OpenGLES.framework in Frameworks */,
 				D3A48986195141BE00EED32D /* libsqlite3.0.dylib in Frameworks */,
 				D3A4888B194EBCA100EED32D /* AudioToolbox.framework in Frameworks */,
-				5B6A9F631991E20B00A798BE /* libbaidumapapi.a in Frameworks */,
 				D3A48889194EBC9400EED32D /* SystemConfiguration.framework in Frameworks */,
 				D3A48887194EBC8B00EED32D /* AddressBook.framework in Frameworks */,
 				D3A48885194EBC8100EED32D /* AVFoundation.framework in Frameworks */,

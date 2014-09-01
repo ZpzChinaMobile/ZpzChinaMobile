@@ -28,12 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //适配ios7
-    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0))
-    {
-        //        self.edgesForExtendedLayout=UIRectEdgeNone;
-        self.navigationController.navigationBar.translucent = NO;
-    }
+    
     [self addBackButton];
     [self addtittle:@"地图搜索"];
     [self addRightButton:CGRectMake(280, 20, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
@@ -47,7 +42,8 @@
     [self.contentView addSubview:_mapView];
     _locService = [[BMKLocationService alloc]init];
     
-    _geocodesearch = [[BMKGeocodeSearch alloc]init];
+    _geocodesearch = [[BMKGeoCodeSearch alloc]init];
+    _geocodesearch.delegate = self;
     
     CLLocationCoordinate2D coor;
     BMKCoordinateRegion viewRegion = BMKCoordinateRegionMake(coor, BMKCoordinateSpanMake(0.02f, 0));
@@ -64,17 +60,20 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"===>%@",baseAddress);
-    NSLog(@"===>%@",baseCity);
+-(void)viewWillAppear:(BOOL)animated {
+    [_mapView viewWillAppear];
+    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _locService.delegate = self;
+    _geocodesearch.delegate = self;
+    
     if([[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@""]){
         [_locService startUserLocationService];
     }else{
         isGeoSearch = true;
-        BMKGeocodeSearchOption *geocodeSearchOption = [[BMKGeocodeSearchOption alloc]init];
+        BMKGeoCodeSearchOption *geocodeSearchOption = [[BMKGeoCodeSearchOption alloc]init];
         geocodeSearchOption.city= baseCity;
         geocodeSearchOption.address = baseAddress;
-        BOOL flag = [_geocodesearch geocode:geocodeSearchOption];
+        BOOL flag = [_geocodesearch geoCode:geocodeSearchOption];
         if(flag)
         {
             NSLog(@"geo检索发送成功");
@@ -84,13 +83,7 @@
             NSLog(@"geo检索发送失败");
         }
     }
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [_mapView viewWillAppear];
-    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-    _locService.delegate = self;
-    _geocodesearch.delegate = self;
+    
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
@@ -122,6 +115,25 @@
 }
 */
 
+/**
+ *在地图View将要启动定位时，会调用此函数
+ *@param mapView 地图View
+ */
+- (void)mapViewWillStartLocatingUser:(BMKMapView *)mapView
+{
+	NSLog(@"start locate");
+}
+
+/**
+ *用户方向更新后，会调用此函数
+ *@param userLocation 新的用户位置
+ */
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    [_mapView updateLocationData:userLocation];
+    //NSLog(@"heading is %@",userLocation.heading);
+}
+
 - (void)didUpdateUserLocation:(BMKUserLocation *)userLocation{
     NSLog(@"定位跟新");
     BMKCoordinateRegion region;
@@ -132,13 +144,13 @@
     if (_mapView) {
         _mapView.region = region;
         NSLog(@"当前的坐标  维度:%f,经度:%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-        _mapView.showsUserLocation = YES;//显示定位图层
-        
+        //_mapView.showsUserLocation = YES;//显示定位图层
+        [_mapView updateLocationData:userLocation];
         isGeoSearch = false;
         CLLocationCoordinate2D pt = (CLLocationCoordinate2D){userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude};
-        BMKReverseGeocodeOption *reverseGeocodeSearchOption = [[BMKReverseGeocodeOption alloc]init];
+        BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
         reverseGeocodeSearchOption.reverseGeoPoint = pt;
-        BOOL flag = [_geocodesearch reverseGeocode:reverseGeocodeSearchOption];
+        BOOL flag = [_geocodesearch reverseGeoCode:reverseGeocodeSearchOption];
         if(flag)
         {
             NSLog(@"反geo检索发送成功");
@@ -147,10 +159,9 @@
         {
             NSLog(@"反geo检索发送失败");
         }
-        
+        [_locService stopUserLocationService];
     }
     //_mapView.showsUserLocation = NO;
-    [_locService stopUserLocationService];
 }
 
 
@@ -158,51 +169,40 @@
     NSLog(@"didStopLocatingUser");
 }
 
--(void) onGetReverseGeocodeResult:(BMKGeocodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
+-(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
 {
-    NSLog(@"%@",result.address);
+    //annotationPoint = [[BMKPointAnnotation alloc]init];
     CLLocationCoordinate2D coor;
     coor.latitude = result.location.latitude;
     coor.longitude = result.location.longitude;
+    testLocation.latitude=result.location.latitude;//设定测试点的坐标是当前位置
+    testLocation.longitude=result.location.longitude;
     annotationPoint.coordinate = coor;
     annotationPoint.title = result.address;
     [_mapView addAnnotation:annotationPoint];
     [_mapView setZoomLevel:14];
-    [_mapView selectAnnotation:annotationPoint animated:NO];
     if (result.address) {
         address = result.address;
     }else{
         address = baseAddress;
     }
-    testLocation.latitude=result.location.latitude;//设定测试点的坐标是当前位置
-    testLocation.longitude=result.location.longitude;
 }
 
-- (void)onGetGeocodeResult:(BMKGeocodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
+
+- (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
 {
-    NSLog(@"%@",result.address);
-    BMKCoordinateRegion region;
-    region.center.latitude = result.location.latitude;
-    region.center.longitude = result.location.longitude;
-    region.span.latitudeDelta = 0.2;
-    region.span.longitudeDelta = 0.2;
-    _mapView.region = region;
-    _mapView.showsUserLocation = YES;//显示定位图层
-    CLLocationCoordinate2D coor;
-    coor.latitude = result.location.latitude;
-    coor.longitude = result.location.longitude;
-    annotationPoint.coordinate = coor;
-    annotationPoint.title = result.address;
-    [_mapView addAnnotation:annotationPoint];
-    [_mapView setZoomLevel:14];
-    [_mapView selectAnnotation:annotationPoint animated:NO];
-    testLocation.latitude=result.location.latitude;//设定测试点的坐标是当前位置
-    testLocation.longitude=result.location.longitude;
-    if (result.address) {
-        address = result.address;
-    }else{
-        address = baseAddress;
-    }
+    NSLog(@"onGetGeoCodeResult");
+    NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
+	[_mapView removeAnnotations:array];
+	array = [NSArray arrayWithArray:_mapView.overlays];
+	[_mapView removeOverlays:array];
+	if (error == 0) {
+		annotationPoint.coordinate = result.location;
+		annotationPoint.title = result.address;
+		[_mapView addAnnotation:annotationPoint];
+        _mapView.centerCoordinate = result.location;
+        [_mapView setZoomLevel:14];
+	}
 }
 
 /**
@@ -262,9 +262,9 @@
     /*if (_coordinateXText.text != nil && _coordinateYText.text != nil) {
      pt = (CLLocationCoordinate2D){[_coordinateYText.text floatValue], [_coordinateXText.text floatValue]};
      }*/
-    BMKReverseGeocodeOption *reverseGeocodeSearchOption = [[BMKReverseGeocodeOption alloc]init];
+    BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
     reverseGeocodeSearchOption.reverseGeoPoint = pt;
-    BOOL flag = [_geocodesearch reverseGeocode:reverseGeocodeSearchOption];
+    BOOL flag = [_geocodesearch reverseGeoCode:reverseGeocodeSearchOption];
     if(flag)
     {
         NSLog(@"反geo检索发送成功");
@@ -289,9 +289,9 @@
     /*if (_coordinateXText.text != nil && _coordinateYText.text != nil) {
      pt = (CLLocationCoordinate2D){[_coordinateYText.text floatValue], [_coordinateXText.text floatValue]};
      }*/
-    BMKReverseGeocodeOption *reverseGeocodeSearchOption = [[BMKReverseGeocodeOption alloc]init];
+    BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
     reverseGeocodeSearchOption.reverseGeoPoint = pt;
-    BOOL flag = [_geocodesearch reverseGeocode:reverseGeocodeSearchOption];
+    BOOL flag = [_geocodesearch reverseGeoCode:reverseGeocodeSearchOption];
     if(flag)
     {
         NSLog(@"反geo检索发送成功");
