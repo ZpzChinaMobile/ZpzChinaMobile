@@ -405,7 +405,6 @@ int j;
         polygonView.strokeColor = [[UIColor redColor] colorWithAlphaComponent:1];
         polygonView.fillColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
         polygonView.lineWidth =3.5;
-        [self drawFunction];
 		return polygonView;
     }
     if ([overlay isKindOfClass:[BMKGroundOverlay class]])
@@ -438,8 +437,9 @@ int j;
 -(void)removeAnnotationsOnTheMap
 {
     NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
+    NSArray *overlaysArray = [[NSArray alloc] initWithArray:_mapView.overlays];
     [_mapView removeAnnotations: annArray];
-    [_mapView removeOverlay:polygon];
+    [_mapView removeOverlays:overlaysArray];
 }
 
 
