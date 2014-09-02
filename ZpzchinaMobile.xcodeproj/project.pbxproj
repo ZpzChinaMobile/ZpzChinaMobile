@@ -26,8 +26,8 @@
 		5B892FA0199A3CF0001F9921 /* XiangMuXiangQing_ShaiXuan in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F98199A3CF0001F9921 /* XiangMuXiangQing_ShaiXuan */; };
 		5B892FA1199A3CF0001F9921 /* XiangMuXiangQing_TanKuang in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F99199A3CF0001F9921 /* XiangMuXiangQing_TanKuang */; };
 		5B892FA2199A3CF0001F9921 /* XinJianXiangMu in Resources */ = {isa = PBXBuildFile; fileRef = 5B892F9A199A3CF0001F9921 /* XinJianXiangMu */; };
-		5B892FAA199A3D8F001F9921 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892FA7199A3D8F001F9921 /* CycleScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		5B892FAB199A3D8F001F9921 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892FA9199A3D8F001F9921 /* ViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5B892FAA199A3D8F001F9921 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892FA7199A3D8F001F9921 /* CycleScrollView.m */; };
+		5B892FAB199A3D8F001F9921 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892FA9199A3D8F001F9921 /* ViewController.m */; };
 		5BE93B8D199C6BCA00E2FF67 /* ModificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93B8C199C6BCA00E2FF67 /* ModificationViewController.m */; };
 		5BE93BB2199C6FFB00E2FF67 /* OneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BB1199C6FFB00E2FF67 /* OneTableViewController.m */; };
 		5BE93BB5199C700B00E2FF67 /* TwoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BB4199C700B00E2FF67 /* TwoTableViewController.m */; };

@@ -76,7 +76,7 @@ static bool FirstLogin = NO;
     [textView addSubview:_passWordTextField];
     [self.view addSubview:textView];
     
-    UIButton *loginBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    loginBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     loginBtn.frame = CGRectMake(25, 340, 264, 36);
     loginBtn.tag = 20140801;
     [loginBtn setTitle:@"登    录" forState:UIControlStateNormal];
@@ -152,6 +152,7 @@ static bool FirstLogin = NO;
     //测试账号:zm 密码:123
     //登录接口
     
+    loginBtn.enabled=NO;
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:_userNameTextField.text,@"userName",_passWordTextField.text,@"password" ,@"ios",@"deviceType",nil];
     NSLog(@"%@",parameters);
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/login",serverAddress] parameters:parameters error:nil];
@@ -189,6 +190,7 @@ static bool FirstLogin = NO;
             UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"登录失败！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             alert.tag = 1;
             [alert show];
+            loginBtn.enabled=YES;
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -198,6 +200,7 @@ static bool FirstLogin = NO;
 }
 
 -(void)loginSuccess{             //登录成功
+    loginBtn.enabled=YES;
     [[NSUserDefaults standardUserDefaults]setObject:_userNameTextField.text forKey:@"userName"];
     [[NSUserDefaults standardUserDefaults]setObject:_passWordTextField.text forKey:@"passWord"];
     [[NSUserDefaults standardUserDefaults]setObject:self.userToken forKey:@"UserToken"];

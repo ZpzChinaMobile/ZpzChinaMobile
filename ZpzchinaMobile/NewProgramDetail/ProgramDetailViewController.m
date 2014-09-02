@@ -151,6 +151,7 @@
             [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];
             
             [self.highImages addObject:camera];
+            NSLog(@"url====%@",array[0]);
             [array removeObjectAtIndex:0];
             [self getImages:array];
             
@@ -191,10 +192,6 @@
         }else{
             [self gotoScrollImageViewWithImageAry:app.planImageArr];//self.planImageArr];
         }
-        
-        
-        
-        
         
     }else if(button==self.secondStageButton1){
         NSLog(@"secondStageButton1");

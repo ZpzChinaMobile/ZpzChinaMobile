@@ -492,6 +492,7 @@
             //保存图片至数据库
             for(int i=0;i<self.horizonImageArr.count;i++){
                 CameraModel *model = [self.horizonImageArr objectAtIndex:i];
+                NSLog(@"model.a_device=%@",model.a_device);
                 if([model.a_device isEqualToString:@"ios"]){
                     [GetBigImage getbigimage:model.a_url];
                 }
