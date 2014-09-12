@@ -200,9 +200,15 @@
 
 -(void)addContactViewFirefighting:(int)index{
     flag = index;
+
     [singlepickerview removeFromSuperview];
     singlepickerview = nil;
-    NSArray *arr = [[NSArray alloc] initWithObjects:@"招标",@"正在施工",@"施工完成",nil];
+    NSArray *arr ;
+    if (index!=1) {
+        arr= [[NSArray alloc] initWithObjects:@"招标",@"正在施工",@"施工完成",nil];
+    }else{
+        arr= [[NSArray alloc] initWithObjects:@"无装修",@"简单全装修",@"部分装修",@"精装修",nil];
+    }
     singlepickerview = [[SinglePickerView alloc] initWithTitle:CGRectMake(0, 0, 320, 260) title:nil Arr:arr delegate:self];
     [singlepickerview showInView:self.tableView.superview];
 }

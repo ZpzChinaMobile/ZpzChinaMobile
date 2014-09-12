@@ -53,45 +53,8 @@
 
 @implementation ModificationViewController
 
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [super viewWillDisappear:animated];
-//    NSLog(@"back");
-//    //[self.delegate backToPro];
-//}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts horizonImageArr:(NSMutableArray*)horizonImageArr pilePitImageArr:(NSMutableArray*)pilePitImageArr mainConstructionImageArr:(NSMutableArray*)mainConstructionImageArr explorationImageArr:(NSMutableArray*)explorationImageArr fireControlImageArr:(NSMutableArray*)fireControlImageArr electroweakImageArr:(NSMutableArray*)electroweakImageArr planImageArr:(NSMutableArray*)planImageArr{
     if ([super init]) {
-        //        AppModel* appModel=[AppModel sharedInstance];
-        //        self.singleDic=appModel.singleDic;
-        //       // NSLog(@"222222%@",self.dataDic);
-        //        self.contacts=@[appModel.contactAry,appModel.ownerAry,appModel.explorationAry,appModel.horizonAry,appModel.designAry,appModel.pileAry];
-        //        self.horizonImageArr=appModel.horizonImageArr;
-        //        self.pilePitImageArr=appModel.pilePitImageArr;
-        //        self.mainConstructionImageArr=appModel.mainConstructionImageArr;
-        //        self.explorationImageArr=appModel.explorationImageArr;
-        //        self.fireControlImageArr=appModel.fireControlImageArr;
-        //        self.electroweakImageArr=appModel.electroweakImageArr;
-        //        self.planImageArr=appModel.planImageArr;
-        
-        //        self.singleDic=singleDic;
-        //        NSLog(@"222222%@",self.dataDic);
-        //        self.contacts=contacts;
-        //        self.horizonImageArr=horizonImageArr;
-        //        self.pilePitImageArr=pilePitImageArr;
-        //        self.mainConstructionImageArr=mainConstructionImageArr;
-        //        self.explorationImageArr=explorationImageArr;
-        //        self.fireControlImageArr=fireControlImageArr;
-        //        self.electroweakImageArr=electroweakImageArr;
-        //        self.planImageArr=planImageArr;
     }
     return self;
 }
@@ -103,10 +66,8 @@
     NSLog(@"viewDidLoad");
     
     //此处判断是用户选择的时 修改还是新增 ,如果是新增页面进 则初始化model
-   // if (self.isRelease) {
     if (!self.fromView) {
         [appModel getNew];
-       // appModel.singleDic=[NSMutableDictionary dictionary];
     }
     
     
@@ -124,26 +85,14 @@
     
     self.dataDic=[NSMutableDictionary dictionary];
     
-    
-    
-    //AppModel* appModel=[AppModel sharedInstance];
-    //appModel.dataDic=self.dataDic;
-    
     [self initdataDic];
-    
     [self initTVC];
-    
     [self initNavi];
-    // [self initTableView];
     [self initThemeView];
     [self initTableViewSpace];
-    [self.tableViewSpace addSubview:self.twoTVC.tableView];
-    [self.tableViewSpace addSubview:self.oneTVC.tableView];
+    [self.tableViewSpace addSubview:self.oneTVC.view];
     [self initTableView];
-    
-   // NSLog(@"**********%@",self.dataDic);
 
-    // Do any additional setup after loading the view.
 }
 
 -(void)upTVCSpaceWithHeight:(CGFloat)height{
@@ -166,7 +115,6 @@
     
     NSLog(@"initTVC====%@",self.singleDic);
     self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.contactAry images:self.planImageArr];
-    //    self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:[self.contacts[0] mutableCopy] images:self.planImageArr];
     self.oneTVC.fromView=self.fromView;
     self.oneTVC.superVC=self;
     self.oneTVC.delegate=self;
@@ -217,18 +165,25 @@
     
     self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
     
+    //i==0,i==1的tvc在自己的init里已经设置过,继承vc
+    //i==2-10为tvc
     for (int i=0; i<10; i++) {
         UITableViewController* tvc=self.tvcArray[i];
         tvc.tableView.frame=CGRectMake(0, 0, 320, 568-64.5-50);
+        //因为是vc,所以vc.view.frame与tableView.frame的大小不同,会影响动画效果,所以需要重新设置vc.view.frame
+        if (i==0||i==1) {
+            CGRect frame=tvc.view.frame;
+            frame.size.height-=64.5+50;
+            tvc.view.frame=frame;
+        }
+        NSLog(@"===%f",tvc.view.frame.size.height);
     }
-    
 }
 
 -(void)initTableViewSpace{
     self.tableViewSpace=[[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, 568-64.5-50)];
     self.tableViewSpace.backgroundColor=[UIColor clearColor];
-    [self.contentView insertSubview:self.tableViewSpace atIndex:0];
-    //[self.contentView addSubview:self.tableViewSpace];
+    [self.contentView addSubview:self.tableViewSpace];
 }
 
 -(void)initThemeView{
@@ -241,7 +196,6 @@
     UIView* tempView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 48.5)];
     tempView.backgroundColor=[UIColor whiteColor];
     [view addSubview:tempView];
-    
     
     //大标题左边的大阶段图片
     UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing/map@2x.png"];
@@ -283,7 +237,6 @@
 
 -(void)change{
     NSLog(@"用户选择了筛选");
-    //暂时移除观察者,避免加新view时有动画
     //table没有出现的时候才进行添加,避免反复添加
     if (![self.view.subviews containsObject:self.myTableView]) {
         [self.view addSubview:self.myTableView];
@@ -314,10 +267,7 @@
     self.myTableView.showsVerticalScrollIndicator=NO;
     self.myTableView.scrollEnabled=NO;
     self.myTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    //self.myTableView.backgroundColor=[UIColor colorWithWhite:1 alpha:.95];
     self.myTableView.backgroundColor=[UIColor whiteColor];
-    //用于存放使sectionHeader可以被点击的button的array
-    //self.sectionButtonArray=[NSMutableArray array];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -330,8 +280,6 @@
     
     NSInteger a=[ary indexOfObject:[self.tableViewSpace.subviews lastObject]];
     
-    
-    //NSLog(@"a=%d",a);
     ModificationSelectViewCell* cell=[ModificationSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath nowTableView:a];
     
     return cell;
@@ -396,12 +344,11 @@
     [self.myTableView reloadData];
     
     int a[4]={0,2,5,9};
-    //NSLog(@"%d",a[indexPath.section]+indexPath.row);
     NSLog(@"%d",self.tableViewSpace.subviews.count);
     UITableViewController* tvc=self.tvcArray[a[indexPath.section]+indexPath.row];
-   // [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
-    [self.tableViewSpace addSubview:tvc.tableView];
+    [self.tableViewSpace addSubview:tvc.view];
     [self selectCancel];
     
     self.bigStageLabel.text=@[@"土地信息",@"主体设计阶段",@"主体施工阶段",@"装修阶段"][indexPath.section];
@@ -415,17 +362,8 @@
 
 }
 
-//-(void)leftAction
-//{
-//    NSLog(@"self");
-//    if ([self.delegate respondsToSelector:@selector(backToPro)]) {
-//        [self.delegate backToPro];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
-//
-//}
-
 -(void)rightAction{
+    
     self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
     self.shadowView.backgroundColor=[UIColor blackColor];
     self.shadowView.alpha=.5;
@@ -436,9 +374,6 @@
     if (self.fromView==0) {
         
         [ProjectSqlite InsertData:self.dataDic];
-//        for (int i=0; i<self.contacts.count; i++) {
-//            NSLog(@"========%d",[self.contacts[i] count]);
-//        }
         
         if(appModel.contactAry.count){
             for(int i=0; i<appModel.contactAry.count;i++){
@@ -573,12 +508,6 @@
             }
         }
         
-//        if([self.contacts[4] count] !=0){
-//            for(int i=0; i<[self.contacts[4] count];i++){
-//                [ContactSqlite InsertData:[self.contacts[4] objectAtIndex:i]];
-//            }
-//        }
-        
         if([self.contacts[3] count] !=0){
             for(int i=0; i<[self.contacts[3] count];i++){
                 [ContactSqlite InsertUpdataServerData:[self.contacts[3] objectAtIndex:i]];
@@ -592,7 +521,6 @@
         }
         
         [self loadAlertView];
-        //[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(loadAlertView) userInfo:nil repeats:NO];
     }
 }
 
@@ -626,17 +554,8 @@
         self.dataDic=[NSMutableDictionary dictionary];
         
         [self initdataDic];
-        
         [self initTVC];
-        
-        [self initNavi];
-        // [self initTableView];
-        [self initThemeView];
-        [self initTableViewSpace];
-        [self.tableViewSpace addSubview:self.twoTVC.tableView];
-        [self.tableViewSpace addSubview:self.oneTVC.tableView];
-        [self initTableView];
-
+        [self.tableViewSpace addSubview:self.oneTVC.view];
     }
     if (!self.isRelease&&self.fromView) {
         [self.navigationController popViewControllerAnimated:YES];

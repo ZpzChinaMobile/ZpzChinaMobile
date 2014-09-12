@@ -15,7 +15,7 @@
 #import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
 #import "AppModel.h"
-@interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,OwnerTypeViewDelegate,LocationViewDelegate,UIActionSheetDelegate>{
+@interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,OwnerTypeViewDelegate,LocationViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>{
     AddContactViewController* addcontactView;
     DatePickerView* datepickerview;
     OwnerTypeViewController* ownertypeview;
@@ -46,7 +46,6 @@
 }
 
 -(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
-    //   _isUpdata = YES;
     //    NSLog(@"==>%d",self.flag);
     [dic setValue:@"ownerUnitContacts" forKeyPath:@"category"];
     if(btnTag != 0){
@@ -60,12 +59,10 @@
 }
 
 -(void)locationBack:(NSString *)address testLocation:(CLLocationCoordinate2D)testLocation{
-    //    _isUpdata = YES;
     [self.dataDic setObject:address forKey:@"landAddress"];
     [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.longitude] forKey:@"longitude"];
     [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.latitude] forKey:@"latitude"];
     [self.tableView reloadData];
-    NSLog(@"222");
 }
 
 -(void)backOwnerTypeViewController{
@@ -244,20 +241,18 @@
     [self.superVC.navigationController pushViewController:locationView animated:YES];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.contacts=contacts;
-        //self.im
+
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        
+        [self.view addSubview:self.tableView];
     }
     return self;
 }
@@ -270,7 +265,6 @@
 //        appModel.ownerAry =[NSMutableArray array];
 //        self.contacts=appModel.ownerAry;
 //    }
-    self.tableView.separatorStyle=NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -321,6 +315,7 @@
 }
 
 -(void)endEdit{
+    NSLog(@"endEdit");
     [self.delegate downTVCSpace];
 }
 

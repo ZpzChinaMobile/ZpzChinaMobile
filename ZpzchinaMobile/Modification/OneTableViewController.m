@@ -17,7 +17,7 @@
 #import "Camera.h"
 #import "CameraSqlite.h"
 #import "AppModel.h"
-@interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate,UIScrollViewDelegate>{
+@interface OneTableViewController ()<PlanAndAuctionDelegate,MChoiceViewDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>{
     LocateView* locateview;
     MultipleChoiceViewController* muview;
     AddContactViewController* addcontactView;
@@ -29,12 +29,6 @@
 @implementation OneTableViewController
 //土地规划/拍卖
 
-//测试代码
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    NSLog(@"%d",scrollView==self.tableView);
-//    NSLog(@"22");
-}
-
 
 //选择框
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -42,7 +36,6 @@
     if(buttonIndex == 0) {
         NSLog(@"Cancel");
     }else {
-        //_isUpdata = YES;
         locateview = (LocateView *)actionSheet;
         [self.dataDic setObject:[locateview.proviceDictionary objectForKey:@"provice"] forKey:@"province"];
         [self.dataDic setObject:[locateview.proviceDictionary objectForKey:@"city"] forKey:@"city"];
@@ -85,7 +78,7 @@
 }
 
 -(void)addContactView:(int)index{
-    NSLog(@"1");
+    //NSLog(@"1");
     [locateview removeFromSuperview];
     locateview = nil;
     
@@ -100,6 +93,8 @@
         [muview.view setFrame:CGRectMake(0, 0, 262, 431)];
         muview.delegate = self;
         [self presentPopupViewController:muview animationType:MJPopupViewAnimationSlideBottomBottom];
+        
+         NSLog(@"%d",self.view.subviews.count);
     }else{
         if(self.contacts.count <3){
             addcontactView = [[AddContactViewController alloc] init];
@@ -169,15 +164,6 @@
     [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
 
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images{
     if ([super init]) {
         self.singleDic=singleDic;
@@ -185,6 +171,13 @@
         self.contacts=contacts;
         self.images=images;
         NSLog(@"******%@\n************%@",dataDic,singleDic);
+        
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        
+        [self.view addSubview:self.tableView];
     }
     return self;
 }
@@ -200,7 +193,6 @@
     //        self.contacts=appModel.contactAry;
     //    }
     
-    self.tableView.separatorStyle=NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -348,6 +340,7 @@
     }
     return 350;
 }
+
 -(void)viewDidDisappear:(BOOL)animated{
     AppModel* model=[AppModel sharedInstance];
     if (self.images.count) {

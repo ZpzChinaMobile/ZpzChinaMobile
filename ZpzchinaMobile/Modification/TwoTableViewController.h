@@ -13,13 +13,15 @@
 -(void)downTVCSpace;
 @end
 
-@interface TwoTableViewController : UITableViewController
+@interface TwoTableViewController : UIViewController
 @property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
 @property(nonatomic,strong)NSMutableArray* contacts;
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 @property(nonatomic)NSInteger timeflag;
 @property(nonatomic,weak)ModificationViewController* superVC;
+@property(nonatomic,strong)UITableView* tableView;
+
 
 //@property(nonatomic,strong)UIViewController* bgVC;
 

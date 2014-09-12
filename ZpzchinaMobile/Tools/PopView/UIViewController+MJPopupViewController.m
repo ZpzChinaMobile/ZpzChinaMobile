@@ -109,7 +109,6 @@
 
 -(UIView*)topView {
     UIViewController *recentView = self;
-    
     while (recentView.parentViewController != nil) {
         recentView = recentView.parentViewController;
     }
