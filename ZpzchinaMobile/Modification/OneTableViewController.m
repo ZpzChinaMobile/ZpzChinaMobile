@@ -98,8 +98,9 @@
     }else{
         if(self.contacts.count <3){
             addcontactView = [[AddContactViewController alloc] init];
-            [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
             addcontactView.delegate = self;
+            addcontactView.contactType = @"";
+            [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
             if(self.fromView == 0){
                 [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
             }else{

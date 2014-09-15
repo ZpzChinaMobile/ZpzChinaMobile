@@ -18,6 +18,7 @@
 @synthesize dataDic;
 @synthesize btnTag;
 @synthesize dropDown;
+@synthesize contactType;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -207,8 +208,6 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    NSLog(@"%d",textField.tag);
-    NSLog(@"%@",textField.text);
     switch (textField.tag) {
         case 0:
             [self.dataDic setValue:textField.text forKey:@"contactName"];

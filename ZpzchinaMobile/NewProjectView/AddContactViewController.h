@@ -22,10 +22,12 @@
     NIDropDown *dropDown;
     UITextField *textfield;
     UIView *closeView;
+    NSString *contactType;
 }
 @property(nonatomic ,weak) id <AddContactViewDelegate> delegate;
 @property(retain,nonatomic)NSMutableDictionary *dataDic;
 @property(retain,nonatomic)NIDropDown *dropDown;
+@property(retain,nonatomic)NSString *contactType;
 @property(assign,nonatomic)int btnTag;
 -(void)setlocalProjectId:(NSString *)aid;
 -(void)updataContact:(NSMutableDictionary *)dic index:(int)index;
