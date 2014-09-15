@@ -82,7 +82,7 @@
     }else{
         [self.dataDic setObject:@"" forKey:@"ownerType"];
     }
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop];
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
 }
 
