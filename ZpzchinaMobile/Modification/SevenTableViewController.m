@@ -50,7 +50,11 @@
         if(self.fromView == 0){
             [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
         }else{
-            [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
+            if(self.superVC.isRelease == 0){
+                [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
+            }else{
+                [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"id"]];
+            }
         }
         [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
     }else{
