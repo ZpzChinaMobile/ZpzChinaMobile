@@ -186,7 +186,7 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, -100, 320, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 0, 320, self.view.frame.size.height)];
     textfield = nil;
     textfield = textField;
     closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, self.view.frame.size.height)];
@@ -203,7 +203,7 @@
     [textField resignFirstResponder];
     [closeView removeFromSuperview];
     closeView = nil;
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 40, 320, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 70, 320, self.view.frame.size.height)];
     return YES;
 }
 
@@ -260,7 +260,7 @@
 }
 
 -(void)closeKeyBoard{
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 0, 320, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 70, 320, self.view.frame.size.height)];
     [textfield resignFirstResponder];
     [closeView removeFromSuperview];
     closeView = nil;
