@@ -27,7 +27,6 @@
         type = @"plan";
     }
     
-    NSLog(@"%@",viewController);
     
     projectID = aid;
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
