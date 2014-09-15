@@ -230,7 +230,6 @@
 -(void)titleClick:(id)sender{
     [textfield resignFirstResponder];
     if(dropDown == nil) {
-        NSLog(@"%@",self.contactType);
         NSMutableArray *dataTempArr = nil;
         if([self.contactType isEqualToString:@"auctionUnitContacts"]||[self.contactType isEqualToString:@"explorationUnitContacts"]){
             dataTempArr = [[NSMutableArray alloc]initWithObjects:@"项目负责人", nil];

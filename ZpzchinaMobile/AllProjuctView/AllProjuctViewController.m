@@ -416,4 +416,8 @@ int startIndex;
    
 }
 
+
+-(void)dealloc{
+    NSLog(@"dealloc");
+}
 @end
