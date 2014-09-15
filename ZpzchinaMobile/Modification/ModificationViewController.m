@@ -366,11 +366,7 @@
 }
 
 -(void)rightAction{
-    NSLog(@"2222");
-    //[self.view.layer removeAllAnimations];
-    //[self.oneTVC.view.layer removeAllAnimations];
-    
-    return;
+
     self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
     self.shadowView.backgroundColor=[UIColor blackColor];
     self.shadowView.alpha=.5;

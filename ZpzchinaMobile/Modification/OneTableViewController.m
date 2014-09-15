@@ -208,7 +208,7 @@
 {
     if(indexPath.row == 0){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        // if (!cell) {
+         //if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         //}
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -220,9 +220,10 @@
     }else{
         PlanAndAuctionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
         // if (!cell) {
-        
+        //[cell.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        //[cell.layer removeAllAnimations];
+        NSLog(@"222====%d",cell.subviews.count);
         if(self.fromView == 0){
-            //AppModel* appModel=[AppModel sharedInstance];
             cell = [[PlanAndAuctionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:nil flag:self.fromView contactArr:self.contacts] ;
         }else{
             cell=[[PlanAndAuctionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:self.contacts];

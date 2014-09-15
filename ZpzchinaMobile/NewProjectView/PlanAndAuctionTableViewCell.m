@@ -12,6 +12,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic singleDic:(NSMutableDictionary *)singleDic flag:(int)flag contactArr:(NSMutableArray *)contactArr
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
     if (self) {
         // Initialization code
         
@@ -256,6 +257,7 @@
 }
 
 -(void)BtnClick:(UIButton *)button{
+    NSLog(@"333333");
     [textfield resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(addContactView:)]){
         [self.delegate addContactView:button.tag];
