@@ -99,7 +99,7 @@
         if(self.contacts.count <3){
             addcontactView = [[AddContactViewController alloc] init];
             addcontactView.delegate = self;
-            addcontactView.contactType = @"";
+            addcontactView.contactType = @"auctionUnitContacts";
             [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
             if(self.fromView == 0){
                 [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
@@ -153,8 +153,9 @@
 
 -(void)updataContact:(NSMutableDictionary *)dic index:(int)index{
     addcontactView = [[AddContactViewController alloc] init];
-    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
+    addcontactView.contactType = @"auctionUnitContacts";
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     //[addcontactView updataContact:dic index:index];
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
     //    if(self.fromView == 1){

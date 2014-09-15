@@ -46,8 +46,9 @@
     NSLog(@"=====》%@",self.contacts);
     if(self.contacts.count <3){
         addcontactView = [[AddContactViewController alloc] init];
-        [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
         addcontactView.delegate = self;
+        addcontactView.contactType = @"explorationUnitContacts";
+        [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
         if(self.fromView == 0){
             [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
         }else{
@@ -63,8 +64,9 @@
 -(void)updataExplorationUnitContacts:(NSMutableDictionary *)dic index:(int)index{
     //self.flag = 2;
     addcontactView = [[AddContactViewController alloc] init];
-    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
+    addcontactView.contactType = @"explorationUnitContacts";
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
     //    if(self.fromView == 1){
     //        if(self.isRelease == 0){

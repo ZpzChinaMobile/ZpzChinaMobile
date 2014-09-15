@@ -63,8 +63,9 @@
             //self.flag = 1;
             if(self.contacts.count <3){
                 addcontactView = [[AddContactViewController alloc] init];
-                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
                 addcontactView.delegate = self;
+                addcontactView.contactType = @"ownerUnitContacts";
+                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
                 if(self.fromView == 0){
                     [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
                 }else{
@@ -112,8 +113,9 @@
 }
 -(void)updataPlotOwner:(NSMutableDictionary *)dic index:(int)index{
     addcontactView = [[AddContactViewController alloc] init];
-    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
+    addcontactView.contactType = @"ownerUnitContacts";
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
     //    if(self.fromView == 1){
     //        if(self.isRelease == 0){

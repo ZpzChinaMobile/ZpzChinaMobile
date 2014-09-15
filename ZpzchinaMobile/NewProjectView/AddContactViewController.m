@@ -230,7 +230,17 @@
 -(void)titleClick:(id)sender{
     [textfield resignFirstResponder];
     if(dropDown == nil) {
-        NSMutableArray *dataTempArr = [[NSMutableArray alloc]initWithObjects:@"项目经理",@"采购经理",@"设计经理",@"项目总负责",@"其他", nil];
+        NSLog(@"%@",self.contactType);
+        NSMutableArray *dataTempArr = nil;
+        if([self.contactType isEqualToString:@"auctionUnitContacts"]||[self.contactType isEqualToString:@"explorationUnitContacts"]){
+            dataTempArr = [[NSMutableArray alloc]initWithObjects:@"项目负责人", nil];
+        }else if([self.contactType isEqualToString:@"ownerUnitContacts"]){
+            dataTempArr = [[NSMutableArray alloc]initWithObjects:@"项目经理",@"采购经理",@"设计经理",@"项目总负责",@"其他", nil];
+        }else if([self.contactType isEqualToString:@"contractorUnitContacts"]||[self.contactType isEqualToString:@"pileFoundationUnitContacts"]){
+            dataTempArr = [[NSMutableArray alloc]initWithObjects:@"现场经理",@"采购负责人", nil];
+        }else if([self.contactType isEqualToString:@"designInstituteContacts"]){
+            dataTempArr = [[NSMutableArray alloc]initWithObjects:@"建筑师",@"结构工程师",@"电气工程师",@"暖通工程师",@"给排水工程师",@"幕墙工程师", nil];
+        }
         dropDown = [[NIDropDown alloc] initWithFrame:sender arr:dataTempArr tit:@"Foreignparticipation"];
         dropDown.delegate = self;
     }
