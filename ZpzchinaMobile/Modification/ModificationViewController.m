@@ -46,7 +46,6 @@
 @property(nonatomic,strong)TenTableViewController* tenTVC;
 @property(nonatomic,strong)NSArray* contacts;//联系人数组
 @property(nonatomic,strong)NSArray* images;//图片数组
-@property(nonatomic,strong)NSArray* tvcArray;
 
 @property(nonatomic,strong)UIView* shadowView;//保存到数据库,直到用户点击确认之后才消失的背景
 @end
@@ -365,6 +364,14 @@
 
 }
 
+-(void)leftAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.delegate) {
+        [self.delegate backToProgramDetailView];
+    }
+}
+
 -(void)rightAction{
 
     self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
@@ -425,8 +432,7 @@
         NSMutableDictionary *dic = [ProjectStage JudgmentUpdataProjectStr:self.singleDic newDic:self.dataDic];
         if (!self.isRelease) {
             [dic setValue:[self.singleDic objectForKey:@"projectID"] forKeyPath:@"id"];
-            NSLog(@"%@",dic);
-            
+
             //保存图片至数据库
             for(int i=0;i<self.horizonImageArr.count;i++){
                 CameraModel *model = [self.horizonImageArr objectAtIndex:i];
@@ -561,7 +567,7 @@
         [self.tableViewSpace addSubview:self.oneTVC.view];
     }
     if (!self.isRelease&&self.fromView) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self leftAction];
     }
 }
 

@@ -25,7 +25,7 @@
 #import "AppModel.h"
 #import "ContactSqlite.h"
 
-@interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate>
+@interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate,ModificationDelegate>
 
 @property(nonatomic,strong)UIScrollView* myScrollView;
 @property(nonatomic,strong)UIView* tuDiXinXi;//土地信息大模块
@@ -83,12 +83,37 @@
     }
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+-(void)backToProgramDetailView{
+//    self.view=nil;
+//    return;
+    
+    NSArray* array=[NSArray arrayWithObjects:self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu, nil];
+    CGRect frames[4]={self.tuDiXinXi.frame,self.zhuTiSheJi.frame,self.zhuTiShiGong.frame,self.zhuangXiu.frame};
+
+    CGFloat a,b,c;
+    for (int i=0; i<array.count; i++) {
+        if (i==0) {
+            [self.tuDiXinXi removeFromSuperview];
+            self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
+            self.tuDiXinXi.frame=frames[i];
+            [self.myScrollView addSubview:self.tuDiXinXi];
+        }else if (i==1){
+            [self.zhuTiSheJi removeFromSuperview];
+            self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&b delegate:self];
+            self.zhuTiSheJi.frame=frames[i];
+            [self.myScrollView addSubview:self.zhuTiSheJi];
+        }else if (i==2){
+            [self.zhuTiShiGong removeFromSuperview];
+            self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&b thirdViewHeight:&c delegate:self];
+            self.zhuTiShiGong.frame=frames[i];
+            [self.myScrollView addSubview:self.zhuTiShiGong];
+        }else{
+            [self.zhuangXiu removeFromSuperview];
+            self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self];
+            self.zhuangXiu.frame=frames[i];
+            [self.myScrollView addSubview:self.zhuangXiu];
+        }
     }
-    return self;
 }
 
 -(instancetype)init{
@@ -978,6 +1003,7 @@
         ModificationViewController* modiVC=[[ModificationViewController alloc]initWithSingle:[self.dataDic mutableCopy] contacts:@[self.contactAry,self.ownerAry,self.explorationAry,self.horizonAry,self.designAry,self.pileAry] horizonImageArr:self.horizonImageArr pilePitImageArr:self.pilePitImageArr mainConstructionImageArr:self.mainConstructionImageArr explorationImageArr:self.explorationImageArr fireControlImageArr:self.fireControlImageArr electroweakImageArr:self.electroweakImageArr planImageArr:self.planImageArr];
         modiVC.isRelease=self.isRelease;
         modiVC.fromView=self.fromView;
+        modiVC.delegate=self;
         [self.navigationController pushViewController:modiVC animated:YES];
     }
 }
