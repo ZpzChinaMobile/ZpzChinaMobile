@@ -182,7 +182,7 @@ static __weak ProgramDetailViewController* myDelegate;
     [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"主体施工" programTitle:nil address:nil detailAddress:nil]];
     
     //图片imageView
-    [self getImageView:myDelegate.mainConstructionImageArr.count imageViewSequence:3];
+    [self getImageView:myDelegate.mainConstructionImageArr.count+myDelegate.fireControlImageArr.count imageViewSequence:3];
 }
 
 +(void)getSecondView{

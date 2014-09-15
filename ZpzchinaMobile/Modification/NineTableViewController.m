@@ -20,19 +20,17 @@
 
 @implementation NineTableViewController
 //消防/景观绿化
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic images:(NSMutableArray*)images{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.images=images;
+        
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        [self.view addSubview:self.tableView];
     }
     return self;
 }
@@ -40,13 +38,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    //    if (self.fromView==0) {
-    //        AppModel* appModel=[AppModel sharedInstance];
-    //        [appModel.fireControlImageArr removeAllObjects];
-    //    }
-    self.tableView.separatorStyle=NO;
-    
+    [super viewDidLoad];   
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,7 +69,6 @@
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [cell.contentView addSubview:[self getImageViewsWithImages:[self.images copy]]];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        // Configure the cell...
         
         return cell;
     }else{
@@ -115,7 +106,6 @@
         self.images = [CameraSqlite loadAllfireControlList:[self.dataDic objectForKey:@"id"]];
     }else{
         if(self.superVC.isRelease == 0){
-            // if(cameraflag == 0){
             if([CameraSqlite loadfireControlSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
                 [self.images insertObject:[[CameraSqlite loadAllfireControlList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
             }

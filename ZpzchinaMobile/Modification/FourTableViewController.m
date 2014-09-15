@@ -15,7 +15,7 @@
 #import "LocationViewController.h"
 #import "SinglePickerView.h"
 #import "AppModel.h"
-@interface FourTableViewController ()<DesignDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
+@interface FourTableViewController ()<DesignDelegate,AddContactViewDelegate,UIActionSheetDelegate,UITableViewDelegate,UITableViewDataSource>{
     AddContactViewController* addcontactView;
     SinglePickerView* singlepickerview;
 }
@@ -90,34 +90,24 @@
     [singlepickerview showInView:self.tableView.superview];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray *)images{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.contacts=contacts;
+        
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        [self.view addSubview:self.tableView];
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-//    if (self.fromView==0) {
-//        AppModel* appModel=[AppModel sharedInstance];
-//        appModel.designAry =[NSMutableArray array];
-//        self.contacts=appModel.designAry;
-//    }
-    self.tableView.separatorStyle=NO;
-    
-    
+    [super viewDidLoad];    
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,8 +139,8 @@
     }else{
     
         cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 Arr:self.contacts singleDic:self.singleDic];
-    NSLog(@"%@",self.dataDic);
-    }        cell.delegate=self;
+    }
+    cell.delegate=self;
 
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     // Configure the cell...

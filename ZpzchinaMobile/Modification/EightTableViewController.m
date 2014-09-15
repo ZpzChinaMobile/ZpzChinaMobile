@@ -12,7 +12,7 @@
 #import "Camera.h"
 #import "CameraSqlite.h"
 #import "AppModel.h"
-@interface EightTableViewController ()<CameraDelegate>{
+@interface EightTableViewController ()<CameraDelegate,UITableViewDelegate,UITableViewDelegate,UITableViewDataSource>{
     Camera* camera;
 }
 
@@ -20,20 +20,19 @@
 
 @implementation EightTableViewController
 //主体施工
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray *)images{
     if ([super init]) {
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.contacts=contacts;
         self.images=images;
+        
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        [self.view addSubview:self.tableView];
+
     }
     return self;
 }
@@ -41,11 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    if (self.fromView==0) {
-    //        AppModel* appModel=[AppModel sharedInstance];
-    //        [appModel.mainConstructionImageArr removeAllObjects];
-    //    }
-    self.tableView.separatorStyle=NO;
 }
 
 - (void)didReceiveMemoryWarning

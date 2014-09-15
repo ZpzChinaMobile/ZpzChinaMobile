@@ -170,7 +170,6 @@
         self.dataDic=dataDic;
         self.contacts=contacts;
         self.images=images;
-        NSLog(@"******%@\n************%@",dataDic,singleDic);
         
         self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
         self.tableView.delegate=self;
@@ -185,14 +184,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //    if (self.fromView==0) {
-    //        AppModel* appModel=[AppModel sharedInstance];
-    //       appModel.contactAry =[NSMutableArray array];
-    //        [appModel.planImageArr removeAllObjects];
-    //        self.contacts=appModel.contactAry;
-    //    }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -235,7 +226,6 @@
             cell = [[PlanAndAuctionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:nil flag:self.fromView contactArr:self.contacts] ;
         }else{
             cell=[[PlanAndAuctionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlanAndAuctionTableViewCell" dic:self.dataDic singleDic:self.singleDic flag:1 contactArr:self.contacts];
-            NSLog(@"9999999999999%@",self.contacts);
         }
         
         cell.delegate=self;
@@ -354,7 +344,7 @@
     muview=nil;
     addcontactView=nil;
     camera=nil;
-    
+
     NSLog(@"oneDealloc");
 }
 

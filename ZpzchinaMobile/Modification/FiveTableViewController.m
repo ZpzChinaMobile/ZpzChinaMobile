@@ -15,7 +15,7 @@
 #import "LocationViewController.h"
 #import "SinglePickerView.h"
 #import "AppModel.h"
-@interface FiveTableViewController ()<PlotDelegate,AddContactViewDelegate,UIActionSheetDelegate>{
+@interface FiveTableViewController ()<PlotDelegate,AddContactViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>{
     DatePickerView* datepickerview;
     AddContactViewController* addcontactView;
 }
@@ -150,14 +150,13 @@
         self.singleDic=singleDic;
         self.dataDic=dataDic;
         self.contacts=contacts;
-    }
-    return self;
-}
+        
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        [self.view addSubview:self.tableView];
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
     }
     return self;
 }
@@ -165,12 +164,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    if (self.fromView==0) {
-//        AppModel* appModel=[AppModel sharedInstance];
-//        appModel.ownerAry =[NSMutableArray array];
-//        self.contacts=appModel.ownerAry;
-//    }
-    self.tableView.separatorStyle=NO;
     _titleArray = @[@"业主单位",@"预计施工时间",@"预计竣工时间",@"电梯",@"空调",@"供暖方式",@"外墙材料",@"钢结构"];
 }
 

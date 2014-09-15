@@ -246,10 +246,20 @@
                     [ary addObject:camera.a_url];
                 }
             }
+            
+            for (int i=0; i<self.fireControlImageArr.count; i++) {
+                CameraModel* camera=self.fireControlImageArr[i];
+                if (camera.a_url) {
+                    [ary addObject:camera.a_url];
+                }
+            }
+            
+            
             self.highImages=[NSMutableArray array];
             [self getImages:ary];
         }else{
-            [self gotoScrollImageViewWithImageAry:app.mainConstructionImageArr];//self.mainConstructionImageArr];
+            NSArray* array=[app.mainConstructionImageArr arrayByAddingObjectsFromArray:app.fireControlImageArr];
+            [self gotoScrollImageViewWithImageAry:array];//self.mainConstructionImageArr];
         }
         
     }else if(button==self.fourthStageButton1){

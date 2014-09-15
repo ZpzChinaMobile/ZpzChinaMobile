@@ -304,6 +304,7 @@
 
 -(void)closeKeyBoard{
     [textfield resignFirstResponder];
+    NSLog(@"+++++");
     [closeView removeFromSuperview];
     closeView = nil;
 }

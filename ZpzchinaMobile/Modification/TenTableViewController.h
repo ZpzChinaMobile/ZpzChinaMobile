@@ -11,7 +11,7 @@
 #import "WeakElectricityCell.h"
 #import "ModificationViewController.h"
 
-@interface TenTableViewController : UITableViewController<WeakElectricityDelegate,UIActionSheetDelegate>
+@interface TenTableViewController : UIViewController<WeakElectricityDelegate,UIActionSheetDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     SinglePickerView *singlepickerview;
     int flag;//0弱电安装，1装修情况 2装卸进度
@@ -21,6 +21,7 @@
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 @property(nonatomic,weak)ModificationViewController* superVC;
+@property(nonatomic,strong)UITableView* tableView;
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic images:(NSMutableArray*)images;
 @end

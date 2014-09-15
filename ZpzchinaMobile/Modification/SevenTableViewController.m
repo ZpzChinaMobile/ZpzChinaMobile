@@ -19,7 +19,7 @@
 #import "Camera.h"
 #import "CameraSqlite.h"
 #import "AppModel.h"
-@interface SevenTableViewController ()<PilePitDelegate,AddContactViewDelegate,CameraDelegate>{
+@interface SevenTableViewController ()<PilePitDelegate,AddContactViewDelegate,CameraDelegate,UITableViewDataSource,UITableViewDelegate>{
     AddContactViewController* addcontactView;
     Camera* camera;
 }
@@ -78,30 +78,20 @@
         self.dataDic=dataDic;
         self.contacts=contacts;
         self.images=images;
+
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        [self.view addSubview:self.tableView];
+
     }
     return self;
 }
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    if (self.fromView==0) {
-    //        AppModel* appModel=[AppModel sharedInstance];
-    //        appModel.pileAry =[NSMutableArray array];
-    //        [appModel.pilePitImageArr removeAllObjects];
-    //        self.contacts=appModel.pileAry;
-    //    }
-    self.tableView.separatorStyle=NO;
 }
 
 - (void)didReceiveMemoryWarning
