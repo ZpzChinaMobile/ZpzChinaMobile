@@ -20,7 +20,7 @@
 #import "CameraSqlite.h"
 #import "AppModel.h"
 
-@interface SixTableViewController ()<HorizonDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate>{
+@interface SixTableViewController ()<HorizonDelegate,AddContactViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate,UITableViewDelegate,UITableViewDataSource>{
     DatePickerView* datepickerview;
     AddContactViewController* addcontactView;
     LocationViewController* locateview;
@@ -118,30 +118,19 @@
         self.dataDic=dataDic;
         self.contacts=contacts;
         self.images=images;
+        
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        [self.view addSubview:self.tableView];
     }
     return self;
 }
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    if (self.fromView==0) {
-    //        AppModel* appModel=[AppModel sharedInstance];
-    //        appModel.horizonAry =[NSMutableArray array];
-    //        [appModel.horizonImageArr removeAllObjects];
-    //        self.contacts=appModel.horizonAry;
-    //    }
-    self.tableView.separatorStyle=NO;
 }
 
 - (void)didReceiveMemoryWarning

@@ -20,13 +20,6 @@
 
 @implementation TenTableViewController
 //装修阶段
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic images:(NSMutableArray*)images{
     if ([super init]) {
@@ -34,19 +27,18 @@
         self.dataDic=dataDic;
         self.images=images;
         
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView.delegate=self;
+        self.tableView.dataSource=self;
+        self.tableView.separatorStyle=NO;
+        [self.view addSubview:self.tableView];
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    //    if (self.fromView==0) {
-    //        AppModel* appModel=[AppModel sharedInstance];
-    //        [appModel.electroweakImageArr removeAllObjects];
-    //    }
-    self.tableView.separatorStyle=NO;
-    
+    [super viewDidLoad];    
 }
 
 - (void)didReceiveMemoryWarning

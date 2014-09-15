@@ -113,7 +113,6 @@
     //contactAry flag 0
     AppModel* appModel=[AppModel sharedInstance];
     
-    NSLog(@"initTVC====%@",self.singleDic);
     self.oneTVC=[[OneTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.contactAry images:self.planImageArr];
     self.oneTVC.fromView=self.fromView;
     self.oneTVC.superVC=self;
@@ -168,15 +167,14 @@
     //i==0,i==1的tvc在自己的init里已经设置过,继承vc
     //i==2-10为tvc
     for (int i=0; i<10; i++) {
-        UITableViewController* tvc=self.tvcArray[i];
-        tvc.tableView.frame=CGRectMake(0, 0, 320, 568-64.5-50);
+        UIViewController* vc=self.tvcArray[i];
+        //tvc.tableView.frame=CGRectMake(0, 0, 320, 568-64.5-50);
         //因为是vc,所以vc.view.frame与tableView.frame的大小不同,会影响动画效果,所以需要重新设置vc.view.frame
-        if (i==0||i==1) {
-            CGRect frame=tvc.view.frame;
+        //if (i==0||i==1||i==2) {
+            CGRect frame=vc.view.frame;
             frame.size.height-=64.5+50;
-            tvc.view.frame=frame;
-        }
-        NSLog(@"===%f",tvc.view.frame.size.height);
+            vc.view.frame=frame;
+        //}
     }
 }
 
@@ -274,7 +272,12 @@
     
     NSMutableArray* ary=[NSMutableArray array];
     for (int i=0; i<10; i++) {
-        UITableView* tv=[self.tvcArray[i] tableView];
+        UIView* tv;
+        if (i==0||1) {
+            tv=[self.tvcArray[i] view];
+        }else{
+            tv=[self.tvcArray[i] tableView];
+        }
         [ary addObject:tv];
     }
     
@@ -363,7 +366,7 @@
 }
 
 -(void)rightAction{
-    
+
     self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
     self.shadowView.backgroundColor=[UIColor blackColor];
     self.shadowView.alpha=.5;

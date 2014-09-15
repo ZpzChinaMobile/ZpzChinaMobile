@@ -33,7 +33,6 @@
         if(buttonIndex == 0) {
             NSLog(@"Cancel");
         }else {
-  //          _isUpdata = YES;
             if(self.timeflag == 0){
                 [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedStartTime"];
             }else if(self.timeflag == 1){
@@ -222,11 +221,7 @@
     [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
-    //    if(self.fromView == 1){
-    //        if(self.isRelease == 0){
-    //            [addcontactView setenabled:self.ownerArr];
-    //        }
-    //    }
+
     [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
 }
 
