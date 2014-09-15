@@ -221,32 +221,33 @@
 }
 
 -(void)logout{
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],@"token" ,@"ios",@"deviceType",nil];
-    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/LogOut",serverAddress] parameters:parameters error:nil];
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    op.responseSerializer = [AFJSONResponseSerializer serializer];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
-        if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
-            _isLogout = YES;
-        }else{
-            _isLogout = NO;
-        }
-        NSLog(@"%d",_isLogout);
-        if(_isLogout){
-            NSLog(@"退出成功！");
-            [self logoutSuccess];
-        }else{
-            NSLog(@"退出失败！");
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"退出失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            alert.tag = 1;
-            [alert show];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-    [[NSOperationQueue mainQueue] addOperation:op];
+    [self logoutSuccess];
+//    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],@"token" ,@"ios",@"deviceType",nil];
+//    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/LogOut",serverAddress] parameters:parameters error:nil];
+//    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//    op.responseSerializer = [AFJSONResponseSerializer serializer];
+//    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+//        NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
+//        if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
+//            _isLogout = YES;
+//        }else{
+//            _isLogout = NO;
+//        }
+//        NSLog(@"%d",_isLogout);
+//        if(_isLogout){
+//            NSLog(@"退出成功！");
+//            [self logoutSuccess];
+//        }else{
+//            NSLog(@"退出失败！");
+//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"退出失败！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//            alert.tag = 1;
+//            [alert show];
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+//    [[NSOperationQueue mainQueue] addOperation:op];
 }
 
 -(void)AllBtnClick:(UIButton *)button{
