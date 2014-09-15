@@ -415,8 +415,10 @@
         
     }else{
         //本地加载
-        [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
-        [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
+//        [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
+//        [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
+        [self loadLocalContact:self.ID];
+        [self loadLocalImage:self.ID];
         [self loadSelf];
     }
 }
