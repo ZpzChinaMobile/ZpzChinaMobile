@@ -26,12 +26,11 @@
 #import "LocateView.h"
 #import "DatePickerView.h"
 #import "MultipleChoiceViewController.h"
-#import "OwnerTypeViewController.h"
 #import "LocationViewController.h"
 #import "SinglePickerView.h"
 #import "Camera.h"
 #import "CollectionViewController.h"
-@interface NewProjectViewController :BaseViewController<UITableViewDelegate,UITableViewDataSource,PlanAndAuctionDelegate,ProjectDelegate,AddContactViewDelegate,UIActionSheetDelegate,MChoiceViewDelegate,OwnerTypeViewDelegate,UIAlertViewDelegate,LocationViewDelegate,GeologicalSurveyDelegate,DesignDelegate,PlotDelegate,HorizonDelegate,PilePitDelegate,CameraDelegate,MainConstructionDelegate,FirefightingDelegate,LandscapingDelegate,WeakinstallationDelegate,DecorationDelegate,RenovationprogressDelegate>{
+@interface NewProjectViewController :BaseViewController<UITableViewDelegate,UITableViewDataSource,PlanAndAuctionDelegate,ProjectDelegate,AddContactViewDelegate,UIActionSheetDelegate,MChoiceViewDelegate,UIAlertViewDelegate,LocationViewDelegate,GeologicalSurveyDelegate,DesignDelegate,PlotDelegate,HorizonDelegate,PilePitDelegate,CameraDelegate,MainConstructionDelegate,FirefightingDelegate,LandscapingDelegate,WeakinstallationDelegate,DecorationDelegate,RenovationprogressDelegate>{
     UITableView *_tableView;
     NSMutableArray *mainStageArr;
     NSMutableArray *phasedArr;
@@ -53,7 +52,6 @@
     DatePickerView *datepickerview;
     SinglePickerView *singlepickerview;
     MultipleChoiceViewController *muview;
-    OwnerTypeViewController *ownertypeview;
     LocationViewController *locationView;
     CollectionViewController *collectionview;
     
@@ -107,5 +105,4 @@
 @property(retain,nonatomic)LocateView *locateview;
 @property(retain,nonatomic)DatePickerView *datepickerview;
 @property(retain,nonatomic)MultipleChoiceViewController *muview;
-@property(retain,nonatomic)OwnerTypeViewController *ownertypeview;
 @end

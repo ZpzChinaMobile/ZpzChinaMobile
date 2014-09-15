@@ -1,22 +1,22 @@
 //
-//  OwnerTypeTableViewCell.m
+//  MChoiceTableViewCell.m
 //  ZpzchinaMobile
 //
-//  Created by 汪洋 on 14-6-28.
+//  Created by 汪洋 on 14-6-27.
 //  Copyright (c) 2014年 汪洋. All rights reserved.
 //
 
-#import "OwnerTypeTableViewCell.h"
+#import "MChoiceTableViewCell.h"
 
-@implementation OwnerTypeTableViewCell
+@implementation MChoiceTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        m_checkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 29, 29)];
-        [m_checkImageView setImage:[UIImage imageNamed:@"Unselected.png"]];
+        m_checkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(230, 12, 18, 18)];
+        [m_checkImageView setImage:[UIImage imageNamed:@"高级搜索-多选_09a.png"]];
         [self addSubview:m_checkImageView];
     }
     return self;
@@ -38,12 +38,12 @@
 {
 	if (checked)
 	{
-		m_checkImageView.image = [UIImage imageNamed:@"Selected.png"];
+		m_checkImageView.image = [UIImage imageNamed:@"高级搜索-多选_07a.png"];
 		self.backgroundView.backgroundColor = [UIColor colorWithRed:223.0/255.0 green:230.0/255.0 blue:250.0/255.0 alpha:1.0];
 	}
 	else
 	{
-		m_checkImageView.image = [UIImage imageNamed:@"Unselected.png"];
+		m_checkImageView.image = [UIImage imageNamed:@"高级搜索-多选_09a.png"];
 		self.backgroundView.backgroundColor = [UIColor whiteColor];
 	}
 	m_checked = checked;

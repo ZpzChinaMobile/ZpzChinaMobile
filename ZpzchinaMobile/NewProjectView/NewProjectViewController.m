@@ -22,7 +22,7 @@
 @implementation NewProjectViewController
 @synthesize mainStageArr,phasedArr,cellArr,contactArr,ownerArr,explorationUnitArr,designInstituteArr;
 @synthesize mysection,myrow,timeflag;
-@synthesize addcontactView,locateview,datepickerview,muview,ownertypeview;
+@synthesize addcontactView,locateview,datepickerview,muview;
 @synthesize dataDic,SingleDataDic;
 @synthesize flag,fromView,isRelease;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -1137,10 +1137,12 @@
             
             break;
         case 5:
-            ownertypeview = [[OwnerTypeViewController alloc] init];
-            [ownertypeview.view setFrame:CGRectMake(0, 0, 262, 431)];
-            ownertypeview.delegate = self;
-            [bgviewcontroller presentPopupViewController:ownertypeview animationType:MJPopupViewAnimationSlideBottomBottom];
+            muview = [[MultipleChoiceViewController alloc] init];
+            muview.arr = [[NSMutableArray alloc] initWithObjects:@"外商独资",@"中外合资",@"私人企业",@"政府机关",@"国有企业",@"其他", nil];
+            muview.flag = 0;
+            muview.delegate = self;
+            [muview.view setFrame:CGRectMake(0, 0, 272, 350)];
+            [self presentPopupViewController:muview animationType:MJPopupViewAnimationFade];
             break;
         default:
             break;

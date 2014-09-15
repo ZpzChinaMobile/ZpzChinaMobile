@@ -12,13 +12,13 @@
 #import "AddContactViewController.h"
 #import "DatePickerView.h"
 #import "UIViewController+MJPopupViewController.h"
-#import "OwnerTypeViewController.h"
+#import "MultipleChoiceViewController.h"
 #import "LocationViewController.h"
 #import "AppModel.h"
-@interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,OwnerTypeViewDelegate,LocationViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>{
+@interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,MChoiceViewDelegate,LocationViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>{
     AddContactViewController* addcontactView;
     DatePickerView* datepickerview;
-    OwnerTypeViewController* ownertypeview;
+    MultipleChoiceViewController* muview;
     LocationViewController* locationView;
 }
 
@@ -53,7 +53,7 @@
     }else{
         [self.contacts addObject:dic];
     }
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
 }
 
@@ -64,11 +64,11 @@
     [self.tableView reloadData];
 }
 
--(void)backOwnerTypeViewController{
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+-(void)backMChoiceViewController{
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
 }
 
--(void)choiceDataOwnerType:(NSMutableArray *)arr{
+-(void)choiceData:(NSMutableArray *)arr index:(int)index{
     NSMutableString *string = [[NSMutableString alloc] init];
     for(int i=0;i<arr.count;i++){
         if(![[arr objectAtIndex:i] isEqualToString:@""]){
@@ -82,9 +82,8 @@
     }else{
         [self.dataDic setObject:@"" forKey:@"ownerType"];
     }
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop];
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
-    
 }
 
 -(void)addContactViewProject:(int)index{
@@ -97,15 +96,16 @@
             //self.flag = 1;
             if(self.contacts.count <3){
                 addcontactView = [[AddContactViewController alloc] init];
-                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
                 addcontactView.delegate = self;
+                addcontactView.contactType = @"ownerUnitContacts";
+                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
                 
                 if(self.fromView == 0){
                     [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
                 }else{
                     [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
                 }
-                [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+                [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
             }else{
                 UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
@@ -148,10 +148,12 @@
             
             break;
         case 5:
-            ownertypeview = [[OwnerTypeViewController alloc] init];
-            [ownertypeview.view setFrame:CGRectMake(0, 0, 262, 431)];
-            ownertypeview.delegate = self;
-            [self presentPopupViewController:ownertypeview animationType:MJPopupViewAnimationSlideBottomBottom];
+            muview = [[MultipleChoiceViewController alloc] init];
+            muview.arr = [[NSMutableArray alloc] initWithObjects:@"外商独资",@"中外合资",@"私人企业",@"政府机关",@"国有企业",@"其他", nil];
+            muview.flag = 0;
+            muview.delegate = self;
+            [muview.view setFrame:CGRectMake(0, 0, 272, 350)];
+            [self presentPopupViewController:muview animationType:MJPopupViewAnimationFade];
             break;
         default:
             break;
@@ -218,11 +220,12 @@
 -(void)updataOwner:(NSMutableDictionary *)dic index:(int)index{
     //    self.flag = 1;
     addcontactView = [[AddContactViewController alloc] init];
-    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
+    addcontactView.contactType = @"ownerUnitContacts";
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
 
-    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
 }
 
 -(void)gotoMap:(NSString *)address city:(NSString *)city{
@@ -320,7 +323,7 @@
 -(void)dealloc{
     addcontactView=nil;
     datepickerview=nil;
-    ownertypeview=nil;
+    muview=nil;
     locationView=nil;
     NSLog(@"twoDealloc");
 }

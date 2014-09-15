@@ -18,6 +18,7 @@
 @synthesize dataDic;
 @synthesize btnTag;
 @synthesize dropDown;
+@synthesize contactType;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -185,7 +186,7 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, -100, 320, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 0, 320, self.view.frame.size.height)];
     textfield = nil;
     textfield = textField;
     closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, self.view.frame.size.height)];
@@ -202,13 +203,11 @@
     [textField resignFirstResponder];
     [closeView removeFromSuperview];
     closeView = nil;
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 40, 320, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 70, 320, self.view.frame.size.height)];
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    NSLog(@"%d",textField.tag);
-    NSLog(@"%@",textField.text);
     switch (textField.tag) {
         case 0:
             [self.dataDic setValue:textField.text forKey:@"contactName"];
@@ -231,7 +230,17 @@
 -(void)titleClick:(id)sender{
     [textfield resignFirstResponder];
     if(dropDown == nil) {
-        NSMutableArray *dataTempArr = [[NSMutableArray alloc]initWithObjects:@"项目经理",@"采购经理",@"设计经理",@"项目总负责",@"其他", nil];
+        NSLog(@"%@",self.contactType);
+        NSMutableArray *dataTempArr = nil;
+        if([self.contactType isEqualToString:@"auctionUnitContacts"]||[self.contactType isEqualToString:@"explorationUnitContacts"]){
+            dataTempArr = [[NSMutableArray alloc]initWithObjects:@"项目负责人", nil];
+        }else if([self.contactType isEqualToString:@"ownerUnitContacts"]){
+            dataTempArr = [[NSMutableArray alloc]initWithObjects:@"项目经理",@"采购经理",@"设计经理",@"项目总负责",@"其他", nil];
+        }else if([self.contactType isEqualToString:@"contractorUnitContacts"]||[self.contactType isEqualToString:@"pileFoundationUnitContacts"]){
+            dataTempArr = [[NSMutableArray alloc]initWithObjects:@"现场经理",@"采购负责人", nil];
+        }else if([self.contactType isEqualToString:@"designInstituteContacts"]){
+            dataTempArr = [[NSMutableArray alloc]initWithObjects:@"建筑师",@"结构工程师",@"电气工程师",@"暖通工程师",@"给排水工程师",@"幕墙工程师", nil];
+        }
         dropDown = [[NIDropDown alloc] initWithFrame:sender arr:dataTempArr tit:@"Foreignparticipation"];
         dropDown.delegate = self;
     }
@@ -251,7 +260,7 @@
 }
 
 -(void)closeKeyBoard{
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 40, 320, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 70, 320, self.view.frame.size.height)];
     [textfield resignFirstResponder];
     [closeView removeFromSuperview];
     closeView = nil;
@@ -294,11 +303,5 @@
     [accountName setText:model.a_accountName];
     [address setText:model.a_accountAddress];
     [title setTitle:[NSString stringWithFormat:@"岗位:%@",model.a_duties] forState:UIControlStateNormal];
-    /*saveBtn.enabled = NO;
-    addName.enabled = NO;
-    addPhone.enabled = NO;
-    address.enabled = NO;
-    title.enabled =NO;
-    accountName.enabled =NO;*/
 }
 @end

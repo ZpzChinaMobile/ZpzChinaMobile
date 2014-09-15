@@ -75,7 +75,7 @@
     overlayView.backgroundColor = [UIColor clearColor];
     
     // BackgroundView
-    MJPopupBackgroundView *backgroundView = [[MJPopupBackgroundView alloc] initWithFrame:CGRectMake(0, 0, 320, 454)];
+    MJPopupBackgroundView *backgroundView = [[MJPopupBackgroundView alloc] initWithFrame:sourceView.bounds];
     backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     backgroundView.tag = kMJBackgroundViewTag;
     backgroundView.backgroundColor = [UIColor blackColor];

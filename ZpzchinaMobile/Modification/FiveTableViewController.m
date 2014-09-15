@@ -11,7 +11,7 @@
 #import "AddContactViewController.h"
 #import "DatePickerView.h"
 #import "UIViewController+MJPopupViewController.h"
-#import "OwnerTypeViewController.h"
+#import "MultipleChoiceViewController.h"
 #import "LocationViewController.h"
 #import "SinglePickerView.h"
 #import "AppModel.h"
@@ -51,7 +51,7 @@
     }else{
         [self.contacts addObject:dic];
     }
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
 }
 
@@ -63,14 +63,15 @@
             //self.flag = 1;
             if(self.contacts.count <3){
                 addcontactView = [[AddContactViewController alloc] init];
-                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
                 addcontactView.delegate = self;
+                addcontactView.contactType = @"ownerUnitContacts";
+                [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
                 if(self.fromView == 0){
                     [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
                 }else{
                     [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
                 }
-                [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+                [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
             }else{
                 UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
@@ -112,15 +113,16 @@
 }
 -(void)updataPlotOwner:(NSMutableDictionary *)dic index:(int)index{
     addcontactView = [[AddContactViewController alloc] init];
-    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     addcontactView.delegate = self;
+    addcontactView.contactType = @"ownerUnitContacts";
+    [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
     //    if(self.fromView == 1){
     //        if(self.isRelease == 0){
     //            [addcontactView setenabled:self.ownerArr];
     //        }
     //    }
-    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+    [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
 }
 -(void)addSwitchValue:(int)index value:(BOOL)value{
     //   _isUpdata = YES;
