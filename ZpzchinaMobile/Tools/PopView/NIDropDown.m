@@ -59,7 +59,6 @@
 
 -(void)hideDropDown:(UIButton *)b {
     CGRect btn = b.frame;
-    
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.1];
     self.frame = CGRectMake(130, btn.origin.y, 150, 0);
