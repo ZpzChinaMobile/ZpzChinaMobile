@@ -65,7 +65,7 @@
 }
 
 -(void)backMChoiceViewController{
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
 }
 
 -(void)choiceData:(NSMutableArray *)arr index:(int)index{
@@ -82,7 +82,7 @@
     }else{
         [self.dataDic setObject:@"" forKey:@"ownerType"];
     }
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
 }
 
@@ -157,7 +157,7 @@
             muview.flag = 0;
             muview.delegate = self;
             [muview.view setFrame:CGRectMake(0, 0, 272, 350)];
-            [self presentPopupViewController:muview animationType:MJPopupViewAnimationFade];
+            [self.view.window.rootViewController presentPopupViewController:muview animationType:MJPopupViewAnimationFade];
             break;
         default:
             break;

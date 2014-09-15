@@ -45,7 +45,7 @@
 }
 
 -(void)backMChoiceViewController{
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
 }
 
 -(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
@@ -73,7 +73,7 @@
     }else{
         [self.dataDic setObject:@"" forKey:@"usage"];
     }
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
 }
 
@@ -94,7 +94,7 @@
         muview.flag = 0;
         muview.delegate = self;
         [muview.view setFrame:CGRectMake(0, 0, 272, 350)];
-        [self presentPopupViewController:muview animationType:MJPopupViewAnimationFade];
+        [self.view.window.rootViewController presentPopupViewController:muview animationType:MJPopupViewAnimationFade];
     }else{
         if(self.contacts.count <3){
             addcontactView = [[AddContactViewController alloc] init];
