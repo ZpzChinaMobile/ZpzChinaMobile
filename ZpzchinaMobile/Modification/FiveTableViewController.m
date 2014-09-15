@@ -11,7 +11,7 @@
 #import "AddContactViewController.h"
 #import "DatePickerView.h"
 #import "UIViewController+MJPopupViewController.h"
-#import "OwnerTypeViewController.h"
+#import "MultipleChoiceViewController.h"
 #import "LocationViewController.h"
 #import "SinglePickerView.h"
 #import "AppModel.h"

@@ -45,7 +45,7 @@
 }
 
 -(void)backMChoiceViewController{
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
 }
 
 -(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
@@ -59,7 +59,7 @@
     [self.tableView reloadData];
 }
 
--(void)choiceData:(NSMutableArray *)arr{
+-(void)choiceData:(NSMutableArray *)arr index:(int)index{
     NSMutableString *string = [[NSMutableString alloc] init];
     for(int i=0;i<arr.count;i++){
         if(![[arr objectAtIndex:i] isEqualToString:@""]){
@@ -73,7 +73,7 @@
     }else{
         [self.dataDic setObject:@"" forKey:@"usage"];
     }
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop];
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
 }
 
@@ -90,11 +90,11 @@
         }
     }else if(index == 1){
         muview = [[MultipleChoiceViewController alloc] init];
-        [muview.view setFrame:CGRectMake(0, 0, 262, 431)];
+        muview.arr = [[NSMutableArray alloc] initWithObjects:@"工业",@"酒店及餐饮",@"商务办公",@"住宅/经济适用房",@"公用事业设施（教育、医疗、科研、基础建设等）",@"其他", nil];
+        muview.flag = 0;
         muview.delegate = self;
-        [self presentPopupViewController:muview animationType:MJPopupViewAnimationSlideBottomBottom];
-        
-         NSLog(@"%d",self.view.subviews.count);
+        [muview.view setFrame:CGRectMake(0, 0, 272, 350)];
+        [self presentPopupViewController:muview animationType:MJPopupViewAnimationFade];
     }else{
         if(self.contacts.count <3){
             addcontactView = [[AddContactViewController alloc] init];

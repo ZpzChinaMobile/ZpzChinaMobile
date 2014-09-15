@@ -12,13 +12,13 @@
 #import "AddContactViewController.h"
 #import "DatePickerView.h"
 #import "UIViewController+MJPopupViewController.h"
-#import "OwnerTypeViewController.h"
+#import "MultipleChoiceViewController.h"
 #import "LocationViewController.h"
 #import "AppModel.h"
-@interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,OwnerTypeViewDelegate,LocationViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>{
+@interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,MChoiceViewDelegate,LocationViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>{
     AddContactViewController* addcontactView;
     DatePickerView* datepickerview;
-    OwnerTypeViewController* ownertypeview;
+    MultipleChoiceViewController* muview;
     LocationViewController* locationView;
 }
 
@@ -64,11 +64,11 @@
     [self.tableView reloadData];
 }
 
--(void)backOwnerTypeViewController{
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+-(void)backMChoiceViewController{
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
 }
 
--(void)choiceDataOwnerType:(NSMutableArray *)arr{
+-(void)choiceData:(NSMutableArray *)arr index:(int)index{
     NSMutableString *string = [[NSMutableString alloc] init];
     for(int i=0;i<arr.count;i++){
         if(![[arr objectAtIndex:i] isEqualToString:@""]){
@@ -84,7 +84,6 @@
     }
     [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomTop];
     [self.tableView reloadData];
-    
 }
 
 -(void)addContactViewProject:(int)index{
@@ -149,10 +148,12 @@
             
             break;
         case 5:
-            ownertypeview = [[OwnerTypeViewController alloc] init];
-            [ownertypeview.view setFrame:CGRectMake(0, 0, 262, 431)];
-            ownertypeview.delegate = self;
-            [self presentPopupViewController:ownertypeview animationType:MJPopupViewAnimationSlideBottomBottom];
+            muview = [[MultipleChoiceViewController alloc] init];
+            muview.arr = [[NSMutableArray alloc] initWithObjects:@"外商独资",@"中外合资",@"私人企业",@"政府机关",@"国有企业",@"其他", nil];
+            muview.flag = 0;
+            muview.delegate = self;
+            [muview.view setFrame:CGRectMake(0, 0, 272, 350)];
+            [self presentPopupViewController:muview animationType:MJPopupViewAnimationFade];
             break;
         default:
             break;
@@ -322,7 +323,7 @@
 -(void)dealloc{
     addcontactView=nil;
     datepickerview=nil;
-    ownertypeview=nil;
+    muview=nil;
     locationView=nil;
     NSLog(@"twoDealloc");
 }
