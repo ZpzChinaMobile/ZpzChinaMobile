@@ -37,7 +37,7 @@
         [self.contacts addObject:dic];
     }
     
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+    [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
 }
 
@@ -52,7 +52,7 @@
         }else{
             [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
         }
-        [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
+        [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
     }else{
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
@@ -71,7 +71,7 @@
     //            [addcontactView setenabled:pileFoundationUnitArr];
     //        }
     //    }
-    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
+    [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
 }
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray *)images{
