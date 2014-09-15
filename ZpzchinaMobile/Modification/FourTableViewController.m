@@ -47,7 +47,7 @@
         [self.contacts addObject:dic];
     }
      NSLog(@"%@",self.contacts);
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideBottomBottom];
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
 }
 
@@ -63,7 +63,7 @@
         }else{
             [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
         }
-        [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+        [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
     }else{
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"名额已经满了！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
@@ -80,7 +80,7 @@
     //            [addcontactView setenabled:self.designInstituteArr];
     //        }
     //    }
-    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationSlideBottomBottom];
+    [self presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
 }
 
 -(void)addSinglePickerView{

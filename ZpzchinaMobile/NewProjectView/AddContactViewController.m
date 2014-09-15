@@ -260,7 +260,7 @@
 }
 
 -(void)closeKeyBoard{
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 40, 320, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 0, 320, self.view.frame.size.height)];
     [textfield resignFirstResponder];
     [closeView removeFromSuperview];
     closeView = nil;
@@ -303,11 +303,5 @@
     [accountName setText:model.a_accountName];
     [address setText:model.a_accountAddress];
     [title setTitle:[NSString stringWithFormat:@"岗位:%@",model.a_duties] forState:UIControlStateNormal];
-    /*saveBtn.enabled = NO;
-    addName.enabled = NO;
-    addPhone.enabled = NO;
-    address.enabled = NO;
-    title.enabled =NO;
-    accountName.enabled =NO;*/
 }
 @end
