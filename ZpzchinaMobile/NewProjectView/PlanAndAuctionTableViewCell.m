@@ -289,8 +289,6 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    
-
     if ([self.delegate respondsToSelector:@selector(addContent:index:)]){
         [self.delegate addContent:textField.text index:textField.tag];
     }
