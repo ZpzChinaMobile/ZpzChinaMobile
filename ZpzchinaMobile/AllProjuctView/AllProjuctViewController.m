@@ -413,7 +413,6 @@ int startIndex;
             _recordView = nil;
         }
     } str:text index:startIndex];
-   
 }
 
 

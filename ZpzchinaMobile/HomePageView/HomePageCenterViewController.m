@@ -65,7 +65,7 @@
     topLabel.frame = CGRectMake(100, 20, 120, 28);
     topLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:19];
     topLabel.textColor = [UIColor whiteColor];
-    topLabel.text = @"软件名称";
+    topLabel.text = @"信息采集";
     topLabel.textAlignment = NSTextAlignmentCenter;
     [topView addSubview:topLabel];
     [self.view addSubview:topView];
@@ -98,7 +98,7 @@
     [bannerView addSubview:footView];
     
     UILabel *userNameLabel = [[UILabel alloc] init];
-    userNameLabel.frame = CGRectMake(10, 195, 140, 28);
+    userNameLabel.frame = CGRectMake(10, 195, 160, 28);
     userNameLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:17];
     userNameLabel.textColor = [UIColor whiteColor];
     userNameLabel.text = [NSString stringWithFormat:@"用户名：%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]];
