@@ -656,7 +656,13 @@
 }
 
 +(NSString *)JudgmentProjectStage:(NSMutableDictionary *)dic{
-    //NSLog(@"%@",dic);
+//    NSLog(@"===>%@",dic[@"projectID"]);
+//    NSString *projectID = nil;
+//    if([dic[@"projectID"] isEqualToString:@""]){
+//        projectID = dic[@"id"];
+//    }else{
+//        projectID = dic[@"projectID"];
+//    }
     NSString *stage = [[NSString alloc] init];
     stage = @"0";
     if(![[dic objectForKey:@"landName"] isEqualToString:@""] ||

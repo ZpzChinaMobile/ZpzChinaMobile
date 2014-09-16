@@ -412,7 +412,6 @@ int startIndex;
                                         model.a_decorationSituation,@"decorationSituation",
                                         model.a_decorationProgress,@"decorationProgress",
                                         nil];
-        NSLog(@"%@",[ProjectStage JudgmentProjectStage:parametersdata]);
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
