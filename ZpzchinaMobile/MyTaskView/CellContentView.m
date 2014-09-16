@@ -68,9 +68,9 @@
     //areacountLabel.text = @"16,000M²";
     areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
     [self addSubview:areacountLabel];
-    
+    NSLog(@"stage ===== > %@",stage);
     progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(220,5,52,52)];
-    if([stage isEqualToString:@"1"]){
+    if([stage isEqualToString:@"1"]||[stage isEqualToString:@"0"]){
         [progressImage setImage:[UIImage imageNamed:@"全部项目_16.png"]];
     }else if([stage isEqualToString:@"2"]){
         [progressImage setImage:[UIImage imageNamed:@"全部项目_15.png"]];
@@ -144,6 +144,8 @@
     nameLabel.text = [dic objectForKey:@"projectName"];
     investmentcountLabel.text = [dic objectForKey:@"investment"];
     areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
+    
+    NSLog(@"stage ===== > %@",stage);
     if([stage isEqualToString:@"1"]||[stage isEqualToString:@"0"]){
         [progressImage setImage:[UIImage imageNamed:@"全部项目_16.png"]];
     }else if([stage isEqualToString:@"2"]){

@@ -14,6 +14,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        NSLog(@"%@",dic);
         stage = [ProjectStage JudgmentProjectStage:dic];
         UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14,0,291.5,260)];
         [bgImgView setImage:[UIImage imageNamed:@"全部项目_10.png"]];
@@ -50,9 +51,9 @@
         //areacountLabel.text = @"16,000M²";
         areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
         [self addSubview:areacountLabel];
-        
+        NSLog(@"stage ===== > %@",stage);
         progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(234,5,52,52)];
-        if([stage isEqualToString:@"1"]){
+        if([stage isEqualToString:@"1"]||[stage isEqualToString:@"0"]){
             [progressImage setImage:[UIImage imageNamed:@"全部项目_16.png"]];
         }else if([stage isEqualToString:@"2"]){
             [progressImage setImage:[UIImage imageNamed:@"全部项目_15.png"]];
