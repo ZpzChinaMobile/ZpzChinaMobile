@@ -52,6 +52,18 @@
 
 @implementation ModificationViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+}
+
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts horizonImageArr:(NSMutableArray*)horizonImageArr pilePitImageArr:(NSMutableArray*)pilePitImageArr mainConstructionImageArr:(NSMutableArray*)mainConstructionImageArr explorationImageArr:(NSMutableArray*)explorationImageArr fireControlImageArr:(NSMutableArray*)fireControlImageArr electroweakImageArr:(NSMutableArray*)electroweakImageArr planImageArr:(NSMutableArray*)planImageArr{
     if ([super init]) {
     }
@@ -369,7 +381,7 @@
 -(void)leftAction
 {
     [self.navigationController popViewControllerAnimated:YES];
-    if (self.delegate&&self.isRelease==1) {
+    if (self.delegate&&self.isRelease==1&&self.fromView==1) {
         [self.delegate backToProgramDetailView];
     }
 }

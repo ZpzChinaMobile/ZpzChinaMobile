@@ -257,7 +257,6 @@
 }
 
 -(void)BtnClick:(UIButton *)button{
-    NSLog(@"333333");
     [textfield resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(addContactView:)]){
         [self.delegate addContactView:button.tag];
@@ -285,6 +284,8 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    [closeView removeFromSuperview];
+    closeView=nil;
     return YES;
 }
 
