@@ -146,6 +146,8 @@
         return cell;
     }else{
         PilePitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PilePitTableViewCell"];
+        [cell removeFromSuperview];
+        cell = nil;
         // if (!cell) {
         if(self.fromView == 0){
             cell=[[PilePitTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PilePitTableViewCell" flag:0 Arr:self.contacts];

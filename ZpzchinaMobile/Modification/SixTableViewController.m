@@ -185,6 +185,8 @@
         return cell;
     }else{
         HorizonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HorizonTableViewCell"];
+        [cell removeFromSuperview];
+        cell = nil;
         // if (!cell) {
         if(self.fromView == 0){
             cell=[[HorizonTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizonTableViewCell" dic:self.dataDic flag:0 Arr:self.contacts singleDic:nil];

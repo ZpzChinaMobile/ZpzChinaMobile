@@ -250,6 +250,7 @@ static bool FirstLogin = NO;
 
         [[AppDelegate instance] window].rootViewController = drawerController;
         [[[AppDelegate instance] window] makeKeyAndVisible];
+        
     }
     else{
         if (buttonIndex ==0) {      //进行脸部识别的注册

@@ -102,9 +102,14 @@
     [self setAlpha:0.0f];
     [self.layer addAnimation:animation forKey:@"LocateView"];
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(removeAnimations) withObject:nil afterDelay:0.4];
     if(self.delegate) {
         [self.delegate actionSheet:self clickedButtonAtIndex:0];
     }
+}
+
+-(void)removeAnimations{
+    [self.layer removeAllAnimations];
 }
 
 //以下3个方法实现PickerView的数据初始化
