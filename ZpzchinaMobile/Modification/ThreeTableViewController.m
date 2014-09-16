@@ -154,6 +154,8 @@
         return cell;
     }else{
         GeologicalSurveyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanAndAuctionTableViewCell"];
+        [cell removeFromSuperview];
+        cell = nil;
         // if (!cell) {
         if(self.fromView == 0){
             //AppModel* appModel=[AppModel sharedInstance];

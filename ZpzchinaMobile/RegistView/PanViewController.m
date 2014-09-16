@@ -165,7 +165,6 @@ static int j =0;
 
 -(void)recognizeSuccess           //注册成功后登录跳转的界面
 {
-    NSLog(@"asdfasdfasdfasdf");
     UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
     UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
     

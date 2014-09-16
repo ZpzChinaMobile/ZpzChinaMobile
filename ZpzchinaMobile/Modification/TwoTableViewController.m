@@ -311,7 +311,8 @@
     NSString *stringcell = @"ProjectTableViewCell";
     ProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
     //if(!cell){
-    
+    [cell removeFromSuperview];
+    cell = nil;
     if(self.fromView == 0){
         cell=[[ProjectTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:self.fromView ownerArr:self.contacts singleDic:nil];
     }else{

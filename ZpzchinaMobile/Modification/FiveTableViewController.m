@@ -213,6 +213,8 @@
     
     static NSString *stringcell = @"ProjectTableViewCell";
     PlotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+    [cell removeFromSuperview];
+    cell = nil;
     //if(!cell){
     if(self.fromView == 0){
         cell = [[PlotTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:0 Arr:self.contacts singleDic:nil];

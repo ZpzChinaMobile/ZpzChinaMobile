@@ -89,9 +89,14 @@
     [self setAlpha:0.0f];
     [self.layer addAnimation:animation forKey:@"DatePicker"];
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(removeAnimations) withObject:nil afterDelay:0.4];
     if(self.delegate) {
         [self.delegate actionSheet:self clickedButtonAtIndex:0];
     }
+}
+
+-(void)removeAnimations{
+    [self.layer removeAllAnimations];
 }
 
 -(void)complatedClick{
@@ -107,6 +112,7 @@
     [self setAlpha:0.0f];
     [self.layer addAnimation:animation forKey:@"DatePicker"];
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(removeAnimations) withObject:nil afterDelay:0.4];
     if(self.delegate) {
         [self.delegate actionSheet:self clickedButtonAtIndex:1];
     }
