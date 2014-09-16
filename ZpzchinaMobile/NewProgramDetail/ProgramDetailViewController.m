@@ -84,9 +84,6 @@
 }
 
 -(void)backToProgramDetailView{
-//    self.view=nil;
-//    return;
-    //self.dataDic;
     ProjectModel* model=[ProjectSqlite loadList:self.ID][0];
     self.dataDic=[ProjectStage JudgmentStr:model];
 
