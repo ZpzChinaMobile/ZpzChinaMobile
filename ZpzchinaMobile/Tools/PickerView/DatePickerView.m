@@ -76,7 +76,13 @@
     [self.layer addAnimation:animation forKey:@"DatePicker"];
     
     self.frame = CGRectMake(0, view.frame.size.height - self.frame.size.height, self.frame.size.width, self.frame.size.height);
-    [view addSubview:self];
+    
+    
+    UIButton* button=[[UIButton alloc]initWithFrame:view.frame];
+    [button addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
+    //[view addSubview:self];
+    [button addSubview:self];
+    [view addSubview:button];
 }
 
 -(void)cancelClick{
@@ -88,6 +94,7 @@
     animation.subtype = kCATransitionFromBottom;
     [self setAlpha:0.0f];
     [self.layer addAnimation:animation forKey:@"DatePicker"];
+    [self.superview performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
     [self performSelector:@selector(removeAnimations) withObject:nil afterDelay:0.4];
     if(self.delegate) {
@@ -111,6 +118,7 @@
     animation.subtype = kCATransitionFromBottom;
     [self setAlpha:0.0f];
     [self.layer addAnimation:animation forKey:@"DatePicker"];
+    [self.superview performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
     [self performSelector:@selector(removeAnimations) withObject:nil afterDelay:0.4];
     if(self.delegate) {

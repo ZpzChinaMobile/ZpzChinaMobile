@@ -423,6 +423,8 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    [closeView removeFromSuperview];
+    closeView=nil;
     return YES;
 }
 
