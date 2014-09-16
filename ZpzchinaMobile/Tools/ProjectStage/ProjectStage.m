@@ -658,6 +658,7 @@
 +(NSString *)JudgmentProjectStage:(NSMutableDictionary *)dic{
     //NSLog(@"%@",dic);
     NSString *stage = [[NSString alloc] init];
+    stage = @"0";
     if(![[dic objectForKey:@"landName"] isEqualToString:@""] ||
        ![[dic objectForKey:@"district"] isEqualToString:@""] ||
        ![[dic objectForKey:@"province"] isEqualToString:@""] ||
