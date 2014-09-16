@@ -144,7 +144,7 @@
     nameLabel.text = [dic objectForKey:@"projectName"];
     investmentcountLabel.text = [dic objectForKey:@"investment"];
     areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
-    if([stage isEqualToString:@"1"]){
+    if([stage isEqualToString:@"1"]||[stage isEqualToString:@"0"]){
         [progressImage setImage:[UIImage imageNamed:@"全部项目_16.png"]];
     }else if([stage isEqualToString:@"2"]){
         [progressImage setImage:[UIImage imageNamed:@"全部项目_15.png"]];
