@@ -53,6 +53,8 @@
     }
     [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
+    //
+    [[self.superVC.tvcArray[1] tableView]reloadData];
 }
 
 -(void)addContactViewPlot:(int)index{

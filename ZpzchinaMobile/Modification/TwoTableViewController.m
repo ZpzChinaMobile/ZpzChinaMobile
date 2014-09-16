@@ -55,6 +55,9 @@
     }
     [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
+    
+    //
+    [[self.superVC.tvcArray[4] tableView] reloadData];
 }
 
 -(void)locationBack:(NSString *)address testLocation:(CLLocationCoordinate2D)testLocation{

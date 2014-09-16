@@ -12,7 +12,6 @@
 -(void)upTVCSpaceWithHeight:(CGFloat)height;
 -(void)downTVCSpace;
 @end
-
 @interface TwoTableViewController : UIViewController
 @property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
