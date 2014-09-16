@@ -425,7 +425,7 @@ int j;
     [bgViewtapGestureRecognizer setNumberOfTapsRequired:1];
     [bgViewtapGestureRecognizer setNumberOfTouchesRequired:1];
     [bgView addGestureRecognizer:bgViewtapGestureRecognizer];
-    [self.view addSubview:bgView];
+    //[self.view addSubview:bgView];
     ProjectModel *model = [showArr objectAtIndex:view.tag];
     NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
     _MapContent = [[MapContentView alloc] initWithFrame:CGRectMake(0, 568, 320, 190) dic:dic number:[numberArr objectAtIndex:view.tag]];

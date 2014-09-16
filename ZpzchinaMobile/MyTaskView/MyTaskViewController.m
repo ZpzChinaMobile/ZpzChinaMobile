@@ -379,7 +379,7 @@ int startIndex;
         NSString *starttime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedStartTime];
         NSString *endtime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedFinishTime];
         NSString *actualStartTime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_actualStartTime];
-        NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:
+        NSMutableDictionary *parametersdata = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                         model.a_landName,@"landName",
                                         model.a_projectName,@"projectName",
                                         model.a_district,@"district",
@@ -412,6 +412,7 @@ int startIndex;
                                         model.a_decorationSituation,@"decorationSituation",
                                         model.a_decorationProgress,@"decorationProgress",
                                         nil];
+        NSLog(@"%@",[ProjectStage JudgmentProjectStage:parametersdata]);
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];

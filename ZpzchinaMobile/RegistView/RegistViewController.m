@@ -211,6 +211,10 @@
 - (void)commomRegister    //进行注册
 {
     NSLog(@"共同注册部分");
+    
+    if (![self phoneNoErr:_phoneNumberTextField.text]) {
+        return;
+    }
     if (![passWordField.text isEqualToString:verifyPassWordField.text]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"两次输入的密码不一致，请重新输入！" delegate:nil cancelButtonTitle:@"是" otherButtonTitles: nil];
         [alert show];
