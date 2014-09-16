@@ -369,7 +369,7 @@
 -(void)leftAction
 {
     [self.navigationController popViewControllerAnimated:YES];
-    if (self.delegate) {
+    if (self.delegate&&self.isRelease==1) {
         [self.delegate backToProgramDetailView];
     }
 }

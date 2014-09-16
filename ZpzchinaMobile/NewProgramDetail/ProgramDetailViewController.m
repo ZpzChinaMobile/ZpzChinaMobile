@@ -86,10 +86,15 @@
 -(void)backToProgramDetailView{
 //    self.view=nil;
 //    return;
-    
+    //self.dataDic;
+    ProjectModel* model=[ProjectSqlite loadList:self.ID][0];
+    self.dataDic=[ProjectStage JudgmentStr:model];
+
+    [self loadLocalContact:self.ID];
+    [self loadLocalImage:self.ID];
     NSArray* array=[NSArray arrayWithObjects:self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu, nil];
     CGRect frames[4]={self.tuDiXinXi.frame,self.zhuTiSheJi.frame,self.zhuTiShiGong.frame,self.zhuangXiu.frame};
-
+    
     CGFloat a,b,c;
     for (int i=0; i<array.count; i++) {
         if (i==0) {

@@ -124,7 +124,7 @@
                 [self.window setRootViewController:drawerController];
                 self.window.backgroundColor = [UIColor whiteColor];
                 [self.window makeKeyAndVisible];
-            }·
+            }
             
             #endif
             
