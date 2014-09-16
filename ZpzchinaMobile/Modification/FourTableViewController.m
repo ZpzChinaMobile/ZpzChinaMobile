@@ -154,9 +154,9 @@
     static NSString *stringcell = @"ProjectTableViewCell";
     DesignTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
    // if(!cell){
+    [cell removeFromSuperview];
+    cell = nil;
     if(self.fromView == 0){
-        [cell removeFromSuperview];
-        cell = nil;
         //AppModel* appModel=[AppModel sharedInstance];
         cell = [[DesignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:self.fromView Arr:self.contacts singleDic:nil];
     }else{
