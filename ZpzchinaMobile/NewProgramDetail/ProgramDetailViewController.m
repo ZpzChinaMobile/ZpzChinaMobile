@@ -1060,6 +1060,7 @@
     }
     self.contentView=nil;
     AppModel* appModel=[AppModel sharedInstance];
+    [appModel becomeNil];
     appModel=nil;
     NSLog(@"programDealloc");
 }
