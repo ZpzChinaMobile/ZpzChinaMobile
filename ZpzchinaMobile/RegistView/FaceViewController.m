@@ -275,5 +275,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     return nil;
 }
 
-
+-(void)dealloc{
+    NSLog(@"dealloc");
+}
 @end

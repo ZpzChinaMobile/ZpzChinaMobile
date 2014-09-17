@@ -113,4 +113,5 @@
     UIGraphicsEndImageContext();
     return image;
 }
+
 @end

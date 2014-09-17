@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @protocol CameraDelegate;
-@interface Camera : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
+@interface Camera : NSObject<UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
     //图片2进制路径
     NSString* _filePath;
     UIImagePickerController *pickerController;
