@@ -45,6 +45,7 @@ static int People =0;
     [self.view addSubview:_cameraView];
     _imageView = [[UIImageView alloc] initWithFrame:_cameraView.frame];
     [self.view addSubview:_imageView];
+    
     event = [[LoginEvent alloc] init];
     [self initialize];
     
@@ -73,7 +74,7 @@ static int People =0;
     {
         if (device.position == AVCaptureDevicePositionFront)
         {
-            NSLog(@"asdsf");
+            NSLog(@"as11dsf");
             _captureInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
             NSLog(@"==>%@",_captureInput);
         }
@@ -227,7 +228,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     m_highlitView[_index].hidden = NO;
     
     //开始就截图的判定条件
-    if (m_highlitView[_index].center.x>80&&m_highlitView[_index].center.x<240&&m_highlitView[_index].center.y>self.view.center.y-100&&m_highlitView[_index].center.x<self.view.frame.size.height-100&&m_highlitView[_index].frame.size.width>60&&m_highlitView[_index].frame.size.width<280&&m_highlitView[_index].frame.size.height>80&&m_highlitView[_index].frame.size.height<440) {
+    if (m_highlitView[_index].center.x>80&&m_highlitView[_index].center.x<240&&m_highlitView[_index].center.y>100&&m_highlitView[_index].center.x<400&&m_highlitView[_index].frame.size.width>60&&m_highlitView[_index].frame.size.width<280&&m_highlitView[_index].frame.size.height>80&&m_highlitView[_index].frame.size.height<440) {
         isBeginToCutFace =YES;
         [self performSelector:@selector(delayTojudge:) withObject:image afterDelay:1.0];
         
