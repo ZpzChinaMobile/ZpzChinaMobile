@@ -325,11 +325,13 @@
             //全部项目
             _allProjuct = [[AllProjuctViewController alloc] init];
             [self.navigationController pushViewController:_allProjuct animated:YES];
+            _allProjuct=nil;
             break;
         case 2:
             //我的任务
             _myTask = [[MyTaskViewController alloc] init];
             [self.navigationController pushViewController:_myTask animated:YES];
+            _myTask=nil;
             break;
         case 3:
             NSLog(@"3");
