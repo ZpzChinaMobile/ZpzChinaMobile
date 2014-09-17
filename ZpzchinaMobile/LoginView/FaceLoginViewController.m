@@ -84,17 +84,21 @@
 #pragma mark   进行识别登录－－－－－－－－－－
 -(void)beginFaceRecoginzer    //开始第一次进行识别
 {
-
+    
+    self.view.userInteractionEnabled =NO;
     faceVC = [[FaceViewController alloc] init];
     [self.view addSubview:faceVC.view];
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event          //进行第二次，第三次的识别
 {
+     self.view.userInteractionEnabled =NO;
+        faceVC = [[FaceViewController alloc] init];
+        [self.view addSubview:faceVC.view];
 
-    faceVC = [[FaceViewController alloc] init];
 
-    [self.view addSubview:faceVC.view];
+    
 
 }
 
@@ -105,6 +109,8 @@
 }
 
 -(void)backToFormerVC{          //识别失败，回到前一个页面
+    
+    self.view.userInteractionEnabled =YES;
     [faceVC.view removeFromSuperview];
     faceVC = nil;
 }
