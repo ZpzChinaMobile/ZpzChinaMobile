@@ -72,7 +72,7 @@
     [saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:saveBtn];
     
-    addName = [[UITextField alloc] initWithFrame:CGRectMake(31, 10, 143.5, 32)];
+    addName = [[UITextField alloc] initWithFrame:CGRectMake(31, 10, 205, 32)];
     addName.delegate = self;
     addName.textAlignment=NSTextAlignmentLeft;
     addName.placeholder=@"添加姓名";
@@ -81,7 +81,7 @@
     [addName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:addName];
     
-    addPhone = [[UITextField alloc] initWithFrame:CGRectMake(31, 55, 143.5, 32)];
+    addPhone = [[UITextField alloc] initWithFrame:CGRectMake(31, 55, 205, 32)];
     addPhone.delegate = self;
     addPhone.textAlignment=NSTextAlignmentLeft;
     addPhone.placeholder=@"添加电话";
@@ -104,7 +104,7 @@
     [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
     [contentView addSubview:arrowImage];
     
-    accountName = [[UITextField alloc] initWithFrame:CGRectMake(31, 145, 143.5, 32)];
+    accountName = [[UITextField alloc] initWithFrame:CGRectMake(31, 145, 205, 32)];
     accountName.delegate = self;
     accountName.textAlignment=NSTextAlignmentLeft;
     accountName.placeholder=@"单位名称";
@@ -113,7 +113,7 @@
     [accountName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:accountName];
     
-    address = [[UITextField alloc] initWithFrame:CGRectMake(31, 190, 143.5, 32)];
+    address = [[UITextField alloc] initWithFrame:CGRectMake(31, 190, 205, 32)];
     address.delegate = self;
     address.textAlignment=NSTextAlignmentLeft;
     address.placeholder=@"单位地址";
