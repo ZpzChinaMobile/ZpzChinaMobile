@@ -129,7 +129,7 @@
 
 //新建数据
 +(void)InsertData:(NSDictionary *)dic{
-    NSLog(@"==>%@",[dic objectForKey:@"id"]);
+    //NSLog(@"==>%@",[dic objectForKey:@"id"]);
     NSString *aid = nil;
     NSString *status = nil;
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
@@ -192,7 +192,7 @@
 
 //更新本地创建数据
 +(void)UpdataDataStatus2:(NSDictionary *)dic{
-    NSLog(@"%@",dic);
+    //NSLog(@"%@",dic);
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
 	if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:@"UPDATE Project SET projectId=?,projectCode=?,projectVersion=?,landName=?,district=?,province=?,city=?,landAddress=?,area=?,plotRatio=?,usage=?,auctionUnit=?,projectName=?,description=?,owner=?,expectedStartTime=?,expectedFinishTime=?,investment=?,areaOfStructure=?,storeyHeight=?,foreignInvestment=?,ownerType=?, longitude=?,latitude=?,mainDesignStage=?,propertyElevator=?,propertyAirCondition=?,propertyHeating=?,propertyExternalWallMeterial=?,propertyStealStructure=?,actualStartTime=?,fireControl=?,green=?,electroweakInstallation=?,decorationSituation=?,decorationProgress=? WHERE id=?",
@@ -211,7 +211,7 @@
 
 //删除数据
 +(void)delData:(NSString *)aid{
-    NSLog(@"aid==>%@",aid);
+    //NSLog(@"aid==>%@",aid);
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
 	if ([sqlite open:DataBaseName]) {
         //本地数据
@@ -231,7 +231,6 @@
 +(void)InsertUpdataServerData:(NSDictionary *)dic{
     //NSLog(@"%@",dic);
     NSArray *tempArr = [ProjectSqlite loadServerDataStatus:[dic objectForKey:@"id"]];
-    NSLog(@"%d",tempArr.count);
     if(tempArr.count != 0){
         [ProjectSqlite UpdataDataStatus2:dic];
     }else{

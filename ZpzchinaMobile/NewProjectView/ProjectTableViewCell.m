@@ -77,7 +77,7 @@
         [ProjectAddress setTitleColor:GrayColor forState:UIControlStateNormal];
         ProjectAddress.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         ProjectAddress.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
-        [ProjectAddress addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        //[ProjectAddress addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:ProjectAddress];
         
         UIImageView *mapImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,65, 22.5, 22.5)];
