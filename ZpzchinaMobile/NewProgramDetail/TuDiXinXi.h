@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ProgramDetailViewController.h"
-@interface TuDiXinXi : NSObject
-+(UIView*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate;
+@interface TuDiXinXi : UIView
++(TuDiXinXi*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate;
 +(void)myDealloc;
 @end

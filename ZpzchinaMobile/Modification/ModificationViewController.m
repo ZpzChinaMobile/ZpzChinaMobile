@@ -48,6 +48,8 @@
 @property(nonatomic,strong)NSArray* images;//图片数组
 
 @property(nonatomic,strong)UIView* shadowView;//保存到数据库,直到用户点击确认之后才消失的背景
+
+@property(nonatomic)BOOL isNeedBackLoad;
 @end
 
 @implementation ModificationViewController
@@ -66,6 +68,7 @@
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts horizonImageArr:(NSMutableArray*)horizonImageArr pilePitImageArr:(NSMutableArray*)pilePitImageArr mainConstructionImageArr:(NSMutableArray*)mainConstructionImageArr explorationImageArr:(NSMutableArray*)explorationImageArr fireControlImageArr:(NSMutableArray*)fireControlImageArr electroweakImageArr:(NSMutableArray*)electroweakImageArr planImageArr:(NSMutableArray*)planImageArr{
     if ([super init]) {
+        self.isNeedBackLoad=NO;
     }
     return self;
 }
@@ -80,7 +83,6 @@
     if (!self.fromView) {
         [appModel getNew];
     }
-    
     
     //singleDic赋值只针对修改，新建页面无用
     self.singleDic=appModel.singleDic;
@@ -388,6 +390,8 @@
 
 -(void)rightAction{
 
+    self.isNeedBackLoad=YES;
+    
     self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
     self.shadowView.backgroundColor=[UIColor blackColor];
     self.shadowView.alpha=.5;

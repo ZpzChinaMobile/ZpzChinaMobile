@@ -75,6 +75,8 @@
     }else{
         static NSString *stringcell = @"WeakElectricityCell";
         WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+        [cell removeFromSuperview];
+        cell = nil;
         if(self.fromView == 0){
             cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:0 Arr:nil singleDic:nil];
         }else{

@@ -126,6 +126,7 @@
             break;
         case 1:
             [self.dataDic setObject:str forKey:@"landAddress"];
+            [[self.superVC.tvcArray[1] tableView]reloadData];
             break;
         case 2:
             if([str isEqualToString:@""]){
