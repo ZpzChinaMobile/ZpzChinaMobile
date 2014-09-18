@@ -152,7 +152,10 @@
     [self.view exchangeSubviewAtIndex:tview2 withSubviewAtIndex:tview1];
     [UIView setAnimationDelegate:self];
     [UIView commitAnimations];
-
+    
+    [[[AppDelegate instance] window].rootViewController.view removeFromSuperview];
+    [[AppDelegate instance] window].rootViewController = nil;
+    
     [[AppDelegate instance] window].rootViewController = drawerController;
     [[[AppDelegate instance] window] makeKeyAndVisible];
     

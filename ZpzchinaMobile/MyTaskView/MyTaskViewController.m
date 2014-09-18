@@ -59,8 +59,6 @@ int startIndex;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:_tableView];
-    
-    [self loadServer:startIndex];
 
     
     UIView *bgView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 50)];
@@ -68,7 +66,7 @@ int startIndex;
     [self.view addSubview:bgView2];
     bgView2.alpha = 0.9;
     
-    UIButton *releaseProjuctBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    releaseProjuctBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     releaseProjuctBtn.frame = CGRectMake(20, 74.5, 120, 36);
     [releaseProjuctBtn setTitle:@"我发布的项目" forState:UIControlStateNormal];
     releaseProjuctBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:12];
@@ -76,7 +74,7 @@ int startIndex;
     [releaseProjuctBtn addTarget:self action:@selector(releaseProjuctBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:releaseProjuctBtn];
     
-    UIButton *localProjuctBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
+    localProjuctBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     localProjuctBtn.frame = CGRectMake(180, 74.5, 120, 36);
     [localProjuctBtn setTitle:@"本地保存项目" forState:UIControlStateNormal];
     localProjuctBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:12];
@@ -96,6 +94,68 @@ int startIndex;
     //集成刷新控件
     [self setupRefresh];
     [self.view addSubview:indicator];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name: kReachabilityChangedNotification
+                                               object: nil];
+    hostReach = [Reachability reachabilityWithHostName:@"www.apple.com"];
+    [hostReach startNotifier];
+    
+    if([[networkConnect sharedInstance] connectedToNetwork]){
+        [self loadServer:startIndex];
+    }else{
+        NSLog(@"asdfasdf");
+        if (![self.view.subviews containsObject:coverView]) {
+            [self.view addSubview:coverView];
+        }
+        flag = 1;
+        [_tableView removeHeader];
+        [_tableView removeFooter];
+        [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"DRIBBBLE-icon45-blue-drops_07.png"]];
+        [self.showArr removeAllObjects];
+        self.showArr = [ProjectSqlite loadList];
+        [_tableView reloadData];
+        [UIView animateWithDuration:0.5 animations:^{
+            [_lineImage setFrame:CGRectMake(205, 112.5, 71.5, 2)];
+        }completion:^(BOOL finish){
+            if ([self.view.subviews containsObject:coverView]) {
+                [coverView removeFromSuperview];
+            }
+        }];
+        [indicator stopAnimating];
+        releaseProjuctBtn.enabled = NO;
+    }
+}
+
+- (void)reachabilityChanged:(NSNotification *)note {
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    
+    if (status == NotReachable) {
+        if (![self.view.subviews containsObject:coverView]) {
+            [self.view addSubview:coverView];
+        }
+        flag = 1;
+        [_tableView removeHeader];
+        [_tableView removeFooter];
+        [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"DRIBBBLE-icon45-blue-drops_07.png"]];
+        [self.showArr removeAllObjects];
+        self.showArr = [ProjectSqlite loadList];
+        [_tableView reloadData];
+        [UIView animateWithDuration:0.5 animations:^{
+            [_lineImage setFrame:CGRectMake(205, 112.5, 71.5, 2)];
+        }completion:^(BOOL finish){
+            if ([self.view.subviews containsObject:coverView]) {
+                [coverView removeFromSuperview];
+            }
+        }];
+        [indicator stopAnimating];
+        releaseProjuctBtn.enabled = NO;
+    }else{
+        releaseProjuctBtn.enabled = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -28,6 +28,7 @@
     }
     
     NSLog(@"%@",viewController);
+    
     projectID = aid;
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
@@ -113,5 +114,6 @@
     UIGraphicsEndImageContext();
     return image;
 }
+
 
 @end

@@ -32,6 +32,8 @@
     UIView *bgView;
     UIActivityIndicatorView *indicator;
     UIView* coverView;//当左button在加载网络时,覆盖在右button上,不让点击
+    UIButton *releaseProjuctBtn;
+    UIButton *localProjuctBtn;
 }
 @property(retain,nonatomic)NSMutableArray *showArr;
 @property(retain,nonatomic)NSMutableArray *dataArr;
