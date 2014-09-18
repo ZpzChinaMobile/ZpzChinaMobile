@@ -276,5 +276,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     return nil;
 }
 
+-(void)dealloc{
+    NSLog(@"dealloc");
+    _session = nil;
+    _captureInput = nil;
+    _captureOutput = nil;
+    _preview = nil;
+    _device = nil;
+}
+
 
 @end
