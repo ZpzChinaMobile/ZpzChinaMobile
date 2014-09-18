@@ -84,6 +84,7 @@
 
 -(void)backToProgramDetailView{
     ProjectModel* model;
+    NSLog(@"2222222222222222222222e222222222222");
     if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
         model=[ProjectSqlite loadList:self.dataDic[@"id"]][0];
     }else{
@@ -652,6 +653,7 @@
     [self.fireControlImageArr removeAllObjects];
     [self.electroweakImageArr removeAllObjects];
     [self.planImageArr removeAllObjects];
+    NSLog(@"=====");
     self.horizonImageArr = [CameraSqlite loadAllHorizonList:localProjectId];
     self.pilePitImageArr = [CameraSqlite loadAllPilePitList:localProjectId];
     self.mainConstructionImageArr = [CameraSqlite loadAllMainConstructionList:localProjectId];

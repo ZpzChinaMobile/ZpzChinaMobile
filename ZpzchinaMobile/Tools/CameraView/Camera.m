@@ -46,8 +46,8 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    if ([self.delegate respondsToSelector:@selector(backCamera)]){
-        [self.delegate backCamera];
+    if ([self.delegate respondsToSelector:@selector(backCamera:)]){
+        [self.delegate backCamera:nil];
     }
     [picker dismissViewControllerAnimated:YES completion:Nil];
     
@@ -99,9 +99,11 @@
     }
     [dic setValue:projectID forKey:@"localProjectId"];
     [dic setValue:@"localios" forKey:@"device"];
-    [CameraSqlite InsertData:dic];
-    if ([self.delegate respondsToSelector:@selector(backCamera)]){
-        [self.delegate backCamera];
+    CameraModel* model=[[CameraModel alloc]init];
+    [model loadWithDB:dic];
+    //[CameraSqlite InsertData:dic];
+    if ([self.delegate respondsToSelector:@selector(backCamera:)]){
+        [self.delegate backCamera:model];
     }
     [pickerController dismissViewControllerAnimated:YES completion:Nil];
 }

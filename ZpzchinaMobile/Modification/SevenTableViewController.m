@@ -22,6 +22,7 @@
 @interface SevenTableViewController ()<PilePitDelegate,AddContactViewDelegate,CameraDelegate,UITableViewDataSource,UITableViewDelegate>{
     AddContactViewController* addcontactView;
     Camera* camera;
+    NSInteger newImageCount;
 }
 
 @end
@@ -90,6 +91,7 @@
         self.tableView.dataSource=self;
         self.tableView.separatorStyle=NO;
         [self.view addSubview:self.tableView];
+        newImageCount=0;
 
     }
     return self;
@@ -152,7 +154,16 @@
     // return cell;
 }
 
--(void)backCamera{
+-(void)backCamera:(CameraModel *)cameraModel{
+    if (!self.images) {
+        self.images=[NSMutableArray array];
+    }
+    if (!cameraModel) return;
+    newImageCount++;
+    [self.images addObject:cameraModel];
+    [self.tableView reloadData];
+    return;
+    
     if (!self.images.count) {
         self.images=[NSMutableArray array];
     }
@@ -243,6 +254,9 @@
 -(void)dealloc{
     addcontactView=nil;
     camera=nil;
+    for (int i=0; i<newImageCount; i++) {
+        [self.images removeLastObject];
+    }
     NSLog(@"sevendealloc");
 }
 @end

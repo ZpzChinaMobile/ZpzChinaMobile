@@ -22,7 +22,7 @@
     MultipleChoiceViewController* muview;
     AddContactViewController* addcontactView;
     Camera* camera;
-    // BOOL _isUpdata;
+    NSInteger newImageCount;
 }
 @end
 
@@ -177,7 +177,7 @@
         self.tableView.delegate=self;
         self.tableView.dataSource=self;
         self.tableView.separatorStyle=NO;
-        
+        newImageCount=0;
         [self.view addSubview:self.tableView];
     }
     return self;
@@ -282,36 +282,34 @@
     return view;
 }
 
--(void)backCamera{
-    if (!self.images.count) {
+-(void)backCamera:(CameraModel *)cameraModel{
+    if (!self.images) {
         self.images=[NSMutableArray array];
     }
-    /**
-     if(self.fromView == 0){
-     [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
-     }else{
-     if(self.superVC.isRelease == 0){
-     [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
-     }else{
-     [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"id"]];
-     }
-     }
-     */
+    if (!cameraModel) return;
+    newImageCount++;
+    [self.images addObject:cameraModel];
+    [self.tableView reloadData];
+
+    return;
+    
     if(self.fromView == 0){
-        [self.images removeAllObjects];
-        self.images = [CameraSqlite loadAllPlanList:[self.dataDic objectForKey:@"id"]];
+        [self.images insertObject:cameraModel atIndex:0];
+        //[self.images removeAllObjects];
+        //self.images = [CameraSqlite loadAllPlanList:[self.dataDic objectForKey:@"id"]];
     }else{
         if(self.superVC.isRelease==0){
-            if([CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-                [self.images insertObject:[[CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
-            }
+            [self.images insertObject:cameraModel atIndex:0];
+            //if([CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
+//                [self.images insertObject:[[CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
+            //}
         }else{
-            [self.images removeAllObjects];
-            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"id"]];
-            }else{
-                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]];
-            }
+//            [self.images removeAllObjects];
+//            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
+//                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"id"]];
+//            }else{
+//                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]];
+//            }
         }
         
     }
@@ -351,7 +349,9 @@
     muview=nil;
     addcontactView=nil;
     camera=nil;
-
+    for (int i=0; i<newImageCount; i++) {
+        [self.images removeLastObject];
+    }
     NSLog(@"oneDealloc");
 }
 

@@ -389,7 +389,9 @@
 }
 
 -(void)rightAction{
-
+    AppModel* appModel=[AppModel sharedInstance];
+    NSLog(@"SAVE");
+    
     self.isNeedBackLoad=YES;
     
     self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
@@ -397,7 +399,6 @@
     self.shadowView.alpha=.5;
     [self.contentView addSubview:self.shadowView];
     
-    AppModel* appModel=[AppModel sharedInstance];
     
     if (self.fromView==0) {
         
@@ -440,6 +441,57 @@
             }
         }
         
+        
+        if (appModel.planImageArr.count) {
+            for(int i=0;i<appModel.planImageArr.count;i++){
+                CameraModel *model = appModel.planImageArr[i];
+                [CameraSqlite InsertNewData:model];
+            }
+        }
+        
+        if (appModel.horizonImageArr.count) {
+            for(int i=0;i<appModel.horizonImageArr.count;i++){
+                CameraModel *model = appModel.horizonImageArr[i];
+                [CameraSqlite InsertNewData:model];
+            }
+        }
+        
+        if (appModel.pilePitImageArr.count) {
+            for(int i=0;i<appModel.pilePitImageArr.count;i++){
+                CameraModel *model = appModel.pilePitImageArr[i];
+                [CameraSqlite InsertNewData:model];
+            }
+        }
+        
+        if (appModel.mainConstructionImageArr.count) {
+            for(int i=0;i<appModel.mainConstructionImageArr.count;i++){
+                CameraModel *model = appModel.mainConstructionImageArr[i];
+                [CameraSqlite InsertNewData:model];
+            }
+        }
+        
+        if (appModel.explorationImageArr.count) {
+            for(int i=0;i<appModel.explorationImageArr.count;i++){
+                CameraModel *model = appModel.explorationImageArr[i];
+                [CameraSqlite InsertNewData:model];
+            }
+        }
+        
+        if (appModel.fireControlImageArr.count) {
+            for(int i=0;i<appModel.fireControlImageArr.count;i++){
+                CameraModel *model = appModel.fireControlImageArr[i];
+                [CameraSqlite InsertNewData:model];
+            }
+        }
+        
+        if (appModel.electroweakImageArr.count) {
+            for(int i=0;i<appModel.electroweakImageArr.count;i++){
+                CameraModel *model = appModel.electroweakImageArr[i];
+                [CameraSqlite InsertNewData:model];
+            }
+        }
+        
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                         message:@"保存完毕，请到本地保存项目查看！"
                                                        delegate:self
@@ -457,12 +509,16 @@
                 NSLog(@"model.a_device=%@",model.a_device);
                 if([model.a_device isEqualToString:@"ios"]){
                     [GetBigImage getbigimage:model.a_url];
+                }else if ([model.a_device isEqualToString:@"localios"]){
+                    [CameraSqlite InsertNewData:model];
                 }
             }
             for(int i=0;i<self.pilePitImageArr.count;i++){
                 CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
                 if([model.a_device isEqualToString:@"ios"]){
                     [GetBigImage getbigimage:model.a_url];
+                }else if ([model.a_device isEqualToString:@"localios"]){
+                    [CameraSqlite InsertNewData:model];
                 }
             }
             
@@ -470,6 +526,8 @@
                 CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
                 if([model.a_device isEqualToString:@"ios"]){
                     [GetBigImage getbigimage:model.a_url];
+                }else if ([model.a_device isEqualToString:@"localios"]){
+                    [CameraSqlite InsertNewData:model];
                 }
             }
             
@@ -477,6 +535,8 @@
                 CameraModel *model = [self.explorationImageArr objectAtIndex:i];
                 if([model.a_device isEqualToString:@"ios"]){
                     [GetBigImage getbigimage:model.a_url];
+                }else if ([model.a_device isEqualToString:@"localios"]){
+                    [CameraSqlite InsertNewData:model];
                 }
             }
             
@@ -484,6 +544,8 @@
                 CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
                 if([model.a_device isEqualToString:@"ios"]){
                     [GetBigImage getbigimage:model.a_url];
+                }else if ([model.a_device isEqualToString:@"localios"]){
+                    [CameraSqlite InsertNewData:model];
                 }
             }
             
@@ -491,6 +553,8 @@
                 CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
                 if([model.a_device isEqualToString:@"ios"]){
                     [GetBigImage getbigimage:model.a_url];
+                }else if ([model.a_device isEqualToString:@"localios"]){
+                    [CameraSqlite InsertNewData:model];
                 }
             }
             
@@ -498,11 +562,62 @@
                 CameraModel *model = [self.planImageArr objectAtIndex:i];
                 if([model.a_device isEqualToString:@"ios"]){
                     [GetBigImage getbigimage:model.a_url];
+                }else if ([model.a_device isEqualToString:@"localios"]){
+                    [CameraSqlite InsertNewData:model];
                 }
             }
         }else{
             NSLog(@"singleDic==========%@",self.singleDic);
             [dic setValue:[self.singleDic objectForKey:@"id"] forKeyPath:@"id"];
+            
+            if (appModel.planImageArr.count) {
+                for(int i=0;i<appModel.planImageArr.count;i++){
+                    CameraModel *model = appModel.planImageArr[i];
+                    [CameraSqlite InsertNewData:model];
+                }
+            }
+            
+            if (appModel.horizonImageArr.count) {
+                for(int i=0;i<appModel.horizonImageArr.count;i++){
+                    CameraModel *model = appModel.horizonImageArr[i];
+                    [CameraSqlite InsertNewData:model];
+                }
+            }
+            
+            if (appModel.pilePitImageArr.count) {
+                for(int i=0;i<appModel.pilePitImageArr.count;i++){
+                    CameraModel *model = appModel.pilePitImageArr[i];
+                    [CameraSqlite InsertNewData:model];
+                }
+            }
+            
+            if (appModel.mainConstructionImageArr.count) {
+                for(int i=0;i<appModel.mainConstructionImageArr.count;i++){
+                    CameraModel *model = appModel.mainConstructionImageArr[i];
+                    [CameraSqlite InsertNewData:model];
+                }
+            }
+            
+            if (appModel.explorationImageArr.count) {
+                for(int i=0;i<appModel.explorationImageArr.count;i++){
+                    CameraModel *model = appModel.explorationImageArr[i];
+                    [CameraSqlite InsertNewData:model];
+                }
+            }
+            
+            if (appModel.fireControlImageArr.count) {
+                for(int i=0;i<appModel.fireControlImageArr.count;i++){
+                    CameraModel *model = appModel.fireControlImageArr[i];
+                    [CameraSqlite InsertNewData:model];
+                }
+            }
+            
+            if (appModel.electroweakImageArr.count) {
+                for(int i=0;i<appModel.electroweakImageArr.count;i++){
+                    CameraModel *model = appModel.electroweakImageArr[i];
+                    [CameraSqlite InsertNewData:model];
+                }
+            }
         }
         
         
