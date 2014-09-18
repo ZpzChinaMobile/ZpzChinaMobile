@@ -83,6 +83,10 @@ int startIndex;
     [self setupRefresh];
     [self.view addSubview:indicator];
     
+    coverView=[[UIView alloc]init];//网络加载时不让点
+    coverView.frame=CGRectMake(0, 64.5, 320, 568-64.5);
+    [self.view addSubview:coverView];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name: kReachabilityChangedNotification
@@ -361,7 +365,6 @@ int startIndex;
                                                        delegate:nil
                                               cancelButtonTitle:@"确定"
                                               otherButtonTitles:nil,nil];
-        alert.delegate = self;
         [alert show];
     }
 }
@@ -379,6 +382,7 @@ int startIndex;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(alertView.tag == 0){
+        if (!buttonIndex) return;
         bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
         [bgView setBackgroundColor:[UIColor blackColor]];
         UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
