@@ -8,7 +8,6 @@
 
 #import "CameraSqlite.h"
 #import "SqliteHelper.h"
-#import "CameraModel.h"
 @implementation CameraSqlite
 +(void)opensql{
     sqlite3 *zpzchinaMobileDB;
@@ -69,11 +68,34 @@
 //新建数据
 +(void)InsertData:(NSDictionary *)dic{
     NSLog(@"==>%@",dic);
-    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
-        [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,status) VALUES (?,?,?,?,?,?,?,?,?,'2');",
-         [dic objectForKey:@"id"],[dic objectForKey:@"name"],[dic objectForKey:@"baseCameraID"],[dic objectForKey:@"body"],[dic objectForKey:@"type"],[dic objectForKey:@"projectName"],[dic objectForKey:@"projectID"],[dic objectForKey:@"localProjectId"],[dic objectForKey:@"device"]];
-	}
+    NSMutableArray *arr = [CameraSqlite loadSingleList:dic[@"id"]];
+    if(arr.count == 0){
+        SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+        if ([sqlite open:DataBaseName]) {
+            [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,status) VALUES (?,?,?,?,?,?,?,?,?,'2');",
+             [dic objectForKey:@"id"],[dic objectForKey:@"name"],[dic objectForKey:@"baseCameraID"],[dic objectForKey:@"body"],[dic objectForKey:@"type"],[dic objectForKey:@"projectName"],[dic objectForKey:@"projectID"],[dic objectForKey:@"localProjectId"],[dic objectForKey:@"device"]];
+        }
+    }
+}
+
++(void)InsertNewData:(CameraModel *)model{
+//    NSLog(@"==>%@",model.a_id);
+//    NSLog(@"==>%@",model.a_name);
+//    NSLog(@"==>%@",model.a_baseCameraID);
+//    NSLog(@"==>%@",model.a_body);
+//    NSLog(@"==>%@",model.a_type);
+//    NSLog(@"==>%@",model.a_projectName);
+//    NSLog(@"==>%@",model.a_projectID);
+//    NSLog(@"==>%@",model.a_localProjectId);
+//    NSLog(@"==>%@",model.a_device);
+    NSMutableArray *arr = [CameraSqlite loadSingleList:model.a_id];
+    if(arr.count == 0){
+        SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+        if ([sqlite open:DataBaseName]) {
+            [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,status) VALUES (?,?,?,?,?,?,?,?,?,'2');",
+             model.a_id,model.a_name,model.a_baseCameraID,model.a_body,model.a_type,model.a_projectName,model.a_projectID,model.a_localProjectId,model.a_device];
+        }
+    }
 }
 
 //获取所有数据
@@ -424,6 +446,20 @@
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
 	if ([sqlite open:DataBaseName]) {
         NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Camera WHERE localProjectId = '%@' AND status <>'1'",aid]];
+        for (NSDictionary * dict in results) {
+            CameraModel *model = [[CameraModel alloc]init];
+            [model loadWithDB:dict];
+            [list addObject:model];
+        }
+	}
+    return list;
+}
+
++(NSMutableArray *)loadSingleList:(NSString *)aid{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+	if ([sqlite open:DataBaseName]) {
+        NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Camera WHERE id = '%@' AND status <>'1'",aid]];
         for (NSDictionary * dict in results) {
             CameraModel *model = [[CameraModel alloc]init];
             [model loadWithDB:dict];

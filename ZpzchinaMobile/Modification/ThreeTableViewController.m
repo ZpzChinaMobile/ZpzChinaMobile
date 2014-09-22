@@ -21,6 +21,7 @@
 @interface ThreeTableViewController ()<GeologicalSurveyDelegate,AddContactViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CameraDelegate,UITableViewDataSource,UITableViewDelegate>{
     AddContactViewController* addcontactView;
     Camera* camera;
+    NSInteger newImageCount;
 }
 
 @end
@@ -92,6 +93,7 @@
         self.tableView.dataSource=self;
         self.tableView.separatorStyle=NO;
         [self.view addSubview:self.tableView];
+        newImageCount=0;
     }
     return self;
 }
@@ -143,7 +145,6 @@
         cell = nil;
         // if (!cell) {
         if(self.fromView == 0){
-            //AppModel* appModel=[AppModel sharedInstance];
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:self.fromView Arr:self.contacts explorationImageArr:nil];
         }else{
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:1 Arr:self.contacts explorationImageArr:nil];
@@ -204,7 +205,16 @@
     }
 }
 
--(void)backCamera{
+-(void)backCamera:(CameraModel *)cameraModel{
+    if (!self.images) {
+        self.images=[NSMutableArray array];
+    }
+    if (!cameraModel) return;
+    newImageCount++;
+    [self.images addObject:cameraModel];
+    [self.tableView reloadData];
+    return;
+    
     if (!self.images.count) {
         self.images=[NSMutableArray array];
     }
@@ -246,6 +256,9 @@
 -(void)dealloc{
     addcontactView=nil;
     camera=nil;
+    for (int i=0; i<newImageCount; i++) {
+        [self.images removeLastObject];
+    }
     NSLog(@"threeDealloc");
 }
 @end

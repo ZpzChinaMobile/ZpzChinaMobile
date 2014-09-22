@@ -72,7 +72,7 @@
     [saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:saveBtn];
     
-    addName = [[UITextField alloc] initWithFrame:CGRectMake(31, 10, 143.5, 32)];
+    addName = [[UITextField alloc] initWithFrame:CGRectMake(31, 10, 205, 32)];
     addName.delegate = self;
     addName.textAlignment=NSTextAlignmentLeft;
     addName.placeholder=@"添加姓名";
@@ -81,7 +81,7 @@
     [addName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:addName];
     
-    addPhone = [[UITextField alloc] initWithFrame:CGRectMake(31, 55, 143.5, 32)];
+    addPhone = [[UITextField alloc] initWithFrame:CGRectMake(31, 55, 205, 32)];
     addPhone.delegate = self;
     addPhone.textAlignment=NSTextAlignmentLeft;
     addPhone.placeholder=@"添加电话";
@@ -104,7 +104,7 @@
     [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
     [contentView addSubview:arrowImage];
     
-    accountName = [[UITextField alloc] initWithFrame:CGRectMake(31, 145, 143.5, 32)];
+    accountName = [[UITextField alloc] initWithFrame:CGRectMake(31, 145, 205, 32)];
     accountName.delegate = self;
     accountName.textAlignment=NSTextAlignmentLeft;
     accountName.placeholder=@"单位名称";
@@ -113,7 +113,7 @@
     [accountName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:accountName];
     
-    address = [[UITextField alloc] initWithFrame:CGRectMake(31, 190, 143.5, 32)];
+    address = [[UITextField alloc] initWithFrame:CGRectMake(31, 190, 205, 32)];
     address.delegate = self;
     address.textAlignment=NSTextAlignmentLeft;
     address.placeholder=@"单位地址";
@@ -138,7 +138,7 @@
 }
 
 -(void)updataContact:(NSMutableDictionary *)dic index:(int)index{
-    NSLog(@"dic ===> %@",dic);
+    //NSLog(@"dic ===> %@",dic);
     self.dataDic = dic;
     self.btnTag = index;
     [addName setText:[dic objectForKey:@"contactName"]];
@@ -147,16 +147,6 @@
     [address setText:[dic objectForKey:@"accountAddress"]];
     [title setTitle:[NSString stringWithFormat:@"岗位:%@",[dic objectForKey:@"duties"]] forState:UIControlStateNormal];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(void)saveBtnClick{
     if([[self.dataDic objectForKey:@"contactName"] isEqualToString:@""]){
@@ -179,7 +169,6 @@
         return;
     }
     
-    NSLog(@"%@",self.dataDic);
     if ([delegate respondsToSelector:@selector(back:btnTag:)]){
         [delegate back:self.dataDic btnTag:self.btnTag];
     }
@@ -210,6 +199,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     switch (textField.tag) {
         case 0:
+            NSLog(@"=====%@",self.dataDic);
             [self.dataDic setValue:textField.text forKey:@"contactName"];
             break;
         case 1:

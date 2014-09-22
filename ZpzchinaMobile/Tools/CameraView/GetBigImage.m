@@ -32,8 +32,10 @@
         }
         //NSLog(@"dic ==> %@",dic);
         [CameraSqlite InsertData:dic];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"bigImage" object:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"bigImage" object:nil];
     }];
     [[NSOperationQueue mainQueue] addOperation:op];
 }

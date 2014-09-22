@@ -365,7 +365,6 @@ int startIndex;
                                                        delegate:nil
                                               cancelButtonTitle:@"确定"
                                               otherButtonTitles:nil,nil];
-        alert.delegate = self;
         [alert show];
     }
 }
@@ -383,6 +382,7 @@ int startIndex;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(alertView.tag == 0){
+        if (!buttonIndex) return;
         bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
         [bgView setBackgroundColor:[UIColor blackColor]];
         UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
