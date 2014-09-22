@@ -10,7 +10,7 @@
 
 @protocol ModificationDelegate <NSObject>
 
--(void)backToProgramDetailView;
+-(void)backToProgramDetailViewWithIsRelease:(int)isRelease;
 
 @end
 

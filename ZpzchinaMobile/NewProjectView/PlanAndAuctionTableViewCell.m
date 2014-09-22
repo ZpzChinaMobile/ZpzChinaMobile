@@ -14,8 +14,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        // Initialization code
-        
+      
         for (int i=0; i<6; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
             [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
@@ -26,8 +25,7 @@
         LotName.delegate = self;
         LotName.textAlignment=NSTextAlignmentLeft;
         LotName.placeholder=@"地块名称";
-        NSLog(@"%d",flag);
-        NSLog(@"%@",dic);
+
         if(flag == 0){
             if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
                 [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
@@ -212,8 +210,6 @@
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
-        //NSLog(@"%@",contactArr);
-        
         self.dataArr = [NSMutableArray arrayWithArray:contactArr];
         if(contactArr.count != 0){
             for(int i=0; i<contactArr.count;i++){
@@ -240,16 +236,9 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
-    // Initialization code
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 -(void)updateContent:(BOOL)openRow{
@@ -270,7 +259,7 @@
     
     textfield = nil;
     textfield = textField;
-    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];//350)];
+    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
     closeView.userInteractionEnabled = YES;
     closeView.backgroundColor=[UIColor clearColor];
 
@@ -305,7 +294,6 @@
 
 -(void)closeKeyBoard{
     [textfield resignFirstResponder];
-    NSLog(@"+++++");
     [closeView removeFromSuperview];
     closeView = nil;
 }

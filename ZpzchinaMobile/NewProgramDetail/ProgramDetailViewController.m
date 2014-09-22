@@ -82,75 +82,78 @@
     }
 }
 
--(void)backToProgramDetailView{
-    ProjectModel* model;
-    NSLog(@"2222222222222222222222e222222222222");
-    if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
-        model=[ProjectSqlite loadList:self.dataDic[@"id"]][0];
-    }else{
-        model=[ProjectSqlite loadList:self.dataDic[@"projectID"]][0];
-    }
-    self.dataDic=[ProjectStage JudgmentStr:model];
-
-    [self.contactAry removeAllObjects];
-    [self.ownerAry removeAllObjects];
-    [self.explorationAry removeAllObjects];
-    [self.horizonAry removeAllObjects];
-    [self.designAry removeAllObjects];
-    [self.pileAry removeAllObjects];
-    //图片的处理还没做，因为发现现在的照相逻辑是拍完则立即保存到数据库的
-    if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
-        [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
-        [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
-    }else{
-        [self loadLocalContact:[self.dataDic objectForKey:@"projectID"]];
-        [self loadLocalImage:[self.dataDic objectForKey:@"projectID"]];
-    }
-    
-    NSArray* array=[NSArray arrayWithObjects:self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu, nil];
-    CGRect frames[4]={self.tuDiXinXi.frame,self.zhuTiSheJi.frame,self.zhuTiShiGong.frame,self.zhuangXiu.frame};
-    
-    CGFloat a,b,c;
-    for (int i=0; i<array.count; i++) {
-        if (i==0) {
-            [self.tuDiXinXi removeFromSuperview];
-            self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
-            self.tuDiXinXi.frame=frames[i];
-            [self.myScrollView addSubview:self.tuDiXinXi];
-        }else if (i==1){
-            [self.zhuTiSheJi removeFromSuperview];
-            self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&b delegate:self];
-            self.zhuTiSheJi.frame=frames[i];
-            [self.myScrollView addSubview:self.zhuTiSheJi];
-        }else if (i==2){
-            [self.zhuTiShiGong removeFromSuperview];
-            self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&b thirdViewHeight:&c delegate:self];
-            self.zhuTiShiGong.frame=frames[i];
-            [self.myScrollView addSubview:self.zhuTiShiGong];
+-(void)backToProgramDetailViewWithIsRelease:(int)isRelease{
+    if (isRelease) {
+        ProjectModel* model;
+        if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
+            model=[ProjectSqlite loadList:self.dataDic[@"id"]][0];
         }else{
-            [self.zhuangXiu removeFromSuperview];
-            self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self];
-            self.zhuangXiu.frame=frames[i];
-            [self.myScrollView addSubview:self.zhuangXiu];
+            model=[ProjectSqlite loadList:self.dataDic[@"projectID"]][0];
         }
+        NSLog(@"=====%@",self.dataDic);
+        NSLog(@"=====%@",[ProjectStage JudgmentStr:model]);
+        self.dataDic=[ProjectStage JudgmentStr:model];
+        
+        [self.contactAry removeAllObjects];
+        [self.ownerAry removeAllObjects];
+        [self.explorationAry removeAllObjects];
+        [self.horizonAry removeAllObjects];
+        [self.designAry removeAllObjects];
+        [self.pileAry removeAllObjects];
+        //图片的处理还没做，因为发现现在的照相逻辑是拍完则立即保存到数据库的
+        if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
+            [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
+            [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
+        }else{
+            [self loadLocalContact:[self.dataDic objectForKey:@"projectID"]];
+            [self loadLocalImage:[self.dataDic objectForKey:@"projectID"]];
+        }
+        
+        NSArray* array=[NSArray arrayWithObjects:self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu, nil];
+        CGRect frames[4]={self.tuDiXinXi.frame,self.zhuTiSheJi.frame,self.zhuTiShiGong.frame,self.zhuangXiu.frame};
+        
+        CGFloat a,b,c;
+        for (int i=0; i<array.count; i++) {
+            if (i==0) {
+                [self.tuDiXinXi removeFromSuperview];
+                self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
+                self.tuDiXinXi.frame=frames[i];
+                [self.myScrollView addSubview:self.tuDiXinXi];
+            }else if (i==1){
+                [self.zhuTiSheJi removeFromSuperview];
+                self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&b delegate:self];
+                self.zhuTiSheJi.frame=frames[i];
+                [self.myScrollView addSubview:self.zhuTiSheJi];
+            }else if (i==2){
+                [self.zhuTiShiGong removeFromSuperview];
+                self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&b thirdViewHeight:&c delegate:self];
+                self.zhuTiShiGong.frame=frames[i];
+                [self.myScrollView addSubview:self.zhuTiShiGong];
+            }else{
+                [self.zhuangXiu removeFromSuperview];
+                self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self];
+                self.zhuangXiu.frame=frames[i];
+                [self.myScrollView addSubview:self.zhuangXiu];
+            }
+        }
+        AppModel* appModel=[AppModel sharedInstance];
+        appModel.singleDic=self.dataDic;
+        
+        appModel.contactAry=self.contactAry;
+        appModel.ownerAry=self.ownerAry;
+        appModel.explorationAry=self.explorationAry;
+        appModel.horizonAry=self.horizonAry;
+        appModel.designAry=self.designAry;
+        appModel.pileAry=self.pileAry;
+        
+        appModel.horizonImageArr=self.horizonImageArr;
+        appModel.pilePitImageArr=self.pilePitImageArr;
+        appModel.mainConstructionImageArr=self.mainConstructionImageArr;
+        appModel.explorationImageArr=self.explorationImageArr;
+        appModel.fireControlImageArr=self.fireControlImageArr;
+        appModel.electroweakImageArr=self.electroweakImageArr;
+        appModel.planImageArr=self.planImageArr;
     }
-    AppModel* appModel=[AppModel sharedInstance];
-    appModel.singleDic=self.dataDic;
-    
-    appModel.contactAry=self.contactAry;
-    appModel.ownerAry=self.ownerAry;
-    appModel.explorationAry=self.explorationAry;
-    appModel.horizonAry=self.horizonAry;
-    appModel.designAry=self.designAry;
-    appModel.pileAry=self.pileAry;
-    
-    appModel.horizonImageArr=self.horizonImageArr;
-    appModel.pilePitImageArr=self.pilePitImageArr;
-    appModel.mainConstructionImageArr=self.mainConstructionImageArr;
-    appModel.explorationImageArr=self.explorationImageArr;
-    appModel.fireControlImageArr=self.fireControlImageArr;
-    appModel.electroweakImageArr=self.electroweakImageArr;
-    appModel.planImageArr=self.planImageArr;
 }
 
 -(instancetype)init{
@@ -1010,7 +1013,6 @@
 -(void)gotoModificationVC{
     //如果加载时的动画还在说明此时正在加载，否则加载动画的圈圈为被nil
     if (self.loadAnimationView) return;
-    
     if(([ProjectSqlite loadUpdataDataStatus:self.ID].count !=0)&&!self.isRelease){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                         message:@"此项目已在本地保存项目中"

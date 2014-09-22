@@ -46,10 +46,19 @@
 @property(nonatomic,strong)TenTableViewController* tenTVC;
 @property(nonatomic,strong)NSArray* contacts;//联系人数组
 @property(nonatomic,strong)NSArray* images;//图片数组
+@property(nonatomic,strong)NSMutableArray* originContacts;
+
+@property(nonatomic,strong)NSMutableArray* originContactAry;
+@property(nonatomic,strong)NSMutableArray* originOwnerAry;
+@property(nonatomic,strong)NSMutableArray* originExplorationAry;
+@property(nonatomic,strong)NSMutableArray* originHorizonAry;
+@property(nonatomic,strong)NSMutableArray* originDesignAry;
+@property(nonatomic,strong)NSMutableArray* originPileAry;
 
 @property(nonatomic,strong)UIView* shadowView;//保存到数据库,直到用户点击确认之后才消失的背景
 
-@property(nonatomic)BOOL isNeedBackLoad;
+@property(nonatomic)NSInteger gotoBigImageCount;//服务器加载下来的项目保存到数据库中，计算需要请求服务器高清图的张数
+@property(nonatomic)NSInteger backFromBigImageCount;//请求高清图完成的张数
 @end
 
 @implementation ModificationViewController
@@ -68,14 +77,45 @@
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic contacts:(NSArray*)contacts horizonImageArr:(NSMutableArray*)horizonImageArr pilePitImageArr:(NSMutableArray*)pilePitImageArr mainConstructionImageArr:(NSMutableArray*)mainConstructionImageArr explorationImageArr:(NSMutableArray*)explorationImageArr fireControlImageArr:(NSMutableArray*)fireControlImageArr electroweakImageArr:(NSMutableArray*)electroweakImageArr planImageArr:(NSMutableArray*)planImageArr{
     if ([super init]) {
-        self.isNeedBackLoad=NO;
+        self.gotoBigImageCount=0;
+        self.backFromBigImageCount=0;
+        
+        AppModel* appModel=[AppModel sharedInstance];
+        
+        //复制一个未改动的联系人备份
+        self.originContactAry=[NSMutableArray array];
+        self.originOwnerAry=[NSMutableArray array];
+        self.originExplorationAry=[NSMutableArray array];
+        self.originHorizonAry=[NSMutableArray array];
+        self.originDesignAry=[NSMutableArray array];
+        self.originPileAry=[NSMutableArray array];
+        
+        self.originContacts=[NSMutableArray arrayWithObjects:self.originContactAry,self.originOwnerAry,self.originExplorationAry,self.originHorizonAry,self.originDesignAry,self.originPileAry,nil];
+        
+        NSArray* tempContacs=[NSArray arrayWithObjects:appModel.contactAry,appModel.ownerAry,appModel.explorationAry,appModel.horizonAry,appModel.designAry,appModel.pileAry, nil];
+        
+        for (int i=0; i<tempContacs.count; i++) {
+            for (int k=0; k<[tempContacs[i] count]; k++) {
+                [self.originContacts[i] addObject:[tempContacs[i][k] mutableCopy]];
+            }
+        }
     }
     return self;
+}
+
+-(void)getNoti{
+    NSLog(@"=====getNoti");
+    self.backFromBigImageCount++;
+    if (self.gotoBigImageCount==self.backFromBigImageCount) {
+        [self loadAlertView];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getNoti) name:@"bigImage" object:nil];
+    
     AppModel* appModel=[AppModel sharedInstance];
     NSLog(@"viewDidLoad");
     
@@ -105,10 +145,8 @@
     [self initTableViewSpace];
     [self.tableViewSpace addSubview:self.oneTVC.view];
     [self initTableView];
-
+    
 }
-
-
 
 -(void)upTVCSpaceWithHeight:(CGFloat)height{
     [UIView animateWithDuration:.5 animations:^{
@@ -186,9 +224,9 @@
         //tvc.tableView.frame=CGRectMake(0, 0, 320, 568-64.5-50);
         //因为是vc,所以vc.view.frame与tableView.frame的大小不同,会影响动画效果,所以需要重新设置vc.view.frame
         //if (i==0||i==1||i==2) {
-            CGRect frame=vc.view.frame;
-            frame.size.height-=64.5+50;
-            vc.view.frame=frame;
+        CGRect frame=vc.view.frame;
+        frame.size.height-=64.5+50;
+        vc.view.frame=frame;
         //}
     }
 }
@@ -365,7 +403,7 @@
     NSLog(@"%d",self.tableViewSpace.subviews.count);
     UITableViewController* tvc=self.tvcArray[a[indexPath.section]+indexPath.row];
     [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-
+    
     [self.tableViewSpace addSubview:tvc.view];
     [self selectCancel];
     
@@ -377,28 +415,44 @@
     [self addBackButton];
     [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
     [self addtittle:self.fromView?@"修改项目":@"新建项目"];
-
+    
 }
 
 -(void)leftAction
 {
-    [self.navigationController popViewControllerAnimated:YES];
-    if (self.delegate&&self.isRelease==1&&self.fromView==1) {
-        [self.delegate backToProgramDetailView];
+    if (self.delegate&&self.fromView==1) {
+        if (self.isRelease==0) {
+            AppModel* appModel=[AppModel sharedInstance];
+            
+            NSArray* tempAry=@[appModel.contactAry,appModel.ownerAry,appModel.explorationAry,appModel.horizonAry,appModel.designAry,appModel.pileAry];
+            for (int i=0; i<tempAry.count; i++) {
+                [tempAry[i] removeAllObjects];
+                for (int k=0; k<[self.originContacts[i] count]; k++) {
+                    [tempAry[i] addObject:self.originContacts[i][k]];
+                    
+                }
+            }
+        }
+        [self.delegate backToProgramDetailViewWithIsRelease:self.isRelease];
     }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)rightAction{
     AppModel* appModel=[AppModel sharedInstance];
     NSLog(@"SAVE");
     
-    self.isNeedBackLoad=YES;
-    
-    self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
+    self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568)];
     self.shadowView.backgroundColor=[UIColor blackColor];
     self.shadowView.alpha=.5;
-    [self.contentView addSubview:self.shadowView];
+    [self.view addSubview:self.shadowView];
     
+    UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    testActivityIndicator.center = CGPointMake(160, 284);//只能设置中心，不能设置大小
+    testActivityIndicator.color = [UIColor whiteColor]; // 改变圈圈的颜色为红色； iOS5引入
+    [testActivityIndicator startAnimating]; // 开始旋转
+    [self.shadowView addSubview:testActivityIndicator];
     
     if (self.fromView==0) {
         
@@ -409,7 +463,7 @@
                 [ContactSqlite InsertData:[appModel.contactAry objectAtIndex:i]];
             }
         }
-        
+        NSLog(@"=====%d",appModel.contactAry.count);
         if(appModel.ownerAry.count){
             for(int i=0; i<appModel.ownerAry.count;i++){
                 [ContactSqlite InsertData:[appModel.ownerAry objectAtIndex:i]];
@@ -428,7 +482,6 @@
             }
         }
         
-        
         if(appModel.horizonAry.count){
             for(int i=0; i<appModel.horizonAry.count;i++){
                 [ContactSqlite InsertData:[appModel.horizonAry objectAtIndex:i]];
@@ -440,7 +493,6 @@
                 [ContactSqlite InsertData:[appModel.pileAry objectAtIndex:i]];
             }
         }
-        
         
         if (appModel.planImageArr.count) {
             for(int i=0;i<appModel.planImageArr.count;i++){
@@ -500,76 +552,53 @@
         [alert show];
     }else{
         NSMutableDictionary *dic = [ProjectStage JudgmentUpdataProjectStr:self.singleDic newDic:self.dataDic];
+        
+        [dic setValue:[self.singleDic objectForKey:self.isRelease?@"id":@"projectID"] forKeyPath:@"id"];
+        
+        //保存项目
+        [ProjectSqlite InsertUpdataServerData:dic];
+        
+        //保存联系人
+        if([self.contacts[0] count] !=0){
+            for(int i=0; i<[self.contacts[0] count];i++){
+                [ContactSqlite InsertUpdataServerData:[self.contacts[0] objectAtIndex:i]];
+            }
+        }
+        
+        if([self.contacts[1] count] !=0){
+            for(int i=0; i<[self.contacts[1] count];i++){
+                [ContactSqlite InsertUpdataServerData:[self.contacts[1] objectAtIndex:i]];
+            }
+        }
+        
+        if([self.contacts[2] count] !=0){
+            for(int i=0; i<[self.contacts[2] count];i++){
+                [ContactSqlite InsertUpdataServerData:[self.contacts[2] objectAtIndex:i]];
+            }
+        }
+        
+        if([self.contacts[4] count] !=0){
+            for(int i=0; i<[self.contacts[4] count];i++){
+                [ContactSqlite InsertUpdataServerData:[self.contacts[4] objectAtIndex:i]];
+            }
+        }
+        
+        if([self.contacts[3] count] !=0){
+            for(int i=0; i<[self.contacts[3] count];i++){
+                [ContactSqlite InsertUpdataServerData:[self.contacts[3] objectAtIndex:i]];
+            }
+        }
+        
+        if([self.contacts[5] count] !=0){
+            for(int i=0; i<[self.contacts[5] count];i++){
+                [ContactSqlite InsertUpdataServerData:[self.contacts[5] objectAtIndex:i]];
+            }
+        }
+        
         if (!self.isRelease) {
-            [dic setValue:[self.singleDic objectForKey:@"projectID"] forKeyPath:@"id"];
-
-            //保存图片至数据库
-            for(int i=0;i<self.horizonImageArr.count;i++){
-                CameraModel *model = [self.horizonImageArr objectAtIndex:i];
-                NSLog(@"model.a_device=%@",model.a_device);
-                if([model.a_device isEqualToString:@"ios"]){
-                    [GetBigImage getbigimage:model.a_url];
-                }else if ([model.a_device isEqualToString:@"localios"]){
-                    [CameraSqlite InsertNewData:model];
-                }
-            }
-            for(int i=0;i<self.pilePitImageArr.count;i++){
-                CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
-                if([model.a_device isEqualToString:@"ios"]){
-                    [GetBigImage getbigimage:model.a_url];
-                }else if ([model.a_device isEqualToString:@"localios"]){
-                    [CameraSqlite InsertNewData:model];
-                }
-            }
-            
-            for(int i=0;i<self.mainConstructionImageArr.count;i++){
-                CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
-                if([model.a_device isEqualToString:@"ios"]){
-                    [GetBigImage getbigimage:model.a_url];
-                }else if ([model.a_device isEqualToString:@"localios"]){
-                    [CameraSqlite InsertNewData:model];
-                }
-            }
-            
-            for(int i=0;i<self.explorationImageArr.count;i++){
-                CameraModel *model = [self.explorationImageArr objectAtIndex:i];
-                if([model.a_device isEqualToString:@"ios"]){
-                    [GetBigImage getbigimage:model.a_url];
-                }else if ([model.a_device isEqualToString:@"localios"]){
-                    [CameraSqlite InsertNewData:model];
-                }
-            }
-            
-            for(int i=0;i<self.fireControlImageArr.count;i++){
-                CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
-                if([model.a_device isEqualToString:@"ios"]){
-                    [GetBigImage getbigimage:model.a_url];
-                }else if ([model.a_device isEqualToString:@"localios"]){
-                    [CameraSqlite InsertNewData:model];
-                }
-            }
-            
-            for(int i=0;i<self.electroweakImageArr.count;i++){
-                CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
-                if([model.a_device isEqualToString:@"ios"]){
-                    [GetBigImage getbigimage:model.a_url];
-                }else if ([model.a_device isEqualToString:@"localios"]){
-                    [CameraSqlite InsertNewData:model];
-                }
-            }
-            
-            for(int i=0;i<self.planImageArr.count;i++){
-                CameraModel *model = [self.planImageArr objectAtIndex:i];
-                if([model.a_device isEqualToString:@"ios"]){
-                    [GetBigImage getbigimage:model.a_url];
-                }else if ([model.a_device isEqualToString:@"localios"]){
-                    [CameraSqlite InsertNewData:model];
-                }
-            }
+            [self carculateImageCount];
+            [self saveImage];
         }else{
-            NSLog(@"singleDic==========%@",self.singleDic);
-            [dic setValue:[self.singleDic objectForKey:@"id"] forKeyPath:@"id"];
-            
             if (appModel.planImageArr.count) {
                 for(int i=0;i<appModel.planImageArr.count;i++){
                     CameraModel *model = appModel.planImageArr[i];
@@ -620,49 +649,126 @@
             }
         }
         
-        
-        //保存项目
-        [ProjectSqlite InsertUpdataServerData:dic];
-        
-        
-        //保存联系人
-        if([self.contacts[0] count] !=0){
-            for(int i=0; i<[self.contacts[0] count];i++){
-                [ContactSqlite InsertUpdataServerData:[self.contacts[0] objectAtIndex:i]];
-            }
+        if (self.gotoBigImageCount==0) {
+            [self loadAlertView];
         }
-        
-        if([self.contacts[1] count] !=0){
-            for(int i=0; i<[self.contacts[1] count];i++){
-                [ContactSqlite InsertUpdataServerData:[self.contacts[1] objectAtIndex:i]];
-            }
+    }
+}
+
+-(void)carculateImageCount{
+    for(int i=0;i<self.horizonImageArr.count;i++){
+        CameraModel *model = [self.horizonImageArr objectAtIndex:i];
+        NSLog(@"model.a_device=%@",model.a_device);
+        if([model.a_device isEqualToString:@"ios"]){
+            self.gotoBigImageCount++;
         }
-        
-        if([self.contacts[2] count] !=0){
-            for(int i=0; i<[self.contacts[2] count];i++){
-                [ContactSqlite InsertUpdataServerData:[self.contacts[2] objectAtIndex:i]];
-            }
+    }
+    for(int i=0;i<self.pilePitImageArr.count;i++){
+        CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            self.gotoBigImageCount++;
         }
-        
-        if([self.contacts[4] count] !=0){
-            for(int i=0; i<[self.contacts[4] count];i++){
-                [ContactSqlite InsertUpdataServerData:[self.contacts[4] objectAtIndex:i]];
-            }
+    }
+    
+    for(int i=0;i<self.mainConstructionImageArr.count;i++){
+        CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            self.gotoBigImageCount++;
         }
-        
-        if([self.contacts[3] count] !=0){
-            for(int i=0; i<[self.contacts[3] count];i++){
-                [ContactSqlite InsertUpdataServerData:[self.contacts[3] objectAtIndex:i]];
-            }
+    }
+    
+    for(int i=0;i<self.explorationImageArr.count;i++){
+        CameraModel *model = [self.explorationImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            self.gotoBigImageCount++;
         }
-        
-        if([self.contacts[5] count] !=0){
-            for(int i=0; i<[self.contacts[5] count];i++){
-                [ContactSqlite InsertUpdataServerData:[self.contacts[5] objectAtIndex:i]];
-            }
+    }
+    
+    for(int i=0;i<self.fireControlImageArr.count;i++){
+        CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            self.gotoBigImageCount++;
         }
-        
-        [self loadAlertView];
+    }
+    
+    for(int i=0;i<self.electroweakImageArr.count;i++){
+        CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            self.gotoBigImageCount++;
+        }
+    }
+    
+    for(int i=0;i<self.planImageArr.count;i++){
+        CameraModel *model = [self.planImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            self.gotoBigImageCount++;
+        }
+    }
+}
+
+//保存图片至数据库
+-(void)saveImage{
+    for(int i=0;i<self.horizonImageArr.count;i++){
+        CameraModel *model = [self.horizonImageArr objectAtIndex:i];
+        NSLog(@"model.a_device=%@",model.a_device);
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }else if ([model.a_device isEqualToString:@"localios"]){
+            [CameraSqlite InsertNewData:model];
+        }
+    }
+    for(int i=0;i<self.pilePitImageArr.count;i++){
+        CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }else if ([model.a_device isEqualToString:@"localios"]){
+            [CameraSqlite InsertNewData:model];
+        }
+    }
+    
+    for(int i=0;i<self.mainConstructionImageArr.count;i++){
+        CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }else if ([model.a_device isEqualToString:@"localios"]){
+            [CameraSqlite InsertNewData:model];
+        }
+    }
+    
+    for(int i=0;i<self.explorationImageArr.count;i++){
+        CameraModel *model = [self.explorationImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }else if ([model.a_device isEqualToString:@"localios"]){
+            [CameraSqlite InsertNewData:model];
+        }
+    }
+    
+    for(int i=0;i<self.fireControlImageArr.count;i++){
+        CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }else if ([model.a_device isEqualToString:@"localios"]){
+            [CameraSqlite InsertNewData:model];
+        }
+    }
+    
+    for(int i=0;i<self.electroweakImageArr.count;i++){
+        CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }else if ([model.a_device isEqualToString:@"localios"]){
+            [CameraSqlite InsertNewData:model];
+        }
+    }
+    
+    for(int i=0;i<self.planImageArr.count;i++){
+        CameraModel *model = [self.planImageArr objectAtIndex:i];
+        if([model.a_device isEqualToString:@"ios"]){
+            [GetBigImage getbigimage:model.a_url];
+        }else if ([model.a_device isEqualToString:@"localios"]){
+            [CameraSqlite InsertNewData:model];
+        }
     }
 }
 
@@ -775,6 +881,8 @@
 }
 
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"bigImage" object:nil];
+    
     if (!self.fromView) {
         AppModel* app=[AppModel sharedInstance];
         app=nil;
@@ -790,7 +898,7 @@
     self.nineTVC=nil;
     self.tenTVC=nil;
     
-
+    
     NSLog(@"modifiDealloc");
 }
 

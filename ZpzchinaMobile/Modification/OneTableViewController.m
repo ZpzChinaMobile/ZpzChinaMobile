@@ -49,7 +49,7 @@
 }
 
 -(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
-    [dic setValue:@"auctionUnitContacts" forKeyPath:@"category"];
+    [dic setValue:@"auctionUnitContacts" forKey:@"category"];
     if(btnTag !=0){
         [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
     }else{
@@ -57,6 +57,7 @@
     }
     [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
+    addcontactView = nil;
 }
 
 -(void)choiceData:(NSMutableArray *)arr index:(int)index{
@@ -162,6 +163,7 @@
     addcontactView.contactType = @"auctionUnitContacts";
     [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     //[addcontactView updataContact:dic index:index];
+    NSLog(@"======%@,%d",[self.contacts objectAtIndex:index-1],index);
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
     [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
 }
@@ -208,7 +210,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if(indexPath.row == 0){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
         if (!cell) {
@@ -292,28 +293,6 @@
     [self.tableView reloadData];
 
     return;
-    
-    if(self.fromView == 0){
-        [self.images insertObject:cameraModel atIndex:0];
-        //[self.images removeAllObjects];
-        //self.images = [CameraSqlite loadAllPlanList:[self.dataDic objectForKey:@"id"]];
-    }else{
-        if(self.superVC.isRelease==0){
-            [self.images insertObject:cameraModel atIndex:0];
-            //if([CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-//                [self.images insertObject:[[CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
-            //}
-        }else{
-//            [self.images removeAllObjects];
-//            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-//                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"id"]];
-//            }else{
-//                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]];
-//            }
-        }
-        
-    }
-    [self.tableView reloadData];
 }
 
 -(void)tap:(UIButton*)button{

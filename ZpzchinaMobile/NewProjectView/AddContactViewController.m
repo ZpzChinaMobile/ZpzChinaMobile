@@ -138,7 +138,7 @@
 }
 
 -(void)updataContact:(NSMutableDictionary *)dic index:(int)index{
-    NSLog(@"dic ===> %@",dic);
+    //NSLog(@"dic ===> %@",dic);
     self.dataDic = dic;
     self.btnTag = index;
     [addName setText:[dic objectForKey:@"contactName"]];
@@ -147,16 +147,6 @@
     [address setText:[dic objectForKey:@"accountAddress"]];
     [title setTitle:[NSString stringWithFormat:@"岗位:%@",[dic objectForKey:@"duties"]] forState:UIControlStateNormal];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(void)saveBtnClick{
     if([[self.dataDic objectForKey:@"contactName"] isEqualToString:@""]){
@@ -179,7 +169,6 @@
         return;
     }
     
-    NSLog(@"%@",self.dataDic);
     if ([delegate respondsToSelector:@selector(back:btnTag:)]){
         [delegate back:self.dataDic btnTag:self.btnTag];
     }
@@ -210,6 +199,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     switch (textField.tag) {
         case 0:
+            NSLog(@"=====%@",self.dataDic);
             [self.dataDic setValue:textField.text forKey:@"contactName"];
             break;
         case 1:

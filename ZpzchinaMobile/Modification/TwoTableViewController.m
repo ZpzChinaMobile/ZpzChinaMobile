@@ -305,10 +305,8 @@
         cell = [[ProjectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:1 ownerArr:self.contacts singleDic:self.singleDic] ;
 
     }
-        cell.delegate=self;
-    //}
+    cell.delegate=self;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    // Configure the cell...
     
     return cell;
 }

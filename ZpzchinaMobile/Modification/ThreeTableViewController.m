@@ -145,7 +145,6 @@
         cell = nil;
         // if (!cell) {
         if(self.fromView == 0){
-            //AppModel* appModel=[AppModel sharedInstance];
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:self.fromView Arr:self.contacts explorationImageArr:nil];
         }else{
             cell=[[GeologicalSurveyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GeologicalSurveyTableViewCell" flag:1 Arr:self.contacts explorationImageArr:nil];
