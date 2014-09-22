@@ -15,15 +15,12 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
         if(flag==0){
             dataDic = dic;
         }else{
             dataDic = singleDic;
         }
-        
 
-        
         for (int i=0; i<10; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
             [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
