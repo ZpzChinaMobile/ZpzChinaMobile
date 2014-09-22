@@ -83,6 +83,10 @@ int startIndex;
     [self setupRefresh];
     [self.view addSubview:indicator];
     
+    coverView=[[UIView alloc]init];//网络加载时不让点
+    coverView.frame=CGRectMake(0, 64.5, 320, 568-64.5);
+    [self.view addSubview:coverView];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name: kReachabilityChangedNotification
@@ -387,7 +391,6 @@ int startIndex;
         [testActivityIndicator startAnimating]; // 开始旋转
         [bgView addSubview:testActivityIndicator];
         [self.view addSubview:bgView];
-        NSLog(@"%@",bgView);
         bgView.alpha = 0.5;
         self.dataArr = [ProjectSqlite loadInsertData];
         [self setServer:0];
