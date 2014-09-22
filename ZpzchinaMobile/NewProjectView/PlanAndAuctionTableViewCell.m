@@ -280,13 +280,8 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([self.delegate respondsToSelector:@selector(addContent:index:)]){
-//        NSInteger count=0;
-//        for (int i=0; i<textField.text.length; i++) {
-//            NSRange range=NSMakeRange(i, 1);
-//            NSString* subStr=[textField.text substringWithRange:range];
-//            NSLog(@"%@,%d,%d",subStr,[subStr lengthOfBytesUsingEncoding:NSUTF8StringEncoding],[subStr lengthOfBytesUsingEncoding:NSASCIIStringEncoding]);
-//        }
-        [self.delegate addContent:[textField.text substringToIndex:20] index:textField.tag];
+        NSString* tempStr=textField.text.length>20?[textField.text substringToIndex:20]:textField.text;
+        [self.delegate addContent:tempStr index:textField.tag];
     }
     [self.delegate endEdit];
 }
