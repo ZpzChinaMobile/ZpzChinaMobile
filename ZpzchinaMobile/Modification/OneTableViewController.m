@@ -323,6 +323,15 @@
     }
 }
 
+-(void)cellTextFieldResignFirstResponder{
+    for (UITextField* field in [[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] subviews][0] subviews]) {
+        if ([field isFirstResponder]) {
+            NSLog(@"%@",field);
+            [field resignFirstResponder];
+        };
+    };
+}
+
 -(void)dealloc{
     locateview=nil;
     muview=nil;

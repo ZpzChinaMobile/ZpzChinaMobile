@@ -54,7 +54,7 @@
         [zone addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:zone];
         
-        UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 62, 220, 30)];
+        UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 64, 135, 30)];
         zoneLabel.textColor = GrayColor;
         zoneLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         zoneLabel.textAlignment = NSTextAlignmentLeft;
@@ -84,7 +84,7 @@
         UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 280, 30)];
         address.delegate = self;
         address.textAlignment=NSTextAlignmentLeft;
-        address.placeholder=@"地块地址";
+        address.placeholder=@"地块地址(限20个字)";
         if(flag == 0){
             if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
                 [address setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landAddress"]]];
@@ -103,7 +103,7 @@
         //[address setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:address];
         
-        UILabel *landareaLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,160, 70, 30)];
+        UILabel *landareaLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,159, 70, 30)];
         landareaLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         landareaLabe.textColor = BlueColor;
         landareaLabe.text = @"土地面积:";
@@ -131,7 +131,7 @@
         //[landarea setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:landarea];
         
-        UILabel *volumerateLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,215, 85, 30)];
+        UILabel *volumerateLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,214, 85, 30)];
         volumerateLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         volumerateLabe.textColor = BlueColor;
         volumerateLabe.text = @"土地容积率:";
@@ -169,7 +169,7 @@
         [landuse addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:landuse];
         
-        UILabel *landuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 257, 220, 30)];
+        UILabel *landuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 260, 175, 30)];
         landuseLabel.textColor = GrayColor;
         landuseLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         landuseLabel.textAlignment = NSTextAlignmentLeft;
@@ -280,7 +280,13 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([self.delegate respondsToSelector:@selector(addContent:index:)]){
-        [self.delegate addContent:textField.text index:textField.tag];
+//        NSInteger count=0;
+//        for (int i=0; i<textField.text.length; i++) {
+//            NSRange range=NSMakeRange(i, 1);
+//            NSString* subStr=[textField.text substringWithRange:range];
+//            NSLog(@"%@,%d,%d",subStr,[subStr lengthOfBytesUsingEncoding:NSUTF8StringEncoding],[subStr lengthOfBytesUsingEncoding:NSASCIIStringEncoding]);
+//        }
+        [self.delegate addContent:[textField.text substringToIndex:20] index:textField.tag];
     }
     [self.delegate endEdit];
 }

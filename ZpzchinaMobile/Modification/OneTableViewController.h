@@ -24,7 +24,7 @@
 @property(nonatomic,weak)id<OneTVCDelegate>delegate;
 @property(nonatomic,strong)UITableView* tableView;
 
-
+-(void)cellTextFieldResignFirstResponder;
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images;
 -(void)addContactView:(int)index;
 -(void)addContent:(NSString *)str index:(int)index;

@@ -141,8 +141,8 @@
     [self initdataDic];
     [self initTVC];
     [self initNavi];
-    [self initThemeView];
     [self initTableViewSpace];
+    [self initThemeView];
     [self.tableViewSpace addSubview:self.oneTVC.view];
     [self initTableView];
     
@@ -440,6 +440,11 @@
 }
 
 -(void)rightAction{
+    OneTableViewController* oneVC=self.tvcArray[0];
+    [oneVC cellTextFieldResignFirstResponder];
+    TwoTableViewController* twoVC=self.tvcArray[1];
+    [twoVC cellTextFieldResignFirstResponder];
+    
     AppModel* appModel=[AppModel sharedInstance];
     NSLog(@"SAVE");
     

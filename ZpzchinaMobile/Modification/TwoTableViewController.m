@@ -327,6 +327,16 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 550;
 }
+
+-(void)cellTextFieldResignFirstResponder{
+    for (UITextField* field in [[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] subviews][0] subviews]) {
+        if ([field isFirstResponder]) {
+            NSLog(@"%@",field);
+            [field resignFirstResponder];
+        };
+    };
+}
+
 -(void)dealloc{
     addcontactView=nil;
     datepickerview=nil;
