@@ -134,7 +134,7 @@
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"area"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"area"];
+                    [self.dataDic setObject:@"0" forKey:@"area"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"area"];
@@ -145,7 +145,7 @@
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"plotRatio"];
+                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"plotRatio"];

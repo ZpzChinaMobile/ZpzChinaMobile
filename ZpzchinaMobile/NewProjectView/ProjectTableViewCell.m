@@ -34,14 +34,14 @@
         ProjectName.placeholder=@"项目名称";
         if(flag == 0){
             if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
-                [ProjectName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
+                [ProjectName setText:[dic objectForKey:@"projectName"]];
             }
         }else{
-            if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
-                [ProjectName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"projectName"]]];
+            if([dic objectForKey:@"projectName"]){
+                [ProjectName setText:[dic objectForKey:@"projectName"]];
             }else{
                 if(![[singleDic objectForKey:@"projectName"] isEqualToString:@""]){
-                    [ProjectName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"projectName"]]];
+                    [ProjectName setText:[singleDic objectForKey:@"projectName"]];
                 }
             }
         }
@@ -61,11 +61,11 @@
                 [ProjectAddress setTitle:@"项目地址" forState:UIControlStateNormal];
             }
         }else{
-            if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
+            if([dic objectForKey:@"landAddress"]){
                 [ProjectAddress setTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landAddress"]] forState:UIControlStateNormal];
             }else{
                 if(![[singleDic objectForKey:@"landAddress"] isEqualToString:@""]){
-                    [ProjectAddress setTitle:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landAddress"]] forState:UIControlStateNormal];
+                    [ProjectAddress setTitle:[singleDic objectForKey:@"landAddress"] forState:UIControlStateNormal];
                 }else{
                     [ProjectAddress setTitle:@"项目地址" forState:UIControlStateNormal];
                 }
@@ -96,11 +96,11 @@
                 [ProjectMark setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"description"]]];
             }
         }else{
-            if(![[dic objectForKey:@"description"] isEqualToString:@""]){
-                [ProjectMark setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"description"]]];
+            if([dic objectForKey:@"description"]){
+                [ProjectMark setText:[dic objectForKey:@"description"]];
             }else{
                 if(![[singleDic objectForKey:@"description"] isEqualToString:@""]){
-                    [ProjectMark setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"description"]]];
+                    [ProjectMark setText:[singleDic objectForKey:@"description"]];
                 }
             }
         }

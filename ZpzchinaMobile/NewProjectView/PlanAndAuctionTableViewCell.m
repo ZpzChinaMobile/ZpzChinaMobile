@@ -28,14 +28,14 @@
 
         if(flag == 0){
             if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
+                [LotName setText:[dic objectForKey:@"landName"]];
             }
         }else{
-            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
+            if([dic objectForKey:@"landName"]){
+                [LotName setText:[dic objectForKey:@"landName"]];
             }else{
                 if(![[singleDic objectForKey:@"landName"] isEqualToString:@""]){
-                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landName"]]];
+                    [LotName setText:[singleDic objectForKey:@"landName"]];
                 }
             }
         }
@@ -87,20 +87,20 @@
         address.placeholder=@"地块地址(限20个字)";
         if(flag == 0){
             if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
-                [address setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landAddress"]]];
+                [address setText:[dic objectForKey:@"landAddress"]];
             }
         }else{
-            if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
-                [address setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landAddress"]]];
+            if([dic objectForKey:@"landAddress"]){
+                [address setText:[dic objectForKey:@"landAddress"]];
             }else{
                 if(![[singleDic objectForKey:@"landAddress"] isEqualToString:@""]){
-                    [address setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landAddress"]]];
+                    [address setText:[singleDic objectForKey:@"landAddress"]];
                 }
             }
         }
+        
         address.returnKeyType=UIReturnKeyDone;
         address.tag = 1;
-        //[address setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:address];
         
         UILabel *landareaLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,159, 70, 30)];

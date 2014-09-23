@@ -66,6 +66,7 @@
     [self.dataDic setObject:[NSString stringWithFormat:@"%f",testLocation.latitude] forKey:@"latitude"];
     [self.tableView reloadData];
     [[self.superVC.tvcArray[0] tableView]reloadData];
+
 }
 
 -(void)backMChoiceViewController{
@@ -182,7 +183,7 @@
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"investment"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"investment"];
+                    [self.dataDic setObject:@"0" forKey:@"investment"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"investment"];
@@ -193,7 +194,7 @@
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"areaOfStructure"];
+                    [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"areaOfStructure"];
@@ -204,7 +205,7 @@
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"storeyHeight"];
+                    [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"storeyHeight"];
@@ -245,6 +246,12 @@
     locationView.baseAddress = address;
     locationView.baseCity = city;
     [self.superVC.navigationController pushViewController:locationView animated:YES];
+}
+
+-(void)getLocationNil{
+    if (locationView) {
+        locationView=nil;
+    }
 }
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images{
