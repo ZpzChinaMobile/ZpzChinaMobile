@@ -58,7 +58,7 @@
 }
 
 - (void)dealloc {
-	[self close];	
+	[self close];
 	[super dealloc];
 }
 

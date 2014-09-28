@@ -16,7 +16,7 @@
 
 @interface ClearFireCell : UITableViewCell
 
-@property(nonatomic ,strong) id <ClearFireDelegate> delegate;
+@property(nonatomic ,weak) id <ClearFireDelegate> delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag Arr:(NSMutableArray *)Arr singleDic:(NSMutableDictionary *)singleDic;
 

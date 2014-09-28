@@ -14,6 +14,7 @@
 #import "AppModel.h"
 @interface NineTableViewController ()<CameraDelegate>{
     Camera* camera;
+    NSInteger newImageCount;
 }
 
 @end
@@ -31,6 +32,7 @@
         self.tableView.dataSource=self;
         self.tableView.separatorStyle=NO;
         [self.view addSubview:self.tableView];
+        newImageCount=0;
     }
     return self;
 }
@@ -74,6 +76,8 @@
     }else{
         static NSString *stringcell = @"ClearFireCell";
         ClearFireCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+        [cell removeFromSuperview];
+        cell = nil;
         if(self.fromView == 0){
             cell = [[ClearFireCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:0 Arr:nil singleDic:nil];
         }else{
@@ -96,7 +100,16 @@
     return 100;
 }
 
--(void)backCamera{
+-(void)backCamera:(CameraModel *)cameraModel{
+    if (!self.images) {
+        self.images=[NSMutableArray array];
+    }
+    if (!cameraModel) return;
+    newImageCount++;
+    [self.images addObject:cameraModel];
+    [self.tableView reloadData];
+    return;
+    
     if (!self.images.count) {
         self.images=[NSMutableArray array];
     }
@@ -205,6 +218,9 @@
 }
 -(void)dealloc{
     camera=nil;
+    for (int i=0; i<newImageCount; i++) {
+        [self.images removeLastObject];
+    }
     NSLog(@"nineDealloc");
 }
 @end

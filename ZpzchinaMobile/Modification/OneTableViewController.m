@@ -22,7 +22,7 @@
     MultipleChoiceViewController* muview;
     AddContactViewController* addcontactView;
     Camera* camera;
-    // BOOL _isUpdata;
+    NSInteger newImageCount;
 }
 @end
 
@@ -49,7 +49,7 @@
 }
 
 -(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{
-    [dic setValue:@"auctionUnitContacts" forKeyPath:@"category"];
+    [dic setValue:@"auctionUnitContacts" forKey:@"category"];
     if(btnTag !=0){
         [self.contacts replaceObjectAtIndex:btnTag-1 withObject:dic];
     }else{
@@ -57,6 +57,7 @@
     }
     [self.view.window.rootViewController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
     [self.tableView reloadData];
+    addcontactView = nil;
 }
 
 -(void)choiceData:(NSMutableArray *)arr index:(int)index{
@@ -126,13 +127,14 @@
             break;
         case 1:
             [self.dataDic setObject:str forKey:@"landAddress"];
+            [[self.superVC.tvcArray[1] tableView]reloadData];
             break;
         case 2:
             if([str isEqualToString:@""]){
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"area"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"area"];
+                    [self.dataDic setObject:@"0" forKey:@"area"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"area"];
@@ -143,7 +145,7 @@
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"plotRatio"];
+                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"plotRatio"];
@@ -161,6 +163,7 @@
     addcontactView.contactType = @"auctionUnitContacts";
     [addcontactView.view setFrame:CGRectMake(0, 0, 262, 431)];
     //[addcontactView updataContact:dic index:index];
+    NSLog(@"======%@,%d",[self.contacts objectAtIndex:index-1],index);
     [addcontactView updataContact:[self.contacts objectAtIndex:index-1] index:index];
     [self.view.window.rootViewController presentPopupViewController:addcontactView animationType:MJPopupViewAnimationFade];
 }
@@ -176,7 +179,7 @@
         self.tableView.delegate=self;
         self.tableView.dataSource=self;
         self.tableView.separatorStyle=NO;
-        
+        newImageCount=0;
         [self.view addSubview:self.tableView];
     }
     return self;
@@ -207,7 +210,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if(indexPath.row == 0){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
         if (!cell) {
@@ -281,40 +283,16 @@
     return view;
 }
 
--(void)backCamera{
-    if (!self.images.count) {
+-(void)backCamera:(CameraModel *)cameraModel{
+    if (!self.images) {
         self.images=[NSMutableArray array];
     }
-    /**
-     if(self.fromView == 0){
-     [addcontactView setlocalProjectId:[self.dataDic objectForKey:@"id"]];
-     }else{
-     if(self.superVC.isRelease == 0){
-     [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"projectID"]];
-     }else{
-     [addcontactView setlocalProjectId:[self.singleDic objectForKey:@"id"]];
-     }
-     }
-     */
-    if(self.fromView == 0){
-        [self.images removeAllObjects];
-        self.images = [CameraSqlite loadAllPlanList:[self.dataDic objectForKey:@"id"]];
-    }else{
-        if(self.superVC.isRelease==0){
-            if([CameraSqlite loadPlanSingleList:[self.singleDic objectForKey:@"projectID"]].count!=0){
-                [self.images insertObject:[[CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]] objectAtIndex:0] atIndex:0];
-            }
-        }else{
-            [self.images removeAllObjects];
-            if([[self.singleDic objectForKey:@"projectID"] isEqualToString:@""]){
-                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"id"]];
-            }else{
-                self.images = [CameraSqlite loadAllPlanList:[self.singleDic objectForKey:@"projectID"]];
-            }
-        }
-        
-    }
+    if (!cameraModel) return;
+    newImageCount++;
+    [self.images addObject:cameraModel];
     [self.tableView reloadData];
+
+    return;
 }
 
 -(void)tap:(UIButton*)button{
@@ -345,12 +323,23 @@
     }
 }
 
+-(void)cellTextFieldResignFirstResponder{
+    for (UITextField* field in [[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] subviews][0] subviews]) {
+        if ([field isFirstResponder]) {
+            NSLog(@"%@",field);
+            [field resignFirstResponder];
+        };
+    };
+}
+
 -(void)dealloc{
     locateview=nil;
     muview=nil;
     addcontactView=nil;
     camera=nil;
-
+    for (int i=0; i<newImageCount; i++) {
+        [self.images removeLastObject];
+    }
     NSLog(@"oneDealloc");
 }
 

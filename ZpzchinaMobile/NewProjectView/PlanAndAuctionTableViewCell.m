@@ -14,8 +14,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        // Initialization code
-        
+      
         for (int i=0; i<6; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
             [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
@@ -26,18 +25,17 @@
         LotName.delegate = self;
         LotName.textAlignment=NSTextAlignmentLeft;
         LotName.placeholder=@"地块名称";
-        NSLog(@"%d",flag);
-        NSLog(@"%@",dic);
+
         if(flag == 0){
             if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
+                [LotName setText:[dic objectForKey:@"landName"]];
             }
         }else{
-            if(![[dic objectForKey:@"landName"] isEqualToString:@""]){
-                [LotName setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landName"]]];
+            if([dic objectForKey:@"landName"]){
+                [LotName setText:[dic objectForKey:@"landName"]];
             }else{
                 if(![[singleDic objectForKey:@"landName"] isEqualToString:@""]){
-                    [LotName setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landName"]]];
+                    [LotName setText:[singleDic objectForKey:@"landName"]];
                 }
             }
         }
@@ -56,7 +54,7 @@
         [zone addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:zone];
         
-        UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 62, 220, 30)];
+        UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 64, 135, 30)];
         zoneLabel.textColor = GrayColor;
         zoneLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         zoneLabel.textAlignment = NSTextAlignmentLeft;
@@ -86,26 +84,26 @@
         UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 280, 30)];
         address.delegate = self;
         address.textAlignment=NSTextAlignmentLeft;
-        address.placeholder=@"地块地址";
+        address.placeholder=@"地块地址(限20个字)";
         if(flag == 0){
             if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
-                [address setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landAddress"]]];
+                [address setText:[dic objectForKey:@"landAddress"]];
             }
         }else{
-            if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
-                [address setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"landAddress"]]];
+            if([dic objectForKey:@"landAddress"]){
+                [address setText:[dic objectForKey:@"landAddress"]];
             }else{
                 if(![[singleDic objectForKey:@"landAddress"] isEqualToString:@""]){
-                    [address setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"landAddress"]]];
+                    [address setText:[singleDic objectForKey:@"landAddress"]];
                 }
             }
         }
+        
         address.returnKeyType=UIReturnKeyDone;
         address.tag = 1;
-        //[address setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:address];
         
-        UILabel *landareaLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,160, 70, 30)];
+        UILabel *landareaLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,159, 70, 30)];
         landareaLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         landareaLabe.textColor = BlueColor;
         landareaLabe.text = @"土地面积:";
@@ -133,7 +131,7 @@
         //[landarea setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:landarea];
         
-        UILabel *volumerateLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,215, 85, 30)];
+        UILabel *volumerateLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,214, 85, 30)];
         volumerateLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         volumerateLabe.textColor = BlueColor;
         volumerateLabe.text = @"土地容积率:";
@@ -171,7 +169,7 @@
         [landuse addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:landuse];
         
-        UILabel *landuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 257, 220, 30)];
+        UILabel *landuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 260, 175, 30)];
         landuseLabel.textColor = GrayColor;
         landuseLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
         landuseLabel.textAlignment = NSTextAlignmentLeft;
@@ -212,8 +210,6 @@
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
-        //NSLog(@"%@",contactArr);
-        
         self.dataArr = [NSMutableArray arrayWithArray:contactArr];
         if(contactArr.count != 0){
             for(int i=0; i<contactArr.count;i++){
@@ -240,16 +236,9 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
-    // Initialization code
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 -(void)updateContent:(BOOL)openRow{
@@ -270,7 +259,7 @@
     
     textfield = nil;
     textfield = textField;
-    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];//350)];
+    closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
     closeView.userInteractionEnabled = YES;
     closeView.backgroundColor=[UIColor clearColor];
 
@@ -291,7 +280,8 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([self.delegate respondsToSelector:@selector(addContent:index:)]){
-        [self.delegate addContent:textField.text index:textField.tag];
+        NSString* tempStr=textField.text.length>20&&textField.tag==1?[textField.text substringToIndex:20]:textField.text;
+        [self.delegate addContent:tempStr index:textField.tag];
     }
     [self.delegate endEdit];
 }
@@ -305,7 +295,6 @@
 
 -(void)closeKeyBoard{
     [textfield resignFirstResponder];
-    NSLog(@"+++++");
     [closeView removeFromSuperview];
     closeView = nil;
 }

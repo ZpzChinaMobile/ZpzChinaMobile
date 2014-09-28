@@ -14,6 +14,7 @@
 #import "AppModel.h"
 @interface EightTableViewController ()<CameraDelegate,UITableViewDelegate,UITableViewDelegate,UITableViewDataSource>{
     Camera* camera;
+    NSInteger newImageCount;
 }
 
 @end
@@ -32,7 +33,7 @@
         self.tableView.dataSource=self;
         self.tableView.separatorStyle=NO;
         [self.view addSubview:self.tableView];
-
+        newImageCount=0;
     }
     return self;
 }
@@ -73,7 +74,16 @@
     
 }
 
--(void)backCamera{
+-(void)backCamera:(CameraModel *)cameraModel{
+    if (!self.images) {
+        self.images=[NSMutableArray array];
+    }
+    if (!cameraModel) return;
+    [self.images addObject:cameraModel];
+    newImageCount++;
+    [self.tableView reloadData];
+    return;
+    
     if (!self.images.count) {
         self.images=[NSMutableArray array];
     }
@@ -162,6 +172,9 @@
 }
 -(void)dealloc{
     camera=nil;
+    for (int i=0; i<newImageCount; i++) {
+        [self.images removeLastObject];
+    }
     NSLog(@"eightdealloc");
 }
 @end

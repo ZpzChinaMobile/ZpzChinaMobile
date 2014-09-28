@@ -388,7 +388,7 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[newDic objectForKey:@"id"] forKey:@"id"];
     //土地规划/拍卖
-    if([[newDic objectForKey:@"landName"] isEqualToString:@""]){
+    if(![newDic objectForKey:@"landName"]){
         [dic setObject:[oldDic objectForKey:@"landName"] forKey:@"landName"];
     }else{
         [dic setObject:[newDic objectForKey:@"landName"] forKey:@"landName"];
@@ -406,7 +406,7 @@
         [dic setObject:[newDic objectForKey:@"province"] forKey:@"province"];
     }
     
-    if([[newDic objectForKey:@"landAddress"] isEqualToString:@""]){
+    if(![newDic objectForKey:@"landAddress"]){
         [dic setObject:[oldDic objectForKey:@"landAddress"] forKey:@"landAddress"];
     }else{
         [dic setObject:[newDic objectForKey:@"landAddress"] forKey:@"landAddress"];
@@ -455,7 +455,7 @@
         [dic setObject:[newDic objectForKey:@"projectCode"] forKey:@"projectCode"];
     }
     
-    if([[newDic objectForKey:@"projectName"] isEqualToString:@""]){
+    if(![newDic objectForKey:@"projectName"]){
         [dic setObject:[oldDic objectForKey:@"projectName"] forKey:@"projectName"];
     }else{
         [dic setObject:[newDic objectForKey:@"projectName"] forKey:@"projectName"];
@@ -467,7 +467,7 @@
         [dic setObject:[newDic objectForKey:@"projectVersion"] forKey:@"projectVersion"];
     }
     
-    if([[newDic objectForKey:@"description"] isEqualToString:@""]){
+    if(![newDic objectForKey:@"description"]){
         [dic setObject:[oldDic objectForKey:@"description"] forKey:@"description"];
     }else{
         [dic setObject:[newDic objectForKey:@"description"] forKey:@"description"];

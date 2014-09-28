@@ -9,31 +9,46 @@
 #import "TuDiXinXi.h"
 #import "CameraModel.h"
 #import "GTMBase64.h"
-@implementation TuDiXinXi
-static CGFloat height;//统计总高
-static UIView* totalView;
-static __weak ProgramDetailViewController* myDelegate;
-static NSDictionary* dataDic;
 
-+(void)myDealloc{
-    totalView=nil;
-    dataDic=nil;
+@interface TuDiXinXi(){
+    CGFloat height;
+    NSDictionary* dataDic;
 }
 
-+(UIView*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate {    
+//@property(nonatomic)CGFloat height;
+@property(nonatomic,weak)ProgramDetailViewController* myDelegate;
+//@property(nonatomic,strong)NSDictionary* dataDic;
+@end
+
+@implementation TuDiXinXi
+//static CGFloat height;//统计总高
+//static UIView* totalView;
+//static __weak ProgramDetailViewController* myDelegate;
+//static NSDictionary* dataDic;
+
++(void)myDealloc{
+
+}
+
+-(void)dealloc{
+    NSLog(@"tudixinxi Dealloc");
+}
+
++(TuDiXinXi*)tuDiXinXiWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate{
+    TuDiXinXi* view=[[TuDiXinXi alloc]initWithFrame:CGRectMake(0, 0, 320, 0)];
+    return [view getWithFirstViewHeight:firstViewHeight delegate:delegate];
+}
+
+-(TuDiXinXi*)getWithFirstViewHeight:(CGFloat*)firstViewHeight delegate:(ProgramDetailViewController*)delegate {
+    self.backgroundColor=[UIColor whiteColor];
     
     //数值初始
     height=0;
-    totalView=nil;
-    
-    //totalView初始
-    totalView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 0)];
-    totalView.backgroundColor=[UIColor whiteColor];
     
     //把programVC掉过来给属性赋值，用于知道是哪个imageView被点击了
-    myDelegate=delegate;
+    self.myDelegate=delegate;
     
-    dataDic=myDelegate.dataDic;
+    dataDic=self.myDelegate.dataDic;
     
     //获得第一个大view,  土地规划/拍卖模块
     [self getFirstView];
@@ -41,16 +56,18 @@ static NSDictionary* dataDic;
     [self getSecondView];
 
     
-    totalView.frame=CGRectMake(0, 0, 320, height);
-    return totalView;
+    self.frame=CGRectMake(0, 0, 320, height);
+    return self;
 }
 
-+(void)getSecondView{
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"项目立项" programTitle:dataDic[@"projectName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"city"],dataDic[@"district"],dataDic[@"landAddress"]] detailAddress:dataDic[@"description"]]];
-    
-    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, height-175, 320, 3.5)];
+-(void)getSecondView{
+    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, height, 320, 3.5)];
     shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
-    [totalView addSubview:shadow];
+    [self addSubview:shadow];
+    
+    [self addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"项目立项" programTitle:dataDic[@"projectName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"city"],dataDic[@"district"],dataDic[@"landAddress"]] detailAddress:dataDic[@"description"]]];
+    [self bringSubviewToFront:shadow];
+    
     
     //获取预计施工时间以及预计竣工时间
     NSMutableArray* tempAry=[NSMutableArray array];
@@ -74,14 +91,14 @@ static NSDictionary* dataDic;
         for (int i=0; i<3; i++) {
             UIView* tempView=[self twoLineLable:ary1[k][i] secondStr:ary2[k][i]];
             tempView.center=CGPointMake(tempView.frame.size.width*(i+.5), height+30) ;
-            [totalView addSubview:tempView];
+            [self addSubview:tempView];
         }
         height+=60;
     }
     
     //联系人信息3个label
-    NSArray* array1=myDelegate.ownerAry;
-    for (int i=0,j=myDelegate.ownerAry.count; i<3; i++) {
+    NSArray* array1=self.myDelegate.ownerAry;
+    for (int i=0,j=self.myDelegate.ownerAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
             tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"]];
@@ -90,7 +107,7 @@ static NSDictionary* dataDic;
             tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i]];
         }
         
-        [totalView addSubview:tempView];
+        [self addSubview:tempView];
         tempView.center=CGPointMake(160, height+60);
         height+=120;
     }
@@ -101,7 +118,7 @@ static NSDictionary* dataDic;
     frame.origin.y=height;
     tempView.frame=frame;
     
-    [totalView addSubview:tempView];
+    [self addSubview:tempView];
 //    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(15, height+5, 21, 21)];
 //    imageView.image=;
 //    [totalView addSubview:imageView];
@@ -114,7 +131,7 @@ static NSDictionary* dataDic;
     
 }
 
-+(UIView*)getOwnerTypeViewWithImage:(UIImage*)image owners:(NSArray*)owners{
+-(UIView*)getOwnerTypeViewWithImage:(UIImage*)image owners:(NSArray*)owners{
     UIView* view=[[UIView alloc]initWithFrame:CGRectZero];
     view.backgroundColor=[UIColor whiteColor];
     
@@ -134,18 +151,18 @@ static NSDictionary* dataDic;
 }
 
 
-+(void)getImageView:(NSInteger)imageNumber{
+-(void)getImageView:(NSInteger)imageNumber{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     view.center=CGPointMake(160, height+107.75);
-    [totalView addSubview:view];
+    [self addSubview:view];
     height+=215.5;
     
     
     UIImage *aimage;
-    if (myDelegate.planImageArr.count) {
+    if (self.myDelegate.planImageArr.count) {
         CameraModel *model;
-        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
-            model = myDelegate.planImageArr[0];
+        if (self.myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+            model = self.myDelegate.planImageArr[0];
             if([model.a_device isEqualToString:@"localios"]){
                 aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
             }else{
@@ -153,7 +170,7 @@ static NSDictionary* dataDic;
             }
             
         }else{
-            model=myDelegate.imgDic[@"planImageArr"];
+            model=self.myDelegate.imgDic[@"planImageArr"];
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
 
@@ -162,7 +179,9 @@ static NSDictionary* dataDic;
     }
     CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
     CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
-    aimage=[UIImage imageWithCGImage:CGImageCreateWithImageInRect([aimage CGImage], frame)];
+    CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+    aimage=[UIImage imageWithCGImage:tempImage];
+    CGImageRelease(tempImage);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
 
@@ -177,11 +196,11 @@ static NSDictionary* dataDic;
     [view addSubview:label];
     
     //添加选中图片时的触发
-    if (myDelegate.planImageArr.count) {
-        myDelegate.firstStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-        myDelegate.firstStageButton1.tag=0;
-        [myDelegate.firstStageButton1 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:myDelegate.firstStageButton1];
+    if (self.myDelegate.planImageArr.count) {
+        self.myDelegate.firstStageButton1=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
+        self.myDelegate.firstStageButton1.tag=0;
+        [self.myDelegate.firstStageButton1 addTarget:self.myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:self.myDelegate.firstStageButton1];
     }
 }
 
@@ -193,48 +212,56 @@ static NSDictionary* dataDic;
 //}
 
 //第一行蓝，第二行黑，专门为土地信息做的view
-+(UIView*)getBlueThreeTypesTwoLinesWithFirstStr:(NSArray*)firstStrs secondStr:(NSArray*)secondStrs{
+-(UIView*)getBlueThreeTypesTwoLinesWithFirstStr:(NSArray*)firstStrs secondStr:(NSArray*)secondStrs{
     UIView* view=[[UIView alloc]initWithFrame:CGRectZero];
     view.backgroundColor=[UIColor whiteColor];
     
+    CGRect bounds;
+    
     for (int i=0; i<2; i++) {
-        UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(i*160, 10, 160, 20)];
-        firstLabel.text=firstStrs[i];
+        NSInteger count=i?2:i;
+        
+        UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 10+i*60, 140, 20)];
+        firstLabel.text=firstStrs[count];
         firstLabel.textColor=RGBCOLOR(82, 125, 237);
         firstLabel.font=[UIFont systemFontOfSize:14];
-        firstLabel.textAlignment=NSTextAlignmentCenter;
+        firstLabel.textAlignment=NSTextAlignmentLeft;
         [view addSubview:firstLabel];
         
-        UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectMake(i*160, 30, 160, 20)];
-        secondLabel.text=secondStrs[i];
+        if (i) {
+            bounds=[secondStrs[count] boundingRectWithSize:CGSizeMake( 280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+        }
+        UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 30+i*60, i?280:140, i?bounds.size.height+5:20)];
+        secondLabel.text=secondStrs[count];
+        secondLabel.numberOfLines=0;
         secondLabel.textColor=RGBCOLOR(125, 125, 125);
         secondLabel.font=[UIFont systemFontOfSize:14];
-        secondLabel.textAlignment=NSTextAlignmentCenter;
+        secondLabel.textAlignment=NSTextAlignmentLeft;
         [view addSubview:secondLabel];
     }
-    UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 10+60, 160, 20)];
-    firstLabel.text=firstStrs[2];
+    UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 10, 160, 20)];
+    firstLabel.text=firstStrs[1];
     firstLabel.textColor=RGBCOLOR(82, 125, 237);
     firstLabel.font=[UIFont systemFontOfSize:14];
     firstLabel.textAlignment=NSTextAlignmentCenter;
     [view addSubview:firstLabel];
     
     UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectZero];
-    secondLabel.text=secondStrs[2];
+    secondLabel.text=secondStrs[1];
     secondLabel.numberOfLines=0;
     secondLabel.textColor=RGBCOLOR(125, 125, 125);
     secondLabel.font=[UIFont systemFontOfSize:14];
-    secondLabel.textAlignment=NSTextAlignmentLeft;
-    CGRect bounds=[secondLabel.text boundingRectWithSize:CGSizeMake( 305-52, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:14] forKey:NSFontAttributeName] context:nil];
-    secondLabel.frame=CGRectMake(52, 30+60, 305-52, bounds.size.height);
+    secondLabel.textAlignment=NSTextAlignmentCenter;
+   
+    secondLabel.frame=CGRectMake(160, 30, 160, 20);
     [view addSubview:secondLabel];
     
-    view.frame=CGRectMake(0, 0, 320, 2*60+(bounds.size.height-20));
+    view.frame=CGRectMake(0, 0, 320, 120+bounds.size.height-15);
     return view;
 }
 
 
-+(void)getFirstView{
+-(void)getFirstView{
     /*
      *
      *
@@ -243,11 +270,11 @@ static NSDictionary* dataDic;
      *
      */
     //项目名称view
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"土地规划/拍卖" programTitle:dataDic[@"landName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"province"],dataDic[@"city"],dataDic[@"district"]] detailAddress:dataDic[@"landAddress"]]];
+    [self addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"土地规划/拍卖" programTitle:dataDic[@"landName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"province"],dataDic[@"city"],dataDic[@"district"]] detailAddress:dataDic[@"landAddress"]]];
     
-    NSLog(@"city=%@ description=%@ district=%@ landAddress=%@ landName=%@ ownerType=%@ projectName=%@ usage=%@ province=%@",dataDic[@"city"],dataDic[@"description"],dataDic[@"district"],dataDic[@"landAddress"],dataDic[@"landName"],dataDic[@"ownerType"],dataDic[@"projectName"],dataDic[@"usage"],dataDic[@"province"]);
+    //NSLog(@"city=%@ description=%@ district=%@ landAddress=%@ landName=%@ ownerType=%@ projectName=%@ usage=%@ province=%@",dataDic[@"city"],dataDic[@"description"],dataDic[@"district"],dataDic[@"landAddress"],dataDic[@"landName"],dataDic[@"ownerType"],dataDic[@"projectName"],dataDic[@"usage"],dataDic[@"province"]);
     //图片imageView
-    [self getImageView:myDelegate.planImageArr.count];
+    [self getImageView:self.myDelegate.planImageArr.count];
     
     //建立3个2行的label
     NSArray* ary1=@[@"土地面积",@"土地容积率",@"地块用途"];
@@ -256,11 +283,11 @@ static NSDictionary* dataDic;
     CGRect tempFrame=tempViewNew.frame;
     tempFrame.origin.y=height;
     tempViewNew.frame=tempFrame;
-    [totalView addSubview:tempViewNew];
+    [self addSubview:tempViewNew];
     height+=tempViewNew.frame.size.height;
     
-    NSArray* array1=myDelegate.contactAry;
-    for (int i=0,j=myDelegate.contactAry.count; i<3; i++) {
+    NSArray* array1=self.myDelegate.contactAry;
+    for (int i=0,j=self.myDelegate.contactAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
             tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"]];
@@ -269,13 +296,13 @@ static NSDictionary* dataDic;
             tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i]];
         }
         
-        [totalView addSubview:tempView];
+        [self addSubview:tempView];
         tempView.center=CGPointMake(160, height+60);
         height+=120;
     }
 }
 
-+(UIView*)getSeperatedLine{
+-(UIView*)getSeperatedLine{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 290, 1)];
     view.backgroundColor=RGBCOLOR(206, 206, 206);
     
@@ -283,7 +310,7 @@ static NSDictionary* dataDic;
 }
 
 //竖着的3个view,联系人,职位,地点,单位,手机
-+(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel{
+-(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 120)];
     
     //分割线1
@@ -337,7 +364,7 @@ static NSDictionary* dataDic;
 }
 
 //显示一个2行字的label
-+(UIView*)twoLineLable:(NSString*)firstStr secondStr:(NSString*)secondStr{
+-(UIView*)twoLineLable:(NSString*)firstStr secondStr:(NSString*)secondStr{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320*1.0/3, 60)];
     
     UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 10, 320*1.0/3, 25)];
@@ -358,13 +385,13 @@ static NSDictionary* dataDic;
     return view;
 }
 
-+(UIView*)getProgramViewWithTitleImage:(UIImage*)titleImage stageTitle:(NSString*)stageTitle programTitle:(NSString*)programTitle address:(NSString*)address detailAddress:(NSString*)detailAddress{
+-(UIView*)getProgramViewWithTitleImage:(UIImage*)titleImage stageTitle:(NSString*)stageTitle programTitle:(NSString*)programTitle address:(NSString*)address detailAddress:(NSString*)detailAddress{
     
     //项目title及项目名称的画布
-    UIView* titleView=[[UIView alloc]initWithFrame:CGRectMake(0, height, 320, 175)];
+    UIView* titleView=[[UIView alloc]initWithFrame:CGRectMake(0, height, 320, 145)];
     titleView.backgroundColor=RGBCOLOR(229, 229, 229);
     NSLog(@"%f",height);
-    height+=175;
+    height+=145;
     
     ///title部分
     //图片
@@ -386,33 +413,50 @@ static NSDictionary* dataDic;
     line1.center=CGPointMake(160, 65);
     [titleView addSubview:line1];
     
+    //用来控制自适应的高度变化的累加
+    CGFloat tempHeight=0;
+    
     //项目名称部分
-    UILabel* programName=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    programName.center=CGPointMake(160, 85);
+    CGRect bounds=[programTitle boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} context:nil];
+    
+    UILabel* programName=[[UILabel alloc]initWithFrame:CGRectMake(20, 75, 280, bounds.size.height)];
     programName.text=programTitle;
+    programName.numberOfLines=0;
     programName.font=[UIFont systemFontOfSize:18];
     programName.textAlignment=NSTextAlignmentCenter;
     [titleView addSubview:programName];
+    tempHeight+=bounds.size.height-18;
     
     //项目地点部分
-    UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    areaLabel.center=CGPointMake(160, 115);
+    bounds=[address boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+    
+    UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 106+tempHeight, 280, bounds.size.height>=18?36:bounds.size.height)];
     areaLabel.text=address;
+    areaLabel.numberOfLines=2;
     areaLabel.font=[UIFont systemFontOfSize:14];
     areaLabel.textAlignment=NSTextAlignmentCenter;
     [titleView addSubview:areaLabel];
+    tempHeight+=bounds.size.height>=18?36-14:bounds.size.height-14;
+    
     
     //项目详细地点
-    UILabel* areaDetailLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 280, 50)];
+    bounds=[detailAddress boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil];
+    
+    //CGFloat temp=bounds.size.height>
+    UILabel* areaDetailLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 125+tempHeight, 280, [stageTitle isEqualToString:@"土地规划/拍卖"]&&bounds.size.height>=17?34:bounds.size.height)];
     areaDetailLabel.text=detailAddress;
-    areaDetailLabel.center=CGPointMake(160, 145);
-    areaDetailLabel.numberOfLines=2;
+    areaDetailLabel.numberOfLines=[stageTitle isEqualToString:@"土地规划/拍卖"]?0:0;
     areaDetailLabel.textColor=RGBCOLOR(125, 125, 125);
     areaDetailLabel.font=[UIFont systemFontOfSize:13];
     areaDetailLabel.textAlignment=NSTextAlignmentCenter;
     [titleView addSubview:areaDetailLabel];
+    tempHeight+=bounds.size.height-13;
+    //areaDetailLabel.backgroundColor=[UIColor redColor];
     
-    
+    CGRect frame=titleView.frame;
+    frame.size.height+=tempHeight;
+    titleView.frame=frame;
+    height+=tempHeight;
     return titleView;
 }
 @end

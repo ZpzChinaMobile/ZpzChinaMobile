@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "CameraModel.h"
 @interface CameraSqlite : NSObject
 +(void)opensql;
 +(void)dropTable;
@@ -39,8 +39,11 @@
 
 
 +(NSMutableArray *)loadList:(NSString *)aid;
++(NSMutableArray *)loadSingleList:(NSString *)aid;
 +(void)InsertData:(NSDictionary *)dic;
 +(void)delData:(NSString *)aid;
 +(void)UpdataProjectId:(NSString *)projectId aid:(NSString *)aid projectName:(NSString *)projectName;
 +(void)UpdataBaseId:(NSString *)baseCameraID aid:(NSString *)aid;
+
++(void)InsertNewData:(CameraModel *)model;
 @end

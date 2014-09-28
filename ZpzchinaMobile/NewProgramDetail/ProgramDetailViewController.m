@@ -28,7 +28,7 @@
 @interface ProgramDetailViewController ()<UITableViewDataSource,UITableViewDelegate,ProgramSelectViewCellDelegate,ModificationDelegate>
 
 @property(nonatomic,strong)UIScrollView* myScrollView;
-@property(nonatomic,strong)UIView* tuDiXinXi;//土地信息大模块
+@property(nonatomic,strong)TuDiXinXi* tuDiXinXi;//土地信息大模块
 @property(nonatomic,strong)UIView* zhuTiSheJi;//主体设计阶段
 @property(nonatomic,strong)UIView* zhuTiShiGong;//主体施工阶段
 @property(nonatomic,strong)UIView* zhuangXiu;//装修阶段
@@ -69,7 +69,6 @@
 
 @implementation ProgramDetailViewController
 
-
 -(CGFloat)loadNewViewStandardY{
     if (!self.zhuTiSheJi) {
         return 50+56+self.tuDiXinXi.frame.size.height-568+64.5;//50和76分别为themeView和给之后预留的动画view的高,568为屏幕高,64.5为伪navi高
@@ -83,41 +82,77 @@
     }
 }
 
--(void)backToProgramDetailView{
-//    self.view=nil;
-//    return;
-    //self.dataDic;
-    ProjectModel* model=[ProjectSqlite loadList:self.ID][0];
-    self.dataDic=[ProjectStage JudgmentStr:model];
-
-    [self loadLocalContact:self.ID];
-    [self loadLocalImage:self.ID];
-    NSArray* array=[NSArray arrayWithObjects:self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu, nil];
-    CGRect frames[4]={self.tuDiXinXi.frame,self.zhuTiSheJi.frame,self.zhuTiShiGong.frame,self.zhuangXiu.frame};
-    
-    CGFloat a,b,c;
-    for (int i=0; i<array.count; i++) {
-        if (i==0) {
-            [self.tuDiXinXi removeFromSuperview];
-            self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
-            self.tuDiXinXi.frame=frames[i];
-            [self.myScrollView addSubview:self.tuDiXinXi];
-        }else if (i==1){
-            [self.zhuTiSheJi removeFromSuperview];
-            self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&b delegate:self];
-            self.zhuTiSheJi.frame=frames[i];
-            [self.myScrollView addSubview:self.zhuTiSheJi];
-        }else if (i==2){
-            [self.zhuTiShiGong removeFromSuperview];
-            self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&b thirdViewHeight:&c delegate:self];
-            self.zhuTiShiGong.frame=frames[i];
-            [self.myScrollView addSubview:self.zhuTiShiGong];
+-(void)backToProgramDetailViewWithIsRelease:(int)isRelease{
+    if (isRelease) {
+        ProjectModel* model;
+        if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
+            model=[ProjectSqlite loadList:self.dataDic[@"id"]][0];
         }else{
-            [self.zhuangXiu removeFromSuperview];
-            self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self];
-            self.zhuangXiu.frame=frames[i];
-            [self.myScrollView addSubview:self.zhuangXiu];
+            model=[ProjectSqlite loadList:self.dataDic[@"projectID"]][0];
         }
+        NSLog(@"=====%@",self.dataDic);
+        NSLog(@"=====%@",[ProjectStage JudgmentStr:model]);
+        self.dataDic=[ProjectStage JudgmentStr:model];
+        
+        [self.contactAry removeAllObjects];
+        [self.ownerAry removeAllObjects];
+        [self.explorationAry removeAllObjects];
+        [self.horizonAry removeAllObjects];
+        [self.designAry removeAllObjects];
+        [self.pileAry removeAllObjects];
+        //图片的处理还没做，因为发现现在的照相逻辑是拍完则立即保存到数据库的
+        if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
+            [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
+            [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
+        }else{
+            [self loadLocalContact:[self.dataDic objectForKey:@"projectID"]];
+            [self loadLocalImage:[self.dataDic objectForKey:@"projectID"]];
+        }
+        
+        NSArray* array=[NSArray arrayWithObjects:self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu, nil];
+        CGRect frames[4]={self.tuDiXinXi.frame,self.zhuTiSheJi.frame,self.zhuTiShiGong.frame,self.zhuangXiu.frame};
+        
+        CGFloat a,b,c;
+        for (int i=0; i<array.count; i++) {
+            if (i==0) {
+                [self.tuDiXinXi removeFromSuperview];
+                self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
+                self.tuDiXinXi.frame=frames[i];
+                [self.myScrollView addSubview:self.tuDiXinXi];
+            }else if (i==1){
+                [self.zhuTiSheJi removeFromSuperview];
+                self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&b delegate:self];
+                self.zhuTiSheJi.frame=frames[i];
+                [self.myScrollView addSubview:self.zhuTiSheJi];
+            }else if (i==2){
+                [self.zhuTiShiGong removeFromSuperview];
+                self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&b thirdViewHeight:&c delegate:self];
+                self.zhuTiShiGong.frame=frames[i];
+                [self.myScrollView addSubview:self.zhuTiShiGong];
+            }else{
+                [self.zhuangXiu removeFromSuperview];
+                self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self];
+                self.zhuangXiu.frame=frames[i];
+                [self.myScrollView addSubview:self.zhuangXiu];
+            }
+        }
+        AppModel* appModel=[AppModel sharedInstance];
+        appModel.singleDic=self.dataDic;
+        
+        appModel.contactAry=self.contactAry;
+        appModel.ownerAry=self.ownerAry;
+        appModel.explorationAry=self.explorationAry;
+        appModel.horizonAry=self.horizonAry;
+        appModel.designAry=self.designAry;
+        appModel.pileAry=self.pileAry;
+        
+        appModel.horizonImageArr=self.horizonImageArr;
+        appModel.pilePitImageArr=self.pilePitImageArr;
+        appModel.mainConstructionImageArr=self.mainConstructionImageArr;
+        appModel.explorationImageArr=self.explorationImageArr;
+        appModel.fireControlImageArr=self.fireControlImageArr;
+        appModel.electroweakImageArr=self.electroweakImageArr;
+        appModel.planImageArr=self.planImageArr;
     }
 }
 
@@ -428,6 +463,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //初始navi,创建返回Button,初始scrollView,初始加载新view的动画
+    [self initNaviAndScrollView];
     
     //加载时的等待菊花
     self.loadAnimationView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -439,7 +476,6 @@
     if (!self.isRelease) {
         //如果是从 需要读取 本地数据库 的页面进来，则会有内容,如果是网络则无
         self.dataDic=[[NSMutableDictionary alloc]init];
-        
         //网络加载,初始哈页面在加载中,因为网络加载为异步,所以需要写在加载完后的block里
         [self doNetWorkFirst];
         
@@ -447,8 +483,15 @@
         //本地加载
 //        [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
 //        [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
-        [self loadLocalContact:self.ID];
-        [self loadLocalImage:self.ID];
+        
+        if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
+            [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
+            [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
+        }else{
+            [self loadLocalContact:[self.dataDic objectForKey:@"projectID"]];
+            [self loadLocalImage:[self.dataDic objectForKey:@"projectID"]];
+        }
+        
         [self loadSelf];
     }
 }
@@ -477,18 +520,14 @@
     appModel.electroweakImageArr=self.electroweakImageArr;
     appModel.planImageArr=self.planImageArr;
     
-    [self initNaviAndScrollView];//初始navi,创建返回Button,初始scrollView,初始加载新view的动画
     [self initThemeView];//主体view初始
     
     CGFloat a;
     self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
     self.firstViewFirstStage=0;
     self.firstViewSecondStage=a;
-    
     [self setOriginToView:self.tuDiXinXi];
-    
     [self initTableView];
-    
     [self.myScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 }
 
@@ -617,6 +656,7 @@
     [self.fireControlImageArr removeAllObjects];
     [self.electroweakImageArr removeAllObjects];
     [self.planImageArr removeAllObjects];
+    NSLog(@"=====");
     self.horizonImageArr = [CameraSqlite loadAllHorizonList:localProjectId];
     self.pilePitImageArr = [CameraSqlite loadAllPilePitList:localProjectId];
     self.mainConstructionImageArr = [CameraSqlite loadAllMainConstructionList:localProjectId];
@@ -715,11 +755,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==3) {
-        return 40;
-    }else{
-        return 34;
-    }
+    return indexPath.section==3?40:30;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -754,7 +790,6 @@
     return view;
 }
 
-
 //判断用户点击的是哪个sectionHeader,然后将section传过去
 -(void)selectSection:(id)button{
     NSLog(@"%d",[self.sectionButtonArray indexOfObject:button]);
@@ -762,11 +797,7 @@
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==3) {
-        return NO;
-    }else{
-        return YES;
-    }
+    return indexPath.section==3?NO:YES;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -775,7 +806,6 @@
 }
 
 -(void)didchangeStageSection:(NSInteger)section row:(NSInteger)row{
-    NSLog(@"=======%f",self.myScrollView.contentOffset.y);
     
     CGFloat a,b,c;
     for (int i=1; i<=section; i++) {//土地信息阶段必存在，不用判断和操作
@@ -816,21 +846,6 @@
     CGFloat fourthViewFirstStage=self.zhuangXiu.frame.origin.y-50;
     CGFloat fourthArray[1]={fourthViewFirstStage};
     CGFloat* ary[4]={firstArray,secondArray,thirdArray,fourthArray};
-    
-    //因去除了真navi,所以不用减64.5这个自定义伪navi高了
-    /*
-     //遍历不太好，后期可改进
-     for (int i=0; i<sizeof(firstArray)/sizeof(CGFloat); i++) {
-     firstArray[i]-=64.5;
-     }
-     for (int i=0; i<sizeof(secondArray)/sizeof(CGFloat); i++) {
-     secondArray[i]-=64.5;
-     }
-     for (int i=0; i<sizeof(thirdArray)/sizeof(CGFloat); i++) {
-     thirdArray[i]-=64.5;
-     }
-     fourthArray[0]-=64.5;
-     */
     
     [self.myScrollView  setContentOffset:CGPointMake(0, ary[section][row]) animated:YES];
     [self selectCancel];
@@ -996,7 +1011,8 @@
 }
 
 -(void)gotoModificationVC{
-    
+    //如果加载时的动画还在说明此时正在加载，否则加载动画的圈圈为被nil
+    if (self.loadAnimationView) return;
     if(([ProjectSqlite loadUpdataDataStatus:self.ID].count !=0)&&!self.isRelease){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                         message:@"此项目已在本地保存项目中"
@@ -1022,7 +1038,6 @@
     [modificationButton setImage:[UIImage imageNamed:@"XiangMuXiangQing/more_01@2x.png"] forState:UIControlStateNormal];
     [modificationButton addTarget:self action:@selector(gotoModificationVC) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:modificationButton];
-    
     
     //scrollView初始
     NSLog(@"============%f",self.contentView.frame.size.height);
@@ -1063,6 +1078,7 @@
     }
     self.contentView=nil;
     AppModel* appModel=[AppModel sharedInstance];
+    [appModel becomeNil];
     appModel=nil;
     NSLog(@"programDealloc");
 }

@@ -17,7 +17,7 @@
 
 @interface WeakElectricityCell : UITableViewCell
 
-@property(nonatomic ,strong) id <WeakElectricityDelegate> delegate;
+@property(nonatomic ,weak) id <WeakElectricityDelegate> delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag Arr:(NSMutableArray *)Arr singleDic:(NSMutableDictionary *)singleDic;
 

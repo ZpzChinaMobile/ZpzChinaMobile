@@ -14,6 +14,7 @@
 #import "AppModel.h"
 @interface TenTableViewController ()<CameraDelegate>{
     Camera* camera;
+    NSInteger newImageCount;
 }
 
 @end
@@ -32,6 +33,7 @@
         self.tableView.dataSource=self;
         self.tableView.separatorStyle=NO;
         [self.view addSubview:self.tableView];
+        newImageCount=0;
     }
     return self;
 }
@@ -75,6 +77,8 @@
     }else{
         static NSString *stringcell = @"WeakElectricityCell";
         WeakElectricityCell *cell = [tableView dequeueReusableCellWithIdentifier:stringcell];
+        [cell removeFromSuperview];
+        cell = nil;
         if(self.fromView == 0){
             cell = [[WeakElectricityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stringcell dic:self.dataDic flag:0 Arr:nil singleDic:nil];
         }else{
@@ -93,7 +97,16 @@
     return 150;
 }
 
--(void)backCamera{
+-(void)backCamera:(CameraModel *)cameraModel{
+    if (!self.images) {
+        self.images=[NSMutableArray array];
+    }
+    if (!cameraModel) return;
+    [self.images addObject:cameraModel];
+    newImageCount++;
+    [self.tableView reloadData];
+    return;
+    
     if (!self.images.count) {
         self.images=[NSMutableArray array];
     }
@@ -213,6 +226,9 @@
     NSLog(@"tenDisappear");
 }
 -(void)dealloc{
+    for (int i=0; i<newImageCount; i++) {
+        [self.images removeLastObject];
+    }
     camera=nil;
     NSLog(@"tenDealloc");
 }

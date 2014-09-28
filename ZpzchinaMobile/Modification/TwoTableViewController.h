@@ -26,4 +26,6 @@
 
 @property(nonatomic,weak)id<TwoTVCDelegate>delegate;
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images;
+-(void)cellTextFieldResignFirstResponder;
+-(void)getLocationNil;
 @end
