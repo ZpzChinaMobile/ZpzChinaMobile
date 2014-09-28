@@ -14,9 +14,9 @@
 #import "AdvancedSearchViewController.h"
 #import "CellContentView.h"
 #import "NewProjectViewController.h"
-#import "ASRDialogViewController.h"
+#import "UnderstandViewController.h"
 #import "RecordView.h"
-@interface SearchViewController : BaseViewController<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,toolBarViewDelegate,CellContentViewDelegate,UIActionSheetDelegate,ASRDialogViewControllerDelegate>{
+@interface SearchViewController : BaseViewController<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,toolBarViewDelegate,CellContentViewDelegate,UIActionSheetDelegate,UnderstandViewControllerDelegate>{
     UISearchBar *_searchbar;
     NSMutableArray *showArr;
     SearchCellView *searchCellView;
@@ -29,7 +29,7 @@
     UITableView *_tableView;
     NewProjectViewController *_newProject;
     NSMutableDictionary *dataDic;
-    ASRDialogViewController *ASRDialogview;
+    UnderstandViewController *underStandVC;
     RecordView *_recordView;
 }
 @property (nonatomic,retain) NSMutableArray *showArr;

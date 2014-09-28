@@ -23,6 +23,10 @@
 #import "FaceppAPI.h"
 #import "FaceLoginViewController.h"
 
+#import "iflyMSC/iflySetting.h"
+#import "Definition.h"
+#import "iflyMSC/IFlySpeechUtility.h"
+
 @implementation AppDelegate
 + (AppDelegate *)instance {
 	return (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -37,6 +41,25 @@
     
     // turn on the debug mode
     [FaceppAPI setDebugMode:TRUE];
+    
+    
+    //设置log等级，此处log为默认在documents目录下的msc.log文件
+    [IFlySetting setLogFile:LVL_NONE];
+    
+    //输出在console的log开关
+    [IFlySetting showLogcat:NO];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachePath = [paths objectAtIndex:0];
+    //设置msc.log的保存路径
+    [IFlySetting setLogFilePath:cachePath];
+    
+    
+    //创建语音配置
+    NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@,timeout=%@",APPID_VALUE,TIMEOUT_VALUE];
+    
+    //所有服务启动前，需要确保执行createUtility
+    [IFlySpeechUtility createUtility:initString];
     
     //屏幕常亮
     //[[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -54,7 +77,7 @@
     [CameraSqlite opensql];
     [RecordSqlite opensql];
     [ProjectLogSqlite opensql];
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
+    /*if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         NSLog(@"第一次启动");
         LoginViewController *loginview = [[LoginViewController alloc] init];
@@ -96,7 +119,7 @@
             
             if([[networkConnect sharedInstance] connectedToNetwork]){
                 NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"]);
-                if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"] isEqualToString:@"0"]) {
+                if (![[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"] isEqualToString:@"1"]) {
                     LoginViewController *loginview = [[LoginViewController alloc] init];
                     UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
                     [self.window setRootViewController:naVC];
@@ -109,7 +132,7 @@
                     self.window.backgroundColor = [UIColor whiteColor];
                     [self.window makeKeyAndVisible];
                 }
-            }else{
+            }else{*/
                 UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
                 UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
                 UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
@@ -124,12 +147,12 @@
                 [self.window setRootViewController:drawerController];
                 self.window.backgroundColor = [UIColor whiteColor];
                 [self.window makeKeyAndVisible];
-            }
-            
-            #endif
-            
-        }
-    }
+//            }
+//            
+//            #endif
+//            
+//        }
+//    }
 
        return YES;
 }

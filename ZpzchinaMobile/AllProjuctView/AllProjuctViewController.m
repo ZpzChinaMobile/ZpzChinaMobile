@@ -349,9 +349,9 @@ int startIndex;
     [_searchbar resignFirstResponder];
     switch (index) {
         case 0:
-            ASRDialogview = [[ASRDialogViewController alloc] init];
-            ASRDialogview.delegate = self;
-            [self.navigationController pushViewController:ASRDialogview animated:YES];
+            underStandVC = [[UnderstandViewController alloc] init];
+            underStandVC.delegate = self;
+            [self.navigationController pushViewController:underStandVC animated:YES];
             break;
         case 1:
             ADsearchVIew = [[AdvancedSearchViewController alloc] init];
@@ -361,6 +361,7 @@ int startIndex;
             mapView = [[BaiDuMapViewController alloc] init];
             [self.navigationController pushViewController:mapView animated:YES];
             break;
+            
         default:
             break;
     }
@@ -368,12 +369,11 @@ int startIndex;
 
 -(void)getSearchContent:(NSString *)searchContent{
     [self.showArr removeAllObjects];
-    NSString *string = [searchContent stringByReplacingOccurrencesOfString:@"。" withString:@""];
-    [_searchbar setText:string];
+    [_searchbar setText:searchContent];
     startIndex = 0;
     [_searchbar resignFirstResponder];
     [self.showArr removeAllObjects];
-    [self loadServer:string startIndex:startIndex];
+    [self loadServer:searchContent startIndex:startIndex];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *time = [dateFormatter stringFromDate:[NSDate date]];
