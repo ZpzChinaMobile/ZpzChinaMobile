@@ -202,14 +202,11 @@
 }
 
 -(void)getImages:(NSMutableArray*)array{
-    // NSMutableArray* images=[NSMutableArray array];
-    
     if (array.count) {
         NSMutableURLRequest *requestSecond = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,array[0]] parameters:nil error:nil];
         AFHTTPRequestOperation *opSecond = [[AFHTTPRequestOperation alloc] initWithRequest:requestSecond];
         opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
         [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
-            // NSLog(@"responseObjectSecond%@",responseObjectSecond[@"d"][@"data"][0]);
             
             //将高清图的cameraModel放进字典
             CameraModel* camera=[[CameraModel alloc]init];
@@ -599,7 +596,6 @@
                 [imgDic setObject:imgTempDic.allValues[i] forKey:imgTempDic.allKeys[i]];
             }
         }
-        // NSLog(@"responseObjectSecond%@",imgDic);
         [self doNetWorkSecondImgDic:imgDic];
         if (!imgDic.allKeys.count) {
             [self loadSelf];
