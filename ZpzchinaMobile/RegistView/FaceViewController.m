@@ -13,7 +13,9 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "FaceLoginViewController.h"
-
+#import "LoginSqlite.h"
+#import "UserModel.h"
+#import "UserSqlite.h"
 @interface FaceViewController ()
 
 @end
@@ -249,15 +251,21 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         _preview = nil;
         _device = nil;
         _imageView.image = image;
-        if([[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"] isEqualToString:@"1"]){//识别登录
+        NSMutableArray *listArr = [UserSqlite loadList];
+        if ([listArr count]!=0) {
+            UserModel *model = [listArr objectAtIndex:0];
+            
+            if([model.a_isFaceRegisted isEqualToString:@"1"]){//识别登录
                 [event detectWithImage:image With:People];
-
-        }else{
+                
+            }else{
                 if([delegate respondsToSelector:@selector(addImage:)]){//未注册时进行
-                [delegate addImage:image];
-
+                    [delegate addImage:image];
+                    
+                }
             }
         }
+        
 
     }
 }

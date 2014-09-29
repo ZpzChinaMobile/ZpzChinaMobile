@@ -16,7 +16,8 @@
 #import "LoginSqlite.h"
 #import "PanViewController.h"
 #import "ContactModel.h"
-
+#import "ProjectStage.h"
+#import "UserSqlite.h"
 @interface RegistViewController ()
 
 @end
@@ -248,18 +249,8 @@
             
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
             for(NSDictionary *item in a){
-                [[NSUserDefaults standardUserDefaults]setObject:_phoneNumberTextField.text forKey:@"userName"];
-                [[NSUserDefaults standardUserDefaults]setObject:passWordField.text forKey:@"passWord"];
-                [[NSUserDefaults standardUserDefaults]setObject:[item objectForKey:@"userToken"] forKey:@"UserToken"];
-                NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",isFaceRegisted]forKey:@"isFaceRegisted"];
-                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"faceCount"] forKey:@"currentFaceCount"];
-                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"userID"] forKey:@"userID"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [LoginSqlite insertData:[item objectForKey:@"userToken"] datakey:@"UserToken"];
-                [LoginSqlite insertData:_phoneNumberTextField.text datakey:@"userName"];
-                [LoginSqlite insertData:passWordField.text datakey:@"passWord"];
-
+                [LoginSqlite insertData:item[@"userToken"] datakey:@"UserToken"];
+                [UserSqlite InsertData:item];
             }
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"注册成功，是否进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
             [alert show];

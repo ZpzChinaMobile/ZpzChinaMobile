@@ -26,7 +26,8 @@
 #import "iflyMSC/iflySetting.h"
 #import "Definition.h"
 #import "iflyMSC/IFlySpeechUtility.h"
-
+#import "UserSqlite.h"
+#import "UserModel.h"
 @implementation AppDelegate
 + (AppDelegate *)instance {
 	return (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -71,7 +72,7 @@
 	}
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-     [LoginSqlite opensql];
+    [LoginSqlite opensql];
     [ProjectSqlite opensql];
     [ContactSqlite opensql];
     [CameraSqlite opensql];
@@ -88,17 +89,11 @@
         [self.window makeKeyAndVisible];
     }else{
         NSLog(@"已经不是第一次启动了");
-        NSLog(@"==>%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"]);
-        if (![[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"]) {
-            LoginViewController *loginview = [[LoginViewController alloc] init];
-            UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
-            
-            [self.window setRootViewController:naVC];
-            self.window.backgroundColor = [UIColor whiteColor];
-            [self.window makeKeyAndVisible];
-        }else{
-            
-            #if TARGET_IPHONE_SIMULATOR
+        NSMutableArray *listArr = [UserSqlite loadList];
+        if ([listArr count]!=0) {
+            UserModel *model = [listArr objectAtIndex:0];
+            NSLog(@"*************%@",model.a_userToken);
+#if TARGET_IPHONE_SIMULATOR
             
             UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
             UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
@@ -115,7 +110,7 @@
             self.window.backgroundColor = [UIColor whiteColor];
             [self.window makeKeyAndVisible];
             
-            #elif TARGET_OS_IPHONE
+#elif TARGET_OS_IPHONE
             
             if([[networkConnect sharedInstance] connectedToNetwork]){
                 NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"]);

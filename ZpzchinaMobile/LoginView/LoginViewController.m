@@ -14,6 +14,8 @@
 #import "LoginSqlite.h"
 #import "RegistViewController.h"
 #import "PanViewController.h"
+#import "UserModel.h"
+#import "UserSqlite.h"
 
 @interface LoginViewController ()
 
@@ -168,16 +170,13 @@ static bool FirstLogin = NO;
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",isFaceRegisted]forKey:@"isFaceRegisted"];
-                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"faceCount"] forKey:@"currentFaceCount"];
-                [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:@"userName"];
-                [[NSUserDefaults standardUserDefaults] setObject:self.userToken forKey:@"UserToken"];
-                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"userID"] forKey:@"userID"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [LoginSqlite insertData:[item objectForKey:@"userToken"]  datakey:@"UserToken"];
-                
-                if([[NSUserDefaults standardUserDefaults] objectForKey:@"firstPassWordLogin"]==nil&&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){
-                    [[NSUserDefaults standardUserDefaults] setObject:@"firstLogin" forKey:@"firstPassWordLogin"];
+                [LoginSqlite insertData:self.userToken datakey:@"UserToken"];
+                [UserSqlite InsertData:item];
+            
+                NSLog(@"firstPassWordLogin******%@",[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""]);
+                if([[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""] isEqualToString:@""] &&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){//判断用户是否是第一次登陆并判断用户脸部识别的状态
+                    [LoginSqlite insertData:@"1" datakey:@"firstPassWordLogin"];
+  NSLog(@"firstPassWordLogin******%@",[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""]);
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否要进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
                     
                     [alert show];
@@ -202,13 +201,7 @@ static bool FirstLogin = NO;
 
 -(void)loginSuccess{             //登录成功
     loginBtn.enabled=YES;
-    [[NSUserDefaults standardUserDefaults]setObject:_userNameTextField.text forKey:@"userName"];
-    [[NSUserDefaults standardUserDefaults]setObject:_passWordTextField.text forKey:@"passWord"];
-    [[NSUserDefaults standardUserDefaults]setObject:self.userToken forKey:@"UserToken"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    [LoginSqlite insertData:self.userToken datakey:@"UserToken"];
-    [LoginSqlite insertData:_userNameTextField.text datakey:@"userName"];
-    [LoginSqlite insertData:_passWordTextField.text datakey:@"passWord"];
+
     
     UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"登录成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     alert.tag = 20140731;

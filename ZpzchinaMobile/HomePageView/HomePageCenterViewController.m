@@ -14,7 +14,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GradientView.h"
 #import "networkConnect.h"
-
+#import "LoginSqlite.h"
+#import "UserModel.h"
+#import "UserSqlite.h"
 @interface HomePageCenterViewController ()
 
 @end
@@ -101,8 +103,11 @@
     userNameLabel.frame = CGRectMake(10, 195, 200, 28);
     userNameLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:17];
     userNameLabel.textColor = [UIColor whiteColor];
-    userNameLabel.text = [NSString stringWithFormat:@"用户名：%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]];
+    NSMutableArray *list = [UserSqlite loadList];
+    UserModel *model = list[0];
+    userNameLabel.text = [NSString stringWithFormat:@"用户名：%@",model.a_cellphone];
     [bannerView addSubview:userNameLabel];
+
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.frame = CGRectMake(10, 228, 140, 28);
