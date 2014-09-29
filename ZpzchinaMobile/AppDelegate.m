@@ -27,6 +27,7 @@
 #import "Definition.h"
 #import "iflyMSC/IFlySpeechUtility.h"
 #import "UserSqlite.h"
+#import "UserModel.h"
 @implementation AppDelegate
 + (AppDelegate *)instance {
 	return (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -71,15 +72,15 @@
 	}
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-     [LoginSqlite opensql];
+    [LoginSqlite opensql];
     [ProjectSqlite opensql];
     [ContactSqlite opensql];
     [CameraSqlite opensql];
     [RecordSqlite opensql];
     [ProjectLogSqlite opensql];
-    
-    if(![[LoginSqlite getdata:@"firstLaunch" defaultdata:@""] isEqualToString:@""]){
-        [LoginSqlite insertData:@"firstLaunch" datakey:@"firstLaunch"];
+    [UserSqlite opensql];
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"firstLaunch"]){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         NSLog(@"第一次启动");
         LoginViewController *loginview = [[LoginViewController alloc] init];
         UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
@@ -89,17 +90,14 @@
         [self.window makeKeyAndVisible];
     }else{
         NSLog(@"已经不是第一次启动了");
-        NSLog(@"&&&&&&*******%@",[LoginSqlite getdata:@"UserToken" defaultdata:@""]);
-        if ([[LoginSqlite getdata:@"UserToken" defaultdata:@""] isEqualToString:@""]) {
-            LoginViewController *loginview = [[LoginViewController alloc] init];
-            UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
+        NSMutableArray *listArr = [UserSqlite loadList];
+        if ([listArr count]!=0) {
+            UserModel *model = [listArr objectAtIndex:0];
+            NSLog(@"*************%@",model.a_userToken);
+            NSLog(@"&&&&&&*******%@",[LoginSqlite getdata:@"UserToken" defaultdata:@""]);
             
-            [self.window setRootViewController:naVC];
-            self.window.backgroundColor = [UIColor whiteColor];
-            [self.window makeKeyAndVisible];
-        }else{
             
-            #if TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
             
             UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
             UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
@@ -116,11 +114,11 @@
             self.window.backgroundColor = [UIColor whiteColor];
             [self.window makeKeyAndVisible];
             
-            #elif TARGET_OS_IPHONE
+#elif TARGET_OS_IPHONE
             
             if([[networkConnect sharedInstance] connectedToNetwork]){
                 
-
+                NSLog(@"**a_isFaceRegisted*******%@**",model.a_isFaceRegisted);
                 if (![[LoginSqlite getdata:@"isFaceRegisted" defaultdata:@""] isEqualToString:@"1"]) {
                     LoginViewController *loginview = [[LoginViewController alloc] init];
                     UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
@@ -151,12 +149,21 @@
                 [self.window makeKeyAndVisible];
             }
             
-            #endif
+#endif
             
+            
+        }else{
+            LoginViewController *loginview = [[LoginViewController alloc] init];
+            UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
+            
+            [self.window setRootViewController:naVC];
+            self.window.backgroundColor = [UIColor whiteColor];
+            [self.window makeKeyAndVisible];
         }
+        
     }
-
-       return YES;
+    
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

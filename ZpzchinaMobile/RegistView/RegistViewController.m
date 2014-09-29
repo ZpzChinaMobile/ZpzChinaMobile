@@ -17,6 +17,7 @@
 #import "PanViewController.h"
 #import "ContactModel.h"
 #import "ProjectStage.h"
+#import "UserSqlite.h"
 @interface RegistViewController ()
 
 @end
@@ -249,15 +250,7 @@
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
             for(NSDictionary *item in a){
 
-                [LoginSqlite insertData:[item objectForKey:@"userToken"] datakey:@"UserToken"];
-                [LoginSqlite insertData:_phoneNumberTextField.text datakey:@"userName"];
-                [LoginSqlite insertData:passWordField.text datakey:@"passWord"];
-                NSString *isFaceRegisted = [NSString stringWithFormat:@"%@",[item objectForKey:@"isFaceRegisted"]];
-                [LoginSqlite insertData:isFaceRegisted datakey:@"isFaceRegisted"];
-                NSString *currentFaceCount = [NSString stringWithFormat:@"%@",[item objectForKey:@"faceCount"]];
-                [LoginSqlite insertData:currentFaceCount datakey:@"currentFaceCount"];
-                [LoginSqlite insertData:[item objectForKey:@"userID"] datakey:@"userID"];
-
+                [UserSqlite InsertData:item];
             }
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"注册成功，是否进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
             [alert show];

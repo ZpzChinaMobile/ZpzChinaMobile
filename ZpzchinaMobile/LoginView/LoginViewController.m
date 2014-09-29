@@ -16,6 +16,7 @@
 #import "PanViewController.h"
 #import "UserModel.h"
 #import "UserSqlite.h"
+
 @interface LoginViewController ()
 
 @end
@@ -169,14 +170,9 @@ static bool FirstLogin = NO;
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-                [LoginSqlite insertData:[NSString stringWithFormat:@"%@",isFaceRegisted] datakey:@"isFaceRegisted"];
-                [LoginSqlite insertData:_userNameTextField.text datakey:@"userName"];
-                [LoginSqlite insertData:[item objectForKey:@"userID"] datakey:@"userID"];
-                [LoginSqlite insertData:[item objectForKey:@"userToken"] datakey:@"UserToken"];
-                
-                NSString *currentFaceCount = [NSString stringWithFormat:@"%@",[item objectForKey:@"faceCount"]];
-                [LoginSqlite insertData:currentFaceCount datakey:@"currentFaceCount"];
-                [LoginSqlite insertData:[item objectForKey:@"userID"] datakey:@"userID"];
+
+                [UserSqlite InsertData:item];
+            
                 NSLog(@"firstPassWordLogin******%@",[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""]);
                 if([[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""] isEqualToString:@""] &&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){//判断用户是否是第一次登陆并判断用户脸部识别的状态
                     [LoginSqlite insertData:@"1" datakey:@"firstPassWordLogin"];
