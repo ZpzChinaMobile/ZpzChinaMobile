@@ -168,10 +168,13 @@ static bool FirstLogin = NO;
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-                [LoginSqlite insertData:[NSString stringWithFormat:@"%@",isFaceRegisted] datakey:@"isFaceRegisted"];
-                [LoginSqlite insertData:[item objectForKey:@"faceCount"] datakey:@"currentFaceCount"];
-                [LoginSqlite insertData:_userNameTextField.text datakey:@"userName"];
-                [LoginSqlite insertData:[item objectForKey:@"userID"] datakey:@"userID"];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",isFaceRegisted]forKey:@"isFaceRegisted"];
+                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"faceCount"] forKey:@"currentFaceCount"];
+                [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:@"userName"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.userToken forKey:@"UserToken"];
+                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"userID"] forKey:@"userID"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [LoginSqlite insertData:[item objectForKey:@"userToken"]  datakey:@"UserToken"];
                 
                 if([[NSUserDefaults standardUserDefaults] objectForKey:@"firstPassWordLogin"]==nil&&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){
                     [[NSUserDefaults standardUserDefaults] setObject:@"firstLogin" forKey:@"firstPassWordLogin"];
