@@ -170,7 +170,7 @@ static bool FirstLogin = NO;
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-
+                [LoginSqlite insertData:_userNameTextField.text datakey:@"userName"];
                 [UserSqlite InsertData:item];
             
                 NSLog(@"firstPassWordLogin******%@",[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""]);

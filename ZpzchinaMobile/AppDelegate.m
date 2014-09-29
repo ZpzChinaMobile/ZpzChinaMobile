@@ -119,7 +119,7 @@
             if([[networkConnect sharedInstance] connectedToNetwork]){
                 
                 NSLog(@"**a_isFaceRegisted*******%@**",model.a_isFaceRegisted);
-                if (![[LoginSqlite getdata:@"isFaceRegisted" defaultdata:@""] isEqualToString:@"1"]) {
+                if (![model.a_isFaceRegisted isEqualToString:@"1"]) {
                     LoginViewController *loginview = [[LoginViewController alloc] init];
                     UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
                     [self.window setRootViewController:naVC];

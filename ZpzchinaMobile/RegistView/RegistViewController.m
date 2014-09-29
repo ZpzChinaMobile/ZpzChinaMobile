@@ -249,7 +249,7 @@
             
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
             for(NSDictionary *item in a){
-
+                [LoginSqlite insertData:_phoneNumberTextField.text datakey:@"userName"];
                 [UserSqlite InsertData:item];
             }
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"注册成功，是否进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];

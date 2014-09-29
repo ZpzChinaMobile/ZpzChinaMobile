@@ -11,6 +11,7 @@
 #import "FaceppAPI.h"
 #import "GTMBase64.h"
 #import "LoginSqlite.h"
+#import "UserSqlite.h"
 @implementation LoginEvent
 @synthesize faceIDArray;
 static int chanceToLoginByFace =3;
@@ -168,8 +169,9 @@ static int chanceToLoginByFace =3;
              
              NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
              for(NSDictionary *item in a){
+                 
 
-                 [LoginSqlite insertData:[NSString stringWithFormat:@"%@",[item objectForKey:@"faceCount"]] datakey:@"currentFaceCount"];
+//                 [LoginSqlite insertData:[NSString stringWithFormat:@"%@",[item objectForKey:@"faceCount"]] datakey:@"currentFaceCount"];
                  
                  //自学习，每次登录成功后继续注册脸，直到脸的张数为15
                  if([[item objectForKey:@"faceCount"] intValue] <15){
@@ -318,7 +320,8 @@ static int chanceToLoginByFace =3;
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"])
         {
-            [LoginSqlite insertData:@"1" datakey:@"isFaceRegisted"]; //保存用户脸部识别注册的状态
+            
+            [UserSqlite updataIsFaceRegisted:@"1"]; //保存用户脸部识别注册的状态
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"faceLogin" object:nil];//登录
         }else{
