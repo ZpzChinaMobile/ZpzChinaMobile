@@ -14,5 +14,7 @@
 +(void)delAll;
 
 +(void)InsertData:(NSDictionary *)dic;
++(void)updataIsFaceRegisted:(NSString *)str;
++(void)updataFaceCount:(NSString *)str;
 +(NSMutableArray *)loadList;
 @end

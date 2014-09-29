@@ -88,4 +88,18 @@
 	}
     return list;
 }
+
++(void)updataIsFaceRegisted:(NSString *)str{
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+	if ([sqlite open:DataBaseName]) {
+        [sqlite executeQuery:@"UPDATE User SET isFaceRegisted=?",str];
+	}
+}
+
++(void)updataFaceCount:(NSString *)str{
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+	if ([sqlite open:DataBaseName]) {
+        [sqlite executeQuery:@"UPDATE User SET faceCount=?",str];
+	}
+}
 @end
