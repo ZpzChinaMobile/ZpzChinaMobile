@@ -1029,11 +1029,14 @@
     [self addBackButton];
     
     CGRect frame=CGRectMake(285,30,25.5,22.5);
-    UIButton* modificationButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    modificationButton.frame=frame;
-    [modificationButton setImage:[UIImage imageNamed:@"XiangMuXiangQing/more_01@2x.png"] forState:UIControlStateNormal];
-    [modificationButton addTarget:self action:@selector(gotoModificationVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.topView addSubview:modificationButton];
+    if (!self.isFromAllProject) {
+        UIButton* modificationButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        modificationButton.frame=frame;
+        [modificationButton setImage:[UIImage imageNamed:@"XiangMuXiangQing/more_01@2x.png"] forState:UIControlStateNormal];
+        [modificationButton addTarget:self action:@selector(gotoModificationVC) forControlEvents:UIControlEventTouchUpInside];
+        [self.topView addSubview:modificationButton];
+    }
+    
     
     //scrollView初始
     NSLog(@"============%f",self.contentView.frame.size.height);

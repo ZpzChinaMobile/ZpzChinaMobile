@@ -257,6 +257,7 @@ int startIndex;
     vc.url=[dataArr objectAtIndex:indexPath.section][@"url"];
     vc.isRelease=0;
     vc.fromView=1;
+    vc.isFromAllProject=YES;
     vc.ID=[[dataArr objectAtIndex:indexPath.section] objectForKey:@"projectID"];
     [self.navigationController pushViewController:vc animated:YES];
 }
