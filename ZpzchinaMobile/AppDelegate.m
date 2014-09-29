@@ -77,7 +77,7 @@
     [CameraSqlite opensql];
     [RecordSqlite opensql];
     [ProjectLogSqlite opensql];
-    /*if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         NSLog(@"第一次启动");
         LoginViewController *loginview = [[LoginViewController alloc] init];
@@ -132,7 +132,7 @@
                     self.window.backgroundColor = [UIColor whiteColor];
                     [self.window makeKeyAndVisible];
                 }
-            }else{*/
+            }else{
                 UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
                 UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
                 UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
@@ -147,12 +147,12 @@
                 [self.window setRootViewController:drawerController];
                 self.window.backgroundColor = [UIColor whiteColor];
                 [self.window makeKeyAndVisible];
-//            }
-//            
-//            #endif
-//            
-//        }
-//    }
+            }
+            
+            #endif
+            
+        }
+    }
 
        return YES;
 }
