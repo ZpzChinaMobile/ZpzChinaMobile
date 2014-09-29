@@ -40,7 +40,7 @@ int j;
     latArr = [[NSMutableArray alloc] init];
     pointArr = [[NSMutableArray alloc] init];
     coordinates = [[NSMutableArray alloc] init];
-    [self loadServer];
+    //[self loadServer];
     [self addBackButton];
     [self addtittle:@"地图搜索"];
     _mapView = [[BMKMapView alloc] initWithFrame:self.view.frame];
@@ -337,6 +337,26 @@ int j;
     CGPoint location = [touch locationInView:imageView];
     CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
     [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+    
+    
+    NSInteger numberOfPoints = [coordinates count];
+    
+    if (numberOfPoints > 2)
+    {
+        CLLocationCoordinate2D points[numberOfPoints];
+        
+        
+        for (NSInteger i = 0; i < numberOfPoints; i++) {
+            points[i] = [coordinates[i] MKCoordinateValue];
+            NSLog(@"%lf,%lf",[coordinates[i] MKCoordinateValue].longitude,[coordinates[i] MKCoordinateValue].latitude);
+        }
+        
+        
+        
+        polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
+        [_mapView addOverlay:polygon];
+    }
+    
     CGPathCloseSubpath(pathRef);
     //NSLog(@"==>%@",pathRef);
     int count = 0;
@@ -365,18 +385,6 @@ int j;
             [_mapView addAnnotation:annotationPoint];
             topCount++;
         }
-    }
-    
-    NSInteger numberOfPoints = [coordinates count];
-    
-    if (numberOfPoints > 2)
-    {
-        CLLocationCoordinate2D points[numberOfPoints];
-        for (NSInteger i = 0; i < numberOfPoints; i++) {
-            points[i] = [coordinates[i] MKCoordinateValue];
-        }
-        polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
-        [_mapView addOverlay:polygon];
     }
 }
 
@@ -484,6 +492,7 @@ int j;
     [[NSOperationQueue mainQueue] addOperation:op];
 }
 
+
 -(void)closeBgview{
     [bgView removeFromSuperview];
     bgView=nil;
@@ -493,4 +502,6 @@ int j;
         _MapContent = nil;
     }];
 }
+
+
 @end
