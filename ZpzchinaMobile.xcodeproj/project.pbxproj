@@ -10,7 +10,6 @@
 		043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7131199CB71E0095D05B /* WeakElectricityCell.m */; };
 		043F7135199CC5380095D05B /* ClearFireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7134199CC5380095D05B /* ClearFireCell.m */; };
 		049A978819D50769007DC7C0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A978719D50769007DC7C0 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		049A979119D5138B007DC7C0 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049A979019D5138B007DC7C0 /* iflyMSC.framework */; };
 		049A979319D513C9007DC7C0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 049A979219D513C9007DC7C0 /* libz.dylib */; };
 		049A97A019D554BD007DC7C0 /* RecognizerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A979D19D554BD007DC7C0 /* RecognizerFactory.m */; };
 		049A97A119D554BD007DC7C0 /* UnderstandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A979F19D554BD007DC7C0 /* UnderstandViewController.m */; };
@@ -410,6 +409,7 @@
 		D3B27964195AA9DB0090632C /* ProjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B27963195AA9DB0090632C /* ProjectModel.m */; };
 		D3B8F54219D928E6008F6164 /* UserSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B8F54119D928E6008F6164 /* UserSqlite.m */; };
 		D3B8F54519D92BB0008F6164 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B8F54419D92BB0008F6164 /* UserModel.m */; };
+		D3B8F54B19D94930008F6164 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B8F54A19D94930008F6164 /* iflyMSC.framework */; };
 		D3BB71AD1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71AC1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m */; };
 		D3BB71B01953DE9100A3F626 /* ProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71AF1953DE9100A3F626 /* ProjectTableViewCell.m */; };
 		D3BB71B31953DF1400A3F626 /* GeologicalSurveyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71B21953DF1400A3F626 /* GeologicalSurveyTableViewCell.m */; };
@@ -485,7 +485,6 @@
 		049A977C19D4FFBB007DC7C0 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		049A978619D50769007DC7C0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		049A978719D50769007DC7C0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		049A979019D5138B007DC7C0 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = ZpzchinaMobile/AllProjuctView/voice/iflyMSC.framework; sourceTree = "<group>"; };
 		049A979219D513C9007DC7C0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		049A979C19D554BD007DC7C0 /* RecognizerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizerFactory.h; sourceTree = "<group>"; };
 		049A979D19D554BD007DC7C0 /* RecognizerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognizerFactory.m; sourceTree = "<group>"; };
@@ -1162,6 +1161,7 @@
 		D3B8F54119D928E6008F6164 /* UserSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSqlite.m; sourceTree = "<group>"; };
 		D3B8F54319D92BB0008F6164 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		D3B8F54419D92BB0008F6164 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		D3B8F54A19D94930008F6164 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = ZpzchinaMobile/AllProjuctView/voice/iflyMSC.framework; sourceTree = "<group>"; };
 		D3BB71AB1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanAndAuctionTableViewCell.h; sourceTree = "<group>"; };
 		D3BB71AC1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanAndAuctionTableViewCell.m; sourceTree = "<group>"; };
 		D3BB71AE1953DE9100A3F626 /* ProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTableViewCell.h; sourceTree = "<group>"; };
@@ -1329,9 +1329,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B8F54B19D94930008F6164 /* iflyMSC.framework in Frameworks */,
 				049A979319D513C9007DC7C0 /* libz.dylib in Frameworks */,
 				D3AD620519B0420F001FD483 /* libbaidumapapi.a in Frameworks */,
-				049A979119D5138B007DC7C0 /* iflyMSC.framework in Frameworks */,
 				D3AD620419B041FF001FD483 /* libbaidumapapi.a in Frameworks */,
 				D3311C2819A59CE6003B2682 /* MapKit.framework in Frameworks */,
 				D3BB730519557D6F00A3F626 /* CoreLocation.framework in Frameworks */,
@@ -1941,8 +1941,8 @@
 		D3A48839194A916B00EED32D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3B8F54A19D94930008F6164 /* iflyMSC.framework */,
 				049A979219D513C9007DC7C0 /* libz.dylib */,
-				049A979019D5138B007DC7C0 /* iflyMSC.framework */,
 				D3311C2719A59CE6003B2682 /* MapKit.framework */,
 				D3BB730419557D6F00A3F626 /* CoreLocation.framework */,
 				D3BB730219557D5F00A3F626 /* QuartzCore.framework */,

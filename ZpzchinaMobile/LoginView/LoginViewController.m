@@ -110,7 +110,7 @@ static bool FirstLogin = NO;
     [registBtn setTitle:@"没有账户，去注册！" forState:UIControlStateNormal];
     registBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:17];
     [registBtn addTarget:self action:@selector(registBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:registBtn];
+    //[self.view addSubview:registBtn];
     
 }
 
@@ -170,7 +170,7 @@ static bool FirstLogin = NO;
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-                [LoginSqlite insertData:_userNameTextField.text datakey:@"userName"];
+                [LoginSqlite insertData:self.userToken datakey:@"UserToken"];
                 [UserSqlite InsertData:item];
             
                 NSLog(@"firstPassWordLogin******%@",[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""]);

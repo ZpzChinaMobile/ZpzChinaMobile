@@ -22,6 +22,7 @@
 @property (nonatomic,strong) NSString *a_department;
 @property (nonatomic,strong) NSString *a_company;
 @property (nonatomic,strong) NSString *a_city;
+@property (nonatomic,strong) NSString *a_cellphone;
 -(void)loadWithDictionary:(NSDictionary*)dic;
 -(void)loadWithDB:(NSDictionary*)dic;
 @end
