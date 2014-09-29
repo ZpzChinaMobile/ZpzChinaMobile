@@ -23,7 +23,6 @@
 
 @implementation LoginViewController
 @synthesize userToken;
-static bool FirstLogin = NO;
 //static int j =0;
 //static int alertShowCount = 0;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -169,21 +168,19 @@ static bool FirstLogin = NO;
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
-                NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
+                //NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
                 [LoginSqlite insertData:self.userToken datakey:@"UserToken"];
                 [UserSqlite InsertData:item];
-            
-                NSLog(@"firstPassWordLogin******%@",[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""]);
-                if([[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""] isEqualToString:@""] &&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){//判断用户是否是第一次登陆并判断用户脸部识别的状态
-                    [LoginSqlite insertData:@"1" datakey:@"firstPassWordLogin"];
-  NSLog(@"firstPassWordLogin******%@",[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""]);
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否要进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
-                    
-                    [alert show];
-                }else{
-                    NSLog(@"登录成功！");
-                    [self loginSuccess];
-                }
+//                if([[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""] isEqualToString:@""] &&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){//判断用户是否是第一次登陆并判断用户脸部识别的状态
+//                    [LoginSqlite insertData:@"1" datakey:@"firstPassWordLogin"];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否要进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
+//                    
+//                    [alert show];
+//                }else{
+//                    NSLog(@"登录成功！");
+//                    [self loginSuccess];
+//                }
+                [self loginSuccess];
             }
         }else{
             NSLog(@"登录失败！");
