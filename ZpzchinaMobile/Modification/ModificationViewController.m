@@ -67,6 +67,7 @@
     [super viewWillAppear:animated];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    [self.tvcArray[1] getLocationNil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -141,8 +142,8 @@
     [self initdataDic];
     [self initTVC];
     [self initNavi];
-    [self initThemeView];
     [self initTableViewSpace];
+    [self initThemeView];
     [self.tableViewSpace addSubview:self.oneTVC.view];
     [self initTableView];
     
@@ -440,6 +441,11 @@
 }
 
 -(void)rightAction{
+    OneTableViewController* oneVC=self.tvcArray[0];
+    [oneVC cellTextFieldResignFirstResponder];
+    TwoTableViewController* twoVC=self.tvcArray[1];
+    [twoVC cellTextFieldResignFirstResponder];
+    
     AppModel* appModel=[AppModel sharedInstance];
     NSLog(@"SAVE");
     
@@ -816,19 +822,15 @@
     //土地规划/拍卖
     
     [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
-    [self.dataDic setObject:@"" forKey:@"landName"];
     [self.dataDic setObject:@"" forKey:@"district"];
     [self.dataDic setObject:@"" forKey:@"province"];
-    [self.dataDic setObject:@"" forKey:@"landAddress"];
     [self.dataDic setObject:@"" forKey:@"city"];
     [self.dataDic setObject:@"" forKey:@"usage"];
     [self.dataDic setObject:@"" forKey:@"auctionUnit"];
     //建立项目
     [self.dataDic setObject:@"" forKey:@"projectID"];
     [self.dataDic setObject:@"" forKey:@"projectCode"];
-    [self.dataDic setObject:@"" forKey:@"projectName"];
     [self.dataDic setObject:@"" forKey:@"projectVersion"];
-    [self.dataDic setObject:@"" forKey:@"description"];
     [self.dataDic setObject:@"" forKey:@"owner"];
     [self.dataDic setObject:@"" forKey:@"expectedStartTime"];
     [self.dataDic setObject:@"" forKey:@"expectedFinishTime"];
@@ -848,6 +850,11 @@
     [self.dataDic setObject:@"" forKey:@"url"];
     
     if(self.fromView == 0){
+        [self.dataDic setObject:@"" forKey:@"landName"];
+        [self.dataDic setObject:@"" forKey:@"landAddress"];
+        [self.dataDic setObject:@"" forKey:@"projectName"];
+        [self.dataDic setObject:@"" forKey:@"description"];
+        
         [self.dataDic setObject:@"0" forKey:@"area"];
         [self.dataDic setObject:@"0" forKey:@"plotRatio"];
         [self.dataDic setObject:@"0" forKey:@"investment"];

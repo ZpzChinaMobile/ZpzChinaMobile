@@ -26,16 +26,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    //为解决掉页面而加的view
+    UIView* tempView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,kScreenWidth, 64.5)];
+    [self.view addSubview:tempView];
+    
+    UIView *contentView=[[UIView alloc] initWithFrame:CGRectMake(0,64.5,kScreenWidth,kContentHeight)];
+    contentView.backgroundColor=[UIColor whiteColor];
+    self.contentView=contentView;
+    [self.view addSubview:contentView];
+
+    
     UIView *topView=[[UIView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth, 64.5)];
     topView.layer.contents=(id)[UIImage imageNamed:@"地图搜索_01.png"].CGImage;
     [self.view addSubview:topView];
     self.topView=topView;
     
-    UIView *contentView=[[UIView alloc] initWithFrame:CGRectMake(0,64.5,kScreenWidth,kContentHeight)];
-    contentView.backgroundColor=[UIColor whiteColor];
-    self.contentView=contentView;
-    [self.view insertSubview:contentView atIndex:0];
 }
 
 - (void)didReceiveMemoryWarning

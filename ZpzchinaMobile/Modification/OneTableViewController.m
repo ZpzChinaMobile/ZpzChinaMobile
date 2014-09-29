@@ -134,7 +134,7 @@
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"area"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"area"];
+                    [self.dataDic setObject:@"0" forKey:@"area"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"area"];
@@ -145,7 +145,7 @@
                 if(self.fromView == 0){
                     [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }else{
-                    [self.dataDic setObject:@"" forKey:@"plotRatio"];
+                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }
             }else{
                 [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"plotRatio"];
@@ -321,6 +321,15 @@
     if (self.images.count) {
         model.planImageArr=self.images;
     }
+}
+
+-(void)cellTextFieldResignFirstResponder{
+    for (UITextField* field in [[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] subviews][0] subviews]) {
+        if ([field isFirstResponder]) {
+            NSLog(@"%@",field);
+            [field resignFirstResponder];
+        };
+    };
 }
 
 -(void)dealloc{

@@ -24,6 +24,10 @@
     return self;
 }
 
+-(void)dealloc{
+    NSLog(@"location dealloc");
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -65,24 +69,24 @@
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     _locService.delegate = self;
     _geocodesearch.delegate = self;
-    
-    if([[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@""]){
-        [_locService startUserLocationService];
-    }else{
-        isGeoSearch = true;
-        BMKGeoCodeSearchOption *geocodeSearchOption = [[BMKGeoCodeSearchOption alloc]init];
-        geocodeSearchOption.city= baseCity;
-        geocodeSearchOption.address = baseAddress;
-        BOOL flag = [_geocodesearch geoCode:geocodeSearchOption];
-        if(flag)
-        {
-            NSLog(@"geo检索发送成功");
-        }
-        else
-        {
-            NSLog(@"geo检索发送失败");
-        }
-    }
+    [_locService startUserLocationService];
+//    if([[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@""]){
+//        [_locService startUserLocationService];
+//    }else{
+//        isGeoSearch = true;
+//        BMKGeoCodeSearchOption *geocodeSearchOption = [[BMKGeoCodeSearchOption alloc]init];
+//        geocodeSearchOption.city= baseCity;
+//        geocodeSearchOption.address = baseAddress;
+//        BOOL flag = [_geocodesearch geoCode:geocodeSearchOption];
+//        if(flag)
+//        {
+//            NSLog(@"geo检索发送成功");
+//        }
+//        else
+//        {
+//            NSLog(@"geo检索发送失败");
+//        }
+//    }
     
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
@@ -314,9 +318,11 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if ([delegate respondsToSelector:@selector(locationBack:testLocation:)]){
-        [delegate locationBack:address testLocation:testLocation];
-        [self.navigationController popViewControllerAnimated:YES];
+    if (buttonIndex==1) {
+        if ([delegate respondsToSelector:@selector(locationBack:testLocation:)]){
+            [delegate locationBack:address testLocation:testLocation];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 @end

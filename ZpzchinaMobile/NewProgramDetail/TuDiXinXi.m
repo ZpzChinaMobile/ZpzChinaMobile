@@ -61,11 +61,13 @@
 }
 
 -(void)getSecondView{
-    [self addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"项目立项" programTitle:dataDic[@"projectName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"city"],dataDic[@"district"],dataDic[@"landAddress"]] detailAddress:dataDic[@"description"]]];
-    
-    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, height-175, 320, 3.5)];
+    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, height, 320, 3.5)];
     shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
     [self addSubview:shadow];
+    
+    [self addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"项目立项" programTitle:dataDic[@"projectName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"city"],dataDic[@"district"],dataDic[@"landAddress"]] detailAddress:dataDic[@"description"]]];
+    [self bringSubviewToFront:shadow];
+    
     
     //获取预计施工时间以及预计竣工时间
     NSMutableArray* tempAry=[NSMutableArray array];
@@ -214,39 +216,47 @@
     UIView* view=[[UIView alloc]initWithFrame:CGRectZero];
     view.backgroundColor=[UIColor whiteColor];
     
+    CGRect bounds;
+    
     for (int i=0; i<2; i++) {
-        UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(i*160, 10, 160, 20)];
-        firstLabel.text=firstStrs[i];
+        NSInteger count=i?2:i;
+        
+        UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 10+i*60, 140, 20)];
+        firstLabel.text=firstStrs[count];
         firstLabel.textColor=RGBCOLOR(82, 125, 237);
         firstLabel.font=[UIFont systemFontOfSize:14];
-        firstLabel.textAlignment=NSTextAlignmentCenter;
+        firstLabel.textAlignment=NSTextAlignmentLeft;
         [view addSubview:firstLabel];
         
-        UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectMake(i*160, 30, 160, 20)];
-        secondLabel.text=secondStrs[i];
+        if (i) {
+            bounds=[secondStrs[count] boundingRectWithSize:CGSizeMake( 280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+        }
+        UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 30+i*60, i?280:140, i?bounds.size.height+5:20)];
+        secondLabel.text=secondStrs[count];
+        secondLabel.numberOfLines=0;
         secondLabel.textColor=RGBCOLOR(125, 125, 125);
         secondLabel.font=[UIFont systemFontOfSize:14];
-        secondLabel.textAlignment=NSTextAlignmentCenter;
+        secondLabel.textAlignment=NSTextAlignmentLeft;
         [view addSubview:secondLabel];
     }
-    UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 10+60, 160, 20)];
-    firstLabel.text=firstStrs[2];
+    UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 10, 160, 20)];
+    firstLabel.text=firstStrs[1];
     firstLabel.textColor=RGBCOLOR(82, 125, 237);
     firstLabel.font=[UIFont systemFontOfSize:14];
     firstLabel.textAlignment=NSTextAlignmentCenter;
     [view addSubview:firstLabel];
     
     UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectZero];
-    secondLabel.text=secondStrs[2];
+    secondLabel.text=secondStrs[1];
     secondLabel.numberOfLines=0;
     secondLabel.textColor=RGBCOLOR(125, 125, 125);
     secondLabel.font=[UIFont systemFontOfSize:14];
-    secondLabel.textAlignment=NSTextAlignmentLeft;
-    CGRect bounds=[secondLabel.text boundingRectWithSize:CGSizeMake( 305-52, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:14] forKey:NSFontAttributeName] context:nil];
-    secondLabel.frame=CGRectMake(52, 30+60, 305-52, bounds.size.height);
+    secondLabel.textAlignment=NSTextAlignmentCenter;
+   
+    secondLabel.frame=CGRectMake(160, 30, 160, 20);
     [view addSubview:secondLabel];
     
-    view.frame=CGRectMake(0, 0, 320, 2*60+(bounds.size.height-20));
+    view.frame=CGRectMake(0, 0, 320, 120+bounds.size.height-15);
     return view;
 }
 
@@ -262,7 +272,7 @@
     //项目名称view
     [self addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"土地规划/拍卖" programTitle:dataDic[@"landName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"province"],dataDic[@"city"],dataDic[@"district"]] detailAddress:dataDic[@"landAddress"]]];
     
-    NSLog(@"city=%@ description=%@ district=%@ landAddress=%@ landName=%@ ownerType=%@ projectName=%@ usage=%@ province=%@",dataDic[@"city"],dataDic[@"description"],dataDic[@"district"],dataDic[@"landAddress"],dataDic[@"landName"],dataDic[@"ownerType"],dataDic[@"projectName"],dataDic[@"usage"],dataDic[@"province"]);
+    //NSLog(@"city=%@ description=%@ district=%@ landAddress=%@ landName=%@ ownerType=%@ projectName=%@ usage=%@ province=%@",dataDic[@"city"],dataDic[@"description"],dataDic[@"district"],dataDic[@"landAddress"],dataDic[@"landName"],dataDic[@"ownerType"],dataDic[@"projectName"],dataDic[@"usage"],dataDic[@"province"]);
     //图片imageView
     [self getImageView:self.myDelegate.planImageArr.count];
     
@@ -378,10 +388,10 @@
 -(UIView*)getProgramViewWithTitleImage:(UIImage*)titleImage stageTitle:(NSString*)stageTitle programTitle:(NSString*)programTitle address:(NSString*)address detailAddress:(NSString*)detailAddress{
     
     //项目title及项目名称的画布
-    UIView* titleView=[[UIView alloc]initWithFrame:CGRectMake(0, height, 320, 175)];
+    UIView* titleView=[[UIView alloc]initWithFrame:CGRectMake(0, height, 320, 145)];
     titleView.backgroundColor=RGBCOLOR(229, 229, 229);
     NSLog(@"%f",height);
-    height+=175;
+    height+=145;
     
     ///title部分
     //图片
@@ -403,33 +413,50 @@
     line1.center=CGPointMake(160, 65);
     [titleView addSubview:line1];
     
+    //用来控制自适应的高度变化的累加
+    CGFloat tempHeight=0;
+    
     //项目名称部分
-    UILabel* programName=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    programName.center=CGPointMake(160, 85);
+    CGRect bounds=[programTitle boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} context:nil];
+    
+    UILabel* programName=[[UILabel alloc]initWithFrame:CGRectMake(20, 75, 280, bounds.size.height)];
     programName.text=programTitle;
+    programName.numberOfLines=0;
     programName.font=[UIFont systemFontOfSize:18];
     programName.textAlignment=NSTextAlignmentCenter;
     [titleView addSubview:programName];
+    tempHeight+=bounds.size.height-18;
     
     //项目地点部分
-    UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    areaLabel.center=CGPointMake(160, 115);
+    bounds=[address boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+    
+    UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 106+tempHeight, 280, bounds.size.height>=18?36:bounds.size.height)];
     areaLabel.text=address;
+    areaLabel.numberOfLines=2;
     areaLabel.font=[UIFont systemFontOfSize:14];
     areaLabel.textAlignment=NSTextAlignmentCenter;
     [titleView addSubview:areaLabel];
+    tempHeight+=bounds.size.height>=18?36-14:bounds.size.height-14;
+    
     
     //项目详细地点
-    UILabel* areaDetailLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 280, 50)];
+    bounds=[detailAddress boundingRectWithSize:CGSizeMake(280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil];
+    
+    //CGFloat temp=bounds.size.height>
+    UILabel* areaDetailLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 125+tempHeight, 280, [stageTitle isEqualToString:@"土地规划/拍卖"]&&bounds.size.height>=17?34:bounds.size.height)];
     areaDetailLabel.text=detailAddress;
-    areaDetailLabel.center=CGPointMake(160, 145);
-    areaDetailLabel.numberOfLines=2;
+    areaDetailLabel.numberOfLines=[stageTitle isEqualToString:@"土地规划/拍卖"]?0:0;
     areaDetailLabel.textColor=RGBCOLOR(125, 125, 125);
     areaDetailLabel.font=[UIFont systemFontOfSize:13];
     areaDetailLabel.textAlignment=NSTextAlignmentCenter;
     [titleView addSubview:areaDetailLabel];
+    tempHeight+=bounds.size.height-13;
+    //areaDetailLabel.backgroundColor=[UIColor redColor];
     
-    
+    CGRect frame=titleView.frame;
+    frame.size.height+=tempHeight;
+    titleView.frame=frame;
+    height+=tempHeight;
     return titleView;
 }
 @end

@@ -271,9 +271,9 @@ int startIndex;
 -(void)gotoView:(NSInteger)index{
     switch (index) {
         case 0:
-            ASRDialogview = [[ASRDialogViewController alloc] init];
-            ASRDialogview.delegate = self;
-            [self.navigationController pushViewController:ASRDialogview animated:YES];
+            underStandVC = [[UnderstandViewController alloc] init];
+            underStandVC.delegate = self;
+            [self.navigationController pushViewController:underStandVC animated:YES];
             break;
         case 1:
             ADsearchVIew = [[AdvancedSearchViewController alloc] init];
@@ -347,8 +347,8 @@ int startIndex;
 }
 
 -(void)getSearchContent:(NSString *)searchContent{
-    NSString *string = [searchContent stringByReplacingOccurrencesOfString:@"。" withString:@""];
-    [_searchbar setText:string];
+    
+    [_searchbar setText:searchContent];
     [self loadServer:_searchbar.text startIndex:0];
 }
 @end
