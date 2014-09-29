@@ -39,6 +39,6 @@
 
 @property(nonatomic,strong)NSMutableDictionary* imgDic;//保存该页面的大图字典,键为@"horizonImageArr",@"pilePitImageArr",@"mainConstructionImageArr",@"explorationImageArr",@"fireControlImageArr",@"electroweakImageArr",@"planImageArr"
 
-
+@property(nonatomic)BOOL isFromAllProject;
 -(void)userChangeImageWithButtons:(UIButton *)button;
 @end
