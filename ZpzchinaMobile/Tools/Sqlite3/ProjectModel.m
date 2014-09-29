@@ -11,6 +11,7 @@
 #import "ContactSqlite.h"
 #import "CameraSqlite.h"
 #import "ProjectSqlite.h"
+#import "LoginSqlite.h"
 @implementation ProjectModel
 //本地数据库
 -(void)loadWithDB:(NSDictionary*)dic
@@ -97,7 +98,8 @@
 }
 
 + (NSURLSessionDataTask *)globalSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block str:(NSString *)str index:(int)index{
-    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?keywords=%@&startIndex=%d&pageSize=5",[[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"],str,index];
+    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?keywords=%@&startIndex=%d&pageSize=5",[LoginSqlite getdata:@"UserToken" defaultdata:@""],str,index];
+    
     NSLog(@"%@",urlStr);
     NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)urlStr, NULL, NULL,  kCFStringEncodingUTF8 ));
     return [[AFAppDotNetAPIClient sharedClient] GET:encodedString parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
@@ -134,7 +136,7 @@
 }
 
 + (NSURLSessionDataTask *)globalMyProjectWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block index:(int)index{
-    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?myProjects=true&startIndex=%d&pageSize=5",[[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"],index] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
+    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?myProjects=true&startIndex=%d&pageSize=5",[LoginSqlite getdata:@"UserToken" defaultdata:@""],index] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
         NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];
         NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
         NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];

@@ -98,8 +98,8 @@ static int chanceToLoginByFace =3;
     
     if (count==1)
     {//判断image的张数
-        
-        person_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
+       
+        person_id =  [LoginSqlite getdata:@"userID" defaultdata:@""];
         NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
         FaceppResult *result = [[FaceppAPI detection] detectWithURL:nil orImageData:imageData mode:FaceppDetectionModeNormal attribute:FaceppDetectionAttributeNone];
         if (result.success)
@@ -168,11 +168,8 @@ static int chanceToLoginByFace =3;
              
              NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
              for(NSDictionary *item in a){
-                 [[NSUserDefaults standardUserDefaults]setObject:[item objectForKey:@"userToken"] forKey:@"UserToken"];
-                 [[NSUserDefaults standardUserDefaults]synchronize];
-                 [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"faceCount"] forKey:@"currentFaceCount"]; //  保存用户名下脸的张数，以便自学习是进行判断
-                 [[NSUserDefaults standardUserDefaults] synchronize];
-                 [LoginSqlite insertData:[item objectForKey:@"userToken"]  datakey:@"UserToken"];
+
+                 [LoginSqlite insertData:[NSString stringWithFormat:@"%@",[item objectForKey:@"faceCount"]] datakey:@"currentFaceCount"];
                  
                  //自学习，每次登录成功后继续注册脸，直到脸的张数为15
                  if([[item objectForKey:@"faceCount"] intValue] <15){
@@ -219,7 +216,7 @@ static int chanceToLoginByFace =3;
 #pragma mark 脸部识别注册－－－－－－－－
 -(void)detectWithImageArray:(NSMutableArray *)faceArray//没有进行脸部注册时候获取faceID
 {
-     person_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
+    person_id =  [LoginSqlite getdata:@"userID" defaultdata:@""];
     
     for (int i =0; i<faceArray.count; i++) {
         UIImage *image = [faceArray objectAtIndex:i];
@@ -321,13 +318,13 @@ static int chanceToLoginByFace =3;
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"])
         {
-            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isFaceRegisted"]; //保存用户脸部识别注册的状态
+            [LoginSqlite insertData:@"1" datakey:@"isFaceRegisted"]; //保存用户脸部识别注册的状态
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"faceLogin" object:nil];//登录
         }else{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"faceRegister" object:nil];//返回前一个VC
         }
-        [[NSUserDefaults standardUserDefaults] synchronize];
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:nil];//返回前登录界面

@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "FaceLoginViewController.h"
-
+#import "LoginSqlite.h"
 @interface FaceViewController ()
 
 @end
@@ -249,7 +249,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         _preview = nil;
         _device = nil;
         _imageView.image = image;
-        if([[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"] isEqualToString:@"1"]){//识别登录
+        if([[LoginSqlite getdata:@"isFaceRegisted" defaultdata:@""] isEqualToString:@"1"]){//识别登录
                 [event detectWithImage:image With:People];
 
         }else{

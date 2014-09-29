@@ -43,7 +43,7 @@
     nameLabel.frame = CGRectMake(25, 20, 250, 28);
     nameLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:19];
     nameLabel.textColor = [UIColor whiteColor];
-    nameLabel.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]];
+    nameLabel.text = [NSString stringWithFormat:@"%@",[LoginSqlite getdata:@"userName" defaultdata:@""]];
     [self.view addSubview:nameLabel];
     
     UILabel *welcomeLabel = [[UILabel alloc] init];
@@ -300,16 +300,17 @@
 }
 
 -(void)logoutSuccess{
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userName"];
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"passWord"];
-    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"UserToken"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isFaceRegisted"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentFaceCount"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"firstPassWordLogin"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];     [[NSUserDefaults standardUserDefaults]synchronize];
-     [LoginSqlite insertData:@"" datakey:@"userName"];
-     [LoginSqlite insertData:@"" datakey:@"passWord"];
-     [LoginSqlite insertData:@"" datakey:@"UserToken"];
+//    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userName"];
+//    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"passWord"];
+//    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"UserToken"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isFaceRegisted"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentFaceCount"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"firstPassWordLogin"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];     [[NSUserDefaults standardUserDefaults]synchronize];
+//     [LoginSqlite insertData:@"" datakey:@"userName"];
+//     [LoginSqlite insertData:@"" datakey:@"passWord"];
+//     [LoginSqlite insertData:@"" datakey:@"UserToken"];
+    [LoginSqlite dropTable];
     [ProjectSqlite delAll];
     [ContactSqlite delAll];
     [CameraSqlite delAll];

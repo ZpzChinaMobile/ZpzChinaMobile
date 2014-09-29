@@ -77,8 +77,9 @@
     [CameraSqlite opensql];
     [RecordSqlite opensql];
     [ProjectLogSqlite opensql];
-    /*if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+    
+    if(![[LoginSqlite getdata:@"firstLaunch" defaultdata:@""] isEqualToString:@""]){
+        [LoginSqlite insertData:@"firstLaunch" datakey:@"firstLaunch"];
         NSLog(@"第一次启动");
         LoginViewController *loginview = [[LoginViewController alloc] init];
         UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
@@ -88,8 +89,8 @@
         [self.window makeKeyAndVisible];
     }else{
         NSLog(@"已经不是第一次启动了");
-        NSLog(@"==>%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"]);
-        if (![[NSUserDefaults standardUserDefaults]objectForKey:@"UserToken"]) {
+        NSLog(@"&&&&&&*******%@",[LoginSqlite getdata:@"UserToken" defaultdata:@""]);
+        if ([[LoginSqlite getdata:@"UserToken" defaultdata:@""] isEqualToString:@""]) {
             LoginViewController *loginview = [[LoginViewController alloc] init];
             UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
             
@@ -118,8 +119,9 @@
             #elif TARGET_OS_IPHONE
             
             if([[networkConnect sharedInstance] connectedToNetwork]){
-                NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"]);
-                if (![[[NSUserDefaults standardUserDefaults]objectForKey:@"isFaceRegisted"] isEqualToString:@"1"]) {
+                
+
+                if (![[LoginSqlite getdata:@"isFaceRegisted" defaultdata:@""] isEqualToString:@"1"]) {
                     LoginViewController *loginview = [[LoginViewController alloc] init];
                     UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
                     [self.window setRootViewController:naVC];
@@ -132,7 +134,7 @@
                     self.window.backgroundColor = [UIColor whiteColor];
                     [self.window makeKeyAndVisible];
                 }
-            }else{*/
+            }else{
                 UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
                 UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
                 UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
@@ -147,12 +149,12 @@
                 [self.window setRootViewController:drawerController];
                 self.window.backgroundColor = [UIColor whiteColor];
                 [self.window makeKeyAndVisible];
-//            }
-//            
-//            #endif
-//            
-//        }
-//    }
+            }
+            
+            #endif
+            
+        }
+    }
 
        return YES;
 }
