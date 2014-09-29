@@ -14,7 +14,8 @@
 #import "LoginSqlite.h"
 #import "RegistViewController.h"
 #import "PanViewController.h"
-
+#import "UserModel.h"
+#import "UserSqlite.h"
 @interface LoginViewController ()
 
 @end
@@ -175,6 +176,9 @@ static bool FirstLogin = NO;
                 [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"userID"] forKey:@"userID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [LoginSqlite insertData:[item objectForKey:@"userToken"]  datakey:@"UserToken"];
+                
+                [UserSqlite InsertData:item];
+                
                 
                 if([[NSUserDefaults standardUserDefaults] objectForKey:@"firstPassWordLogin"]==nil&&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){
                     [[NSUserDefaults standardUserDefaults] setObject:@"firstLogin" forKey:@"firstPassWordLogin"];

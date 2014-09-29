@@ -26,7 +26,7 @@
 #import "iflyMSC/iflySetting.h"
 #import "Definition.h"
 #import "iflyMSC/IFlySpeechUtility.h"
-
+#import "UserSqlite.h"
 @implementation AppDelegate
 + (AppDelegate *)instance {
 	return (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -77,6 +77,7 @@
     [CameraSqlite opensql];
     [RecordSqlite opensql];
     [ProjectLogSqlite opensql];
+    [UserSqlite opensql];
     /*if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         NSLog(@"第一次启动");

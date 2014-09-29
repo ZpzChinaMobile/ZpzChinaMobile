@@ -408,6 +408,8 @@
 		D3B27957195A6F800090632C /* LocateView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B27956195A6F800090632C /* LocateView.m */; };
 		D3B27961195A9EDA0090632C /* ProjectSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B27960195A9EDA0090632C /* ProjectSqlite.m */; };
 		D3B27964195AA9DB0090632C /* ProjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B27963195AA9DB0090632C /* ProjectModel.m */; };
+		D3B8F54219D928E6008F6164 /* UserSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B8F54119D928E6008F6164 /* UserSqlite.m */; };
+		D3B8F54519D92BB0008F6164 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B8F54419D92BB0008F6164 /* UserModel.m */; };
 		D3BB71AD1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71AC1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m */; };
 		D3BB71B01953DE9100A3F626 /* ProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71AF1953DE9100A3F626 /* ProjectTableViewCell.m */; };
 		D3BB71B31953DF1400A3F626 /* GeologicalSurveyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71B21953DF1400A3F626 /* GeologicalSurveyTableViewCell.m */; };
@@ -1156,6 +1158,10 @@
 		D3B27960195A9EDA0090632C /* ProjectSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectSqlite.m; sourceTree = "<group>"; };
 		D3B27962195AA9DB0090632C /* ProjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectModel.h; sourceTree = "<group>"; };
 		D3B27963195AA9DB0090632C /* ProjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectModel.m; sourceTree = "<group>"; };
+		D3B8F54019D928E6008F6164 /* UserSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSqlite.h; sourceTree = "<group>"; };
+		D3B8F54119D928E6008F6164 /* UserSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSqlite.m; sourceTree = "<group>"; };
+		D3B8F54319D92BB0008F6164 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		D3B8F54419D92BB0008F6164 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		D3BB71AB1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanAndAuctionTableViewCell.h; sourceTree = "<group>"; };
 		D3BB71AC1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanAndAuctionTableViewCell.m; sourceTree = "<group>"; };
 		D3BB71AE1953DE9100A3F626 /* ProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTableViewCell.h; sourceTree = "<group>"; };
@@ -2333,6 +2339,10 @@
 				D3C58E48197EADFF003DD94F /* RecordSqlite.m */,
 				D3C58E4A197EAE0D003DD94F /* RecordModel.h */,
 				D3C58E4B197EAE0D003DD94F /* RecordModel.m */,
+				D3B8F54019D928E6008F6164 /* UserSqlite.h */,
+				D3B8F54119D928E6008F6164 /* UserSqlite.m */,
+				D3B8F54319D92BB0008F6164 /* UserModel.h */,
+				D3B8F54419D92BB0008F6164 /* UserModel.m */,
 			);
 			path = Sqlite3;
 			sourceTree = "<group>";
@@ -2937,6 +2947,7 @@
 				D31B26CF19891F2600B05B03 /* GPUImageStretchDistortionFilter.m in Sources */,
 				D3B2794E19595A150090632C /* UIViewController+MJPopupViewController.m in Sources */,
 				D31B269A19891F2600B05B03 /* GPUImageLuminanceThresholdFilter.m in Sources */,
+				D3B8F54219D928E6008F6164 /* UserSqlite.m in Sources */,
 				D3C58EA51980BD5E003DD94F /* CDataScanner_Extensions.m in Sources */,
 				D31B2B9E1990992300B05B03 /* FaceLoginViewController.m in Sources */,
 				D3C58EA71980BD5E003DD94F /* CJSONDeserializer.m in Sources */,
@@ -2966,6 +2977,7 @@
 				5BE93BB5199C700B00E2FF67 /* TwoTableViewController.m in Sources */,
 				043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */,
 				D31B26C719891F2600B05B03 /* GPUImageSmoothToonFilter.m in Sources */,
+				D3B8F54519D92BB0008F6164 /* UserModel.m in Sources */,
 				D3C58E961980BD5E003DD94F /* FaceppDetection.m in Sources */,
 				D31B26AE19891F2600B05B03 /* GPUImagePerlinNoiseFilter.m in Sources */,
 				D31B268D19891F2600B05B03 /* GPUImageHueFilter.m in Sources */,
