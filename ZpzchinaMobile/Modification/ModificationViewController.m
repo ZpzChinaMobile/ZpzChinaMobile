@@ -218,17 +218,12 @@
     
     self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
     
-    //i==0,i==1的tvc在自己的init里已经设置过,继承vc
-    //i==2-10为tvc
     for (int i=0; i<10; i++) {
         UIViewController* vc=self.tvcArray[i];
-        //tvc.tableView.frame=CGRectMake(0, 0, 320, 568-64.5-50);
         //因为是vc,所以vc.view.frame与tableView.frame的大小不同,会影响动画效果,所以需要重新设置vc.view.frame
-        //if (i==0||i==1||i==2) {
         CGRect frame=vc.view.frame;
         frame.size.height-=64.5+50;
         vc.view.frame=frame;
-        //}
     }
 }
 

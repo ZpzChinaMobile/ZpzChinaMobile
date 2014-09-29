@@ -14,7 +14,8 @@
 #import "LoginSqlite.h"
 #import "RegistViewController.h"
 #import "PanViewController.h"
-
+#import "UserModel.h"
+#import "UserSqlite.h"
 @interface LoginViewController ()
 
 @end

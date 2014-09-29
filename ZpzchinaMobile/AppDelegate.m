@@ -26,7 +26,7 @@
 #import "iflyMSC/iflySetting.h"
 #import "Definition.h"
 #import "iflyMSC/IFlySpeechUtility.h"
-
+#import "UserSqlite.h"
 @implementation AppDelegate
 + (AppDelegate *)instance {
 	return (AppDelegate *)[[UIApplication sharedApplication] delegate];
