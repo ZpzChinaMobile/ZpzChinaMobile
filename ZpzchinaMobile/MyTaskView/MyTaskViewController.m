@@ -391,7 +391,6 @@ int startIndex;
         [testActivityIndicator startAnimating]; // 开始旋转
         [bgView addSubview:testActivityIndicator];
         [self.view addSubview:bgView];
-        NSLog(@"%@",bgView);
         bgView.alpha = 0.5;
         self.dataArr = [ProjectSqlite loadInsertData];
         [self setServer:0];

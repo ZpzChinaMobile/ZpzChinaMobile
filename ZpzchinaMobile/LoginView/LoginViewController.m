@@ -108,7 +108,7 @@ static bool FirstLogin = NO;
     [registBtn setTitle:@"没有账户，去注册！" forState:UIControlStateNormal];
     registBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:17];
     [registBtn addTarget:self action:@selector(registBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:registBtn];
+    //[self.view addSubview:registBtn];
     
 }
 
@@ -168,13 +168,10 @@ static bool FirstLogin = NO;
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
                 NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",isFaceRegisted]forKey:@"isFaceRegisted"];
-                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"faceCount"] forKey:@"currentFaceCount"];
-                [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:@"userName"];
-                [[NSUserDefaults standardUserDefaults] setObject:self.userToken forKey:@"UserToken"];
-                [[NSUserDefaults standardUserDefaults] setObject:[item objectForKey:@"userID"] forKey:@"userID"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [LoginSqlite insertData:[item objectForKey:@"userToken"]  datakey:@"UserToken"];
+                [LoginSqlite insertData:[NSString stringWithFormat:@"%@",isFaceRegisted] datakey:@"isFaceRegisted"];
+                [LoginSqlite insertData:[item objectForKey:@"faceCount"] datakey:@"currentFaceCount"];
+                [LoginSqlite insertData:_userNameTextField.text datakey:@"userName"];
+                [LoginSqlite insertData:[item objectForKey:@"userID"] datakey:@"userID"];
                 
                 if([[NSUserDefaults standardUserDefaults] objectForKey:@"firstPassWordLogin"]==nil&&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){
                     [[NSUserDefaults standardUserDefaults] setObject:@"firstLogin" forKey:@"firstPassWordLogin"];
