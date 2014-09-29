@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7131199CB71E0095D05B /* WeakElectricityCell.m */; };
 		043F7135199CC5380095D05B /* ClearFireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F7134199CC5380095D05B /* ClearFireCell.m */; };
+		049A978819D50769007DC7C0 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A978719D50769007DC7C0 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		049A979119D5138B007DC7C0 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049A979019D5138B007DC7C0 /* iflyMSC.framework */; };
+		049A979319D513C9007DC7C0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 049A979219D513C9007DC7C0 /* libz.dylib */; };
+		049A97A019D554BD007DC7C0 /* RecognizerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A979D19D554BD007DC7C0 /* RecognizerFactory.m */; };
+		049A97A119D554BD007DC7C0 /* UnderstandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A979F19D554BD007DC7C0 /* UnderstandViewController.m */; };
 		5B0726D319A1D5A80050DF5B /* 新建项目－6_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */; };
 		5B0CC39E199F09290036F94B /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CC39D199F09290036F94B /* AppModel.m */; };
 		5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */; };
@@ -382,9 +387,6 @@
 		D3AA5A1B195D75DE00565078 /* 全部项目_16.png in Resources */ = {isa = PBXBuildFile; fileRef = D3AA5A18195D75DE00565078 /* 全部项目_16.png */; };
 		D3AA5A24195D89FF00565078 /* Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D3AA5A22195D89FF00565078 /* Selected.png */; };
 		D3AA5A25195D89FF00565078 /* Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = D3AA5A23195D89FF00565078 /* Unselected.png */; };
-		D3AAAB60196D6EC0008F9CCD /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3AAAB5F196D6EC0008F9CCD /* iflyMSC.framework */; };
-		D3AAAB65196D6F1E008F9CCD /* ASRDialogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AAAB62196D6F1E008F9CCD /* ASRDialogViewController.m */; };
-		D3AAAB66196D6F1E008F9CCD /* ZCNoneiFLYTEK.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AAAB64196D6F1E008F9CCD /* ZCNoneiFLYTEK.m */; };
 		D3AAAB6A196D6F2E008F9CCD /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AAAB69196D6F2E008F9CCD /* DKCircleButton.m */; };
 		D3AAAB6C196E8E2E008F9CCD /* mapsearch-1.png in Resources */ = {isa = PBXBuildFile; fileRef = D3AAAB6B196E8E2E008F9CCD /* mapsearch-1.png */; };
 		D3AB1BC219812C810046C587 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AB1BC119812C810046C587 /* AFAppDotNetAPIClient.m */; };
@@ -476,6 +478,17 @@
 		043F7131199CB71E0095D05B /* WeakElectricityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakElectricityCell.m; sourceTree = "<group>"; };
 		043F7133199CC5380095D05B /* ClearFireCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearFireCell.h; sourceTree = "<group>"; };
 		043F7134199CC5380095D05B /* ClearFireCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearFireCell.m; sourceTree = "<group>"; };
+		049A977919D4FFBB007DC7C0 /* Definition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definition.h; sourceTree = "<group>"; };
+		049A977B19D4FFBB007DC7C0 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		049A977C19D4FFBB007DC7C0 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
+		049A978619D50769007DC7C0 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		049A978719D50769007DC7C0 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		049A979019D5138B007DC7C0 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = ZpzchinaMobile/AllProjuctView/voice/iflyMSC.framework; sourceTree = "<group>"; };
+		049A979219D513C9007DC7C0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		049A979C19D554BD007DC7C0 /* RecognizerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecognizerFactory.h; sourceTree = "<group>"; };
+		049A979D19D554BD007DC7C0 /* RecognizerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecognizerFactory.m; sourceTree = "<group>"; };
+		049A979E19D554BD007DC7C0 /* UnderstandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnderstandViewController.h; sourceTree = "<group>"; };
+		049A979F19D554BD007DC7C0 /* UnderstandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnderstandViewController.m; sourceTree = "<group>"; };
 		5B0726D219A1D5A80050DF5B /* 新建项目－6_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目－6_03.png"; sourceTree = "<group>"; };
 		5B0CC39C199F09290036F94B /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		5B0CC39D199F09290036F94B /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
@@ -1110,11 +1123,6 @@
 		D3AA5A18195D75DE00565078 /* 全部项目_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "全部项目_16.png"; sourceTree = "<group>"; };
 		D3AA5A22195D89FF00565078 /* Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selected.png; sourceTree = "<group>"; };
 		D3AA5A23195D89FF00565078 /* Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Unselected.png; sourceTree = "<group>"; };
-		D3AAAB5F196D6EC0008F9CCD /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = ZpzchinaMobile/lib/iflyMSC.framework; sourceTree = "<group>"; };
-		D3AAAB61196D6F1E008F9CCD /* ASRDialogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASRDialogViewController.h; sourceTree = "<group>"; };
-		D3AAAB62196D6F1E008F9CCD /* ASRDialogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASRDialogViewController.m; sourceTree = "<group>"; };
-		D3AAAB63196D6F1E008F9CCD /* ZCNoneiFLYTEK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCNoneiFLYTEK.h; sourceTree = "<group>"; };
-		D3AAAB64196D6F1E008F9CCD /* ZCNoneiFLYTEK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCNoneiFLYTEK.m; sourceTree = "<group>"; };
 		D3AAAB68196D6F2E008F9CCD /* DKCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCircleButton.h; sourceTree = "<group>"; };
 		D3AAAB69196D6F2E008F9CCD /* DKCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCircleButton.m; sourceTree = "<group>"; };
 		D3AAAB6B196E8E2E008F9CCD /* mapsearch-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mapsearch-1.png"; sourceTree = "<group>"; };
@@ -1315,10 +1323,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049A979319D513C9007DC7C0 /* libz.dylib in Frameworks */,
 				D3AD620519B0420F001FD483 /* libbaidumapapi.a in Frameworks */,
+				049A979119D5138B007DC7C0 /* iflyMSC.framework in Frameworks */,
 				D3AD620419B041FF001FD483 /* libbaidumapapi.a in Frameworks */,
 				D3311C2819A59CE6003B2682 /* MapKit.framework in Frameworks */,
-				D3AAAB60196D6EC0008F9CCD /* iflyMSC.framework in Frameworks */,
 				D3BB730519557D6F00A3F626 /* CoreLocation.framework in Frameworks */,
 				D3BB730319557D5F00A3F626 /* QuartzCore.framework in Frameworks */,
 				D3BB730119557D5700A3F626 /* OpenGLES.framework in Frameworks */,
@@ -1347,6 +1356,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		049A977819D4FFBB007DC7C0 /* voice */ = {
+			isa = PBXGroup;
+			children = (
+				049A977919D4FFBB007DC7C0 /* Definition.h */,
+				049A977B19D4FFBB007DC7C0 /* UIPlaceHolderTextView.h */,
+				049A977C19D4FFBB007DC7C0 /* UIPlaceHolderTextView.m */,
+				049A979C19D554BD007DC7C0 /* RecognizerFactory.h */,
+				049A979D19D554BD007DC7C0 /* RecognizerFactory.m */,
+				049A979E19D554BD007DC7C0 /* UnderstandViewController.h */,
+				049A979F19D554BD007DC7C0 /* UnderstandViewController.m */,
+			);
+			path = voice;
+			sourceTree = "<group>";
+		};
+		049A978519D50769007DC7C0 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				049A978619D50769007DC7C0 /* JSONKit.h */,
+				049A978719D50769007DC7C0 /* JSONKit.m */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
 		5B0CC39B199F090F0036F94B /* AppModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1903,8 +1935,9 @@
 		D3A48839194A916B00EED32D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				049A979219D513C9007DC7C0 /* libz.dylib */,
+				049A979019D5138B007DC7C0 /* iflyMSC.framework */,
 				D3311C2719A59CE6003B2682 /* MapKit.framework */,
-				D3AAAB5F196D6EC0008F9CCD /* iflyMSC.framework */,
 				D3BB730419557D6F00A3F626 /* CoreLocation.framework */,
 				D3BB730219557D5F00A3F626 /* QuartzCore.framework */,
 				D3BB730019557D5700A3F626 /* OpenGLES.framework */,
@@ -2134,6 +2167,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				049A978519D50769007DC7C0 /* JSONKit */,
 				D3A4282919C6D97500BAB6C7 /* MChoice */,
 				5B0CC39B199F090F0036F94B /* AppModel */,
 				5B892FA5199A3D8F001F9921 /* Code4appScrollView */,
@@ -2321,10 +2355,7 @@
 		D3A4899F1951861D00EED32D /* AllProjuctView */ = {
 			isa = PBXGroup;
 			children = (
-				D3AAAB61196D6F1E008F9CCD /* ASRDialogViewController.h */,
-				D3AAAB62196D6F1E008F9CCD /* ASRDialogViewController.m */,
-				D3AAAB63196D6F1E008F9CCD /* ZCNoneiFLYTEK.h */,
-				D3AAAB64196D6F1E008F9CCD /* ZCNoneiFLYTEK.m */,
+				049A977819D4FFBB007DC7C0 /* voice */,
 				D3A489A01951863B00EED32D /* AllProjuctViewController.h */,
 				D3A489A11951863B00EED32D /* AllProjuctViewController.m */,
 				D3A489A319527C4E00EED32D /* SearchViewController.h */,
@@ -2877,6 +2908,7 @@
 				D31B26D219891F2600B05B03 /* GPUImageTextureInput.m in Sources */,
 				D3AB326F196BD5D800F0FC02 /* CollectionViewController.m in Sources */,
 				D31B265B19891F2600B05B03 /* GPUImageBulgeDistortionFilter.m in Sources */,
+				049A97A119D554BD007DC7C0 /* UnderstandViewController.m in Sources */,
 				D31B269F19891F2600B05B03 /* GPUImageMissEtikateFilter.m in Sources */,
 				D3BDC1F51973963600DE5A78 /* Album.m in Sources */,
 				D31B26D719891F2600B05B03 /* GPUImageThresholdSketchFilter.m in Sources */,
@@ -2978,6 +3010,7 @@
 				D31B266019891F2600B05B03 /* GPUImageClosingFilter.m in Sources */,
 				D31B265819891F2600B05B03 /* GPUImageBoxBlurFilter.m in Sources */,
 				D346A0491963E41400CDDBDF /* UIView+Extension.m in Sources */,
+				049A978819D50769007DC7C0 /* JSONKit.m in Sources */,
 				D3BB73CF1957C20900A3F626 /* RootViewController.mm in Sources */,
 				D31B26AD19891F2600B05B03 /* GPUImageParallelCoordinateLineTransformFilter.m in Sources */,
 				D31B26C819891F2600B05B03 /* GPUImageSobelEdgeDetectionFilter.m in Sources */,
@@ -3010,7 +3043,6 @@
 				D3AA5A15195D457800565078 /* DatePickerView.m in Sources */,
 				D31B266C19891F2600B05B03 /* GPUImageDifferenceBlendFilter.m in Sources */,
 				D31B26E719891F2600B05B03 /* GPUImageXYDerivativeFilter.m in Sources */,
-				D3AAAB65196D6F1E008F9CCD /* ASRDialogViewController.m in Sources */,
 				5B0CC39E199F09290036F94B /* AppModel.m in Sources */,
 				D3BB71B01953DE9100A3F626 /* ProjectTableViewCell.m in Sources */,
 				D31B26DA19891F2600B05B03 /* GPUImageToonFilter.m in Sources */,
@@ -3081,6 +3113,7 @@
 				D31B26B919891F2600B05B03 /* GPUImageRGBClosingFilter.m in Sources */,
 				D31B26D919891F2600B05B03 /* GPUImageToneCurveFilter.m in Sources */,
 				D346A025196281B200CDDBDF /* GTMBase64.m in Sources */,
+				049A97A019D554BD007DC7C0 /* RecognizerFactory.m in Sources */,
 				D31B266119891F2600B05B03 /* GPUImageColorBlendFilter.m in Sources */,
 				5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */,
 				D31B267219891F2600B05B03 /* GPUImageEmbossFilter.m in Sources */,
@@ -3105,7 +3138,6 @@
 				D3C58E49197EADFF003DD94F /* RecordSqlite.m in Sources */,
 				D31B26D619891F2600B05B03 /* GPUImageThresholdedNonMaximumSuppressionFilter.m in Sources */,
 				D31B26A219891F2600B05B03 /* GPUImageMotionBlurFilter.m in Sources */,
-				D3AAAB66196D6F1E008F9CCD /* ZCNoneiFLYTEK.m in Sources */,
 				D31B269D19891F2600B05B03 /* GPUImageMaskFilter.m in Sources */,
 				D31B26A519891F2600B05B03 /* GPUImageMultiplyBlendFilter.m in Sources */,
 				D31B26C219891F2600B05B03 /* GPUImageSharpenFilter.m in Sources */,
@@ -3251,6 +3283,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZpzchinaMobile/lib",
+					"$(PROJECT_DIR)/ZpzchinaMobile/AllProjuctView/voice",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZpzchinaMobile/ZpzchinaMobile-Prefix.pch";
@@ -3287,6 +3320,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ZpzchinaMobile/lib",
+					"$(PROJECT_DIR)/ZpzchinaMobile/AllProjuctView/voice",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZpzchinaMobile/ZpzchinaMobile-Prefix.pch";

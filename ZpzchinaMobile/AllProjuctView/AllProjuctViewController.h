@@ -14,11 +14,11 @@
 #import "toolBarView.h"
 #import "BaiDuMapViewController.h"
 #import "AdvancedSearchViewController.h"
-#import "ASRDialogViewController.h"
+#import "UnderstandViewController.h"
 #import "RecordView.h"
 #import "ProjectContentCell.h"
 #import "TFIndicatorView.h"
-@interface AllProjuctViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,CellContentViewDelegate,UIActionSheetDelegate,UISearchBarDelegate,toolBarViewDelegate,ASRDialogViewControllerDelegate,RecordViewDelegate>{
+@interface AllProjuctViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,CellContentViewDelegate,UIActionSheetDelegate,UISearchBarDelegate,toolBarViewDelegate,RecordViewDelegate,UnderstandViewControllerDelegate>{
     UITableView *_tableView;
     CellContentView *_cellContent;
     SearchViewController *_searchView;
@@ -32,7 +32,7 @@
     toolBarView *toolbarView;
     BaiDuMapViewController *mapView;
     AdvancedSearchViewController *ADsearchVIew;
-    ASRDialogViewController *ASRDialogview;
+    UnderstandViewController *underStandVC;
     RecordView *_recordView;
     UIView *lineBgView;
     UIActivityIndicatorView *indicator;
