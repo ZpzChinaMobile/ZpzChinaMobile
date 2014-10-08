@@ -79,7 +79,6 @@
     [RecordSqlite opensql];
     [ProjectLogSqlite opensql];
     [UserSqlite opensql];
-    NSLog(@"asdfasdfasdf");
     if(![[NSUserDefaults standardUserDefaults] objectForKey:@"firstLaunch"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         NSLog(@"第一次启动");
