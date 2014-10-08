@@ -25,6 +25,8 @@
 #import "CameraModel.h"
 #import "GetBigImage.h"
 #import "AppModel.h"
+#import "UserModel.h"
+#import "UserSqlite.h"
 @interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,OneTVCDelegate,TwoTVCDelegate>
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
@@ -817,9 +819,7 @@
     //土地规划/拍卖
     
     [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
-    [self.dataDic setObject:@"" forKey:@"district"];
-    [self.dataDic setObject:@"" forKey:@"province"];
-    [self.dataDic setObject:@"" forKey:@"city"];
+    
     [self.dataDic setObject:@"" forKey:@"usage"];
     [self.dataDic setObject:@"" forKey:@"auctionUnit"];
     //建立项目
@@ -845,6 +845,12 @@
     [self.dataDic setObject:@"" forKey:@"url"];
     
     if(self.fromView == 0){
+        NSMutableArray *arr = [UserSqlite loadList];
+        UserModel *model = arr[0];
+        [self.dataDic setObject:model.a_district forKey:@"district"];
+        [self.dataDic setObject:model.a_province forKey:@"province"];
+        [self.dataDic setObject:model.a_city forKey:@"city"];
+        
         [self.dataDic setObject:@"" forKey:@"landName"];
         [self.dataDic setObject:@"" forKey:@"landAddress"];
         [self.dataDic setObject:@"" forKey:@"projectName"];
@@ -865,6 +871,10 @@
         [self.dataDic setObject:@"0" forKey:@"propertyExternalWallMeterial"];
         [self.dataDic setObject:@"0" forKey:@"propertyStealStructure"];
     }else{
+        [self.dataDic setObject:@"" forKey:@"district"];
+        [self.dataDic setObject:@"" forKey:@"province"];
+        [self.dataDic setObject:@"" forKey:@"city"];
+        
         [self.dataDic setObject:@"" forKey:@"area"];
         [self.dataDic setObject:@"" forKey:@"plotRatio"];
         [self.dataDic setObject:@"" forKey:@"investment"];
