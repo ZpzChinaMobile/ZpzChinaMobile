@@ -150,6 +150,13 @@
     return view;
 }
 
+-(UIImage*)saveImage:(UIView*)view{
+    UIGraphicsBeginImageContext(CGSizeMake(view.bounds.size.width, view.bounds.size.height));
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return viewImage;
+}
 
 -(void)getImageView:(NSInteger)imageNumber{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
@@ -173,7 +180,7 @@
             model=self.myDelegate.imgDic[@"planImageArr"];
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
-
+        
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }
@@ -184,7 +191,8 @@
     CGImageRelease(tempImage);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
-
+    imageView.image=[self saveImage:imageView];
+    
     [view addSubview:imageView];
     
     //图片数量label

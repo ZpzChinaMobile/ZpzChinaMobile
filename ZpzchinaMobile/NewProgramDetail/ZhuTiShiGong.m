@@ -52,6 +52,15 @@ static __weak ProgramDetailViewController* myDelegate;
     return totalView;
 }
 
++(UIImage*)saveImage:(UIView*)view{
+    UIGraphicsBeginImageContext(CGSizeMake(view.bounds.size.width, view.bounds.size.height));
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return viewImage;
+}
+
+
 +(void)getImageView:(NSInteger)imageNumber imageViewSequence:(int)sequence{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     view.center=CGPointMake(160, height+107.75);
@@ -113,6 +122,7 @@ static __weak ProgramDetailViewController* myDelegate;
     CGImageRelease(tempImage);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
+    imageView.image=[self saveImage:imageView];
 
     [view addSubview:imageView];
     

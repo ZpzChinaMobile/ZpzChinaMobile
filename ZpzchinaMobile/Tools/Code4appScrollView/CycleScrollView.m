@@ -62,6 +62,9 @@
         imageView.userInteractionEnabled = YES;
         imageView.image = [curImages objectAtIndex:i];
         
+        imageView.image=[self saveImage:imageView];
+        
+        
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handleTap:)];
         [imageView addGestureRecognizer:singleTap];
@@ -84,6 +87,14 @@
     if (scrollDirection == CycleDirectionPortait) {
         [scrollView setContentOffset:CGPointMake(0, scrollFrame.size.height)];
     }
+}
+
+-(UIImage*)saveImage:(UIView*)view{
+    UIGraphicsBeginImageContext(CGSizeMake(view.bounds.size.width, view.bounds.size.height));
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return viewImage;
 }
 
 - (NSArray *)getDisplayImagesWithCurpage:(int)page {

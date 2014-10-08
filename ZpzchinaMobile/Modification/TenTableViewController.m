@@ -132,7 +132,13 @@
     [self.tableView reloadData];
 }
 
-
+-(UIImage*)saveImage:(UIView*)view{
+    UIGraphicsBeginImageContext(CGSizeMake(view.bounds.size.width, view.bounds.size.height));
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return viewImage;
+}
 
 -(UIView*)getImageViewsWithImages:(NSArray*)images{
     NSMutableArray* imageAry=[NSMutableArray array];
@@ -156,6 +162,7 @@
         UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
         imageView.image=imageAry[i];
+        imageView.image=[self saveImage:imageView];
         [view addSubview:imageView];
         
         if (i==imageAry.count-1) {

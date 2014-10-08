@@ -17,6 +17,7 @@
 #import "LoginSqlite.h"
 #import "UserModel.h"
 #import "UserSqlite.h"
+//#import "AppDelegate.h"
 @interface HomePageCenterViewController ()
 
 @end
@@ -295,6 +296,17 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+//    UILabel* label=[[UILabel alloc]init];
+//    label.frame=CGRectMake(50, 100, 220, 200);
+//    label.backgroundColor=[UIColor whiteColor];
+//    label.font=[UIFont systemFontOfSize:30];
+//    label.text=@"收到内存警告";
+//    UIWindow* app=[AppDelegate instance].window;
+//    [app addSubview:label];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [label removeFromSuperview];
+//    });
+    
     // Dispose of any resources that can be recreated.
 }
 

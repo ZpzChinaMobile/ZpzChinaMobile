@@ -40,6 +40,15 @@ static NSDictionary* dataDic;
     return totalView;
 }
 
++(UIImage*)saveImage:(UIView*)view{
+    UIGraphicsBeginImageContext(CGSizeMake(view.bounds.size.width, view.bounds.size.height));
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return viewImage;
+}
+
+
 +(void)getImageView:(NSInteger)imageNumber{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     view.center=CGPointMake(160, height+107.75);
@@ -62,12 +71,6 @@ static NSDictionary* dataDic;
             model=myDelegate.imgDic[@"electroweakImageArr"];
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
-
-//        if([model.a_device isEqualToString:@"localios"]){
-//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-//        }else{
-//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-//        }
     }else{
         aimage=[UIImage imageNamed:@"首页_16.png"];
     }
@@ -78,7 +81,8 @@ static NSDictionary* dataDic;
     CGImageRelease(tempImage);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
-
+    imageView.image=[self saveImage:imageView];
+    
     [view addSubview:imageView];
     
     

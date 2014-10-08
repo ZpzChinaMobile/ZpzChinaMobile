@@ -63,7 +63,9 @@
 @property(nonatomic,strong)NSMutableArray* highImages;//存放用于放进scrollView翻滚的图片cameraModel数组
 
 @property(nonatomic,strong)UIActivityIndicatorView* loadAnimationView;//viewDidLoad时等待网络下载资源时转菊花
-@property(nonatomic,strong)UIView* enterToScrollView;//进无限滚时的动画
+@property(nonatomic,strong)UIView* enterToScrollView;//进无限滚时的动画的背景
+@property(nonatomic,strong)UIActivityIndicatorView* scrollViewloadAnimationView;//进无限滚时的动画的背景时转菊花
+
 
 @end
 
@@ -196,10 +198,14 @@
         }
         
         [vc.imagesArray addObject:aimage];
+        NSLog(@"=====%ld",sizeof([GTMBase64 decodeString:model.a_body]));
     }
     [self presentViewController:vc animated:NO completion:nil];
-    
+    [self.scrollViewloadAnimationView stopAnimating];
+    [self.enterToScrollView removeFromSuperview];
 }
+
+
 
 -(void)getImages:(NSMutableArray*)array{
     if (array.count) {
@@ -237,7 +243,16 @@
     
     if (!self.enterToScrollView) {
         self.enterToScrollView=[[UIView alloc]initWithFrame:self.view.frame];
+        self.enterToScrollView.backgroundColor=[UIColor blackColor];
     }
+    if (!self.scrollViewloadAnimationView) {
+        self.scrollViewloadAnimationView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        self.scrollViewloadAnimationView.color=[UIColor whiteColor];
+        self.scrollViewloadAnimationView.center=CGPointMake(160, self.enterToScrollView.frame.size.height*.5);
+        [self.enterToScrollView addSubview:self.scrollViewloadAnimationView];
+    }
+    [self.scrollViewloadAnimationView startAnimating];
+    [self.view addSubview:self.enterToScrollView];
     
     if (button==self.firstStageButton1) {
         

@@ -398,7 +398,7 @@
     [self.myTableView reloadData];
     
     int a[4]={0,2,5,9};
-    NSLog(@"%d",self.tableViewSpace.subviews.count);
+    
     UITableViewController* tvc=self.tvcArray[a[indexPath.section]+indexPath.row];
     [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
