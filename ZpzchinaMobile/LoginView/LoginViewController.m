@@ -199,7 +199,6 @@
 -(void)loginSuccess{             //登录成功
     loginBtn.enabled=YES;
 
-    
     UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"登录成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     alert.tag = 20140731;
     [alert show];
@@ -257,9 +256,5 @@
         }
 
     }
-    
 }
-
-
-
 @end
