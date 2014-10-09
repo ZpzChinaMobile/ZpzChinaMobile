@@ -14,7 +14,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
+
         UIImageView *arrowImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(63,16, 10, 18)];
         [arrowImage1 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage1];
@@ -23,13 +24,12 @@
         [arrowImage2 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage2];
         
-
-        
         UIButton *tempBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
         tempBtn1.frame = CGRectMake(0,10, 80, 30);
         tempBtn1.titleLabel.textAlignment = NSTextAlignmentLeft;
         [tempBtn1 setTitle:@"消防" forState:UIControlStateNormal];
         [tempBtn1 setTitleColor:BlueColor forState:UIControlStateNormal];
+        tempBtn1.titleLabel.font=myFont;
         [tempBtn1 addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         tempBtn1.tag =0;
         [self addSubview:tempBtn1];
@@ -53,7 +53,7 @@
             }
         }
         label1.textColor = GrayColor;
-        label1.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        label1.font = myFont;
         label1.textAlignment = NSTextAlignmentLeft;
         [self addSubview:label1];
 
@@ -63,12 +63,13 @@
         tempBtn2.titleLabel.textAlignment = NSTextAlignmentLeft;
         [tempBtn2 setTitle:@"景观绿化" forState:UIControlStateNormal];
         [tempBtn2 setTitleColor:BlueColor forState:UIControlStateNormal];
+        tempBtn2.titleLabel.font=myFont;
         [tempBtn2 addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         tempBtn2.tag =1;
         [self addSubview:tempBtn2];
         UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(130,10+50, 120, 30)];
         label2.textColor = GrayColor;
-        label2.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        label2.font = myFont;
         label2.textAlignment = NSTextAlignmentLeft;
         
         [self addSubview:label2];

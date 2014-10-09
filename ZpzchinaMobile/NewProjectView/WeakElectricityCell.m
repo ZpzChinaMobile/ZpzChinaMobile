@@ -17,7 +17,7 @@
         // Initialization code
             for (int i =0; i<3; i++) {
                 
-                UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(100,50*i+16, 10, 18)];
+                UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(100,50*i+17, 10, 18)];
                 [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
                 [self addSubview:arrowImage];
                 
@@ -27,16 +27,18 @@
                 
                 
         }
-        
+        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
+
         UIButton *tempBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        tempBtn1.frame = CGRectMake(15,10, 80, 30);
+        tempBtn1.frame = CGRectMake(15,11, 80, 30);
         [tempBtn1 setTitle:@"弱电安装" forState:UIControlStateNormal];
         [tempBtn1 setTitleColor:BlueColor forState:UIControlStateNormal];
         [tempBtn1 addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         tempBtn1.tag = 0;
+        tempBtn1.titleLabel.font=myFont;
         [self.contentView addSubview:tempBtn1];
         
-        UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(130,10, 120, 30)];
+        UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(130,11, 120, 30)];
         if(flag == 0){
             if(![[dic objectForKey:@"electroweakInstallation"] isEqualToString:@""]){
                 [label1 setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"electroweakInstallation"]]];
@@ -56,21 +58,22 @@
             }
         }
         label1.textColor = GrayColor;
-        label1.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        label1.font = myFont;
         label1.textAlignment = NSTextAlignmentLeft;
         [self addSubview:label1];
         
         UIButton *tempBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        tempBtn2.frame = CGRectMake(15,10+50, 80, 30);
+        tempBtn2.frame = CGRectMake(15,11+50, 80, 30);
         [tempBtn2 setTitle:@"装修情况" forState:UIControlStateNormal];
         [tempBtn2 setTitleColor:BlueColor forState:UIControlStateNormal];
         [tempBtn2 addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        tempBtn2.titleLabel.font=myFont;
         tempBtn2.tag = 1;
         [self.contentView addSubview:tempBtn2];
         
-        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(130,10+50, 120, 30)];
+        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(130,11+50, 120, 30)];
         label2.textColor = GrayColor;
-        label2.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        label2.font = myFont;
         label2.textAlignment = NSTextAlignmentLeft;
 
         [self addSubview:label2];
@@ -101,12 +104,13 @@
         [tempBtn3 setTitle:@"装修进度" forState:UIControlStateNormal];
         [tempBtn3 setTitleColor:BlueColor forState:UIControlStateNormal];
         [tempBtn3 addTarget:self action:@selector(tempBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        tempBtn3.titleLabel.font=myFont;
         tempBtn3.tag = 2;
         [self.contentView addSubview:tempBtn3];
         
         UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(130,10+100, 120, 30)];
         label3.textColor = GrayColor;
-        label3.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        label3.font = myFont;
         label3.textAlignment = NSTextAlignmentLeft;
         [self addSubview:label3];
         if(flag == 0){

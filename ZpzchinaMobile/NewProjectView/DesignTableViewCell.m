@@ -14,7 +14,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
 
         for (int i=0; i<2; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
@@ -22,7 +22,7 @@
             [self addSubview:lingImage];
         }
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,15, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(75,15, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
@@ -31,12 +31,11 @@
         [Company setTitle:@"设计院" forState:UIControlStateNormal];
         [Company setTitleColor:BlueColor forState:UIControlStateNormal];
         Company.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Company.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        Company.titleLabel.font = myFont;
         [Company addTarget:self action:@selector(Company) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Company];
         
-               dataArr = [NSMutableArray arrayWithArray:Arr];
-        NSLog(@"123343435454545---------------arr   %@",dataArr);
+        dataArr = [NSMutableArray arrayWithArray:Arr];
         if(Arr.count != 0){
             for(int i=0; i<Arr.count;i++){
                 if(i<3){
@@ -45,7 +44,7 @@
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
                     contactBtn.tag = i+1;
                     [contactBtn setTitleColor:BlueColor forState:UIControlStateNormal];
-                    contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+                    contactBtn.titleLabel.font =myFont;
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
                         [contactBtn setFrame:CGRectMake(120, 10, 60, 30)];
@@ -66,13 +65,13 @@
         [Bodydesign setTitle:@"主体设计阶段" forState:UIControlStateNormal];
         [Bodydesign setTitleColor:BlueColor forState:UIControlStateNormal];
         Bodydesign.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Bodydesign.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        Bodydesign.titleLabel.font = myFont;
         [Bodydesign addTarget:self action:@selector(Bodydesign) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Bodydesign];
         
         UILabel *BodydesignLabel = [[UILabel alloc] initWithFrame:CGRectMake(150,65, 200, 30)];
         BodydesignLabel.textColor = GrayColor;
-        BodydesignLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        BodydesignLabel.font = myFont;
         BodydesignLabel.textAlignment = NSTextAlignmentLeft;
         if(flag == 0){
             //NSLog(@"========");

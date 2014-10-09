@@ -9,7 +9,6 @@
 #import "CycleScrollView.h"
 
 @implementation CycleScrollView
-//@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame cycleDirection:(CycleDirection)direction pictures:(NSArray *)pictureArray
 {
@@ -42,6 +41,10 @@
         }
         
         [self addSubview:scrollView];
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [scrollView addGestureRecognizer:singleTap];
+
         [self refreshScrollView];
     }
     
@@ -58,15 +61,18 @@
     [self getDisplayImagesWithCurpage:curPage];
     
     for (int i = 0; i < 3; i++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:scrollFrame];
-        imageView.userInteractionEnabled = YES;
-        imageView.image = [curImages objectAtIndex:i];
+        UIImage* image=[curImages objectAtIndex:i];
+        CGFloat height=image.size.height*320/image.size.width;
         
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, height)];
+        imageView.center=CGPointMake(160, scrollFrame.size.height*.5);
+        NSLog(@"scroll frame = %@",NSStringFromCGRect(imageView.frame));
+        imageView.userInteractionEnabled = YES;
+        imageView.image =image;
         imageView.image=[self saveImage:imageView];
         
         
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                    action:@selector(handleTap:)];
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [imageView addGestureRecognizer:singleTap];
         
         // 水平滚动
@@ -166,7 +172,6 @@
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap {
-    
     if ([self.delegate respondsToSelector:@selector(cycleScrollViewDelegate:didSelectImageView:)]) {
         [self.delegate cycleScrollViewDelegate:self didSelectImageView:curPage];
     }
@@ -176,7 +181,6 @@
 - (void)dealloc
 {
     NSLog(@"cycleScrollViewDealloc");
-
 }
 
 @end

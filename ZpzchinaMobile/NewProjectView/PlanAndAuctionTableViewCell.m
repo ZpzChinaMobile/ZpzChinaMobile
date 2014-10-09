@@ -21,9 +21,12 @@
             [self addSubview:lingImage];
         }
         
+        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
+        
         UITextField *LotName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
         LotName.delegate = self;
         LotName.textAlignment=NSTextAlignmentLeft;
+        LotName.font=myFont;
         LotName.placeholder=@"地块名称";
 
         if(flag == 0){
@@ -45,18 +48,18 @@
         [self addSubview:LotName];
         
         UIButton *zone = [UIButton buttonWithType:UIButtonTypeCustom];
-        zone.frame = CGRectMake(20,65, 220, 30);
+        zone.frame = CGRectMake(20,64, 220, 30);
         [zone setTitle:@"所在区域/省市" forState:UIControlStateNormal];
         [zone setTitleColor:BlueColor forState:UIControlStateNormal];
         zone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        zone.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        zone.titleLabel.font = myFont;
         zone.tag = 0;
         //[zone addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:zone];
         
         UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 64, 135, 30)];
         zoneLabel.textColor = GrayColor;
-        zoneLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        zoneLabel.font = myFont;
         zoneLabel.textAlignment = NSTextAlignmentLeft;
         if(flag == 0){
             if(![[dic objectForKey:@"city"] isEqualToString:@""]){
@@ -81,9 +84,10 @@
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage];
         
-        UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 280, 30)];
+        UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,113, 280, 30)];
         address.delegate = self;
         address.textAlignment=NSTextAlignmentLeft;
+        address.font=myFont;
         address.placeholder=@"地块地址(限20个字)";
         if(flag == 0){
             if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
@@ -103,16 +107,17 @@
         address.tag = 1;
         [self addSubview:address];
         
-        UILabel *landareaLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,159, 70, 30)];
-        landareaLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        UILabel *landareaLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,161, 70, 30)];
+        landareaLabe.font = myFont;
         landareaLabe.textColor = BlueColor;
         landareaLabe.text = @"土地面积:";
         [self addSubview:landareaLabe];
         
-        UITextField *landarea = [[UITextField alloc] initWithFrame:CGRectMake(90,160, 150, 30)];
+        UITextField *landarea = [[UITextField alloc] initWithFrame:CGRectMake(90,161, 150, 30)];
         landarea.delegate = self;
         landarea.textAlignment=NSTextAlignmentLeft;
         landarea.keyboardType = UIKeyboardTypeDecimalPad;
+        landarea.font=myFont;
         if(flag == 0){
             if(![[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]] isEqualToString:@""]){
                 [landarea setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]]];
@@ -131,14 +136,15 @@
         //[landarea setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:landarea];
         
-        UILabel *volumerateLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,214, 85, 30)];
-        volumerateLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        UILabel *volumerateLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,213, 85, 30)];
+        volumerateLabe.font = myFont;
         volumerateLabe.textColor = BlueColor;
         volumerateLabe.text = @"土地容积率:";
         [self addSubview:volumerateLabe];
         
-        UITextField *volumerate = [[UITextField alloc] initWithFrame:CGRectMake(110,215, 150, 30)];
+        UITextField *volumerate = [[UITextField alloc] initWithFrame:CGRectMake(110,213, 150, 30)];
         volumerate.delegate = self;
+        volumerate.font=myFont;
         volumerate.keyboardType = UIKeyboardTypeDecimalPad;
         volumerate.textAlignment=NSTextAlignmentLeft;
         if(flag == 0){
@@ -160,18 +166,18 @@
         [self addSubview:volumerate];
         
         UIButton *landuse = [UIButton buttonWithType:UIButtonTypeCustom];
-        landuse.frame = CGRectMake(20,260, 220, 30);
+        landuse.frame = CGRectMake(20,261, 220, 30);
         landuse.tag = 1;
         [landuse setTitle:@"地块用途" forState:UIControlStateNormal];
         [landuse setTitleColor:BlueColor forState:UIControlStateNormal];
         landuse.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        landuse.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        landuse.titleLabel.font = myFont;;
         [landuse addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:landuse];
         
-        UILabel *landuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 260, 175, 30)];
+        UILabel *landuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 261, 195, 30)];
         landuseLabel.textColor = GrayColor;
-        landuseLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        landuseLabel.font = myFont;
         landuseLabel.textAlignment = NSTextAlignmentLeft;
         if(flag == 0){
             if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
@@ -197,16 +203,16 @@
         [self addSubview:arrowImage2];
         
         UIButton *auctionunit = [UIButton buttonWithType:UIButtonTypeCustom];
-        auctionunit.frame = CGRectMake(20,315, 140, 30);
+        auctionunit.frame = CGRectMake(20,314, 140, 30);
         auctionunit.tag = 2;
         [auctionunit setTitle:@"拍卖单位" forState:UIControlStateNormal];
         [auctionunit setTitleColor:BlueColor forState:UIControlStateNormal];
         auctionunit.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        auctionunit.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        auctionunit.titleLabel.font = myFont;
         [auctionunit addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:auctionunit];
         
-        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,318, 20, 20)];
+        UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,319, 20, 20)];
         [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
         [self addSubview:addImage];
         
@@ -219,14 +225,14 @@
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
                     contactBtn.tag = i+1;
                     [contactBtn setTitleColor:BlueColor forState:UIControlStateNormal];
-                    contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+                    contactBtn.titleLabel.font = myFont;
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
-                        [contactBtn setFrame:CGRectMake(120, 315, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(120, 314, 60, 30)];
                     }else if(i == 1){
-                        [contactBtn setFrame:CGRectMake(180, 315, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(180, 314, 60, 30)];
                     }else if(i == 2){
-                        [contactBtn setFrame:CGRectMake(240, 315, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(240, 314, 60, 30)];
                     }
                     [self addSubview:contactBtn];
                 }

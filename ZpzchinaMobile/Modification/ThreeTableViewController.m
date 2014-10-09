@@ -101,12 +101,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    if (self.fromView==0) {
-    //        AppModel* appModel=[AppModel sharedInstance];
-    //        appModel.explorationAry =[NSMutableArray array];
-    //        [appModel.explorationImageArr removeAllObjects];
-    //        self.contacts=appModel.explorationAry;
-    //    }
     self.tableView.separatorStyle=NO;
 }
 

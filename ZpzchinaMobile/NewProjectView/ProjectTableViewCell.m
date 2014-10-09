@@ -27,11 +27,13 @@
             [self addSubview:lingImage];
         }
         
+        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
         
         UITextField *ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
         ProjectName.delegate = self;
         ProjectName.textAlignment=NSTextAlignmentLeft;
         ProjectName.placeholder=@"项目名称";
+        ProjectName.font=myFont;
         if(flag == 0){
             if(![[dic objectForKey:@"projectName"] isEqualToString:@""]){
                 [ProjectName setText:[dic objectForKey:@"projectName"]];
@@ -52,7 +54,7 @@
         
         ProjectAddress = [UIButton buttonWithType:UIButtonTypeCustom];
         ProjectAddress.tag = 0;
-        ProjectAddress.frame = CGRectMake(20,65, 260, 30);
+        ProjectAddress.frame = CGRectMake(20,63, 260, 30);
         
         if(flag == 0){
             if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
@@ -73,7 +75,7 @@
         }
         [ProjectAddress setTitleColor:GrayColor forState:UIControlStateNormal];
         ProjectAddress.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        ProjectAddress.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        ProjectAddress.titleLabel.font = myFont;
         //[ProjectAddress addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:ProjectAddress];
         
@@ -87,10 +89,11 @@
         [mapImage addGestureRecognizer:mapImagetapGestureRecognizer];
         [self addSubview:mapImage];
         
-        UITextField *ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(20,115, 280, 30)];
+        UITextField *ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(20,114, 280, 30)];
         ProjectMark.delegate = self;
         ProjectMark.textAlignment=NSTextAlignmentLeft;
         ProjectMark.placeholder=@"项目描述";
+        ProjectMark.font=myFont;
         if(flag == 0){
             if(![[dic objectForKey:@"description"] isEqualToString:@""]){
                 [ProjectMark setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"description"]]];
@@ -110,12 +113,12 @@
         [self addSubview:ProjectMark];
         
         UIButton *Owner = [UIButton buttonWithType:UIButtonTypeCustom];
-        Owner.frame = CGRectMake(20,165, 140, 30);
+        Owner.frame = CGRectMake(20,163, 140, 30);
         Owner.tag = 1;
         [Owner setTitle:@"业主单位" forState:UIControlStateNormal];
         [Owner setTitleColor:BlueColor forState:UIControlStateNormal];
         Owner.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Owner.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        Owner.titleLabel.font = myFont;
         [Owner addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Owner];
         
@@ -124,7 +127,7 @@
         [self addSubview:addImage];
         
         UIButton *startdate = [UIButton buttonWithType:UIButtonTypeCustom];
-        startdate.frame = CGRectMake(20,215, 200, 30);
+        startdate.frame = CGRectMake(20,213, 200, 30);
         startdate.tag = 2;
         if(flag == 0){
             if(![[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
@@ -158,12 +161,12 @@
         }
         [startdate setTitleColor:GrayColor forState:UIControlStateNormal];
         startdate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        startdate.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        startdate.titleLabel.font = myFont;
         [startdate addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:startdate];
         
         UIButton *enddate = [UIButton buttonWithType:UIButtonTypeCustom];
-        enddate.frame = CGRectMake(20,265, 200, 30);
+        enddate.frame = CGRectMake(20,264, 200, 30);
         enddate.tag = 3;
         if(flag == 0){
             if(![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
@@ -196,20 +199,21 @@
         }
         [enddate setTitleColor:GrayColor forState:UIControlStateNormal];
         enddate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        enddate.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        enddate.titleLabel.font = myFont;
         [enddate addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:enddate];
         
-        UILabel *InvestmentLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,315, 60, 30)];
-        InvestmentLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        UILabel *InvestmentLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,314, 60, 30)];
+        InvestmentLabe.font = myFont;
         InvestmentLabe.textColor = GrayColor;
         InvestmentLabe.text = @"投资额:";
         [self addSubview:InvestmentLabe];
         
-        UITextField *Investment = [[UITextField alloc] initWithFrame:CGRectMake(75,316, 150, 30)];
+        UITextField *Investment = [[UITextField alloc] initWithFrame:CGRectMake(75,314, 150, 30)];
         Investment.delegate = self;
         Investment.textAlignment=NSTextAlignmentLeft;
         Investment.keyboardType = UIKeyboardTypeDecimalPad;
+        Investment.font=myFont;
         if(flag == 0){
             if(![[dic objectForKey:@"investment"] isEqualToString:@""]){
                 [Investment setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]]];
@@ -228,16 +232,17 @@
         //[Investment setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:Investment];
         
-        UILabel *GFALabe = [[UILabel alloc] initWithFrame:CGRectMake(20,365, 70, 30)];
-        GFALabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        UILabel *GFALabe = [[UILabel alloc] initWithFrame:CGRectMake(20,364, 70, 30)];
+        GFALabe.font = myFont;
         GFALabe.textColor = GrayColor;
         GFALabe.text = @"建筑面积:";
         [self addSubview:GFALabe];
         
-        UITextField *GFA = [[UITextField alloc] initWithFrame:CGRectMake(90,366, 150, 30)];
+        UITextField *GFA = [[UITextField alloc] initWithFrame:CGRectMake(90,364, 150, 30)];
         GFA.delegate = self;
         GFA.keyboardType = UIKeyboardTypeDecimalPad;
         GFA.textAlignment=NSTextAlignmentLeft;
+        GFA.font=myFont;
         if(flag == 0){
             if(![[dic objectForKey:@"areaOfStructure"] isEqualToString:@""]){
                 [GFA setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]]];
@@ -256,16 +261,17 @@
         //[GFA setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:GFA];
         
-        UILabel *StoreybuildingLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,415, 70, 30)];
-        StoreybuildingLabe.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        UILabel *StoreybuildingLabe = [[UILabel alloc] initWithFrame:CGRectMake(20,414, 70, 30)];
+        StoreybuildingLabe.font = myFont;
         StoreybuildingLabe.textColor = GrayColor;
         StoreybuildingLabe.text = @"建筑层高:";
         [self addSubview:StoreybuildingLabe];
         
-        UITextField *Storeybuilding = [[UITextField alloc] initWithFrame:CGRectMake(90,416, 150, 30)];
+        UITextField *Storeybuilding = [[UITextField alloc] initWithFrame:CGRectMake(90,414, 150, 30)];
         Storeybuilding.delegate = self;
         Storeybuilding.textAlignment=NSTextAlignmentLeft;
         Storeybuilding.keyboardType = UIKeyboardTypeDecimalPad;
+        Storeybuilding.font=myFont;
         if(flag == 0){
             if(![[dic objectForKey:@"storeyHeight"] isEqualToString:@""]){
                 [Storeybuilding setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]]];
@@ -286,17 +292,17 @@
         
         UIButton *Foreignparticipation = [UIButton buttonWithType:UIButtonTypeCustom];
         Foreignparticipation.tag = 4;
-        Foreignparticipation.frame = CGRectMake(20,465, 100, 30);
+        Foreignparticipation.frame = CGRectMake(20,464, 100, 30);
         [Foreignparticipation setTitle:@"外资参与" forState:UIControlStateNormal];
         [Foreignparticipation setTitleColor:BlueColor forState:UIControlStateNormal];
         Foreignparticipation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Foreignparticipation.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        Foreignparticipation.titleLabel.font = myFont;
         [Foreignparticipation addTarget:self action:@selector(ForeignparticipationClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Foreignparticipation];
         
-        foreignparticipationLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,465, 100, 30)];
+        foreignparticipationLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,464, 100, 30)];
         foreignparticipationLabel.textColor = GrayColor;
-        foreignparticipationLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        foreignparticipationLabel.font = myFont;
         foreignparticipationLabel.textAlignment = NSTextAlignmentLeft;
         if(flag == 0){
             if(![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
@@ -322,13 +328,13 @@
         [self addSubview:foreignparticipationLabel];
         
         
-        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,473, 8, 12.5)];
+        UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,472, 8, 12.5)];
         [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage];
         
         UIButton *OwnerType = [UIButton buttonWithType:UIButtonTypeCustom];
         OwnerType.tag = 5;
-        OwnerType.frame = CGRectMake(20,515, 100, 30);
+        OwnerType.frame = CGRectMake(20,513, 100, 30);
         [OwnerType setTitle:@"业主类型" forState:UIControlStateNormal];
         if(flag == 0){
             if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
@@ -349,13 +355,13 @@
         }
         [OwnerType setTitleColor:BlueColor forState:UIControlStateNormal];
         OwnerType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        OwnerType.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        OwnerType.titleLabel.font = myFont;
         [OwnerType addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:OwnerType];
         
-        UILabel *ownerLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,512, 220, 30)];
+        UILabel *ownerLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,513, 220, 30)];
         ownerLabel.textColor = GrayColor;
-        ownerLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        ownerLabel.font = myFont;
         ownerLabel.textAlignment = NSTextAlignmentLeft;
         if(flag == 0){
             if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
@@ -376,7 +382,7 @@
         }
         [self addSubview:ownerLabel];
         
-        UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(90,522, 8, 12.5)];
+        UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(90,521, 8, 12.5)];
         [arrowImage2 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
         [self addSubview:arrowImage2];
         
@@ -389,14 +395,14 @@
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
                     contactBtn.tag = i+1;
                     [contactBtn setTitleColor:BlueColor forState:UIControlStateNormal];
-                    contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+                    contactBtn.titleLabel.font = myFont;
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
-                        [contactBtn setFrame:CGRectMake(120, 165, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(120, 164, 60, 30)];
                     }else if(i == 1){
-                        [contactBtn setFrame:CGRectMake(180, 165, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(180, 164, 60, 30)];
                     }else{
-                        [contactBtn setFrame:CGRectMake(240, 165, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(240, 164, 60, 30)];
                     }
                     [self addSubview:contactBtn];
                 }

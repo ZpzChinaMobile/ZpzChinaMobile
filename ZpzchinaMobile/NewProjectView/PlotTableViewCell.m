@@ -15,7 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
+        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
         
         for (int i=0; i<8; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
@@ -37,7 +37,7 @@
         }
         [Owner setTitleColor:BlueColor forState:UIControlStateNormal];
         Owner.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Owner.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        Owner.titleLabel.font =myFont;
         [Owner addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Owner];
         
@@ -75,7 +75,7 @@
         }
         [startdate setTitleColor:GrayColor forState:UIControlStateNormal];
         startdate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        startdate.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        startdate.titleLabel.font = myFont;
         [startdate addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:startdate];
         
@@ -113,7 +113,7 @@
         }
         [enddate setTitleColor:GrayColor forState:UIControlStateNormal];
         enddate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        enddate.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        enddate.titleLabel.font = myFont;
         [enddate addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:enddate];
         
@@ -122,7 +122,7 @@
         [Elevator setTitle:@"电梯" forState:UIControlStateNormal];
         [Elevator setTitleColor:BlueColor forState:UIControlStateNormal];
         Elevator.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Elevator.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        Elevator.titleLabel.font = myFont;
         //[Elevator addTarget:self action:@selector(LotNameClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Elevator];
         
@@ -131,7 +131,7 @@
         [Airconditioning setTitle:@"空调" forState:UIControlStateNormal];
         [Airconditioning setTitleColor:BlueColor forState:UIControlStateNormal];
         Airconditioning.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Airconditioning.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        Airconditioning.titleLabel.font = myFont;
         //[Airconditioning addTarget:self action:@selector(LotNameClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Airconditioning];
         
@@ -140,7 +140,7 @@
         [Heatingmode setTitle:@"供暖方式" forState:UIControlStateNormal];
         [Heatingmode setTitleColor:BlueColor forState:UIControlStateNormal];
         Heatingmode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Heatingmode.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        Heatingmode.titleLabel.font =myFont;
         //[zone addTarget:self action:@selector(LotNameClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Heatingmode];
         
@@ -149,7 +149,7 @@
         [Exteriormaterials setTitle:@"外墙材料" forState:UIControlStateNormal];
         [Exteriormaterials setTitleColor:BlueColor forState:UIControlStateNormal];
         Exteriormaterials.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Exteriormaterials.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        Exteriormaterials.titleLabel.font = myFont;
         //[Exteriormaterials addTarget:self action:@selector(LotNameClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Exteriormaterials];
         
@@ -158,7 +158,7 @@
         [Steel setTitle:@"刚结构" forState:UIControlStateNormal];
         [Steel setTitleColor:BlueColor forState:UIControlStateNormal];
         Steel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Steel.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        Steel.titleLabel.font = myFont;
         //[Steel addTarget:self action:@selector(LotNameClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Steel];
         
@@ -296,7 +296,7 @@
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
                     contactBtn.tag = i+1;
                     [contactBtn setTitleColor:BlueColor forState:UIControlStateNormal];
-                    contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+                    contactBtn.titleLabel.font = myFont;
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
                         [contactBtn setFrame:CGRectMake(120, 10, 60, 30)];

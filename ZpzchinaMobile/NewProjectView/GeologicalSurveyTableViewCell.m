@@ -16,11 +16,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
-//        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 150)];
-//        [lingImage setBackgroundColor:[UIColor blackColor]];
-//        [self addSubview:lingImage];
-//        lingImage.alpha = 0.1;
+        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
         
         UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 280, 1)];
         [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
@@ -31,11 +27,11 @@
         [self addSubview:addImage];
         
         UIButton *Company = [UIButton buttonWithType:UIButtonTypeCustom];
-        Company.frame = CGRectMake(20,10, 140, 30);
+        Company.frame = CGRectMake(20,11, 140, 30);
         [Company setTitle:@"地勘公司" forState:UIControlStateNormal];
         [Company setTitleColor:BlueColor forState:UIControlStateNormal];
         Company.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        Company.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        Company.titleLabel.font = myFont;
         [Company addTarget:self action:@selector(Company) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:Company];
         
@@ -48,14 +44,14 @@
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
                     contactBtn.tag = i+1;
                     [contactBtn setTitleColor:BlueColor forState:UIControlStateNormal];
-                    contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+                    contactBtn.titleLabel.font = myFont;
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
-                        [contactBtn setFrame:CGRectMake(120, 10, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(120, 11, 60, 30)];
                     }else if(i == 1){
-                        [contactBtn setFrame:CGRectMake(180, 10, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(180, 11, 60, 30)];
                     }else{
-                        [contactBtn setFrame:CGRectMake(240, 10, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(240, 11, 60, 30)];
                     }
                     [self addSubview:contactBtn];
                 }

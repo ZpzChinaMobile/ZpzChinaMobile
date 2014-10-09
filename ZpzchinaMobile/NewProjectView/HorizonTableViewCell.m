@@ -14,11 +14,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
-//        UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 0, 6, 100)];
-//        [lingImage setBackgroundColor:[UIColor blackColor]];
-//        [self addSubview:lingImage];
-//        lingImage.alpha = 0.1;
+        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
         
         UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 280, 1)];
         [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
@@ -58,7 +54,7 @@
         }
         [startdate setTitleColor:GrayColor forState:UIControlStateNormal];
         startdate.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        startdate.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];;
+        startdate.titleLabel.font = myFont;
         [startdate addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:startdate];
         
@@ -67,12 +63,12 @@
         [self addSubview:addImage];
         
         UIButton *contractor = [UIButton buttonWithType:UIButtonTypeCustom];
-        contractor.frame = CGRectMake(20,65, 140, 30);
+        contractor.frame = CGRectMake(20,63, 140, 30);
         contractor.tag = 1;
         [contractor setTitle:@"施工总承包" forState:UIControlStateNormal];
         [contractor setTitleColor:BlueColor forState:UIControlStateNormal];
         contractor.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        contractor.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        contractor.titleLabel.font = myFont;
         [contractor addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:contractor];
         
@@ -86,14 +82,14 @@
                     contactBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
                     contactBtn.tag = i+1;
                     [contactBtn setTitleColor:BlueColor forState:UIControlStateNormal];
-                    contactBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+                    contactBtn.titleLabel.font = myFont;
                     [contactBtn addTarget:self action:@selector(contactBtn:) forControlEvents:UIControlEventTouchUpInside];
                     if(i == 0){
-                        [contactBtn setFrame:CGRectMake(140, 65, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(130, 63, 60, 30)];
                     }else if(i == 1){
-                        [contactBtn setFrame:CGRectMake(200, 65, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(190, 63, 60, 30)];
                     }else{
-                        [contactBtn setFrame:CGRectMake(250, 65, 60, 30)];
+                        [contactBtn setFrame:CGRectMake(250, 63, 60, 30)];
                     }
                     [self addSubview:contactBtn];
                 }

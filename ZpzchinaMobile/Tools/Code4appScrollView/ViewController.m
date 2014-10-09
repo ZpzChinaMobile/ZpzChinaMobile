@@ -24,28 +24,16 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-        
-    UIButton* button=[[UIButton alloc]initWithFrame:self.view.frame];
-    button.backgroundColor=[UIColor clearColor];
-    [button addTarget:self action:@selector(cycleScrollViewDelegate:didSelectImageView:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-    
-    CycleScrollView *cycle = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)
-                                                     cycleDirection:CycleDirectionLandscape
-                                                           pictures:self.imagesArray];
-    cycle.center=CGPointMake(160, 250);
+    [super viewDidLoad];    
+    CycleScrollView *cycle = [[CycleScrollView alloc] initWithFrame:self.view.frame cycleDirection:CycleDirectionLandscape pictures:self.imagesArray];
     cycle.delegate = self;
     
-    self.view.backgroundColor=[UIColor blackColor];
-    
     [self.view addSubview:cycle];
-    
+    self.view.backgroundColor=[UIColor blackColor];
 }
 
 #pragma mark - CycleScrollViewDelegate
 - (void)cycleScrollViewDelegate:(CycleScrollView *)cycleScrollView didSelectImageView:(int)index {
-    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
