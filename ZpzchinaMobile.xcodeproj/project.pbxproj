@@ -635,6 +635,9 @@
 		D3FC037519E7DEE400FF332C /* 高级搜索-多选_07a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC025919E7DEE400FF332C /* 高级搜索-多选_07a@2x.png */; };
 		D3FC037619E7DEE400FF332C /* 高级搜索-多选_09a.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC025A19E7DEE400FF332C /* 高级搜索-多选_09a.png */; };
 		D3FC037719E7DEE400FF332C /* 高级搜索-多选_09a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC025B19E7DEE400FF332C /* 高级搜索-多选_09a@2x.png */; };
+		D3FC037A19E7E36100FF332C /* 修改密码_03.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC037819E7E36100FF332C /* 修改密码_03.png */; };
+		D3FC037B19E7E36100FF332C /* 修改密码_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC037919E7E36100FF332C /* 修改密码_03@2x.png */; };
+		D3FC037E19E7E48200FF332C /* UpdataPassWordEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FC037D19E7E48200FF332C /* UpdataPassWordEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1668,6 +1671,10 @@
 		D3FC025919E7DEE400FF332C /* 高级搜索-多选_07a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "高级搜索-多选_07a@2x.png"; sourceTree = "<group>"; };
 		D3FC025A19E7DEE400FF332C /* 高级搜索-多选_09a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "高级搜索-多选_09a.png"; sourceTree = "<group>"; };
 		D3FC025B19E7DEE400FF332C /* 高级搜索-多选_09a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "高级搜索-多选_09a@2x.png"; sourceTree = "<group>"; };
+		D3FC037819E7E36100FF332C /* 修改密码_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "修改密码_03.png"; sourceTree = "<group>"; };
+		D3FC037919E7E36100FF332C /* 修改密码_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "修改密码_03@2x.png"; sourceTree = "<group>"; };
+		D3FC037C19E7E48200FF332C /* UpdataPassWordEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdataPassWordEvent.h; sourceTree = "<group>"; };
+		D3FC037D19E7E48200FF332C /* UpdataPassWordEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdataPassWordEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2877,6 +2884,8 @@
 			children = (
 				D3FC013019E7CE8400FF332C /* UpdataPassWordViewController.h */,
 				D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */,
+				D3FC037C19E7E48200FF332C /* UpdataPassWordEvent.h */,
+				D3FC037D19E7E48200FF332C /* UpdataPassWordEvent.m */,
 			);
 			path = UpdataPassword;
 			sourceTree = "<group>";
@@ -2884,6 +2893,8 @@
 		D3FC013F19E7DEE400FF332C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D3FC037819E7E36100FF332C /* 修改密码_03.png */,
+				D3FC037919E7E36100FF332C /* 修改密码_03@2x.png */,
 				D3FC014019E7DEE400FF332C /* 01.png */,
 				D3FC015519E7DEE400FF332C /* 01@2x.png */,
 				D3FC015619E7DEE400FF332C /* 02.png */,
@@ -3256,6 +3267,7 @@
 				D3FC027F19E7DEE400FF332C /* 06@2x.png in Resources */,
 				D3FC02B519E7DEE400FF332C /* 全部项目_10@2x.png in Resources */,
 				D3FC02FA19E7DEE400FF332C /* 新建项目5_09.png in Resources */,
+				D3FC037A19E7E36100FF332C /* 修改密码_03.png in Resources */,
 				D3FC028B19E7DEE400FF332C /* draw_point@2x.png in Resources */,
 				D3FC02E019E7DEE400FF332C /* 我的任务_05.png in Resources */,
 				D3FC02AD19E7DEE400FF332C /* Unselected@2x.png in Resources */,
@@ -3365,6 +3377,7 @@
 				D3FC031D19E7DEE400FF332C /* 登录_03@2x.png in Resources */,
 				D3FC028619E7DEE400FF332C /* controls_03.png in Resources */,
 				D3FC026D19E7DEE400FF332C /* 018.png in Resources */,
+				D3FC037B19E7E36100FF332C /* 修改密码_03@2x.png in Resources */,
 				D3BB72FD19557D3100A3F626 /* mapapi.bundle in Resources */,
 				D3FC031C19E7DEE400FF332C /* 登录_03.png in Resources */,
 				D3FC036C19E7DEE400FF332C /* 首页侧拉栏_12.png in Resources */,
@@ -3675,6 +3688,7 @@
 				D3A4897A19512A2600EED32D /* AFURLRequestSerialization.m in Sources */,
 				D3A4897919512A2600EED32D /* AFURLConnectionOperation.m in Sources */,
 				D31B26B219891F2600B05B03 /* GPUImagePoissonBlendFilter.m in Sources */,
+				D3FC037E19E7E48200FF332C /* UpdataPassWordEvent.m in Sources */,
 				D3C58E971980BD5E003DD94F /* FaceppFaceset.m in Sources */,
 				D31B2B95199098DC00B05B03 /* PanViewController.m in Sources */,
 				D31B26E319891F2600B05B03 /* GPUImageVignetteFilter.m in Sources */,
