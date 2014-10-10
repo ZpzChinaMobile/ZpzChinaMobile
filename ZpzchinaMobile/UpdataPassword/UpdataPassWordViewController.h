@@ -12,6 +12,7 @@
     UITextField *oldPassWordTextField;
     UITextField *newPassWordTextField;
     UITextField *newAgainPassWordTextField;
+    UIButton *confirmBtn;
 }
 
 @end
