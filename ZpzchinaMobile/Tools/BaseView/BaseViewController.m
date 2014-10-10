@@ -37,7 +37,7 @@
 
     
     UIView *topView=[[UIView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth, 64.5)];
-    topView.layer.contents=(id)[UIImage imageNamed:@"地图搜索_01.png"].CGImage;
+    topView.layer.contents=(id)[GetImagePath getImagePath:@"地图搜索_01"].CGImage;
     [self.view addSubview:topView];
     self.topView=topView;
     

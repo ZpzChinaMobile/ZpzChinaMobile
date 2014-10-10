@@ -53,13 +53,13 @@
     UIView *topView = [[UIView alloc] init];
     [topView setFrame:CGRectMake(0, 0, 320, 55)];
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,55)];
-    [bgImgView setImage:[UIImage imageNamed:@"地图搜索_01.png"]];
+    [bgImgView setImage:[GetImagePath getImagePath:@"地图搜索_01"]];
     [topView addSubview:bgImgView];
     
     //nav左边按钮
     UIButton *leftBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     leftBtn.frame = CGRectMake(20, 28, 26.5, 14.5);
-    [leftBtn setImage:[UIImage imageNamed:@"icon__13.png"] forState:UIControlStateNormal];
+    [leftBtn setImage:[GetImagePath getImagePath:@"icon__13"] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [topView addSubview:leftBtn];
     
@@ -74,28 +74,12 @@
     [self.view addSubview:topView];
     
     //上半部分背景
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSFileManager *fileManage = [NSFileManager defaultManager];
-//    NSString *myDirectory = [documentsDirectory stringByAppendingPathComponent:@"image.png"];
-//    NSData *data = [fileManage contentsAtPath:myDirectory];
-    //UIImage *image = [UIImage imageWithData:data];
     UIView *bannerView = [[UIView alloc] init];
     bannerView.frame = CGRectMake(0, 55, 320, 265);
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, bannerView.frame.size.width, bannerView.frame.size.height);
     btn.enabled = NO;
-    //[btn setImage:[UIImage imageNamed:@"首页_16.png"] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"首页_16.png"] forState:UIControlStateDisabled];
-//    if(image == nil){
-//        [btn setImage:[UIImage imageNamed:@"首页_16.png"] forState:UIControlStateNormal];
-//    }else{
-//        [btn setImage:image forState:UIControlStateNormal];
-//    }
-    //退出长按事件
-//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(openCamera:)];
-//    longPress.minimumPressDuration = 0.8; //定义按的时间
-//    [btn addGestureRecognizer:longPress];
+    [btn setImage:[GetImagePath getImagePath:@"首页_16"] forState:UIControlStateDisabled];
     [bannerView addSubview:btn];
     
     //上半部分背景上的叠加图
@@ -121,7 +105,7 @@
     [bannerView addSubview:titleLabel];
     
     UIImageView *cityImgView = [[UIImageView alloc] initWithFrame:CGRectMake(200,234,12,17)];
-    [cityImgView setImage:[UIImage imageNamed:@"首页_10.png"]];
+    [cityImgView setImage:[GetImagePath getImagePath:@"首页_10"]];
     [bannerView addSubview:cityImgView];
     
     UILabel *cityLabel = [[UILabel alloc] init];
@@ -138,7 +122,7 @@
     [newProjectView setBackgroundColor:[UIColor colorWithRed:(74/255.0)  green:(100/255.0)  blue:(176/255.0)  alpha:1.0]];
     
     UIImageView *contentImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(40,16,25,25)];
-    [contentImage1 setImage:[UIImage imageNamed:@"首页_03.png"]];
+    [contentImage1 setImage:[GetImagePath getImagePath:@"首页_03"]];
     [newProjectView addSubview:contentImage1];
     
     UILabel *label1 = [[UILabel alloc] init];
@@ -173,7 +157,7 @@
     [allProjectView setBackgroundColor:[UIColor colorWithRed:(74/255.0)  green:(100/255.0)  blue:(176/255.0)  alpha:1.0]];
     
     UIImageView *contentImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(40,16,25,25)];
-    [contentImage2 setImage:[UIImage imageNamed:@"首页_05.png"]];
+    [contentImage2 setImage:[GetImagePath getImagePath:@"首页_05"]];
     [allProjectView addSubview:contentImage2];
     
     UILabel *label2 = [[UILabel alloc] init];
@@ -208,7 +192,7 @@
     [myTask setBackgroundColor:[UIColor colorWithRed:(74/255.0)  green:(100/255.0)  blue:(176/255.0)  alpha:1.0]];
     
     UIImageView *contentImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(40,16,25,25)];
-    [contentImage3 setImage:[UIImage imageNamed:@"首页_07.png"]];
+    [contentImage3 setImage:[GetImagePath getImagePath:@"首页_07"]];
     [myTask addSubview:contentImage3];
     
     UILabel *label3 = [[UILabel alloc] init];
