@@ -74,25 +74,28 @@
     [self.view addSubview:topView];
     
     //上半部分背景
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSFileManager *fileManage = [NSFileManager defaultManager];
-    NSString *myDirectory = [documentsDirectory stringByAppendingPathComponent:@"image.png"];
-    NSData *data = [fileManage contentsAtPath:myDirectory];
-    UIImage *image = [UIImage imageWithData:data];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSFileManager *fileManage = [NSFileManager defaultManager];
+//    NSString *myDirectory = [documentsDirectory stringByAppendingPathComponent:@"image.png"];
+//    NSData *data = [fileManage contentsAtPath:myDirectory];
+    //UIImage *image = [UIImage imageWithData:data];
     UIView *bannerView = [[UIView alloc] init];
     bannerView.frame = CGRectMake(0, 55, 320, 265);
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, bannerView.frame.size.width, bannerView.frame.size.height);
-    if(image == nil){
-        [btn setImage:[UIImage imageNamed:@"首页_16.png"] forState:UIControlStateNormal];
-    }else{
-        [btn setImage:image forState:UIControlStateNormal];
-    }
+    btn.enabled = NO;
+    //[btn setImage:[UIImage imageNamed:@"首页_16.png"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"首页_16.png"] forState:UIControlStateDisabled];
+//    if(image == nil){
+//        [btn setImage:[UIImage imageNamed:@"首页_16.png"] forState:UIControlStateNormal];
+//    }else{
+//        [btn setImage:image forState:UIControlStateNormal];
+//    }
     //退出长按事件
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(openCamera:)];
-    longPress.minimumPressDuration = 0.8; //定义按的时间
-    [btn addGestureRecognizer:longPress];
+//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(openCamera:)];
+//    longPress.minimumPressDuration = 0.8; //定义按的时间
+//    [btn addGestureRecognizer:longPress];
     [bannerView addSubview:btn];
     
     //上半部分背景上的叠加图
@@ -306,8 +309,6 @@
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [label removeFromSuperview];
 //    });
-    
-    // Dispose of any resources that can be recreated.
 }
 
 /*

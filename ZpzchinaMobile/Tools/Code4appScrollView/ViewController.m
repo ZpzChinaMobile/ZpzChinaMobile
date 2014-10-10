@@ -38,7 +38,6 @@
 }
 
 - (void)cycleScrollViewDelegate:(CycleScrollView *)cycleScrollView didScrollImageView:(int)index {
-
    // self.title = [NSString stringWithFormat:@"第%d张", index];
 }
 #pragma mark CycleScrollViewDelegate End -
