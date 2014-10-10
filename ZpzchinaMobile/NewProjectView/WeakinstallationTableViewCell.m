@@ -23,7 +23,7 @@
         lingImage.alpha = 0.1;
         
         UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50, 250, 1)];
-        [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+        [lingImage2 setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
         [self addSubview:lingImage2];
         
         UIButton *electroweakInstallation = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -52,7 +52,7 @@
         [self addSubview:electroweakInstallation];
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,20, 8, 12.5)];
-        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage];
         
         NSLog(@"==> %@",electroweakArr);
@@ -89,7 +89,7 @@
             for(int i=0;i<3;i++){
                 UIImageView *image = [[UIImageView alloc] init];
                 [image setFrame:CGRectMake(270/3*i, 10, 80, 80)];
-                [image setImage:[UIImage imageNamed:@"NoImage.png"]];
+                [image setImage:[GetImagePath getImagePath:@"NoImage"]];
                 [view1 addSubview:image];
             }
         }

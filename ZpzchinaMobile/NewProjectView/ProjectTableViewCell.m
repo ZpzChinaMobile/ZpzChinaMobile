@@ -23,7 +23,7 @@
 
         for (int i=0; i<10; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
-            [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+            [lingImage setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
             [self addSubview:lingImage];
         }
         
@@ -80,7 +80,7 @@
         [self addSubview:ProjectAddress];
         
         UIImageView *mapImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,65, 22.5, 22.5)];
-        [mapImage setImage:[UIImage imageNamed:@"新建项目3_03.png"]];
+        [mapImage setImage:[GetImagePath getImagePath:@"新建项目3_03"]];
         mapImage.userInteractionEnabled = YES;
         UITapGestureRecognizer *mapImagetapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
         [mapImagetapGestureRecognizer addTarget:self action:@selector(gotoMap)];
@@ -123,7 +123,7 @@
         [self addSubview:Owner];
         
         UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,168, 20, 20)];//添加按钮
-        [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
+        [addImage setImage:[GetImagePath getImagePath:@"新建项目5_03"]];
         [self addSubview:addImage];
         
         UIButton *startdate = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -329,7 +329,7 @@
         
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,472, 8, 12.5)];
-        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage];
         
         UIButton *OwnerType = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -383,7 +383,7 @@
         [self addSubview:ownerLabel];
         
         UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(90,521, 8, 12.5)];
-        [arrowImage2 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage2 setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage2];
         
         self.dataArr = [NSMutableArray arrayWithArray:ownerArr];

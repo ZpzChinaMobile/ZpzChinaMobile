@@ -63,7 +63,7 @@
             for(int i=0;i<3;i++){
                 UIImageView *image = [[UIImageView alloc] init];
                 [image setFrame:CGRectMake(270/3*i, 0, 80, 80)];
-                [image setImage:[UIImage imageNamed:@"NoImage.png"]];
+                [image setImage:[GetImagePath getImagePath:@"NoImage"]];
                 [view1 addSubview:image];
             }
         }
@@ -106,7 +106,7 @@
             for(int i=0;i<3;i++){
                 UIImageView *image = [[UIImageView alloc] init];
                 [image setFrame:CGRectMake(270/3*i, 0, 80, 80)];
-                [image setImage:[UIImage imageNamed:@"NoImage.png"]];
+                [image setImage:[GetImagePath getImagePath:@"NoImage"]];
                 [view2 addSubview:image];
             }
         }
@@ -148,7 +148,7 @@
             for(int i=0;i<3;i++){
                 UIImageView *image = [[UIImageView alloc] init];
                 [image setFrame:CGRectMake(270/3*i, 0, 80, 80)];
-                [image setImage:[UIImage imageNamed:@"NoImage.png"]];
+                [image setImage:[GetImagePath getImagePath:@"NoImage"]];
                 [view3 addSubview:image];
             }
         }

@@ -35,7 +35,7 @@
     
     [self addBackButton];
     [self addtittle:@"地图搜索"];
-    [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
+    [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"icon__09"]];
     _mapView = [[BMKMapView alloc] initWithFrame:self.view.frame];
     //[_mapView setShowsUserLocation:YES];//显示定位的蓝点儿
     //_mapView.showsUserLocation = YES;//可以显示用户当前位置
@@ -234,7 +234,7 @@
     NSString *AnnotationViewID = @"renameMark";
     if (newAnnotation == nil) {
         newAnnotation = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
-        [newAnnotation setImage:[UIImage imageNamed:@"地图搜索1_09.png"]];
+        [newAnnotation setImage:[GetImagePath getImagePath:@"地图搜索1_09"]];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, -10, 50, 50)];
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont fontWithName:nil size:14];
@@ -246,7 +246,6 @@
 		((BMKPinAnnotationView*)newAnnotation).animatesDrop = NO;
         // 设置可拖拽
 		((BMKPinAnnotationView*)newAnnotation).draggable = NO;
-        //newAnnotation.image=[UIImage imageNamed:@"新建项目5_06.png"];
     }
     return newAnnotation;
     

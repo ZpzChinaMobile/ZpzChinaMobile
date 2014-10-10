@@ -29,7 +29,7 @@
     // Do any additional setup after loading the view.
     [self addBackButton];
     [self addtittle:@"高级搜索"];
-    [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
+    [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"icon__09"]];
     dataDic = [[NSMutableDictionary alloc] init];
     [dataDic setValue:@"" forKey:@"keyStr"];
     [dataDic setValue:@"" forKey:@"companyName"];
@@ -94,7 +94,7 @@
         [cell.contentView addSubview:btn];
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(290,17, 8, 12.5)];
-        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [cell.contentView addSubview:arrowImage];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

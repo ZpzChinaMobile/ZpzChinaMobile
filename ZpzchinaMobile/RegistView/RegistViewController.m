@@ -39,7 +39,7 @@
 
     self.navigationController.navigationBar.hidden =YES;
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:self.view.frame];
-    [bgImgView setImage:[UIImage imageNamed:@"注册.png"]];
+    [bgImgView setImage:[GetImagePath getImagePath:@"注册"]];
     bgImgView.userInteractionEnabled =YES;
     [self.view addSubview:bgImgView];
     
@@ -48,7 +48,7 @@
     [self.view addSubview:panView];
     
     UIImageView *bgImgView2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,264,91)];
-    [bgImgView2 setImage:[UIImage imageNamed:@"登录_07.png"]];
+    [bgImgView2 setImage:[GetImagePath getImagePath:@"登录_07.png"]];
     [panView addSubview:bgImgView2];
     _phoneNumberTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,0,255,45)];
     _phoneNumberTextField.delegate = self;
@@ -68,12 +68,12 @@
     
     UIButton *getCodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     getCodeBtn.frame = CGRectMake(200,50,50,40);
-    [getCodeBtn setImage:[UIImage imageNamed:@"注册_03"] forState:UIControlStateNormal];
+    [getCodeBtn setImage:[GetImagePath getImagePath:@"注册_03"] forState:UIControlStateNormal];
     [getCodeBtn addTarget:self action:@selector(getVerifitionCode) forControlEvents:UIControlEventTouchUpInside];
     [panView addSubview:getCodeBtn];
     
     UIImageView *bgImgView3 = [[UIImageView alloc] initWithFrame:CGRectMake(0,110,264,91)];
-    [bgImgView3 setImage:[UIImage imageNamed:@"登录_07.png"]];
+    [bgImgView3 setImage:[GetImagePath getImagePath:@"登录_07"]];
     [panView addSubview:bgImgView3];
     passWordField = [[UITextField alloc] initWithFrame:CGRectMake(10,110,255,45)];
     passWordField.delegate = self;
@@ -95,7 +95,7 @@
 
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     registerBtn.frame = CGRectMake(0, 220, 128, 40);
-    [registerBtn setBackgroundImage:[UIImage imageNamed:@"注册_07"] forState:UIControlStateNormal];
+    [registerBtn setBackgroundImage:[GetImagePath getImagePath:@"注册_07"] forState:UIControlStateNormal];
     [registerBtn setTitle:@"注   册" forState:UIControlStateNormal];
     [registerBtn addTarget:self action:@selector(beginToCollect) forControlEvents:UIControlEventTouchUpInside];
     registerBtn.tag =2014072401;
@@ -103,11 +103,11 @@
     
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelBtn.frame = CGRectMake(134, 220, 128, 40);
-    [cancelBtn setBackgroundImage:[UIImage imageNamed:@"注册_09"] forState:UIControlStateNormal];
+    [cancelBtn setBackgroundImage:[GetImagePath getImagePath:@"注册_09"] forState:UIControlStateNormal];
     [cancelBtn setTitle:@"取   消" forState:UIControlStateNormal];
     [cancelBtn setTitle:@"取   消" forState:UIControlStateHighlighted];
     [cancelBtn setTitle:@"取   消" forState:UIControlStateSelected];
-    cancelBtn.titleLabel.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"注册_07"]];
+    cancelBtn.titleLabel.textColor = [UIColor colorWithPatternImage:[GetImagePath getImagePath:@"注册_07"]];
     [cancelBtn addTarget:self action:@selector(cancelRegister) forControlEvents:UIControlEventTouchUpInside];
     [panView addSubview:cancelBtn];
     

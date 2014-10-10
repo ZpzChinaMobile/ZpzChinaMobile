@@ -17,7 +17,7 @@
       
         for (int i=0; i<6; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
-            [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+            [lingImage setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
             [self addSubview:lingImage];
         }
         
@@ -81,7 +81,7 @@
         [self addSubview:zoneLabel];
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(125,73, 8, 12.5)];
-        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage];
         
         UITextField *address = [[UITextField alloc] initWithFrame:CGRectMake(20,113, 280, 30)];
@@ -199,7 +199,7 @@
         [self addSubview:landuseLabel];
         
         UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(90,268, 8, 12.5)];
-        [arrowImage2 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage2 setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage2];
         
         UIButton *auctionunit = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -213,7 +213,7 @@
         [self addSubview:auctionunit];
         
         UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,319, 20, 20)];
-        [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
+        [addImage setImage:[GetImagePath getImagePath:@"新建项目5_03"]];
         [self addSubview:addImage];
         
         self.dataArr = [NSMutableArray arrayWithArray:contactArr];

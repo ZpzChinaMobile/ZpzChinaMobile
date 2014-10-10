@@ -82,7 +82,7 @@
     loginBtn.tag = 20140801;
     [loginBtn setTitle:@"登    录" forState:UIControlStateNormal];
     loginBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:17];
-    [loginBtn setBackgroundImage:[UIImage imageNamed:@"登录_11.png"] forState:UIControlStateNormal];
+    [loginBtn setBackgroundImage:[GetImagePath getImagePath:@"登录_11"] forState:UIControlStateNormal];
     [loginBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginBtn];
     
@@ -101,7 +101,7 @@
     [self.view addSubview:rememberBtn];
     
     rememberView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 396, 13, 13)];
-    [rememberView setImage:[UIImage imageNamed:@"登录_15.png"]];
+    [rememberView setImage:[GetImagePath getImagePath:@"登录_15"]];
     [self.view addSubview:rememberView];
     
     UIButton *registBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -121,10 +121,10 @@
 
 -(void)rememberBtnClick{
     if(!_isSelect){
-        [rememberView setImage:[UIImage imageNamed:@"登录1_07.png"]];
+        [rememberView setImage:[GetImagePath getImagePath:@"登录1_07"]];
         _isSelect = YES;
     }else{
-        [rememberView setImage:[UIImage imageNamed:@"登录_15.png"]];
+        [rememberView setImage:[GetImagePath getImagePath:@"登录_15"]];
         _isSelect = NO;
     }
 }

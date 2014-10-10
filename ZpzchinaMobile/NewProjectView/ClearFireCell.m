@@ -17,11 +17,11 @@
         UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
 
         UIImageView *arrowImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(63,16, 10, 18)];
-        [arrowImage1 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage1 setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage1];
         
         UIImageView *arrowImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(95,50+16, 10, 18)];
-        [arrowImage2 setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage2 setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage2];
         
         UIButton *tempBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -96,7 +96,7 @@
         
         for (int i =0; i<2; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
-            [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+            [lingImage setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
             [self addSubview:lingImage];
             
         }

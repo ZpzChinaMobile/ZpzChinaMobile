@@ -17,11 +17,11 @@
         UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
         
         UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 280, 1)];
-        [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+        [lingImage2 setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
         [self addSubview:lingImage2];
         
         UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(115,15, 20, 20)];
-        [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
+        [addImage setImage:[GetImagePath getImagePath:@"新建项目5_03"]];
         [self addSubview:addImage];
         
         UIButton *Company = [UIButton buttonWithType:UIButtonTypeCustom];

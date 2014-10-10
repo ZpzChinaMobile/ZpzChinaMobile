@@ -29,7 +29,7 @@
 */
 -(void)addContent:(NSString *)contentStr{
     UIImageView *smallImage = [[UIImageView alloc] initWithFrame:CGRectMake(20,12.5, 20, 20)];
-    [smallImage setImage:[UIImage imageNamed:@"搜索1_03.png"]];
+    [smallImage setImage:[GetImagePath getImagePath:@"搜索1_03"]];
     [self addSubview:smallImage];
     
     UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 10, 100, 20)];

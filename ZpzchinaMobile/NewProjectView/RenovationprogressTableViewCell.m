@@ -20,10 +20,6 @@
         [self addSubview:lingImage];
         lingImage.alpha = 0.1;
         
-        /*UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50, 250, 1)];
-        [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
-        [self addSubview:lingImage2];*/
-        
         UIButton *decorationProgress = [UIButton buttonWithType:UIButtonTypeCustom];
         decorationProgress.frame = CGRectMake(60,15, 200, 30);
         if(flag == 0){
@@ -50,7 +46,7 @@
         [self addSubview:decorationProgress];
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,20, 8, 12.5)];
-        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09.png"]];
         [self addSubview:arrowImage];
     }
     return self;
