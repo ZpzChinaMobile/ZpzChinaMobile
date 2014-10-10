@@ -113,7 +113,7 @@ static __weak ProgramDetailViewController* myDelegate;
         }
         
     }else{
-        aimage=[UIImage imageNamed:@"首页_16.png"];
+        aimage=[GetImagePath getImagePath:@"首页_16"];
     }
     CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
     CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
@@ -160,7 +160,7 @@ static __weak ProgramDetailViewController* myDelegate;
      *
      *
      */
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"消防/景观绿化" programTitle:nil address:nil detailAddress:nil]];
+    [totalView addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon03"] stageTitle:@"消防/景观绿化" programTitle:nil address:nil detailAddress:nil]];
     
     for (int i=0; i<2; i++) {
         //项目名称部分
@@ -191,7 +191,7 @@ static __weak ProgramDetailViewController* myDelegate;
      *
      *
      */
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"主体施工" programTitle:nil address:nil detailAddress:nil]];
+    [totalView addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon03"] stageTitle:@"主体施工" programTitle:nil address:nil detailAddress:nil]];
     
     //图片imageView
     [self getImageView:myDelegate.mainConstructionImageArr.count+myDelegate.fireControlImageArr.count imageViewSequence:3];
@@ -205,7 +205,7 @@ static __weak ProgramDetailViewController* myDelegate;
      *
      *
      */
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"桩基基坑" programTitle:nil address:nil detailAddress:nil]];
+    [totalView addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon03"] stageTitle:@"桩基基坑" programTitle:nil address:nil detailAddress:nil]];
     
     //图片imageView
     [self getImageView:myDelegate.pilePitImageArr.count imageViewSequence:2];
@@ -248,7 +248,7 @@ static __weak ProgramDetailViewController* myDelegate;
     }
     
     
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_02@2x.png"] stageTitle:@"地平阶段" programTitle:@[@"实际开工时间"] address:@[confromTimespStr] detailAddress:nil]];
+    [totalView addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon03"] stageTitle:@"地平阶段" programTitle:@[@"实际开工时间"] address:@[confromTimespStr] detailAddress:nil]];
     
     //图片view
     [self getImageView:myDelegate.horizonImageArr.count imageViewSequence:1];
@@ -319,7 +319,7 @@ static __weak ProgramDetailViewController* myDelegate;
     
     //电话图标
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(197, 46, 12.5, 12.5)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing/phone@2x.png"];
+    imageView.image=[GetImagePath getImagePath:@"021"];
     [view addSubview:imageView];
     
     //电话号码
@@ -424,7 +424,7 @@ static __weak ProgramDetailViewController* myDelegate;
     
     //阴影
     UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 3.5)];
-    shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
+    shadow.image=[GetImagePath getImagePath:@"Shadow-bottom"];
     [titleView addSubview:shadow];
     
     ///title部分
