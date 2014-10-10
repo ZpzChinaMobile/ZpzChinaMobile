@@ -84,7 +84,31 @@
     [lineImage1 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:lineImage1];
     lineImage1.alpha = 0.5;
-   
+    
+    //修改密码
+    UIView *setView = [[UIView alloc] initWithFrame:CGRectMake(0,302,320,50)];
+    [setView setBackgroundColor:[UIColor clearColor]];
+    UIImageView *image1 = [[UIImageView alloc] initWithFrame:CGRectMake(15,12.5,25,25)];
+    [image1 setImage:[GetImagePath getImagePath:@"首页侧拉栏_07"]];
+    [setView addSubview:image1];
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(55, 12.5, 120, 25)];
+    label1.font = [UIFont fontWithName:@"GurmukhiMN" size:17];
+    label1.textColor = [UIColor whiteColor];
+    label1.text = @"修改密码";
+    [setView addSubview:label1];
+    UIButton *btn1 =  [UIButton buttonWithType:UIButtonTypeCustom];
+    btn1.tag = 0;
+    [btn1 setBackgroundColor:[UIColor clearColor]];
+    btn1.frame = CGRectMake(0, 0, 320, 50);
+    [btn1 addTarget:self action:@selector(AllBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [setView addSubview:btn1];
+    [self.view addSubview:setView];
+    
+    UIImageView *lineImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,352,320,1)];
+    [lineImage2 setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:lineImage2];
+    lineImage2.alpha = 0.5;
+    
     
      //退出
     UIButton *logoutBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -148,27 +172,14 @@
 }
 
 -(void)AllBtnClick:(UIButton *)button{
-    switch (button.tag) {
-        case 0:
-            NSLog(@"0");
-            break;
-        case 1:
-            NSLog(@"1");
-            break;
-        case 2:
-            NSLog(@"2");
-            break;
-        case 3:
-            NSLog(@"3");
-            break;
-        default:
-            break;
-    }
-    
     if(button.tag == 99){
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"是否清除所有本地数据！" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 2;
         [alert show];
+    }else if (button.tag == 0){
+        [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"changeViewControllers" object:nil];
+        }];
     }
 }
 

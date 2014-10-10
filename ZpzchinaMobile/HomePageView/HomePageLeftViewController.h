@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface HomePageLeftViewController : UIViewController<UIAlertViewDelegate>
 @property(nonatomic, assign) BOOL isLogout;
 

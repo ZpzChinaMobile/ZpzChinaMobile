@@ -12,6 +12,7 @@
 #import "AllProjuctViewController.h"
 #import "Album.h"
 #import "ModificationViewController.h"
+#import "UpdataPassWordViewController.h"
 @interface HomePageCenterViewController : UIViewController<UIActionSheetDelegate>{
     NewProjectViewController *_newProject;
     MyTaskViewController *_myTask;

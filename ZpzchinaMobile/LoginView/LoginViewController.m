@@ -91,18 +91,18 @@
     [restPasswordBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
     restPasswordBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:14];
     //[restPasswordBtn addTarget:self action:@selector(restPasswordBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:restPasswordBtn];
+    //[self.view addSubview:restPasswordBtn];
     
     UIButton *rememberBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     rememberBtn.frame = CGRectMake(17, 386, 160, 36);
     [rememberBtn setTitle:@"记住我的密码" forState:UIControlStateNormal];
     rememberBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:14];
     [rememberBtn addTarget:self action:@selector(rememberBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rememberBtn];
+    //[self.view addSubview:rememberBtn];
     
     rememberView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 396, 13, 13)];
     [rememberView setImage:[GetImagePath getImagePath:@"登录_15"]];
-    [self.view addSubview:rememberView];
+    //[self.view addSubview:rememberView];
     
     UIButton *registBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     registBtn.frame = CGRectMake(70, 500, 200, 36);

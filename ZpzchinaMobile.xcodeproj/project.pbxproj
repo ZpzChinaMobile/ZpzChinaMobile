@@ -628,6 +628,7 @@
 		D3C58EA81980BD5E003DD94F /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58E901980BD5E003DD94F /* CJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3C58EA91980BD5E003DD94F /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58E921980BD5E003DD94F /* CJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3C58EB31980D8C9003DD94F /* ProjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58EB21980D8C9003DD94F /* ProjectContentCell.m */; };
+		D3FC013219E7CE8400FF332C /* UpdataPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1653,6 +1654,8 @@
 		D3C58E931980BD5E003DD94F /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		D3C58EB11980D8C9003DD94F /* ProjectContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContentCell.h; sourceTree = "<group>"; };
 		D3C58EB21980D8C9003DD94F /* ProjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContentCell.m; sourceTree = "<group>"; };
+		D3FC013019E7CE8400FF332C /* UpdataPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdataPassWordViewController.h; sourceTree = "<group>"; };
+		D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdataPassWordViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2589,6 +2592,7 @@
 		D3A48840194A916B00EED32D /* ZpzchinaMobile */ = {
 			isa = PBXGroup;
 			children = (
+				D3FC012F19E7CE6700FF332C /* UpdataPassword */,
 				5BE93B8A199C6BCA00E2FF67 /* Modification */,
 				5B892EFF199A3BE5001F9921 /* NewProgramDetail */,
 				D31B2B971990992300B05B03 /* LoginView */,
@@ -3139,6 +3143,15 @@
 				D3C58E931980BD5E003DD94F /* JSONRepresentation.h */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		D3FC012F19E7CE6700FF332C /* UpdataPassword */ = {
+			isa = PBXGroup;
+			children = (
+				D3FC013019E7CE8400FF332C /* UpdataPassWordViewController.h */,
+				D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */,
+			);
+			path = UpdataPassword;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3752,6 +3765,7 @@
 				D31B266E19891F2600B05B03 /* GPUImageDirectionalNonMaximumSuppressionFilter.m in Sources */,
 				D31B266819891F2600B05B03 /* GPUImageCropFilter.m in Sources */,
 				D3A4897819512A2600EED32D /* AFSecurityPolicy.m in Sources */,
+				D3FC013219E7CE8400FF332C /* UpdataPassWordViewController.m in Sources */,
 				D31B26CE19891F2600B05B03 /* GPUImageStillCamera.m in Sources */,
 				D31B268E19891F2600B05B03 /* GPUImageJFAVoronoiFilter.m in Sources */,
 				D3A4898319512A2600EED32D /* UIRefreshControl+AFNetworking.m in Sources */,

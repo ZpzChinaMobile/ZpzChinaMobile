@@ -48,6 +48,8 @@
         [alert show];
     }
     
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector (changeViewControllers:) name:@"changeViewControllers" object:nil];
+    
     album = [[Album alloc] init];
     //nav
     UIView *topView = [[UIView alloc] init];
@@ -365,5 +367,14 @@
     if(buttonIndex == 0){
         [album getCameraView:self button:btn];
     }
+}
+
+-(void)changeViewControllers:(NSNotification*)notification{
+    UpdataPassWordViewController *updataPassWord = [[UpdataPassWordViewController alloc] init];
+    [self.navigationController pushViewController:updataPassWord animated:YES];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeViewControllers" object:nil];
 }
 @end
