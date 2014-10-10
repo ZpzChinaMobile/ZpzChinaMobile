@@ -19,12 +19,12 @@
         
         for (int i=0; i<8; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
-            [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+            [lingImage setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
             [self addSubview:lingImage];
         }
         
         UIImageView *addImage = [[UIImageView alloc] initWithFrame:CGRectMake(90,15, 20, 20)];
-        [addImage setImage:[UIImage imageNamed:@"新建项目5_03.png"]];
+        [addImage setImage:[GetImagePath getImagePath:@"新建项目5_03"]];
         [self addSubview:addImage];
         
         UIButton *Owner = [UIButton buttonWithType:UIButtonTypeCustom];

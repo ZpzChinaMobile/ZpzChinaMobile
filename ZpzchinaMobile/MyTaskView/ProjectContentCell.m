@@ -17,7 +17,7 @@
         NSLog(@"%@",dic);
         stage = [ProjectStage JudgmentProjectStage:dic];
         UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14,0,291.5,260)];
-        [bgImgView setImage:[UIImage imageNamed:@"全部项目_10.png"]];
+        [bgImgView setImage:[GetImagePath getImagePath:@"全部项目_10"]];
         [self addSubview:bgImgView];
         
         nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,5,160,36)];
@@ -54,17 +54,14 @@
         NSLog(@"stage ===== > %@",stage);
         progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(234,5,52,52)];
         if([stage isEqualToString:@"1"]||[stage isEqualToString:@"0"]){
-            [progressImage setImage:[UIImage imageNamed:@"全部项目_16.png"]];
+            [progressImage setImage:[GetImagePath getImagePath:@"全部项目_16"]];
         }else if([stage isEqualToString:@"2"]){
-            [progressImage setImage:[UIImage imageNamed:@"全部项目_15.png"]];
+            [progressImage setImage:[GetImagePath getImagePath:@"全部项目_15"]];
         }else if([stage isEqualToString:@"3"]){
-            [progressImage setImage:[UIImage imageNamed:@"全部项目_14.png"]];
+            [progressImage setImage:[GetImagePath getImagePath:@"全部项目_14"]];
         }else{
-            [progressImage setImage:[UIImage imageNamed:@"全部项目_13.png"]];
+            [progressImage setImage:[GetImagePath getImagePath:@"全部项目_13"]];
         }
-        /*UIImageView *smailImage = [[UIImageView alloc] initWithFrame:CGRectMake(15,17,24.5,18.5)];
-        [smailImage setImage:[UIImage imageNamed:@"全部项目_21.png"]];
-        [progressImage addSubview:smailImage];*/
         [self addSubview:progressImage];
         
         startdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(234,57,65,20)];
@@ -86,15 +83,15 @@
         [self addSubview:enddateLabel];
         
         UIImageView *bigImage = [[UIImageView alloc] initWithFrame:CGRectMake(16.5,100,286.5,109.5)];
-        [bigImage setImage:[UIImage imageNamed:@"全部项目_37.png"]];
+        [bigImage setImage:[GetImagePath getImagePath:@"全部项目_37"]];
         [self addSubview:bigImage];
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(34,225,20,20)];
-        [arrowImage setImage:[UIImage imageNamed:@"全部项目_17.png"]];
+        [arrowImage setImage:[GetImagePath getImagePath:@"全部项目_17"]];
         [self addSubview:arrowImage];
         
         UIImageView *dianImage = [[UIImageView alloc] initWithFrame:CGRectMake(284,225,3.5,18)];
-        [dianImage setImage:[UIImage imageNamed:@"全部项目_19.png"]];
+        [dianImage setImage:[GetImagePath getImagePath:@"全部项目_19"]];
         dianImage.userInteractionEnabled = YES;
         UITapGestureRecognizer *dianImagetapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
         //[dianImagetapGestureRecognizer addTarget:self action:@selector(dianImageClick)];

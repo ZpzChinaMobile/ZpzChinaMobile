@@ -21,7 +21,7 @@
         lingImage.alpha = 0.1;
         
         UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50, 250, 1)];
-        [lingImage2 setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+        [lingImage2 setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
         [self addSubview:lingImage2];
         
         UIButton *green = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -50,7 +50,7 @@
         [self addSubview:green];
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,20, 8, 12.5)];
-        [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+        [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage];
     }
     return self;

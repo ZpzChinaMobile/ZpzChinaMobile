@@ -45,22 +45,22 @@
     [self.dataDic setValue:@"" forKey:@"baseContactID"];
     [self.dataDic setValue:@"" forKeyPath:@"duties"];
     UIImageView *bgimageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 262, 431)];
-    [bgimageView setImage:[UIImage imageNamed:@"新建项目1_03.png"]];
+    [bgimageView setImage:[GetImagePath getImagePath:@"新建项目1_03"]];
     [self.view addSubview:bgimageView];
     
     UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(118.5, 10, 25, 25)];
-    [headerImageView setImage:[UIImage imageNamed:@"新建项目1_06.png"]];
+    [headerImageView setImage:[GetImagePath getImagePath:@"新建项目1_06"]];
     [self.view addSubview:headerImageView];
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 120, 262, 311)];
     for (int i=0; i<5; i++) {
         UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(31, 45*(i+1), 200, 1)];
-        [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+        [lingImage setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
         [contentView addSubview:lingImage];
     }
     
     UIImageView *btnImageView = [[UIImageView alloc] initWithFrame:CGRectMake(60, 250, 143.5, 32)];
-    [btnImageView setImage:[UIImage imageNamed:@"新建项目1_11.png"]];
+    [btnImageView setImage:[GetImagePath getImagePath:@"新建项目1_11"]];
     [contentView addSubview:btnImageView];
     
     saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -101,7 +101,7 @@
     [contentView addSubview:title];
     
     UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(220,108, 8, 12.5)];
-    [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+    [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
     [contentView addSubview:arrowImage];
     
     accountName = [[UITextField alloc] initWithFrame:CGRectMake(31, 145, 205, 32)];

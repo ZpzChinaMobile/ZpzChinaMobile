@@ -76,7 +76,7 @@ int startIndex;
     
     
     _lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(44, 112.5, 71.5, 2)];
-    [_lineImage setImage:[UIImage imageNamed:@"我的任务_03.png"]];
+    [_lineImage setImage:[GetImagePath getImagePath:@"我的任务_03"]];
     [self.view addSubview:_lineImage];
 
     //集成刷新控件
@@ -104,7 +104,7 @@ int startIndex;
         flag = 1;
         [_tableView removeHeader];
         [_tableView removeFooter];
-        [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"DRIBBBLE-icon45-blue-drops_07.png"]];
+        [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_07"]];
         [self.showArr removeAllObjects];
         self.showArr = [ProjectSqlite loadList];
         [_tableView reloadData];
@@ -132,7 +132,7 @@ int startIndex;
         flag = 1;
         [_tableView removeHeader];
         [_tableView removeFooter];
-        [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"DRIBBBLE-icon45-blue-drops_07.png"]];
+        [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_07"]];
         [self.showArr removeAllObjects];
         self.showArr = [ProjectSqlite loadList];
         [_tableView reloadData];
@@ -238,7 +238,7 @@ int startIndex;
     flag = 1;
     [_tableView removeHeader];
     [_tableView removeFooter];
-    [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"DRIBBBLE-icon45-blue-drops_07.png"]];
+    [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_07"]];
     [self.showArr removeAllObjects];
     self.showArr = [ProjectSqlite loadList];
     [_tableView reloadData];

@@ -18,11 +18,11 @@
             for (int i =0; i<3; i++) {
                 
                 UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(100,50*i+17, 10, 18)];
-                [arrowImage setImage:[UIImage imageNamed:@"新建项目5_09.png"]];
+                [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
                 [self addSubview:arrowImage];
                 
                 UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];
-                [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+                [lingImage setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
                 [self addSubview:lingImage];
                 
                 

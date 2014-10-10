@@ -33,11 +33,11 @@
     //NSLog(@"dic ===> %@",dic);
     //NSLog(@"%@",[ProjectStage JudgmentProjectStage:dic]);
     UIImageView *grayBgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 190)];
-    [grayBgView setImage:[UIImage imageNamed:@"地图搜索1_16.png"]];
+    [grayBgView setImage:[GetImagePath getImagePath:@"地图搜索1_16"]];
     
     NSString *stage = [ProjectStage JudgmentProjectStage:dic];
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15,25,291.5,151.5)];
-    [bgImgView setImage:[UIImage imageNamed:@"地图搜索1_05.png"]];
+    [bgImgView setImage:[GetImagePath getImagePath:@"地图搜索1_05"]];
     
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,5,160,36)];
     nameLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:15];
@@ -72,16 +72,16 @@
     
     UIImageView *progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(220,5,52,52)];
     if([stage isEqualToString:@"1"]){
-        [progressImage setImage:[UIImage imageNamed:@"全部项目_16.png"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_16"]];
     }else if([stage isEqualToString:@"2"]){
-        [progressImage setImage:[UIImage imageNamed:@"全部项目_15.png"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_15"]];
     }else if([stage isEqualToString:@"3"]){
-        [progressImage setImage:[UIImage imageNamed:@"全部项目_14.png"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_14"]];
     }else{
-        [progressImage setImage:[UIImage imageNamed:@"全部项目_13.png"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_13"]];
     }
     UIImageView *smailImage = [[UIImageView alloc] initWithFrame:CGRectMake(15,17,24.5,18.5)];
-    [smailImage setImage:[UIImage imageNamed:@"全部项目_21.png"]];
+    [smailImage setImage:[GetImagePath getImagePath:@"全部项目_21"]];
     [progressImage addSubview:smailImage];
     [bgImgView addSubview:progressImage];
     
@@ -104,11 +104,11 @@
     [bgImgView addSubview:enddateLabel];
     
     UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(20,115,20,20)];
-    [arrowImage setImage:[UIImage imageNamed:@"全部项目_17.png"]];
+    [arrowImage setImage:[GetImagePath getImagePath:@"全部项目_17"]];
     [bgImgView addSubview:arrowImage];
     
     UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 100, 250, 1)];
-    [lingImage setImage:[UIImage imageNamed:@"新建项目5_27.png"]];
+    [lingImage setImage:[GetImagePath getImagePath:@"新建项目5_27"]];
     [bgImgView addSubview:lingImage];
     
     UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(50,115,60,20)];
@@ -127,7 +127,7 @@
     [self addSubview:grayBgView];
     
     UIImageView *numberImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 28.5, 40.5)];
-    [numberImageView setImage:[UIImage imageNamed:@"地图搜索1_09.png"]];
+    [numberImageView setImage:[GetImagePath getImagePath:@"地图搜索1_09"]];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 28.5, 30)];
     label.textColor = [UIColor whiteColor];

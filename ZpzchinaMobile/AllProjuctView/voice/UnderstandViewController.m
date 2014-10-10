@@ -56,7 +56,7 @@ static bool startListen =YES;
     //RightButton设置属性
     UIButton *completeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [completeBtn setFrame:CGRectMake(280, 25, 30, 30)];
-    [completeBtn setBackgroundImage:[UIImage imageNamed:@"icon__09"] forState:UIControlStateNormal];
+    [completeBtn setBackgroundImage:[GetImagePath getImagePath:@"icon__09"] forState:UIControlStateNormal];
     completeBtn.titleLabel.textColor = [UIColor whiteColor];
     [completeBtn addTarget:self action:@selector(completeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:completeBtn];
@@ -79,7 +79,7 @@ static bool startListen =YES;
     label.textColor = [UIColor colorWithRed:(151/255.0)  green:(151/255.0)  blue:(151/255.0)  alpha:1.0];
     label.text =@"请开始说话";
     [resultView addSubview:label];
-    UIImage *image = [UIImage imageNamed:@"语音搜索_04"];
+    UIImage *image = [GetImagePath getImagePath:@"语音搜索_04"];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(90, resultView.frame.origin.y+resultView.frame.size.height+103.5-56.5, 149, 149)];
     //    imageView.center = CGPointMake(160, resultView.frame.origin.y+resultView.frame.size.height+60);
     imageView.image = image;
@@ -91,9 +91,9 @@ static bool startListen =YES;
     
     
     
-    [button setBackgroundImage:[UIImage imageNamed:@"语音搜索1_05"] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"语音搜索1_05"] forState:UIControlStateSelected];
-    [button setBackgroundImage:[UIImage imageNamed:@"语音搜索1_05"] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[GetImagePath getImagePath:@"语音搜索1_05"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[GetImagePath getImagePath:@"语音搜索1_05"] forState:UIControlStateSelected];
+    [button setBackgroundImage:[GetImagePath getImagePath:@"语音搜索1_05"] forState:UIControlStateHighlighted];
     
     [button addTarget:self action:@selector(startListening1) forControlEvents:UIControlEventTouchUpInside];
     
