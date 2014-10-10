@@ -103,7 +103,7 @@
     titleLabel.frame = CGRectMake(10, 228, 140, 28);
     titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:12];
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = @"职位区域经理";
+    titleLabel.text = model.a_department;
     [bannerView addSubview:titleLabel];
     
     UIImageView *cityImgView = [[UIImageView alloc] initWithFrame:CGRectMake(200,234,12,17)];

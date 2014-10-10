@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-@interface UpdataPassWordViewController : BaseViewController
+@interface UpdataPassWordViewController : BaseViewController<UITextFieldDelegate>{
+    UITextField *oldPassWordTextField;
+    UITextField *newPassWordTextField;
+    UITextField *newAgainPassWordTextField;
+}
 
 @end

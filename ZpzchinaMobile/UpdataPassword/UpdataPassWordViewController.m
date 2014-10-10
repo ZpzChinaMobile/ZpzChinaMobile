@@ -30,10 +30,41 @@
     [self addBackButton];
     [self addtittle:@"修改密码"];
     
-    UILabel *oldPassWord = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 60, 30)];
+    UILabel *oldPassWord = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 60, 30)];
     oldPassWord.textColor = BlueColor;
     oldPassWord.text = @"原密码";
+    oldPassWord.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     [self.contentView addSubview:oldPassWord];
+    
+    oldPassWordTextField = [[UITextField alloc] initWithFrame:CGRectMake(75, 20, 200, 30)];
+    oldPassWordTextField.placeholder = @"原密码";
+    oldPassWordTextField.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    oldPassWordTextField.delegate = self;
+    [oldPassWordTextField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    [self.contentView addSubview:oldPassWordTextField];
+    
+    UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(15, 55, 290, 1)];
+    [lineImage setBackgroundColor:[UIColor blackColor]];
+    [self.contentView addSubview:lineImage];
+    lineImage.alpha = 0.2;
+    
+    UILabel *newPassWord = [[UILabel alloc] initWithFrame:CGRectMake(15, 65, 60, 30)];
+    newPassWord.textColor = BlueColor;
+    newPassWord.text = @"新密码";
+    newPassWord.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    [self.contentView addSubview:newPassWord];
+    
+    newAgainPassWordTextField = [[UITextField alloc] initWithFrame:CGRectMake(75, 65, 200, 30)];
+    newAgainPassWordTextField.placeholder = @"新密码";
+    newAgainPassWordTextField.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    newAgainPassWordTextField.delegate = self;
+    [newAgainPassWordTextField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    [self.contentView addSubview:newAgainPassWordTextField];
+    
+    UIImageView *lineImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(15, 100, 290, 1)];
+    [lineImage2 setBackgroundColor:[UIColor blackColor]];
+    [self.contentView addSubview:lineImage2];
+    lineImage2.alpha = 0.2;
 }
 
 - (void)didReceiveMemoryWarning

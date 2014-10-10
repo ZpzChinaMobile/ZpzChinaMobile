@@ -15,6 +15,7 @@
 #import "CameraSqlite.h"
 #import "RecordSqlite.h"
 #import "UserSqlite.h"
+#import "UserModel.h"
 @interface HomePageLeftViewController ()
 
 @end
@@ -44,7 +45,9 @@
     nameLabel.frame = CGRectMake(25, 20, 250, 28);
     nameLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:19];
     nameLabel.textColor = [UIColor whiteColor];
-    nameLabel.text = [NSString stringWithFormat:@"%@",[LoginSqlite getdata:@"userName" defaultdata:@""]];
+    NSArray *list = [UserSqlite loadList];
+    UserModel *model = list[0];
+    nameLabel.text = [NSString stringWithFormat:@"%@",model.a_cellphone];
     [self.view addSubview:nameLabel];
     
     UILabel *welcomeLabel = [[UILabel alloc] init];
@@ -56,18 +59,18 @@
     
     //头像
     
-    UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(0,250,320,1)];
+    UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(0,400,320,1)];
     [lineImage setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:lineImage];
     lineImage.alpha = 0.5;
     
     //清除本地数据
-    UIView *clearView = [[UIView alloc] initWithFrame:CGRectMake(0,252,320,50)];
+    UIView *clearView = [[UIView alloc] initWithFrame:CGRectMake(0,402,320,50)];
     [clearView setBackgroundColor:[UIColor clearColor]];
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(15,12.5,25,25)];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(35,12.5,25,25)];
     [image setImage:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_03"]];
     [clearView addSubview:image];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(55, 12.5, 120, 25)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(75, 12.5, 120, 25)];
     label.font = [UIFont fontWithName:@"GurmukhiMN" size:17];
     label.textColor = [UIColor whiteColor];
     label.text = @"清除本地数据";
@@ -80,18 +83,18 @@
     [clearView addSubview:btn];
     [self.view addSubview:clearView];
     
-    UIImageView *lineImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,300,320,1)];
+    UIImageView *lineImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,450,320,1)];
     [lineImage1 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:lineImage1];
     lineImage1.alpha = 0.5;
     
     //修改密码
-    UIView *setView = [[UIView alloc] initWithFrame:CGRectMake(0,302,320,50)];
+    UIView *setView = [[UIView alloc] initWithFrame:CGRectMake(0,452,320,50)];
     [setView setBackgroundColor:[UIColor clearColor]];
-    UIImageView *image1 = [[UIImageView alloc] initWithFrame:CGRectMake(15,12.5,25,25)];
-    [image1 setImage:[GetImagePath getImagePath:@"首页侧拉栏_07"]];
+    UIImageView *image1 = [[UIImageView alloc] initWithFrame:CGRectMake(35,12.5,25,25)];
+    [image1 setImage:[GetImagePath getImagePath:@"补充切图_06"]];
     [setView addSubview:image1];
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(55, 12.5, 120, 25)];
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(75, 12.5, 120, 25)];
     label1.font = [UIFont fontWithName:@"GurmukhiMN" size:17];
     label1.textColor = [UIColor whiteColor];
     label1.text = @"修改密码";
@@ -104,18 +107,35 @@
     [setView addSubview:btn1];
     [self.view addSubview:setView];
     
-    UIImageView *lineImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,352,320,1)];
+    UIImageView *lineImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,502,320,1)];
     [lineImage2 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:lineImage2];
     lineImage2.alpha = 0.5;
     
     
      //退出
-    UIButton *logoutBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
-    logoutBtn.frame = CGRectMake(60, 520, 169, 38);
-    [logoutBtn setImage:[GetImagePath getImagePath:@"首页侧拉栏_17"] forState:UIControlStateNormal];
-    [logoutBtn addTarget:self action:@selector(logoutBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:logoutBtn];
+    UIView *logoutView = [[UIView alloc] initWithFrame:CGRectMake(0,502,320,50)];
+    [logoutView setBackgroundColor:[UIColor clearColor]];
+    UIImageView *image2 = [[UIImageView alloc] initWithFrame:CGRectMake(35,12.5,25,25)];
+    [image2 setImage:[GetImagePath getImagePath:@"补充切图_08"]];
+    [logoutView addSubview:image2];
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(75, 12.5, 120, 25)];
+    label2.font = [UIFont fontWithName:@"GurmukhiMN" size:17];
+    label2.textColor = [UIColor whiteColor];
+    label2.text = @"退出登录";
+    [logoutView addSubview:label2];
+    UIButton *btn2 =  [UIButton buttonWithType:UIButtonTypeCustom];
+    btn2.tag = 1;
+    [btn2 setBackgroundColor:[UIColor clearColor]];
+    btn2.frame = CGRectMake(0, 0, 320, 50);
+    [btn2 addTarget:self action:@selector(logoutBtn) forControlEvents:UIControlEventTouchUpInside];
+    [logoutView addSubview:btn2];
+    [self.view addSubview:logoutView];
+    
+    UIImageView *lineImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(0,552,320,1)];
+    [lineImage3 setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:lineImage3];
+    lineImage3.alpha = 0.5;
 }
 
 - (void)didReceiveMemoryWarning
