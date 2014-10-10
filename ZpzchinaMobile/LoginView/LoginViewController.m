@@ -41,11 +41,11 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.hidden = YES;
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 321, 568)];
-    [bgImgView setImage:[UIImage imageNamed:@"注册.png"]];
+    [bgImgView setImage:[GetImagePath getImagePath:@"注册"]];
     [self.view addSubview:bgImgView];
     
     UIImageView *headerImgView = [[UIImageView alloc] initWithFrame:CGRectMake(111, 80, 98.5, 98.5)];
-    [headerImgView setImage:[UIImage imageNamed:@"登录_03.png"]];
+    [headerImgView setImage:[GetImagePath getImagePath:@"登录_03"]];
     UIImageView *roundView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 89, 89)];
     roundView.layer.masksToBounds = YES;
     roundView.layer.cornerRadius = 45;
@@ -56,7 +56,7 @@
 
     UIView *textView = [[UIView alloc] initWithFrame:CGRectMake(25,240,264,87)];
     UIImageView *bgImgView2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,264,87)];
-    [bgImgView2 setImage:[UIImage imageNamed:@"登录_07.png"]];
+    [bgImgView2 setImage:[GetImagePath getImagePath:@"登录_07"]];
     [textView addSubview:bgImgView2];
     _userNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,0,254,43)];
     _userNameTextField.delegate = self;

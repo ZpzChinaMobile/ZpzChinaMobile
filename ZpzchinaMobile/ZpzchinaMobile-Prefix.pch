@@ -19,6 +19,7 @@
     #import <QuartzCore/QuartzCore.h>
     #import "UIViewController+MMDrawerController.h"
     #import "AFNetworking.h"
+    #import "GetImagePath.h"
 #endif
 #define  serverAddress "http://eipqas.zhongjichina.com/ZPZChina.svc"
 #define  kScreenWidth  [[UIScreen mainScreen] bounds].size.width
