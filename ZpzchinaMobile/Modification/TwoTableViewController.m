@@ -28,20 +28,19 @@
 //项目立项
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-
-        datepickerview = (DatePickerView *)actionSheet;
-        if(buttonIndex == 0) {
-            NSLog(@"Cancel");
-        }else {
-            if(self.timeflag == 0){
-                [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedStartTime"];
-            }else if(self.timeflag == 1){
-                [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedFinishTime"];
-            }else{
-                //[self.dataDic setObject:datepickerview.timeSp forKey:@"actualStartTime"];
-            }
+    datepickerview = (DatePickerView *)actionSheet;
+    if(buttonIndex == 0) {
+        NSLog(@"Cancel");
+    }else {
+        if(self.timeflag == 0){
+            [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedStartTime"];
+        }else if(self.timeflag == 1){
+            [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedFinishTime"];
+        }else{
+            //[self.dataDic setObject:datepickerview.timeSp forKey:@"actualStartTime"];
         }
-        [self.tableView reloadData];
+    }
+    [self.tableView reloadData];
 }
 
 -(void)back:(NSMutableDictionary *)dic btnTag:(int)btnTag{

@@ -186,13 +186,20 @@
                 [landuseLabel setText:@""];
             }
         }else{
-            if(![[dic objectForKey:@"usage"] isEqualToString:@""]){
-                [landuseLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"usage"]]];
+            /*
+             if([dic objectForKey:@"landAddress"]){
+             [address setText:[dic objectForKey:@"landAddress"]];
+             }else{
+             if(![[singleDic objectForKey:@"landAddress"] isEqualToString:@""]){
+             [address setText:[singleDic objectForKey:@"landAddress"]];
+             }
+             }
+             */
+            if([dic objectForKey:@"usage"]){
+                [landuseLabel setText:[dic objectForKey:@"usage"]];
             }else{
                 if(![[singleDic objectForKey:@"usage"] isEqualToString:@""]){
-                    [landuseLabel setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"usage"]]];
-                }else{
-                    [landuseLabel setText:@""];
+                    [landuseLabel setText:[singleDic objectForKey:@"usage"]];
                 }
             }
         }

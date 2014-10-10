@@ -430,7 +430,7 @@
         [dic setObject:[newDic objectForKey:@"plotRatio"] forKey:@"plotRatio"];
     }
     
-    if([[newDic objectForKey:@"usage"] isEqualToString:@""]){
+    if(![newDic objectForKey:@"usage"]){
         [dic setObject:[oldDic objectForKey:@"usage"] forKey:@"usage"];
     }else{
         [dic setObject:[newDic objectForKey:@"usage"] forKey:@"usage"];
@@ -543,7 +543,7 @@
         [dic setObject:[newDic objectForKey:@"foreignInvestment"] forKey:@"foreignInvestment"];
     }
     
-    if([[newDic objectForKey:@"ownerType"] isEqualToString:@""]){
+    if(![newDic objectForKey:@"ownerType"]){
         [dic setObject:[oldDic objectForKey:@"ownerType"] forKey:@"ownerType"];
     }else{
         [dic setObject:[newDic objectForKey:@"ownerType"] forKey:@"ownerType"];

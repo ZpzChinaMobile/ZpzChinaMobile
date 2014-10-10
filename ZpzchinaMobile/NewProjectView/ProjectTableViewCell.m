@@ -370,13 +370,11 @@
                 [ownerLabel setText:@""];
             }
         }else{
-            if(![[dic objectForKey:@"ownerType"] isEqualToString:@""]){
-                [ownerLabel setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"ownerType"]]];
+            if([dic objectForKey:@"ownerType"]){
+                [ownerLabel setText:[dic objectForKey:@"ownerType"]];
             }else{
                 if(![[singleDic objectForKey:@"ownerType"] isEqualToString:@""]){
                     [ownerLabel setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"ownerType"]]];
-                }else{
-                    [ownerLabel setText:@""];
                 }
             }
         }

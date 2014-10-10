@@ -22,6 +22,7 @@
         [self addSubview:topView];
         
         datepicker = [ [ UIDatePicker alloc] initWithFrame:CGRectMake(0, 44, 320, self.frame.size.height-44)];
+        datepicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
         datepicker.datePickerMode = UIDatePickerModeDate;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];

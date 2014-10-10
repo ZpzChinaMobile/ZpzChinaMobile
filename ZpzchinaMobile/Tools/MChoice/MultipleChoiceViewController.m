@@ -182,7 +182,7 @@
 }
 
 -(void)complatedClick{
-    if(self.dataArr.count !=0){
+    if(self.dataArr.count !=0){        
         if ([delegate respondsToSelector:@selector(choiceData:index:)]){
             [delegate choiceData:self.dataArr index:self.flag];
         }

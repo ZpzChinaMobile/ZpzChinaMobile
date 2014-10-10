@@ -34,6 +34,7 @@
 //地平阶段
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==0) return;
     if(self.timeflag == 0){
         [self.dataDic setObject:datepickerview.timeSp forKey:@"expectedStartTime"];
     }else if(self.timeflag == 1){

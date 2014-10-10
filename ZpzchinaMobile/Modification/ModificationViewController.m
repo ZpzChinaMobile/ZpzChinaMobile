@@ -820,7 +820,6 @@
     
     [self.dataDic setObject:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
     
-    [self.dataDic setObject:@"" forKey:@"usage"];
     [self.dataDic setObject:@"" forKey:@"auctionUnit"];
     //建立项目
     [self.dataDic setObject:@"" forKey:@"projectID"];
@@ -829,7 +828,6 @@
     [self.dataDic setObject:@"" forKey:@"owner"];
     [self.dataDic setObject:@"" forKey:@"expectedStartTime"];
     [self.dataDic setObject:@"" forKey:@"expectedFinishTime"];
-    [self.dataDic setObject:@"" forKey:@"ownerType"];
     //地勘阶段
     [self.dataDic setObject:@"" forKey:@"mainDesignStage"];
     //地平
@@ -855,7 +853,9 @@
         [self.dataDic setObject:@"" forKey:@"landAddress"];
         [self.dataDic setObject:@"" forKey:@"projectName"];
         [self.dataDic setObject:@"" forKey:@"description"];
-        
+        [self.dataDic setObject:@"" forKey:@"usage"];
+        [self.dataDic setObject:@"" forKey:@"ownerType"];
+
         [self.dataDic setObject:@"0" forKey:@"area"];
         [self.dataDic setObject:@"0" forKey:@"plotRatio"];
         [self.dataDic setObject:@"0" forKey:@"investment"];

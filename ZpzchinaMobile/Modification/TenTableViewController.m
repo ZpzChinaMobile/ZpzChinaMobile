@@ -21,7 +21,6 @@
 
 @implementation TenTableViewController
 //装修阶段
-
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic images:(NSMutableArray*)images{
     if ([super init]) {
         self.singleDic=singleDic;
@@ -59,7 +58,6 @@
 {
     return 2;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -174,7 +172,6 @@
     return view;
 }
 
-
 -(void)tap:(UIButton*)button{
     camera=[[Camera alloc]init];
     camera.delegate=self;
@@ -188,8 +185,6 @@
         [camera getCameraView:self.superVC flag:5 aid:[self.dataDic objectForKey:@"id"]];
     }
 }
-
-
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -208,7 +203,6 @@
     }
     [self.tableView reloadData];
 }
-
 
 -(void)addContactViewFirefighting:(int)index{
     flag = index;
@@ -232,6 +226,7 @@
     }
     NSLog(@"tenDisappear");
 }
+
 -(void)dealloc{
     for (int i=0; i<newImageCount; i++) {
         [self.images removeLastObject];

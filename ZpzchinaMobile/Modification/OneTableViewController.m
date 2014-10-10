@@ -79,7 +79,6 @@
 }
 
 -(void)addContactView:(int)index{
-    //NSLog(@"1");
     [locateview removeFromSuperview];
     locateview = nil;
     
