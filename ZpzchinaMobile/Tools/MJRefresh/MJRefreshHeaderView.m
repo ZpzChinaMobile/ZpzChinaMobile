@@ -74,7 +74,7 @@
     self.y = - self.height;
     //NSLog(@"self.height ==> %f",self.height);
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.origin.x, -500, self.frame.size.width, 500)];
-    [bgView setImage:[UIImage imageNamed:@"全部项目_02.png"]];
+    [bgView setImage:[GetImagePath getImagePath:@"全部项目_02"]];
     [self addSubview:bgView];
 }
 
