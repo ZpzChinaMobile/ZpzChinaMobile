@@ -27,4 +27,12 @@
 #define  BlueColor [UIColor colorWithRed:(40/255.0)  green:(134/255.0)  blue:(247/255.0)  alpha:1.0]
 #define  GrayColor [UIColor colorWithRed:(105/255.0)  green:(105/255.0)  blue:(105/255.0)  alpha:1.0]
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
-#define NSLog //NSLog
+
+
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#define debugMethod() NSLog(@"%s", __func__)
+#else
+#define NSLog(...)
+#define debugMethod()
+#endif
