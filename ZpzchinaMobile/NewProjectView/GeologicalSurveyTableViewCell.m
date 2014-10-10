@@ -59,43 +59,6 @@
         }
         
         NSLog(@"==> %@",explorationImageArr);
-        UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(40, 52, 270, 98)];
-        imageArr = explorationImageArr;
-        if(imageArr.count !=0){
-            for(int i=0;i<imageArr.count;i++){
-                CameraModel *model = [imageArr objectAtIndex:i];
-                UIImage *aimage = nil;
-                if(flag == 0){
-                    aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-                }else{
-                    NSLog(@"a_device ==> %@",model.a_device);
-                    if([model.a_device isEqualToString:@"localios"]){
-                        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-                    }else{
-                        aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-                    }
-                }
-                UIImageView *image = [[UIImageView alloc] init];
-                image.tag = 0;
-                [image setImage:aimage];
-                [image setFrame:CGRectMake(270/3*i, 10, 80, 80)];
-                image.userInteractionEnabled = YES;
-                UITapGestureRecognizer *imagetapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-                [imagetapGestureRecognizer addTarget:self action:@selector(gotoMoreExploration)];
-                [imagetapGestureRecognizer setNumberOfTapsRequired:1];
-                [imagetapGestureRecognizer setNumberOfTouchesRequired:1];
-                [image addGestureRecognizer:imagetapGestureRecognizer];
-                [view1 addSubview:image];
-            }
-        }else{
-            for(int i=0;i<3;i++){
-                UIImageView *image = [[UIImageView alloc] init];
-                [image setFrame:CGRectMake(270/3*i, 10, 80, 80)];
-                [image setImage:[UIImage imageNamed:@"NoImage.png"]];
-                [view1 addSubview:image];
-            }
-        }
-        [self addSubview:view1];
     }
     return self;
 }

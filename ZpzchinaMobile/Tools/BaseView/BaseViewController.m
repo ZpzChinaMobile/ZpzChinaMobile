@@ -63,8 +63,8 @@
 -(void)addBackButton
 {
     UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(0,27,29,28.5);
-    [backButton setImage:[GetImagePath getImagePath:@"icon_04"] forState:UIControlStateNormal];
+    backButton.frame = CGRectMake(5,27,25,22);
+    [backButton setImage:[GetImagePath getImagePath:@"013"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(leftAction) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:backButton];
 }

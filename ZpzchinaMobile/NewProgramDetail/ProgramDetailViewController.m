@@ -427,7 +427,7 @@
         
         UIImage* image=[GetImagePath getImagePath:@"筛选中04"];
         self.bigStageImageView.image=image;//大阶段图片
-        self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
+        self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width, image.size.height);
         
         self.smallStageLabel.text=ary3[0];//小标题
     }else if(self.zhuTiShiGong&&self.myScrollView.contentOffset.y>=self.zhuTiShiGong.frame.origin.y-568+64.5){
@@ -435,7 +435,7 @@
         
         UIImage* image=[GetImagePath getImagePath:@"筛选中03"];
         self.bigStageImageView.image=image;//大阶段图片
-        self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
+        self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width, image.size.height);
         
         for (int i=3; i>=0; i--) {//小标题
             if (self.myScrollView.contentOffset.y>=thirdArray[i]+50-568+64.5) {
@@ -448,7 +448,7 @@
         
         UIImage* image=[GetImagePath getImagePath:@"筛选中02"];
         self.bigStageImageView.image=image;//大阶段图片
-        self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
+        self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width, image.size.height);
         
         for (int i=2; i>=0; i--) {//小标题
             if (self.myScrollView.contentOffset.y>=secondArray[i]+50-568+64.5) {
@@ -461,7 +461,7 @@
         
         UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
         self.bigStageImageView.image=image;//大阶段图片
-        self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
+        self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width, image.size.height);
         
         for (int i=1; i>=0; i--) {//小标题
             if (self.myScrollView.contentOffset.y>=firstArray[i]+50-568+64.5) {
@@ -776,7 +776,7 @@
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 37.5)];
     
     UIImage* image=[GetImagePath getImagePath:path[section]];
-    CGRect frame=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
+    CGRect frame=CGRectMake(0, 0, image.size.width, image.size.height);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
     imageView.center=CGPointMake(23.5, 37.5*.5);
     imageView.image=image;
@@ -975,7 +975,7 @@
     
     //大标题左边的大阶段图片
     UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
-    CGRect frame=CGRectMake(20, 12, image.size.width*.5, image.size.height*.5);
+    CGRect frame=CGRectMake(20, 12, image.size.width, image.size.height);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     self.bigStageImageView.image=image;
     [tempView addSubview:self.bigStageImageView];

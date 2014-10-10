@@ -37,8 +37,8 @@
     
     //cell.sureImageView=nil;
     if (indexPath.row==number) {
-        cell.sureImageView=[[UIImageView alloc]initWithFrame:CGRectMake(270, 9, 16, 16)];
-        cell.sureImageView.image=[UIImage imageNamed:@"XiangMuXiangQing_ShaiXuan/right@2x.png"];
+        cell.sureImageView=[[UIImageView alloc]initWithFrame:CGRectMake(270, 9, 18, 19)];
+        cell.sureImageView.image=[GetImagePath getImagePath:@"高级搜索-多选_07a"];
         [cell.contentView addSubview:cell.sureImageView];
     }
     return cell;
