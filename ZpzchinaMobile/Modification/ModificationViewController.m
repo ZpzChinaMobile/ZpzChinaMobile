@@ -248,7 +248,7 @@
     
     //大标题左边的大阶段图片
     UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
-    CGRect frame=CGRectMake(20, 12, image.size.width*.5, image.size.height*.5);
+    CGRect frame=CGRectMake(20, 12, image.size.width, image.size.height);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     self.bigStageImageView.image=image;
     [tempView addSubview:self.bigStageImageView];
@@ -348,7 +348,7 @@
     
     
     UIImage* image=[GetImagePath getImagePath:[mainPath stringByAppendingPathComponent:path[section]]];
-    CGRect frame=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
+    CGRect frame=CGRectMake(0, 0, image.size.width, image.size.height);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
     imageView.center=CGPointMake(23.5, 37.5*.5);
     imageView.image=image;

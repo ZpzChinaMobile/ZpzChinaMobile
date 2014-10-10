@@ -188,9 +188,6 @@
         
         return cell;
     }
-    // cell.contentView.backgroundColor=[UIColor yellowColor];
-    //cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    // return cell;
 }
 
 -(UIImage*)saveImage:(UIView*)view{
@@ -214,7 +211,7 @@
         }
         [imageAry addObject:aimage];
     }
-    [imageAry addObject:[UIImage imageNamed:@"新建项目－6_03.png"]];
+    [imageAry addObject:[GetImagePath getImagePath:@"新建项目－6_03"]];
     
     CGFloat cellHeight=120;
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
