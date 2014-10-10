@@ -12,6 +12,7 @@
 #import "GTMBase64.h"
 #import "LoginSqlite.h"
 #import "UserSqlite.h"
+#import "UserModel.h"
 @implementation LoginEvent
 @synthesize faceIDArray;
 static int chanceToLoginByFace =3;
@@ -96,11 +97,13 @@ static int chanceToLoginByFace =3;
 #pragma mark 脸部识别登录－－－－－－－－
 -(void)detectWithImage:(UIImage *)image With:(int)count//已经注册开始识别
 {
-    
+    NSMutableArray *list = [UserSqlite loadList];
+    UserModel *model = list[0];
+    NSLog(@"====>%@",model.a_userID);
+    person_id =  model.a_userID;
     if (count==1)
     {//判断image的张数
        
-        person_id =  [LoginSqlite getdata:@"userID" defaultdata:@""];
         NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
         FaceppResult *result = [[FaceppAPI detection] detectWithURL:nil orImageData:imageData mode:FaceppDetectionModeNormal attribute:FaceppDetectionAttributeNone];
         if (result.success)
@@ -218,7 +221,10 @@ static int chanceToLoginByFace =3;
 #pragma mark 脸部识别注册－－－－－－－－
 -(void)detectWithImageArray:(NSMutableArray *)faceArray//没有进行脸部注册时候获取faceID
 {
-    person_id =  [LoginSqlite getdata:@"userID" defaultdata:@""];
+    NSMutableArray *list = [UserSqlite loadList];
+    UserModel *model = list[0];
+    NSLog(@"====>%@",model.a_userID);
+    person_id =  model.a_userID;
     
     for (int i =0; i<faceArray.count; i++) {
         UIImage *image = [faceArray objectAtIndex:i];
