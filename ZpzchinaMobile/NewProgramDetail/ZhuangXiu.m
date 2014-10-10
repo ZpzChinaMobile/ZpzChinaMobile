@@ -72,7 +72,7 @@ static NSDictionary* dataDic;
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
     }else{
-        aimage=[UIImage imageNamed:@"首页_16.png"];
+        aimage=[GetImagePath getImagePath:@"首页_16"];
     }
     CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
     CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);

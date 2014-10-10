@@ -72,7 +72,7 @@ static NSDictionary* dataDic;
         [timeArray addObject:confromTimespStr];
     }
     
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"出图阶段" programTitle:@[@"预计施工时间",@"预计竣工时间"] address:timeArray detailAddress:nil]];
+    [totalView addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon02"] stageTitle:@"出图阶段" programTitle:@[@"预计施工时间",@"预计竣工时间"] address:timeArray detailAddress:nil]];
     
     //3个联系人Label
     NSArray* array1=myDelegate.ownerAry;
@@ -131,7 +131,7 @@ static NSDictionary* dataDic;
      *
      *
      */
-    [totalView addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing_1/pen_02@2x.png"] stageTitle:@"设计阶段" programTitle:@[@"主体设计阶段"] address:@[dataDic[@"mainDesignStage"]] detailAddress:nil]];
+    [totalView addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon02"] stageTitle:@"设计阶段" programTitle:@[@"主体设计阶段"] address:@[dataDic[@"mainDesignStage"]] detailAddress:nil]];
     
     NSArray* array1=myDelegate.designAry;
     for (int i=0,j=myDelegate.designAry.count; i<3; i++) {
@@ -184,7 +184,7 @@ static NSDictionary* dataDic;
         }
         
     }else{
-        aimage=[UIImage imageNamed:@"首页_16.png"];
+        aimage=[GetImagePath getImagePath:@"首页_16"];
     }
     CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
     CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
@@ -296,7 +296,7 @@ static NSDictionary* dataDic;
     
     //电话图标
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(197, 46, 12.5, 12.5)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing/phone@2x.png"];
+    imageView.image=[GetImagePath getImagePath:@"021"];
     [view addSubview:imageView];
     
     //电话号码
@@ -318,7 +318,7 @@ static NSDictionary* dataDic;
     
     //阴影
     UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 3.5)];
-    shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
+    shadow.image=[GetImagePath getImagePath:@"Shadow-bottom"];
     [titleView addSubview:shadow];
     
     ///title部分

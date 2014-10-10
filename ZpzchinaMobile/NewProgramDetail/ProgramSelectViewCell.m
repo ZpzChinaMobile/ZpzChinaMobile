@@ -48,13 +48,13 @@
         CGFloat tempX=270;
         if (secondIcon) {
             UIImageView* tempImageView=[[UIImageView alloc]initWithFrame:CGRectMake(tempX, 4, 20, 20)];
-            tempImageView.image=[UIImage imageNamed:@"XiangMuXiangQing_ShaiXuan/Gallery@2x.png"];
+            tempImageView.image=[GetImagePath getImagePath:@"06"];
             [cell.contentView addSubview:tempImageView];
             tempX-=30;
         }
         if (firstIcon) {
             UIImageView* tempImageView=[[UIImageView alloc]initWithFrame:CGRectMake(tempX, 4, 20, 20)];
-            tempImageView.image=[UIImage imageNamed:@"XiangMuXiangQing_ShaiXuan/use@2x.png"];
+            tempImageView.image=[GetImagePath getImagePath:@"017"];
             [cell.contentView addSubview:tempImageView];
         }
         
@@ -63,7 +63,7 @@
         
         //上拉取消tableView的箭头
         UIButton* cancel=[[UIButton alloc]initWithFrame:CGRectMake(145, 20, 24.5, 15.5)];
-        [cancel setBackgroundImage:[UIImage imageNamed:@"XiangMuXiangQing_ShaiXuan/more_15@2x.png"] forState:UIControlStateNormal];
+        [cancel setBackgroundImage:[GetImagePath getImagePath:@"015"] forState:UIControlStateNormal];
         [cancel addTarget:cell.delegate action:@selector(selectCancel) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:cancel];
     }

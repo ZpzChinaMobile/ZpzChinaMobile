@@ -62,10 +62,10 @@
 
 -(void)getSecondView{
     UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, height, 320, 3.5)];
-    shadow.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-bottom.png"];
+    shadow.image=[GetImagePath getImagePath:@"Shadow-bottom"];
     [self addSubview:shadow];
     
-    [self addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"项目立项" programTitle:dataDic[@"projectName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"city"],dataDic[@"district"],dataDic[@"landAddress"]] detailAddress:dataDic[@"description"]]];
+    [self addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon01"] stageTitle:@"项目立项" programTitle:dataDic[@"projectName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"city"],dataDic[@"district"],dataDic[@"landAddress"]] detailAddress:dataDic[@"description"]]];
     [self bringSubviewToFront:shadow];
     
     
@@ -113,7 +113,7 @@
     }
     
     
-    UIView* tempView=[self getOwnerTypeViewWithImage:[UIImage imageNamed:@"XiangMuXiangQing/logo@2x.png"] owners:[dataDic[@"ownerType"] componentsSeparatedByString:@","]];
+    UIView* tempView=[self getOwnerTypeViewWithImage:[GetImagePath getImagePath:@"07"] owners:[dataDic[@"ownerType"] componentsSeparatedByString:@","]];
     CGRect frame=tempView.frame;
     frame.origin.y=height;
     tempView.frame=frame;
@@ -182,7 +182,7 @@
         }
         
     }else{
-        aimage=[UIImage imageNamed:@"首页_16.png"];
+        aimage=[GetImagePath getImagePath:@"首页_16"];
     }
     CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
     CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
@@ -278,7 +278,7 @@
      *
      */
     //项目名称view
-    [self addSubview:[self getProgramViewWithTitleImage:[UIImage imageNamed:@"XiangMuXiangQing/map_01.png"] stageTitle:@"土地规划/拍卖" programTitle:dataDic[@"landName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"province"],dataDic[@"city"],dataDic[@"district"]] detailAddress:dataDic[@"landAddress"]]];
+    [self addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon01"] stageTitle:@"土地规划/拍卖" programTitle:dataDic[@"landName"] address:[NSString stringWithFormat:@"%@ %@ %@",dataDic[@"province"],dataDic[@"city"],dataDic[@"district"]] detailAddress:dataDic[@"landAddress"]]];
     
     //NSLog(@"city=%@ description=%@ district=%@ landAddress=%@ landName=%@ ownerType=%@ projectName=%@ usage=%@ province=%@",dataDic[@"city"],dataDic[@"description"],dataDic[@"district"],dataDic[@"landAddress"],dataDic[@"landName"],dataDic[@"ownerType"],dataDic[@"projectName"],dataDic[@"usage"],dataDic[@"province"]);
     //图片imageView
@@ -358,7 +358,7 @@
     
     //电话图标
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(197, 46, 12.5, 12.5)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing/phone@2x.png"];
+    imageView.image=[GetImagePath getImagePath:@"021"];
     [view addSubview:imageView];
     
     //电话号码

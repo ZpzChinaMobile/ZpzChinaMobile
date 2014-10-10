@@ -425,7 +425,7 @@
     if (self.zhuangXiu&&self.myScrollView.contentOffset.y>=self.zhuangXiu.frame.origin.y-568+64.5) {
         self.bigStageLabel.text=@"装修阶段";//大标题
         
-        UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing_3/paint_01@2x.png"];
+        UIImage* image=[GetImagePath getImagePath:@"筛选中04"];
         self.bigStageImageView.image=image;//大阶段图片
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
         
@@ -433,7 +433,7 @@
     }else if(self.zhuTiShiGong&&self.myScrollView.contentOffset.y>=self.zhuTiShiGong.frame.origin.y-568+64.5){
         self.bigStageLabel.text=@"主体施工阶段";//大标题
         
-        UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing_2/Subject_01@2x.png"];
+        UIImage* image=[GetImagePath getImagePath:@"筛选中03"];
         self.bigStageImageView.image=image;//大阶段图片
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
         
@@ -446,7 +446,7 @@
     }else if(self.zhuTiSheJi&&self.myScrollView.contentOffset.y>=self.zhuTiSheJi.frame.origin.y-568+64.5){
         self.bigStageLabel.text=@"主体设计阶段";//大标题
         
-        UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing_1/pen_01@2x.png"];
+        UIImage* image=[GetImagePath getImagePath:@"筛选中02"];
         self.bigStageImageView.image=image;//大阶段图片
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
         
@@ -459,7 +459,7 @@
     }else{
         self.bigStageLabel.text=@"土地信息";//大标题
         
-        UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing/map@2x.png"];
+        UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
         self.bigStageImageView.image=image;//大阶段图片
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
         
@@ -771,11 +771,11 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     //NSString* mainPath=@"XiangMuXiangQing_ShaiXuan";
-    NSArray* path=@[@"XiangMuXiangQing_ShaiXuan/map@2x.png",@"XiangMuXiangQing_ShaiXuan/pen_01@2x.png",@"XiangMuXiangQing_2/Subject_01@2x.png",@"XiangMuXiangQing_3/paint_01@2x.png"];
+    NSArray* path=@[@"筛选中01",@"筛选中02",@"筛选中03",@"筛选中04"];
     
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 37.5)];
     
-    UIImage* image=[UIImage imageNamed:path[section]];
+    UIImage* image=[GetImagePath getImagePath:path[section]];
     CGRect frame=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
     imageView.center=CGPointMake(23.5, 37.5*.5);
@@ -974,7 +974,7 @@
     
     
     //大标题左边的大阶段图片
-    UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing/map@2x.png"];
+    UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
     CGRect frame=CGRectMake(20, 12, image.size.width*.5, image.size.height*.5);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     self.bigStageImageView.image=image;
@@ -995,13 +995,13 @@
     [tempView addSubview:self.smallStageLabel];
     
     //右箭头imageView
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(280, 14, 25.5, 22.5)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing/more_02@2x.png"];
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(280, 14, 25, 22)];
+    imageView.image=[GetImagePath getImagePath:@"012"];
     [tempView addSubview:imageView];
     
     //上导航栏themeView第二部分,上导航下方阴影
     UIImageView* shadowView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 48.5, 320, 1.5)];
-    shadowView.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-top.png"];
+    shadowView.image=[GetImagePath getImagePath:@"Shadow-top"];
     shadowView.alpha=.5;
     [view addSubview:shadowView];
     
@@ -1043,11 +1043,11 @@
 -(void)initNaviAndScrollView{
     [self addBackButton];
     
-    CGRect frame=CGRectMake(285,30,25.5,22.5);
+    CGRect frame=CGRectMake(285,30,25,22);
     if (!self.isFromAllProject) {
         UIButton* modificationButton=[UIButton buttonWithType:UIButtonTypeCustom];
         modificationButton.frame=frame;
-        [modificationButton setImage:[UIImage imageNamed:@"XiangMuXiangQing/more_01@2x.png"] forState:UIControlStateNormal];
+        [modificationButton setImage:[GetImagePath getImagePath:@"019"] forState:UIControlStateNormal];
         [modificationButton addTarget:self action:@selector(gotoModificationVC) forControlEvents:UIControlEventTouchUpInside];
         [self.topView addSubview:modificationButton];
     }
