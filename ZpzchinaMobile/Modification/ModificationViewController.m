@@ -247,7 +247,7 @@
     [view addSubview:tempView];
     
     //大标题左边的大阶段图片
-    UIImage* image=[UIImage imageNamed:@"XiangMuXiangQing/map@2x.png"];
+    UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
     CGRect frame=CGRectMake(20, 12, image.size.width*.5, image.size.height*.5);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     self.bigStageImageView.image=image;
@@ -268,13 +268,13 @@
     [tempView addSubview:self.smallStageLabel];
     
     //右箭头imageView
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(280, 14, 25.5, 22.5)];
-    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing/more_02@2x.png"];
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(280, 14, 25, 22)];
+    imageView.image=[GetImagePath getImagePath:@"012"];
     [tempView addSubview:imageView];
     
     //上导航栏themeView第二部分,上导航下方阴影
     UIImageView* shadowView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 48.5, 320, 1.5)];
-    shadowView.image=[UIImage imageNamed:@"XiangMuXiangQing/Shadow-top.png"];
+    shadowView.image=[GetImagePath getImagePath:@"Shadow-top"];
     shadowView.alpha=.2;
     [view addSubview:shadowView];
     
@@ -341,13 +341,13 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     NSString* mainPath=@"XiangMuJieDuan";
-    NSArray* path=@[@"map2@x.png",@"pen@2x.png",@"Subject@2x.png",@"paint@2x.png"];
+    NSArray* path=@[@"筛选中01",@"筛选中02",@"筛选中03",@"筛选中04"];
     
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 37.5)];
     view.backgroundColor=RGBCOLOR(234,234,234);
     
     
-    UIImage* image=[UIImage imageNamed:[mainPath stringByAppendingPathComponent:path[section]]];
+    UIImage* image=[GetImagePath getImagePath:[mainPath stringByAppendingPathComponent:path[section]]];
     CGRect frame=CGRectMake(0, 0, image.size.width*.5, image.size.height*.5);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
     imageView.center=CGPointMake(23.5, 37.5*.5);
@@ -411,7 +411,7 @@
 
 -(void)initNavi{
     [self addBackButton];
-    [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[UIImage imageNamed:@"icon__09.png"]];
+    [self addRightButton:CGRectMake(280, 25, 28, 28) title:nil iamge:[GetImagePath getImagePath:@"020"]];
     [self addtittle:self.fromView?@"修改项目":@"新建项目"];
     
 }
