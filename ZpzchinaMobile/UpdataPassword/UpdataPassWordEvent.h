@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface UpdataPassWordEvent : NSObject
-+ (NSURLSessionDataTask *)PutUserWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block dataDic:(NSMutableDictionary *)dataDic;
++ (void)PutUserWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block dataDic:(NSMutableDictionary *)dataDic;
 @end
