@@ -15,6 +15,7 @@
 #import "MultipleChoiceViewController.h"
 #import "LocationViewController.h"
 #import "AppModel.h"
+#import "AppDelegate.h"
 @interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,MChoiceViewDelegate,LocationViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>{
     AddContactViewController* addcontactView;
     DatePickerView* datepickerview;
@@ -237,16 +238,15 @@
 }
 
 -(void)gotoMap:(NSString *)address city:(NSString *)city{
-    //[locateview removeFromSuperview];
-    //locateview = nil;
     NSLog(@"====>%@",city);
-    if (!locationView) {
-        locationView = [[LocationViewController alloc] init];
+    AppDelegate* app=[AppDelegate instance];
+    if (!app.locationView) {
+        app.locationView = [[LocationViewController alloc] init];
     }
-    locationView.delegate = self;
-    locationView.baseAddress = address;
-    locationView.baseCity = city;
-    [self.superVC.navigationController pushViewController:locationView animated:YES];
+    app.locationView.delegate = self;
+    app.locationView.baseAddress = address;
+    app.locationView.baseCity = city;
+    [self.superVC.navigationController pushViewController:app.locationView animated:YES];
 }
 
 -(void)getLocationNil{

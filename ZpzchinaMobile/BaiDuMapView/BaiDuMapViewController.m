@@ -237,7 +237,13 @@ int j;
 	annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
     annotationView.annotation = annotation;
     // 单击弹出泡泡，弹出泡泡前提annotation必须实现title属性
-	annotationView.canShowCallout = NO;
+    if(showArr.count !=0){
+        annotationView.canShowCallout = NO;
+    }else{
+        annotationView.canShowCallout = YES;
+    }
+    
+	
     // 设置是否可以拖拽
     annotationView.draggable = NO;
     j++;
@@ -429,7 +435,6 @@ int j;
 - (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view{
     NSLog(@"didSelectAnnotationView");
     if(showArr.count !=0){
-        view.canShowCallout = NO;
         bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64.5, 320, self.contentView.frame.size.height)];
         [bgView setBackgroundColor:[UIColor clearColor]];
         bgView.userInteractionEnabled = YES;
@@ -448,7 +453,6 @@ int j;
             _MapContent.frame = CGRectMake(0, 378, 611, 260);
         }];
     }else{
-        view.canShowCallout = YES;
         imageView.userInteractionEnabled = NO;
     }
 }
