@@ -51,10 +51,9 @@ int j;
     [self.contentView addSubview:_mapView];
     
     _locService = [[BMKLocationService alloc]init];
-    [_locService startUserLocationService];
+    
     
     _geocodesearch = [[BMKGeoCodeSearch alloc]init];
-    _geocodesearch.delegate = self;
     
     CLLocationCoordinate2D coor;
     BMKCoordinateRegion viewRegion = BMKCoordinateRegionMake(coor, BMKCoordinateSpanMake(0.02f, 0));
@@ -80,22 +79,25 @@ int j;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    //[_mapView viewWillAppear];
+    [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     _locService.delegate = self;
     _geocodesearch.delegate = self;
-    
+    [_locService startUserLocationService];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
 
+-(void)dealloc{
+    NSLog(@"baidumap dealloc");
+}
+
 -(void)viewWillDisappear:(BOOL)animated {
-    //[_mapView viewWillDisappear];
+    [_mapView viewWillDisappear];
     NSLog(@"baidumapDis");
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
     _geocodesearch.delegate = nil;
-    _mapView = nil;
     _locService = nil;
     _geocodesearch = nil;
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];

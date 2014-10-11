@@ -240,7 +240,9 @@
     //[locateview removeFromSuperview];
     //locateview = nil;
     NSLog(@"====>%@",city);
-    locationView = [[LocationViewController alloc] init];
+    if (!locationView) {
+        locationView = [[LocationViewController alloc] init];
+    }
     locationView.delegate = self;
     locationView.baseAddress = address;
     locationView.baseCity = city;
@@ -249,7 +251,7 @@
 
 -(void)getLocationNil{
     if (locationView) {
-        locationView=nil;
+        //locationView=nil;
     }
 }
 
