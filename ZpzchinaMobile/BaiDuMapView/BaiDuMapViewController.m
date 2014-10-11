@@ -304,97 +304,101 @@ int j;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    UITouch *touch = [touches anyObject];
-    
-    CGPoint location = [touch locationInView:imageView];
-    
-    //创建path
-    
-    pathRef=CGPathCreateMutable();
-    
-    CGPathMoveToPoint(pathRef, NULL, location.x, location.y);
-    
-    CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
-    [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
-    
+    NSLog(@"%d",touches.count);
+    if(imageView){
+        UITouch *touch = [touches anyObject];
+        
+        CGPoint location = [touch locationInView:imageView];
+        
+        //创建path
+        
+        pathRef=CGPathCreateMutable();
+        
+        CGPathMoveToPoint(pathRef, NULL, location.x, location.y);
+        
+        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+        [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+    }
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    UITouch *touch = [touches anyObject];
-    
-    CGPoint location = [touch locationInView:imageView];
-    
-    CGPoint pastLocation = [touch previousLocationInView:imageView];
-    
-    //画线
-    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pastLocation.x, pastLocation.y);
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), location.x, location.y);
-    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 0.0, 0.0, 1.0);  //颜色
-    CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
-    imageView.image=UIGraphicsGetImageFromCurrentImageContext();
-    
-    //更新Path
-    
-    CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
-    
-    CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
-    [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+    if(imageView){
+        UITouch *touch = [touches anyObject];
+        
+        CGPoint location = [touch locationInView:imageView];
+        
+        CGPoint pastLocation = [touch previousLocationInView:imageView];
+        
+        //画线
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pastLocation.x, pastLocation.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), location.x, location.y);
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 0.0, 0.0, 1.0);  //颜色
+        CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
+        imageView.image=UIGraphicsGetImageFromCurrentImageContext();
+        
+        //更新Path
+        
+        CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
+        
+        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+        [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+    }
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInView:imageView];
-    CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
-    [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
-    
-    
-    NSInteger numberOfPoints = [coordinates count];
-    
-    if (numberOfPoints > 2)
-    {
-        CLLocationCoordinate2D points[numberOfPoints];
+    if(imageView){
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInView:imageView];
+        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+        [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
         
         
-        for (NSInteger i = 0; i < numberOfPoints; i++) {
-            points[i] = [coordinates[i] MKCoordinateValue];
-            NSLog(@"%lf,%lf",[coordinates[i] MKCoordinateValue].longitude,[coordinates[i] MKCoordinateValue].latitude);
+        NSInteger numberOfPoints = [coordinates count];
+        
+        if (numberOfPoints > 2)
+        {
+            CLLocationCoordinate2D points[numberOfPoints];
+            
+            
+            for (NSInteger i = 0; i < numberOfPoints; i++) {
+                points[i] = [coordinates[i] MKCoordinateValue];
+                NSLog(@"%lf,%lf",[coordinates[i] MKCoordinateValue].longitude,[coordinates[i] MKCoordinateValue].latitude);
+            }
+            
+            
+            
+            polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
+            [_mapView addOverlay:polygon];
         }
         
-        
-        
-        polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
-        [_mapView addOverlay:polygon];
-    }
-    
-    CGPathCloseSubpath(pathRef);
-    //NSLog(@"==>%@",pathRef);
-    int count = 0;
-    if(logArr.count>26){
-        count = 26;
-    }else{
-        count = logArr.count;
-    }
-    //地理坐标转换成点
-    for(int i=0;i<count;i++){
-        testLocation.latitude = [[latArr objectAtIndex:i] floatValue];
-        testLocation.longitude = [[logArr objectAtIndex:i] floatValue];
-        locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
-        //NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
-        if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
-            
-            NSLog(@"point in path!");
-            ProjectModel *model = [showArr objectAtIndex:i];
-            annotationPoint = [[BMKPointAnnotation alloc]init];
-            CLLocationCoordinate2D coor;
-            coor.latitude = testLocation.latitude;
-            coor.longitude = testLocation.longitude;
-            annotationPoint.coordinate = coor;
-            annotationPoint.title = model.a_landName;
-            annotationPoint.subtitle = model.a_landAddress;
-            [_mapView addAnnotation:annotationPoint];
-            topCount++;
+        CGPathCloseSubpath(pathRef);
+        //NSLog(@"==>%@",pathRef);
+        int count = 0;
+        if(logArr.count>26){
+            count = 26;
+        }else{
+            count = logArr.count;
+        }
+        //地理坐标转换成点
+        for(int i=0;i<count;i++){
+            testLocation.latitude = [[latArr objectAtIndex:i] floatValue];
+            testLocation.longitude = [[logArr objectAtIndex:i] floatValue];
+            locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
+            //NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
+            if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
+                
+                NSLog(@"point in path!");
+                ProjectModel *model = [showArr objectAtIndex:i];
+                annotationPoint = [[BMKPointAnnotation alloc]init];
+                CLLocationCoordinate2D coor;
+                coor.latitude = testLocation.latitude;
+                coor.longitude = testLocation.longitude;
+                annotationPoint.coordinate = coor;
+                annotationPoint.title = model.a_landName;
+                annotationPoint.subtitle = model.a_landAddress;
+                [_mapView addAnnotation:annotationPoint];
+                topCount++;
+            }
         }
     }
 }
