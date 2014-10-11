@@ -47,7 +47,6 @@
     _locService = [[BMKLocationService alloc]init];
     
     _geocodesearch = [[BMKGeoCodeSearch alloc]init];
-    _geocodesearch.delegate = self;
     
     CLLocationCoordinate2D coor;
     BMKCoordinateRegion viewRegion = BMKCoordinateRegionMake(coor, BMKCoordinateSpanMake(0.02f, 0));
