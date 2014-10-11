@@ -79,11 +79,12 @@ int j;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    j=0;
     [_mapView viewWillAppear];
+    [_locService startUserLocationService];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     _locService.delegate = self;
     _geocodesearch.delegate = self;
-    [_locService startUserLocationService];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
@@ -98,8 +99,10 @@ int j;
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
     _geocodesearch.delegate = nil;
-    _locService = nil;
-    _geocodesearch = nil;
+    [imageView removeFromSuperview];
+    imageView = nil;
+    [coordinates removeAllObjects];
+    [self removeAnnotationsOnTheMap];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
 }
