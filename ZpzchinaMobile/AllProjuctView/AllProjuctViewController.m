@@ -341,7 +341,9 @@ int startIndex;
             [self.navigationController pushViewController:ADsearchVIew animated:YES];
             break;
         case 2:
-            mapView = [[BaiDuMapViewController alloc] init];
+            if (!mapView) {
+                mapView = [[BaiDuMapViewController alloc] init];
+            }
             [self.navigationController pushViewController:mapView animated:YES];
             break;
             
