@@ -84,7 +84,11 @@ static __weak ProgramDetailViewController* myDelegate;
             model=myDelegate.imgDic[@"horizonImageArr"];
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
-        
+        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+        aimage=[UIImage imageWithCGImage:tempImage];
+        CGImageRelease(tempImage);
     }else if (sequence==2&&myDelegate.pilePitImageArr.count){
         if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
             model = myDelegate.pilePitImageArr[0];
@@ -97,7 +101,11 @@ static __weak ProgramDetailViewController* myDelegate;
             model=myDelegate.imgDic[@"pilePitImageArr"];
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
-       
+        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+        aimage=[UIImage imageWithCGImage:tempImage];
+        CGImageRelease(tempImage);
     }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
         NSLog(@"mainConstructionImageArr%d",myDelegate.mainConstructionImageArr.count);
         if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
@@ -111,15 +119,14 @@ static __weak ProgramDetailViewController* myDelegate;
             model=myDelegate.imgDic[@"mainConstructionImageArr"];
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
-        
+        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+        aimage=[UIImage imageWithCGImage:tempImage];
+        CGImageRelease(tempImage);
     }else{
         aimage=[GetImagePath getImagePath:@"首页_16"];
     }
-    CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
-    CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
-    CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
-    aimage=[UIImage imageWithCGImage:tempImage];
-    CGImageRelease(tempImage);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
     imageView.image=[self saveImage:imageView];

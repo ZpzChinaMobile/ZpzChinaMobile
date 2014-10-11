@@ -71,14 +71,15 @@ static NSDictionary* dataDic;
             model=myDelegate.imgDic[@"electroweakImageArr"];
             aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
         }
+        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+        aimage=[UIImage imageWithCGImage:tempImage];
+        CGImageRelease(tempImage);
+
     }else{
         aimage=[GetImagePath getImagePath:@"首页_16"];
     }
-    CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
-    CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
-    CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
-    aimage=[UIImage imageWithCGImage:tempImage];
-    CGImageRelease(tempImage);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
     imageView.image=aimage;
     imageView.image=[self saveImage:imageView];
