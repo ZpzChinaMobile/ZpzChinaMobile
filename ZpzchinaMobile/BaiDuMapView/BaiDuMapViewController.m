@@ -429,6 +429,7 @@ int j;
 - (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view{
     NSLog(@"didSelectAnnotationView");
     if(showArr.count !=0){
+        view.canShowCallout = NO;
         bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64.5, 320, self.contentView.frame.size.height)];
         [bgView setBackgroundColor:[UIColor clearColor]];
         bgView.userInteractionEnabled = YES;
@@ -446,6 +447,9 @@ int j;
         [UIView animateWithDuration:0.5 animations:^{
             _MapContent.frame = CGRectMake(0, 378, 611, 260);
         }];
+    }else{
+        view.canShowCallout = YES;
+        imageView.userInteractionEnabled = NO;
     }
 }
 
