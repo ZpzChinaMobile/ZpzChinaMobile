@@ -446,6 +446,9 @@ int j;
         [UIView animateWithDuration:0.5 animations:^{
             _MapContent.frame = CGRectMake(0, 378, 611, 260);
         }];
+    }else{
+        view.canShowCallout = YES;
+        imageView.userInteractionEnabled = NO;
     }
 }
 
