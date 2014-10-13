@@ -69,7 +69,7 @@
     [super viewWillAppear:animated];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-    //[self.tvcArray[1] getLocationNil];
+    [self.tvcArray[1] getLocationNil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

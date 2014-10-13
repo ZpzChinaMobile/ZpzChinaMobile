@@ -30,7 +30,7 @@
     UIButton *cancelBtn;
     UIView *topBgView;
     toolBarView *toolbarView;
-    BaiDuMapViewController *mapView;
+    //BaiDuMapViewController *mapView;
     AdvancedSearchViewController *ADsearchVIew;
     UnderstandViewController *underStandVC;
     RecordView *_recordView;

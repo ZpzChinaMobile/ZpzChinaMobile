@@ -36,6 +36,8 @@
 		5BE93BCA199C706000E2FF67 /* NineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BC9199C706000E2FF67 /* NineTableViewController.m */; };
 		5BE93BCD199C70B800E2FF67 /* TenTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BCC199C70B800E2FF67 /* TenTableViewController.m */; };
 		5BE93BD3199C8A2600E2FF67 /* ModificationSelectViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BD2199C8A2600E2FF67 /* ModificationSelectViewCell.m */; };
+		5BEAF93D19EBCC6D00E323A2 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BEAF93A19EBCC6D00E323A2 /* libbaidumapapi.a */; };
+		5BEAF93E19EBCC6D00E323A2 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BEAF93C19EBCC6D00E323A2 /* libbaidumapapi.a */; };
 		D31B227F19820D4500B05B03 /* TFIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B227E19820D4500B05B03 /* TFIndicatorView.m */; };
 		D31B25081988DCFC00B05B03 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = D31B25071988DCFC00B05B03 /* citydict.plist */; };
 		D31B264E19891F2600B05B03 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B250E19891F2500B05B03 /* GLProgram.m */; };
@@ -287,8 +289,6 @@
 		D3AAAB6A196D6F2E008F9CCD /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AAAB69196D6F2E008F9CCD /* DKCircleButton.m */; };
 		D3AB1BC219812C810046C587 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AB1BC119812C810046C587 /* AFAppDotNetAPIClient.m */; };
 		D3AB326F196BD5D800F0FC02 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AB326E196BD5D800F0FC02 /* CollectionViewController.m */; };
-		D3AD620419B041FF001FD483 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F601991E20B00A798BE /* libbaidumapapi.a */; };
-		D3AD620519B0420F001FD483 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A9F621991E20B00A798BE /* libbaidumapapi.a */; };
 		D3AE4DE41965007C001086F9 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE31965007C001086F9 /* ResultsViewController.m */; };
 		D3AE4DE719651FBE001086F9 /* ProjectLogSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE619651FBE001086F9 /* ProjectLogSqlite.m */; };
 		D3AE4DEA19651FCF001086F9 /* ProjectLogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE919651FCF001086F9 /* ProjectLogModel.m */; };
@@ -669,8 +669,6 @@
 		5B0CC39D199F09290036F94B /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		5B45CF0219E7BEFD00676E42 /* GetImagePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetImagePath.h; sourceTree = "<group>"; };
 		5B45CF0319E7BEFD00676E42 /* GetImagePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetImagePath.m; sourceTree = "<group>"; };
-		5B6A9F601991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
-		5B6A9F621991E20B00A798BE /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		5B892F00199A3BF2001F9921 /* ProgramDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailViewController.h; sourceTree = "<group>"; };
 		5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDetailViewController.m; sourceTree = "<group>"; };
 		5B892F02199A3BF2001F9921 /* TuDiXinXi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDiXinXi.h; sourceTree = "<group>"; };
@@ -713,6 +711,8 @@
 		5BE93BCC199C70B800E2FF67 /* TenTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TenTableViewController.m; sourceTree = "<group>"; };
 		5BE93BD1199C8A2600E2FF67 /* ModificationSelectViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModificationSelectViewCell.h; sourceTree = "<group>"; };
 		5BE93BD2199C8A2600E2FF67 /* ModificationSelectViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModificationSelectViewCell.m; sourceTree = "<group>"; };
+		5BEAF93A19EBCC6D00E323A2 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
+		5BEAF93C19EBCC6D00E323A2 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		D31B227D19820D4500B05B03 /* TFIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFIndicatorView.h; sourceTree = "<group>"; };
 		D31B227E19820D4500B05B03 /* TFIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFIndicatorView.m; sourceTree = "<group>"; };
 		D31B25071988DCFC00B05B03 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
@@ -1683,10 +1683,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B8F54B19D94930008F6164 /* iflyMSC.framework in Frameworks */,
+				5BEAF93E19EBCC6D00E323A2 /* libbaidumapapi.a in Frameworks */,
 				049A979319D513C9007DC7C0 /* libz.dylib in Frameworks */,
-				D3AD620519B0420F001FD483 /* libbaidumapapi.a in Frameworks */,
-				D3AD620419B041FF001FD483 /* libbaidumapapi.a in Frameworks */,
 				D3311C2819A59CE6003B2682 /* MapKit.framework in Frameworks */,
+				5BEAF93D19EBCC6D00E323A2 /* libbaidumapapi.a in Frameworks */,
 				D3BB730519557D6F00A3F626 /* CoreLocation.framework in Frameworks */,
 				D3BB730319557D5F00A3F626 /* QuartzCore.framework in Frameworks */,
 				D3BB730119557D5700A3F626 /* OpenGLES.framework in Frameworks */,
@@ -1756,31 +1756,6 @@
 			path = GetImagePath;
 			sourceTree = "<group>";
 		};
-		5B6A9F5E1991E20B00A798BE /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				5B6A9F5F1991E20B00A798BE /* Release-iphoneos */,
-				5B6A9F611991E20B00A798BE /* Release-iphonesimulator */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		5B6A9F5F1991E20B00A798BE /* Release-iphoneos */ = {
-			isa = PBXGroup;
-			children = (
-				5B6A9F601991E20B00A798BE /* libbaidumapapi.a */,
-			);
-			path = "Release-iphoneos";
-			sourceTree = "<group>";
-		};
-		5B6A9F611991E20B00A798BE /* Release-iphonesimulator */ = {
-			isa = PBXGroup;
-			children = (
-				5B6A9F621991E20B00A798BE /* libbaidumapapi.a */,
-			);
-			path = "Release-iphonesimulator";
-			sourceTree = "<group>";
-		};
 		5B892EFF199A3BE5001F9921 /* NewProgramDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1842,6 +1817,31 @@
 				5BE93BCC199C70B800E2FF67 /* TenTableViewController.m */,
 			);
 			path = Modification;
+			sourceTree = "<group>";
+		};
+		5BEAF93819EBCC6D00E323A2 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				5BEAF93919EBCC6D00E323A2 /* Release-iphoneos */,
+				5BEAF93B19EBCC6D00E323A2 /* Release-iphonesimulator */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		5BEAF93919EBCC6D00E323A2 /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				5BEAF93A19EBCC6D00E323A2 /* libbaidumapapi.a */,
+			);
+			path = "Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		5BEAF93B19EBCC6D00E323A2 /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				5BEAF93C19EBCC6D00E323A2 /* libbaidumapapi.a */,
+			);
+			path = "Release-iphonesimulator";
 			sourceTree = "<group>";
 		};
 		D31B250C19891F2500B05B03 /* face */ = {
@@ -2415,12 +2415,12 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				5BEAF93819EBCC6D00E323A2 /* libs */,
 				5B45CF0119E7BEFD00676E42 /* GetImagePath */,
 				049A978519D50769007DC7C0 /* JSONKit */,
 				D3A4282919C6D97500BAB6C7 /* MChoice */,
 				5B0CC39B199F090F0036F94B /* AppModel */,
 				5B892FA5199A3D8F001F9921 /* Code4appScrollView */,
-				5B6A9F5E1991E20B00A798BE /* libs */,
 				D31B250C19891F2500B05B03 /* face */,
 				D3AB1BBF19812C810046C587 /* AfNetWork */,
 				D3C58E601980BD5E003DD94F /* FaceppSDK */,
