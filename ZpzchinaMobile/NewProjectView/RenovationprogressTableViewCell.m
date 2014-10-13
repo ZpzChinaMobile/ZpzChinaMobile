@@ -46,7 +46,7 @@
         [self addSubview:decorationProgress];
         
         UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,20, 8, 12.5)];
-        [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09.png"]];
+        [arrowImage setImage:[GetImagePath getImagePath:@"新建项目5_09"]];
         [self addSubview:arrowImage];
     }
     return self;

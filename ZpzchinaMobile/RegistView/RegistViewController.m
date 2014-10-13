@@ -48,7 +48,7 @@
     [self.view addSubview:panView];
     
     UIImageView *bgImgView2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,264,91)];
-    [bgImgView2 setImage:[GetImagePath getImagePath:@"登录_07.png"]];
+    [bgImgView2 setImage:[GetImagePath getImagePath:@"登录_07"]];
     [panView addSubview:bgImgView2];
     _phoneNumberTextField = [[UITextField alloc] initWithFrame:CGRectMake(10,0,255,45)];
     _phoneNumberTextField.delegate = self;
