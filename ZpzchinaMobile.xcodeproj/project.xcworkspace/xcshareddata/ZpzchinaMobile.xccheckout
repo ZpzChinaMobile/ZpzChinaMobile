@@ -10,29 +10,29 @@
 	<string>ZpzchinaMobile</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4E13F94A-8260-4721-9FA3-C1BA8127D1AD</key>
+		<key>E0F16470F0D6B9343BF7B0A69274D34B2366EE65</key>
 		<string>https://github.com/ZpzChinaMobile/ZpzChinaMobile.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ZpzchinaMobile.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4E13F94A-8260-4721-9FA3-C1BA8127D1AD</key>
+		<key>E0F16470F0D6B9343BF7B0A69274D34B2366EE65</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/ZpzChinaMobile/ZpzChinaMobile.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4E13F94A-8260-4721-9FA3-C1BA8127D1AD</string>
+	<string>E0F16470F0D6B9343BF7B0A69274D34B2366EE65</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4E13F94A-8260-4721-9FA3-C1BA8127D1AD</string>
+			<string>E0F16470F0D6B9343BF7B0A69274D34B2366EE65</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ZpzChinaMobile</string>
 		</dict>

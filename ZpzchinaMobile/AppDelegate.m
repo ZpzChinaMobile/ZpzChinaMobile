@@ -34,6 +34,7 @@
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog(@"asdfasdfasf");
     NSString *API_KEY = KAPI_KEY;
     NSString *API_SECRET = KAPI_SECRET;
     
