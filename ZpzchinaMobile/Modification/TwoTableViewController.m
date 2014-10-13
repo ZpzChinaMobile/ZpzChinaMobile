@@ -250,8 +250,9 @@
 }
 
 -(void)getLocationNil{
-    if (locationView) {
-        //locationView=nil;
+    AppDelegate* app=[AppDelegate instance];
+    if (app.locationView) {
+        app.locationView=nil;
     }
 }
 
@@ -292,7 +293,6 @@
 {
     return 1;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

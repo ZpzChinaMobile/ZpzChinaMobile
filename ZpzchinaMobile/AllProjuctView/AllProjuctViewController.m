@@ -341,10 +341,10 @@ int startIndex;
             [self.navigationController pushViewController:ADsearchVIew animated:YES];
             break;
         case 2:
-            if (!mapView) {
-                mapView = [[BaiDuMapViewController alloc] init];
-            }
+        {
+            BaiDuMapViewController*   mapView = [[BaiDuMapViewController alloc] init];
             [self.navigationController pushViewController:mapView animated:YES];
+        }
             break;
             
         default:
