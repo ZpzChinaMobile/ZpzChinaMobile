@@ -136,7 +136,7 @@
 {
     NSLog(@"applicationDidEnterBackground");
     UIApplication*   app = [UIApplication sharedApplication];
-    __block UIBackgroundTaskIdentifier bgTask;
+    __block    UIBackgroundTaskIdentifier bgTask;
     bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"结束");
@@ -146,7 +146,6 @@
             }
         });
     }];
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             if (bgTask != UIBackgroundTaskInvalid)
@@ -155,6 +154,7 @@
             }
         });
     });
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

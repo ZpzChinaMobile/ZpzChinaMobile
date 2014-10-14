@@ -18,10 +18,12 @@
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             if (block) {
-                block([NSMutableArray arrayWithArray:[[responseObject objectForKey:@"d"] objectForKey:@"data"]], nil);
+                block([NSMutableArray array], nil);
             }
         }else{
-            NSLog(@"失败了");
+            if (block) {
+                block(nil,nil);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
