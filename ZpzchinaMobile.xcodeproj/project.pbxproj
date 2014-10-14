@@ -346,6 +346,7 @@
 		D3C58EA81980BD5E003DD94F /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58E901980BD5E003DD94F /* CJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3C58EA91980BD5E003DD94F /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58E921980BD5E003DD94F /* CJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3C58EB31980D8C9003DD94F /* ProjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58EB21980D8C9003DD94F /* ProjectContentCell.m */; };
+		D3E1AA5119ECE6C000750ACD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3E1AA5019ECE6C000750ACD /* Settings.bundle */; };
 		D3FC013219E7CE8400FF332C /* UpdataPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */; };
 		D3FC025C19E7DEE400FF332C /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC014019E7DEE400FF332C /* 01.png */; };
 		D3FC025D19E7DEE400FF332C /* 010.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC014119E7DEE400FF332C /* 010.png */; };
@@ -1373,6 +1374,7 @@
 		D3C58E931980BD5E003DD94F /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		D3C58EB11980D8C9003DD94F /* ProjectContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContentCell.h; sourceTree = "<group>"; };
 		D3C58EB21980D8C9003DD94F /* ProjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContentCell.m; sourceTree = "<group>"; };
+		D3E1AA5019ECE6C000750ACD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D3FC013019E7CE8400FF332C /* UpdataPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdataPassWordViewController.h; sourceTree = "<group>"; };
 		D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdataPassWordViewController.m; sourceTree = "<group>"; };
 		D3FC014019E7DEE400FF332C /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01.png; sourceTree = "<group>"; };
@@ -2346,6 +2348,7 @@
 				D3A48843194A916B00EED32D /* InfoPlist.strings */,
 				D3A48846194A916B00EED32D /* main.m */,
 				D3A48848194A916B00EED32D /* ZpzchinaMobile-Prefix.pch */,
+				D3E1AA5019ECE6C000750ACD /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3450,6 +3453,7 @@
 				D3FC035619E7DEE400FF332C /* 面部采集_11.png in Resources */,
 				D3FC032219E7DEE400FF332C /* 登录_15.png in Resources */,
 				D3FC02CA19E7DEE400FF332C /* 全部项目_37.png in Resources */,
+				D3E1AA5119ECE6C000750ACD /* Settings.bundle in Resources */,
 				D3FC034619E7DEE400FF332C /* 面部识别登录.png in Resources */,
 				D3FC02E419E7DEE400FF332C /* 搜索_03.png in Resources */,
 				D3FC02C019E7DEE400FF332C /* 全部项目_19.png in Resources */,
