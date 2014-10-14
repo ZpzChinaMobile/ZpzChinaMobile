@@ -215,9 +215,9 @@ int startIndex;
     }
     NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%d",indexPath.section];
     ProjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //if(!cell){
+    if(!cell){
         cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier dic:dic];
-    //}
+    }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
