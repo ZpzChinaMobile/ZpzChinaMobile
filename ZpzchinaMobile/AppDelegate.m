@@ -98,12 +98,7 @@
         [self.window makeKeyAndVisible];
     }else{
         NSLog(@"已经不是第一次启动了");
-        NSMutableArray *listArr = [UserSqlite loadList];
-        if ([listArr count]!=0) {
-            UserModel *model = [listArr objectAtIndex:0];
-            NSLog(@"*************%@",model.a_userToken);
-#if TARGET_IPHONE_SIMULATOR
-            
+        if(![[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] isEqualToString:@""]){
             UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
             UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
             UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
@@ -118,50 +113,6 @@
             [self.window setRootViewController:drawerController];
             self.window.backgroundColor = [UIColor whiteColor];
             [self.window makeKeyAndVisible];
-            
-#elif TARGET_OS_IPHONE
-            
-            if([[networkConnect sharedInstance] connectedToNetwork]){
-                
-                NSLog(@"**a_isFaceRegisted*******%@**",model.a_isFaceRegisted);
-                LoginViewController *loginview = [[LoginViewController alloc] init];
-                UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
-                [self.window setRootViewController:naVC];
-                self.window.backgroundColor = [UIColor whiteColor];
-                [self.window makeKeyAndVisible];
-//                if (![model.a_isFaceRegisted isEqualToString:@"1"]) {
-//                    LoginViewController *loginview = [[LoginViewController alloc] init];
-//                    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
-//                    [self.window setRootViewController:naVC];
-//                    self.window.backgroundColor = [UIColor whiteColor];
-//                    [self.window makeKeyAndVisible];
-//                }else{
-//                    FaceLoginViewController *faceVC = [[FaceLoginViewController alloc] init];
-//                    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:faceVC];
-//                    [self.window setRootViewController:naVC];
-//                    self.window.backgroundColor = [UIColor whiteColor];
-//                    [self.window makeKeyAndVisible];
-//                }
-            }else{
-                UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
-                UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
-                UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-                navigationController.navigationBarHidden = YES;
-                drawerController = [[MMDrawerController alloc]
-                                    initWithCenterViewController:navigationController
-                                    leftDrawerViewController:leftViewController
-                                    rightDrawerViewController:nil];
-                [drawerController setMaximumRightDrawerWidth:320-62];
-                [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-                [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-                [self.window setRootViewController:drawerController];
-                self.window.backgroundColor = [UIColor whiteColor];
-                [self.window makeKeyAndVisible];
-            }
-            
-#endif
-            
-            
         }else{
             LoginViewController *loginview = [[LoginViewController alloc] init];
             UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
@@ -170,9 +121,7 @@
             self.window.backgroundColor = [UIColor whiteColor];
             [self.window makeKeyAndVisible];
         }
-        
     }
-    
     return YES;
 }
 
