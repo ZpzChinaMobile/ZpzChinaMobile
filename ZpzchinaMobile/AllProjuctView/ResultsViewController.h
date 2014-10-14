@@ -7,17 +7,14 @@
 //
 
 #import "BaseViewController.h"
-#import "CellContentView.h"
-#import "NewProjectViewController.h"
+#import "ProjectContentCell.h"
 #import "TFIndicatorView.h"
-@interface ResultsViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,CellContentViewDelegate,UIActionSheetDelegate>{
+@interface ResultsViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>{
     NSMutableArray *showArr;
     UITableView *_tableView;
     UIActivityIndicatorView *indicator;
     NSMutableDictionary *dataDic;
-    CellContentView *_cellContent;
     UIActionSheet *_myActionSheet;
-    NewProjectViewController *_newProject;
 }
 @property(nonatomic,retain)NSMutableDictionary *dataDic;
 @end

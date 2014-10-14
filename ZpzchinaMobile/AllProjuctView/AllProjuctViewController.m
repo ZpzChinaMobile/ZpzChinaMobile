@@ -262,11 +262,6 @@ int startIndex;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)searchBtnClick{
-    NSLog(@"searchBtnClick");
-    _searchView = [[SearchViewController alloc] init];
-    [self.navigationController pushViewController:_searchView animated:YES];
-}
 
 -(void)addActionSheet{
     NSLog(@"addActionSheet");
