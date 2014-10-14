@@ -62,9 +62,9 @@ int j;
     // *设定当前地图的显示范围
     [_mapView setRegion:adjusteRegion animated:YES];
     
-    btnView = [[UIView alloc] initWithFrame:CGRectMake(0, 84, 66, 220)];
+    btnView = [[UIView alloc] initWithFrame:CGRectMake(10, 104, 40, 40)];
     drawBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
-    drawBtn.frame = CGRectMake(10,20, 40, 40);
+    drawBtn.frame = CGRectMake(0,0, 40, 40);
     [drawBtn setBackgroundImage:[GetImagePath getImagePath:@"mapsearch-1"] forState:UIControlStateNormal];
     [drawBtn addTarget:self action:@selector(drawFunction) forControlEvents:UIControlEventTouchUpInside];
     [btnView addSubview:drawBtn];

@@ -129,7 +129,7 @@
         }
         [imageAry addObject:aimage];
     }
-    [imageAry addObject:[GetImagePath getImagePath:@"新建项目－6_03"]];
+    [imageAry addObject:[GetImagePath getImagePath:@"018"]];
     
     CGFloat cellHeight=120;
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
