@@ -275,6 +275,7 @@
 		D3A489A21951863B00EED32D /* AllProjuctViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489A11951863B00EED32D /* AllProjuctViewController.m */; };
 		D3A489B31952B89C00EED32D /* toolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489B21952B89C00EED32D /* toolBarView.m */; };
 		D3A4FC46195E564100D3415C /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4FC45195E564100D3415C /* NIDropDown.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D3A62C2119ED22BF0008DADA /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A62C2019ED22BF0008DADA /* MD5.m */; };
 		D3AA5A01195BBD1300565078 /* networkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AA5A00195BBD1300565078 /* networkConnect.m */; };
 		D3AA5A07195BC11F00565078 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AA5A06195BC11F00565078 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3AA5A0A195C1D6500565078 /* ContactSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AA5A09195C1D6500565078 /* ContactSqlite.m */; };
@@ -1080,6 +1081,8 @@
 		D3A489B21952B89C00EED32D /* toolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = toolBarView.m; sourceTree = "<group>"; };
 		D3A4FC44195E564100D3415C /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
 		D3A4FC45195E564100D3415C /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
+		D3A62C1F19ED22BF0008DADA /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
+		D3A62C2019ED22BF0008DADA /* MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5.m; sourceTree = "<group>"; };
 		D3AA59FF195BBD1300565078 /* networkConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = networkConnect.h; sourceTree = "<group>"; };
 		D3AA5A00195BBD1300565078 /* networkConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = networkConnect.m; sourceTree = "<group>"; };
 		D3AA5A05195BC11F00565078 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -2218,6 +2221,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				D3A62C1E19ED22BF0008DADA /* MD5 */,
 				5BEAF93819EBCC6D00E323A2 /* libs */,
 				5B45CF0119E7BEFD00676E42 /* GetImagePath */,
 				049A978519D50769007DC7C0 /* JSONKit */,
@@ -2420,6 +2424,15 @@
 				D3C58E45197EA014003DD94F /* RecordView.m */,
 			);
 			path = AllProjuctView;
+			sourceTree = "<group>";
+		};
+		D3A62C1E19ED22BF0008DADA /* MD5 */ = {
+			isa = PBXGroup;
+			children = (
+				D3A62C1F19ED22BF0008DADA /* MD5.h */,
+				D3A62C2019ED22BF0008DADA /* MD5.m */,
+			);
+			path = MD5;
 			sourceTree = "<group>";
 		};
 		D3AA59FE195BBD0000565078 /* NetWork */ = {
@@ -3418,6 +3431,7 @@
 				D31B266919891F2600B05B03 /* GPUImageCrosshairGenerator.m in Sources */,
 				D31B269119891F2600B05B03 /* GPUImageLanczosResamplingFilter.m in Sources */,
 				5B892FAB199A3D8F001F9921 /* ViewController.m in Sources */,
+				D3A62C2119ED22BF0008DADA /* MD5.m in Sources */,
 				D3AE4DE41965007C001086F9 /* ResultsViewController.m in Sources */,
 				D3C58EB31980D8C9003DD94F /* ProjectContentCell.m in Sources */,
 				5BE93BB8199C701F00E2FF67 /* ThreeTableViewController.m in Sources */,
