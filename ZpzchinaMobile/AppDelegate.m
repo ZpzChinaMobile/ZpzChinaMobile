@@ -98,7 +98,8 @@
         [self.window makeKeyAndVisible];
     }else{
         NSLog(@"已经不是第一次启动了");
-        if(![[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] isEqualToString:@""]){
+        NSLog(@"===>%@",[LoginSqlite getdata:@"UserToken" defaultdata:@""]);
+        if(![[LoginSqlite getdata:@"UserToken" defaultdata:@""] isEqualToString:@""]){
             UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
             UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
             UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
