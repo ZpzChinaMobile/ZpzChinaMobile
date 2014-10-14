@@ -120,18 +120,20 @@ int startIndex;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *CellWithIdentifier = [NSString stringWithFormat:@"Cell%d",indexPath.section];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellWithIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellWithIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(showArr.count != 0){
         ProjectModel *model = [showArr objectAtIndex:indexPath.section];
-        NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
-        _cellContent = [[CellContentView alloc] initWithFrame:CGRectMake(14, 0, 291.5, 260) dic:dic];
-        _cellContent.delegate = self;
-        [cell.contentView addSubview:_cellContent];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        dic = [ProjectStage JudgmentStr:model];
     }
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%d",indexPath.section];
+    ProjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(!cell){
+        cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier dic:dic];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

@@ -250,7 +250,6 @@
 		D3A4888E194EBCF800EED32D /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4888D194EBCF800EED32D /* PopupView.m */; };
 		D3A48891194EBD6400EED32D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A48890194EBD6400EED32D /* UIPlaceHolderTextView.m */; };
 		D3A48941194FF02600EED32D /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A48940194FF02600EED32D /* GradientView.m */; };
-		D3A489451950215900EED32D /* NewProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489441950215900EED32D /* NewProjectViewController.m */; };
 		D3A48949195023A000EED32D /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A48948195023A000EED32D /* BaseViewController.m */; };
 		D3A4897419512A2600EED32D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4895019512A2600EED32D /* AFHTTPRequestOperation.m */; };
 		D3A4897519512A2600EED32D /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4895219512A2600EED32D /* AFHTTPRequestOperationManager.m */; };
@@ -273,10 +272,7 @@
 		D3A4898A1951421400EED32D /* SqliteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489891951421400EED32D /* SqliteHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3A4898D1951447400EED32D /* LoginSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4898C1951447400EED32D /* LoginSqlite.m */; };
 		D3A4899519515C9700EED32D /* MyTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4899419515C9700EED32D /* MyTaskViewController.m */; };
-		D3A4899E1951753E00EED32D /* CellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4899D1951753E00EED32D /* CellContentView.m */; };
 		D3A489A21951863B00EED32D /* AllProjuctViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489A11951863B00EED32D /* AllProjuctViewController.m */; };
-		D3A489A519527C4E00EED32D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489A419527C4E00EED32D /* SearchViewController.m */; };
-		D3A489AB1952913700EED32D /* SearchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489AA1952913700EED32D /* SearchCellView.m */; };
 		D3A489B31952B89C00EED32D /* toolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A489B21952B89C00EED32D /* toolBarView.m */; };
 		D3A4FC46195E564100D3415C /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A4FC45195E564100D3415C /* NIDropDown.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D3AA5A01195BBD1300565078 /* networkConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AA5A00195BBD1300565078 /* networkConnect.m */; };
@@ -1126,8 +1122,6 @@
 		D3A48890194EBD6400EED32D /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		D3A4893F194FF02600EED32D /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		D3A48940194FF02600EED32D /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
-		D3A489431950215900EED32D /* NewProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectViewController.h; sourceTree = "<group>"; };
-		D3A489441950215900EED32D /* NewProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectViewController.m; sourceTree = "<group>"; };
 		D3A48947195023A000EED32D /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		D3A48948195023A000EED32D /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		D3A4894F19512A2600EED32D /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -1173,14 +1167,8 @@
 		D3A4898C1951447400EED32D /* LoginSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSqlite.m; sourceTree = "<group>"; };
 		D3A4899319515C9700EED32D /* MyTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTaskViewController.h; sourceTree = "<group>"; };
 		D3A4899419515C9700EED32D /* MyTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTaskViewController.m; sourceTree = "<group>"; };
-		D3A4899C1951753E00EED32D /* CellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellContentView.h; sourceTree = "<group>"; };
-		D3A4899D1951753E00EED32D /* CellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellContentView.m; sourceTree = "<group>"; };
 		D3A489A01951863B00EED32D /* AllProjuctViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllProjuctViewController.h; sourceTree = "<group>"; };
 		D3A489A11951863B00EED32D /* AllProjuctViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllProjuctViewController.m; sourceTree = "<group>"; };
-		D3A489A319527C4E00EED32D /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		D3A489A419527C4E00EED32D /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		D3A489A91952913700EED32D /* SearchCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCellView.h; sourceTree = "<group>"; };
-		D3A489AA1952913700EED32D /* SearchCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCellView.m; sourceTree = "<group>"; };
 		D3A489B11952B89C00EED32D /* toolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolBarView.h; sourceTree = "<group>"; };
 		D3A489B21952B89C00EED32D /* toolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = toolBarView.m; sourceTree = "<group>"; };
 		D3A4FC44195E564100D3415C /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
@@ -2458,8 +2446,6 @@
 		D3A489421950213D00EED32D /* NewProjectView */ = {
 			isa = PBXGroup;
 			children = (
-				D3A489431950215900EED32D /* NewProjectViewController.h */,
-				D3A489441950215900EED32D /* NewProjectViewController.m */,
 				D3BB71AB1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.h */,
 				D3BB71AC1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m */,
 				D3BB71AE1953DE9100A3F626 /* ProjectTableViewCell.h */,
@@ -2595,8 +2581,6 @@
 			children = (
 				D3A4899319515C9700EED32D /* MyTaskViewController.h */,
 				D3A4899419515C9700EED32D /* MyTaskViewController.m */,
-				D3A4899C1951753E00EED32D /* CellContentView.h */,
-				D3A4899D1951753E00EED32D /* CellContentView.m */,
 				D3AA5A0E195D148400565078 /* GetProject.h */,
 				D3AA5A0F195D148400565078 /* GetProject.m */,
 				D3C58EB11980D8C9003DD94F /* ProjectContentCell.h */,
@@ -2611,10 +2595,6 @@
 				049A977819D4FFBB007DC7C0 /* voice */,
 				D3A489A01951863B00EED32D /* AllProjuctViewController.h */,
 				D3A489A11951863B00EED32D /* AllProjuctViewController.m */,
-				D3A489A319527C4E00EED32D /* SearchViewController.h */,
-				D3A489A419527C4E00EED32D /* SearchViewController.m */,
-				D3A489A91952913700EED32D /* SearchCellView.h */,
-				D3A489AA1952913700EED32D /* SearchCellView.m */,
 				D3A489B11952B89C00EED32D /* toolBarView.h */,
 				D3A489B21952B89C00EED32D /* toolBarView.m */,
 				D3BB73D61958006A00A3F626 /* AdvancedSearchViewController.h */,
@@ -3587,8 +3567,6 @@
 				D31B265619891F2600B05B03 /* GPUImageAverageLuminanceThresholdFilter.m in Sources */,
 				D31B26E819891F2600B05B03 /* GPUImageZoomBlurFilter.m in Sources */,
 				D31B26B719891F2600B05B03 /* GPUImageRawDataInput.m in Sources */,
-				D3A489A519527C4E00EED32D /* SearchViewController.m in Sources */,
-				D3A489451950215900EED32D /* NewProjectViewController.m in Sources */,
 				D31B26C919891F2600B05B03 /* GPUImageSoftEleganceFilter.m in Sources */,
 				D31B264E19891F2600B05B03 /* GLProgram.m in Sources */,
 				D31B268519891F2600B05B03 /* GPUImageHazeFilter.m in Sources */,
@@ -3671,7 +3649,6 @@
 				D31B2B9E1990992300B05B03 /* FaceLoginViewController.m in Sources */,
 				D3C58EA71980BD5E003DD94F /* CJSONDeserializer.m in Sources */,
 				D3A489B31952B89C00EED32D /* toolBarView.m in Sources */,
-				D3A489AB1952913700EED32D /* SearchCellView.m in Sources */,
 				D31B268B19891F2600B05B03 /* GPUImageHSBFilter.m in Sources */,
 				D31B269319891F2600B05B03 /* GPUImageLevelsFilter.m in Sources */,
 				D31B26AB19891F2600B05B03 /* GPUImageOutput.m in Sources */,
@@ -3856,7 +3833,6 @@
 				D3C58E9F1980BD5E003DD94F /* FaceppResult.m in Sources */,
 				D31B265219891F2600B05B03 /* GPUImageAddBlendFilter.m in Sources */,
 				D3BB71BC1953E05D00A3F626 /* HorizonTableViewCell.m in Sources */,
-				D3A4899E1951753E00EED32D /* CellContentView.m in Sources */,
 				D31B266319891F2600B05B03 /* GPUImageColorDodgeBlendFilter.m in Sources */,
 				D3BB71C51953E35700A3F626 /* FirefightingTableViewCell.m in Sources */,
 				D31B2B9F1990992300B05B03 /* LoginEvent.m in Sources */,

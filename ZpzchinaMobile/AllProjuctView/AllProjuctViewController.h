@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-#import "CellContentView.h"
-#import "SearchViewController.h"
-#import "NewProjectViewController.h"
 #import "toolBarView.h"
 #import "BaiDuMapViewController.h"
 #import "AdvancedSearchViewController.h"
@@ -18,12 +15,9 @@
 #import "RecordView.h"
 #import "ProjectContentCell.h"
 #import "TFIndicatorView.h"
-@interface AllProjuctViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,CellContentViewDelegate,UIActionSheetDelegate,UISearchBarDelegate,toolBarViewDelegate,RecordViewDelegate,UnderstandViewControllerDelegate>{
+@interface AllProjuctViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,toolBarViewDelegate,RecordViewDelegate,UnderstandViewControllerDelegate,UISearchBarDelegate>{
     UITableView *_tableView;
-    CellContentView *_cellContent;
-    SearchViewController *_searchView;
     UIActionSheet *_myActionSheet;
-    NewProjectViewController *_newProject;
     NSMutableArray *showArr;
     NSMutableArray *dataArr;
     UISearchBar *_searchbar;

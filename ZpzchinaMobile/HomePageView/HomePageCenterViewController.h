@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NewProjectViewController.h"
 #import "MyTaskViewController.h"
 #import "AllProjuctViewController.h"
 #import "Album.h"
 #import "ModificationViewController.h"
 #import "UpdataPassWordViewController.h"
 @interface HomePageCenterViewController : UIViewController<UIActionSheetDelegate>{
-    NewProjectViewController *_newProject;
     MyTaskViewController *_myTask;
     AllProjuctViewController *_allProjuct;
     UIActionSheet *_myActionSheet;
