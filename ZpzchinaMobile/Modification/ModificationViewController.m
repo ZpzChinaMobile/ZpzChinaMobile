@@ -787,8 +787,8 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.shadowView removeFromSuperview];
-    [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     if (!self.fromView) {
+        [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         AppModel* appModel=[AppModel sharedInstance];
         [appModel getNew];
         //singleDic赋值只针对修改，新建页面无用
