@@ -140,7 +140,6 @@
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"原密码错误" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
                 }
-                
             }
         } dataDic:dic];
     }
