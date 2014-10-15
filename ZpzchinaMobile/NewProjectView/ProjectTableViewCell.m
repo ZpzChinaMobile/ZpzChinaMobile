@@ -359,7 +359,7 @@
         [OwnerType addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:OwnerType];
         
-        UILabel *ownerLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,513, 220, 30)];
+        UILabel *ownerLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,513, 195, 30)];
         ownerLabel.textColor = GrayColor;
         ownerLabel.font = myFont;
         ownerLabel.textAlignment = NSTextAlignmentLeft;

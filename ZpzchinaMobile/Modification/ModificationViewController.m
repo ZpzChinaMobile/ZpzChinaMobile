@@ -466,7 +466,7 @@
                 [ContactSqlite InsertData:[appModel.contactAry objectAtIndex:i]];
             }
         }
-        NSLog(@"=====%d",appModel.contactAry.count);
+
         if(appModel.ownerAry.count){
             for(int i=0; i<appModel.ownerAry.count;i++){
                 [ContactSqlite InsertData:[appModel.ownerAry objectAtIndex:i]];
@@ -787,6 +787,7 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.shadowView removeFromSuperview];
+    [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     if (!self.fromView) {
         AppModel* appModel=[AppModel sharedInstance];
         [appModel getNew];
