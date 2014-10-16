@@ -19,5 +19,6 @@
     UILabel *enddateLabel;
     UILabel *addressLabel;
 }
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic;
+@property(nonatomic,strong)NSMutableDictionary *dic;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 @end
