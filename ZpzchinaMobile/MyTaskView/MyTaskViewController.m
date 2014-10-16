@@ -260,7 +260,7 @@ int startIndex;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(flag == 0){
-        NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%d",indexPath.section];
+        NSString *CellIdentifier = [NSString stringWithFormat:@"Cell"];
         ProjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         [cell removeFromSuperview];
         cell=nil;
@@ -270,14 +270,15 @@ int startIndex;
             dic = [ProjectStage JudgmentStr:model];
         }
         if(!cell){
-            cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier dic:dic];
+            cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        cell.dic = dic;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
-        NSString *CellIdentifier = [NSString stringWithFormat:@"aCell%d",indexPath.section];
+        NSString *CellIdentifier = [NSString stringWithFormat:@"aCell"];
         ProjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         [cell removeFromSuperview];
         cell=nil;
@@ -287,8 +288,9 @@ int startIndex;
             dic = [ProjectStage JudgmentStr:model];
         }
         if(!cell){
-            cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier dic:dic];
+            cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        cell.dic = dic;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

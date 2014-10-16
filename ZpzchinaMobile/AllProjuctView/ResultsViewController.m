@@ -126,11 +126,12 @@ int startIndex;
         ProjectModel *model = [showArr objectAtIndex:indexPath.section];
         dic = [ProjectStage JudgmentStr:model];
     }
-    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%d",indexPath.section];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell"];
     ProjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(!cell){
-        cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier dic:dic];
+        cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    cell.dic = dic;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
