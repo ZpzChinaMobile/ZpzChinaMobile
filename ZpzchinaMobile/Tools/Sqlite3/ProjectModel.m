@@ -136,8 +136,8 @@
 }
 
 + (NSURLSessionDataTask *)globalMyProjectWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block index:(int)index{
-    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?myProjects=true&pageSize=2&startIndex=%d",[LoginSqlite getdata:@"UserToken" defaultdata:@""],index] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
-        NSLog(@"JSON==>%d",index);
+    return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?myProjects=true&pageSize=5&startIndex=%d",[LoginSqlite getdata:@"UserToken" defaultdata:@""],index] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
+        //NSLog(@"JSON==>%d",index);
         NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];
         NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
         NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
@@ -200,6 +200,45 @@
         
     } failure:^(NSURLSessionDataTask *__unused task, NSError *error) {
         NSLog(@"Error: %@", error);
+        if (block) {
+            block([NSMutableArray array], error);
+        }
+    }];
+}
+
+//地图搜索 精度,维度
++ (NSURLSessionDataTask *)GetMapSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block longitude:(NSString*)longitude latitude:(NSString*)latitude{
+    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@/mapSearch&latitude=%@&longitude=%@&radius=1",[LoginSqlite getdata:@"UserToken" defaultdata:@""],latitude,longitude];
+    
+    NSLog(@"%@",urlStr);
+    NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)urlStr, NULL, NULL,  kCFStringEncodingUTF8 ));
+    return [[AFAppDotNetAPIClient sharedClient] GET:encodedString parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
+        //NSLog(@"JSON===>%@",JSON);
+        NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];
+        NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
+        NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
+        if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
+            for (NSDictionary *attributes in postsFromResponse) {
+                ProjectModel *model = [[ProjectModel alloc] init];
+                [model loadWithDictionary:attributes];
+                [mutablePosts addObject:model];
+            }
+        }else{
+            NSLog(@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
+            if([[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"] isEqualToString:@"No results in database"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"没有找到项目"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
+            }
+        }
+        
+        if (block) {
+            block([NSMutableArray arrayWithArray:mutablePosts], nil);
+        }
+    } failure:^(NSURLSessionDataTask *__unused task, NSError *error) {
         if (block) {
             block([NSMutableArray array], error);
         }

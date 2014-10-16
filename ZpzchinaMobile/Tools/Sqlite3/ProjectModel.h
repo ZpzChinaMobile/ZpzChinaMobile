@@ -91,4 +91,7 @@
 + (NSURLSessionDataTask *)globalProjectValueWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block url:(NSString *)url;
 + (void)globalPostWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block parameters:(NSMutableDictionary *)parameters aid:(NSString *)aid;
 + (void)globalPutWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block parameters:(NSMutableDictionary *)parameters aid:(NSString *)aid;
+
+//地图搜索 精度,维度
++ (NSURLSessionDataTask *)GetMapSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block longitude:(NSString*)longitude latitude:(NSString*)latitude;
 @end

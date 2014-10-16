@@ -14,7 +14,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        NSLog(@"%@",dic);
+        //NSLog(@"%@",dic);
         stage = [ProjectStage JudgmentProjectStage:dic];
         UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14,0,291.5,260)];
         [bgImgView setImage:[GetImagePath getImagePath:@"全部项目_10"]];
