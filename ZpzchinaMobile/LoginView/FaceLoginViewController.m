@@ -158,9 +158,6 @@
     
     [[AppDelegate instance] window].rootViewController = drawerController;
     [[[AppDelegate instance] window] makeKeyAndVisible];
-    
-   
-    
 }
 
 

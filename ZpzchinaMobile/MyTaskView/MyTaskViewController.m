@@ -269,9 +269,9 @@ int startIndex;
             ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
             dic = [ProjectStage JudgmentStr:model];
         }
-        //if(!cell){
+        if(!cell){
             cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier dic:dic];
-        //}
+        }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -286,9 +286,9 @@ int startIndex;
             ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
             dic = [ProjectStage JudgmentStr:model];
         }
-        //if(!cell){
+        if(!cell){
             cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier dic:dic];
-        //}
+        }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -587,6 +587,7 @@ int startIndex;
                 [indicator stopAnimating];
             }
             [self.showArr addObjectsFromArray:posts];
+            NSLog(@"==>%@",self.showArr);
             [_tableView reloadData];
             if(startIndex !=0){
                 [_tableView footerEndRefreshing];

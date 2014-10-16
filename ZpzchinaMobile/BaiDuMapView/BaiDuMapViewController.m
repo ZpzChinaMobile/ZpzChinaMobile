@@ -357,48 +357,80 @@ int j;
         
         if (numberOfPoints > 2)
         {
+            double maxLongitude=-9999;
+            double minLongitude=9999;
+            double maxLatitude=-9999;
+            double minLatitude=9999;
+            
             CLLocationCoordinate2D points[numberOfPoints];
-            
-            
             for (NSInteger i = 0; i < numberOfPoints; i++) {
                 points[i] = [coordinates[i] MKCoordinateValue];
-                NSLog(@"%lf,%lf",[coordinates[i] MKCoordinateValue].longitude,[coordinates[i] MKCoordinateValue].latitude);
+                if (points[i].longitude>maxLongitude) {
+                    maxLongitude=points[i].longitude;
+                }else if (points[i].longitude<minLongitude){
+                    minLongitude=points[i].longitude;
+                }else if (points[i].latitude>maxLatitude){
+                    maxLatitude=points[i].latitude;
+                }else if (points[i].latitude<minLatitude){
+                    minLatitude=points[i].latitude;
+                }
+                
             }
-            
-            
-            
             polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
             [_mapView addOverlay:polygon];
-        }
-        
-        CGPathCloseSubpath(pathRef);
-        //NSLog(@"==>%@",pathRef);
-        int count = 0;
-        if(logArr.count>26){
-            count = 26;
-        }else{
-            count = logArr.count;
-        }
-        //地理坐标转换成点
-        for(int i=0;i<count;i++){
-            testLocation.latitude = [[latArr objectAtIndex:i] floatValue];
-            testLocation.longitude = [[logArr objectAtIndex:i] floatValue];
-            locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
-            //NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
-            if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
-                
-                NSLog(@"point in path!");
-                ProjectModel *model = [showArr objectAtIndex:i];
-                annotationPoint = [[BMKPointAnnotation alloc]init];
-                CLLocationCoordinate2D coor;
-                coor.latitude = testLocation.latitude;
-                coor.longitude = testLocation.longitude;
-                annotationPoint.coordinate = coor;
-                annotationPoint.title = model.a_landName;
-                annotationPoint.subtitle = model.a_landAddress;
-                [_mapView addAnnotation:annotationPoint];
-                topCount++;
-            }
+            
+            CLLocationCoordinate2D centerLocation=CLLocationCoordinate2DMake((maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
+            NSLog(@"%f",centerLocation.longitude);
+            [ProjectModel GetMapSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
+                if (!error) {
+                    NSLog(@"map ===== %@",posts);
+                    
+                    for(int i=0;i<posts.count;i++){
+                        ProjectModel *model = [posts objectAtIndex:i];
+                        if([[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@""]){
+                            [logArr addObject:@"0"];
+                        }else{
+                            [logArr addObject:model.a_longitude];
+                        }
+                        if([[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@""]){
+                            [latArr addObject:@"0"];
+                        }else{
+                            [latArr addObject:model.a_latitude];
+                        }
+                        //NSLog(@"log==>%@,lat===>%@",model.a_longitude,model.a_latitude);
+                    }
+                    
+                    
+                    CGPathCloseSubpath(pathRef);
+                    int count = 0;
+                    if(logArr.count>26){
+                        count = 26;
+                    }else{
+                        count = logArr.count;
+                    }
+                    //地理坐标转换成点
+                    for(int i=0;i<count;i++){
+                        testLocation.latitude = [[latArr objectAtIndex:i] floatValue];
+                        testLocation.longitude = [[logArr objectAtIndex:i] floatValue];
+                        locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
+                        NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
+                        if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
+                            
+                            NSLog(@"point in path!");
+                            ProjectModel *model = [posts objectAtIndex:i];
+                            annotationPoint = [[BMKPointAnnotation alloc]init];
+                            CLLocationCoordinate2D coor;
+                            coor.latitude = testLocation.latitude;
+                            coor.longitude = testLocation.longitude;
+                            annotationPoint.coordinate = coor;
+                            annotationPoint.title = model.a_landName;
+                            annotationPoint.subtitle = model.a_landAddress;
+                            [_mapView addAnnotation:annotationPoint];
+                            topCount++;
+                        }
+                    }
+                }
+            } longitude:[NSString stringWithFormat:@"%lf",centerLocation.longitude] latitude:[NSString stringWithFormat:@"%lf",centerLocation.latitude]];
         }
     }
 }
