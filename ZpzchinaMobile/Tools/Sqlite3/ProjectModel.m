@@ -137,6 +137,7 @@
 
 + (NSURLSessionDataTask *)globalMyProjectWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block index:(int)index{
     return [[AFAppDotNetAPIClient sharedClient] GET:[NSString stringWithFormat:@"/ZPZChina.svc/projects/%@?myProjects=true",[LoginSqlite getdata:@"UserToken" defaultdata:@""]] parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
+        NSLog(@"JSON==>%@",JSON);
         NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];
         NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
         NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
