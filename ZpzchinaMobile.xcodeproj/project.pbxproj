@@ -284,7 +284,6 @@
 		D3AA5A15195D457800565078 /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AA5A14195D457800565078 /* DatePickerView.m */; };
 		D3AAAB6A196D6F2E008F9CCD /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AAAB69196D6F2E008F9CCD /* DKCircleButton.m */; };
 		D3AB1BC219812C810046C587 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AB1BC119812C810046C587 /* AFAppDotNetAPIClient.m */; };
-		D3AB326F196BD5D800F0FC02 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AB326E196BD5D800F0FC02 /* CollectionViewController.m */; };
 		D3AE4DE41965007C001086F9 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE31965007C001086F9 /* ResultsViewController.m */; };
 		D3AE4DE719651FBE001086F9 /* ProjectLogSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE619651FBE001086F9 /* ProjectLogSqlite.m */; };
 		D3AE4DEA19651FCF001086F9 /* ProjectLogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3AE4DE919651FCF001086F9 /* ProjectLogModel.m */; };
@@ -1097,8 +1096,6 @@
 		D3AAAB69196D6F2E008F9CCD /* DKCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCircleButton.m; sourceTree = "<group>"; };
 		D3AB1BC019812C810046C587 /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDotNetAPIClient.h; sourceTree = "<group>"; };
 		D3AB1BC119812C810046C587 /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDotNetAPIClient.m; sourceTree = "<group>"; };
-		D3AB326D196BD5D800F0FC02 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
-		D3AB326E196BD5D800F0FC02 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		D3AD62B819B46B2E001FD483 /* BMKGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKGradient.h; sourceTree = "<group>"; };
 		D3AD62B919B46B2E001FD483 /* BMKHeatMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKHeatMap.h; sourceTree = "<group>"; };
 		D3AE4DE21965007C001086F9 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
@@ -2228,8 +2225,6 @@
 				D3AB1BBF19812C810046C587 /* AfNetWork */,
 				D3C58E601980BD5E003DD94F /* FaceppSDK */,
 				D3AAAB67196D6F2E008F9CCD /* DKCircleButton */,
-				D3AB3269196BD19E00F0FC02 /* CollectView */,
-				D3AB3255196A478D00F0FC02 /* Waterflow */,
 				D346A0311963E41400CDDBDF /* MJRefresh */,
 				D346A0301963D9EE00CDDBDF /* WaittingView */,
 				D346A02A1963D25300CDDBDF /* ProjectStage */,
@@ -2449,22 +2444,6 @@
 				D3AB1BC119812C810046C587 /* AFAppDotNetAPIClient.m */,
 			);
 			path = AfNetWork;
-			sourceTree = "<group>";
-		};
-		D3AB3255196A478D00F0FC02 /* Waterflow */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Waterflow;
-			sourceTree = "<group>";
-		};
-		D3AB3269196BD19E00F0FC02 /* CollectView */ = {
-			isa = PBXGroup;
-			children = (
-				D3AB326D196BD5D800F0FC02 /* CollectionViewController.h */,
-				D3AB326E196BD5D800F0FC02 /* CollectionViewController.m */,
-			);
-			path = CollectView;
 			sourceTree = "<group>";
 		};
 		D3B2794819595A150090632C /* PopView */ = {
@@ -3241,7 +3220,6 @@
 				D31B26C119891F2600B05B03 /* GPUImageSepiaFilter.m in Sources */,
 				D31B26DB19891F2600B05B03 /* GPUImageTransformFilter.m in Sources */,
 				D31B26D219891F2600B05B03 /* GPUImageTextureInput.m in Sources */,
-				D3AB326F196BD5D800F0FC02 /* CollectionViewController.m in Sources */,
 				D31B265B19891F2600B05B03 /* GPUImageBulgeDistortionFilter.m in Sources */,
 				049A97A119D554BD007DC7C0 /* UnderstandViewController.m in Sources */,
 				D31B269F19891F2600B05B03 /* GPUImageMissEtikateFilter.m in Sources */,
