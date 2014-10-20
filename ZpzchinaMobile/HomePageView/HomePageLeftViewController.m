@@ -219,7 +219,6 @@
             [ContactSqlite delAll];
             [CameraSqlite delAll];
             [RecordSqlite delAll];
-            [UserSqlite delAll];
         }
     }else if(alertView.tag == 3){
         if(buttonIndex == 1){
