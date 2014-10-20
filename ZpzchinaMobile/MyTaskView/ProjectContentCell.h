@@ -18,6 +18,7 @@
     UILabel *startdateLabel;
     UILabel *enddateLabel;
     UILabel *addressLabel;
+    UILabel *zoneLabel;
 }
 @property(nonatomic,strong)NSMutableDictionary *dic;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;

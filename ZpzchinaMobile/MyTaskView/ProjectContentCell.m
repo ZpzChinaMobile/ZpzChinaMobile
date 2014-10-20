@@ -95,10 +95,9 @@
     [dianImage addGestureRecognizer:dianImagetapGestureRecognizer];
     [self addSubview:dianImage];
     
-    UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(64,225,60,20)];
+    zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(64,225,60,20)];
     zoneLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     zoneLabel.textColor = BlueColor;
-    zoneLabel.text = @"华南区 -";
     [self addSubview:zoneLabel];
     
     addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(114,225,160,20)];
@@ -130,7 +129,7 @@
     NSDate *confromTimesp2 = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedFinishTime"] intValue]];
     NSString *confromTimespStr2 = [formatter stringFromDate:confromTimesp2];
     enddateLabel.text = confromTimespStr2;
-    
+    zoneLabel.text = [NSString stringWithFormat:@"%@ -",dic[@"district"]];
     addressLabel.text = [dic objectForKey:@"landAddress"];
 }
 @end

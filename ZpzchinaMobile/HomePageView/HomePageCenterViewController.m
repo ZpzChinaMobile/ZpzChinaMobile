@@ -108,14 +108,14 @@
     
     UIImageView *cityImgView = [[UIImageView alloc] initWithFrame:CGRectMake(200,234,12,17)];
     [cityImgView setImage:[GetImagePath getImagePath:@"首页_10"]];
-    [bannerView addSubview:cityImgView];
+    //[bannerView addSubview:cityImgView];
     
     UILabel *cityLabel = [[UILabel alloc] init];
     cityLabel.frame = CGRectMake(220, 228, 140, 28);
     cityLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:12];
     cityLabel.textColor = [UIColor whiteColor];
     cityLabel.text = @"上海，中国";
-    [bannerView addSubview:cityLabel];
+    //[bannerView addSubview:cityLabel];
     [self.view addSubview:bannerView];
     
     //新建项目
