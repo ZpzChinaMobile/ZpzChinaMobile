@@ -262,8 +262,8 @@ int startIndex;
     if(flag == 0){
         NSString *CellIdentifier = [NSString stringWithFormat:@"Cell"];
         ProjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        [cell removeFromSuperview];
-        cell=nil;
+//        [cell removeFromSuperview];
+//        cell=nil;
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(self.showArr.count !=0){
             ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
@@ -280,8 +280,8 @@ int startIndex;
     }else{
         NSString *CellIdentifier = [NSString stringWithFormat:@"aCell"];
         ProjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        [cell removeFromSuperview];
-        cell=nil;
+//        [cell removeFromSuperview];
+//        cell=nil;
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(self.showArr.count !=0){
             ProjectModel *model = [self.showArr objectAtIndex:indexPath.section];
