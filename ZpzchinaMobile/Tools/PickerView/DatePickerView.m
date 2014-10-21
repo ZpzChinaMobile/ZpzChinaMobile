@@ -26,8 +26,8 @@
         datepicker.datePickerMode = UIDatePickerModeDate;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSDate* minDate = [dateFormatter dateFromString:@"1900-01-01 00:00:00"];
-        NSDate* maxDate = [dateFormatter dateFromString:@"2900-01-01 00:00:00"];
+        NSDate* minDate = [dateFormatter dateFromString:@"1970-01-01 00:00:00"];
+        NSDate* maxDate = [dateFormatter dateFromString:@"2050-01-01 00:00:00"];
         datepicker.minimumDate = minDate;
         datepicker.maximumDate = maxDate;
         if(date != nil){

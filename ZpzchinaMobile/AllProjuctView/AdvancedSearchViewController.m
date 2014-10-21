@@ -103,9 +103,14 @@
 
 -(void)rightAction{
     NSLog(@"%@",dataDic);
-    resultsview = [[ResultsViewController alloc] init];
-    resultsview.dataDic = dataDic;
-    [self.navigationController pushViewController:resultsview animated:YES];
+    if(![dataDic[@"keyStr"] isEqualToString:@""]){
+        resultsview = [[ResultsViewController alloc] init];
+        resultsview.dataDic = dataDic;
+        [self.navigationController pushViewController:resultsview animated:YES];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请填写关键字" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
