@@ -39,7 +39,7 @@ int j;
     [super viewDidLoad];
     [self addBackButton];
     [self addtittle:@"地图搜索"];
-    
+    hasProject = 0;
     if (self.isIOS8) {
         //由于IOS8中定位的授权机制改变 需要进行手动授权
         locationManager = [[CLLocationManager alloc] init];
@@ -372,6 +372,7 @@ int j;
     [logArr removeAllObjects];
     [latArr removeAllObjects];
     [showArr removeAllObjects];
+    hasProject = 0;
     if(imageView){
         UITouch *touch = [touches anyObject];
         CGPoint location = [touch locationInView:imageView];
@@ -443,6 +444,7 @@ int j;
                         if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
                             
                             NSLog(@"point in path!");
+                            hasProject = 1;
                             ProjectModel *model = [posts objectAtIndex:i];
                             annotationPoint = [[BMKPointAnnotation alloc]init];
                             CLLocationCoordinate2D coor;
@@ -457,6 +459,14 @@ int j;
                     }
                     [imageView removeFromSuperview];
                     imageView = nil;
+                    if(hasProject == 0){
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                        message:@"没有找到项目"
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"确定"
+                                                              otherButtonTitles:nil,nil];
+                        [alert show];
+                    }
                 }
             } longitude:[NSString stringWithFormat:@"%lf",centerLocation.longitude] latitude:[NSString stringWithFormat:@"%lf",centerLocation.latitude]];
         }

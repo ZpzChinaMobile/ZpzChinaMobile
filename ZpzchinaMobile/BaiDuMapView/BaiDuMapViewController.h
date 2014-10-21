@@ -38,6 +38,7 @@
     NSMutableArray *coordinates;
     BMKPolygon* polygon;
     CLLocationManager  *locationManager;
+    int hasProject;
 }
 
 @end
