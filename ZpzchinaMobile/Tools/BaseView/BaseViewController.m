@@ -99,6 +99,14 @@
     [self.topView addSubview:rightButton];
 }
 
+-(void)setRightButtonClick:(int)flag{
+    if(flag == 0){
+        rightButton.enabled = NO;
+    }else{
+        rightButton.enabled = YES;
+    }
+}
+
 -(void)removeRightBtn{
     [rightButton removeFromSuperview];
     rightButton = nil;
