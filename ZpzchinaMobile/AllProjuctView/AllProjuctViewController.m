@@ -326,6 +326,10 @@ int startIndex;
     [_recordView removeFromSuperview];
     _recordView = nil;
     [_searchbar resignFirstResponder];
+    [cancelBtn setHidden:YES];
+    [UIView animateWithDuration:0.5 animations:^{
+        topBgView.frame = CGRectMake(30, 0,270, 64.5);
+    }];
     switch (index) {
         case 0:
             underStandVC = [[UnderstandViewController alloc] init];
