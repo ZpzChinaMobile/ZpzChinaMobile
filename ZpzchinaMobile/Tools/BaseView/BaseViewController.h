@@ -19,6 +19,7 @@
 -(void)addtittle:(NSString *)title;
 //右边按钮，定义大小，可以是文字或者图片，没有就传nil
 - (void)addRightButton:(CGRect)frame title:(NSString*)title iamge:(UIImage*)image;
+-(void)setRightButtonClick:(int)flag;
 //设置背景颜色
 -(void)setBgColor:(UIColor *)color;
 //移除右按钮

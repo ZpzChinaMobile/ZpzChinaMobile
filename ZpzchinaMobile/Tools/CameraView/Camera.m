@@ -46,6 +46,8 @@
     
 }
 
+
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     if ([self.delegate respondsToSelector:@selector(backCamera:)]){
         [self.delegate backCamera:nil];
@@ -74,6 +76,7 @@
         //NSLog(@"encoded : %@",encoded);
         [self setImage:encoded];
     }
+    
 }
 
 -(void)setImage:(NSString *)imageStr{

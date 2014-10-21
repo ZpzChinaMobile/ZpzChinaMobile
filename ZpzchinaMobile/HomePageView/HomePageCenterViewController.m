@@ -95,7 +95,7 @@
     userNameLabel.textColor = [UIColor whiteColor];
     NSMutableArray *list = [UserSqlite loadList];
     UserModel *model = list[0];
-    userNameLabel.text = [NSString stringWithFormat:@"用户名：%@",model.a_cellphone];
+    userNameLabel.text = [NSString stringWithFormat:@"%@",model.a_cellphone];
     [bannerView addSubview:userNameLabel];
 
     
@@ -108,14 +108,14 @@
     
     UIImageView *cityImgView = [[UIImageView alloc] initWithFrame:CGRectMake(200,234,12,17)];
     [cityImgView setImage:[GetImagePath getImagePath:@"首页_10"]];
-    //[bannerView addSubview:cityImgView];
+    [bannerView addSubview:cityImgView];
     
     UILabel *cityLabel = [[UILabel alloc] init];
     cityLabel.frame = CGRectMake(220, 228, 140, 28);
     cityLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:12];
     cityLabel.textColor = [UIColor whiteColor];
-    cityLabel.text = @"上海，中国";
-    //[bannerView addSubview:cityLabel];
+    cityLabel.text = [NSString stringWithFormat:@"%@  %@",model.a_city,model.a_district];
+    [bannerView addSubview:cityLabel];
     [self.view addSubview:bannerView];
     
     //新建项目
@@ -232,14 +232,14 @@
     label4.frame = CGRectMake(20, 8, 140, 28);
     label4.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:14];
     label4.textColor = [UIColor whiteColor];
-    label4.text = @"Email";
+    label4.text = @"联系方式";
     [emailView addSubview:label4];
     
     UILabel *intlabel4 = [[UILabel alloc] init];
-    intlabel4.frame = CGRectMake(20, 27, 250, 28);
+    intlabel4.frame = CGRectMake(20, 30, 250, 28);
     intlabel4.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:13];
     intlabel4.textColor = [UIColor whiteColor];
-    intlabel4.text = @"yourname@website.com";
+    intlabel4.text = model.a_cellphone;
     [emailView addSubview:intlabel4];
     
     UIButton *emailBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -263,14 +263,14 @@
     label5.frame = CGRectMake(20, 8, 140, 28);
     label5.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:14];
     label5.textColor = [UIColor whiteColor];
-    label5.text = @"Website";
+    label5.text = @"所属公司";
     [websiteView addSubview:label5];
     
     UILabel *intlabel5 = [[UILabel alloc] init];
     intlabel5.frame = CGRectMake(20, 27, 250, 28);
     intlabel5.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:13];
     intlabel5.textColor = [UIColor whiteColor];
-    intlabel5.text = @"http://www.baidu.com";
+    intlabel5.text = model.a_company;
     [websiteView addSubview:intlabel5];
     
     UIButton *websiteBtn =  [UIButton buttonWithType:UIButtonTypeCustom];

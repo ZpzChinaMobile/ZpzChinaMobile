@@ -39,7 +39,7 @@
     [self addBackButton];
     [self addtittle:@"地图搜索"];
     [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"icon__09"]];
-    
+    [self setRightButtonClick:0];
     if (self.isIOS8) {
         //由于IOS8中定位的授权机制改变 需要进行手动授权
         locationManager = [[CLLocationManager alloc] init];
@@ -210,6 +210,7 @@
     }else{
         address = baseAddress;
     }
+    [self setRightButtonClick:1];
 }
 
 

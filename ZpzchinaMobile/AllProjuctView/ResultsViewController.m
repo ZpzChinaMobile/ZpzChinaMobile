@@ -205,6 +205,14 @@ int startIndex;
             }
         }else{
             NSLog(@"%@",[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
+            if([[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"] isEqualToString:@"no data in database!"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"没有找到项目"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
+            }
         }
         
         //NSLog(@"%@",self.showArr);
