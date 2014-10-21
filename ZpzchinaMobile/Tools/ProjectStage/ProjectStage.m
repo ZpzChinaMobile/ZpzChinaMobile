@@ -145,7 +145,7 @@
     if([[NSString stringWithFormat:@"%@",model.a_expectedStartTime] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_expectedStartTime] isEqualToString:@"(null)"]){
         [dic setObject:@"" forKey:@"expectedStartTime"];
     }else{
-        if([model.a_expectedStartTime length] == 10 || [model.a_expectedStartTime length] == 0){
+        if([model.a_expectedStartTime length] <= 10 || [model.a_expectedStartTime length] == 0|| [model.a_expectedStartTime intValue] < 0){
             [dic setObject:[NSString stringWithFormat:@"%@",model.a_expectedStartTime] forKey:@"expectedStartTime"];
         }else{
             NSString *astr =  [model.a_expectedStartTime stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
@@ -161,7 +161,7 @@
     if([[NSString stringWithFormat:@"%@",model.a_expectedFinishTime] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_expectedFinishTime] isEqualToString:@"(null)"]){
         [dic setObject:@"" forKey:@"expectedFinishTime"];
     }else{
-        if([model.a_expectedFinishTime length] == 10 || [model.a_expectedFinishTime length] == 0){
+        if([model.a_expectedFinishTime length] <= 10 || [model.a_expectedFinishTime length] == 0|| [model.a_expectedFinishTime intValue] < 0){
             [dic setObject:[NSString stringWithFormat:@"%@",model.a_expectedFinishTime] forKey:@"expectedFinishTime"];
         }else{
             NSString *astr =  [model.a_expectedFinishTime stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
@@ -169,6 +169,7 @@
             if([astr isEqualToString:@"0"]){
                 [dic setObject:[NSString stringWithFormat:@"%@",model.a_expectedFinishTime] forKey:@"expectedFinishTime"];
             }else{
+                NSLog(@"time==%@",model.a_expectedFinishTime);
                 [dic setObject:[NSString stringWithFormat:@"%@",[model.a_expectedFinishTime substringWithRange:NSMakeRange(6,10)]] forKey:@"expectedFinishTime"];
             }
         }
@@ -255,7 +256,7 @@
     if([[NSString stringWithFormat:@"%@",model.a_actualStartTime] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_actualStartTime] isEqualToString:@"(null)"]){
         [dic setObject:@"" forKey:@"actualStartTime"];
     }else{
-        if([model.a_actualStartTime length] == 10 || [model.a_actualStartTime length] == 0){
+        if([model.a_actualStartTime length] <= 10 || [model.a_actualStartTime length] == 0|| [model.a_actualStartTime intValue] < 0){
             [dic setObject:[NSString stringWithFormat:@"%@",model.a_actualStartTime] forKey:@"actualStartTime"];
         }else{
             NSString *astr =  [model.a_actualStartTime stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
@@ -263,6 +264,7 @@
             if([astr isEqualToString:@"0"]){
                 [dic setObject:[NSString stringWithFormat:@"%@",model.a_actualStartTime] forKey:@"actualStartTime"];
             }else{
+                NSLog(@"====>%@",model.a_actualStartTime);
                 [dic setObject:[NSString stringWithFormat:@"%@",[model.a_actualStartTime substringWithRange:NSMakeRange(6,10)]] forKey:@"actualStartTime"];
             }
         }
@@ -483,7 +485,7 @@
         if([[oldDic objectForKey:@"expectedStartTime"] isEqualToString:@""]||[[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"expectedStartTime"]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"expectedStartTime"]] isEqualToString:@"(null)"]){
             [dic setObject:@"" forKey:@"expectedStartTime"];
         }else{
-            if([[oldDic objectForKey:@"expectedStartTime"] length] == 10 || [[oldDic objectForKey:@"expectedStartTime"] length] == 0){
+            if([[oldDic objectForKey:@"expectedStartTime"] length] <= 10 || [[oldDic objectForKey:@"expectedStartTime"] length] == 0|| [[oldDic objectForKey:@"expectedStartTime"] intValue] < 0){
                 [dic setObject:[oldDic objectForKey:@"expectedStartTime"] forKey:@"expectedStartTime"];
             }else{
                 NSString *astr =  [[oldDic objectForKey:@"expectedStartTime"] stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
@@ -503,7 +505,7 @@
         if([[oldDic objectForKey:@"expectedFinishTime"] isEqualToString:@""]||[[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"expectedFinishTime"]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"expectedFinishTime"]] isEqualToString:@"(null)"]){
             [dic setObject:@"" forKey:@"expectedFinishTime"];
         }else{
-            if([[oldDic objectForKey:@"expectedFinishTime"] length] == 10 || [[oldDic objectForKey:@"expectedFinishTime"] length] == 0){
+            if([[oldDic objectForKey:@"expectedFinishTime"] length] <= 10 || [[oldDic objectForKey:@"expectedFinishTime"] length] == 0||[[oldDic objectForKey:@"expectedFinishTime"] intValue] < 0){
                 [dic setObject:[oldDic objectForKey:@"expectedFinishTime"] forKey:@"expectedFinishTime"];
             }else{
                 NSString *astr =  [[oldDic objectForKey:@"expectedFinishTime"] stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];
@@ -601,7 +603,7 @@
         if([[oldDic objectForKey:@"actualStartTime"] isEqualToString:@""]||[[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"actualStartTime"]] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",[oldDic objectForKey:@"actualStartTime"]] isEqualToString:@"(null)"]){
             [dic setObject:@"" forKey:@"actualStartTime"];
         }else{
-            if([[oldDic objectForKey:@"actualStartTime"] length] == 10 || [[oldDic objectForKey:@"actualStartTime"] length] == 0){
+            if([[oldDic objectForKey:@"actualStartTime"] length] <= 10 || [[oldDic objectForKey:@"actualStartTime"] length] == 0||[[oldDic objectForKey:@"actualStartTime"] intValue] < 0){
                 [dic setObject:[oldDic objectForKey:@"actualStartTime"] forKey:@"actualStartTime"];
             }else{
                 NSString *astr =  [[oldDic objectForKey:@"actualStartTime"] stringByReplacingOccurrencesOfString:@"/Date(" withString:@""];

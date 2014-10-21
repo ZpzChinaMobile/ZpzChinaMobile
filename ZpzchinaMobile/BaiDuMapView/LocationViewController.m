@@ -8,13 +8,18 @@
 
 #import "LocationViewController.h"
 
-@interface LocationViewController ()
-
+@interface LocationViewController ()<CLLocationManagerDelegate>
+@property(nonatomic)BOOL isIOS8;
 @end
 
 @implementation LocationViewController
 @synthesize delegate;
 @synthesize baseAddress,baseCity;
+
+-(BOOL)isIOS8{
+    return [[UIDevice currentDevice].systemVersion floatValue] >= 8?YES:NO;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -31,10 +36,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self addBackButton];
     [self addtittle:@"地图搜索"];
     [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"icon__09"]];
+    
+    if (self.isIOS8) {
+        //由于IOS8中定位的授权机制改变 需要进行手动授权
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate=self;
+    }else{
+        [self loadSelf];
+    }
+}
+
+-(void)loadSelf{
     _mapView = [[BMKMapView alloc] initWithFrame:self.view.frame];
     //[_mapView setShowsUserLocation:YES];//显示定位的蓝点儿
     //_mapView.showsUserLocation = YES;//可以显示用户当前位置
@@ -62,45 +77,53 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [self myViewWillAppear];
+}
+
+-(void)myViewWillAppear{
     [_mapView viewWillAppear];
     [_locService startUserLocationService];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     _locService.delegate = self;
     _geocodesearch.delegate = self;
-//    if([[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@""]){
-//        [_locService startUserLocationService];
-//    }else{
-//        isGeoSearch = true;
-//        BMKGeoCodeSearchOption *geocodeSearchOption = [[BMKGeoCodeSearchOption alloc]init];
-//        geocodeSearchOption.city= baseCity;
-//        geocodeSearchOption.address = baseAddress;
-//        BOOL flag = [_geocodesearch geoCode:geocodeSearchOption];
-//        if(flag)
-//        {
-//            NSLog(@"geo检索发送成功");
-//        }
-//        else
-//        {
-//            NSLog(@"geo检索发送失败");
-//        }
-//    }
+    //    if([[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",baseAddress] isEqualToString:@""]){
+    //        [_locService startUserLocationService];
+    //    }else{
+    //        isGeoSearch = true;
+    //        BMKGeoCodeSearchOption *geocodeSearchOption = [[BMKGeoCodeSearchOption alloc]init];
+    //        geocodeSearchOption.city= baseCity;
+    //        geocodeSearchOption.address = baseAddress;
+    //        BOOL flag = [_geocodesearch geoCode:geocodeSearchOption];
+    //        if(flag)
+    //        {
+    //            NSLog(@"geo检索发送成功");
+    //        }
+    //        else
+    //        {
+    //            NSLog(@"geo检索发送失败");
+    //        }
+    //    }
     
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
+    [self myViewWillDisappear];
+}
+
+-(void)myViewWillDisappear{
     [_mapView viewWillDisappear];
     NSLog(@"locationDis");
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
     _geocodesearch.delegate = nil;
-//    if (_mapView) {
-//        [_mapView removeFromSuperview];
-//        _mapView = nil;
-//    }
-   // _locService = nil;
-   // _geocodesearch = nil;
+    //    if (_mapView) {
+    //        [_mapView removeFromSuperview];
+    //        _mapView = nil;
+    //    }
+    // _locService = nil;
+    // _geocodesearch = nil;
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
 }
@@ -319,6 +342,16 @@
             [delegate locationBack:address testLocation:testLocation];
             [self.navigationController popViewControllerAnimated:YES];
         }
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    if (status!=kCLAuthorizationStatusAuthorizedAlways&&status!=kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [locationManager requestAlwaysAuthorization];
+        [locationManager requestWhenInUseAuthorization];
+    }else{
+        [self loadSelf];
+        [self myViewWillAppear];
     }
 }
 @end

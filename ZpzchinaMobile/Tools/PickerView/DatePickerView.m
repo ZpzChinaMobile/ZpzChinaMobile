@@ -26,8 +26,8 @@
         datepicker.datePickerMode = UIDatePickerModeDate;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSDate* minDate = [dateFormatter dateFromString:@"1900-01-01 00:00:00"];
-        NSDate* maxDate = [dateFormatter dateFromString:@"2900-01-01 00:00:00"];
+        NSDate* minDate = [dateFormatter dateFromString:@"1980-01-01 00:00:00"];
+        NSDate* maxDate = [dateFormatter dateFromString:@"2050-01-01 00:00:00"];
         datepicker.minimumDate = minDate;
         datepicker.maximumDate = maxDate;
         if(date != nil){
@@ -111,6 +111,7 @@
     NSDate* _date = datepicker.date;
     NSLog(@"%@",_date);
     timeSp = [NSString stringWithFormat:@"%ld", (long)[_date timeIntervalSince1970]];
+    //NSLog(@"timeSp==%@",    [NSDate dateWithTimeIntervalSince1970:[timeSp intValue]]);
     CATransition *animation = [CATransition  animation];
     animation.delegate = self;
     animation.duration = 0.3;
