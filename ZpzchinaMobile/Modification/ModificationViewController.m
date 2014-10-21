@@ -787,6 +787,7 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.shadowView removeFromSuperview];
+    [self selectCancel];
     if (!self.fromView) {
         [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         AppModel* appModel=[AppModel sharedInstance];
@@ -808,6 +809,7 @@
         [self initdataDic];
         [self initTVC];
         [self.tableViewSpace addSubview:self.oneTVC.view];
+        [self.myTableView reloadData];
     }
     if (!self.isRelease&&self.fromView) {
         [self leftAction];

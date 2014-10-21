@@ -77,7 +77,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self myViewWillAppear];
+    if (!self.isIOS8) {
+        [self myViewWillAppear];
+    }
 }
 
 -(void)myViewWillAppear{
