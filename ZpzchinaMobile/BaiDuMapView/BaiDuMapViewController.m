@@ -263,7 +263,11 @@ int j;
 	annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
     annotationView.annotation = annotation;
     // 单击弹出泡泡，弹出泡泡前提annotation必须实现title属性
-    annotationView.canShowCallout = NO;
+    if(showArr.count !=0){
+        annotationView.canShowCallout = NO;
+    }else{
+        annotationView.canShowCallout = YES;
+    }
     
 	
     // 设置是否可以拖拽
@@ -367,6 +371,7 @@ int j;
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     [logArr removeAllObjects];
     [latArr removeAllObjects];
+    [showArr removeAllObjects];
     if(imageView){
         UITouch *touch = [touches anyObject];
         CGPoint location = [touch locationInView:imageView];
@@ -405,7 +410,7 @@ int j;
             [ProjectModel GetMapSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
                 if (!error) {
                     NSLog(@"map ===== %@",posts);
-                    
+                    showArr = posts;
                     for(int i=0;i<posts.count;i++){
                         ProjectModel *model = [posts objectAtIndex:i];
                         if([[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@""]){
