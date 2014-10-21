@@ -428,7 +428,6 @@ int j;
                     }
                     
                     
-                    CGPathCloseSubpath(pathRef);
                     int count = 0;
                     if(logArr.count>26){
                         count = 26;
@@ -470,6 +469,7 @@ int j;
                 }
             } longitude:[NSString stringWithFormat:@"%lf",centerLocation.longitude] latitude:[NSString stringWithFormat:@"%lf",centerLocation.latitude]];
         }
+        CGPathCloseSubpath(pathRef);
     }
 }
 
