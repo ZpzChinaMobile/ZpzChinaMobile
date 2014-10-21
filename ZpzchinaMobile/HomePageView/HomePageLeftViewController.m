@@ -47,7 +47,7 @@
     nameLabel.textColor = [UIColor whiteColor];
     NSArray *list = [UserSqlite loadList];
     UserModel *model = list[0];
-    nameLabel.text = [NSString stringWithFormat:@"%@",model.a_cellphone];
+    nameLabel.text = [NSString stringWithFormat:@"%@",model.a_realName];
     [self.view addSubview:nameLabel];
     
     UILabel *welcomeLabel = [[UILabel alloc] init];

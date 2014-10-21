@@ -95,7 +95,7 @@
     userNameLabel.textColor = [UIColor whiteColor];
     NSMutableArray *list = [UserSqlite loadList];
     UserModel *model = list[0];
-    userNameLabel.text = [NSString stringWithFormat:@"%@",model.a_cellphone];
+    userNameLabel.text = [NSString stringWithFormat:@"%@",model.a_realName];
     [bannerView addSubview:userNameLabel];
 
     

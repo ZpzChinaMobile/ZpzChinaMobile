@@ -24,6 +24,7 @@
 @property (nonatomic,strong) NSString *a_city;
 @property (nonatomic,strong) NSString *a_cellphone;
 @property (nonatomic,strong) NSString *a_district;
+@property (nonatomic,strong) NSString *a_realName;
 
 -(void)loadWithDictionary:(NSDictionary*)dic;
 -(void)loadWithDB:(NSDictionary*)dic;
