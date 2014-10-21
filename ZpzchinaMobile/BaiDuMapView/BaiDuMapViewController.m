@@ -396,18 +396,18 @@ int j;
                     maxLongitude=points[i].longitude;
                 }else if (points[i].longitude<minLongitude){
                     minLongitude=points[i].longitude;
-                }else if (points[i].latitude>maxLatitude){
+                }
+                if (points[i].latitude>maxLatitude){
                     maxLatitude=points[i].latitude;
                 }else if (points[i].latitude<minLatitude){
                     minLatitude=points[i].latitude;
                 }
-                
             }
             polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
             [_mapView addOverlay:polygon];
             
             CLLocationCoordinate2D centerLocation=CLLocationCoordinate2DMake((maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
-            NSLog(@"%f",centerLocation.longitude);
+            NSLog(@"=====%f,%f",centerLocation.longitude,centerLocation.latitude);
             [ProjectModel GetMapSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
                 if (!error) {
                     NSLog(@"map ===== %@",posts);
@@ -428,7 +428,6 @@ int j;
                     }
                     
                     
-                    CGPathCloseSubpath(pathRef);
                     int count = 0;
                     if(logArr.count>26){
                         count = 26;
@@ -470,6 +469,7 @@ int j;
                 }
             } longitude:[NSString stringWithFormat:@"%lf",centerLocation.longitude] latitude:[NSString stringWithFormat:@"%lf",centerLocation.latitude]];
         }
+        CGPathCloseSubpath(pathRef);
     }
 }
 
