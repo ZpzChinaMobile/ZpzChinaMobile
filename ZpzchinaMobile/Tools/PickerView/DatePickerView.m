@@ -111,6 +111,7 @@
     NSDate* _date = datepicker.date;
     NSLog(@"%@",_date);
     timeSp = [NSString stringWithFormat:@"%ld", (long)[_date timeIntervalSince1970]];
+    //NSLog(@"timeSp==%@",    [NSDate dateWithTimeIntervalSince1970:[timeSp intValue]]);
     CATransition *animation = [CATransition  animation];
     animation.delegate = self;
     animation.duration = 0.3;

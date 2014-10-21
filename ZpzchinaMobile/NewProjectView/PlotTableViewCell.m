@@ -155,7 +155,7 @@
         
         UIButton *Steel = [UIButton buttonWithType:UIButtonTypeCustom];
         Steel.frame = CGRectMake(20,365, 140, 30);
-        [Steel setTitle:@"刚结构" forState:UIControlStateNormal];
+        [Steel setTitle:@"钢结构" forState:UIControlStateNormal];
         [Steel setTitleColor:BlueColor forState:UIControlStateNormal];
         Steel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         Steel.titleLabel.font = myFont;
