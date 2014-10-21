@@ -208,7 +208,7 @@
 
 //地图搜索 精度,维度
 + (NSURLSessionDataTask *)GetMapSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block longitude:(NSString*)longitude latitude:(NSString*)latitude{
-    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@/mapSearch&latitude=%@&longitude=%@&radius=1",[LoginSqlite getdata:@"UserToken" defaultdata:@""],latitude,longitude];
+    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@/mapSearch&latitude=%@&longitude=%@&radius=1000",[LoginSqlite getdata:@"UserToken" defaultdata:@""],latitude,longitude];
     
     NSLog(@"%@",urlStr);
     //NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)urlStr, NULL, NULL,  kCFStringEncodingUTF8 ));
