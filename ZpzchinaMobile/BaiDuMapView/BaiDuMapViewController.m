@@ -263,11 +263,7 @@ int j;
 	annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
     annotationView.annotation = annotation;
     // 单击弹出泡泡，弹出泡泡前提annotation必须实现title属性
-    if(showArr.count !=0){
-        annotationView.canShowCallout = NO;
-    }else{
-        annotationView.canShowCallout = YES;
-    }
+    annotationView.canShowCallout = NO;
     
 	
     // 设置是否可以拖拽
@@ -369,6 +365,8 @@ int j;
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    [logArr removeAllObjects];
+    [latArr removeAllObjects];
     if(imageView){
         UITouch *touch = [touches anyObject];
         CGPoint location = [touch locationInView:imageView];
@@ -452,6 +450,8 @@ int j;
                             topCount++;
                         }
                     }
+                    [imageView removeFromSuperview];
+                    imageView = nil;
                 }
             } longitude:[NSString stringWithFormat:@"%lf",centerLocation.longitude] latitude:[NSString stringWithFormat:@"%lf",centerLocation.latitude]];
         }
