@@ -19,7 +19,7 @@
     //  NSLog(@"%@,=========%@",paths,database_path);
     if (sqlite3_open([database_path UTF8String], &zpzchinaMobileDB)==SQLITE_OK) {
         NSLog(@"打开数据库成功!");
-        NSString *createSQL = @"CREATE TABLE IF NOT EXISTS User (userToken Text ,userID Text,isFaceRegisted Text,faceCount Text,department Text,company Text,city Text,leaderLevel Text,office Text,province Text,region Text,street Text,supervisor Text,cellphone Text,district Text); ";
+        NSString *createSQL = @"CREATE TABLE IF NOT EXISTS User (userToken Text ,userID Text,isFaceRegisted Text,faceCount Text,department Text,company Text,city Text,leaderLevel Text,office Text,province Text,region Text,street Text,supervisor Text,cellphone Text,district Text,realName Text); ";
         
         if (sqlite3_exec(zpzchinaMobileDB, [createSQL UTF8String], NULL, NULL, &errorMsg) != SQLITE_OK) {
             sqlite3_close(zpzchinaMobileDB);
@@ -70,8 +70,8 @@
     //NSLog(@"==>%@",dic);
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
 	if ([sqlite open:DataBaseName]) {
-        [sqlite executeQuery:@"INSERT INTO User(userToken,userID,isFaceRegisted,faceCount,department,company,city,leaderLevel,office,province,region ,street,supervisor,cellphone,district) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
-         dic[@"userToken"],dic[@"userID"],dic[@"isFaceRegisted"],dic[@"faceCount"],dic[@"department"],dic[@"company"],dic[@"city"],dic[@"leaderLevel"],dic[@"office"],dic[@"province"],dic[@"region"],dic[@"street"],dic[@"supervisor"],dic[@"cellphone"],dic[@"district"]];
+        [sqlite executeQuery:@"INSERT INTO User(userToken,userID,isFaceRegisted,faceCount,department,company,city,leaderLevel,office,province,region ,street,supervisor,cellphone,district,realName) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+         dic[@"userToken"],dic[@"userID"],dic[@"isFaceRegisted"],dic[@"faceCount"],dic[@"department"],dic[@"company"],dic[@"city"],dic[@"leaderLevel"],dic[@"office"],dic[@"province"],dic[@"region"],dic[@"street"],dic[@"supervisor"],dic[@"cellphone"],dic[@"district"],dic[@"realName"]];
 	}
 }
 

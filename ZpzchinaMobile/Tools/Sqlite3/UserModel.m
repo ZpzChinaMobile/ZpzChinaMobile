@@ -27,6 +27,7 @@
     self.a_city = [dic valueForKey:@"city"];
     self.a_cellphone = [dic valueForKey:@"cellphone"];
     self.a_district = [dic valueForKey:@"district"];
+    self.a_realName = [dic valueForKey:@"realName"];
 }
 
 //服务器数据
@@ -47,5 +48,6 @@
     self.a_city = [dic valueForKey:@"city"];
     self.a_cellphone = [dic valueForKey:@"cellphone"];
     self.a_district = [dic valueForKey:@"district"];
+    self.a_realName = [dic valueForKey:@"realName"];
 }
 @end
