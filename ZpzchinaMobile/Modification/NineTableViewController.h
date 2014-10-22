@@ -23,6 +23,7 @@
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 @property(nonatomic,weak)ModificationViewController* superVC;
 @property(nonatomic,strong)UITableView* tableView;
+@property(nonatomic,strong)NSIndexPath* indexPath;
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic images:(NSMutableArray*)images;
 
