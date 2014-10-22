@@ -268,7 +268,7 @@
     
     //大标题左边的大阶段图片
     UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
-    CGRect frame=CGRectMake(20, 12, image.size.width, image.size.height);
+    CGRect frame=CGRectMake(20, 13, image.size.width, image.size.height);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     self.bigStageImageView.image=image;
     [tempView addSubview:self.bigStageImageView];
@@ -356,14 +356,12 @@
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    NSString* mainPath=@"XiangMuJieDuan";
-    NSArray* path=@[@"筛选中01",@"筛选中02",@"筛选中03",@"筛选中04"];
+    NSArray* path=@[@"01",@"02",@"03",@"04"];
     
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 37.5)];
     view.backgroundColor=RGBCOLOR(234,234,234);
     
-    
-    UIImage* image=[GetImagePath getImagePath:[mainPath stringByAppendingPathComponent:path[section]]];
+    UIImage* image=[GetImagePath getImagePath:path[section]];
     CGRect frame=CGRectMake(0, 0, image.size.width, image.size.height);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
     imageView.center=CGPointMake(23.5, 37.5*.5);
@@ -409,6 +407,8 @@
     
     self.bigStageLabel.text=@[@"土地信息",@"主体设计阶段",@"主体施工阶段",@"装修阶段"][indexPath.section];
     self.smallStageLabel.text=@[@"土地规划/拍卖",@"项目立项",@"地勘阶段",@"设计阶段",@"出图阶段",@"地平",@"桩基基坑",@"主体施工",@"消防/景观绿化",@"装修阶段"][a[indexPath.section]+indexPath.row];
+    NSArray* path=@[@"筛选中01",@"筛选中02",@"筛选中03",@"筛选中04"];
+    self.bigStageImageView.image=[GetImagePath getImagePath:path[indexPath.section]];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
