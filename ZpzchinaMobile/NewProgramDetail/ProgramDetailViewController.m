@@ -735,7 +735,6 @@
     self.myTableView.scrollEnabled=NO;
     self.myTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.myTableView.backgroundColor=[UIColor colorWithWhite:1 alpha:.95];
-    
     //用于存放使sectionHeader可以被点击的button的array
     self.sectionButtonArray=[NSMutableArray array];
 }

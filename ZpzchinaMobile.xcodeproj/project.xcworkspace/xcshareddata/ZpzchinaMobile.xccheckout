@@ -14,7 +14,7 @@
 		<string>https://github.com/ZpzChinaMobile/ZpzChinaMobile.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ZpzchinaMobile.xcodeproj/project.xcworkspace</string>
+	<string>ZpzchinaMobile.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E0F16470F0D6B9343BF7B0A69274D34B2366EE65</key>
