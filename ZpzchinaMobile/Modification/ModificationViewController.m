@@ -255,6 +255,15 @@
     [self.contentView addSubview:self.tableViewSpace];
 }
 
+-(void)themeViewReload{
+    UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
+    self.bigStageImageView.image=image;
+    
+    self.bigStageLabel.text=@"土地信息";
+
+    self.smallStageLabel.text=@"土地规划/拍卖";
+}
+
 -(void)initThemeView{
     //画布themeView初始,因为上导航栏下方的阴影需要半透明,而上方部分不需要透明,所以该view分2块
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -267,25 +276,24 @@
     [view addSubview:tempView];
     
     //大标题左边的大阶段图片
-    UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
-    CGRect frame=CGRectMake(20, 13, image.size.width, image.size.height);
+    CGRect frame=CGRectMake(20, 13, 25, 22);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
-    self.bigStageImageView.image=image;
     [tempView addSubview:self.bigStageImageView];
     
     //大阶段标题label
     self.bigStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 150, 30)];
-    self.bigStageLabel.text=@"土地信息";
     self.bigStageLabel.font=[UIFont systemFontOfSize:16];
     [tempView addSubview:self.bigStageLabel];
     
     //小阶段标题label
     self.smallStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(170, 10, 110, 30)];
-    self.smallStageLabel.text=@"土地规划/拍卖";
     self.smallStageLabel.textColor=BlueColor;
     self.smallStageLabel.font=[UIFont systemFontOfSize:14];
     self.smallStageLabel.textAlignment=NSTextAlignmentRight;
     [tempView addSubview:self.smallStageLabel];
+    
+    //给上面3个self的属性赋值
+    [self themeViewReload];
     
     //右箭头imageView
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(280, 14, 25, 22)];
@@ -832,6 +840,7 @@
         [self initdataDic];
         [self initTVC];
         [self.tableViewSpace addSubview:self.oneTVC.view];
+        [self themeViewReload];
         [self.myTableView reloadData];
     }
     if (!self.isRelease&&self.fromView) {
