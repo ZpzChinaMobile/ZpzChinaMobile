@@ -61,6 +61,7 @@
 
 @property(nonatomic)NSInteger gotoBigImageCount;//服务器加载下来的项目保存到数据库中，计算需要请求服务器高清图的张数
 @property(nonatomic)NSInteger backFromBigImageCount;//请求高清图完成的张数
+@property(nonatomic,strong)UIViewController* currentVC;
 @end
 
 @implementation ModificationViewController
@@ -173,51 +174,61 @@
     self.oneTVC.fromView=self.fromView;
     self.oneTVC.superVC=self;
     self.oneTVC.delegate=self;
+    self.oneTVC.indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
     
     //ownerAry flag 1
     self.twoTVC=[[TwoTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.ownerAry images:nil];
     self.twoTVC.fromView=self.fromView;
     self.twoTVC.superVC=self;
     self.twoTVC.delegate=self;
-    
+    self.twoTVC.indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+
     //explorationAry flag 2
     self.threeTVC=[[ThreeTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.explorationAry images:self.explorationImageArr];
     self.threeTVC.fromView=self.fromView;
     self.threeTVC.superVC=self;
-    
+    self.threeTVC.indexPath=[NSIndexPath indexPathForRow:0 inSection:1];
+
     //designAry flag 3
     self.fourTVC=[[FourTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.designAry images:nil];
     self.fourTVC.fromView=self.fromView;
     self.fourTVC.superVC=self;
-    
+    self.fourTVC.indexPath=[NSIndexPath indexPathForRow:1 inSection:1];
+
     //ownerAry flag 1
     self.fiveTVC=[[FiveTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.ownerAry images:nil];
     self.fiveTVC.fromView=self.fromView;
     self.fiveTVC.superVC=self;
-    
+    self.fiveTVC.indexPath=[NSIndexPath indexPathForRow:2 inSection:1];
+
     
     //horizonAry flag 4
     self.sixTVC=[[SixTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.horizonAry images:self.horizonImageArr];
     self.sixTVC.fromView=self.fromView;
     self.sixTVC.superVC=self;
-    
+    self.sixTVC.indexPath=[NSIndexPath indexPathForRow:0 inSection:2];
+
     //pileAry flag 5
     self.sevenTVC=[[SevenTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:appModel.pileAry images:self.pilePitImageArr];
     self.sevenTVC.fromView=self.fromView;
     self.sevenTVC.superVC=self;
-    
+    self.sevenTVC.indexPath=[NSIndexPath indexPathForRow:1 inSection:2];
+
     self.eightTVC=[[EightTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic contacts:nil images:self.mainConstructionImageArr];
     self.eightTVC.fromView=self.fromView;
     self.eightTVC.superVC=self;
-    
+    self.eightTVC.indexPath=[NSIndexPath indexPathForRow:2 inSection:2];
+
     self.nineTVC=[[NineTableViewController alloc]initWithSingle:self.singleDic dataDic:self.dataDic images:self.fireControlImageArr];
     self.nineTVC.fromView=self.fromView;
     self.nineTVC.superVC=self;
-    
+    self.nineTVC.indexPath=[NSIndexPath indexPathForRow:3 inSection:2];
+
     self.tenTVC=[[TenTableViewController alloc] initWithSingle:self.singleDic dataDic:self.dataDic images:self.electroweakImageArr];
     self.tenTVC.fromView=self.fromView;
     self.tenTVC.superVC=self;
-    
+    self.tenTVC.indexPath=[NSIndexPath indexPathForRow:0 inSection:3];
+
     self.tvcArray=@[self.oneTVC,self.twoTVC,self.threeTVC,self.fourTVC,self.fiveTVC,self.sixTVC,self.sevenTVC,self.eightTVC,self.nineTVC,self.tenTVC];
     
     for (int i=0; i<10; i++) {
@@ -227,10 +238,19 @@
         frame.size.height-=64.5+50;
         vc.view.frame=frame;
     }
+    self.currentVC=self.oneTVC;
 }
 
 -(void)initTableViewSpace{
     self.tableViewSpace=[[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, 568-64.5-50)];
+    UISwipeGestureRecognizer* leftSwipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(userSwipe:)];
+    leftSwipe.direction=UISwipeGestureRecognizerDirectionLeft;
+    [self.tableViewSpace addGestureRecognizer:leftSwipe];
+    
+    UISwipeGestureRecognizer* rightSwipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(userSwipe:)];
+    rightSwipe.direction=UISwipeGestureRecognizerDirectionRight;
+    [self.tableViewSpace addGestureRecognizer:rightSwipe];
+    
     self.tableViewSpace.backgroundColor=[UIColor clearColor];
     [self.contentView addSubview:self.tableViewSpace];
 }
@@ -324,11 +344,7 @@
     NSMutableArray* ary=[NSMutableArray array];
     for (int i=0; i<10; i++) {
         UIView* tv;
-        if (i==0||1) {
-            tv=[self.tvcArray[i] view];
-        }else{
-            tv=[self.tvcArray[i] tableView];
-        }
+        tv=[self.tvcArray[i] view];
         [ary addObject:tv];
     }
     
@@ -378,42 +394,49 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    switch (section) {
-        case 0:
-            return 2;
-            break;
-        case 1:
-            return 3;
-            break;
-        case 2:
-            return 4;
-            break;
-        default:
-            return 1;
-            break;
-    }
+    int array[4]={2,3,4,1};
+    return array[section];
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)selectStage:(NSIndexPath*)indexPath{
     [self.myTableView reloadData];
-    
     int a[4]={0,2,5,9};
-    
-    UITableViewController* tvc=self.tvcArray[a[indexPath.section]+indexPath.row];
+    self.currentVC=self.tvcArray[a[indexPath.section]+indexPath.row];
     [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    [self.tableViewSpace addSubview:tvc.view];
+    [self.tableViewSpace addSubview:self.currentVC.view];
     [self selectCancel];
     
     self.bigStageLabel.text=@[@"土地信息",@"主体设计阶段",@"主体施工阶段",@"装修阶段"][indexPath.section];
     self.smallStageLabel.text=@[@"土地规划/拍卖",@"项目立项",@"地勘阶段",@"设计阶段",@"出图阶段",@"地平",@"桩基基坑",@"主体施工",@"消防/景观绿化",@"装修阶段"][a[indexPath.section]+indexPath.row];
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self selectStage:indexPath];
+}
+
+-(void)userSwipe:(UISwipeGestureRecognizer*)swipe{
+    NSInteger temp=[self.tvcArray indexOfObject:self.currentVC];
+    if (swipe.direction==UISwipeGestureRecognizerDirectionLeft) {
+        if (temp==9) {
+            return;
+        }else{
+            temp++;
+        }
+    }else{
+        if (temp==0) {
+            return;
+        }else{
+            temp--;
+        }
+    }
+    [self selectStage:[self.tvcArray[temp] indexPath]];
+}
+
 -(void)initNavi{
     [self addBackButton];
     [self addRightButton:CGRectMake(280, 25, 28, 28) title:nil iamge:[GetImagePath getImagePath:@"020"]];
     [self addtittle:self.fromView?@"修改项目":@"新建项目"];
-    
 }
 
 -(void)leftAction

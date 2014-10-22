@@ -18,6 +18,7 @@
 @property(nonatomic)NSInteger timeflag;
 @property(nonatomic,weak)ModificationViewController* superVC;
 @property(nonatomic,strong)UITableView* tableView;
+@property(nonatomic,strong)NSIndexPath* indexPath;
 
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images;
 @end

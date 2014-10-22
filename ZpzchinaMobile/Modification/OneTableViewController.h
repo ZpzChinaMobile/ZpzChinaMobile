@@ -23,7 +23,7 @@
 @property(nonatomic,weak)ModificationViewController* superVC;
 @property(nonatomic,weak)id<OneTVCDelegate>delegate;
 @property(nonatomic,strong)UITableView* tableView;
-
+@property(nonatomic,strong)NSIndexPath* indexPath;
 -(void)cellTextFieldResignFirstResponder;
 -(instancetype)initWithSingle:(NSMutableDictionary*)singleDic dataDic:(NSMutableDictionary*)dataDic contacts:(NSMutableArray*)contacts images:(NSMutableArray*)images;
 -(void)addContactView:(int)index;

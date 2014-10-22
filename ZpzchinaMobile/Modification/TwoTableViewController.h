@@ -20,7 +20,7 @@
 @property(nonatomic)NSInteger timeflag;
 @property(nonatomic,weak)ModificationViewController* superVC;
 @property(nonatomic,strong)UITableView* tableView;
-
+@property(nonatomic,strong)NSIndexPath* indexPath;
 
 //@property(nonatomic,strong)UIViewController* bgVC;
 
