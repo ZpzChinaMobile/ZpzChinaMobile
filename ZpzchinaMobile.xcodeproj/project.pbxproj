@@ -15,6 +15,12 @@
 		049A97A119D554BD007DC7C0 /* UnderstandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A979F19D554BD007DC7C0 /* UnderstandViewController.m */; };
 		5B0CC39E199F09290036F94B /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0CC39D199F09290036F94B /* AppModel.m */; };
 		5B45CF0419E7BEFD00676E42 /* GetImagePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B45CF0319E7BEFD00676E42 /* GetImagePath.m */; };
+		5B4C196119FA07EC00C6C57D /* BesideViewAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C196019FA07EC00C6C57D /* BesideViewAlert.m */; };
+		5B4C196619FA09D200C6C57D /* 新建项目_210a.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C196219FA09D200C6C57D /* 新建项目_210a.png */; };
+		5B4C196719FA09D200C6C57D /* 新建项目_210a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C196319FA09D200C6C57D /* 新建项目_210a@2x.png */; };
+		5B4C196819FA09D200C6C57D /* 新建项目_211a.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C196419FA09D200C6C57D /* 新建项目_211a.png */; };
+		5B4C196919FA09D200C6C57D /* 新建项目_211a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C196519FA09D200C6C57D /* 新建项目_211a@2x.png */; };
+		5B4C196C19FA0C3800C6C57D /* ModifiBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C196B19FA0C3800C6C57D /* ModifiBaseViewController.m */; };
 		5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */; };
 		5B892F0F199A3BF2001F9921 /* TuDiXinXi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F03199A3BF2001F9921 /* TuDiXinXi.m */; };
 		5B892F10199A3BF2001F9921 /* ZhuTiSheJi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F05199A3BF2001F9921 /* ZhuTiSheJi.m */; };
@@ -572,6 +578,14 @@
 		5B0CC39D199F09290036F94B /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		5B45CF0219E7BEFD00676E42 /* GetImagePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetImagePath.h; sourceTree = "<group>"; };
 		5B45CF0319E7BEFD00676E42 /* GetImagePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetImagePath.m; sourceTree = "<group>"; };
+		5B4C195F19FA07EC00C6C57D /* BesideViewAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BesideViewAlert.h; sourceTree = "<group>"; };
+		5B4C196019FA07EC00C6C57D /* BesideViewAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BesideViewAlert.m; sourceTree = "<group>"; };
+		5B4C196219FA09D200C6C57D /* 新建项目_210a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目_210a.png"; sourceTree = "<group>"; };
+		5B4C196319FA09D200C6C57D /* 新建项目_210a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目_210a@2x.png"; sourceTree = "<group>"; };
+		5B4C196419FA09D200C6C57D /* 新建项目_211a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目_211a.png"; sourceTree = "<group>"; };
+		5B4C196519FA09D200C6C57D /* 新建项目_211a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目_211a@2x.png"; sourceTree = "<group>"; };
+		5B4C196A19FA0C3800C6C57D /* ModifiBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifiBaseViewController.h; sourceTree = "<group>"; };
+		5B4C196B19FA0C3800C6C57D /* ModifiBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifiBaseViewController.m; sourceTree = "<group>"; };
 		5B892F00199A3BF2001F9921 /* ProgramDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailViewController.h; sourceTree = "<group>"; };
 		5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDetailViewController.m; sourceTree = "<group>"; };
 		5B892F02199A3BF2001F9921 /* TuDiXinXi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDiXinXi.h; sourceTree = "<group>"; };
@@ -1617,6 +1631,10 @@
 				5BE93BC9199C706000E2FF67 /* NineTableViewController.m */,
 				5BE93BCB199C70B800E2FF67 /* TenTableViewController.h */,
 				5BE93BCC199C70B800E2FF67 /* TenTableViewController.m */,
+				5B4C195F19FA07EC00C6C57D /* BesideViewAlert.h */,
+				5B4C196019FA07EC00C6C57D /* BesideViewAlert.m */,
+				5B4C196A19FA0C3800C6C57D /* ModifiBaseViewController.h */,
+				5B4C196B19FA0C3800C6C57D /* ModifiBaseViewController.m */,
 			);
 			path = Modification;
 			sourceTree = "<group>";
@@ -2680,6 +2698,10 @@
 		D3FC013F19E7DEE400FF332C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5B4C196219FA09D200C6C57D /* 新建项目_210a.png */,
+				5B4C196319FA09D200C6C57D /* 新建项目_210a@2x.png */,
+				5B4C196419FA09D200C6C57D /* 新建项目_211a.png */,
+				5B4C196519FA09D200C6C57D /* 新建项目_211a@2x.png */,
 				D3FC037819E7E36100FF332C /* 修改密码_03.png */,
 				D3FC037919E7E36100FF332C /* 修改密码_03@2x.png */,
 				D3FC014019E7DEE400FF332C /* 01.png */,
@@ -2964,6 +2986,7 @@
 				D3FC02EF19E7DEE400FF332C /* 新建项目1_06@2x.png in Resources */,
 				D3FC036419E7DEE400FF332C /* 首页侧拉栏_01.png in Resources */,
 				D3FC030319E7DEE400FF332C /* 新建项目5_27@2x.png in Resources */,
+				5B4C196919FA09D200C6C57D /* 新建项目_211a@2x.png in Resources */,
 				D3FC029019E7DEE400FF332C /* icon.png in Resources */,
 				D3FC02F119E7DEE400FF332C /* 新建项目1_11@2x.png in Resources */,
 				D3FC035D19E7DEE400FF332C /* 首页_05@2x.png in Resources */,
@@ -3120,6 +3143,7 @@
 				D3FC028019E7DEE400FF332C /* 07.png in Resources */,
 				D3FC026119E7DEE400FF332C /* 012.png in Resources */,
 				D3FC031119E7DEE400FF332C /* 注册@2x.png in Resources */,
+				5B4C196819FA09D200C6C57D /* 新建项目_211a.png in Resources */,
 				D3FC026319E7DEE400FF332C /* 013.png in Resources */,
 				D3FC02C119E7DEE400FF332C /* 全部项目_19@2x.png in Resources */,
 				D3FC02CE19E7DEE400FF332C /* 地图搜索1_05.png in Resources */,
@@ -3129,6 +3153,7 @@
 				D3FC032319E7DEE400FF332C /* 登录_15@2x.png in Resources */,
 				D3FC026419E7DEE400FF332C /* 013@2x.png in Resources */,
 				D3FC028F19E7DEE400FF332C /* DRIBBBLE-icon45-blue-drops_07@2x.png in Resources */,
+				5B4C196719FA09D200C6C57D /* 新建项目_210a@2x.png in Resources */,
 				D3FC02EE19E7DEE400FF332C /* 新建项目1_06.png in Resources */,
 				D3FC026219E7DEE400FF332C /* 012@2x.png in Resources */,
 				D3FC02A519E7DEE400FF332C /* mapsearch-1@2x.png in Resources */,
@@ -3143,6 +3168,7 @@
 				D3FC034719E7DEE400FF332C /* 面部识别登录1_03.png in Resources */,
 				D3FC027D19E7DEE400FF332C /* 05@2x.png in Resources */,
 				D3FC026919E7DEE400FF332C /* 016.png in Resources */,
+				5B4C196619FA09D200C6C57D /* 新建项目_210a.png in Resources */,
 				D3FC027919E7DEE400FF332C /* 03@2x.png in Resources */,
 				D3FC025C19E7DEE400FF332C /* 01.png in Resources */,
 				D3FC026519E7DEE400FF332C /* 014.png in Resources */,
@@ -3318,6 +3344,7 @@
 				D31B268419891F2600B05B03 /* GPUImageHarrisCornerDetectionFilter.m in Sources */,
 				D31B268319891F2600B05B03 /* GPUImageHardLightBlendFilter.m in Sources */,
 				D31B26BF19891F2600B05B03 /* GPUImageSaturationFilter.m in Sources */,
+				5B4C196C19FA0C3800C6C57D /* ModifiBaseViewController.m in Sources */,
 				D3BB71C21953E32500A3F626 /* MainConstructionTableViewCell.m in Sources */,
 				D346A00E196166D800CDDBDF /* SinglePickerView.m in Sources */,
 				D3A4897C19512A2600EED32D /* AFURLSessionManager.m in Sources */,
@@ -3383,6 +3410,7 @@
 				D31B265119891F2600B05B03 /* GPUImageAdaptiveThresholdFilter.m in Sources */,
 				D31B269419891F2600B05B03 /* GPUImageLightenBlendFilter.m in Sources */,
 				5B892FAA199A3D8F001F9921 /* CycleScrollView.m in Sources */,
+				5B4C196119FA07EC00C6C57D /* BesideViewAlert.m in Sources */,
 				D3A48891194EBD6400EED32D /* UIPlaceHolderTextView.m in Sources */,
 				D31B26EA19891F2600B05B03 /* GPUImageMovieWriter.m in Sources */,
 				D31B266619891F2600B05B03 /* GPUImageColorPackingFilter.m in Sources */,

@@ -27,6 +27,8 @@
 #import "AppModel.h"
 #import "UserModel.h"
 #import "UserSqlite.h"
+#import "BesideViewAlert.h"
+#import "ModifiBaseViewController.h"
 @interface ModificationViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,OneTVCDelegate,TwoTVCDelegate>
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
@@ -61,7 +63,8 @@
 
 @property(nonatomic)NSInteger gotoBigImageCount;//服务器加载下来的项目保存到数据库中，计算需要请求服务器高清图的张数
 @property(nonatomic)NSInteger backFromBigImageCount;//请求高清图完成的张数
-@property(nonatomic,strong)UIViewController* currentVC;
+@property(nonatomic,strong)ModifiBaseViewController* currentVC;
+@property(nonatomic,strong)BesideViewAlert* besideViewAlert;
 @end
 
 @implementation ModificationViewController
@@ -155,7 +158,7 @@
 -(void)upTVCSpaceWithHeight:(CGFloat)height{
     [UIView animateWithDuration:.5 animations:^{
         CGPoint point=self.tableViewSpace.center;
-        point.y-=height;
+        point.y-=height+45;
         self.tableViewSpace.center=point;
     }];
 }
@@ -239,6 +242,11 @@
         vc.view.frame=frame;
     }
     self.currentVC=self.oneTVC;
+    if (!self.besideViewAlert) {
+        self.besideViewAlert=[[BesideViewAlert alloc]init];
+    }
+    self.currentVC.tableView.tableHeaderView=self.besideViewAlert;
+    [self.besideViewAlert setLeftText:nil rigthText:@"项目立项"];
 }
 
 -(void)initTableViewSpace{
@@ -261,13 +269,12 @@
     
     self.bigStageLabel.text=@"土地信息";
 
-    self.smallStageLabel.text=@"土地规划/拍卖";
+    self.topLabel.text=@"土地规划/拍卖";
 }
 
 -(void)initThemeView{
     //画布themeView初始,因为上导航栏下方的阴影需要半透明,而上方部分不需要透明,所以该view分2块
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    //themeView.backgroundColor=[UIColor clearColor];
     [self.contentView addSubview:view];
     
     //上导航栏第一部分，非透明部分
@@ -276,29 +283,25 @@
     [view addSubview:tempView];
     
     //大标题左边的大阶段图片
-    CGRect frame=CGRectMake(20, 13, 25, 22);
+    CGRect frame=CGRectMake(109, 13, 25, 22);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     [tempView addSubview:self.bigStageImageView];
     
     //大阶段标题label
-    self.bigStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 150, 30)];
-    self.bigStageLabel.font=[UIFont systemFontOfSize:16];
+    self.bigStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(139, 10, 100, 30)];
+    self.bigStageLabel.font=[UIFont systemFontOfSize:15];
     [tempView addSubview:self.bigStageLabel];
     
     //小阶段标题label
-    self.smallStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(170, 10, 110, 30)];
+    self.smallStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(250, 10, 60, 30)];
     self.smallStageLabel.textColor=BlueColor;
     self.smallStageLabel.font=[UIFont systemFontOfSize:14];
-    self.smallStageLabel.textAlignment=NSTextAlignmentRight;
+    self.smallStageLabel.text=@"阶段选择";
+    //self.smallStageLabel.textAlignment=NSTextAlignmentRight;
     [tempView addSubview:self.smallStageLabel];
     
     //给上面3个self的属性赋值
     [self themeViewReload];
-    
-    //右箭头imageView
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(280, 14, 25, 22)];
-    imageView.image=[GetImagePath getImagePath:@"012"];
-    [tempView addSubview:imageView];
     
     //上导航栏themeView第二部分,上导航下方阴影
     UIImageView* shadowView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 48.5, 320, 1.5)];
@@ -407,14 +410,21 @@
 -(void)selectStage:(NSIndexPath*)indexPath{
     [self.myTableView reloadData];
     int a[4]={0,2,5,9};
+    NSArray* bigStages=@[@"土地信息",@"主体设计阶段",@"主体施工阶段",@"装修阶段"];
+    NSArray* smallStages=@[@"土地规划/拍卖",@"项目立项",@"地勘阶段",@"设计阶段",@"出图阶段",@"地平",@"桩基基坑",@"主体施工",@"消防/景观绿化",@"装修阶段"];
+    self.currentVC.tableView.tableHeaderView=nil;
     self.currentVC=self.tvcArray[a[indexPath.section]+indexPath.row];
+    NSInteger number=[self.tvcArray indexOfObject:self.currentVC];
+    self.currentVC.tableView.tableHeaderView=self.besideViewAlert;
+    [self.besideViewAlert setLeftText:number?smallStages[number-1]:nil rigthText:number!=9?smallStages[number+1]:nil];
+
     [self.tableViewSpace.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     [self.tableViewSpace addSubview:self.currentVC.view];
     [self selectCancel];
     
-    self.bigStageLabel.text=@[@"土地信息",@"主体设计阶段",@"主体施工阶段",@"装修阶段"][indexPath.section];
-    self.smallStageLabel.text=@[@"土地规划/拍卖",@"项目立项",@"地勘阶段",@"设计阶段",@"出图阶段",@"地平",@"桩基基坑",@"主体施工",@"消防/景观绿化",@"装修阶段"][a[indexPath.section]+indexPath.row];
+    self.bigStageLabel.text=bigStages[indexPath.section];
+    self.topLabel.text=smallStages[a[indexPath.section]+indexPath.row];
     NSArray* path=@[@"筛选中01",@"筛选中02",@"筛选中03",@"筛选中04"];
     self.bigStageImageView.image=[GetImagePath getImagePath:path[indexPath.section]];
 }
@@ -444,7 +454,8 @@
 -(void)initNavi{
     [self addBackButton];
     [self addRightButton:CGRectMake(280, 25, 28, 28) title:nil iamge:[GetImagePath getImagePath:@"020"]];
-    [self addtittle:self.fromView?@"修改项目":@"新建项目"];
+    [self addtittle:@"土地规划/拍卖"];
+    self.topLabel.font=[UIFont fontWithName:@"GurmukhiMN-Bold" size:18];
 }
 
 -(void)leftAction

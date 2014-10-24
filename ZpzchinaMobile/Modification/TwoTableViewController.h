@@ -8,18 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "ModificationViewController.h"
+#import "ModifiBaseViewController.h"
 @protocol TwoTVCDelegate <NSObject>
 -(void)upTVCSpaceWithHeight:(CGFloat)height;
 -(void)downTVCSpace;
 @end
-@interface TwoTableViewController : UIViewController
+@interface TwoTableViewController : ModifiBaseViewController
 @property(nonatomic,strong)NSMutableDictionary* dataDic;//新建用字典
 @property(nonatomic,strong)NSMutableDictionary* singleDic;//修改用字典
 @property(nonatomic,strong)NSMutableArray* contacts;
 @property(nonatomic)NSInteger fromView;//判断是新建还是修改 新建是0 修改是1
 @property(nonatomic)NSInteger timeflag;
 @property(nonatomic,weak)ModificationViewController* superVC;
-@property(nonatomic,strong)UITableView* tableView;
+//@property(nonatomic,strong)UITableView* tableView;
 @property(nonatomic,strong)NSIndexPath* indexPath;
 
 //@property(nonatomic,strong)UIViewController* bgVC;
