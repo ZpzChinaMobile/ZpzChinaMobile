@@ -158,7 +158,7 @@
 -(void)upTVCSpaceWithHeight:(CGFloat)height{
     [UIView animateWithDuration:.5 animations:^{
         CGPoint point=self.tableViewSpace.center;
-        point.y-=height;
+        point.y-=height+45;
         self.tableViewSpace.center=point;
     }];
 }
@@ -408,8 +408,6 @@
 }
 
 -(void)selectStage:(NSIndexPath*)indexPath{
-    
-
     [self.myTableView reloadData];
     int a[4]={0,2,5,9};
     NSArray* bigStages=@[@"土地信息",@"主体设计阶段",@"主体施工阶段",@"装修阶段"];
