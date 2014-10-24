@@ -9,7 +9,6 @@
 #import "BaseViewController.h"
 
 @interface BaseViewController ()
-
 @end
 
 @implementation BaseViewController
@@ -75,13 +74,13 @@
 }
 
 -(void)addtittle:(NSString *)title{
-    UILabel *topLabel = [[UILabel alloc] init];
-    topLabel.frame = CGRectMake(100, 25, 120, 28);
-    topLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:19];
-    topLabel.textColor = [UIColor whiteColor];
-    topLabel.text = title;
-    topLabel.textAlignment = NSTextAlignmentCenter;
-    [self.topView addSubview:topLabel];
+    self.topLabel = [[UILabel alloc] init];
+    self.topLabel.frame = CGRectMake(100, 25, 120, 28);
+    self.topLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:19];
+    self.topLabel.textColor = [UIColor whiteColor];
+    self.topLabel.text = title;
+    self.topLabel.textAlignment = NSTextAlignmentCenter;
+    [self.topView addSubview:self.topLabel];
 }
 
 - (void)addRightButton:(CGRect)frame title:(NSString *)title iamge:(UIImage *)image
