@@ -15,15 +15,10 @@
 #import <MapKit/MapKit.h>
 
 @interface BaiDuMapViewController ()
-@property(nonatomic)BOOL isIOS8;
 @end
 
 @implementation BaiDuMapViewController
 int j;
-
--(BOOL)isIOS8{
-    return [[UIDevice currentDevice].systemVersion floatValue] >= 8?YES:NO;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,13 +35,8 @@ int j;
     [self addBackButton];
     [self addtittle:@"地图搜索"];
     hasProject = 0;
-    if (self.isIOS8) {
-        //由于IOS8中定位的授权机制改变 需要进行手动授权
-        locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate=self;
-    }else{
-        [self loadSelf];
-    }
+
+    [self loadSelf];
 }
 
 -(void)loadSelf{
@@ -90,13 +80,10 @@ int j;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    if (!self.isIOS8) {
-        [self myViewWillAppear];
-    }
+    [self myViewWillAppear];
 }
 
 -(void)myViewWillAppear{
@@ -576,7 +563,6 @@ int j;
             }else{
                 [latArr addObject:model.a_latitude];
             }
-            //NSLog(@"log==>%@,lat===>%@",model.a_longitude,model.a_latitude);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -594,15 +580,4 @@ int j;
         _MapContent = nil;
     }];
 }
-
--(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
-    if (status!=kCLAuthorizationStatusAuthorizedAlways&&status!=kCLAuthorizationStatusAuthorizedWhenInUse) {
-        [locationManager requestAlwaysAuthorization];
-        [locationManager requestWhenInUseAuthorization];
-    }else{
-        [self loadSelf];
-        [self myViewWillAppear];
-    }
-}
-
 @end
