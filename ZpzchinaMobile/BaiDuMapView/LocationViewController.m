@@ -9,16 +9,11 @@
 #import "LocationViewController.h"
 
 @interface LocationViewController ()<CLLocationManagerDelegate>
-@property(nonatomic)BOOL isIOS8;
 @end
 
 @implementation LocationViewController
 @synthesize delegate;
 @synthesize baseAddress,baseCity;
-
--(BOOL)isIOS8{
-    return [[UIDevice currentDevice].systemVersion floatValue] >= 8?YES:NO;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,13 +35,7 @@
     [self addtittle:@"地图搜索"];
     [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"icon__09"]];
     [self setRightButtonClick:0];
-    if (self.isIOS8) {
-        //由于IOS8中定位的授权机制改变 需要进行手动授权
-        locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate=self;
-    }else{
-        [self loadSelf];
-    }
+    [self loadSelf];
 }
 
 -(void)loadSelf{
@@ -77,9 +66,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    if (!self.isIOS8) {
+    //if (!self.isIOS8) {
         [self myViewWillAppear];
-    }
+    //}
 }
 
 -(void)myViewWillAppear{
@@ -345,16 +334,6 @@
             [delegate locationBack:address testLocation:testLocation];
             [self.navigationController popViewControllerAnimated:YES];
         }
-    }
-}
-
--(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
-    if (status!=kCLAuthorizationStatusAuthorizedAlways&&status!=kCLAuthorizationStatusAuthorizedWhenInUse) {
-        [locationManager requestAlwaysAuthorization];
-        [locationManager requestWhenInUseAuthorization];
-    }else{
-        [self loadSelf];
-        [self myViewWillAppear];
     }
 }
 @end
