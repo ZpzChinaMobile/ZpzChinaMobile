@@ -92,7 +92,31 @@
     }else{
         NSLog(@"已经不是第一次启动了");
         NSLog(@"===>%@",[LoginSqlite getdata:@"UserToken" defaultdata:@""]);
-        if(![[LoginSqlite getdata:@"UserToken" defaultdata:@""] isEqualToString:@""]){
+        if([[networkConnect sharedInstance] connectedToNetwork]){
+            if(![[LoginSqlite getdata:@"UserToken" defaultdata:@""] isEqualToString:@""]){
+                UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
+                UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
+                UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+                navigationController.navigationBarHidden = YES;
+                drawerController = [[MMDrawerController alloc]
+                                    initWithCenterViewController:navigationController
+                                    leftDrawerViewController:leftViewController
+                                    rightDrawerViewController:nil];
+                [drawerController setMaximumRightDrawerWidth:320-62];
+                [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+                [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+                [self.window setRootViewController:drawerController];
+                self.window.backgroundColor = [UIColor whiteColor];
+                [self.window makeKeyAndVisible];
+            }else{
+                LoginViewController *loginview = [[LoginViewController alloc] init];
+                UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
+                
+                [self.window setRootViewController:naVC];
+                self.window.backgroundColor = [UIColor whiteColor];
+                [self.window makeKeyAndVisible];
+            }
+        }else{
             UIViewController * leftViewController = [[HomePageLeftViewController alloc] init];
             UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
             UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
@@ -105,13 +129,6 @@
             [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
             [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
             [self.window setRootViewController:drawerController];
-            self.window.backgroundColor = [UIColor whiteColor];
-            [self.window makeKeyAndVisible];
-        }else{
-            LoginViewController *loginview = [[LoginViewController alloc] init];
-            UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:loginview];
-            
-            [self.window setRootViewController:naVC];
             self.window.backgroundColor = [UIColor whiteColor];
             [self.window makeKeyAndVisible];
         }

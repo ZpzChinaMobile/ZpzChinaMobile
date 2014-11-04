@@ -94,7 +94,10 @@
     userNameLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:17];
     userNameLabel.textColor = [UIColor whiteColor];
     NSMutableArray *list = [UserSqlite loadList];
-    UserModel *model = list[0];
+    UserModel *model = nil;
+    if(list.count !=0){
+        model = list[0];
+    }
     userNameLabel.text = [NSString stringWithFormat:@"%@",model.a_realName];
     [bannerView addSubview:userNameLabel];
 

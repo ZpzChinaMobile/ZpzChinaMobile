@@ -46,7 +46,10 @@
     nameLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:19];
     nameLabel.textColor = [UIColor whiteColor];
     NSArray *list = [UserSqlite loadList];
-    UserModel *model = list[0];
+    UserModel *model = nil;
+    if(list.count !=0){
+        model = list[0];
+    }
     nameLabel.text = [NSString stringWithFormat:@"%@",model.a_realName];
     [self.view addSubview:nameLabel];
     

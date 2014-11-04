@@ -241,7 +241,7 @@ int j;
 - (BMKAnnotationView *)mapView:(BMKMapView *)view viewForAnnotation:(id <BMKAnnotation>)annotation
 {
     // 生成重用标示identifier
-    NSString *AnnotationViewID = @"xidanMark";
+    NSString *AnnotationViewID = [NSString stringWithFormat:@"xidanMark%d",j];
 	
     // 检查是否有重用的缓存
     BMKAnnotationView* annotationView = [view dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
@@ -329,7 +329,7 @@ int j;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"%d",touches.count);
+    //NSLog(@"%d",touches.count);
     if(imageView){
         UITouch *touch = [touches anyObject];
         
@@ -409,10 +409,10 @@ int j;
             [_mapView addOverlay:polygon];
             
             CLLocationCoordinate2D centerLocation=CLLocationCoordinate2DMake((maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
-            NSLog(@"=====%f,%f",centerLocation.longitude,centerLocation.latitude);
+            //NSLog(@"=====%f,%f",centerLocation.longitude,centerLocation.latitude);
             [ProjectModel GetMapSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
                 if (!error) {
-                    NSLog(@"map ===== %@",posts);
+                    //NSLog(@"map ===== %@",posts);
                     showArr = posts;
                     for(int i=0;i<posts.count;i++){
                         ProjectModel *model = [posts objectAtIndex:i];
@@ -441,7 +441,7 @@ int j;
                         testLocation.latitude = [[latArr objectAtIndex:i] floatValue];
                         testLocation.longitude = [[logArr objectAtIndex:i] floatValue];
                         locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
-                        NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
+                        //NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
                         if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
                             
                             NSLog(@"point in path!");
@@ -542,6 +542,7 @@ int j;
     NSArray *overlaysArray = [[NSArray alloc] initWithArray:_mapView.overlays];
     [_mapView removeAnnotations: annArray];
     [_mapView removeOverlays:overlaysArray];
+    annotationPoint = nil;
 }
 
 
