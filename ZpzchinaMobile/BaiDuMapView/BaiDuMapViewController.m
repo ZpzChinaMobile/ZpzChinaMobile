@@ -383,15 +383,19 @@ int j;
                 points[i] = [coordinates[i] MKCoordinateValue];
                 if (points[i].longitude>maxLongitude) {
                     maxLongitude=points[i].longitude;
-                }else if (points[i].longitude<minLongitude){
+                }
+                if (points[i].longitude<minLongitude){
                     minLongitude=points[i].longitude;
                 }
                 if (points[i].latitude>maxLatitude){
                     maxLatitude=points[i].latitude;
-                }else if (points[i].latitude<minLatitude){
+                }
+                if (points[i].latitude<minLatitude){
                     minLatitude=points[i].latitude;
                 }
+                NSLog(@"point==%f,%f",points[i].latitude,points[i].longitude);
             }
+            NSLog(@"%f,%f",(maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
             polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
             [_mapView addOverlay:polygon];
             
