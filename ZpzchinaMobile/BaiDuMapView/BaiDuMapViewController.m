@@ -335,7 +335,6 @@ int j;
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     if(imageView){
-        NSLog(@"there is a warning");
         UITouch *touch = [touches anyObject];
         
         CGPoint location = [touch locationInView:imageView];
