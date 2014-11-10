@@ -266,6 +266,9 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if(textField.tag == 2||textField.tag == 3){
+        textField.text = @"";
+    }
     CGFloat heights[4]={50,150,200,250};
     
     [self.delegate beginEditWithHeight:heights[textField.tag]];
