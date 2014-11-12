@@ -10,6 +10,7 @@
 #import "HomePageCenterViewController.h"
 #import "LoginSqlite.h"
 #import "UpdataPassWordEvent.h"
+#import "MD5.h"
 @interface UpdataPassWordViewController ()
 
 @end
@@ -128,8 +129,8 @@
         [alertView show];
     }else{
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setValue:oldPassWordTextField.text forKey:@"oldPassword"];
-        [dic setValue:newPassWordTextField.text forKey:@"newPassword"];
+        [dic setValue:[MD5 md5HexDigest:oldPassWordTextField.text] forKey:@"oldPassword"];
+        [dic setValue:[MD5 md5HexDigest:newPassWordTextField.text] forKey:@"newPassword"];
         [dic setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
         [UpdataPassWordEvent PutUserWithBlock:^(NSMutableArray *posts, NSError *error) {
             if(!error){

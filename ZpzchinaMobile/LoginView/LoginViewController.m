@@ -16,7 +16,7 @@
 #import "PanViewController.h"
 #import "UserModel.h"
 #import "UserSqlite.h"
-
+#import "MD5.h"
 @interface LoginViewController ()
 
 @end
@@ -155,7 +155,7 @@
     //登录接口
     
     loginBtn.enabled=NO;
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:_userNameTextField.text,@"userName",_passWordTextField.text,@"password" ,@"ios",@"deviceType",nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:_userNameTextField.text,@"userName",[MD5 md5HexDigest:_passWordTextField.text],@"password" ,@"ios",@"deviceType",nil];
     NSLog(@"%@",parameters);
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/login",serverAddress] parameters:parameters error:nil];
     NSLog(@"%@",[NSString stringWithFormat:@"%s/Users/login",serverAddress]);
