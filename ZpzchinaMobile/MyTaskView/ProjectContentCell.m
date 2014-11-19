@@ -107,19 +107,28 @@
 }
 
 -(void)setDic:(NSMutableDictionary *)dic{
-    stage = [ProjectStage JudgmentProjectStage:dic];
+    NSLog(@"%@",dic[@"projectStage"]);
     nameLabel.text = [dic objectForKey:@"projectName"];
-    investmentcountLabel.text = [dic objectForKey:@"investment"];
-    if([stage isEqualToString:@"1"]||[stage isEqualToString:@"0"]){
+    if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
+        investmentcountLabel.text = @"0";
+    }else{
+        investmentcountLabel.text = [dic objectForKey:@"investment"];
+    }
+    if([dic[@"projectStage"] isEqualToString:@"1"]||[dic[@"projectStage"] isEqualToString:@"0"]){
         [progressImage setImage:[GetImagePath getImagePath:@"全部项目_16"]];
-    }else if([stage isEqualToString:@"2"]){
+    }else if([dic[@"projectStage"] isEqualToString:@"2"]){
         [progressImage setImage:[GetImagePath getImagePath:@"全部项目_15"]];
-    }else if([stage isEqualToString:@"3"]){
+    }else if([dic[@"projectStage"] isEqualToString:@"3"]){
         [progressImage setImage:[GetImagePath getImagePath:@"全部项目_14"]];
     }else{
         [progressImage setImage:[GetImagePath getImagePath:@"全部项目_13"]];
     }
-    areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
+    
+    if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]] isEqualToString:@"null"]){
+        areacountLabel.text = @"0";
+    }else{
+        areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
+    }
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedStartTime"] intValue]];

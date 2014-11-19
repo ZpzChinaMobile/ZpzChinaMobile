@@ -429,7 +429,7 @@ int startIndex;
                                         model.a_propertyElevator,@"propertyElevator",
                                         model.a_propertyAirCondition,@"propertyAirCondition",
                                         model.a_propertyHeating,@"propertyHeating",
-                                        model.a_propertyExternalWallMeterial,@"propertyExternalWallMeterial",
+                                               model.a_propertyExternalWallMeterial,@"propertyExternalWallMeterial",
                                         model.a_propertyStealStructure,@"propertyStealStructure",
                                         actualStartTime,@"actualStartTime",
                                         model.a_fireControl,@"fireControl",
@@ -437,11 +437,20 @@ int startIndex;
                                         model.a_electroweakInstallation,@"electroweakInstallation",
                                         model.a_decorationSituation,@"decorationSituation",
                                         model.a_decorationProgress,@"decorationProgress",
+                                        model.a_stage,@"projectStage",
                                         nil];
+        
+        for(int i=0;i<parametersdata.allKeys.count;i++){
+            //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
+            if([parametersdata[parametersdata.allKeys[i]] isEqualToString:@"null"]){
+                [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
+            }
+        }
+        
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
-        NSLog(@"%@",parameters);
+        //NSLog(@"%@",parameters);
         [ProjectModel globalPostWithBlock:^(NSMutableArray *posts, NSError *error) {
             if (!error) {
                 int j = index+1;
@@ -554,7 +563,14 @@ int startIndex;
                                         model.a_decorationProgress,@"decorationProgress",
                                         model.a_projectId,@"projectID",
                                         model.a_projectCode,@"projectCode",
+                                        model.a_stage,@"projectStage",
                                         nil];
+        for(int i=0;i<parametersdata.allKeys.count;i++){
+            //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
+            if([parametersdata[parametersdata.allKeys[i]] isEqualToString:@"null"]){
+                [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
+            }
+        }
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];

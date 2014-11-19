@@ -84,6 +84,7 @@
 @property (nonatomic,strong) NSString *a_decorationProgress;
 //url
 @property (nonatomic,strong) NSString *a_url;
+@property (nonatomic,strong) NSString *a_stage;
 -(void)loadWithDictionary:(NSDictionary*)dic;
 -(void)loadWithDB:(NSDictionary*)dic;
 + (NSURLSessionDataTask *)globalSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block str:(NSString *)str index:(int)index;

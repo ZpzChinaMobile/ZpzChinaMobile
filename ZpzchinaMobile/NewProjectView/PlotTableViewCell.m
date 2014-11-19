@@ -169,7 +169,7 @@
             if(i == 0){
                 [mySwitch setFrame:CGRectMake(240, 160, 0, 0)];
                 if(flag == 0){
-                    if([[dic objectForKey:@"propertyElevator"] isEqualToString:@"0"]){
+                    if([[dic objectForKey:@"propertyElevator"] isEqualToString:@"null"]){
                         [mySwitch setOn:NO];
                     }else{
                         [mySwitch setOn:YES];
@@ -177,6 +177,8 @@
                 }else{
                     if([[dic objectForKey:@"propertyElevator"] isEqualToString:@""]){
                         if([[singleDic objectForKey:@"propertyElevator"] isEqualToString:@"0"]){
+                            [mySwitch setOn:NO];
+                        }else if ([[singleDic objectForKey:@"propertyElevator"] isEqualToString:@"null"]){
                             [mySwitch setOn:NO];
                         }else{
                             [mySwitch setOn:YES];
@@ -192,7 +194,7 @@
             }else if(i == 1){
                 [mySwitch setFrame:CGRectMake(240, 210, 0, 0)];
                 if(flag == 0){
-                    if([[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"0"]){
+                    if([[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"null"]){
                         [mySwitch setOn:NO];
                     }else{
                         [mySwitch setOn:YES];
@@ -200,6 +202,8 @@
                 }else{
                     if([[dic objectForKey:@"propertyAirCondition"] isEqualToString:@""]){
                         if([[singleDic objectForKey:@"propertyAirCondition"] isEqualToString:@"0"]){
+                            [mySwitch setOn:NO];
+                        }else if ([[singleDic objectForKey:@"propertyAirCondition"] isEqualToString:@"null"]){
                             [mySwitch setOn:NO];
                         }else{
                             [mySwitch setOn:YES];
@@ -215,7 +219,7 @@
             }else if(i==2){
                 [mySwitch setFrame:CGRectMake(240, 260, 0, 0)];
                 if(flag == 0){
-                    if([[dic objectForKey:@"propertyHeating"] isEqualToString:@"0"]){
+                    if([[dic objectForKey:@"propertyHeating"] isEqualToString:@"null"]){
                         [mySwitch setOn:NO];
                     }else{
                         [mySwitch setOn:YES];
@@ -223,6 +227,8 @@
                 }else{
                     if([[dic objectForKey:@"propertyHeating"] isEqualToString:@""]){
                         if([[singleDic objectForKey:@"propertyHeating"] isEqualToString:@"0"]){
+                            [mySwitch setOn:NO];
+                        }else if ([[singleDic objectForKey:@"propertyHeating"] isEqualToString:@"null"]){
                             [mySwitch setOn:NO];
                         }else{
                             [mySwitch setOn:YES];
@@ -238,7 +244,7 @@
             }else if(i ==3){
                 [mySwitch setFrame:CGRectMake(240, 310, 0, 0)];
                 if(flag == 0){
-                    if([[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"0"]){
+                    if([[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"null"]){
                         [mySwitch setOn:NO];
                     }else{
                         [mySwitch setOn:YES];
@@ -246,6 +252,8 @@
                 }else{
                     if([[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@""]){
                         if([[singleDic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"0"]){
+                            [mySwitch setOn:NO];
+                        }else if ([[singleDic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"null"]){
                             [mySwitch setOn:NO];
                         }else{
                             [mySwitch setOn:YES];
@@ -261,7 +269,7 @@
             }else{
                 [mySwitch setFrame:CGRectMake(240, 360, 0, 0)];
                 if(flag == 0){
-                    if([[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"0"]){
+                    if([[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"null"]){
                         [mySwitch setOn:NO];
                     }else{
                         [mySwitch setOn:YES];
@@ -269,6 +277,8 @@
                 }else{
                     if([[dic objectForKey:@"propertyStealStructure"] isEqualToString:@""]){
                         if([[singleDic objectForKey:@"propertyStealStructure"] isEqualToString:@"0"]){
+                            [mySwitch setOn:NO];
+                        }else if ([[singleDic objectForKey:@"propertyStealStructure"] isEqualToString:@"null"]){
                             [mySwitch setOn:NO];
                         }else{
                             [mySwitch setOn:YES];
