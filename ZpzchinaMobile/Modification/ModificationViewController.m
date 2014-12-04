@@ -500,6 +500,9 @@
     [self.shadowView addSubview:testActivityIndicator];
     
     if (self.fromView==0) {
+        NSString *stage = [ProjectStage JudgmentProjectStage:self.dataDic];
+        [self.dataDic setValue:stage forKey:@"projectStage"];
+        NSLog(@"%@",self.dataDic);
         
         [ProjectSqlite InsertData:self.dataDic];
         
@@ -902,20 +905,20 @@
         [self.dataDic setObject:@"" forKey:@"usage"];
         [self.dataDic setObject:@"" forKey:@"ownerType"];
 
-        [self.dataDic setObject:@"0" forKey:@"area"];
-        [self.dataDic setObject:@"0" forKey:@"plotRatio"];
-        [self.dataDic setObject:@"0" forKey:@"investment"];
-        [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
-        [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
-        [self.dataDic setObject:@"0" forKey:@"foreignInvestment"];
+        [self.dataDic setObject:@"null" forKey:@"area"];
+        [self.dataDic setObject:@"null" forKey:@"plotRatio"];
+        [self.dataDic setObject:@"null" forKey:@"investment"];
+        [self.dataDic setObject:@"null" forKey:@"areaOfStructure"];
+        [self.dataDic setObject:@"null" forKey:@"storeyHeight"];
+        [self.dataDic setObject:@"null" forKey:@"foreignInvestment"];
         [self.dataDic setObject:@"0" forKey:@"longitude"];
         [self.dataDic setObject:@"0" forKey:@"latitude"];
         //出图阶段
-        [self.dataDic setObject:@"0" forKey:@"propertyElevator"];
-        [self.dataDic setObject:@"0" forKey:@"propertyAirCondition"];
-        [self.dataDic setObject:@"0" forKey:@"propertyHeating"];
-        [self.dataDic setObject:@"0" forKey:@"propertyExternalWallMeterial"];
-        [self.dataDic setObject:@"0" forKey:@"propertyStealStructure"];
+        [self.dataDic setObject:@"null" forKey:@"propertyElevator"];
+        [self.dataDic setObject:@"null" forKey:@"propertyAirCondition"];
+        [self.dataDic setObject:@"null" forKey:@"propertyHeating"];
+        [self.dataDic setObject:@"null" forKey:@"propertyExternalWallMeterial"];
+        [self.dataDic setObject:@"null" forKey:@"propertyStealStructure"];
     }else{
         [self.dataDic setObject:@"" forKey:@"district"];
         [self.dataDic setObject:@"" forKey:@"province"];

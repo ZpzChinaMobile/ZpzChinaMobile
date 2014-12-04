@@ -45,7 +45,7 @@
 
 +(NSMutableDictionary *)JudgmentStr:(ProjectModel *)model{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    //[dic setObject:model.a_id forKey:@"id"];
+    [dic setObject:model.a_stage forKey:@"projectStage"];
     if([[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"(null)"]){
         [dic setObject:@"" forKey:@"id"];
     }else{
@@ -82,13 +82,13 @@
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_city] forKey:@"city"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_area] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_area] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_area] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_area] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_area] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"area"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_area] forKey:@"area"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_plotRatio] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_plotRatio] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_plotRatio] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_plotRatio] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_plotRatio] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"plotRatio"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_plotRatio] forKey:@"plotRatio"];
@@ -175,25 +175,25 @@
         }
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_investment] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_investment] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_investment] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_investment] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_investment] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"investment"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_investment] forKey:@"investment"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_areaOfStructure] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_areaOfStructure] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_areaOfStructure] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_areaOfStructure] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_areaOfStructure] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"areaOfStructure"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_areaOfStructure] forKey:@"areaOfStructure"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_storeyHeight] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_storeyHeight] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_storeyHeight] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_storeyHeight] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_storeyHeight] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"storeyHeight"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_storeyHeight] forKey:@"storeyHeight"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_foreignInvestment] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_foreignInvestment] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_foreignInvestment] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_foreignInvestment] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_foreignInvestment] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"foreignInvestment"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_foreignInvestment] forKey:@"foreignInvestment"];
@@ -223,31 +223,31 @@
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_mainDesignStage] forKey:@"mainDesignStage"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_propertyElevator] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyElevator] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_propertyElevator] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyElevator] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_propertyElevator] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"propertyElevator"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_propertyElevator] forKey:@"propertyElevator"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_propertyAirCondition] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyAirCondition] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_propertyAirCondition] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyAirCondition] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_propertyAirCondition] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"propertyAirCondition"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_propertyAirCondition] forKey:@"propertyAirCondition"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_propertyHeating] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyHeating] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_propertyHeating] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyHeating] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_propertyHeating] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"propertyHeating"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_propertyHeating] forKey:@"propertyHeating"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_propertyExternalWallMeterial] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyExternalWallMeterial] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_propertyExternalWallMeterial] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyExternalWallMeterial] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_propertyExternalWallMeterial] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"propertyExternalWallMeterial"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_propertyExternalWallMeterial] forKey:@"propertyExternalWallMeterial"];
     }
     
-    if([[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"(null)"]){
+    if([[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"(null)"]|| [[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"null"]){
         [dic setObject:@"0" forKey:@"propertyStealStructure"];
     }else{
         [dic setObject:[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] forKey:@"propertyStealStructure"];
@@ -658,7 +658,7 @@
 }
 
 +(NSString *)JudgmentProjectStage:(NSMutableDictionary *)dic{
-//    NSLog(@"===>%@",dic[@"projectID"]);
+    NSLog(@"===>%@",dic);
 //    NSString *projectID = nil;
 //    if([dic[@"projectID"] isEqualToString:@""]){
 //        projectID = dic[@"id"];
@@ -666,7 +666,7 @@
 //        projectID = dic[@"projectID"];
 //    }
     NSString *stage = [[NSString alloc] init];
-    stage = @"0";
+    stage = @"1";
     if(![[dic objectForKey:@"landName"] isEqualToString:@""] ||
        ![[dic objectForKey:@"district"] isEqualToString:@""] ||
        ![[dic objectForKey:@"province"] isEqualToString:@""] ||
@@ -683,17 +683,28 @@
        ![[dic objectForKey:@"areaOfStructure"] isEqualToString:@""] ||
        ![[dic objectForKey:@"storeyHeight"] isEqualToString:@""] ||
        ![[dic objectForKey:@"foreignInvestment"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"ownerType"] isEqualToString:@""] ){
+       ![[dic objectForKey:@"ownerType"] isEqualToString:@""] ||
+       ![[dic objectForKey:@"area"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"plotRatio"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"investment"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"areaOfStructure"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"storeyHeight"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"null"]){
         stage = @"1";
     }
     
     if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"propertyElevator"] isEqualToString:@"0"] ||
-       ![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"0"] ||
        ![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"propertyHeating"] isEqualToString:@"0"] ||
-       ![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"0"] ||
-       ![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"0"] ){
+//       ![[dic objectForKey:@"propertyElevator"] isEqualToString:@"0"] ||
+//       ![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"0"] ||
+//       ![[dic objectForKey:@"propertyHeating"] isEqualToString:@"0"] ||
+//       ![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"0"] ||
+//       ![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"0"] ||
+       ![[dic objectForKey:@"propertyElevator"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"propertyHeating"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"null"] ||
+       ![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"null"]){
         stage = @"2";
     }
     

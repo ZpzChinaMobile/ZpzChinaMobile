@@ -153,7 +153,7 @@
 -(void)loginBtnClick{
     //测试账号:zm 密码:123
     //登录接口
-    
+    NSLog(@"%@",[MD5 md5HexDigest:_passWordTextField.text]);
     loginBtn.enabled=NO;
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:_userNameTextField.text,@"userName",[MD5 md5HexDigest:_passWordTextField.text],@"password" ,@"ios",@"deviceType",nil];
     NSLog(@"%@",parameters);

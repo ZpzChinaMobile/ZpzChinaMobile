@@ -53,6 +53,7 @@
     self.a_electroweakInstallation = [dic valueForKey:@"electroweakInstallation"];
     self.a_decorationSituation = [dic valueForKey:@"decorationSituation"];
     self.a_decorationProgress = [dic valueForKey:@"decorationProgress"];
+    self.a_stage = [dic valueForKey:@"projectStage"];
 }
 
 //服务器数据
@@ -95,6 +96,7 @@
     self.a_decorationSituation = [dic valueForKey:@"decorationSituation"];
     self.a_decorationProgress = [dic valueForKey:@"decorationProgress"];
     self.a_url = [dic valueForKey:@"url"];
+    self.a_stage = [dic valueForKey:@"projectStage"];
 }
 
 + (NSURLSessionDataTask *)globalSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block str:(NSString *)str index:(int)index{

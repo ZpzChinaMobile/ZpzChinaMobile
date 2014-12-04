@@ -120,14 +120,26 @@
         landarea.font=myFont;
         if(flag == 0){
             if(![[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]] isEqualToString:@""]){
-                [landarea setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]]];
+                if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]] isEqualToString:@"null"]){
+                    [landarea setText:@"0"];
+                }else{
+                    [landarea setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]]];
+                }
             }
         }else{
             if(![[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]] isEqualToString:@""]){
-                [landarea setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]]];
+                if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]] isEqualToString:@"null"]){
+                    [landarea setText:@"0"];
+                }else{
+                    [landarea setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]]];
+                }
             }else{
                 if(![[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"area"]] isEqualToString:@""]){
-                    [landarea setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"area"]]];
+                    if([[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"area"]] isEqualToString:@"null"]){
+                        [landarea setText:@"0"];
+                    }else{
+                        [landarea setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"area"]]];
+                    }
                 }
             }
         }
@@ -149,14 +161,26 @@
         volumerate.textAlignment=NSTextAlignmentLeft;
         if(flag == 0){
             if(![[NSString stringWithFormat:@"%@",[dic objectForKey:@"plotRatio"]] isEqualToString:@""]){
-                [volumerate setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"plotRatio"]]];
+                if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"plotRatio"]] isEqualToString:@"null"]){
+                    [volumerate setText:@"0"];
+                }else{
+                    [volumerate setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"plotRatio"]]];
+                }
             }
         }else{
             if(![[NSString stringWithFormat:@"%@",[dic objectForKey:@"plotRatio"]] isEqualToString:@""]){
-                [volumerate setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"plotRatio"]]];
+                if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"plotRatio"]] isEqualToString:@"null"]){
+                    [volumerate setText:@"0"];
+                }else{
+                    [volumerate setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"plotRatio"]]];
+                }
             }else{
                 if(![[singleDic objectForKey:@"plotRatio"] isEqualToString:@""]){
-                    [volumerate setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"plotRatio"]]];
+                    if([[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"plotRatio"]] isEqualToString:@"null"]){
+                        [volumerate setText:@"0"];
+                    }else{
+                        [volumerate setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"plotRatio"]]];
+                    }
                 }
             }
         }

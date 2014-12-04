@@ -216,14 +216,26 @@
         Investment.font=myFont;
         if(flag == 0){
             if(![[dic objectForKey:@"investment"] isEqualToString:@""]){
-                [Investment setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]]];
+                if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
+                    [Investment setText:@"0"];
+                }else{
+                    [Investment setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]]];
+                }
             }
         }else{
             if(![[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]] isEqualToString:@""]){
-                [Investment setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]]];
+                if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
+                    [Investment setText:@"0"];
+                }else{
+                    [Investment setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]]];
+                }
             }else{
                 if(![[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"investment"]] isEqualToString:@""]){
-                    [Investment setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"investment"]]];
+                    if([[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"investment"]] isEqualToString:@"null"]){
+                        [Investment setText:@"0"];
+                    }else{
+                        [Investment setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"investment"]]];
+                    }
                 }
             }
         }
@@ -245,14 +257,26 @@
         GFA.font=myFont;
         if(flag == 0){
             if(![[dic objectForKey:@"areaOfStructure"] isEqualToString:@""]){
-                [GFA setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]]];
+                if([[dic objectForKey:@"areaOfStructure"] isEqualToString:@"null"]){
+                    [GFA setText:@"0"];
+                }else{
+                    [GFA setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]]];
+                }
             }
         }else{
             if(![[dic objectForKey:@"areaOfStructure"] isEqualToString:@""]){
-                [GFA setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]]];
+                if([[dic objectForKey:@"areaOfStructure"] isEqualToString:@"null"]){
+                    [GFA setText:@"0"];
+                }else{
+                    [GFA setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]]];
+                }
             }else{
                 if(![[singleDic objectForKey:@"areaOfStructure"] isEqualToString:@""]){
-                    [GFA setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"areaOfStructure"]]];
+                    if([[singleDic objectForKey:@"areaOfStructure"] isEqualToString:@"null"]){
+                        [GFA setText:@"0"];
+                    }else{
+                        [GFA setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"areaOfStructure"]]];
+                    }
                 }
             }
         }
@@ -274,14 +298,26 @@
         Storeybuilding.font=myFont;
         if(flag == 0){
             if(![[dic objectForKey:@"storeyHeight"] isEqualToString:@""]){
-                [Storeybuilding setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]]];
+                if([[dic objectForKey:@"storeyHeight"] isEqualToString:@"null"]){
+                    [Storeybuilding setText:@"0"];
+                }else{
+                    [Storeybuilding setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]]];
+                }
             }
         }else{
             if(![[dic objectForKey:@"storeyHeight"] isEqualToString:@""]){
-                [Storeybuilding setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]]];
+                if([[dic objectForKey:@"storeyHeight"] isEqualToString:@"null"]){
+                    [Storeybuilding setText:@"0"];
+                }else{
+                    [Storeybuilding setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"storeyHeight"]]];
+                }
             }else{
                 if(![[singleDic objectForKey:@"storeyHeight"] isEqualToString:@""]){
-                    [Storeybuilding setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"storeyHeight"]]];
+                    if([[singleDic objectForKey:@"storeyHeight"] isEqualToString:@"null"]){
+                        [Storeybuilding setText:@"0"];
+                    }else{
+                        [Storeybuilding setText:[NSString stringWithFormat:@"%@",[singleDic objectForKey:@"storeyHeight"]]];
+                    }
                 }
             }
         }
@@ -305,7 +341,7 @@
         foreignparticipationLabel.font = myFont;
         foreignparticipationLabel.textAlignment = NSTextAlignmentLeft;
         if(flag == 0){
-            if(![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+            if(![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"null"]){
                 [foreignparticipationLabel setText:@"参与"];
             }else{
                 [foreignparticipationLabel setText:@"不参与"];
@@ -313,6 +349,8 @@
         }else{
             if([[dic objectForKey:@"foreignInvestment"] isEqualToString:@""]){
                 if([[singleDic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+                    [foreignparticipationLabel setText:@"不参与"];
+                }else if ([[singleDic objectForKey:@"foreignInvestment"] isEqualToString:@"null"]){
                     [foreignparticipationLabel setText:@"不参与"];
                 }else{
                     [foreignparticipationLabel setText:@"参与"];
