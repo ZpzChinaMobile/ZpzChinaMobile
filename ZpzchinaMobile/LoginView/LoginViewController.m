@@ -158,11 +158,11 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:_userNameTextField.text,@"userName",[MD5 md5HexDigest:_passWordTextField.text],@"password" ,@"ios",@"deviceType",nil];
     NSLog(@"%@",parameters);
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/login",serverAddress] parameters:parameters error:nil];
-    NSLog(@"%@",[NSString stringWithFormat:@"%s/Users/login",serverAddress]);
+    NSLog(@"==%@",[NSString stringWithFormat:@"%s/Users/login",serverAddress]);
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",responseObject);
+        NSLog(@"==%@",responseObject);
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];

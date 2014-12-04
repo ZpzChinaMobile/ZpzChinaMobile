@@ -107,6 +107,7 @@
     [model loadWithDB:dic];
     //[CameraSqlite InsertData:dic];
     if ([self.delegate respondsToSelector:@selector(backCamera:)]){
+        model.isNewImage=YES;
         [self.delegate backCamera:model];
     }
     [pickerController dismissViewControllerAnimated:YES completion:Nil];

@@ -9,6 +9,7 @@
 #import "ZhuTiShiGong.h"
 #import "CameraModel.h"
 #import "GTMBase64.h"
+#import "MyView.h"
 @implementation ZhuTiShiGong
 static NSDictionary* dataDic;
 
@@ -70,67 +71,84 @@ static __weak ProgramDetailViewController* myDelegate;
     //图片imageView
     
     
-    UIImage *aimage;
-    CameraModel *model;
+//    UIImage *aimage;
+//    CameraModel *model;
+    NSMutableArray* tempImageArr;
     if(sequence==1&&myDelegate.horizonImageArr.count){
-        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
-            model = myDelegate.horizonImageArr[0];
-            if([model.a_device isEqualToString:@"localios"]){
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-            }else{
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            }
-        }else{
-            model=myDelegate.imgDic[@"horizonImageArr"];
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-        }
-        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
-        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
-        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
-        aimage=[UIImage imageWithCGImage:tempImage];
-        CGImageRelease(tempImage);
+        tempImageArr=myDelegate.horizonImageArr;
+//        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+//            model = myDelegate.horizonImageArr[0];
+//            if([model.a_device isEqualToString:@"localios"]){
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//            }else{
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+//            }
+//        }else{
+//            model=myDelegate.imgDic[@"horizonImageArr"];
+//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//        }
+//        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+//        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+//        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+//        aimage=[UIImage imageWithCGImage:tempImage];
+//        CGImageRelease(tempImage);
     }else if (sequence==2&&myDelegate.pilePitImageArr.count){
-        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
-            model = myDelegate.pilePitImageArr[0];
-            if([model.a_device isEqualToString:@"localios"]){
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-            }else{
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            }
-        }else{
-            model=myDelegate.imgDic[@"pilePitImageArr"];
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-        }
-        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
-        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
-        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
-        aimage=[UIImage imageWithCGImage:tempImage];
-        CGImageRelease(tempImage);
+        tempImageArr=myDelegate.pilePitImageArr;
+//        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+//            model = myDelegate.pilePitImageArr[0];
+//            if([model.a_device isEqualToString:@"localios"]){
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//            }else{
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+//            }
+//        }else{
+//            model=myDelegate.imgDic[@"pilePitImageArr"];
+//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//        }
+//        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+//        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+//        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+//        aimage=[UIImage imageWithCGImage:tempImage];
+//        CGImageRelease(tempImage);
     }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
-        NSLog(@"mainConstructionImageArr%d",myDelegate.mainConstructionImageArr.count);
-        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
-            model = myDelegate.mainConstructionImageArr[0];
-            if([model.a_device isEqualToString:@"localios"]){
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-            }else{
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            }
-        }else{
-            model=myDelegate.imgDic[@"mainConstructionImageArr"];
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-        }
-        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
-        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
-        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
-        aimage=[UIImage imageWithCGImage:tempImage];
-        CGImageRelease(tempImage);
-    }else{
-        aimage=[GetImagePath getImagePath:@"首页_16"];
-    }
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    imageView.image=aimage;
-    imageView.image=[self saveImage:imageView];
+        tempImageArr=myDelegate.mainConstructionImageArr;
 
+//        NSLog(@"mainConstructionImageArr%d",myDelegate.mainConstructionImageArr.count);
+//        if (myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+//            model = myDelegate.mainConstructionImageArr[0];
+//            if([model.a_device isEqualToString:@"localios"]){
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//            }else{
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+//            }
+//        }else{
+//            model=myDelegate.imgDic[@"mainConstructionImageArr"];
+//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//        }
+//        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+//        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+//        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+//        aimage=[UIImage imageWithCGImage:tempImage];
+//        CGImageRelease(tempImage);
+    }
+//    else{
+//        aimage=[GetImagePath getImagePath:@"首页_16"];
+//    }
+//    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
+//    imageView.image=aimage;
+//    imageView.image=[self saveImage:imageView];
+
+    MyView* imageView=[[MyView alloc]init];
+    imageView.frame=CGRectMake(0, 0, 320, 215.5);
+    imageView.layer.masksToBounds=YES;
+    imageView.backgroundColor=[UIColor grayColor];
+    [imageView observeImage];
+    
+    if (tempImageArr.count) {
+        CameraModel *model= tempImageArr[0];
+        imageView.myImageView.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body]];
+    }
+    
     [view addSubview:imageView];
     
     //图片数量label

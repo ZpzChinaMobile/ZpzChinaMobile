@@ -12,6 +12,7 @@
 #import "Camera.h"
 #import "CameraSqlite.h"
 #import "AppModel.h"
+#import "EGOImageView.h"
 @interface TenTableViewController ()<CameraDelegate>{
     Camera* camera;
     NSInteger newImageCount;
@@ -142,31 +143,27 @@
     NSMutableArray* imageAry=[NSMutableArray array];
     for (int i=0; i<images.count; i++) {
         CameraModel* model= images[i];
-        UIImage *aimage;
-        if ([model.a_device isEqualToString:@"localios"]) {
-            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-        }else{
-            aimage=[UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-        }
-        [imageAry addObject:aimage];
+        [imageAry addObject:model.a_body];
     }
-    [imageAry addObject:[GetImagePath getImagePath:@"018"]];
+    //无用的元素，只为了数组个数+1
+    [imageAry addObject:@""];
     
     CGFloat cellHeight=120;
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
     view.backgroundColor=RGBCOLOR(229, 229, 229);
-
+    
     for (int i=0; i<imageAry.count; i++) {
-        UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
+        EGOImageView* imageView=[[EGOImageView alloc]initWithPlaceholderImage:[GetImagePath getImagePath:i==(imageAry.count-1)?@"018":@"imgDefault"]];
+        imageView.frame=CGRectMake(0, 0, 80, 80);
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
-        imageView.image=imageAry[i];
-        imageView.image=[self saveImage:imageView];
         [view addSubview:imageView];
         
         if (i==imageAry.count-1) {
             UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
             [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
             [view addSubview:button];
+        }else{
+            imageView.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,imageAry[i]]];
         }
     }
     return view;

@@ -757,12 +757,12 @@
 }
 
 //保存图片至数据库
+#warning 不要忘记拉
 -(void)saveImage{
     for(int i=0;i<self.horizonImageArr.count;i++){
         CameraModel *model = [self.horizonImageArr objectAtIndex:i];
-        NSLog(@"model.a_device=%@",model.a_device);
         if([model.a_device isEqualToString:@"ios"]){
-            [GetBigImage getbigimage:model.a_url];
+            //[GetBigImage getbigimage:model.a_url];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -770,7 +770,7 @@
     for(int i=0;i<self.pilePitImageArr.count;i++){
         CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            [GetBigImage getbigimage:model.a_url];
+            //[GetBigImage getbigimage:model.a_url];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -779,7 +779,7 @@
     for(int i=0;i<self.mainConstructionImageArr.count;i++){
         CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            [GetBigImage getbigimage:model.a_url];
+            //[GetBigImage getbigimage:model.a_url];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -788,7 +788,7 @@
     for(int i=0;i<self.explorationImageArr.count;i++){
         CameraModel *model = [self.explorationImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            [GetBigImage getbigimage:model.a_url];
+            //[GetBigImage getbigimage:model.a_url];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -797,7 +797,7 @@
     for(int i=0;i<self.fireControlImageArr.count;i++){
         CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            [GetBigImage getbigimage:model.a_url];
+            //[GetBigImage getbigimage:model.a_url];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -806,7 +806,7 @@
     for(int i=0;i<self.electroweakImageArr.count;i++){
         CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            [GetBigImage getbigimage:model.a_url];
+            //[GetBigImage getbigimage:model.a_url];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -815,7 +815,7 @@
     for(int i=0;i<self.planImageArr.count;i++){
         CameraModel *model = [self.planImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            [GetBigImage getbigimage:model.a_url];
+            //[GetBigImage getbigimage:model.a_url];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }

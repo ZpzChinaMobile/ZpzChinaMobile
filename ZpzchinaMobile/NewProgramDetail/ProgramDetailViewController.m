@@ -65,6 +65,7 @@
 @property(nonatomic,strong)UIActivityIndicatorView* loadAnimationView;//viewDidLoad时等待网络下载资源时转菊花
 @property(nonatomic,strong)UIView* enterToScrollView;//进无限滚时的动画的背景
 @property(nonatomic,strong)UIActivityIndicatorView* scrollViewloadAnimationView;//进无限滚时的动画的背景时转菊花
+@property(nonatomic,strong)NSMutableDictionary* imgDic;//保存该页面的大图字典,键为@"horizonImageArr",@"pilePitImageArr",@"mainConstructionImageArr",@"explorationImageArr",@"fireControlImageArr",@"electroweakImageArr",@"planImageArr"
 
 
 @end
@@ -179,27 +180,29 @@
 }
 
 //跳转至滚动的图片库里
--(void)gotoScrollImageViewWithImageAry:(NSArray*)imageAry{
+-(void)gotoScrollImageViewWithImageAry:(NSMutableArray*)imageAry{
     ViewController* vc=[[ViewController alloc]init];
     [vc.imagesArray removeAllObjects];
+    vc.imagesArray=imageAry;
     
     //将base64的图放入CameraModel,然后放入GTMBase64里转出image,然后放入数组
-    for (int i=0; i<imageAry.count; i++) {
-        CameraModel *model = imageAry[i];
-        UIImage *aimage;
-        if (self.isRelease) {
-            if([model.a_device isEqualToString:@"localios"]){
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-            }else{
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            }
-        }else{
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-        }
-        
-        [vc.imagesArray addObject:aimage];
-        NSLog(@"=====%ld",sizeof([GTMBase64 decodeString:model.a_body]));
-    }
+//    for (int i=0; i<imageAry.count; i++) {
+//        CameraModel *model = imageAry[i];
+//        UIImage *aimage;
+//        if (self.isRelease) {
+//            if([model.a_device isEqualToString:@"localios"]){
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//            }else{
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
+//            }
+//        }else{
+//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//        }
+//        
+//        [vc.imagesArray addObject:aimage];
+//        NSLog(@"=====%ld",sizeof([GTMBase64 decodeString:model.a_body]));
+//    }
+    
     [self presentViewController:vc animated:NO completion:nil];
     [self.scrollViewloadAnimationView stopAnimating];
     [self.enterToScrollView removeFromSuperview];
@@ -257,102 +260,106 @@
     if (button==self.firstStageButton1) {
         
         NSLog(@"firstStageButton1");
-        if (!self.isRelease) {
-            for (int i=0; i<self.planImageArr.count; i++) {
-                CameraModel* camera=self.planImageArr[i];
-                if (camera.a_url) {
-                    [ary addObject:camera.a_url];
-                }
-            }
-            self.highImages=[NSMutableArray array];
-            [self getImages:ary];
-        }else{
-            [self gotoScrollImageViewWithImageAry:app.planImageArr];//self.planImageArr];
-        }
+        //if (!self.isRelease) {
+//            for (int i=0; i<self.planImageArr.count; i++) {
+//                CameraModel* camera=self.planImageArr[i];
+//                NSLog(@"%f",camera.imageWidth);
+//                if (camera.a_body) {
+//                    [ary addObject:camera.a_body];
+//                }
+//            }
+            //self.highImages=[NSMutableArray array];
+            //[self getImages:ary];
+       // }
+        [self gotoScrollImageViewWithImageAry:self.planImageArr];
+        //        else{
+//            [self gotoScrollImageViewWithImageAry:app.planImageArr];//self.planImageArr];
+//        }
         
     }else if(button==self.secondStageButton1){
         NSLog(@"secondStageButton1");
-        if (!self.isRelease) {
-            for (int i=0; i<self.explorationImageArr.count; i++) {
-                CameraModel* camera=self.explorationImageArr[i];
-                if (camera.a_url) {
-                    [ary addObject:camera.a_url];
-                }
-            }
-            self.highImages=[NSMutableArray array];
-            [self getImages:ary];
-        }else{
-            [self gotoScrollImageViewWithImageAry:app.explorationImageArr];//self.explorationImageArr];
-        }
+        //if (!self.isRelease) {
+//            for (int i=0; i<self.explorationImageArr.count; i++) {
+//                CameraModel* camera=self.explorationImageArr[i];
+//                if (camera.a_body) {
+//                    [ary addObject:camera.a_body];
+//                }
+//            }
+//            self.highImages=[NSMutableArray array];
+//            [self getImages:ary];
+        [self gotoScrollImageViewWithImageAry:self.explorationImageArr];
+        //}else{
+         //   [self gotoScrollImageViewWithImageAry:app.explorationImageArr];//self.explorationImageArr];
+        //}
         
     }else if(button==self.thirdStageButton1){
         NSLog(@"thirdStageButton1");
-        if (!self.isRelease) {
-            for (int i=0; i<self.horizonImageArr.count; i++) {
-                CameraModel* camera=self.horizonImageArr[i];
-                if (camera.a_url) {
-                    [ary addObject:camera.a_url];
-                }
-            }
-            self.highImages=[NSMutableArray array];
-            [self getImages:ary];
-        }else{
-            [self gotoScrollImageViewWithImageAry:app.horizonImageArr];//self.horizonImageArr];
-        }
+       // if (!self.isRelease) {
+//            for (int i=0; i<self.horizonImageArr.count; i++) {
+//                CameraModel* camera=self.horizonImageArr[i];
+//                if (camera.a_body) {
+//                    [ary addObject:camera.a_body];
+//                }
+//            }
+           // self.highImages=[NSMutableArray array];
+            //[self getImages:ary];
+       // }else{
+            [self gotoScrollImageViewWithImageAry:self.horizonImageArr];//self.horizonImageArr];
+       // }
         
     }else if(button==self.thirdStageButton2){
         NSLog(@"thirdStageButton2");
-        if (!self.isRelease) {
-            for (int i=0; i<self.pilePitImageArr.count; i++) {
-                CameraModel* camera=self.pilePitImageArr[i];
-                if (camera.a_url) {
-                    [ary addObject:camera.a_url];
-                }
-            }
-            self.highImages=[NSMutableArray array];
-            [self getImages:ary];
-        }else{
-            [self gotoScrollImageViewWithImageAry:app.pilePitImageArr];//self.pilePitImageArr];
-        }
+        //if (!self.isRelease) {
+//            for (int i=0; i<self.pilePitImageArr.count; i++) {
+//                CameraModel* camera=self.pilePitImageArr[i];
+//                if (camera.a_body) {
+//                    [ary addObject:camera.a_body];
+//                }
+//            }
+           // self.highImages=[NSMutableArray array];
+         //   [self getImages:ary];
+       // }else{
+            [self gotoScrollImageViewWithImageAry:self.pilePitImageArr];//self.pilePitImageArr];
+       // }
     }else if(button==self.thirdStageButton3){
         NSLog(@"thirdStageButton3");
-        if (!self.isRelease) {
-            for (int i=0; i<self.mainConstructionImageArr.count; i++) {
-                CameraModel* camera=self.mainConstructionImageArr[i];
-                if (camera.a_url) {
-                    [ary addObject:camera.a_url];
-                }
-            }
+       // if (!self.isRelease) {
+//            for (int i=0; i<self.mainConstructionImageArr.count; i++) {
+//                CameraModel* camera=self.mainConstructionImageArr[i];
+//                if (camera.a_body) {
+//                    [ary addObject:camera.a_body];
+//                }
+//            }
+        
+//            for (int i=0; i<self.fireControlImageArr.count; i++) {
+//                CameraModel* camera=self.fireControlImageArr[i];
+//                if (camera.a_body) {
+//                    [ary addObject:camera.a_body];
+//                }
+//            }
+        
             
-            for (int i=0; i<self.fireControlImageArr.count; i++) {
-                CameraModel* camera=self.fireControlImageArr[i];
-                if (camera.a_url) {
-                    [ary addObject:camera.a_url];
-                }
-            }
-            
-            
-            self.highImages=[NSMutableArray array];
-            [self getImages:ary];
-        }else{
+           // self.highImages=[NSMutableArray array];
+           // [self getImages:ary];
+       // }else{
             NSArray* array=[app.mainConstructionImageArr arrayByAddingObjectsFromArray:app.fireControlImageArr];
-            [self gotoScrollImageViewWithImageAry:array];//self.mainConstructionImageArr];
-        }
+            [self gotoScrollImageViewWithImageAry:[array mutableCopy]];//self.mainConstructionImageArr];
+       // }
         
     }else if(button==self.fourthStageButton1){
         NSLog(@"fourthStageButton1");
-        if (!self.isRelease) {
-            for (int i=0; i<self.electroweakImageArr.count; i++) {
-                CameraModel* camera=self.electroweakImageArr[i];
-                if (camera.a_url) {
-                    [ary addObject:camera.a_url];
-                }
-            }
-            self.highImages=[NSMutableArray array];
-            [self getImages:ary];
-        }else{
-            [self gotoScrollImageViewWithImageAry:app.electroweakImageArr];//self.electroweakImageArr];
-        }
+        //if (!self.isRelease) {
+//            for (int i=0; i<self.electroweakImageArr.count; i++) {
+//                CameraModel* camera=self.electroweakImageArr[i];
+//                if (camera.a_body) {
+//                    [ary addObject:camera.a_body];
+//                }
+//            }
+           // self.highImages=[NSMutableArray array];
+           // [self getImages:ary];
+        //}else{
+            [self gotoScrollImageViewWithImageAry:self.electroweakImageArr];//self.electroweakImageArr];
+       // }
         
     }
 }
@@ -488,7 +495,7 @@
     if (!self.isRelease) {
         //如果是从 需要读取 本地数据库 的页面进来，则会有内容,如果是网络则无
         self.dataDic=[[NSMutableDictionary alloc]init];
-        //网络加载,初始哈页面在加载中,因为网络加载为异步,所以需要写在加载完后的block里
+        //网络加载,初始化页面在加载中,因为网络加载为异步,所以需要写在加载完后的block里
         [self doNetWorkFirst];
         
     }else{
@@ -602,18 +609,18 @@
             NSLog(@"%@",[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
         }
         
-        //获取高清图
-        NSDictionary* imgTempDic=[NSDictionary dictionaryWithObjectsAndKeys:self.horizonImageArr,@"horizonImageArr",self.pilePitImageArr,@"pilePitImageArr",self.mainConstructionImageArr,@"mainConstructionImageArr",self.explorationImageArr,@"explorationImageArr",self.fireControlImageArr,@"fireControlImageArr",self.electroweakImageArr,@"electroweakImageArr",self.planImageArr,@"planImageArr", nil];
-        NSMutableDictionary* imgDic=[NSMutableDictionary dictionary];
-        for (int i=0; i<7; i++) {
-            if ([imgTempDic.allValues[i] count]) {
-                [imgDic setObject:imgTempDic.allValues[i] forKey:imgTempDic.allKeys[i]];
-            }
-        }
-        [self doNetWorkSecondImgDic:imgDic];
-        if (!imgDic.allKeys.count) {
+//        //获取高清图
+//        NSDictionary* imgTempDic=[NSDictionary dictionaryWithObjectsAndKeys:self.horizonImageArr,@"horizonImageArr",self.pilePitImageArr,@"pilePitImageArr",self.mainConstructionImageArr,@"mainConstructionImageArr",self.explorationImageArr,@"explorationImageArr",self.fireControlImageArr,@"fireControlImageArr",self.electroweakImageArr,@"electroweakImageArr",self.planImageArr,@"planImageArr", nil];
+//        NSMutableDictionary* imgDic=[NSMutableDictionary dictionary];
+//        for (int i=0; i<7; i++) {
+//            if ([imgTempDic.allValues[i] count]) {
+//                [imgDic setObject:imgTempDic.allValues[i] forKey:imgTempDic.allKeys[i]];
+//            }
+//        }
+//        [self doNetWorkSecondImgDic:imgDic];
+       // if (!imgDic.allKeys.count) {
             [self loadSelf];
-        }
+        //}
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail");
@@ -623,38 +630,38 @@
 }
 
 -(void)doNetWorkSecondImgDic:(NSMutableDictionary*)imgDic{
-    if (!self.imgDic) {
-        self.imgDic=[NSMutableDictionary dictionary];
-    }
-    
-    if (imgDic.allKeys.count) {
-        CameraModel* model=imgDic.allValues[0][0];
-        NSMutableURLRequest *requestSecond = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,model.a_url] parameters:nil error:nil];
-        AFHTTPRequestOperation *opSecond = [[AFHTTPRequestOperation alloc] initWithRequest:requestSecond];
-        opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
-        [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
-            NSLog(@"responseObjectSecond%@",responseObjectSecond[@"d"][@"data"][0]);
-            
-            //将高清图的cameraModel放进字典
-            CameraModel* camera=[[CameraModel alloc]init];
-            [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];
-            [self.imgDic setObject:camera forKey:imgDic.allKeys[0]];
-            
-            [imgDic removeObjectForKey:imgDic.allKeys[0]];
-            [self doNetWorkSecondImgDic:imgDic];
-            
-            if (imgDic.allKeys.count==0) {
-                //image图片全部加载完之后初始化页面
-                [self loadSelf];
-            }
-            
-        }failure:^(AFHTTPRequestOperation *operationSecond, NSError *errorSecond){
-            NSLog(@"fail");
-            NSLog(@"Error: %@", errorSecond);
-        }];
-        [[NSOperationQueue mainQueue] addOperation:opSecond];
-    }
-    
+//    if (!self.imgDic) {
+//        self.imgDic=[NSMutableDictionary dictionary];
+//    }
+//    
+//    if (imgDic.allKeys.count) {
+//        CameraModel* model=imgDic.allValues[0][0];
+//        NSMutableURLRequest *requestSecond = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,model.a_url] parameters:nil error:nil];
+//        AFHTTPRequestOperation *opSecond = [[AFHTTPRequestOperation alloc] initWithRequest:requestSecond];
+//        opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
+//        [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
+//            NSLog(@"responseObjectSecond%@",responseObjectSecond[@"d"][@"data"][0]);
+//            
+//            //将高清图的cameraModel放进字典
+//            CameraModel* camera=[[CameraModel alloc]init];
+//            [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];
+//            [self.imgDic setObject:camera forKey:imgDic.allKeys[0]];
+//            
+//            [imgDic removeObjectForKey:imgDic.allKeys[0]];
+//            [self doNetWorkSecondImgDic:imgDic];
+//            
+//            if (imgDic.allKeys.count==0) {
+//                //image图片全部加载完之后初始化页面
+//                [self loadSelf];
+//            }
+//            
+//        }failure:^(AFHTTPRequestOperation *operationSecond, NSError *errorSecond){
+//            NSLog(@"fail");
+//            NSLog(@"Error: %@", errorSecond);
+//        }];
+//        [[NSOperationQueue mainQueue] addOperation:opSecond];
+//    }
+//    
 }
 
 -(void)loadLocalImage:(NSString *)localProjectId{
