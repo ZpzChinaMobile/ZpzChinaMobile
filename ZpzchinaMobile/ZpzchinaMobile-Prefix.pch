@@ -21,7 +21,9 @@
     #import "AFNetworking.h"
     #import "GetImagePath.h"
 #endif
-#define  serverAddress "http://eipqas.zhongjichina.com/ZPZChina.svc"
+//#define  serverAddress "http://eipqas.zhongjichina.com/ZPZChina.svc"
+#define  serverAddress "http://192.168.222.95:802/ZPZChina.svc"
+#define  imageAddress "http://192.168.222.95:801/"
 #define  kScreenWidth  [[UIScreen mainScreen] bounds].size.width
 #define  kScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define  kContentHeight [[UIScreen mainScreen] bounds].size.height-64.5

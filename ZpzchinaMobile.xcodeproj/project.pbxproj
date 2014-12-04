@@ -30,6 +30,10 @@
 		5B892F14199A3BF2001F9921 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F0D199A3BF2001F9921 /* ScrollViewController.m */; };
 		5B892FAA199A3D8F001F9921 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892FA7199A3D8F001F9921 /* CycleScrollView.m */; };
 		5B892FAB199A3D8F001F9921 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892FA9199A3D8F001F9921 /* ViewController.m */; };
+		5B9988D51A2FF9F9007D9ADF /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9988CD1A2FF9F9007D9ADF /* EGOCache.m */; };
+		5B9988D61A2FF9F9007D9ADF /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9988D01A2FF9F9007D9ADF /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5B9988D71A2FF9F9007D9ADF /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9988D21A2FF9F9007D9ADF /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5B9988D81A2FF9F9007D9ADF /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9988D41A2FF9F9007D9ADF /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5BE93B8D199C6BCA00E2FF67 /* ModificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93B8C199C6BCA00E2FF67 /* ModificationViewController.m */; };
 		5BE93BB2199C6FFB00E2FF67 /* OneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BB1199C6FFB00E2FF67 /* OneTableViewController.m */; };
 		5BE93BB5199C700B00E2FF67 /* TwoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93BB4199C700B00E2FF67 /* TwoTableViewController.m */; };
@@ -604,6 +608,14 @@
 		5B892FA7199A3D8F001F9921 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
 		5B892FA8199A3D8F001F9921 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		5B892FA9199A3D8F001F9921 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5B9988CC1A2FF9F9007D9ADF /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
+		5B9988CD1A2FF9F9007D9ADF /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
+		5B9988CF1A2FF9F9007D9ADF /* EGOImageLoadConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoadConnection.h; sourceTree = "<group>"; };
+		5B9988D01A2FF9F9007D9ADF /* EGOImageLoadConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoadConnection.m; sourceTree = "<group>"; };
+		5B9988D11A2FF9F9007D9ADF /* EGOImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageLoader.h; sourceTree = "<group>"; };
+		5B9988D21A2FF9F9007D9ADF /* EGOImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageLoader.m; sourceTree = "<group>"; };
+		5B9988D31A2FF9F9007D9ADF /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
+		5B9988D41A2FF9F9007D9ADF /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
 		5BE93B8B199C6BCA00E2FF67 /* ModificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModificationViewController.h; sourceTree = "<group>"; };
 		5BE93B8C199C6BCA00E2FF67 /* ModificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModificationViewController.m; sourceTree = "<group>"; };
 		5BE93BB0199C6FFB00E2FF67 /* OneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneTableViewController.h; sourceTree = "<group>"; };
@@ -1604,6 +1616,37 @@
 			path = Code4appScrollView;
 			sourceTree = "<group>";
 		};
+		5B9988CA1A2FF9F9007D9ADF /* EGOImageView */ = {
+			isa = PBXGroup;
+			children = (
+				5B9988CB1A2FF9F9007D9ADF /* EGOCache */,
+				5B9988CE1A2FF9F9007D9ADF /* EGOImageLoader */,
+				5B9988D31A2FF9F9007D9ADF /* EGOImageView.h */,
+				5B9988D41A2FF9F9007D9ADF /* EGOImageView.m */,
+			);
+			path = EGOImageView;
+			sourceTree = "<group>";
+		};
+		5B9988CB1A2FF9F9007D9ADF /* EGOCache */ = {
+			isa = PBXGroup;
+			children = (
+				5B9988CC1A2FF9F9007D9ADF /* EGOCache.h */,
+				5B9988CD1A2FF9F9007D9ADF /* EGOCache.m */,
+			);
+			path = EGOCache;
+			sourceTree = "<group>";
+		};
+		5B9988CE1A2FF9F9007D9ADF /* EGOImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				5B9988CF1A2FF9F9007D9ADF /* EGOImageLoadConnection.h */,
+				5B9988D01A2FF9F9007D9ADF /* EGOImageLoadConnection.m */,
+				5B9988D11A2FF9F9007D9ADF /* EGOImageLoader.h */,
+				5B9988D21A2FF9F9007D9ADF /* EGOImageLoader.m */,
+			);
+			path = EGOImageLoader;
+			sourceTree = "<group>";
+		};
 		5BE93B8A199C6BCA00E2FF67 /* Modification */ = {
 			isa = PBXGroup;
 			children = (
@@ -2236,6 +2279,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				5B9988CA1A2FF9F9007D9ADF /* EGOImageView */,
 				D3A62C1E19ED22BF0008DADA /* MD5 */,
 				5BEAF93819EBCC6D00E323A2 /* libs */,
 				5B45CF0119E7BEFD00676E42 /* GetImagePath */,
@@ -3270,6 +3314,7 @@
 				D3B2795119595A640090632C /* AddContactViewController.m in Sources */,
 				D3AA5A0A195C1D6500565078 /* ContactSqlite.m in Sources */,
 				D3A4898D1951447400EED32D /* LoginSqlite.m in Sources */,
+				5B9988D81A2FF9F9007D9ADF /* EGOImageView.m in Sources */,
 				D31B266219891F2600B05B03 /* GPUImageColorBurnBlendFilter.m in Sources */,
 				D3BB71C81953E3BC00A3F626 /* LandscapingTableViewCell.m in Sources */,
 				D31B26C519891F2600B05B03 /* GPUImageSingleComponentGaussianBlurFilter.m in Sources */,
@@ -3282,6 +3327,7 @@
 				D31B26AC19891F2600B05B03 /* GPUImageOverlayBlendFilter.m in Sources */,
 				D31B26A819891F2600B05B03 /* GPUImageNormalBlendFilter.m in Sources */,
 				D3BB71CB1953E49A00A3F626 /* WeakinstallationTableViewCell.m in Sources */,
+				5B9988D51A2FF9F9007D9ADF /* EGOCache.m in Sources */,
 				D3C58EA81980BD5E003DD94F /* CJSONScanner.m in Sources */,
 				D31B265719891F2600B05B03 /* GPUImageBilateralFilter.m in Sources */,
 				D3BB71B31953DF1400A3F626 /* GeologicalSurveyTableViewCell.m in Sources */,
@@ -3318,6 +3364,7 @@
 				D31B26BC19891F2600B05B03 /* GPUImageRGBFilter.m in Sources */,
 				5BE93BB5199C700B00E2FF67 /* TwoTableViewController.m in Sources */,
 				043F7132199CB71E0095D05B /* WeakElectricityCell.m in Sources */,
+				5B9988D61A2FF9F9007D9ADF /* EGOImageLoadConnection.m in Sources */,
 				D31B26C719891F2600B05B03 /* GPUImageSmoothToonFilter.m in Sources */,
 				D3B8F54519D92BB0008F6164 /* UserModel.m in Sources */,
 				D3C58E961980BD5E003DD94F /* FaceppDetection.m in Sources */,
@@ -3348,6 +3395,7 @@
 				D3BB71C21953E32500A3F626 /* MainConstructionTableViewCell.m in Sources */,
 				D346A00E196166D800CDDBDF /* SinglePickerView.m in Sources */,
 				D3A4897C19512A2600EED32D /* AFURLSessionManager.m in Sources */,
+				5B9988D71A2FF9F9007D9ADF /* EGOImageLoader.m in Sources */,
 				D3C58EA21980BD5E003DD94F /* CJSONDeserializer_BlocksExtensions.m in Sources */,
 				D31B269C19891F2600B05B03 /* GPUImageLuminosityBlendFilter.m in Sources */,
 				D3A48879194ACEF700EED32D /* MMDrawerBarButtonItem.m in Sources */,

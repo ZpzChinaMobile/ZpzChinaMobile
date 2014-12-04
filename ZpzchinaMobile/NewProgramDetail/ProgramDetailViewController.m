@@ -488,7 +488,7 @@
     if (!self.isRelease) {
         //如果是从 需要读取 本地数据库 的页面进来，则会有内容,如果是网络则无
         self.dataDic=[[NSMutableDictionary alloc]init];
-        //网络加载,初始哈页面在加载中,因为网络加载为异步,所以需要写在加载完后的block里
+        //网络加载,初始化页面在加载中,因为网络加载为异步,所以需要写在加载完后的block里
         [self doNetWorkFirst];
         
     }else{
