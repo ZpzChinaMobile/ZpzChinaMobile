@@ -33,8 +33,9 @@
     self.a_projectName = [dic valueForKey:@"projectName"];
     self.a_projectID = [dic valueForKey:@"projectID"];
     self.a_device = [dic valueForKey:@"device"];
-    self.a_url = [dic valueForKey:@"url"];
     self.a_imgCompressionContent = [dic valueForKey:@"imgCompressionContent"];
+    self.imageHeight=[dic[@"Height"] floatValue];
+    self.imageWidth=[dic[@"Width"] floatValue];
 }
 
 +(void)globalPostWithBlock:(void (^)(NSMutableArray *, NSError *))block parameters:(NSMutableDictionary *)parameters aid:(NSString *)aid{

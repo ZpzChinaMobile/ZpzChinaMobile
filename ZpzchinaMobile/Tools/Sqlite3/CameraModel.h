@@ -18,8 +18,9 @@
 @property (nonatomic,strong) NSString *a_projectID;
 @property (nonatomic,strong) NSString *a_localProjectId;
 @property (nonatomic,strong) NSString *a_device;
-@property (nonatomic,strong) NSString *a_url;
 @property (nonatomic,strong) NSString *a_imgCompressionContent;
+@property(nonatomic)CGFloat imageHeight;
+@property(nonatomic)CGFloat imageWidth;
 -(void)loadWithDictionary:(NSDictionary*)dic;
 -(void)loadWithDB:(NSDictionary*)dic;
 + (void)globalPostWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block parameters:(NSMutableDictionary *)parameters aid:(NSString *)aid;

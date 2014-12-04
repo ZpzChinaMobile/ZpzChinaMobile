@@ -7,7 +7,8 @@
 //
 
 #import "CycleScrollView.h"
-
+#import "CameraModel.h"
+#import "EGOImageView.h"
 @implementation CycleScrollView
 
 - (id)initWithFrame:(CGRect)frame cycleDirection:(CycleDirection)direction pictures:(NSArray *)pictureArray
@@ -61,15 +62,15 @@
     [self getDisplayImagesWithCurpage:curPage];
     
     for (int i = 0; i < 3; i++) {
-        UIImage* image=[curImages objectAtIndex:i];
-        CGFloat height=image.size.height*320/image.size.width;
+        CameraModel* image=[curImages objectAtIndex:i];
+        CGFloat height=image.imageHeight*320/image.imageWidth;
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, height)];
+        EGOImageView *imageView = [[EGOImageView alloc] initWithFrame:CGRectMake(0, 0, 320, height)];
         imageView.center=CGPointMake(160, scrollFrame.size.height*.5);
         NSLog(@"scroll frame = %@",NSStringFromCGRect(imageView.frame));
         imageView.userInteractionEnabled = YES;
-        imageView.image =image;
-        imageView.image=[self saveImage:imageView];
+        imageView.imageURL =[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,image.a_body]];
+        //imageView.image=[self saveImage:imageView];
         
         
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];

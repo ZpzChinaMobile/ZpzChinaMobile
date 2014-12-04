@@ -9,6 +9,8 @@
 #import "TuDiXinXi.h"
 #import "CameraModel.h"
 #import "GTMBase64.h"
+#import "EGOImageView.h"
+#import "MyView.h"
 
 @interface TuDiXinXi(){
     CGFloat height;
@@ -165,32 +167,41 @@
     height+=215.5;
     
     
-    UIImage *aimage;
+//    UIImage *aimage;
+//    if (self.myDelegate.planImageArr.count) {
+//        CameraModel *model;
+//        if (self.myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
+//            model = self.myDelegate.planImageArr[0];
+//            if([model.a_device isEqualToString:@"localios"]){
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//                NSLog(@"body=====%@",model.a_body);
+//            }else{
+//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];                NSLog(@"=====%@",model.a_imgCompressionContent);
+//            }
+//            
+//        }else{
+//            model=self.myDelegate.imgDic[@"planImageArr"];
+//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+//            NSLog(@"body=====%@",model.a_body);
+//        }
+//        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
+//        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
+//        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
+//        aimage=[UIImage imageWithCGImage:tempImage];
+//        CGImageRelease(tempImage);
+//    }else{
+//        aimage=[GetImagePath getImagePath:@"首页_16"];
+//    }
+    
+    MyView* imageView=[[MyView alloc]init];
+    imageView.frame=CGRectMake(0, 0, 320, 215.5);
+    imageView.layer.masksToBounds=YES;
+    imageView.backgroundColor=[UIColor grayColor];
+    [imageView observeImage];
     if (self.myDelegate.planImageArr.count) {
-        CameraModel *model;
-        if (self.myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
-            model = self.myDelegate.planImageArr[0];
-            if([model.a_device isEqualToString:@"localios"]){
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-            }else{
-                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-            }
-            
-        }else{
-            model=self.myDelegate.imgDic[@"planImageArr"];
-            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-        }
-        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
-        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
-        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
-        aimage=[UIImage imageWithCGImage:tempImage];
-        CGImageRelease(tempImage);
-    }else{
-        aimage=[GetImagePath getImagePath:@"首页_16"];
+        CameraModel *model= self.myDelegate.planImageArr[0];
+        imageView.myImageView.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body]];
     }
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
-    imageView.image=aimage;
-    imageView.image=[self saveImage:imageView];
     
     [view addSubview:imageView];
     
@@ -210,13 +221,6 @@
         [view addSubview:self.myDelegate.firstStageButton1];
     }
 }
-
-//+(void)tapImage:(UIButton*)button{
-//    if (button.tag==0) {
-//        //UIView animateWithDuration:.5 animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>
-//        [myDelegate userChangeImageWithButtons:button withImageView:[totalView.subviews[1] subviews][0]];
-//    }
-//}
 
 //第一行蓝，第二行黑，专门为土地信息做的view
 -(UIView*)getBlueThreeTypesTwoLinesWithFirstStr:(NSArray*)firstStrs secondStr:(NSArray*)secondStrs{
