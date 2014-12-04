@@ -21,6 +21,7 @@
 @property (nonatomic,strong) NSString *a_imgCompressionContent;
 @property(nonatomic)CGFloat imageHeight;
 @property(nonatomic)CGFloat imageWidth;
+@property(nonatomic)BOOL isNewImage;
 -(void)loadWithDictionary:(NSDictionary*)dic;
 -(void)loadWithDB:(NSDictionary*)dic;
 + (void)globalPostWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block parameters:(NSMutableDictionary *)parameters aid:(NSString *)aid;
