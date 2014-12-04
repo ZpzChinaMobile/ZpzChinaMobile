@@ -130,7 +130,6 @@
     if (!self.fromView) {
         [appModel getNew];
     }
-    
     //singleDic赋值只针对修改，新建页面无用
     self.singleDic=appModel.singleDic;
     
@@ -599,10 +598,13 @@
                                               otherButtonTitles:nil,nil];
         [alert show];
     }else{
+        
         NSMutableDictionary *dic = [ProjectStage JudgmentUpdataProjectStr:self.singleDic newDic:self.dataDic];
         
         [dic setValue:[self.singleDic objectForKey:self.isRelease?@"id":@"projectID"] forKeyPath:@"id"];
-        
+        NSString *stage = [ProjectStage JudgmentProjectStage:dic];
+        [dic setValue:stage forKey:@"projectStage"];
+        //NSLog(@"%@",dic);
         //保存项目
         [ProjectSqlite InsertUpdataServerData:dic];
         

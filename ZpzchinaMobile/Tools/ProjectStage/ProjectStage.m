@@ -45,6 +45,7 @@
 
 +(NSMutableDictionary *)JudgmentStr:(ProjectModel *)model{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSLog(@"====>%@",model.a_stage);
     [dic setObject:model.a_stage forKey:@"projectStage"];
     if([[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"(null)"]){
         [dic setObject:@"" forKey:@"id"];
@@ -386,7 +387,7 @@
 
 
 +(NSMutableDictionary *)JudgmentUpdataProjectStr:(NSMutableDictionary *)oldDic newDic:(NSMutableDictionary *)newDic{
-    //NSLog(@"%@",newDic);
+    NSLog(@"%@",oldDic);
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[newDic objectForKey:@"id"] forKey:@"id"];
     //土地规划/拍卖
@@ -690,7 +691,9 @@
        ![[dic objectForKey:@"areaOfStructure"] isEqualToString:@"null"] ||
        ![[dic objectForKey:@"storeyHeight"] isEqualToString:@"null"] ||
        ![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"null"]){
-        stage = @"1";
+        if(![[dic objectForKey:@"expectedStartTime"] isEqualToString:@"0"]){
+            stage = @"1";
+        }
     }
     
     if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""] ||
@@ -705,13 +708,22 @@
        ![[dic objectForKey:@"propertyHeating"] isEqualToString:@"null"] ||
        ![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"null"] ||
        ![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"null"]){
-        stage = @"2";
+        if(![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@"0"]||
+           ![[dic objectForKey:@"propertyElevator"] isEqualToString:@"0"] ||
+           ![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"0"] ||
+           ![[dic objectForKey:@"propertyHeating"] isEqualToString:@"0"] ||
+           ![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"0"] ||
+           ![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"0"]){
+            stage = @"2";
+        }
     }
     
     if(![[dic objectForKey:@"actualStartTime"] isEqualToString:@""] ||
        ![[dic objectForKey:@"fireControl"] isEqualToString:@""] ||
        ![[dic objectForKey:@"green"] isEqualToString:@""] ){
-        stage = @"3";
+        if(![[dic objectForKey:@"actualStartTime"] isEqualToString:@"0"]){
+            stage = @"3";
+        }
     }
     
     if(![[dic objectForKey:@"electroweakInstallation"] isEqualToString:@""] ||

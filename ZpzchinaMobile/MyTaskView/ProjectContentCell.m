@@ -107,7 +107,7 @@
 }
 
 -(void)setDic:(NSMutableDictionary *)dic{
-    NSLog(@"%@",dic[@"projectStage"]);
+    NSLog(@"%@",dic);
     nameLabel.text = [dic objectForKey:@"projectName"];
     if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
         investmentcountLabel.text = @"0";

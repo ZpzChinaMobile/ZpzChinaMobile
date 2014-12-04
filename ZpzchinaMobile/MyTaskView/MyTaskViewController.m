@@ -441,8 +441,9 @@ int startIndex;
                                         nil];
         
         for(int i=0;i<parametersdata.allKeys.count;i++){
-            //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
-            if([parametersdata[parametersdata.allKeys[i]] isEqualToString:@"null"]){
+            NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
+            NSLog(@"%@",[parametersdata[parametersdata.allKeys[i]] class]);
+            if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){
                 [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
             }
         }
@@ -567,7 +568,7 @@ int startIndex;
                                         nil];
         for(int i=0;i<parametersdata.allKeys.count;i++){
             //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
-            if([parametersdata[parametersdata.allKeys[i]] isEqualToString:@"null"]){
+            if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){
                 [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
             }
         }

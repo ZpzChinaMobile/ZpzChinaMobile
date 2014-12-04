@@ -145,6 +145,7 @@
             aid = [dic objectForKey:@"id"];
             status = @"2";
         }
+        
         [sqlite executeQuery:@"INSERT INTO Project(id, projectId,projectCode,projectVersion,landName,district,province,city,landAddress,area,plotRatio,usage,auctionUnit,projectName,description,owner,expectedStartTime,expectedFinishTime,investment,areaOfStructure,storeyHeight,foreignInvestment,ownerType,longitude,latitude,mainDesignStage,propertyElevator,propertyAirCondition,propertyHeating,propertyExternalWallMeterial,propertyStealStructure,actualStartTime,fireControl,green,electroweakInstallation,decorationSituation,decorationProgress,projectStage,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
          aid,[dic objectForKey:@"projectID"],[dic objectForKey:@"projectCode"],[dic objectForKey:@"projectVersion"],[dic objectForKey:@"landName"],[dic objectForKey:@"district"],[dic objectForKey:@"province"],[dic objectForKey:@"city"],[dic objectForKey:@"landAddress"],[dic objectForKey:@"area"],[dic objectForKey:@"plotRatio"],[dic objectForKey:@"usage"],[dic objectForKey:@"auctionUnit"],[dic objectForKey:@"projectName"],[dic objectForKey:@"description"],[dic objectForKey:@"owner"],[dic objectForKey:@"expectedStartTime"],[dic objectForKey:@"expectedFinishTime"],[dic objectForKey:@"investment"],[dic objectForKey:@"areaOfStructure"],[dic objectForKey:@"storeyHeight"],[dic objectForKey:@"foreignInvestment"],[dic objectForKey:@"ownerType"],[dic objectForKey:@"longitude"],[dic objectForKey:@"latitude"],[dic objectForKey:@"mainDesignStage"],[dic objectForKey:@"propertyElevator"],[dic objectForKey:@"propertyAirCondition"],[dic objectForKey:@"propertyHeating"],[dic objectForKey:@"propertyExternalWallMeterial"],[dic objectForKey:@"propertyStealStructure"],[dic objectForKey:@"actualStartTime"],[dic objectForKey:@"fireControl"],[dic objectForKey:@"green"],[dic objectForKey:@"electroweakInstallation"],[dic objectForKey:@"decorationSituation"],[dic objectForKey:@"decorationProgress"],[dic objectForKey:@"projectStage"],status];
 	}
@@ -231,6 +232,7 @@
 +(void)InsertUpdataServerData:(NSDictionary *)dic{
     //NSLog(@"%@",dic);
     NSArray *tempArr = [ProjectSqlite loadServerDataStatus:[dic objectForKey:@"id"]];
+    NSLog(@"%d",tempArr.count);
     if(tempArr.count != 0){
         [ProjectSqlite UpdataDataStatus2:dic];
     }else{
