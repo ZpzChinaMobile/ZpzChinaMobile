@@ -772,10 +772,10 @@
             [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
             [dic setValue:model.a_projectID forKey:@"localProjectId"];
             [dic setValue:@"ios" forKey:@"device"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:model.a_body forKey:@"body"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [dic setValue:model.a_imgCompressionContent forKey:@"imgCompressionContent"];
             [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
@@ -794,10 +794,10 @@
             [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
             [dic setValue:model.a_projectID forKey:@"localProjectId"];
             [dic setValue:@"ios" forKey:@"device"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:model.a_body forKey:@"body"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [dic setValue:model.a_imgCompressionContent forKey:@"imgCompressionContent"];
             [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
@@ -817,10 +817,10 @@
             [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
             [dic setValue:model.a_projectID forKey:@"localProjectId"];
             [dic setValue:@"ios" forKey:@"device"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:model.a_body forKey:@"body"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [dic setValue:model.a_imgCompressionContent forKey:@"imgCompressionContent"];
             [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
@@ -840,10 +840,10 @@
             [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
             [dic setValue:model.a_projectID forKey:@"localProjectId"];
             [dic setValue:@"ios" forKey:@"device"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:model.a_body forKey:@"body"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [dic setValue:model.a_imgCompressionContent forKey:@"imgCompressionContent"];
             [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
@@ -863,10 +863,10 @@
             [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
             [dic setValue:model.a_projectID forKey:@"localProjectId"];
             [dic setValue:@"ios" forKey:@"device"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:model.a_body forKey:@"body"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [dic setValue:model.a_imgCompressionContent forKey:@"imgCompressionContent"];
             [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
@@ -886,10 +886,10 @@
             [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
             [dic setValue:model.a_projectID forKey:@"localProjectId"];
             [dic setValue:@"ios" forKey:@"device"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:model.a_body forKey:@"body"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [dic setValue:model.a_imgCompressionContent forKey:@"imgCompressionContent"];
             [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
@@ -921,10 +921,10 @@
             [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
             [dic setValue:model.a_projectID forKey:@"localProjectId"];
             [dic setValue:@"ios" forKey:@"device"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:model.a_body forKey:@"body"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
             [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
-            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [dic setValue:model.a_imgCompressionContent forKey:@"imgCompressionContent"];
             [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
