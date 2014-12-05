@@ -9,6 +9,7 @@
 #import "CycleScrollView.h"
 #import "CameraModel.h"
 #import "EGOImageView.h"
+#import "GTMBase64.h"
 @implementation CycleScrollView
 
 - (id)initWithFrame:(CGRect)frame cycleDirection:(CycleDirection)direction pictures:(NSArray *)pictureArray
@@ -69,7 +70,12 @@
         imageView.center=CGPointMake(160, scrollFrame.size.height*.5);
         NSLog(@"scroll frame = %@",NSStringFromCGRect(imageView.frame));
         imageView.userInteractionEnabled = YES;
-        imageView.imageURL =[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,image.a_body]];
+        if (image.isNewImage) {
+            imageView.image=[UIImage imageWithData:[GTMBase64 decodeString:image.a_body]];
+        }else{
+            imageView.imageURL =[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,image.a_body]];
+
+        }
         //imageView.image=[self saveImage:imageView];
         
         

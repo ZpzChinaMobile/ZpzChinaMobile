@@ -38,6 +38,10 @@
     self.imageWidth=[dic[@"Width"] floatValue];
 }
 
+-(BOOL)isNewImage{
+    return [self.a_device isEqualToString:@"localios"];
+}
+
 +(void)globalPostWithBlock:(void (^)(NSMutableArray *, NSError *))block parameters:(NSMutableDictionary *)parameters aid:(NSString *)aid{
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/ProjectImgs/",serverAddress] parameters:parameters error:nil];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];

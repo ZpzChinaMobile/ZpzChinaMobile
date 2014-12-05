@@ -241,7 +241,6 @@
 
 -(void)userChangeImageWithButtons:(UIButton *)button{
     NSLog(@"userChangeImage");
-    NSMutableArray* ary=[NSMutableArray array];
     AppModel* app=[AppModel sharedInstance];
     
     if (!self.enterToScrollView) {
@@ -271,6 +270,10 @@
             //self.highImages=[NSMutableArray array];
             //[self getImages:ary];
        // }
+//        for (int i=0; i<self.planImageArr.count; i++) {
+//            CameraModel* model=self.planImageArr[i];
+//            NSLog(@"%f",model.imageHeight);
+//        }
         [self gotoScrollImageViewWithImageAry:self.planImageArr];
         //        else{
 //            [self gotoScrollImageViewWithImageAry:app.planImageArr];//self.planImageArr];

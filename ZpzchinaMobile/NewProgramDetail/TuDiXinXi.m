@@ -200,7 +200,11 @@
     [imageView observeImage];
     if (self.myDelegate.planImageArr.count) {
         CameraModel *model= self.myDelegate.planImageArr[0];
-        imageView.myImageView.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body]];
+        if (model.isNewImage) {
+            imageView.myImageView.image=[UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+        }else{
+            imageView.myImageView.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body]];
+        }
     }
     
     [view addSubview:imageView];

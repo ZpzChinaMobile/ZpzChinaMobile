@@ -105,9 +105,9 @@
     [dic setValue:@"localios" forKey:@"device"];
     CameraModel* model=[[CameraModel alloc]init];
     [model loadWithDB:dic];
+    model.imageWidth=model.imageHeight=640;
     //[CameraSqlite InsertData:dic];
     if ([self.delegate respondsToSelector:@selector(backCamera:)]){
-        model.isNewImage=YES;
         [self.delegate backCamera:model];
     }
     [pickerController dismissViewControllerAnimated:YES completion:Nil];
