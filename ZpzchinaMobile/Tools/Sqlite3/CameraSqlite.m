@@ -15,10 +15,10 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documents = [paths objectAtIndex:0];
     NSString *database_path = [documents stringByAppendingPathComponent:DataBaseName];
-    //  NSLog(@"%@,=========%@",paths,database_path);
+      NSLog(@"%@,=========%@",paths,database_path);
     if (sqlite3_open([database_path UTF8String], &zpzchinaMobileDB)==SQLITE_OK) {
         NSLog(@"打开数据库成功!");
-        NSString *createSQL = @"CREATE TABLE IF NOT EXISTS Camera (id Text ,baseCameraID Text ,body Text,type TEXT,name Text,projectName Text,projectID Text,localProjectId Text,device Text,status Text); ";
+        NSString *createSQL = @"CREATE TABLE IF NOT EXISTS Camera (id Text ,baseCameraID Text ,body Text,type TEXT,name Text,projectName Text,projectID Text,localProjectId Text,device Text,height Text,width Text,imgCompressionContent Text,status Text); ";
         
         if (sqlite3_exec(zpzchinaMobileDB, [createSQL UTF8String], NULL, NULL, &errorMsg) != SQLITE_OK) {
             sqlite3_close(zpzchinaMobileDB);
@@ -72,8 +72,8 @@
     if(arr.count == 0){
         SqliteHelper *sqlite = [[SqliteHelper alloc] init];
         if ([sqlite open:DataBaseName]) {
-            [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,status) VALUES (?,?,?,?,?,?,?,?,?,'2');",
-             [dic objectForKey:@"id"],[dic objectForKey:@"name"],[dic objectForKey:@"baseCameraID"],[dic objectForKey:@"body"],[dic objectForKey:@"type"],[dic objectForKey:@"projectName"],[dic objectForKey:@"projectID"],[dic objectForKey:@"localProjectId"],[dic objectForKey:@"device"]];
+            [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,height,width,imgCompressionContent,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'2');",
+             [dic objectForKey:@"id"],[dic objectForKey:@"name"],[dic objectForKey:@"baseCameraID"],[dic objectForKey:@"body"],[dic objectForKey:@"type"],[dic objectForKey:@"projectName"],[dic objectForKey:@"projectID"],[dic objectForKey:@"localProjectId"],[dic objectForKey:@"device"],[dic objectForKey:@"height"],[dic objectForKey:@"width"],[dic objectForKey:@"imgCompressionContent"]];
         }
     }
 }
@@ -92,8 +92,8 @@
     if(arr.count == 0){
         SqliteHelper *sqlite = [[SqliteHelper alloc] init];
         if ([sqlite open:DataBaseName]) {
-            [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,status) VALUES (?,?,?,?,?,?,?,?,?,'2');",
-             model.a_id,model.a_name,model.a_baseCameraID,model.a_body,model.a_type,model.a_projectName,model.a_projectID,model.a_localProjectId,model.a_device];
+            [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,height,width,imgCompressionContent,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'2');",
+             model.a_id,model.a_name,model.a_baseCameraID,model.a_body,model.a_type,model.a_projectName,model.a_projectID,model.a_localProjectId,model.a_device,model.imageHeight,model.imageWidth,model.a_imgCompressionContent];
         }
     }
 }

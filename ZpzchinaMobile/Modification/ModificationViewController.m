@@ -121,7 +121,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getNoti) name:@"bigImage" object:nil];
+    //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getNoti) name:@"bigImage" object:nil];
     
     AppModel* appModel=[AppModel sharedInstance];
     NSLog(@"viewDidLoad");
@@ -130,7 +130,6 @@
     if (!self.fromView) {
         [appModel getNew];
     }
-    
     //singleDic赋值只针对修改，新建页面无用
     self.singleDic=appModel.singleDic;
     
@@ -599,10 +598,13 @@
                                               otherButtonTitles:nil,nil];
         [alert show];
     }else{
+        
         NSMutableDictionary *dic = [ProjectStage JudgmentUpdataProjectStr:self.singleDic newDic:self.dataDic];
         
         [dic setValue:[self.singleDic objectForKey:self.isRelease?@"id":@"projectID"] forKeyPath:@"id"];
-        
+        NSString *stage = [ProjectStage JudgmentProjectStage:dic];
+        [dic setValue:stage forKey:@"projectStage"];
+        //NSLog(@"%@",dic);
         //保存项目
         [ProjectSqlite InsertUpdataServerData:dic];
         
@@ -760,7 +762,21 @@
     for(int i=0;i<self.horizonImageArr.count;i++){
         CameraModel *model = [self.horizonImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            //[GetBigImage getbigimage:model.a_url];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:model.a_name forKey:@"name"];
+            [dic setValue:model.a_type forKey:@"type"];
+            [dic setValue:model.a_baseCameraID forKey:@"baseCameraID"];
+            [dic setValue:model.a_projectName forKey:@"projectName"];
+            [dic setValue:model.a_projectID forKey:@"projectID"];
+            int value = (arc4random() % 9999999) + 1000000;
+            [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
+            [dic setValue:model.a_projectID forKey:@"localProjectId"];
+            [dic setValue:@"ios" forKey:@"device"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -768,7 +784,21 @@
     for(int i=0;i<self.pilePitImageArr.count;i++){
         CameraModel *model = [self.pilePitImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            //[GetBigImage getbigimage:model.a_url];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:model.a_name forKey:@"name"];
+            [dic setValue:model.a_type forKey:@"type"];
+            [dic setValue:model.a_baseCameraID forKey:@"baseCameraID"];
+            [dic setValue:model.a_projectName forKey:@"projectName"];
+            [dic setValue:model.a_projectID forKey:@"projectID"];
+            int value = (arc4random() % 9999999) + 1000000;
+            [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
+            [dic setValue:model.a_projectID forKey:@"localProjectId"];
+            [dic setValue:@"ios" forKey:@"device"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -777,7 +807,21 @@
     for(int i=0;i<self.mainConstructionImageArr.count;i++){
         CameraModel *model = [self.mainConstructionImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            //[GetBigImage getbigimage:model.a_url];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:model.a_name forKey:@"name"];
+            [dic setValue:model.a_type forKey:@"type"];
+            [dic setValue:model.a_baseCameraID forKey:@"baseCameraID"];
+            [dic setValue:model.a_projectName forKey:@"projectName"];
+            [dic setValue:model.a_projectID forKey:@"projectID"];
+            int value = (arc4random() % 9999999) + 1000000;
+            [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
+            [dic setValue:model.a_projectID forKey:@"localProjectId"];
+            [dic setValue:@"ios" forKey:@"device"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -786,7 +830,21 @@
     for(int i=0;i<self.explorationImageArr.count;i++){
         CameraModel *model = [self.explorationImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            //[GetBigImage getbigimage:model.a_url];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:model.a_name forKey:@"name"];
+            [dic setValue:model.a_type forKey:@"type"];
+            [dic setValue:model.a_baseCameraID forKey:@"baseCameraID"];
+            [dic setValue:model.a_projectName forKey:@"projectName"];
+            [dic setValue:model.a_projectID forKey:@"projectID"];
+            int value = (arc4random() % 9999999) + 1000000;
+            [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
+            [dic setValue:model.a_projectID forKey:@"localProjectId"];
+            [dic setValue:@"ios" forKey:@"device"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -795,7 +853,21 @@
     for(int i=0;i<self.fireControlImageArr.count;i++){
         CameraModel *model = [self.fireControlImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            //[GetBigImage getbigimage:model.a_url];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:model.a_name forKey:@"name"];
+            [dic setValue:model.a_type forKey:@"type"];
+            [dic setValue:model.a_baseCameraID forKey:@"baseCameraID"];
+            [dic setValue:model.a_projectName forKey:@"projectName"];
+            [dic setValue:model.a_projectID forKey:@"projectID"];
+            int value = (arc4random() % 9999999) + 1000000;
+            [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
+            [dic setValue:model.a_projectID forKey:@"localProjectId"];
+            [dic setValue:@"ios" forKey:@"device"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -804,7 +876,21 @@
     for(int i=0;i<self.electroweakImageArr.count;i++){
         CameraModel *model = [self.electroweakImageArr objectAtIndex:i];
         if([model.a_device isEqualToString:@"ios"]){
-            //[GetBigImage getbigimage:model.a_url];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:model.a_name forKey:@"name"];
+            [dic setValue:model.a_type forKey:@"type"];
+            [dic setValue:model.a_baseCameraID forKey:@"baseCameraID"];
+            [dic setValue:model.a_projectName forKey:@"projectName"];
+            [dic setValue:model.a_projectID forKey:@"projectID"];
+            int value = (arc4random() % 9999999) + 1000000;
+            [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
+            [dic setValue:model.a_projectID forKey:@"localProjectId"];
+            [dic setValue:@"ios" forKey:@"device"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
@@ -812,12 +898,40 @@
     
     for(int i=0;i<self.planImageArr.count;i++){
         CameraModel *model = [self.planImageArr objectAtIndex:i];
+//            NSLog(@"==>%@",model.a_id);
+//            NSLog(@"==>%@",model.a_name);
+//            NSLog(@"==>%@",model.a_baseCameraID);
+//            NSLog(@"==>%@",model.a_body);
+//            NSLog(@"==>%@",model.a_type);
+//            NSLog(@"==>%@",model.a_projectName);
+//            NSLog(@"==>%@",model.a_projectID);
+//            NSLog(@"==>%@",model.a_localProjectId);
+//            NSLog(@"==>%@",model.a_device);
+//            NSLog(@"==>%@",model.a_imgCompressionContent);
+//            NSLog(@"==>%f",model.imageWidth);
+//            NSLog(@"==>%f",model.imageHeight);
         if([model.a_device isEqualToString:@"ios"]){
-            //[GetBigImage getbigimage:model.a_url];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:model.a_name forKey:@"name"];
+            [dic setValue:model.a_type forKey:@"type"];
+            [dic setValue:model.a_baseCameraID forKey:@"baseCameraID"];
+            [dic setValue:model.a_projectName forKey:@"projectName"];
+            [dic setValue:model.a_projectID forKey:@"projectID"];
+            int value = (arc4random() % 9999999) + 1000000;
+            [dic setValue:[NSString stringWithFormat:@"%d",value] forKey:@"id"];
+            [dic setValue:model.a_projectID forKey:@"localProjectId"];
+            [dic setValue:@"ios" forKey:@"device"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body] forKey:@"body"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageWidth] forKey:@"width"];
+            [dic setValue:[NSString stringWithFormat:@"%f",model.imageHeight] forKey:@"height"];
+            [dic setValue:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_imgCompressionContent] forKey:@"imgCompressionContent"];
+            [CameraSqlite InsertData:dic];
         }else if ([model.a_device isEqualToString:@"localios"]){
             [CameraSqlite InsertNewData:model];
         }
     }
+    
+    [self loadAlertView];
 }
 
 

@@ -441,8 +441,9 @@ int startIndex;
                                         nil];
         
         for(int i=0;i<parametersdata.allKeys.count;i++){
-            //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
-            if([parametersdata[parametersdata.allKeys[i]] isEqualToString:@"null"]){
+            NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
+            NSLog(@"%@",[parametersdata[parametersdata.allKeys[i]] class]);
+            if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){
                 [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
             }
         }
@@ -497,22 +498,28 @@ int startIndex;
 -(void)setImageServer:(NSInteger)index{
     if(index<imageArr.count){
         CameraModel *model = [imageArr objectAtIndex:index];
-        //[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],@"userToken"
-        NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:model.a_name,@"imgName",model.a_body,@"imgContent",model.a_projectName,@"project",model.a_type,@"category",model.a_projectID,@"projectID",@"ios",@"device",model.a_baseCameraID,@"imgID",nil];
-        //NSLog(@"%@",parametersdata);
-        NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-        [parameters setValue:parametersdata forKey:@"data"];
-        [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
-        
-        [CameraModel globalPostWithBlock:^(NSMutableArray *posts, NSError *error) {
-            if (!error) {
-                int j = index+1;
-                [self setImageServer:j];
-            }else{
-                [bgView removeFromSuperview];
-                bgView = nil;
-            }
-        } parameters:parameters aid:model.a_id];
+        if([model.a_device isEqualToString:@"ios"]){
+            [CameraSqlite delData:model.a_id];
+            int j = index+1;
+            [self setImageServer:j];
+        }else{
+            //[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],@"userToken"
+            NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:model.a_name,@"imgName",model.a_body,@"imgContent",model.a_projectName,@"project",model.a_type,@"category",model.a_projectID,@"projectID",@"ios",@"device",model.a_baseCameraID,@"imgID",nil];
+            //NSLog(@"%@",parametersdata);
+            NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+            [parameters setValue:parametersdata forKey:@"data"];
+            [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
+            
+            [CameraModel globalPostWithBlock:^(NSMutableArray *posts, NSError *error) {
+                if (!error) {
+                    int j = index+1;
+                    [self setImageServer:j];
+                }else{
+                    [bgView removeFromSuperview];
+                    bgView = nil;
+                }
+            } parameters:parameters aid:model.a_id];
+        }
     }else{
         NSLog(@"setImageServer结束");
         updataProjectArr = [ProjectSqlite loadUpdataData];
@@ -567,7 +574,7 @@ int startIndex;
                                         nil];
         for(int i=0;i<parametersdata.allKeys.count;i++){
             //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
-            if([parametersdata[parametersdata.allKeys[i]] isEqualToString:@"null"]){
+            if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){
                 [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
             }
         }

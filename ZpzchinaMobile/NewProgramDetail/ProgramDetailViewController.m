@@ -216,7 +216,7 @@
         AFHTTPRequestOperation *opSecond = [[AFHTTPRequestOperation alloc] initWithRequest:requestSecond];
         opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
         [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
-            
+            NSLog(@"%@",responseObjectSecond);
             //将高清图的cameraModel放进字典
             CameraModel* camera=[[CameraModel alloc]init];
             [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];
@@ -487,7 +487,7 @@
     [super viewDidLoad];
     //初始navi,创建返回Button,初始scrollView,初始加载新view的动画
     [self initNaviAndScrollView];
-    
+    NSLog(@"%@",self.dataDic);
     //加载时的等待菊花
     self.loadAnimationView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.loadAnimationView.color=[UIColor blackColor];
@@ -505,7 +505,6 @@
         //本地加载
 //        [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
 //        [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
-        
         if([[self.dataDic objectForKey:@"projectID"] isEqualToString:@""]){
             [self loadLocalContact:[self.dataDic objectForKey:@"id"]];
             [self loadLocalImage:[self.dataDic objectForKey:@"id"]];
@@ -558,7 +557,7 @@
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSLog(@"JSON: %@", responseObject);
+        NSLog(@"JSON: %@", responseObject);
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             NSArray *zz = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
@@ -568,7 +567,7 @@
                 
                 self.dataDic = [ProjectStage JudgmentStr:model];
                 
-                //NSLog(@"%@",self.dataDic);
+                NSLog(@"%@",self.dataDic);
                 //NSLog(@"contactItem%d",[[item objectForKey:@"baseContacts"] count]);
                 
                 for(NSDictionary *contactItem in [item objectForKey:@"baseContacts"]){
