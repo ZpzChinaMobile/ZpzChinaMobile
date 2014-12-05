@@ -166,33 +166,7 @@
     [self addSubview:view];
     height+=215.5;
     
-    
-//    UIImage *aimage;
-//    if (self.myDelegate.planImageArr.count) {
-//        CameraModel *model;
-//        if (self.myDelegate.isRelease) {//本地加载,则使用和网络层一样的属性的图,
-//            model = self.myDelegate.planImageArr[0];
-//            if([model.a_device isEqualToString:@"localios"]){
-//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-//                NSLog(@"body=====%@",model.a_body);
-//            }else{
-//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];                NSLog(@"=====%@",model.a_imgCompressionContent);
-//            }
-//            
-//        }else{
-//            model=self.myDelegate.imgDic[@"planImageArr"];
-//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-//            NSLog(@"body=====%@",model.a_body);
-//        }
-//        CGPoint center=CGPointMake(aimage.size.width*.5, aimage.size.height*.5);
-//        CGRect frame=CGRectMake(center.x-320, center.y-215.5, 320*2, 215.5*2);
-//        CGImageRef tempImage=CGImageCreateWithImageInRect([aimage CGImage], frame);
-//        aimage=[UIImage imageWithCGImage:tempImage];
-//        CGImageRelease(tempImage);
-//    }else{
-//        aimage=[GetImagePath getImagePath:@"首页_16"];
-//    }
-    
+    //图片imageView
     MyView* imageView=[[MyView alloc]init];
     imageView.frame=CGRectMake(0, 0, 320, 215.5);
     imageView.layer.masksToBounds=YES;

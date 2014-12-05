@@ -140,30 +140,31 @@
 }
 
 -(UIView*)getImageViewsWithImages:(NSArray*)images{
-    NSMutableArray* imageAry=[NSMutableArray array];
-    for (int i=0; i<images.count; i++) {
-        CameraModel* model= images[i];
-        [imageAry addObject:model.a_body];
-    }
-    //无用的元素，只为了数组个数+1
-    [imageAry addObject:@""];
-    
     CGFloat cellHeight=120;
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*((imageAry.count-1)/3+1))];
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*(images.count/3+1))];
     view.backgroundColor=RGBCOLOR(229, 229, 229);
     
-    for (int i=0; i<imageAry.count; i++) {
-        EGOImageView* imageView=[[EGOImageView alloc]initWithPlaceholderImage:[GetImagePath getImagePath:i==(imageAry.count-1)?@"018":@"imgDefault"]];
+    for (int i=0; i<images.count+1; i++) {
+        EGOImageView* imageView=[[EGOImageView alloc]initWithPlaceholderImage:[GetImagePath getImagePath:i==images.count?@"018":@"imgDefault"]];
         imageView.frame=CGRectMake(0, 0, 80, 80);
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
         [view addSubview:imageView];
         
-        if (i==imageAry.count-1) {
+        if (i==images.count) {
             UIButton* button=[[UIButton alloc]initWithFrame:imageView.frame];
             [button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
             [view addSubview:button];
         }else{
-            imageView.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,imageAry[i]]];
+            if ([images[i] isKindOfClass:[CameraModel class]]) {
+                CameraModel* model= images[i];
+                if (model.isNewImage) {
+                    imageView.image=[UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
+                }else{
+                    imageView.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,model.a_body]];
+                }
+            }else{
+                imageView.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,images[i]]];
+            }
         }
     }
     return view;

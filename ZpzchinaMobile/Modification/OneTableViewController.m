@@ -259,14 +259,6 @@
 }
 
 -(UIView*)getImageViewsWithImages:(NSArray*)images{
-   // NSMutableArray* imageAry=[NSMutableArray array];
-//    for (int i=0; i<images.count; i++) {
-//        CameraModel* model= images[i];
-//        [imageAry addObject:model.a_body];
-//    }
-    //无用的元素，只为了数组个数+1
-   // [imageAry addObject:@""];
-    
     CGFloat cellHeight=120;
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, cellHeight*(images.count/3+1))];
     view.backgroundColor=RGBCOLOR(229, 229, 229);
@@ -297,11 +289,6 @@
     return view;
 }
 
-/**
- *  因为
- *
- *  @param cameraModel <#cameraModel description#>
- */
 -(void)backCamera:(CameraModel *)cameraModel{
     if (!self.images) {
         self.images=[NSMutableArray array];
