@@ -698,10 +698,7 @@
                 }
             }
         }
-        
-        if (self.gotoBigImageCount==0) {
-            [self loadAlertView];
-        }
+        [self loadAlertView];
     }
 }
 
@@ -757,7 +754,6 @@
 }
 
 //保存图片至数据库
-#warning 不要忘记拉
 -(void)saveImage{
     for(int i=0;i<self.horizonImageArr.count;i++){
         CameraModel *model = [self.horizonImageArr objectAtIndex:i];
@@ -898,18 +894,6 @@
     
     for(int i=0;i<self.planImageArr.count;i++){
         CameraModel *model = [self.planImageArr objectAtIndex:i];
-//            NSLog(@"==>%@",model.a_id);
-//            NSLog(@"==>%@",model.a_name);
-//            NSLog(@"==>%@",model.a_baseCameraID);
-//            NSLog(@"==>%@",model.a_body);
-//            NSLog(@"==>%@",model.a_type);
-//            NSLog(@"==>%@",model.a_projectName);
-//            NSLog(@"==>%@",model.a_projectID);
-//            NSLog(@"==>%@",model.a_localProjectId);
-//            NSLog(@"==>%@",model.a_device);
-//            NSLog(@"==>%@",model.a_imgCompressionContent);
-//            NSLog(@"==>%f",model.imageWidth);
-//            NSLog(@"==>%f",model.imageHeight);
         if([model.a_device isEqualToString:@"ios"]){
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             [dic setValue:model.a_name forKey:@"name"];
@@ -931,7 +915,6 @@
         }
     }
     
-    [self loadAlertView];
 }
 
 
