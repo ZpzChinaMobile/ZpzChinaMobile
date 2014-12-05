@@ -216,7 +216,7 @@
         AFHTTPRequestOperation *opSecond = [[AFHTTPRequestOperation alloc] initWithRequest:requestSecond];
         opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
         [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
-            
+            NSLog(@"%@",responseObjectSecond);
             //将高清图的cameraModel放进字典
             CameraModel* camera=[[CameraModel alloc]init];
             [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];

@@ -21,6 +21,9 @@
     self.a_projectID = [dic valueForKey:@"projectID"];
     self.a_localProjectId = [dic valueForKey:@"localProjectId"];
     self.a_device = [dic valueForKey:@"device"];
+    self.a_imgCompressionContent = [dic valueForKey:@"imgCompressionContent"];
+    self.imageHeight=[dic[@"height"] floatValue];
+    self.imageWidth=[dic[@"width"] floatValue];
 }
 
 //服务器数据
