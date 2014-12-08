@@ -600,11 +600,12 @@
                                               otherButtonTitles:nil,nil];
         [alert show];
     }else{
-        NSArray *imgArr = [[NSArray alloc] initWithObjects:self.planImageArr,self.horizonImageArr,self.pilePitImageArr,self.mainConstructionImageArr,self.explorationImageArr,self.fireControlImageArr,self.electroweakImageArr,nil];
+        NSArray *imgArr = [[NSArray alloc] initWithObjects:appModel.planImageArr,appModel.horizonImageArr,appModel.pilePitImageArr,appModel.mainConstructionImageArr,appModel.explorationImageArr,appModel.fireControlImageArr,appModel.electroweakImageArr,nil];
         NSMutableDictionary *dic = [ProjectStage JudgmentUpdataProjectStr:self.singleDic newDic:self.dataDic];
         
         [dic setValue:[self.singleDic objectForKey:self.isRelease?@"id":@"projectID"] forKeyPath:@"id"];
         NSString *stage = [ProjectStage JudgmentProjectStage:dic contactArr:self.contacts imgArr:imgArr];
+        NSLog(@"stage===>%@",stage);
         [dic setValue:stage forKey:@"projectStage"];
         //NSLog(@"%@",dic);
         //保存项目
