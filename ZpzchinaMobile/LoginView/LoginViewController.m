@@ -192,6 +192,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        loginBtn.enabled=YES;
     }];
     [[NSOperationQueue mainQueue] addOperation:op];
 }

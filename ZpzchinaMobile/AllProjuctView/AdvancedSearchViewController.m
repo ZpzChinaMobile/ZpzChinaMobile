@@ -181,7 +181,7 @@
         
         arr = cityArr;
     }else if(button.tag == 104){
-        NSArray *newarr = [[NSArray alloc] initWithObjects:@"工业",@"酒店及餐饮",@"商务办公",@"住宅/经济适用房",@"公用事业设施（教育、医疗、科研、基础建设等）",@"其他",nil];
+        NSArray *newarr = [[NSArray alloc] initWithObjects:@"土地信息阶段",@"主体设计阶段",@"主体施工阶段",@"装修阶段",nil];
         arr = newarr;
     }else{
         NSArray *newarr = [[NSArray alloc] initWithObjects:@"工业",@"酒店及餐饮",@"商务办公",@"住宅/经济适用房",@"公用事业设施（教育、医疗、科研、基础建设等）",@"其他",nil];
