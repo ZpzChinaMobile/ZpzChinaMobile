@@ -74,8 +74,8 @@ static __weak ProgramDetailViewController* myDelegate;
         tempImageArr=myDelegate.horizonImageArr;
     }else if (sequence==2&&myDelegate.pilePitImageArr.count){
         tempImageArr=myDelegate.pilePitImageArr;
-    }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
-        tempImageArr=myDelegate.mainConstructionImageArr;
+    }else if(sequence==3&&imageNumber){
+        tempImageArr=[[myDelegate.mainConstructionImageArr arrayByAddingObjectsFromArray:myDelegate.fireControlImageArr] mutableCopy];
     }
 
     MyView* imageView=[[MyView alloc]init];
@@ -114,7 +114,7 @@ static __weak ProgramDetailViewController* myDelegate;
         [myDelegate.thirdStageButton2 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.thirdStageButton2];
         
-    }else if(sequence==3&&myDelegate.mainConstructionImageArr.count){
+    }else if(sequence==3&&tempImageArr.count){
         myDelegate.thirdStageButton3=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 215.5)];
         [myDelegate.thirdStageButton3 addTarget:myDelegate action:@selector(userChangeImageWithButtons:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:myDelegate.thirdStageButton3];

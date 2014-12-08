@@ -257,113 +257,24 @@
     [self.view addSubview:self.enterToScrollView];
     
     if (button==self.firstStageButton1) {
-        
         NSLog(@"firstStageButton1");
-        //if (!self.isRelease) {
-//            for (int i=0; i<self.planImageArr.count; i++) {
-//                CameraModel* camera=self.planImageArr[i];
-//                NSLog(@"%f",camera.imageWidth);
-//                if (camera.a_body) {
-//                    [ary addObject:camera.a_body];
-//                }
-//            }
-            //self.highImages=[NSMutableArray array];
-            //[self getImages:ary];
-       // }
-//        for (int i=0; i<self.planImageArr.count; i++) {
-//            CameraModel* model=self.planImageArr[i];
-//            NSLog(@"%f",model.imageHeight);
-//        }
         [self gotoScrollImageViewWithImageAry:self.planImageArr];
-        //        else{
-//            [self gotoScrollImageViewWithImageAry:app.planImageArr];//self.planImageArr];
-//        }
-        
     }else if(button==self.secondStageButton1){
         NSLog(@"secondStageButton1");
-        //if (!self.isRelease) {
-//            for (int i=0; i<self.explorationImageArr.count; i++) {
-//                CameraModel* camera=self.explorationImageArr[i];
-//                if (camera.a_body) {
-//                    [ary addObject:camera.a_body];
-//                }
-//            }
-//            self.highImages=[NSMutableArray array];
-//            [self getImages:ary];
         [self gotoScrollImageViewWithImageAry:self.explorationImageArr];
-        //}else{
-         //   [self gotoScrollImageViewWithImageAry:app.explorationImageArr];//self.explorationImageArr];
-        //}
-        
     }else if(button==self.thirdStageButton1){
         NSLog(@"thirdStageButton1");
-       // if (!self.isRelease) {
-//            for (int i=0; i<self.horizonImageArr.count; i++) {
-//                CameraModel* camera=self.horizonImageArr[i];
-//                if (camera.a_body) {
-//                    [ary addObject:camera.a_body];
-//                }
-//            }
-           // self.highImages=[NSMutableArray array];
-            //[self getImages:ary];
-       // }else{
-            [self gotoScrollImageViewWithImageAry:self.horizonImageArr];//self.horizonImageArr];
-       // }
-        
+        [self gotoScrollImageViewWithImageAry:self.horizonImageArr];
     }else if(button==self.thirdStageButton2){
         NSLog(@"thirdStageButton2");
-        //if (!self.isRelease) {
-//            for (int i=0; i<self.pilePitImageArr.count; i++) {
-//                CameraModel* camera=self.pilePitImageArr[i];
-//                if (camera.a_body) {
-//                    [ary addObject:camera.a_body];
-//                }
-//            }
-           // self.highImages=[NSMutableArray array];
-         //   [self getImages:ary];
-       // }else{
-            [self gotoScrollImageViewWithImageAry:self.pilePitImageArr];//self.pilePitImageArr];
-       // }
+        [self gotoScrollImageViewWithImageAry:self.pilePitImageArr];
     }else if(button==self.thirdStageButton3){
         NSLog(@"thirdStageButton3");
-       // if (!self.isRelease) {
-//            for (int i=0; i<self.mainConstructionImageArr.count; i++) {
-//                CameraModel* camera=self.mainConstructionImageArr[i];
-//                if (camera.a_body) {
-//                    [ary addObject:camera.a_body];
-//                }
-//            }
-        
-//            for (int i=0; i<self.fireControlImageArr.count; i++) {
-//                CameraModel* camera=self.fireControlImageArr[i];
-//                if (camera.a_body) {
-//                    [ary addObject:camera.a_body];
-//                }
-//            }
-        
-            
-           // self.highImages=[NSMutableArray array];
-           // [self getImages:ary];
-       // }else{
-            NSArray* array=[app.mainConstructionImageArr arrayByAddingObjectsFromArray:app.fireControlImageArr];
-            [self gotoScrollImageViewWithImageAry:[array mutableCopy]];//self.mainConstructionImageArr];
-       // }
-        
+        NSArray* array=[app.mainConstructionImageArr arrayByAddingObjectsFromArray:app.fireControlImageArr];
+            [self gotoScrollImageViewWithImageAry:[array mutableCopy]];
     }else if(button==self.fourthStageButton1){
         NSLog(@"fourthStageButton1");
-        //if (!self.isRelease) {
-//            for (int i=0; i<self.electroweakImageArr.count; i++) {
-//                CameraModel* camera=self.electroweakImageArr[i];
-//                if (camera.a_body) {
-//                    [ary addObject:camera.a_body];
-//                }
-//            }
-           // self.highImages=[NSMutableArray array];
-           // [self getImages:ary];
-        //}else{
-            [self gotoScrollImageViewWithImageAry:self.electroweakImageArr];//self.electroweakImageArr];
-       // }
-        
+        [self gotoScrollImageViewWithImageAry:self.electroweakImageArr];
     }
 }
 
@@ -910,7 +821,7 @@
             second=self.pilePitImageArr.count?YES:NO;
         }else if (indexPath.row==2){
             first=NO;
-            second=self.mainConstructionImageArr.count?YES:NO;
+            second=(self.mainConstructionImageArr.count+self.fireControlImageArr.count)?YES:NO;
         }else{
             first=NO;
             second=NO;
