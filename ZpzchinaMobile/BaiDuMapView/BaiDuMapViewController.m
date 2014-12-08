@@ -13,7 +13,7 @@
 #import "ProjectStage.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
-
+#import "ProgramDetailViewController.h"
 @interface BaiDuMapViewController ()
 @end
 
@@ -517,14 +517,31 @@ int j;
         ProjectModel *model = [showArr objectAtIndex:view.tag];
         NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
         _MapContent = [[MapContentView alloc] initWithFrame:CGRectMake(0, 568, 320, 190) dic:dic number:[numberArr objectAtIndex:view.tag]];
-        _MapContent.userInteractionEnabled = NO;
+        _MapContent.userInteractionEnabled = YES;
+        _MapContent.tag=view.tag;
         [self.view addSubview:_MapContent];
+        
+        [_MapContent addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoProgramDetailViewController:)]];
+        
         [UIView animateWithDuration:0.5 animations:^{
             _MapContent.frame = CGRectMake(0, 378, 611, 260);
         }];
     }else{
         imageView.userInteractionEnabled = NO;
     }
+}
+
+-(void)gotoProgramDetailViewController:(UIGestureRecognizer*)gesture{
+    ProjectModel *model = [showArr objectAtIndex:gesture.view.tag];
+    NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
+
+    ProgramDetailViewController* vc=[[ProgramDetailViewController alloc]init];
+    vc.url=dic[@"url"];
+    vc.isRelease=0;
+    vc.fromView=1;
+    vc.isFromAllProject=YES;
+    vc.ID=[dic objectForKey:@"projectID"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)removeAnnotationsOnTheMap
