@@ -14,5 +14,5 @@
 +(NSMutableDictionary *)JudgmentStr:(ProjectModel *)model;
 +(NSMutableDictionary *)JudgmentContactStr:(ContactModel *)model;
 +(NSMutableDictionary *)JudgmentUpdataProjectStr:(NSMutableDictionary *)oldDic newDic:(NSMutableDictionary *)newDic;
-+(NSString *)JudgmentProjectStage:(NSMutableDictionary *)dic;
++(NSString *)JudgmentProjectStage:(NSMutableDictionary *)dic contactArr:(NSArray *)contactArr imgArr:(NSArray *)imgArr;
 @end

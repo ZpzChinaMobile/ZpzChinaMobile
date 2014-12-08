@@ -35,7 +35,7 @@
     UIImageView *grayBgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 190)];
     [grayBgView setImage:[GetImagePath getImagePath:@"地图搜索1_16"]];
     
-    NSString *stage = [ProjectStage JudgmentProjectStage:dic];
+    NSString *stage = dic[@"projectStage"];
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15,25,291.5,151.5)];
     [bgImgView setImage:[GetImagePath getImagePath:@"地图搜索1_05"]];
     
