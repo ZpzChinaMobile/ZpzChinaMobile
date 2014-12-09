@@ -175,7 +175,7 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, 0, 320, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, -50, 320, self.view.frame.size.height)];
     textfield = nil;
     textfield = textField;
     closeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, self.view.frame.size.height)];

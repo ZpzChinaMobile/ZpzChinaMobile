@@ -110,9 +110,9 @@
     NSLog(@"%@",dic);
     nameLabel.text = [dic objectForKey:@"projectName"];
     if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
-        investmentcountLabel.text = @"0";
+        investmentcountLabel.text = @"¥ 0";
     }else{
-        investmentcountLabel.text = [dic objectForKey:@"investment"];
+        investmentcountLabel.text = [NSString stringWithFormat:@"¥ %@",[dic objectForKey:@"investment"]];
     }
     if([dic[@"projectStage"] isEqualToString:@"1"]||[dic[@"projectStage"] isEqualToString:@"0"]){
         [progressImage setImage:[GetImagePath getImagePath:@"全部项目_16"]];
@@ -124,10 +124,10 @@
         [progressImage setImage:[GetImagePath getImagePath:@"全部项目_13"]];
     }
     
-    if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]] isEqualToString:@"null"]){
-        areacountLabel.text = @"0";
+    if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]] isEqualToString:@"null"]){
+        areacountLabel.text = @"0㎡";
     }else{
-        areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
+        areacountLabel.text = [NSString stringWithFormat:@"%@㎡",[dic objectForKey:@"areaOfStructure"]];
     }
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];

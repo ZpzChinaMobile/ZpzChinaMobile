@@ -59,9 +59,12 @@
     [topView addSubview:bgImgView];
     
     //nav左边按钮
+    UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 28, 26.5, 14.5)];
+    [leftImage setImage:[GetImagePath getImagePath:@"icon__13"]];
+    [topView addSubview:leftImage];
     UIButton *leftBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(20, 28, 26.5, 14.5);
-    [leftBtn setImage:[GetImagePath getImagePath:@"icon__13"] forState:UIControlStateNormal];
+    leftBtn.frame = CGRectMake(20, 20, 40, 30);
+    //leftBtn.backgroundColor = [UIColor yellowColor];
     [leftBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [topView addSubview:leftBtn];
     

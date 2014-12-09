@@ -17,6 +17,7 @@
     UITextField *textfield;
     UIButton *btn;
     SinglePickerView *singlepickerview;
+    int index;
 }
 @property(retain,nonatomic)NSMutableArray *titleArr;
 @end
