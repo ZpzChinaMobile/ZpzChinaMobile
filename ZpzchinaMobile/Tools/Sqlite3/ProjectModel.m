@@ -124,6 +124,13 @@
                                                       cancelButtonTitle:@"确定"
                                                       otherButtonTitles:nil,nil];
                 [alert show];
+            }else if([[NSString stringWithFormat:@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"]] isEqualToString:@"1312"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"在其他设备中登录，请退出重新登录"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
             }
         }
         
@@ -154,6 +161,13 @@
             if([[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"] isEqualToString:@"No results in database"]){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                                 message:@"没有找到项目"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
+            }else if([[NSString stringWithFormat:@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"]] isEqualToString:@"1312"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"在其他设备中登录，请退出重新登录"
                                                                delegate:self
                                                       cancelButtonTitle:@"确定"
                                                       otherButtonTitles:nil,nil];
@@ -189,6 +203,13 @@
             if([[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"] isEqualToString:@"No results in database"]){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                                 message:@"没有找到项目"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
+            }else if([[NSString stringWithFormat:@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"]] isEqualToString:@"1312"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"在其他设备中登录，请退出重新登录"
                                                                delegate:self
                                                       cancelButtonTitle:@"确定"
                                                       otherButtonTitles:nil,nil];
@@ -234,6 +255,13 @@
                                                       cancelButtonTitle:@"确定"
                                                       otherButtonTitles:nil,nil];
                 [alert show];
+            }else if([[NSString stringWithFormat:@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"]] isEqualToString:@"1312"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"在其他设备中登录，请退出重新登录"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
             }
         }
         
@@ -271,7 +299,12 @@
                 block([NSMutableArray arrayWithArray:[[responseObject objectForKey:@"d"] objectForKey:@"data"]], nil);
             }
         }else{
-            NSLog(@"失败了");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"上传失败"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil,nil];
+            [alert show];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -295,7 +328,12 @@
                 block([NSMutableArray arrayWithArray:[[responseObject objectForKey:@"d"] objectForKey:@"data"]], nil);
             }
         }else{
-            NSLog(@"失败了");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"上传失败"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil,nil];
+            [alert show];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

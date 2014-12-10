@@ -29,12 +29,19 @@
 #import "UserSqlite.h"
 #import "UserModel.h"
 @implementation AppDelegate
+//static int j;
 + (AppDelegate *)instance {
 	return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-        
+//    j=0;
+//    NSError *setCategoryErr = nil;
+//    NSError *activationErr  = nil;
+//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryErr];
+//    [[AVAudioSession sharedInstance] setActive: YES error: &activationErr];
+//    [self initSound];
+    
     NSString *API_KEY = KAPI_KEY;
     NSString *API_SECRET = KAPI_SECRET;
     
@@ -129,27 +136,33 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    NSLog(@"applicationDidEnterBackground");
-    UIApplication*   app = [UIApplication sharedApplication];
-    __block    UIBackgroundTaskIdentifier bgTask;
-    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"结束");
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    }];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    });
-
+//    NSLog(@"applicationDidEnterBackground");
+//    UIApplication*   app = [UIApplication sharedApplication];
+//    __block    UIBackgroundTaskIdentifier bgTask;
+//    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"结束");
+//            if (bgTask != UIBackgroundTaskInvalid)
+//            {
+//                bgTask = UIBackgroundTaskInvalid;
+//            }
+//        });
+//    }];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (bgTask != UIBackgroundTaskInvalid)
+//            {
+//                bgTask = UIBackgroundTaskInvalid;
+//            }
+//        });
+//    });
+//    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+//    
+//    [NSTimer scheduledTimerWithTimeInterval:5
+//                                     target:self
+//                                   selector:@selector(tik)
+//                                   userInfo:nil
+//                                    repeats:YES];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -190,5 +203,20 @@
     }
 }
 
-
+//- (void)initSound
+//{
+//    player=[[AVAudioPlayer alloc] init];
+//}
+//
+//- (void)tik{
+//    NSLog(@"tik＝＝＝%d",j);
+//    if ([[UIApplication sharedApplication] backgroundTimeRemaining] < 61.0) {
+//        
+//        [player prepareToPlay];
+//        
+//        [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+//        
+//    }
+//    j++;
+//}
 @end
