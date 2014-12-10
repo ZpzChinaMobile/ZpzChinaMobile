@@ -474,7 +474,7 @@ int startIndex;
         ContactModel *model = [self.contactArr objectAtIndex:index];
         //[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],@"userToken"
         NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:model.a_contactName,@"name",model.a_mobilePhone,@"telephone",model.a_projectName,@"project",model.a_category,@"category",model.a_duties,@"duties",model.a_accountName,@"workAt",model.a_accountAddress,@"workAddress",model.a_projectId,@"projectID",model.a_projectName,@"project",model.a_baseContactID,@"baseContactID",nil];
-        //NSLog(@"%@",parametersdata);
+        NSLog(@"%@",parametersdata);
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];

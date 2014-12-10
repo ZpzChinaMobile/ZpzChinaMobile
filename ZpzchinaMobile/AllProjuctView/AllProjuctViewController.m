@@ -278,18 +278,23 @@ int startIndex;
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    [self.showArr removeAllObjects];
-    startIndex = 0;
     [searchBar resignFirstResponder];
-    [self.showArr removeAllObjects];
-    [self loadServer:_searchbar.text startIndex:startIndex];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *time = [dateFormatter stringFromDate:[NSDate date]];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setValue:_searchbar.text forKey:@"name"];
-    [dic setValue:time forKey:@"time"];
-    [RecordSqlite InsertData:dic];
+    NSLog(@"=====>%@",[_searchbar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]);
+    if(![[_searchbar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]){
+        startIndex = 0;
+        [self.showArr removeAllObjects];
+        [self loadServer:_searchbar.text startIndex:startIndex];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *time = [dateFormatter stringFromDate:[NSDate date]];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setValue:_searchbar.text forKey:@"name"];
+        [dic setValue:time forKey:@"time"];
+        [RecordSqlite InsertData:dic];
+    }else{
+        [_recordView removeFromSuperview];
+        _recordView = nil;
+    }
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{

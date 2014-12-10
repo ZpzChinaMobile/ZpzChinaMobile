@@ -87,7 +87,7 @@
     
     //建立6个共2行的label
     NSArray* ary1=@[@[@"预计开工时间",@"建筑层高",@"外资参与"],@[@"预计竣工时间",@"投资额",@"建筑面积"]];
-    NSArray* ary2=@[@[tempAry[0],[NSString stringWithFormat:@"%@M",dataDic[@"storeyHeight"]],[dataDic[@"foreignInvestment"] isEqualToString:@"1"]?@"Yes":@"No"],@[tempAry[1],[NSString stringWithFormat:@"%.3f",[dataDic[@"investment"]floatValue]],[NSString stringWithFormat:@"%@㎡",dataDic[@"areaOfStructure"]]]];
+    NSArray* ary2=@[@[tempAry[0],[NSString stringWithFormat:@"%@M",dataDic[@"storeyHeight"]],[dataDic[@"foreignInvestment"] isEqualToString:@"1"]?@"Yes":@"No"],@[tempAry[1],[NSString stringWithFormat:@"¥%.3f",[dataDic[@"investment"]floatValue]],[NSString stringWithFormat:@"%@㎡",dataDic[@"areaOfStructure"]]]];
     
     for (int k=0; k<2; k++) {
         for (int i=0; i<3; i++) {
