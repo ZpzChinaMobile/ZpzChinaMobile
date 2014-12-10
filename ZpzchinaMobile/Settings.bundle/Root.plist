@@ -18,7 +18,7 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>版本号</string>
+			<string>RC</string>
 			<key>Key</key>
 			<string>VERSION_INFO_LABEL</string>
 		</dict>

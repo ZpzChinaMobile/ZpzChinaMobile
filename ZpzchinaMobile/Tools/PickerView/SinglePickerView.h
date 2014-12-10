@@ -14,6 +14,7 @@
     NSString *selectStr;
 }
 @property(retain,nonatomic)NSString *selectStr;
+@property(nonatomic)int limitIndex;
 - (id)initWithTitle:(CGRect)frame title:(NSString *)title Arr:(NSArray *)Arr delegate:(id /*<UIActionSheetDelegate>*/)delegate;
 - (void)showInView:(UIView *)view;
 @end

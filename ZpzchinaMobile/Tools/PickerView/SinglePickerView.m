@@ -132,5 +132,6 @@
 
 - (void)selectIndex:(NSInteger)index {
     self.selectStr = [dataArr objectAtIndex:index];
+    self.limitIndex = (int)index;
 }
 @end

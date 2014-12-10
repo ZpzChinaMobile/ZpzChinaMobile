@@ -668,53 +668,60 @@
 //    }
     NSString *stage = [[NSString alloc] init];
     stage = @"1";
-    if(![[dic objectForKey:@"landName"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"district"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"province"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"landAddress"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"city"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"area"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"plotRatio"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"usage"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"auctionUnit"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"projectName"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"description"] isEqualToString:@""] ||
-       (![[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]&&![[dic objectForKey:@"expectedStartTime"] isEqualToString:@"0"]) ||
-       ![[dic objectForKey:@"investment"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"areaOfStructure"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"storeyHeight"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"foreignInvestment"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"ownerType"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"area"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"plotRatio"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"investment"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"areaOfStructure"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"storeyHeight"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"null"] ||
-       [contactArr[0] count] !=0 ||[contactArr[1] count] !=0||[imgArr[0] count] !=0){
+    if([[dic objectForKey:@"expectedStartTime"] isEqualToString:@"0"] || [[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
+        if(![[dic objectForKey:@"landName"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"district"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"province"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"landAddress"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"city"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"area"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"plotRatio"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"usage"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"auctionUnit"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"projectName"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"description"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"investment"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"areaOfStructure"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"storeyHeight"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"foreignInvestment"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"ownerType"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"area"] isEqualToString:@"null"] ||
+           ![[dic objectForKey:@"plotRatio"] isEqualToString:@"null"] ||
+           ![[dic objectForKey:@"investment"] isEqualToString:@"null"] ||
+           ![[dic objectForKey:@"areaOfStructure"] isEqualToString:@"null"] ||
+           ![[dic objectForKey:@"storeyHeight"] isEqualToString:@"null"] ||
+           ![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"null"] ||
+           [contactArr[0] count] !=0 ||[contactArr[1] count] !=0||[imgArr[0] count] !=0){
+            stage = @"1";
+        }
+    }else{
         stage = @"1";
     }
     
-    if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""] ||
-       (![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]&&![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@"0"] )||
-       (![[dic objectForKey:@"propertyElevator"] isEqualToString:@"0"]&&![[dic objectForKey:@"propertyElevator"] isEqualToString:@"0"] )||
-       (![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"0"]&&![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"0"]) ||
-       (![[dic objectForKey:@"propertyHeating"] isEqualToString:@"0"]&&![[dic objectForKey:@"propertyHeating"] isEqualToString:@"0"]) ||
-       (![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"0"]&&![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"0"]) ||
-       (![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"0"]&&![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"0"]) ||
-       ![[dic objectForKey:@"propertyElevator"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"propertyHeating"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"null"] ||
-       ![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"null"] ||
-       [contactArr[2] count] !=0||[contactArr[4] count] !=0||[contactArr[1] count] !=0||[imgArr[4] count] !=0){
+    NSLog(@"expectedFinishTime ===> %@",[dic objectForKey:@"expectedFinishTime"]);
+    if([[dic objectForKey:@"expectedFinishTime"] isEqualToString:@"0"] || [[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
+        NSLog(@"%@",imgArr[4]);
+        if(![[dic objectForKey:@"mainDesignStage"] isEqualToString:@""] ||
+           (![[dic objectForKey:@"propertyElevator"] isEqualToString:@"null"] &&![[dic objectForKey:@"propertyElevator"] isEqualToString:@"0"])||
+           (![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"null"]&& ![[dic objectForKey:@"propertyAirCondition"] isEqualToString:@"0"])||
+           (![[dic objectForKey:@"propertyHeating"] isEqualToString:@"null"]&& ![[dic objectForKey:@"propertyHeating"] isEqualToString:@"0"])||
+           (![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"null"]&& ![[dic objectForKey:@"propertyExternalWallMeterial"] isEqualToString:@"0"])||
+           (![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"null"]&& ![[dic objectForKey:@"propertyStealStructure"] isEqualToString:@"0"])||
+           [contactArr[2] count] !=0||[contactArr[4] count] !=0||[contactArr[1] count] !=0||[imgArr[4] count] !=0){
+            NSLog(@"asfasdfasdfasf");
+            stage = @"2";
+        }
+    }else{
         stage = @"2";
     }
     
-    if((![[dic objectForKey:@"actualStartTime"] isEqualToString:@""]&&![[dic objectForKey:@"actualStartTime"] isEqualToString:@"0"]) ||
-       ![[dic objectForKey:@"fireControl"] isEqualToString:@""] ||
-       ![[dic objectForKey:@"green"] isEqualToString:@""] ||
-       [contactArr[3] count] !=0 || [contactArr[5] count] !=0||[imgArr[1] count] !=0 || [imgArr[2] count] !=0 || [imgArr[3] count] !=0 || [imgArr[5] count] !=0){
+    if([[dic objectForKey:@"actualStartTime"] isEqualToString:@"0"] || [[dic objectForKey:@"actualStartTime"] isEqualToString:@""]){
+        if(![[dic objectForKey:@"fireControl"] isEqualToString:@""] ||
+           ![[dic objectForKey:@"green"] isEqualToString:@""] ||
+           [contactArr[3] count] !=0 || [contactArr[5] count] !=0||[imgArr[1] count] !=0 || [imgArr[2] count] !=0 || [imgArr[3] count] !=0 || [imgArr[5] count] !=0){
+            stage = @"3";
+        }
+    }else{
         stage = @"3";
     }
     
