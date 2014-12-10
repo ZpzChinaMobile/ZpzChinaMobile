@@ -15,6 +15,7 @@
 #import <MapKit/MapKit.h>
 #import "ProgramDetailViewController.h"
 @interface BaiDuMapViewController ()
+@property(nonatomic)BOOL isShowing;//只有当从搜索出来的小卡片点进项目详情时，self.isShowing才会为真，所以只有当从详情页回来到这个页面触发viewWillAppear时才会再将这个值改为假
 @end
 
 @implementation BaiDuMapViewController
@@ -32,6 +33,7 @@ int j;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isShowing=NO;
     [self addBackButton];
     [self addtittle:@"地图搜索"];
     hasProject = 0;
@@ -83,7 +85,12 @@ int j;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self myViewWillAppear];
+    if (!self.isShowing) {
+        [self myViewWillAppear];
+    }else{
+        //只有当从搜索出来的小卡片点进项目详情时，self.isShowing才会为真，所以只有当从详情页回来到这个页面触发viewWillAppear时才会再将这个值改为假
+        self.isShowing=!self.isShowing;
+    }
 }
 
 -(void)myViewWillAppear{
@@ -102,7 +109,9 @@ int j;
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
-    [self myViewWillDisappear];
+    if (!self.isShowing) {
+        [self myViewWillDisappear];
+    }
 }
 
 -(void)myViewWillDisappear{
@@ -532,6 +541,7 @@ int j;
 }
 
 -(void)gotoProgramDetailViewController:(UIGestureRecognizer*)gesture{
+    self.isShowing=YES;
     ProjectModel *model = [showArr objectAtIndex:gesture.view.tag];
     NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
 
