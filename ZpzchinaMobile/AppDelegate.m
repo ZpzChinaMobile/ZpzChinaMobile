@@ -29,12 +29,19 @@
 #import "UserSqlite.h"
 #import "UserModel.h"
 @implementation AppDelegate
+//static int j;
 + (AppDelegate *)instance {
 	return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-        
+//    j=0;
+//    NSError *setCategoryErr = nil;
+//    NSError *activationErr  = nil;
+//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryErr];
+//    [[AVAudioSession sharedInstance] setActive: YES error: &activationErr];
+//    [self initSound];
+    
     NSString *API_KEY = KAPI_KEY;
     NSString *API_SECRET = KAPI_SECRET;
     
@@ -190,5 +197,20 @@
     }
 }
 
-
+//- (void)initSound
+//{
+//    player=[[AVAudioPlayer alloc] init];
+//}
+//
+//- (void)tik{
+//    NSLog(@"tik＝＝＝%d",j);
+//    if ([[UIApplication sharedApplication] backgroundTimeRemaining] < 61.0) {
+//        
+//        [player prepareToPlay];
+//        
+//        [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+//        
+//    }
+//    j++;
+//}
 @end

@@ -217,6 +217,14 @@
         opSecond.responseSerializer = [AFJSONResponseSerializer serializer];
         [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
             NSLog(@"%@",responseObjectSecond);
+            if([[NSString stringWithFormat:@"%@",[[[responseObjectSecond objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"]] isEqualToString:@"1312"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"在其他设备中登录，请退出重新登录"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
+            }
             //将高清图的cameraModel放进字典
             CameraModel* camera=[[CameraModel alloc]init];
             [camera loadWithDictionary:responseObjectSecond[@"d"][@"data"][0]];
@@ -521,6 +529,14 @@
             }
         }else{
             NSLog(@"%@",[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
+            if([[NSString stringWithFormat:@"%@",[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"]] isEqualToString:@"1312"]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"在其他设备中登录，请退出重新登录"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
+            }
         }
         
 //        //获取高清图
