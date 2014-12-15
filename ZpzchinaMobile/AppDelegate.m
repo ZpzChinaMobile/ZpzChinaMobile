@@ -129,26 +129,26 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    NSLog(@"applicationDidEnterBackground");
-    UIApplication*   app = [UIApplication sharedApplication];
-    __block    UIBackgroundTaskIdentifier bgTask;
-    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"结束");
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    }];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    });
+//    NSLog(@"applicationDidEnterBackground");
+//    UIApplication*   app = [UIApplication sharedApplication];
+//    __block    UIBackgroundTaskIdentifier bgTask;
+//    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"结束");
+//            if (bgTask != UIBackgroundTaskInvalid)
+//            {
+//                bgTask = UIBackgroundTaskInvalid;
+//            }
+//        });
+//    }];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (bgTask != UIBackgroundTaskInvalid)
+//            {
+//                bgTask = UIBackgroundTaskInvalid;
+//            }
+//        });
+//    });
 
 }
 
