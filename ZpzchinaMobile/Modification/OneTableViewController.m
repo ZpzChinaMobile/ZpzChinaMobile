@@ -240,9 +240,9 @@
 
 -(void)beginEditWithHeight:(CGFloat)height{
     NSLog(@"beginEdit");
-    CGFloat a=height+((self.images.count)/3+1)*120-self.tableView.contentOffset.y;
-    if (a>=250) {
-        [self.delegate upTVCSpaceWithHeight:a-250+50];
+    CGFloat a=height+((self.images.count)/3+1)*120-self.tableView.contentOffset.y+45;//+45是因为需求改动后加入的左右阶段提示栏的高度
+    if (a>=210) {
+        [self.delegate upTVCSpaceWithHeight:a-210];
     }
 }
 
@@ -330,7 +330,7 @@
 }
 
 -(void)cellTextFieldResignFirstResponder{
-    for (UITextField* field in [[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] subviews][0] subviews]) {
+    for (UITextField* field in [[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] subviews]) {
         if ([field isFirstResponder]) {
             NSLog(@"%@",field);
             [field resignFirstResponder];
