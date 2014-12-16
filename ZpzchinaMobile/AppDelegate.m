@@ -156,7 +156,13 @@
 //            }
 //        });
 //    });
-
+//    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
+//    
+//    [NSTimer scheduledTimerWithTimeInterval:5
+//                                     target:self
+//                                   selector:@selector(tik)
+//                                   userInfo:nil
+//                                    repeats:YES];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

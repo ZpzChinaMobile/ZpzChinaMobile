@@ -316,9 +316,9 @@
 
 -(void)beginEditWithHeight:(CGFloat)height{
     NSLog(@"beginEdit");
-    CGFloat a=height-self.tableView.contentOffset.y;
-    if (a>=250) {
-        [self.delegate upTVCSpaceWithHeight:a-250+50];
+    CGFloat a=height-self.tableView.contentOffset.y+45;
+    if (a>=210) {
+        [self.delegate upTVCSpaceWithHeight:a-210];
     }
 }
 
@@ -332,7 +332,7 @@
 }
 
 -(void)cellTextFieldResignFirstResponder{
-    for (UITextField* field in [[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] subviews][0] subviews]) {
+    for (UITextField* field in [[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] subviews]) {
         if ([field isFirstResponder]) {
             NSLog(@"%@",field);
             [field resignFirstResponder];
