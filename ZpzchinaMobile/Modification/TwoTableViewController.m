@@ -186,7 +186,7 @@
                     [self.dataDic setObject:@"0" forKey:@"investment"];
                 }
             }else{
-                [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"investment"];
+                [self.dataDic setObject:str forKey:@"investment"];
             }
             break;
         case 3:

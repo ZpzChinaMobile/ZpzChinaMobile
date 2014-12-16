@@ -74,6 +74,7 @@
         [sqlite executeQuery:@"INSERT INTO Record(name,time ) VALUES (?,?);",
          [dic objectForKey:@"name"],[dic objectForKey:@"time"]];
 	}
+    [sqlite executeNonQuery:[NSString stringWithFormat:@"delete from Record where time <> '%@' and name = '%@'",dic[@"time"],dic[@"name"]]];
     NSMutableArray *arr =[RecordSqlite loadList];
     if(arr.count >10){
         [sqlite executeQuery:@"delete from Record Where time = (select min(time) from Record)"];

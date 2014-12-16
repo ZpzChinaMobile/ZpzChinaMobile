@@ -148,7 +148,7 @@
                     [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }
             }else{
-                [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"plotRatio"];
+                [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"plotRatio"];
             }
             break;
         default:

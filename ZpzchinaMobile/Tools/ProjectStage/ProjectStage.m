@@ -45,6 +45,7 @@
 
 +(NSMutableDictionary *)JudgmentStr:(ProjectModel *)model{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //NSLog(@"%@",model.a_landName);
     NSLog(@"====>%@",model.a_stage);
     [dic setObject:model.a_stage forKey:@"projectStage"];
     if([[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"(null)"]){
