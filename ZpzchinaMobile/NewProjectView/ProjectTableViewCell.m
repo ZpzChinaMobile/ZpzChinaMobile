@@ -209,6 +209,12 @@
         InvestmentLabe.text = @"投资额:";
         [self addSubview:InvestmentLabe];
         
+        UILabel *unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(270,314, 60, 30)];
+        unitLabel.font = myFont;
+        unitLabel.textColor = GrayColor;
+        unitLabel.text = @"百万";
+        [self addSubview:unitLabel];
+        
         UITextField *Investment = [[UITextField alloc] initWithFrame:CGRectMake(75,314, 150, 30)];
         Investment.delegate = self;
         Investment.textAlignment=NSTextAlignmentLeft;
