@@ -292,6 +292,13 @@ int startIndex;
         [dic setValue:time forKey:@"time"];
         [RecordSqlite InsertData:dic];
     }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请输入搜索内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        [cancelBtn setHidden:YES];
+        [UIView animateWithDuration:0.5 animations:^{
+            topBgView.frame = CGRectMake(30, 0,270, 64.5);
+        }];
+        _searchbar.text = @"";
         [_recordView removeFromSuperview];
         _recordView = nil;
     }
