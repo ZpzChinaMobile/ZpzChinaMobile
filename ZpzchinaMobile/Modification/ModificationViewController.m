@@ -506,7 +506,13 @@
         NSString *stage = [ProjectStage JudgmentProjectStage:self.dataDic contactArr:contactArr imgArr:imgArr];
         [self.dataDic setValue:stage forKey:@"projectStage"];
         NSLog(@"%@",self.dataDic);
-        
+        if([self.dataDic[@"landName"] isEqualToString:@""]&&[self.dataDic[@"projectName"] isEqualToString:@""]){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请输入地块名称或者项目名称" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            [self.shadowView removeFromSuperview];
+            [self selectCancel];
+            return;
+        }
         [ProjectSqlite InsertData:self.dataDic];
         
         if(appModel.contactAry.count){
@@ -609,6 +615,13 @@
         NSString *stage = [ProjectStage JudgmentProjectStage:dic contactArr:self.contacts imgArr:imgArr];
         NSLog(@"stage===>%@",stage);
         [dic setValue:stage forKey:@"projectStage"];
+        if([dic[@"landName"] isEqualToString:@""]&&[dic[@"projectName"] isEqualToString:@""]){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请输入地块名称或者项目名称" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            [self.shadowView removeFromSuperview];
+            [self selectCancel];
+            return;
+        }
         //NSLog(@"%@",dic);
         //保存项目
         [ProjectSqlite InsertUpdataServerData:dic];
