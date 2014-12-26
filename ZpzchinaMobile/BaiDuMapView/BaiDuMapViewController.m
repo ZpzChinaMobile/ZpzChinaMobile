@@ -16,6 +16,7 @@
 #import "ProgramDetailViewController.h"
 @interface BaiDuMapViewController ()
 @property(nonatomic)BOOL isShowing;//只有当从搜索出来的小卡片点进项目详情时，self.isShowing才会为真，所以只有当从详情页回来到这个页面触发viewWillAppear时才会再将这个值改为假
+@property(nonatomic)BOOL isSelect;
 @end
 
 @implementation BaiDuMapViewController
@@ -34,6 +35,7 @@ int j;
 {
     [super viewDidLoad];
     self.isShowing=NO;
+    self.isSelect = NO;
     [self addBackButton];
     [self addtittle:@"地图搜索"];
     hasProject = 0;
@@ -246,12 +248,21 @@ int j;
     if (annotationView == nil) {
         annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
 		[annotationView setImage:[GetImagePath getImagePath:@"地图搜索1_09"]];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 28.5, 30)];
-        label.textColor = [UIColor whiteColor];
-        label.font = [UIFont fontWithName:nil size:14];
-        label.text = [numberArr objectAtIndex:j];
-        label.textAlignment = NSTextAlignmentCenter;
-        [annotationView addSubview:label];
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 28.5, 30)];
+//        label.textColor = [UIColor whiteColor];
+//        label.font = [UIFont fontWithName:nil size:14];
+//        label.text = [numberArr objectAtIndex:j];
+//        label.textAlignment = NSTextAlignmentCenter;
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setFrame:CGRectMake(0, 0, 28.5, 30)];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setTitle:[numberArr objectAtIndex:j] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont fontWithName:nil size:14];
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        btn.tag = j;
+        [btn addTarget:self action:@selector(showContentView:) forControlEvents:UIControlEventTouchUpInside];
+        [annotationView addSubview:btn];
 		// 设置重天上掉下的效果(annotation)
         ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
         annotationView.tag = j;
@@ -511,8 +522,7 @@ int j;
 	return nil;
 }
 
-- (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view{
-    NSLog(@"didSelectAnnotationView");
+-(void)showContentView:(UIButton *)button{
     if(showArr.count !=0){
         bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64.5, 320, self.contentView.frame.size.height)];
         [bgView setBackgroundColor:[UIColor clearColor]];
@@ -523,11 +533,11 @@ int j;
         [bgViewtapGestureRecognizer setNumberOfTouchesRequired:1];
         [bgView addGestureRecognizer:bgViewtapGestureRecognizer];
         [self.view addSubview:bgView];
-        ProjectModel *model = [showArr objectAtIndex:view.tag];
+        ProjectModel *model = [showArr objectAtIndex:button.tag];
         NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
-        _MapContent = [[MapContentView alloc] initWithFrame:CGRectMake(0, 568, 320, 190) dic:dic number:[numberArr objectAtIndex:view.tag]];
+        _MapContent = [[MapContentView alloc] initWithFrame:CGRectMake(0, 568, 320, 190) dic:dic number:[numberArr objectAtIndex:button.tag]];
         _MapContent.userInteractionEnabled = YES;
-        _MapContent.tag=view.tag;
+        _MapContent.tag=button.tag;
         [self.view addSubview:_MapContent];
         
         [_MapContent addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoProgramDetailViewController:)]];
@@ -536,9 +546,17 @@ int j;
             _MapContent.frame = CGRectMake(0, 378, 611, 260);
         }];
     }else{
+        if(!self.isSelect){
+            [_mapView selectAnnotation:annotationPoint animated:YES];
+            self.isSelect = YES;
+        }else{
+            [_mapView deselectAnnotation:annotationPoint animated:YES];
+            self.isSelect = NO;
+        }
         imageView.userInteractionEnabled = NO;
     }
 }
+
 
 -(void)gotoProgramDetailViewController:(UIGestureRecognizer*)gesture{
     self.isShowing=YES;
