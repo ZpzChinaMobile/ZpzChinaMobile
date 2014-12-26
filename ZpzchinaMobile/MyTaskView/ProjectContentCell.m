@@ -48,8 +48,9 @@
     investmentLabel.text = @"投资额";
     [self addSubview:investmentLabel];
     
-    investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,71,140,20)];
+    investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,71,90,20)];
     investmentcountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    //investmentcountLabel.backgroundColor = [UIColor yellowColor];
     investmentcountLabel.textColor = [UIColor blackColor];
     [self addSubview:investmentcountLabel];
     
@@ -59,9 +60,10 @@
     areaLabel.text = @"建筑面积";
     [self addSubview:areaLabel];
     
-    areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,71,140,20)];
+    areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,71,90,20)];
     areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     areacountLabel.textColor = [UIColor blackColor];
+    //areacountLabel.backgroundColor = [UIColor redColor];
     [self addSubview:areacountLabel];
 
     progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(234,5,52,52)];

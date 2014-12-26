@@ -366,8 +366,8 @@ int startIndex;
 
 -(void)getSearchContent:(NSString *)searchContent{
     [_searchbar resignFirstResponder];
-    NSLog(@"=====>%@",[_searchbar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]);
-    if(![[_searchbar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]){
+    NSLog(@"=====>%@",[searchContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]);
+    if(![[searchContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]){
         [self.showArr removeAllObjects];
         [_searchbar setText:searchContent];
         startIndex = 0;
