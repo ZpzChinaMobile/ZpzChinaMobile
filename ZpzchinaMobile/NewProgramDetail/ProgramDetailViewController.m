@@ -406,7 +406,7 @@
     [super viewDidLoad];
     //初始navi,创建返回Button,初始scrollView,初始加载新view的动画
     [self initNaviAndScrollView];
-    NSLog(@"%@",self.dataDic);
+    NSLog(@"self.dataDic ===> %@",self.dataDic);
     //加载时的等待菊花
     self.loadAnimationView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.loadAnimationView.color=[UIColor blackColor];
@@ -472,6 +472,7 @@
 }
 
 -(void)doNetWorkFirst{
+    NSLog(@"%@",[NSString stringWithFormat:@"%s/%@",serverAddress,self.url]);
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/%@",serverAddress,self.url] parameters:nil error:nil];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];
