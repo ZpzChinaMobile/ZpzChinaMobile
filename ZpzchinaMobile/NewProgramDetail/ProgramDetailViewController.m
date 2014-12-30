@@ -66,7 +66,7 @@
 @property(nonatomic,strong)UIView* enterToScrollView;//进无限滚时的动画的背景
 @property(nonatomic,strong)UIActivityIndicatorView* scrollViewloadAnimationView;//进无限滚时的动画的背景时转菊花
 @property(nonatomic,strong)NSMutableDictionary* imgDic;//保存该页面的大图字典,键为@"horizonImageArr",@"pilePitImageArr",@"mainConstructionImageArr",@"explorationImageArr",@"fireControlImageArr",@"electroweakImageArr",@"planImageArr"
-
+@property(nonatomic)BOOL addObserverSucess;
 
 @end
 
@@ -469,6 +469,7 @@
     [self setOriginToView:self.tuDiXinXi];
     [self initTableView];
     [self.myScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    self.addObserverSucess=YES;
 }
 
 -(void)doNetWorkFirst{
@@ -1012,7 +1013,9 @@
 }
 
 -(void)dealloc{
-    [self.myScrollView removeObserver:self forKeyPath:@"contentOffset"];
+    if (self.addObserverSucess) {
+        [self.myScrollView removeObserver:self forKeyPath:@"contentOffset"];
+    }
     if (self.tuDiXinXi) {
         [TuDiXinXi myDealloc];
     }
