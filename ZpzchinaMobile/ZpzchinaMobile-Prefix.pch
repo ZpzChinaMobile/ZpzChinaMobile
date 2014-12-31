@@ -21,10 +21,11 @@
     #import "AFNetworking.h"
     #import "GetImagePath.h"
 #endif
-#define  serverAddress "http://eipqas.zhongjichina.com/ZPZChina.svc"
-#define imageAddress "http://eipqas.zhongjichina.com:2016/"
-//#define serverAddress "http://192.168.222.173:2015/ZPZChina.svc"
-//#define imageAddress "http://192.168.222.173:2016"
+//#define serverAddress "http://shenji.9966.org:60098/ZPZChina.svc"
+//#define  serverAddress "http://eipqas.zhongjichina.com/ZPZChina.svc"
+//#define imageAddress "http://eipqas.zhongjichina.com:2016"
+#define serverAddress "http://192.168.222.173:2015/ZPZChina.svc"
+#define imageAddress "http://192.168.222.173:2016"
 //#define  serverAddress "http://192.168.222.95:802/ZPZChina.svc"
 //#define  imageAddress "http://192.168.222.95:801"
 #define  kScreenWidth  [[UIScreen mainScreen] bounds].size.width
