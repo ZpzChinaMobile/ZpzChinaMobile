@@ -187,9 +187,10 @@ int startIndex;
 
 
 -(void)loadServer:(NSMutableDictionary *)dic startIndex:(int)startIndex{
-    NSString *urlStr = [NSString stringWithFormat:@"%s/projects/%@?startIndex=%d&pageSize=5&keywords=%@&company=%@&projectStage=%@&city=%@&province=%@&category=%@",serverAddress,[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],startIndex,[dic objectForKey:@"keyStr"],[dic objectForKey:@"companyName"],[dic objectForKey:@"projectStage"],[dic objectForKey:@"district"],[dic objectForKey:@"province"],[dic objectForKey:@"projectCategory"]];
+    NSString *urlStr = [NSString stringWithFormat:@"%s/projects/%@?startIndex=%d&pageSize=5&keywords=%@&company=%@&projectStage=%@&category=%@",serverAddress,[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],startIndex,[dic objectForKey:@"keyStr"],[dic objectForKey:@"companyName"],[dic objectForKey:@"projectStage"],[dic objectForKey:@"projectCategory"]];
     NSLog(@"%@",urlStr);
     NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)urlStr, NULL, NULL,  kCFStringEncodingUTF8 ));
+    NSLog(@"encode==%@",encodedString);
     NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:encodedString parameters:nil error:nil];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     op.responseSerializer = [AFJSONResponseSerializer serializer];

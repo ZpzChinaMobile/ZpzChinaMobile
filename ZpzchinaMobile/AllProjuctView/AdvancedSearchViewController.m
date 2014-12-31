@@ -44,7 +44,9 @@
     //_tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.contentView addSubview:_tableView];
     
-    self.titleArr = [[NSMutableArray alloc] initWithObjects:@"项目关键词",@"相关公司名称",@"省份",@"城市",@"项目阶段",@"项目类别", nil];
+    self.titleArr = [[NSMutableArray alloc] initWithObjects:@"项目关键词",@"相关公司名称",
+                     //ƒ@"省份",@"城市",
+                     @"项目阶段",@"项目类别", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,15 +129,15 @@
         case 1:
             [dataDic setValue:textField.text forKey:@"companyName"];
             break;
+//        case 2:
+//            [dataDic setValue:textField.text forKey:@"district"];
+//            break;
+//        case 3:
+//            [dataDic setValue:textField.text forKey:@"province"];
         case 2:
-            [dataDic setValue:textField.text forKey:@"district"];
-            break;
-        case 3:
-            [dataDic setValue:textField.text forKey:@"province"];
-        case 4:
             [dataDic setValue:textField.text forKey:@"projectStage"];
             break;
-        case 5:
+        case 3:
             [dataDic setValue:textField.text forKey:@"projectCategory"];
             break;
         default:
@@ -153,54 +155,55 @@
     UITextField *newText2 = (UITextField *)[newCell2.contentView viewWithTag:101];
     [newText2 resignFirstResponder];
     NSArray *arr = nil;
-    NSString *path = [[NSBundle mainBundle]pathForResource:@"area" ofType:@"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *allCityArray = [[NSMutableArray alloc] init];
+   // NSString *path = [[NSBundle mainBundle]pathForResource:@"area" ofType:@"plist"];
+    //NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+    //NSMutableArray *allCityArray = [[NSMutableArray alloc] init];
+//    if(button.tag == 102){
+//        NSMutableArray *allCityArray2 = [[NSMutableArray alloc] init];
+//        for (NSString *key in [dict allKeys]) {
+//            [allCityArray addObject:[dict objectForKey:key]];
+//        }
+//        
+//        for(int i=0;i<allCityArray.count;i++){
+//            [allCityArray2 addObject:[[allCityArray[i] allKeys] lastObject]];
+//        }
+//        arr = allCityArray2;
+//    }else if(button.tag == 103){
+//        NSLog(@"===>%@",dataDic[@"province"]);
+//        if([[NSString stringWithFormat:@"%@",dataDic[@"province"]] isEqualToString:@""]){
+//            NSString *path=[[NSBundle mainBundle] pathForResource:@"citydict"
+//                                                           ofType:@"plist"];
+//            NSMutableDictionary *cities = nil;
+//            cities = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+//            NSMutableArray *keys = [[NSMutableArray alloc] initWithArray:[cities allKeys]];
+//            NSMutableArray *cityArr = [[NSMutableArray alloc] init];
+//            for(int i=0;i<keys.count;i++){
+//                for(int l=0;l<[[cities objectForKey:[keys objectAtIndex:i]] count];l++){
+//                    [cityArr addObject:[[cities objectForKey:[keys objectAtIndex:i]] objectAtIndex:l]];
+//                }
+//            }
+//            
+//            arr = cityArr;
+//        }else{
+//            NSString *path = [[NSBundle mainBundle]pathForResource:@"area" ofType:@"plist"];
+//            NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+//            NSMutableArray *allCityArray = [[NSMutableArray alloc] init];
+//            NSMutableArray *cityArr = [[NSMutableArray alloc] init];
+//            for (NSString *key in [dict allKeys]) {
+//                //NSLog(@"%@",[dict objectForKey:key]);
+//                [allCityArray addObject:[dict objectForKey:key]];
+//            }
+//            NSDictionary *dictCity = [allCityArray[index] objectForKey:dataDic[@"province"]];
+//            for (NSString * k in [dictCity allKeys]) {
+//                NSDictionary *dict = [dictCity objectForKey:k];
+//                for (NSString *cityName in [dict allKeys]) {
+//                    [cityArr addObject:cityName];
+//                }
+//            }
+//            arr = cityArr;
+//        }
+//    }else
     if(button.tag == 102){
-        NSMutableArray *allCityArray2 = [[NSMutableArray alloc] init];
-        for (NSString *key in [dict allKeys]) {
-            [allCityArray addObject:[dict objectForKey:key]];
-        }
-        
-        for(int i=0;i<allCityArray.count;i++){
-            [allCityArray2 addObject:[[allCityArray[i] allKeys] lastObject]];
-        }
-        arr = allCityArray2;
-    }else if(button.tag == 103){
-        NSLog(@"===>%@",dataDic[@"province"]);
-        if([[NSString stringWithFormat:@"%@",dataDic[@"province"]] isEqualToString:@""]){
-            NSString *path=[[NSBundle mainBundle] pathForResource:@"citydict"
-                                                           ofType:@"plist"];
-            NSMutableDictionary *cities = nil;
-            cities = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-            NSMutableArray *keys = [[NSMutableArray alloc] initWithArray:[cities allKeys]];
-            NSMutableArray *cityArr = [[NSMutableArray alloc] init];
-            for(int i=0;i<keys.count;i++){
-                for(int l=0;l<[[cities objectForKey:[keys objectAtIndex:i]] count];l++){
-                    [cityArr addObject:[[cities objectForKey:[keys objectAtIndex:i]] objectAtIndex:l]];
-                }
-            }
-            
-            arr = cityArr;
-        }else{
-            NSString *path = [[NSBundle mainBundle]pathForResource:@"area" ofType:@"plist"];
-            NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
-            NSMutableArray *allCityArray = [[NSMutableArray alloc] init];
-            NSMutableArray *cityArr = [[NSMutableArray alloc] init];
-            for (NSString *key in [dict allKeys]) {
-                //NSLog(@"%@",[dict objectForKey:key]);
-                [allCityArray addObject:[dict objectForKey:key]];
-            }
-            NSDictionary *dictCity = [allCityArray[index] objectForKey:dataDic[@"province"]];
-            for (NSString * k in [dictCity allKeys]) {
-                NSDictionary *dict = [dictCity objectForKey:k];
-                for (NSString *cityName in [dict allKeys]) {
-                    [cityArr addObject:cityName];
-                }
-            }
-            arr = cityArr;
-        }
-    }else if(button.tag == 104){
         NSArray *newarr = [[NSArray alloc] initWithObjects:@"土地信息阶段",@"主体设计阶段",@"主体施工阶段",@"装修阶段",nil];
         arr = newarr;
     }else{
@@ -218,31 +221,40 @@
     UITableViewCell *newCell = (UITableViewCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:actionSheet.tag-100 inSection:0]];
     UIButton *newBtn = (UIButton *)[newCell.contentView viewWithTag:actionSheet.tag];
     singlepickerview = (SinglePickerView *)actionSheet;
+//    if(actionSheet.tag == 102){
+//        if(buttonIndex == 0) {
+//            NSLog(@"Cancel");
+//        }else {
+//            //NSLog(@"%d",singlepickerview.limitIndex);
+//            index = singlepickerview.limitIndex;
+//            [dataDic setValue:singlepickerview.selectStr forKey:@"province"];
+//            [newBtn setTitle:singlepickerview.selectStr forState:UIControlStateNormal];
+//        }
+//    }else if(actionSheet.tag == 103){
+//        
+//        if(buttonIndex == 0) {
+//            NSLog(@"Cancel");
+//        }else {
+//            [dataDic setValue:singlepickerview.selectStr forKey:@"district"];
+//            [newBtn setTitle:singlepickerview.selectStr forState:UIControlStateNormal];
+//        }
+//    }else
     if(actionSheet.tag == 102){
         if(buttonIndex == 0) {
             NSLog(@"Cancel");
         }else {
-            //NSLog(@"%d",singlepickerview.limitIndex);
-            index = singlepickerview.limitIndex;
-            [dataDic setValue:singlepickerview.selectStr forKey:@"province"];
+            /**
+             *  NSArray *newarr = [[NSArray alloc] initWithObjects:@"土地信息阶段",@"主体设计阶段",@"主体施工阶段",@"装修阶段",nil];
+             arr = newarr;
+             }else{
+             NSArray *newarr = [[NSArray alloc] initWithObjects:@"工业",@"酒店及餐饮",@"商务办公",@"住宅/经济适用房",@"公用事业设施（教育、医疗、科研、基础建设等）",@"其他",nil];
+             */
+            
+            NSString* stageNum=[NSString stringWithFormat:@"%d",singlepickerview.limitIndex+1];
+            [dataDic setValue:stageNum forKey:@"projectStage"];
             [newBtn setTitle:singlepickerview.selectStr forState:UIControlStateNormal];
         }
     }else if(actionSheet.tag == 103){
-        
-        if(buttonIndex == 0) {
-            NSLog(@"Cancel");
-        }else {
-            [dataDic setValue:singlepickerview.selectStr forKey:@"district"];
-            [newBtn setTitle:singlepickerview.selectStr forState:UIControlStateNormal];
-        }
-    }else if(actionSheet.tag == 104){
-        if(buttonIndex == 0) {
-            NSLog(@"Cancel");
-        }else {
-            [dataDic setValue:singlepickerview.selectStr forKey:@"projectStage"];
-            [newBtn setTitle:singlepickerview.selectStr forState:UIControlStateNormal];
-        }
-    }else if(actionSheet.tag == 105){
         if(buttonIndex == 0) {
             NSLog(@"Cancel");
         }else {
