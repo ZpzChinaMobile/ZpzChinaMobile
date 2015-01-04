@@ -510,7 +510,6 @@
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请输入地块名称或者项目名称" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alertView show];
             [self.shadowView removeFromSuperview];
-            [self selectCancel];
             return;
         }
         [ProjectSqlite InsertData:self.dataDic];
@@ -619,7 +618,6 @@
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请输入地块名称或者项目名称" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alertView show];
             [self.shadowView removeFromSuperview];
-            [self selectCancel];
             return;
         }
         //NSLog(@"%@",dic);

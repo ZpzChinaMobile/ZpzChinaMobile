@@ -332,12 +332,8 @@
 }
 
 -(void)cellTextFieldResignFirstResponder{
-    for (UITextField* field in [[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] subviews]) {
-        if ([field isFirstResponder]) {
-            NSLog(@"%@",field);
-            [field resignFirstResponder];
-        };
-    };
+    ProjectTableViewCell* cell=(ProjectTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [cell closeKeyBoard];
 }
 
 -(void)dealloc{
