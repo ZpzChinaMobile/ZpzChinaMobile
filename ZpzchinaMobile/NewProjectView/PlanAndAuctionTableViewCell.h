@@ -17,6 +17,7 @@
 -(void)updateContent:(BOOL)openRow;
 @property(nonatomic ,weak) id <PlanAndAuctionDelegate> delegate;
 @property(nonatomic,retain)NSMutableArray *dataArr;
+-(void)closeKeyBoard;
 @end
 @protocol PlanAndAuctionDelegate <NSObject>
 -(void)addContactView:(int)index;

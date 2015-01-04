@@ -22,6 +22,7 @@
 @property(nonatomic ,weak) id <ProjectDelegate> delegate;
 @property(retain,nonatomic)NIDropDown *dropDown;
 @property(nonatomic,retain)NSMutableArray *dataArr;
+-(void)closeKeyBoard;
 @end
 @protocol ProjectDelegate <NSObject>
 -(void)addContactViewProject:(int)index;

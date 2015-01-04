@@ -197,7 +197,7 @@
                     [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
                 }
             }else{
-                [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"areaOfStructure"];
+                [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"areaOfStructure"];
             }
             break;
         case 4:
@@ -208,7 +208,12 @@
                     [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
                 }
             }else{
-                [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"storeyHeight"];
+                if([str intValue]<=9999){
+                    [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"storeyHeight"];
+                }else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"建筑层高不能超过9999层" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
             }
             break;
         default:
@@ -332,12 +337,8 @@
 }
 
 -(void)cellTextFieldResignFirstResponder{
-    for (UITextField* field in [[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] subviews]) {
-        if ([field isFirstResponder]) {
-            NSLog(@"%@",field);
-            [field resignFirstResponder];
-        };
-    };
+    ProjectTableViewCell* cell=(ProjectTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [cell closeKeyBoard];
 }
 
 -(void)dealloc{
