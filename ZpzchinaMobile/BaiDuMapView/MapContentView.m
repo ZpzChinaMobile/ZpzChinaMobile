@@ -51,10 +51,10 @@
     investmentLabel.text = @"投资额";
     [bgImgView addSubview:investmentLabel];
     
-    UILabel *investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,71,140,20)];
+    UILabel *investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,71,90,20)];
     investmentcountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     investmentcountLabel.textColor = [UIColor blackColor];
-    investmentcountLabel.text = [dic objectForKey:@"investment"];
+    investmentcountLabel.text = [NSString stringWithFormat:@"￥%@",[dic objectForKey:@"investment"]];
     [bgImgView addSubview:investmentcountLabel];
     
     UILabel *areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,51,60,20)];
@@ -63,11 +63,11 @@
     areaLabel.text = @"建筑面积";
     [bgImgView addSubview:areaLabel];
     
-    UILabel *areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,71,140,20)];
+    UILabel *areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,71,90,20)];
     areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     areacountLabel.textColor = [UIColor blackColor];
     //areacountLabel.text = @"16,000M²";
-    areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
+    areacountLabel.text = [NSString stringWithFormat:@"%@㎡",[dic objectForKey:@"area"]];
     [bgImgView addSubview:areacountLabel];
     
     UIImageView *progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(220,5,52,52)];

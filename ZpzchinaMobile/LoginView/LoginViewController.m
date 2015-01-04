@@ -17,6 +17,7 @@
 #import "UserModel.h"
 #import "UserSqlite.h"
 #import "MD5.h"
+#import "MBProgressHUD.h"
 @interface LoginViewController ()
 
 @end
@@ -151,6 +152,12 @@
 
 #pragma mark  登录－－－－－－－－－－
 -(void)loginBtnClick{
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.mode = MBProgressHUDModeIndeterminate;
+    HUD.delegate = self;
+    HUD.labelText = @"登录中...";
+    [HUD showWhileExecuting:@selector(myProgressTask) onTarget:self withObject:nil animated:YES];
     //测试账号:zm 密码:123
     //登录接口
     NSLog(@"%@",[MD5 md5HexDigest:_passWordTextField.text]);
@@ -187,6 +194,7 @@
             UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"登录失败！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             alert.tag = 1;
             [alert show];
+            [HUD hide:YES];
             loginBtn.enabled=YES;
         }
         
@@ -199,7 +207,7 @@
 
 -(void)loginSuccess{             //登录成功
     loginBtn.enabled=YES;
-
+    [HUD hide:YES];
     UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"登录成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     alert.tag = 20140731;
     [alert show];
@@ -257,5 +265,15 @@
         }
 
     }
+}
+
+-(void) myProgressTask{
+    float progress = 0.0f;
+    while (progress < 1.0f) {
+        progress += 0.01f;
+        HUD.progress = progress;
+        usleep(5000000);
+    }  
+    
 }
 @end

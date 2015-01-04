@@ -378,11 +378,11 @@ int j;
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    [logArr removeAllObjects];
-    [latArr removeAllObjects];
-    [showArr removeAllObjects];
-    hasProject = 0;
     if(imageView){
+        [logArr removeAllObjects];
+        [latArr removeAllObjects];
+        [showArr removeAllObjects];
+        hasProject = 0;
         UITouch *touch = [touches anyObject];
         CGPoint location = [touch locationInView:imageView];
         CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
@@ -523,6 +523,7 @@ int j;
 }
 
 -(void)showContentView:(UIButton *)button{
+    NSLog(@"%d",showArr.count);
     if(showArr.count !=0){
         bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64.5, 320, self.contentView.frame.size.height)];
         [bgView setBackgroundColor:[UIColor clearColor]];
