@@ -22,8 +22,9 @@
 
 #import "AFAppDotNetAPIClient.h"
 
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://eipqas.zhongjichina.com/";
-//static NSString * const AFAppDotNetAPIBaseURLString = @"http://192.168.222.173:2015";
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://211.147.75.57/";
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://EIPQAS.zhongjichina.com/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://192.168.222.173:2015";
 @implementation AFAppDotNetAPIClient
 
 + (instancetype)sharedClient {
@@ -31,7 +32,7 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"http://eipqas.zhongjichi
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedClient = [[AFAppDotNetAPIClient alloc] initWithBaseURL:[NSURL URLWithString:AFAppDotNetAPIBaseURLString]];
-        _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        //_sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     });
     
     return _sharedClient;

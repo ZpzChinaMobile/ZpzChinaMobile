@@ -58,12 +58,16 @@
                 block([NSMutableArray arrayWithArray:[[responseObject objectForKey:@"d"] objectForKey:@"data"]], nil);
             }
         }else{
+            NSError *aError = [NSError errorWithDomain:@"aaa" code:999 userInfo:nil];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                             message:@"上传失败"
                                                            delegate:self
                                                   cancelButtonTitle:@"确定"
                                                   otherButtonTitles:nil,nil];
             [alert show];
+            if (block) {
+                block([NSMutableArray array], aError);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

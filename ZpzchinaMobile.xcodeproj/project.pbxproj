@@ -310,6 +310,7 @@
 		D3B8F54219D928E6008F6164 /* UserSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B8F54119D928E6008F6164 /* UserSqlite.m */; };
 		D3B8F54519D92BB0008F6164 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B8F54419D92BB0008F6164 /* UserModel.m */; };
 		D3B8F54B19D94930008F6164 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B8F54A19D94930008F6164 /* iflyMSC.framework */; };
+		D3BAA7BD1A590151008E613F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BAA7BC1A590151008E613F /* MBProgressHUD.m */; };
 		D3BB71AD1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71AC1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m */; };
 		D3BB71B01953DE9100A3F626 /* ProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71AF1953DE9100A3F626 /* ProjectTableViewCell.m */; };
 		D3BB71B31953DF1400A3F626 /* GeologicalSurveyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BB71B21953DF1400A3F626 /* GeologicalSurveyTableViewCell.m */; };
@@ -1157,6 +1158,8 @@
 		D3B8F54319D92BB0008F6164 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		D3B8F54419D92BB0008F6164 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		D3B8F54A19D94930008F6164 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = ZpzchinaMobile/AllProjuctView/voice/iflyMSC.framework; sourceTree = "<group>"; };
+		D3BAA7BB1A590151008E613F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		D3BAA7BC1A590151008E613F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		D3BB71AB1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanAndAuctionTableViewCell.h; sourceTree = "<group>"; };
 		D3BB71AC1953DB8B00A3F626 /* PlanAndAuctionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanAndAuctionTableViewCell.m; sourceTree = "<group>"; };
 		D3BB71AE1953DE9100A3F626 /* ProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTableViewCell.h; sourceTree = "<group>"; };
@@ -2288,6 +2291,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				D3BAA7BA1A590151008E613F /* MBProgressHUD */,
 				5B9988CA1A2FF9F9007D9ADF /* EGOImageView */,
 				D3A62C1E19ED22BF0008DADA /* MD5 */,
 				5BEAF93819EBCC6D00E323A2 /* libs */,
@@ -2554,6 +2558,15 @@
 				D346A00D196166D800CDDBDF /* SinglePickerView.m */,
 			);
 			path = PickerView;
+			sourceTree = "<group>";
+		};
+		D3BAA7BA1A590151008E613F /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D3BAA7BB1A590151008E613F /* MBProgressHUD.h */,
+				D3BAA7BC1A590151008E613F /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		D3BB72C019557D3100A3F626 /* inc */ = {
@@ -3550,6 +3563,7 @@
 				D3A4899519515C9700EED32D /* MyTaskViewController.m in Sources */,
 				D3C58E9A1980BD5E003DD94F /* FaceppInfo.m in Sources */,
 				D3A4FC46195E564100D3415C /* NIDropDown.m in Sources */,
+				D3BAA7BD1A590151008E613F /* MBProgressHUD.m in Sources */,
 				D31B269E19891F2600B05B03 /* GPUImageMedianFilter.m in Sources */,
 				5BE93BBB199C702B00E2FF67 /* FourTableViewController.m in Sources */,
 				D3A4897B19512A2600EED32D /* AFURLResponseSerialization.m in Sources */,

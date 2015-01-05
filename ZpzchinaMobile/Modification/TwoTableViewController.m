@@ -186,7 +186,12 @@
                     [self.dataDic setObject:@"0" forKey:@"investment"];
                 }
             }else{
-                [self.dataDic setObject:str forKey:@"investment"];
+                if([str floatValue]<=999999999){
+                    [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"investment"];
+                }else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
             }
             break;
         case 3:
@@ -197,7 +202,12 @@
                     [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
                 }
             }else{
-                [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"areaOfStructure"];
+                if([str floatValue]<=999999999){
+                    [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"areaOfStructure"];
+                }else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
             }
             break;
         case 4:
@@ -208,7 +218,12 @@
                     [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
                 }
             }else{
-                [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"storeyHeight"];
+                if([str intValue]<=9999){
+                    [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"storeyHeight"];
+                }else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"建筑层高不能超过9999层" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
             }
             break;
         default:
