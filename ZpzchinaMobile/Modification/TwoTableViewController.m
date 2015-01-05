@@ -179,13 +179,23 @@
             [self.dataDic setObject:str forKey:@"description"];
             break;
         case 2:
-            if([str isEqualToString:@""]){
-                if(self.fromView == 0){
-                    [self.dataDic setObject:@"0" forKey:@"investment"];
-                }else{
-                    [self.dataDic setObject:@"0" forKey:@"investment"];
-                }
-            }else{
+//            if([str isEqualToString:@""]){
+//                if(self.fromView == 0){
+//                    [self.dataDic setObject:@"0" forKey:@"investment"];
+//                }else{
+//                    [self.dataDic setObject:@"0" forKey:@"investment"];
+//                }
+//            }else{
+//                if([str floatValue]<=999999999){
+//                    [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"investment"];
+//                }else{
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//                    [alertView show];
+//                    [self.dataDic setObject:@"0" forKey:@"investment"];
+//                }
+//            }
+            
+            if(![str isEqualToString:@""]){
                 if([str floatValue]<=999999999){
                     [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"investment"];
                 }else{
@@ -196,13 +206,22 @@
             }
             break;
         case 3:
-            if([str isEqualToString:@""]){
-                if(self.fromView == 0){
-                    [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
-                }else{
-                    [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
-                }
-            }else{
+//            if([str isEqualToString:@""]){
+//                if(self.fromView == 0){
+//                    [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
+//                }else{
+//                    [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
+//                }
+//            }else{
+//                if([str floatValue]<=999999999){
+//                    [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"areaOfStructure"];
+//                }else{
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//                    [alertView show];
+//                    [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
+//                }
+//            }
+            if(![str isEqualToString:@""]){
                 if([str floatValue]<=999999999){
                     [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"areaOfStructure"];
                 }else{
@@ -213,13 +232,22 @@
             }
             break;
         case 4:
-            if([str isEqualToString:@""]){
-                if(self.fromView == 0){
-                    [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
-                }else{
-                    [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
-                }
-            }else{
+//            if([str isEqualToString:@""]){
+//                if(self.fromView == 0){
+//                    [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
+//                }else{
+//                    [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
+//                }
+//            }else{
+//                if([str intValue]<=9999){
+//                    [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"storeyHeight"];
+//                }else{
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"建筑层高不能超过9999层" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//                    [alertView show];
+//                    [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
+//                }
+//            }
+            if(![str isEqualToString:@""]){
                 if([str intValue]<=9999){
                     [self.dataDic setObject:[NSString stringWithFormat:@"%d",[str intValue]] forKey:@"storeyHeight"];
                 }else{
