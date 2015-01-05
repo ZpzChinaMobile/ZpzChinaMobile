@@ -137,7 +137,12 @@
                     [self.dataDic setObject:@"0" forKey:@"area"];
                 }
             }else{
-                [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"area"];
+                if([str floatValue]<=999999999){
+                    [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"area"];
+                }else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
             }
             break;
         case 3:
@@ -148,7 +153,12 @@
                     [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }
             }else{
-                [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"plotRatio"];
+                if([str floatValue]<=999999999){
+                    [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"plotRatio"];
+                }else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }
             }
             break;
         default:
