@@ -142,6 +142,7 @@
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
+                    [self.dataDic setObject:@"0" forKey:@"area"];
                 }
             }
             break;
@@ -158,6 +159,7 @@
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
+                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
                 }
             }
             break;

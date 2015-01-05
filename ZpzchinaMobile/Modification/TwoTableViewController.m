@@ -191,6 +191,7 @@
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
+                    [self.dataDic setObject:@"0" forKey:@"investment"];
                 }
             }
             break;
@@ -207,6 +208,7 @@
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
+                    [self.dataDic setObject:@"0" forKey:@"areaOfStructure"];
                 }
             }
             break;
@@ -223,6 +225,7 @@
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"建筑层高不能超过9999层" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
+                    [self.dataDic setObject:@"0" forKey:@"storeyHeight"];
                 }
             }
             break;
