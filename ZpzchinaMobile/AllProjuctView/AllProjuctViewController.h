@@ -30,6 +30,7 @@
     RecordView *_recordView;
     UIView *lineBgView;
     UIActivityIndicatorView *indicator;
+    NSString *allCount;
 }
 @property(retain,nonatomic)NSMutableArray *showArr;
 @end

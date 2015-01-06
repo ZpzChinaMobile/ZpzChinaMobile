@@ -130,15 +130,29 @@
             [[self.superVC.tvcArray[1] tableView]reloadData];
             break;
         case 2:
-            if([str isEqualToString:@""]){
-                if(self.fromView == 0){
-                    [self.dataDic setObject:@"0" forKey:@"area"];
-                }else{
-                    [self.dataDic setObject:@"0" forKey:@"area"];
-                }
-            }else{
+//            if([str isEqualToString:@""]){
+//                if(self.fromView == 0){
+//                    [self.dataDic setObject:@"0" forKey:@"area"];
+//                }else{
+//                    [self.dataDic setObject:@"0" forKey:@"area"];
+//                }
+//            }else{
+//                if([str floatValue]<=999999999){
+//                    [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"area"];
+//                }else{
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//                    [alertView show];
+//                    [self.dataDic setObject:@"0" forKey:@"area"];
+//                }
+//            }
+            if(![str isEqualToString:@""]){
                 if([str floatValue]<=999999999){
-                    [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"area"];
+                    NSArray *arr = [[NSString stringWithFormat:@"%f",[str doubleValue]] componentsSeparatedByString:@"."];
+                    if([[arr[1] substringToIndex:1] intValue] <5){
+                        [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str doubleValue]] forKey:@"area"];
+                    }else{
+                        [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",ceilf([str doubleValue])] forKey:@"area"];
+                    }
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
@@ -147,15 +161,24 @@
             }
             break;
         case 3:
-            if([str isEqualToString:@""]){
-                if(self.fromView == 0){
-                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
-                }else{
-                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
-                }
-            }else{
+//            if([str isEqualToString:@""]){
+//                if(self.fromView == 0){
+//                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
+//                }else{
+//                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
+//                }
+//            }else{
+//                if([str floatValue]<=999999999){
+//                    [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"plotRatio"];
+//                }else{
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//                    [alertView show];
+//                    [self.dataDic setObject:@"0" forKey:@"plotRatio"];
+//                }
+//            }
+            if(![str isEqualToString:@""]){
                 if([str floatValue]<=999999999){
-                    [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"plotRatio"];
+                    [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",round([str doubleValue]*100)/100] forKey:@"plotRatio"];
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];

@@ -42,10 +42,10 @@
     //nameLabel.text = @"上海中技桩业项目名称";
     [self addSubview:nameLabel];
     
-    investmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,51,50,20)];
+    investmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,51,85,20)];
     investmentLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     investmentLabel.textColor = BlueColor;
-    investmentLabel.text = @"投资额";
+    investmentLabel.text = @"投资额(百万)";
     [self addSubview:investmentLabel];
     
     investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,71,90,20)];
@@ -54,10 +54,10 @@
     investmentcountLabel.textColor = [UIColor blackColor];
     [self addSubview:investmentcountLabel];
     
-    areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,51,60,20)];
+    areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,51,75,20)];
     areaLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     areaLabel.textColor = BlueColor;
-    areaLabel.text = @"建筑面积";
+    areaLabel.text = @"建筑面积㎡";
     [self addSubview:areaLabel];
     
     areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,71,90,20)];
@@ -112,9 +112,9 @@
     NSLog(@"%@",dic);
     nameLabel.text = [dic objectForKey:@"projectName"];
     if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
-        investmentcountLabel.text = @"¥ 0";
+        investmentcountLabel.text = @"0";
     }else{
-        investmentcountLabel.text = [NSString stringWithFormat:@"¥ %@",[dic objectForKey:@"investment"]];
+        investmentcountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]];
     }
     if([dic[@"projectStage"] isEqualToString:@"1"]||[dic[@"projectStage"] isEqualToString:@"0"]){
         [progressImage setImage:[GetImagePath getImagePath:@"全部项目_16"]];
@@ -127,9 +127,9 @@
     }
     
     if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]] isEqualToString:@"null"]){
-        areacountLabel.text = @"0㎡";
+        areacountLabel.text = @"0";
     }else{
-        areacountLabel.text = [NSString stringWithFormat:@"%@㎡",[dic objectForKey:@"areaOfStructure"]];
+        areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]];
     }
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];

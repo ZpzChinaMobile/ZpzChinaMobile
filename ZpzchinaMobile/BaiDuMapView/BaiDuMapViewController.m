@@ -51,8 +51,7 @@ int j;
     latArr = [[NSMutableArray alloc] init];
     pointArr = [[NSMutableArray alloc] init];
     coordinates = [[NSMutableArray alloc] init];
-    //[self loadServer];
-    _mapView = [[BMKMapView alloc] initWithFrame:self.view.frame];
+    _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 505)];
     _mapView.zoomEnabled = YES;//允许Zoom
     _mapView.scrollEnabled = YES;//允许Scroll
     _mapView.mapType = BMKMapTypeStandard;//地图类型为标准，可以为卫星，可以开启或关闭交通
@@ -410,66 +409,7 @@ int j;
             
             CLLocationCoordinate2D centerLocation=CLLocationCoordinate2DMake((maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
             //NSLog(@"=====%f,%f",centerLocation.longitude,centerLocation.latitude);
-            [ProjectModel GetMapSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
-                if (!error) {
-                    //NSLog(@"map ===== %@",posts);
-                    showArr = posts;
-                    for(int i=0;i<posts.count;i++){
-                        ProjectModel *model = [posts objectAtIndex:i];
-                        if([[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@""]){
-                            [logArr addObject:@"0"];
-                        }else{
-                            [logArr addObject:model.a_longitude];
-                        }
-                        if([[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@""]){
-                            [latArr addObject:@"0"];
-                        }else{
-                            [latArr addObject:model.a_latitude];
-                        }
-                        //NSLog(@"log==>%@,lat===>%@",model.a_longitude,model.a_latitude);
-                    }
-                    
-                    
-                    int count = 0;
-                    if(logArr.count>26){
-                        count = 26;
-                    }else{
-                        count = logArr.count;
-                    }
-                    //地理坐标转换成点
-                    for(int i=0;i<count;i++){
-                        testLocation.latitude = [[latArr objectAtIndex:i] floatValue];
-                        testLocation.longitude = [[logArr objectAtIndex:i] floatValue];
-                        locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
-                        //NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
-                        if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
-                            
-                            NSLog(@"point in path!");
-                            hasProject = 1;
-                            ProjectModel *model = [posts objectAtIndex:i];
-                            annotationPoint = [[BMKPointAnnotation alloc]init];
-                            CLLocationCoordinate2D coor;
-                            coor.latitude = testLocation.latitude;
-                            coor.longitude = testLocation.longitude;
-                            annotationPoint.coordinate = coor;
-                            annotationPoint.title = model.a_landName;
-                            annotationPoint.subtitle = model.a_landAddress;
-                            [_mapView addAnnotation:annotationPoint];
-                            topCount++;
-                        }
-                    }
-                    [imageView removeFromSuperview];
-                    imageView = nil;
-                    if(hasProject == 0){
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                        message:@"没有找到项目"
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"确定"
-                                                              otherButtonTitles:nil,nil];
-                        [alert show];
-                    }
-                }
-            } longitude:[NSString stringWithFormat:@"%lf",centerLocation.longitude] latitude:[NSString stringWithFormat:@"%lf",centerLocation.latitude]];
+            [self getMapSearch:centerLocation startIndex:0];
         }
         CGPathCloseSubpath(pathRef);
     }
@@ -571,45 +511,6 @@ int j;
     annotationPoint = nil;
 }
 
-
--(void)loadServer{
-    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%s/projects/%@",serverAddress,[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"]] parameters:nil error:nil];
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    op.responseSerializer = [AFJSONResponseSerializer serializer];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSLog(@"JSON: %@", responseObject);
-        NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
-        if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
-            NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
-            for(NSDictionary *item in a){
-                ProjectModel *model = [[ProjectModel alloc] init];
-                [model loadWithDictionary:item];
-                [showArr addObject:model];
-            }
-        }else{
-            NSLog(@"%@",[[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
-        }
-        
-        for(int i=0;i<showArr.count;i++){
-            ProjectModel *model = [showArr objectAtIndex:i];
-            if([[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@""]){
-                [logArr addObject:@"0"];
-            }else{
-                [logArr addObject:model.a_longitude];
-            }
-            if([[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@""]){
-                [latArr addObject:@"0"];
-            }else{
-                [latArr addObject:model.a_latitude];
-            }
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-    [[NSOperationQueue mainQueue] addOperation:op];
-}
-
-
 -(void)closeBgview{
     [bgView removeFromSuperview];
     bgView=nil;
@@ -618,5 +519,70 @@ int j;
         [_MapContent removeFromSuperview];
         _MapContent = nil;
     }];
+}
+
+-(void)getMapSearch:(CLLocationCoordinate2D)centerLocation startIndex:(int)startIndex{
+    [ProjectModel GetMapSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
+        if (!error) {
+            //NSLog(@"map ===== %@",posts);
+            for(int i=0;i<posts.count;i++){
+                ProjectModel *model = [posts objectAtIndex:i];
+                if([[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@""]){
+                    [logArr addObject:@"0"];
+                }else{
+                    [logArr addObject:model.a_longitude];
+                }
+                if([[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_latitude] isEqualToString:@""]){
+                    [latArr addObject:@"0"];
+                }else{
+                    [latArr addObject:model.a_latitude];
+                }
+                NSLog(@"log==>%@,lat===>%@ ====>%@",model.a_longitude,model.a_latitude,model.a_projectName);
+            }
+            
+            
+            int count = 0;
+            if(logArr.count>26){
+                count = 26;
+            }else{
+                count = logArr.count;
+            }
+            //地理坐标转换成点
+            for(int i=0;i<count;i++){
+                testLocation.latitude = [[latArr objectAtIndex:i] floatValue];
+                testLocation.longitude = [[logArr objectAtIndex:i] floatValue];
+                locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
+                //NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
+                if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
+                    
+                    NSLog(@"point in path!");
+                    hasProject = 1;
+                    ProjectModel *model = [posts objectAtIndex:i];
+                    [showArr addObject:model];
+                    NSLog(@"%@",model.a_projectName);
+                    annotationPoint = [[BMKPointAnnotation alloc]init];
+                    CLLocationCoordinate2D coor;
+                    coor.latitude = testLocation.latitude;
+                    coor.longitude = testLocation.longitude;
+                    NSLog(@"%f,%f",testLocation.longitude,testLocation.latitude);
+                    annotationPoint.coordinate = coor;
+                    annotationPoint.title = model.a_landName;
+                    annotationPoint.subtitle = model.a_landAddress;
+                    [_mapView addAnnotation:annotationPoint];
+                    topCount++;
+                }
+            }
+            [imageView removeFromSuperview];
+            imageView = nil;
+            if(hasProject == 0){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"没有找到项目"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
+            }
+        }
+    } longitude:[NSString stringWithFormat:@"%lf",centerLocation.longitude] latitude:[NSString stringWithFormat:@"%lf",centerLocation.latitude]];
 }
 @end
