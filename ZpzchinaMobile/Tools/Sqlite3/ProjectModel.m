@@ -106,15 +106,19 @@
     NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)urlStr, NULL, NULL,  kCFStringEncodingUTF8 ));
     return [[AFAppDotNetAPIClient sharedClient] GET:encodedString parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
         NSLog(@"JSON===>%@",JSON);
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
         NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];
         NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
         NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
+        //NSLog(@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"totalCount"]);
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             for (NSDictionary *attributes in postsFromResponse) {
                 ProjectModel *model = [[ProjectModel alloc] init];
                 [model loadWithDictionary:attributes];
                 [mutablePosts addObject:model];
             }
+            [arr addObject:mutablePosts];
+            [arr addObject:[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"totalCount"]];
         }else{
             NSLog(@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
             if([[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"] isEqualToString:@"No results in database"]){
@@ -135,7 +139,7 @@
         }
         
         if (block) {
-            block([NSMutableArray arrayWithArray:mutablePosts], nil);
+            block([NSMutableArray arrayWithArray:arr], nil);
         }
     } failure:^(NSURLSessionDataTask *__unused task, NSError *error) {
         if (block) {

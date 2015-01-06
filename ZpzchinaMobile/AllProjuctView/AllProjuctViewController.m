@@ -244,7 +244,7 @@ int startIndex;
         countLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:12];
         countLabel.textColor = GrayColor;
         countLabel.textAlignment = NSTextAlignmentCenter;
-        countLabel.text = [NSString stringWithFormat:@"共计%d条",[self.showArr count]];
+        countLabel.text = [NSString stringWithFormat:@"共计%@条",allCount];
         [bgView addSubview:countLabel];
         return bgView;
     }
@@ -398,13 +398,14 @@ int startIndex;
 -(void)loadServer:(NSString *)text startIndex:(int)startIndex{
     [ProjectModel globalSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
         if (!error) {
-            [self.showArr addObjectsFromArray:posts];
+            [self.showArr addObjectsFromArray:posts[0]];
             [dataArr removeAllObjects];
             for(int i=0;i<self.showArr.count;i++){
                 ProjectModel *model = [self.showArr objectAtIndex:i];
                 NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
                 [dataArr addObject:dic];
             }
+            allCount = posts[1];
             [_tableView reloadData];
             [indicator stopAnimating];
             if(startIndex !=0){
