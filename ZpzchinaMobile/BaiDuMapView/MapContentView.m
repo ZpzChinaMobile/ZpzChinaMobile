@@ -45,29 +45,29 @@
     nameLabel.text = [dic objectForKey:@"projectName"];
     [bgImgView addSubview:nameLabel];
     
-    UILabel *investmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,51,50,20)];
+    UILabel *investmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,51,85,20)];
     investmentLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     investmentLabel.textColor = BlueColor;
-    investmentLabel.text = @"投资额";
+    investmentLabel.text = @"投资额(百万)";
     [bgImgView addSubview:investmentLabel];
     
     UILabel *investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,71,90,20)];
     investmentcountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     investmentcountLabel.textColor = [UIColor blackColor];
-    investmentcountLabel.text = [NSString stringWithFormat:@"￥%@",[dic objectForKey:@"investment"]];
+    investmentcountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]];
     [bgImgView addSubview:investmentcountLabel];
     
-    UILabel *areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,51,60,20)];
+    UILabel *areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,51,75,20)];
     areaLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     areaLabel.textColor = BlueColor;
-    areaLabel.text = @"建筑面积";
+    areaLabel.text = @"建筑面积㎡";
     [bgImgView addSubview:areaLabel];
     
     UILabel *areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,71,90,20)];
     areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     areacountLabel.textColor = [UIColor blackColor];
     //areacountLabel.text = @"16,000M²";
-    areacountLabel.text = [NSString stringWithFormat:@"%@㎡",[dic objectForKey:@"area"]];
+    areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"area"]];
     [bgImgView addSubview:areacountLabel];
     
     UIImageView *progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(220,5,52,52)];

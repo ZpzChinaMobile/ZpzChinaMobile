@@ -197,7 +197,7 @@
             
             if(![str isEqualToString:@""]){
                 if([str floatValue]<=999999999){
-                    [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",[str floatValue]] forKey:@"investment"];
+                    [self.dataDic setObject:[NSString stringWithFormat:@"%.2f",round([str doubleValue]*100)/100] forKey:@"investment"];
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];
@@ -223,7 +223,12 @@
 //            }
             if(![str isEqualToString:@""]){
                 if([str floatValue]<=999999999){
-                    [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str floatValue]] forKey:@"areaOfStructure"];
+                    NSArray *arr = [[NSString stringWithFormat:@"%f",[str doubleValue]] componentsSeparatedByString:@"."];
+                    if([[arr[1] substringToIndex:1] intValue] <5){
+                        [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",[str doubleValue]] forKey:@"areaOfStructure"];
+                    }else{
+                        [self.dataDic setObject:[NSString stringWithFormat:@"%.0f",ceilf([str doubleValue])] forKey:@"areaOfStructure"];
+                    }
                 }else{
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"数字过大" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alertView show];

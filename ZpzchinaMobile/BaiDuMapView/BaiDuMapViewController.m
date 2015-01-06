@@ -52,7 +52,8 @@ int j;
     pointArr = [[NSMutableArray alloc] init];
     coordinates = [[NSMutableArray alloc] init];
     //[self loadServer];
-    _mapView = [[BMKMapView alloc] initWithFrame:self.view.frame];
+    //_mapView = [[BMKMapView alloc] initWithFrame:self.view.frame];
+    _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 505)];
     _mapView.zoomEnabled = YES;//允许Zoom
     _mapView.scrollEnabled = YES;//允许Scroll
     _mapView.mapType = BMKMapTypeStandard;//地图类型为标准，可以为卫星，可以开启或关闭交通
@@ -424,7 +425,6 @@ int j;
             [ProjectModel GetMapSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
                 if (!error) {
                     //NSLog(@"map ===== %@",posts);
-                    showArr = posts;
                     for(int i=0;i<posts.count;i++){
                         ProjectModel *model = [posts objectAtIndex:i];
                         if([[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@""]){
@@ -437,7 +437,7 @@ int j;
                         }else{
                             [latArr addObject:model.a_latitude];
                         }
-                        //NSLog(@"log==>%@,lat===>%@",model.a_longitude,model.a_latitude);
+                        NSLog(@"log==>%@,lat===>%@ ====>%@",model.a_longitude,model.a_latitude,model.a_projectName);
                     }
                     
                     
@@ -458,10 +458,13 @@ int j;
                             NSLog(@"point in path!");
                             hasProject = 1;
                             ProjectModel *model = [posts objectAtIndex:i];
+                            [showArr addObject:model];
+                            NSLog(@"%@",model.a_projectName);
                             annotationPoint = [[BMKPointAnnotation alloc]init];
                             CLLocationCoordinate2D coor;
                             coor.latitude = testLocation.latitude;
                             coor.longitude = testLocation.longitude;
+                            NSLog(@"%f,%f",testLocation.longitude,testLocation.latitude);
                             annotationPoint.coordinate = coor;
                             annotationPoint.title = model.a_landName;
                             annotationPoint.subtitle = model.a_landAddress;
