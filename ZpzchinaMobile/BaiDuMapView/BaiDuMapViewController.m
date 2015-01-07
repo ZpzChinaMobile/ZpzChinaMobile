@@ -197,8 +197,6 @@ int j;
      CLLocationCoordinate2D coor;
      coor.latitude = result.location.latitude;
      coor.longitude = result.location.longitude;
-     testLocation.latitude=result.location.latitude;//设定测试点的坐标是当前位置
-     testLocation.longitude=result.location.longitude;
      annotationPoint.coordinate = coor;
      annotationPoint.title = result.address;
      [_mapView addAnnotation:annotationPoint];
@@ -583,13 +581,13 @@ int j;
         }else{
             [latArr addObject:model.a_latitude];
         }
-        //NSLog(@"log==>%@,lat===>%@ ====>%@",model.a_longitude,model.a_latitude,model.a_projectName);
+        NSLog(@"log==>%@,lat===>%@ ====>%@",model.a_longitude,model.a_latitude,model.a_projectName);
     }
     
     //地理坐标转换成点
     for(int i=0;i<posts.count;i++){
-        testLocation.latitude = [[latArr objectAtIndex:i] floatValue];
-        testLocation.longitude = [[logArr objectAtIndex:i] floatValue];
+        testLocation.latitude = [[latArr objectAtIndex:i] doubleValue];
+        testLocation.longitude = [[logArr objectAtIndex:i] doubleValue];
         locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
         //NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
         if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
@@ -633,6 +631,9 @@ int j;
 -(void)aaa{
     startIndex = startIndex+1;
     j = 0;
+    [showArr removeAllObjects];
+    [logArr removeAllObjects];
+    [latArr removeAllObjects];
     NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
     [_mapView removeAnnotations: annArray];
     annotationPoint = nil;
