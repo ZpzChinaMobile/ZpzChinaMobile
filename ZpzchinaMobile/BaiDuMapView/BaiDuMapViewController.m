@@ -589,7 +589,7 @@ int j;
         testLocation.latitude = [[latArr objectAtIndex:i] doubleValue];
         testLocation.longitude = [[logArr objectAtIndex:i] doubleValue];
         locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
-        //NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
+        NSLog(@"=====%@",pathRef);
         if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
             
             NSLog(@"point in path!");
