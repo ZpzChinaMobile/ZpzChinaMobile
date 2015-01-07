@@ -305,6 +305,9 @@ int j;
     }else{
         [imageView removeFromSuperview];
         imageView = nil;
+        _mapView.scrollEnabled = YES;
+        _mapView.zoomEnabled = YES;
+        _mapView.zoomEnabledWithTap = YES;
         if(topBgView == nil){
             topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64.5, 320,40)];
             [topBgView setBackgroundColor:[UIColor grayColor]];
@@ -341,7 +344,7 @@ int j;
         
         CGPathMoveToPoint(pathRef, NULL, location.x, location.y);
         
-        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
         [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
     }
 }
@@ -365,7 +368,7 @@ int j;
         
         CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
         
-        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
         [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
     }
 }
@@ -378,7 +381,8 @@ int j;
         hasProject = 0;
         UITouch *touch = [touches anyObject];
         CGPoint location = [touch locationInView:imageView];
-        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:_mapView];
+        CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
+        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
         [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
         
         
@@ -411,6 +415,7 @@ int j;
             //NSLog(@"%f,%f",(maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
             polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
             [_mapView addOverlay:polygon];
+            
             
             centerLocation=CLLocationCoordinate2DMake((maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
             //NSLog(@"=====%f,%f",centerLocation.longitude,centerLocation.latitude);
@@ -591,9 +596,8 @@ int j;
         locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
         NSLog(@"=====%@",pathRef);
         if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
-            
             NSLog(@"point in path!");
-            hasProject = 1;
+            NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
             ProjectModel *model = [posts objectAtIndex:i];
             [showArr addObject:model];
             NSLog(@"%@",model.a_projectName);
@@ -606,11 +610,19 @@ int j;
             annotationPoint.title = model.a_landName;
             annotationPoint.subtitle = model.a_landAddress;
             [_mapView addAnnotation:annotationPoint];
-            topCount++;
+            
+//            UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+//            image.center = CGPointMake(locationConverToImage.x, locationConverToImage.y);
+//            image.backgroundColor = [UIColor blueColor];
+//            [_mapView addSubview:image];
         }
     }
-    [imageView removeFromSuperview];
-    imageView = nil;
+    //[imageView removeFromSuperview];
+    //imageView = nil;
+    imageView.userInteractionEnabled = NO;
+    _mapView.scrollEnabled = NO;
+    _mapView.zoomEnabled = NO;
+    _mapView.zoomEnabledWithTap = NO;
     if(showArr.count == 0){
         startIndex = startIndex+1;
         if(startIndex>allCount){
@@ -639,4 +651,5 @@ int j;
     annotationPoint = nil;
     [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
 }
+
 @end
