@@ -84,6 +84,12 @@ int j;
     btn.backgroundColor = [UIColor yellowColor];
     [btn addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
+    
+    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn2.frame = CGRectMake(20,100, 40, 40);
+    btn2.backgroundColor = [UIColor yellowColor];
+    [btn2 addTarget:self action:@selector(bbb) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn2];
 }
 
 - (void)didReceiveMemoryWarning
@@ -652,4 +658,16 @@ int j;
     [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
 }
 
+
+-(void)bbb{
+    startIndex = startIndex+1;
+    j = 0;
+    [showArr removeAllObjects];
+    [logArr removeAllObjects];
+    [latArr removeAllObjects];
+    NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
+    [_mapView removeAnnotations: annArray];
+    annotationPoint = nil;
+    [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
+}
 @end
