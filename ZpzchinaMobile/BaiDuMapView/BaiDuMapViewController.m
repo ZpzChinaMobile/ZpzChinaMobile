@@ -78,6 +78,12 @@ int j;
     [btnView addSubview:drawBtn];
     
     [self.contentView addSubview:btnView];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(20,100, 40, 40);
+    btn.backgroundColor = [UIColor yellowColor];
+    [btn addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
 }
 
 - (void)didReceiveMemoryWarning
@@ -275,6 +281,7 @@ int j;
 
 -(void)drawFunction{
     j=0;
+    startIndex = 0;
     if(imageView == nil){
         topCount = 0;
         [topBgView removeFromSuperview];
@@ -608,7 +615,27 @@ int j;
     imageView = nil;
     if(showArr.count == 0){
         startIndex = startIndex+1;
-        [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
+        if(startIndex>allCount){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"没有找到项目"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil,nil];
+            [alert show];
+            [imageView removeFromSuperview];
+            imageView = nil;
+        }else{
+            [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
+        }
     }
+}
+
+-(void)aaa{
+    startIndex = startIndex+1;
+    j = 0;
+    NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
+    [_mapView removeAnnotations: annArray];
+    annotationPoint = nil;
+    [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
 }
 @end
