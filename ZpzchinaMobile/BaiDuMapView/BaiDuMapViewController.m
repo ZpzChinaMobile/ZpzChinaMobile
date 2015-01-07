@@ -339,108 +339,114 @@ int j;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //NSLog(@"%d",touches.count);
-    if(imageView){
-        UITouch *touch = [touches anyObject];
-        
-        CGPoint location = [touch locationInView:imageView];
-        
-        //创建path
-        
-        pathRef=CGPathCreateMutable();
-        
-        CGPathMoveToPoint(pathRef, NULL, location.x, location.y);
-        
-        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
-        [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+    if(!bgView){
+        if(imageView){
+            UITouch *touch = [touches anyObject];
+            
+            CGPoint location = [touch locationInView:imageView];
+            
+            //创建path
+            
+            pathRef=CGPathCreateMutable();
+            
+            CGPathMoveToPoint(pathRef, NULL, location.x, location.y);
+            
+            CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
+            [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+        }
     }
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    if(imageView){
-        UITouch *touch = [touches anyObject];
-        
-        CGPoint location = [touch locationInView:imageView];
-        
-        CGPoint pastLocation = [touch previousLocationInView:imageView];
-        
-        //画线
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pastLocation.x, pastLocation.y);
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), location.x, location.y);
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 0.0, 0.0, 1.0);  //颜色
-        CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
-        imageView.image=UIGraphicsGetImageFromCurrentImageContext();
-        
-        //更新Path
-        
-        CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
-        
-        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
-        [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+    if(!bgView){
+        if(imageView){
+            UITouch *touch = [touches anyObject];
+            
+            CGPoint location = [touch locationInView:imageView];
+            
+            CGPoint pastLocation = [touch previousLocationInView:imageView];
+            
+            //画线
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pastLocation.x, pastLocation.y);
+            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), location.x, location.y);
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 0.0, 0.0, 1.0);  //颜色
+            CGContextDrawPath(UIGraphicsGetCurrentContext(), kCGPathFillStroke);
+            imageView.image=UIGraphicsGetImageFromCurrentImageContext();
+            
+            //更新Path
+            
+            CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
+            
+            CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
+            [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
+        }
     }
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    if(imageView){
-        [logArr removeAllObjects];
-        [latArr removeAllObjects];
-        [showArr removeAllObjects];
-        hasProject = 0;
-        UITouch *touch = [touches anyObject];
-        CGPoint location = [touch locationInView:imageView];
-        CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
-        CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
-        [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
-        
-        
-        NSInteger numberOfPoints = [coordinates count];
-        
-        if (numberOfPoints > 2)
-        {
-            double maxLongitude=-9999;
-            double minLongitude=9999;
-            double maxLatitude=-9999;
-            double minLatitude=9999;
+    if(!bgView){
+        if(imageView){
+            [logArr removeAllObjects];
+            [latArr removeAllObjects];
+            [showArr removeAllObjects];
+            hasProject = 0;
+            UITouch *touch = [touches anyObject];
+            CGPoint location = [touch locationInView:imageView];
+            CGPathAddLineToPoint(pathRef, NULL, location.x, location.y);
+            CLLocationCoordinate2D coordinate = [_mapView convertPoint:location toCoordinateFromView:imageView];
+            [coordinates addObject:[NSValue valueWithMKCoordinate:coordinate]];
             
-            CLLocationCoordinate2D points[numberOfPoints];
-            for (NSInteger i = 0; i < numberOfPoints; i++) {
-                points[i] = [coordinates[i] MKCoordinateValue];
-                if (points[i].longitude>maxLongitude) {
-                    maxLongitude=points[i].longitude;
+            
+            NSInteger numberOfPoints = [coordinates count];
+            
+            if (numberOfPoints > 2)
+            {
+                double maxLongitude=-9999;
+                double minLongitude=9999;
+                double maxLatitude=-9999;
+                double minLatitude=9999;
+                
+                CLLocationCoordinate2D points[numberOfPoints];
+                for (NSInteger i = 0; i < numberOfPoints; i++) {
+                    points[i] = [coordinates[i] MKCoordinateValue];
+                    if (points[i].longitude>maxLongitude) {
+                        maxLongitude=points[i].longitude;
+                    }
+                    if (points[i].longitude<minLongitude){
+                        minLongitude=points[i].longitude;
+                    }
+                    if (points[i].latitude>maxLatitude){
+                        maxLatitude=points[i].latitude;
+                    }
+                    if (points[i].latitude<minLatitude){
+                        minLatitude=points[i].latitude;
+                    }
+                    //NSLog(@"point==%f,%f",points[i].latitude,points[i].longitude);
                 }
-                if (points[i].longitude<minLongitude){
-                    minLongitude=points[i].longitude;
-                }
-                if (points[i].latitude>maxLatitude){
-                    maxLatitude=points[i].latitude;
-                }
-                if (points[i].latitude<minLatitude){
-                    minLatitude=points[i].latitude;
-                }
-                //NSLog(@"point==%f,%f",points[i].latitude,points[i].longitude);
+                //NSLog(@"%f,%f",(maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
+                polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
+                [_mapView addOverlay:polygon];
+                
+                
+                centerLocation=CLLocationCoordinate2DMake((maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
+                //NSLog(@"=====%f,%f",centerLocation.longitude,centerLocation.latitude);
+                CLLocationCoordinate2D coor1=CLLocationCoordinate2DMake(maxLatitude,maxLongitude);
+                BMKMapPoint mp1 = BMKMapPointForCoordinate(coor1);
+                BMKMapPoint mp2 = BMKMapPointForCoordinate(centerLocation);
+                dis = BMKMetersBetweenMapPoints(mp1, mp2);
+                NSLog(@"%f",dis);
+                [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
+                
+                //            CLLocationCoordinate2D coors[2] = {0};
+                //            coors[0].latitude = maxLatitude;
+                //            coors[0].longitude = maxLongitude;
+                //            coors[1].latitude = centerLocation.latitude;
+                //            coors[1].longitude = centerLocation.longitude;
+                //            BMKPolyline* polyline = [BMKPolyline polylineWithCoordinates:coors count:2];
+                //            [_mapView addOverlay:polyline];
             }
-            //NSLog(@"%f,%f",(maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
-            polygon = [BMKPolygon polygonWithCoordinates:points count:numberOfPoints];
-            [_mapView addOverlay:polygon];
-            
-            
-            centerLocation=CLLocationCoordinate2DMake((maxLatitude+minLatitude)*0.5, (maxLongitude+minLongitude)*.5);
-            //NSLog(@"=====%f,%f",centerLocation.longitude,centerLocation.latitude);
-            CLLocationCoordinate2D coor1=CLLocationCoordinate2DMake(maxLatitude,maxLongitude);
-            BMKMapPoint mp1 = BMKMapPointForCoordinate(coor1);
-            BMKMapPoint mp2 = BMKMapPointForCoordinate(centerLocation);
-            dis = BMKMetersBetweenMapPoints(mp1, mp2);
-            NSLog(@"%f",dis);
-            [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
-            
-//            CLLocationCoordinate2D coors[2] = {0};
-//            coors[0].latitude = maxLatitude;
-//            coors[0].longitude = maxLongitude;
-//            coors[1].latitude = centerLocation.latitude;
-//            coors[1].longitude = centerLocation.longitude;
-//            BMKPolyline* polyline = [BMKPolyline polylineWithCoordinates:coors count:2];
-//            [_mapView addOverlay:polyline];
+            CGPathCloseSubpath(pathRef);
         }
-        CGPathCloseSubpath(pathRef);
     }
 }
 
