@@ -398,14 +398,19 @@ int startIndex;
 -(void)loadServer:(NSString *)text startIndex:(int)startIndex{
     [ProjectModel globalSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
         if (!error) {
-            [self.showArr addObjectsFromArray:posts[0]];
+            if(posts.count !=0){
+                [self.showArr addObjectsFromArray:posts[0]];
+                allCount = posts[1];
+            }else{
+                [self.showArr addObjectsFromArray:posts];
+                allCount = @"0";
+            }
             [dataArr removeAllObjects];
             for(int i=0;i<self.showArr.count;i++){
                 ProjectModel *model = [self.showArr objectAtIndex:i];
                 NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
                 [dataArr addObject:dic];
             }
-            allCount = posts[1];
             [_tableView reloadData];
             [indicator stopAnimating];
             if(startIndex !=0){

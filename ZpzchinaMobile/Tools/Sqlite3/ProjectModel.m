@@ -119,6 +119,9 @@
             }
             [arr addObject:mutablePosts];
             [arr addObject:[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"totalCount"]];
+            if (block) {
+                block([NSMutableArray arrayWithArray:arr], nil);
+            }
         }else{
             NSLog(@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
             if([[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"] isEqualToString:@"No results in database"]){
@@ -136,10 +139,10 @@
                                                       otherButtonTitles:nil,nil];
                 [alert show];
             }
-        }
-        
-        if (block) {
-            block([NSMutableArray arrayWithArray:arr], nil);
+            
+            if (block) {
+                block([NSMutableArray arrayWithArray:mutablePosts], nil);
+            }
         }
     } failure:^(NSURLSessionDataTask *__unused task, NSError *error) {
         if (block) {
@@ -234,21 +237,27 @@
 }
 
 //地图搜索 精度,维度
-+ (NSURLSessionDataTask *)GetMapSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block longitude:(NSString*)longitude latitude:(NSString*)latitude{
-    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@/mapSearch&latitude=%@&longitude=%@&radius=1000",[LoginSqlite getdata:@"UserToken" defaultdata:@""],latitude,longitude];
++ (NSURLSessionDataTask *)GetMapSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block longitude:(NSString*)longitude latitude:(NSString*)latitude radius:(NSString *)radius startIndex:(int)startIndex{
+    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@/mapSearch?latitude=%@&longitude=%@&radius=%@&pageSize=26&startIndex=%d",[LoginSqlite getdata:@"UserToken" defaultdata:@""],latitude,longitude,radius,startIndex];
     
     NSLog(@"%@",urlStr);
     //NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)urlStr, NULL, NULL,  kCFStringEncodingUTF8 ));
     return [[AFAppDotNetAPIClient sharedClient] GET:urlStr parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
-        //NSLog(@"JSON===>%@",JSON);
+        NSLog(@"JSON===>%@",JSON);
         NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];
         NSMutableArray *mutablePosts = [NSMutableArray arrayWithCapacity:[postsFromResponse count]];
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
         NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             for (NSDictionary *attributes in postsFromResponse) {
                 ProjectModel *model = [[ProjectModel alloc] init];
                 [model loadWithDictionary:attributes];
                 [mutablePosts addObject:model];
+            }
+            [arr addObject:mutablePosts];
+            [arr addObject:[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"totalCount"]];
+            if (block) {
+                block([NSMutableArray arrayWithArray:arr], nil);
             }
         }else{
             NSLog(@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"errors"]);
@@ -267,10 +276,10 @@
                                                       otherButtonTitles:nil,nil];
                 [alert show];
             }
-        }
-        
-        if (block) {
-            block([NSMutableArray arrayWithArray:mutablePosts], nil);
+            NSError *error = [NSError errorWithDomain:@"" code:[statusCode integerValue] userInfo:nil];
+            if (block) {
+                block([NSMutableArray arrayWithArray:arr], error);
+            }
         }
     } failure:^(NSURLSessionDataTask *__unused task, NSError *error) {
         if (block) {
