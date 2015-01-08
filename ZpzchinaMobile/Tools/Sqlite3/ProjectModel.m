@@ -240,8 +240,7 @@
 + (NSURLSessionDataTask *)GetMapSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block longitude:(NSString*)longitude latitude:(NSString*)latitude radius:(NSString *)radius startIndex:(int)startIndex{
     NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/%@/mapSearch?latitude=%@&longitude=%@&radius=%@&pageSize=26&startIndex=%d",[LoginSqlite getdata:@"UserToken" defaultdata:@""],latitude,longitude,radius,startIndex];
     
-    NSLog(@"%@",urlStr);
-    //NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)urlStr, NULL, NULL,  kCFStringEncodingUTF8 ));
+    NSLog(@"urlstr===========%@",urlStr);
     return [[AFAppDotNetAPIClient sharedClient] GET:urlStr parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
         NSLog(@"JSON===>%@",JSON);
         NSArray *postsFromResponse = [[JSON valueForKeyPath:@"d"] valueForKeyPath:@"data"];

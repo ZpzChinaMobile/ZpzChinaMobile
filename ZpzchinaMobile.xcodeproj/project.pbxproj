@@ -21,6 +21,10 @@
 		5B4C196819FA09D200C6C57D /* 新建项目_211a.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C196419FA09D200C6C57D /* 新建项目_211a.png */; };
 		5B4C196919FA09D200C6C57D /* 新建项目_211a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C196519FA09D200C6C57D /* 新建项目_211a@2x.png */; };
 		5B4C196C19FA0C3800C6C57D /* ModifiBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C196B19FA0C3800C6C57D /* ModifiBaseViewController.m */; };
+		5B63DA461A5E4E1000AB0550 /* 项目地图搜索01.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B63DA421A5E4E1000AB0550 /* 项目地图搜索01.png */; };
+		5B63DA471A5E4E1000AB0550 /* 项目地图搜索01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B63DA431A5E4E1000AB0550 /* 项目地图搜索01@2x.png */; };
+		5B63DA481A5E4E1000AB0550 /* 项目地图搜索02.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B63DA441A5E4E1000AB0550 /* 项目地图搜索02.png */; };
+		5B63DA491A5E4E1000AB0550 /* 项目地图搜索02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B63DA451A5E4E1000AB0550 /* 项目地图搜索02@2x.png */; };
 		5B892F0E199A3BF2001F9921 /* ProgramDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */; };
 		5B892F0F199A3BF2001F9921 /* TuDiXinXi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F03199A3BF2001F9921 /* TuDiXinXi.m */; };
 		5B892F10199A3BF2001F9921 /* ZhuTiSheJi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B892F05199A3BF2001F9921 /* ZhuTiSheJi.m */; };
@@ -594,6 +598,10 @@
 		5B4C196519FA09D200C6C57D /* 新建项目_211a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目_211a@2x.png"; sourceTree = "<group>"; };
 		5B4C196A19FA0C3800C6C57D /* ModifiBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifiBaseViewController.h; sourceTree = "<group>"; };
 		5B4C196B19FA0C3800C6C57D /* ModifiBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifiBaseViewController.m; sourceTree = "<group>"; };
+		5B63DA421A5E4E1000AB0550 /* 项目地图搜索01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "项目地图搜索01.png"; sourceTree = "<group>"; };
+		5B63DA431A5E4E1000AB0550 /* 项目地图搜索01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "项目地图搜索01@2x.png"; sourceTree = "<group>"; };
+		5B63DA441A5E4E1000AB0550 /* 项目地图搜索02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "项目地图搜索02.png"; sourceTree = "<group>"; };
+		5B63DA451A5E4E1000AB0550 /* 项目地图搜索02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "项目地图搜索02@2x.png"; sourceTree = "<group>"; };
 		5B892F00199A3BF2001F9921 /* ProgramDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDetailViewController.h; sourceTree = "<group>"; };
 		5B892F01199A3BF2001F9921 /* ProgramDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDetailViewController.m; sourceTree = "<group>"; };
 		5B892F02199A3BF2001F9921 /* TuDiXinXi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDiXinXi.h; sourceTree = "<group>"; };
@@ -2764,6 +2772,10 @@
 		D3FC013F19E7DEE400FF332C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5B63DA421A5E4E1000AB0550 /* 项目地图搜索01.png */,
+				5B63DA431A5E4E1000AB0550 /* 项目地图搜索01@2x.png */,
+				5B63DA441A5E4E1000AB0550 /* 项目地图搜索02.png */,
+				5B63DA451A5E4E1000AB0550 /* 项目地图搜索02@2x.png */,
 				5B9988DC1A30508A007D9ADF /* imgDefault.png */,
 				5B9988DD1A30508A007D9ADF /* imgDefault@2x.png */,
 				5B4C196219FA09D200C6C57D /* 新建项目_210a.png */,
@@ -3064,11 +3076,13 @@
 				D3FC029619E7DEE400FF332C /* icon03@2x.png in Resources */,
 				D3FC02D919E7DEE400FF332C /* 地图搜索_02@2x.png in Resources */,
 				D3FC033219E7DEE400FF332C /* 筛选中04.png in Resources */,
+				5B63DA461A5E4E1000AB0550 /* 项目地图搜索01.png in Resources */,
 				D3FC027819E7DEE400FF332C /* 03.png in Resources */,
 				D3FC02F519E7DEE400FF332C /* 新建项目3_03@2x.png in Resources */,
 				D3FC033C19E7DEE400FF332C /* 语音搜索1_05.png in Resources */,
 				D3FC035219E7DEE400FF332C /* 面部采集_07.png in Resources */,
 				D3FC037719E7DEE400FF332C /* 高级搜索-多选_09a@2x.png in Resources */,
+				5B63DA491A5E4E1000AB0550 /* 项目地图搜索02@2x.png in Resources */,
 				D3FC032E19E7DEE400FF332C /* 筛选中02.png in Resources */,
 				D3FC026719E7DEE400FF332C /* 015.png in Resources */,
 				D3FC028419E7DEE400FF332C /* 09.png in Resources */,
@@ -3080,6 +3094,7 @@
 				D3FC033319E7DEE400FF332C /* 筛选中04@2x.png in Resources */,
 				D3FC02CF19E7DEE400FF332C /* 地图搜索1_05@2x.png in Resources */,
 				D3FC029519E7DEE400FF332C /* icon03.png in Resources */,
+				5B63DA481A5E4E1000AB0550 /* 项目地图搜索02.png in Resources */,
 				D3FC02B919E7DEE400FF332C /* 全部项目_14@2x.png in Resources */,
 				D3FC02EA19E7DEE400FF332C /* 搜索_10.png in Resources */,
 				D3FC02B619E7DEE400FF332C /* 全部项目_13.png in Resources */,
@@ -3209,6 +3224,7 @@
 				D3FC036519E7DEE400FF332C /* 首页侧拉栏_01@2x.png in Resources */,
 				D3FC02D619E7DEE400FF332C /* 地图搜索_01.png in Resources */,
 				D3FC027A19E7DEE400FF332C /* 04.png in Resources */,
+				5B63DA471A5E4E1000AB0550 /* 项目地图搜索01@2x.png in Resources */,
 				D3FC028019E7DEE400FF332C /* 07.png in Resources */,
 				D3FC026119E7DEE400FF332C /* 012.png in Resources */,
 				D3FC031119E7DEE400FF332C /* 注册@2x.png in Resources */,

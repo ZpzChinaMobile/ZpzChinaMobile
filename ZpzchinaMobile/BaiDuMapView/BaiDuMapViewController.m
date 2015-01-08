@@ -17,6 +17,11 @@
 @interface BaiDuMapViewController ()
 @property(nonatomic)BOOL isShowing;//只有当从搜索出来的小卡片点进项目详情时，self.isShowing才会为真，所以只有当从详情页回来到这个页面触发viewWillAppear时才会再将这个值改为假
 @property(nonatomic)BOOL isSelect;
+
+@property(nonatomic,strong)UIButton* nextBtn;
+@property(nonatomic,strong)UIButton* lastBtn;
+
+@property(nonatomic)NSInteger pageCount;
 @end
 
 @implementation BaiDuMapViewController
@@ -70,7 +75,7 @@ int j;
     // *设定当前地图的显示范围
     [_mapView setRegion:adjusteRegion animated:YES];
     
-    btnView = [[UIView alloc] initWithFrame:CGRectMake(10, 104, 40, 40)];
+    btnView = [[UIView alloc] initWithFrame:CGRectMake(10, 24, 40, 40)];
     drawBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     drawBtn.frame = CGRectMake(0,0, 40, 40);
     [drawBtn setBackgroundImage:[GetImagePath getImagePath:@"mapsearch-1"] forState:UIControlStateNormal];
@@ -79,11 +84,19 @@ int j;
     
     [self.contentView addSubview:btnView];
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(20,100, 40, 40);
-    btn.backgroundColor = [UIColor yellowColor];
-    [btn addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+    self.nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.nextBtn.frame = CGRectMake(20,150, 40, 40);
+    [self.nextBtn setBackgroundImage:[GetImagePath getImagePath:@"项目地图搜索01"] forState:UIControlStateNormal];
+    [self.nextBtn addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
+    self.nextBtn.enabled=NO;
+    [self.view addSubview:self.nextBtn];
+    
+    self.lastBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.lastBtn.frame = CGRectMake(20,200, 40, 40);
+    [self.lastBtn setBackgroundImage:[GetImagePath getImagePath:@"项目地图搜索02"] forState:UIControlStateNormal];
+    [self.lastBtn addTarget:self action:@selector(bbb) forControlEvents:UIControlEventTouchUpInside];
+    self.lastBtn.enabled=NO;
+    [self.view addSubview:self.lastBtn];
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,17 +147,6 @@ int j;
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 /**
  *在地图View将要启动定位时，会调用此函数
@@ -440,7 +442,9 @@ int j;
                 BMKMapPoint mp2 = BMKMapPointForCoordinate(centerLocation);
                 dis = BMKMetersBetweenMapPoints(mp1, mp2);
                 NSLog(@"%f",dis);
-                [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
+                self.pageCount=0;
+                allCount=1;
+                [self getMapSearch:centerLocation startIndex:YES dis:[NSString stringWithFormat:@"%f",dis/1000]];
                 
                 //            CLLocationCoordinate2D coors[2] = {0};
                 //            coors[0].latitude = maxLatitude;
@@ -449,6 +453,8 @@ int j;
                 //            coors[1].longitude = centerLocation.longitude;
                 //            BMKPolyline* polyline = [BMKPolyline polylineWithCoordinates:coors count:2];
                 //            [_mapView addOverlay:polyline];
+//                [imageView removeFromSuperview];
+//                imageView = nil;
             }
             CGPathCloseSubpath(pathRef);
         }
@@ -561,36 +567,59 @@ int j;
     }];
 }
 
--(void)getMapSearch:(CLLocationCoordinate2D)Location startIndex:(int)start dis:(NSString *)distance{
+
+
+-(void)getMapSearch:(CLLocationCoordinate2D)Location startIndex:(BOOL)isNext dis:(NSString *)distance{
+    int tempStartIndex;
+    if (isNext) {
+        if (startIndex>=allCount-1) {
+            tempStartIndex=allCount-1;
+        }else{
+            tempStartIndex=startIndex+1;
+        }
+    }else{
+        if (startIndex<=0) {
+            tempStartIndex=0;
+        }else{
+            tempStartIndex=startIndex-1;
+        }
+    }
+    
     [ProjectModel GetMapSearchWithBlock:^(NSMutableArray *posts, NSError *error) {
         if (!error) {
-            //NSLog(@"map ===== %@",posts);
-            allCount = [posts[1] intValue]/26;
             if([posts[1] intValue]%26 == 0){
                 allCount = [posts[1] intValue]/26;
             }else{
                 allCount = ([posts[1] intValue]/26)+1;
             }
+            
+            if (isNext) {
+                if (startIndex<allCount-1) {
+                    startIndex++;
+                }
+            }else{
+                if (startIndex>0) {
+                    startIndex--;
+                }
+            }
+            
             if([posts[1] intValue] == 0){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                message:@"没有找到项目"
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"确定"
-                                                      otherButtonTitles:nil,nil];
-                [alert show];
+                [[[UIAlertView alloc] initWithTitle:@"提示" message:@"没有找到项目" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil,nil]show];
+                [self judgeBtnEnable];
                 [imageView removeFromSuperview];
                 imageView = nil;
             }else{
-                [self addAnnotation:posts[0]];
+                [self addAnnotation:posts[0] isNext:isNext];
+                //[self judgeBtnEnable];
             }
         }else{
             [imageView removeFromSuperview];
             imageView = nil;
         }
-    } longitude:[NSString stringWithFormat:@"%lf",Location.longitude] latitude:[NSString stringWithFormat:@"%lf",Location.latitude] radius:distance startIndex:start];
+    } longitude:[NSString stringWithFormat:@"%lf",Location.longitude] latitude:[NSString stringWithFormat:@"%lf",Location.latitude] radius:distance startIndex:tempStartIndex];
 }
 
--(void)addAnnotation:(NSMutableArray *)posts{
+-(void)addAnnotation:(NSMutableArray *)posts isNext:(BOOL)isNext{
     for(int i=0;i<posts.count;i++){
         ProjectModel *model = [posts objectAtIndex:i];
         if([[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"<null>"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@"(null)"]||[[NSString stringWithFormat:@"%@",model.a_longitude] isEqualToString:@""]){
@@ -603,7 +632,6 @@ int j;
         }else{
             [latArr addObject:model.a_latitude];
         }
-        NSLog(@"log==>%@,lat===>%@ ====>%@",model.a_longitude,model.a_latitude,model.a_projectName);
     }
     
     //地理坐标转换成点
@@ -615,12 +643,10 @@ int j;
             NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
             ProjectModel *model = [posts objectAtIndex:i];
             [showArr addObject:model];
-            NSLog(@"%@",model.a_projectName);
             annotationPoint = [[BMKPointAnnotation alloc]init];
             CLLocationCoordinate2D coor;
             coor.latitude = testLocation.latitude;
             coor.longitude = testLocation.longitude;
-            NSLog(@"%f,%f",testLocation.longitude,testLocation.latitude);
             annotationPoint.coordinate = coor;
             annotationPoint.title = model.a_landName;
             annotationPoint.subtitle = model.a_landAddress;
@@ -651,24 +677,28 @@ int j;
 //    _mapView.zoomEnabled = NO;
 //    _mapView.zoomEnabledWithTap = NO;
     if(showArr.count == 0){
-        startIndex = startIndex+1;
-        if(startIndex>allCount){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:@"没有找到项目"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"确定"
-                                                  otherButtonTitles:nil,nil];
-            [alert show];
-            [imageView removeFromSuperview];
-            imageView = nil;
+        if (isNext) {
+            [self aaa];
         }else{
-            [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
+            [self bbb];
+        }
+    }else{
+        if (isNext) {
+            self.pageCount++;
+        }else{
+            self.pageCount--;
         }
     }
+    [self judgeBtnEnable];
 }
 
 -(void)aaa{
-    startIndex = startIndex+1;
+    if (!self.nextBtn.enabled) {
+        [[[UIAlertView alloc] initWithTitle:@"提示" message:@"没有找到项目" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil,nil]show];
+        self.pageCount++;
+        [self judgeBtnEnable];
+        return;
+    }
     j = 0;
     [showArr removeAllObjects];
     [logArr removeAllObjects];
@@ -676,7 +706,19 @@ int j;
     NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
     [_mapView removeAnnotations: annArray];
     annotationPoint = nil;
-    [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
+    [self getMapSearch:centerLocation startIndex:1 dis:[NSString stringWithFormat:@"%f",dis/1000]];
+}
+
+
+-(void)bbb{
+    j = 0;
+    [showArr removeAllObjects];
+    [logArr removeAllObjects];
+    [latArr removeAllObjects];
+    NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
+    [_mapView removeAnnotations: annArray];
+    annotationPoint = nil;
+    [self getMapSearch:centerLocation startIndex:0 dis:[NSString stringWithFormat:@"%f",dis/1000]];
 }
 
 -(BOOL)PtInPolygon:(CLLocationCoordinate2D)p{
