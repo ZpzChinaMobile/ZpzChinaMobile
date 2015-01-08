@@ -70,7 +70,7 @@ int j;
     // *设定当前地图的显示范围
     [_mapView setRegion:adjusteRegion animated:YES];
     
-    btnView = [[UIView alloc] initWithFrame:CGRectMake(10, 104, 40, 40)];
+    btnView = [[UIView alloc] initWithFrame:CGRectMake(10, 24, 40, 40)];
     drawBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
     drawBtn.frame = CGRectMake(0,0, 40, 40);
     [drawBtn setBackgroundImage:[GetImagePath getImagePath:@"mapsearch-1"] forState:UIControlStateNormal];
@@ -80,13 +80,13 @@ int j;
     [self.contentView addSubview:btnView];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(20,100, 40, 40);
+    btn.frame = CGRectMake(20,150, 40, 40);
     btn.backgroundColor = [UIColor yellowColor];
     [btn addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake(20,100, 40, 40);
+    btn2.frame = CGRectMake(20,200, 40, 40);
     btn2.backgroundColor = [UIColor yellowColor];
     [btn2 addTarget:self action:@selector(bbb) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
@@ -567,6 +567,10 @@ int j;
                 allCount = ([posts[1] intValue]/26)+1;
             }
             if([posts[1] intValue] == 0){
+                startIndex--;
+                if (startIndex<=0) {
+                    startIndex=0;
+                }
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                                 message:@"没有找到项目"
                                                                delegate:nil
@@ -582,7 +586,7 @@ int j;
             [imageView removeFromSuperview];
             imageView = nil;
         }
-    } longitude:[NSString stringWithFormat:@"%lf",Location.longitude] latitude:[NSString stringWithFormat:@"%lf",Location.latitude] radius:distance startIndex:start];
+    } longitude:[NSString stringWithFormat:@"%lf",Location.longitude] latitude:[NSString stringWithFormat:@"%lf",Location.latitude] radius:distance startIndex:startIndex];
 }
 
 -(void)addAnnotation:(NSMutableArray *)posts{
@@ -638,6 +642,11 @@ int j;
     if(showArr.count == 0){
         startIndex = startIndex+1;
         if(startIndex>allCount){
+            startIndex--;
+            startIndex--;
+            if (startIndex<=0) {
+                startIndex=0;
+            }
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                             message:@"没有找到项目"
                                                            delegate:nil
@@ -666,7 +675,10 @@ int j;
 
 
 -(void)bbb{
-    startIndex = startIndex+1;
+    startIndex = startIndex-1;
+    if(startIndex<=0){
+        startIndex=0;
+    }
     j = 0;
     [showArr removeAllObjects];
     [logArr removeAllObjects];
