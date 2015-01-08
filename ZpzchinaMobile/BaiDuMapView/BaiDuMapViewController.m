@@ -333,6 +333,8 @@ int j;
             [self.view addSubview:countLabel];
         }
     }
+    self.nextBtn.enabled=NO;
+    self.lastBtn.enabled=NO;
 }
 
 
