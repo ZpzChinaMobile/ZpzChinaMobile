@@ -709,18 +709,6 @@ int j;
     [self getMapSearch:centerLocation startIndex:1 dis:[NSString stringWithFormat:@"%f",dis/1000]];
 }
 
-
--(void)bbb{
-    j = 0;
-    [showArr removeAllObjects];
-    [logArr removeAllObjects];
-    [latArr removeAllObjects];
-    NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
-    [_mapView removeAnnotations: annArray];
-    annotationPoint = nil;
-    [self getMapSearch:centerLocation startIndex:0 dis:[NSString stringWithFormat:@"%f",dis/1000]];
-}
-
 -(BOOL)PtInPolygon:(CLLocationCoordinate2D)p{
     int nCross = 0;
     NSInteger numberOfPoints = [coordinates count];
@@ -743,5 +731,10 @@ int j;
         }
     }
     return (nCross % 2 == 1);
+}
+
+-(void)judgeBtnEnable{
+    self.nextBtn.enabled=(startIndex<allCount-1);
+    self.lastBtn.enabled=(self.pageCount>1);
 }
 @end
