@@ -694,6 +694,7 @@ int j;
 
 
 -(void)bbb{
+    NSLog(@"222");
     j = 0;
     [showArr removeAllObjects];
     [logArr removeAllObjects];
