@@ -672,7 +672,7 @@
     self.myTableView.showsVerticalScrollIndicator=NO;
     self.myTableView.scrollEnabled=NO;
     self.myTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    self.myTableView.backgroundColor=[UIColor colorWithWhite:1 alpha:.95];
+    self.myTableView.backgroundColor=[UIColor colorWithWhite:1 alpha:.90];
     //用于存放使sectionHeader可以被点击的button的array
     self.sectionButtonArray=[NSMutableArray array];
 }
@@ -722,7 +722,7 @@
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(47, 12, 200, 16)];
     NSArray* ary=@[@"土地信息阶段",@"主体设计阶段",@"主体施工阶段",@"装修阶段"];
     label.text=ary[section];
-    label.font=[UIFont systemFontOfSize:16];
+    label.font=[UIFont fontWithName:@"GurmukhiMN-Bold" size:16];
     [view addSubview:label];
     
     UIView* separatorLine=[[UIView alloc]initWithFrame:CGRectMake(47, 36.5, 273, 1)];
@@ -848,7 +848,8 @@
     
     ProgramSelectViewCell* cell=[ProgramSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath firstIcon:first secondIcon:second];
     cell.delegate=self;
-    
+    cell.selectedBackgroundView.backgroundColor = RGBCOLOR(234, 234, 234);
+    //cell.selectedBackgroundView.alpha = 0.5;
     return cell;
 }
 

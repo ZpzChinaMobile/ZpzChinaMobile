@@ -316,9 +316,9 @@ int j;
     }else{
         [imageView removeFromSuperview];
         imageView = nil;
-        _mapView.scrollEnabled = YES;
-        _mapView.zoomEnabled = YES;
-        _mapView.zoomEnabledWithTap = YES;
+//        _mapView.scrollEnabled = YES;
+//        _mapView.zoomEnabled = YES;
+//        _mapView.zoomEnabledWithTap = YES;
         if(topBgView == nil){
             topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 64.5, 320,40)];
             [topBgView setBackgroundColor:[UIColor grayColor]];
@@ -610,8 +610,7 @@ int j;
     for(int i=0;i<posts.count;i++){
         testLocation.latitude = [[latArr objectAtIndex:i] doubleValue];
         testLocation.longitude = [[logArr objectAtIndex:i] doubleValue];
-        locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
-        if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
+        if([self PtInPolygon:testLocation]){
             NSLog(@"point in path!");
             NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
             ProjectModel *model = [posts objectAtIndex:i];
@@ -626,19 +625,31 @@ int j;
             annotationPoint.title = model.a_landName;
             annotationPoint.subtitle = model.a_landAddress;
             [_mapView addAnnotation:annotationPoint];
-            
-//            UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-//            image.center = CGPointMake(locationConverToImage.x, locationConverToImage.y);
-//            image.backgroundColor = [UIColor blueColor];
-//            [_mapView addSubview:image];
         }
+//        locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
+//        if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
+//            NSLog(@"point in path!");
+//            NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
+//            ProjectModel *model = [posts objectAtIndex:i];
+//            [showArr addObject:model];
+//            NSLog(@"%@",model.a_projectName);
+//            annotationPoint = [[BMKPointAnnotation alloc]init];
+//            CLLocationCoordinate2D coor;
+//            coor.latitude = testLocation.latitude;
+//            coor.longitude = testLocation.longitude;
+//            NSLog(@"%f,%f",testLocation.longitude,testLocation.latitude);
+//            annotationPoint.coordinate = coor;
+//            annotationPoint.title = model.a_landName;
+//            annotationPoint.subtitle = model.a_landAddress;
+//            [_mapView addAnnotation:annotationPoint];
+//        }
     }
-    //[imageView removeFromSuperview];
-    //imageView = nil;
-    imageView.userInteractionEnabled = NO;
-    _mapView.scrollEnabled = NO;
-    _mapView.zoomEnabled = NO;
-    _mapView.zoomEnabledWithTap = NO;
+    [imageView removeFromSuperview];
+    imageView = nil;
+//    imageView.userInteractionEnabled = NO;
+//    _mapView.scrollEnabled = NO;
+//    _mapView.zoomEnabled = NO;
+//    _mapView.zoomEnabledWithTap = NO;
     if(showArr.count == 0){
         startIndex = startIndex+1;
         if(startIndex>allCount){
@@ -668,4 +679,27 @@ int j;
     [self getMapSearch:centerLocation startIndex:startIndex dis:[NSString stringWithFormat:@"%f",dis/1000]];
 }
 
+-(BOOL)PtInPolygon:(CLLocationCoordinate2D)p{
+    int nCross = 0;
+    NSInteger numberOfPoints = [coordinates count];
+    for(int i = 0; i < numberOfPoints; i++){
+        CLLocationCoordinate2D p1 = [coordinates[i] MKCoordinateValue];
+        CLLocationCoordinate2D p2 = [coordinates[(i+1)%numberOfPoints] MKCoordinateValue];
+        // 求解 y=p.y 与 p1p2 的交点
+        if ( p1.latitude == p2.latitude ){// p1p2 与 y=p0.y平行
+            continue;
+        }
+        if(p.latitude < MIN(p1.latitude, p2.latitude)){// 交点在p1p2延长线上
+            continue;
+        }
+        if(p.latitude >= MAX(p1.latitude, p2.latitude)){
+            continue;
+        }
+        double x = (double)(p.latitude - p1.latitude) * (double)(p2.longitude - p1.longitude) / (double)(p2.latitude - p1.latitude) + p1.longitude;
+        if ( x > p.longitude ){
+            nCross++;
+        }
+    }
+    return (nCross % 2 == 1);
+}
 @end
