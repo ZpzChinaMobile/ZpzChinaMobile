@@ -85,14 +85,14 @@ int j;
     [self.contentView addSubview:btnView];
     
     self.nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.nextBtn.frame = CGRectMake(20,150, 40, 40);
+    self.nextBtn.frame = CGRectMake(10,150, 40, 40);
     [self.nextBtn setBackgroundImage:[GetImagePath getImagePath:@"项目地图搜索01"] forState:UIControlStateNormal];
     [self.nextBtn addTarget:self action:@selector(nextPage) forControlEvents:UIControlEventTouchUpInside];
     self.nextBtn.enabled=NO;
     [self.view addSubview:self.nextBtn];
     
     self.lastBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.lastBtn.frame = CGRectMake(20,200, 40, 40);
+    self.lastBtn.frame = CGRectMake(10,200, 40, 40);
     [self.lastBtn setBackgroundImage:[GetImagePath getImagePath:@"项目地图搜索02"] forState:UIControlStateNormal];
     [self.lastBtn addTarget:self action:@selector(lastPage) forControlEvents:UIControlEventTouchUpInside];
     self.lastBtn.enabled=NO;
@@ -446,6 +446,7 @@ int j;
                 NSLog(@"%f",dis);
                 self.pageCount=0;
                 allCount=1;
+                startIndex=-1;
                 [self getMapSearch:centerLocation startIndex:YES dis:[NSString stringWithFormat:@"%f",dis/1000]];
                 
                 //            CLLocationCoordinate2D coors[2] = {0};
@@ -711,6 +712,18 @@ int j;
     [self getMapSearch:centerLocation startIndex:1 dis:[NSString stringWithFormat:@"%f",dis/1000]];
 }
 
+-(void)lastPage{
+    NSLog(@"222");
+    j = 0;
+    [showArr removeAllObjects];
+    [logArr removeAllObjects];
+    [latArr removeAllObjects];
+    NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
+    [_mapView removeAnnotations: annArray];
+    annotationPoint = nil;
+    [self getMapSearch:centerLocation startIndex:0 dis:[NSString stringWithFormat:@"%f",dis/1000]];
+}
+
 -(BOOL)PtInPolygon:(CLLocationCoordinate2D)p{
     int nCross = 0;
     NSInteger numberOfPoints = [coordinates count];
@@ -735,18 +748,7 @@ int j;
     return (nCross % 2 == 1);
 }
 
--(void)lastPage{
-    NSLog(@"222");
-    j = 0;
-    [showArr removeAllObjects];
-    [logArr removeAllObjects];
-    [latArr removeAllObjects];
-    NSArray *annArray = [[NSArray alloc]initWithArray:_mapView.annotations];
-    [_mapView removeAnnotations: annArray];
-    annotationPoint = nil;
-    [self getMapSearch:centerLocation startIndex:0 dis:[NSString stringWithFormat:@"%f",dis/1000]];
-}
-    
+
     
 
 -(void)judgeBtnEnable{
