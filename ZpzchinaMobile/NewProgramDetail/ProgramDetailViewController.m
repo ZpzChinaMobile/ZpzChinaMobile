@@ -953,7 +953,7 @@
     NSLog(@"用户选择了筛选");
     //暂时移除观察者,避免加新view时有动画
     
-    [self.view addSubview:self.myTableView];
+    [self.view insertSubview:self.myTableView belowSubview:self.topView];
     [UIView animateWithDuration:0.5 animations:^{
         self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
     }];

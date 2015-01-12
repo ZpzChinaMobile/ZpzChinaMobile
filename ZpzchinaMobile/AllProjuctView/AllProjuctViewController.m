@@ -52,7 +52,7 @@ int startIndex;
     
     topBgView = [[UIView alloc] initWithFrame:CGRectMake(30, 0,270, 64.5)];
     topBgView.layer.contents=(id)[GetImagePath getImagePath:@"地图搜索_01"].CGImage;
-    _searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,27, 270, 29)];
+    _searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,24, 270, 29)];
     _searchbar.delegate =self;
     _searchbar.placeholder = @"请输入搜索内容";
 	_searchbar.tintColor = [UIColor lightGrayColor];

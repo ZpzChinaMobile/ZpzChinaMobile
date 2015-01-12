@@ -87,14 +87,14 @@ int j;
     self.nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.nextBtn.frame = CGRectMake(20,150, 40, 40);
     [self.nextBtn setBackgroundImage:[GetImagePath getImagePath:@"项目地图搜索01"] forState:UIControlStateNormal];
-    [self.nextBtn addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
+    [self.nextBtn addTarget:self action:@selector(nextPage) forControlEvents:UIControlEventTouchUpInside];
     self.nextBtn.enabled=NO;
     [self.view addSubview:self.nextBtn];
     
     self.lastBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.lastBtn.frame = CGRectMake(20,200, 40, 40);
     [self.lastBtn setBackgroundImage:[GetImagePath getImagePath:@"项目地图搜索02"] forState:UIControlStateNormal];
-    [self.lastBtn addTarget:self action:@selector(bbb) forControlEvents:UIControlEventTouchUpInside];
+    [self.lastBtn addTarget:self action:@selector(lastPage) forControlEvents:UIControlEventTouchUpInside];
     self.lastBtn.enabled=NO;
     [self.view addSubview:self.lastBtn];
 }
@@ -650,9 +650,9 @@ int j;
     imageView = nil;
     if(showArr.count == 0){
         if (isNext) {
-            [self aaa];
+            [self nextPage];
         }else{
-            [self bbb];
+            [self lastPage];
         }
     }else{
         if (isNext) {
@@ -664,7 +664,7 @@ int j;
     [self judgeBtnEnable];
 }
 
--(void)aaa{
+-(void)nextPage{
     if (!self.nextBtn.enabled) {
         [[[UIAlertView alloc] initWithTitle:@"提示" message:@"没有找到项目" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil,nil]show];
         self.pageCount++;
@@ -705,7 +705,7 @@ int j;
     return (nCross % 2 == 1);
 }
 
--(void)bbb{
+-(void)lastPage{
     NSLog(@"222");
     j = 0;
     [showArr removeAllObjects];
