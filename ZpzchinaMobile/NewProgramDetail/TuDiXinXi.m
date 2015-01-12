@@ -73,15 +73,18 @@
     
     //获取预计施工时间以及预计竣工时间
     NSMutableArray* tempAry=[NSMutableArray array];
-    // NSLog(@"========%@",dataDic[@"expectedStartTime"]);
+     NSLog(@"========%@",dataDic[@"expectedStartTime"]);
     NSArray* timeTempArray=@[dataDic[@"expectedStartTime"],dataDic[@"expectedFinishTime"]];
     for (int i=0; i<2; i++) {
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd"];
         NSString *confromTimespStr ;
         NSDate* confromTimesp = [NSDate dateWithTimeIntervalSince1970:[timeTempArray[i] intValue]];
-        confromTimespStr = [formatter stringFromDate:confromTimesp];
-        
+        if(![timeTempArray[i] isEqualToString:@""]){
+            confromTimespStr = [formatter stringFromDate:confromTimesp];
+        }else{
+            confromTimespStr = @"";
+        }
         [tempAry addObject:confromTimespStr];
     }
     
@@ -103,7 +106,7 @@
     for (int i=0,j=self.myDelegate.ownerAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"]];
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"]];
             j--;
         }else {
             tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i]];
@@ -338,12 +341,12 @@
     [view addSubview:addressLabel];
     
     //电话图标
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(197, 46, 12.5, 12.5)];
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(160, 46, 12.5, 12.5)];
     imageView.image=[GetImagePath getImagePath:@"021"];
     [view addSubview:imageView];
     
     //电话号码
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(215, 41, 100, 25)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(178, 40, 110, 25)];
     label.text=tel;
     label.font=[UIFont systemFontOfSize:14];
     label.textColor=[UIColor grayColor];

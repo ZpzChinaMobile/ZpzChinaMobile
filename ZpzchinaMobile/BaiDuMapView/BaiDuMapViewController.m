@@ -337,15 +337,6 @@ int j;
     self.lastBtn.enabled=NO;
 }
 
-
--(void)refresFunction{
-    
-}
-
--(void)resetFunction{
-    
-}
-
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //NSLog(@"%d",touches.count);
     if(!bgView){
@@ -655,30 +646,9 @@ int j;
             annotationPoint.subtitle = model.a_landAddress;
             [_mapView addAnnotation:annotationPoint];
         }
-//        locationConverToImage=[_mapView convertCoordinate:testLocation toPointToView:imageView];
-//        if (CGPathContainsPoint(pathRef, NULL, locationConverToImage, NO)) {
-//            NSLog(@"point in path!");
-//            NSLog(@"%f====%f",locationConverToImage.x,locationConverToImage.y);
-//            ProjectModel *model = [posts objectAtIndex:i];
-//            [showArr addObject:model];
-//            NSLog(@"%@",model.a_projectName);
-//            annotationPoint = [[BMKPointAnnotation alloc]init];
-//            CLLocationCoordinate2D coor;
-//            coor.latitude = testLocation.latitude;
-//            coor.longitude = testLocation.longitude;
-//            NSLog(@"%f,%f",testLocation.longitude,testLocation.latitude);
-//            annotationPoint.coordinate = coor;
-//            annotationPoint.title = model.a_landName;
-//            annotationPoint.subtitle = model.a_landAddress;
-//            [_mapView addAnnotation:annotationPoint];
-//        }
     }
     [imageView removeFromSuperview];
     imageView = nil;
-//    imageView.userInteractionEnabled = NO;
-//    _mapView.scrollEnabled = NO;
-//    _mapView.zoomEnabled = NO;
-//    _mapView.zoomEnabledWithTap = NO;
     if(showArr.count == 0){
         if (isNext) {
             [self nextPage];

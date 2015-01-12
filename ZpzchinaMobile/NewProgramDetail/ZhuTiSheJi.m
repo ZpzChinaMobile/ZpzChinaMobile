@@ -80,7 +80,7 @@ static NSDictionary* dataDic;
     for (int i=0,j=myDelegate.ownerAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"] sequence:i];
             j--;
         }else {
             tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
@@ -138,7 +138,7 @@ static NSDictionary* dataDic;
     for (int i=0,j=myDelegate.designAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"] sequence:i];
             j--;
         }else {
             tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
@@ -216,7 +216,7 @@ static NSDictionary* dataDic;
     for (int i=0,j=myDelegate.explorationAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"] sequence:i];
             j--;
         }else {
             tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
@@ -280,12 +280,12 @@ static NSDictionary* dataDic;
     [view addSubview:addressLabel];
     
     //电话图标
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(197, 46, 12.5, 12.5)];
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(160, 46, 12.5, 12.5)];
     imageView.image=[GetImagePath getImagePath:@"021"];
     [view addSubview:imageView];
     
     //电话号码
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(215, 41, 100, 25)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(178, 40, 100, 25)];
     label.text=tel;
     label.font=[UIFont systemFontOfSize:14];
     label.textColor=[UIColor grayColor];
