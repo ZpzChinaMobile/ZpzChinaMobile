@@ -62,8 +62,10 @@
     if ([mediaType isEqualToString:@"public.image"]) {
         
         UIImage *photo = [info objectForKey:UIImagePickerControllerOriginalImage];
-        //[self.preview setImage:photo];
-        //photo = [self convertViewAsImage:self.preview];
+        
+        UIImageView *preview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, photo.size.width/2, photo.size.height/2)];
+        [preview setImage:photo];
+        photo = [self convertViewAsImage:preview];
         
         UIImageWriteToSavedPhotosAlbum(photo, self, nil, nil);
         

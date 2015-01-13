@@ -40,6 +40,7 @@ static const char *assoKeyEnableGesture="__yrakenabg";
     return panGestureRecognizer;
 }
 -(void)setStartPanPoint:(CGPoint)point{
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"panToBack" object:nil];
     NSValue *startPanPointValue = [NSValue valueWithCGPoint:point];
     objc_setAssociatedObject(self, assoKeyStartPanPoint, startPanPointValue, OBJC_ASSOCIATION_RETAIN);
 }

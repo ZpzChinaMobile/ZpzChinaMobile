@@ -114,6 +114,7 @@ int startIndex;
     [self.navigationController setEnableBackGesture:true];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(aaa) name:@"panToBack" object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -122,7 +123,15 @@ int startIndex;
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:@"panToBack" object:nil];
 }
+
+//-(void)aaa{
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.topView.alpha = 0;
+//        topBgView.alpha = 0;
+//    }];
+//}
 
 - (void)registerForKeyboardNotifications
 {

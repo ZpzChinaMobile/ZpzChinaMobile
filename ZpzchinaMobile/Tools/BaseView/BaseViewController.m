@@ -35,11 +35,9 @@
     [self.view addSubview:contentView];
 
     
-    UIView *topView=[[UIView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth, 64.5)];
-    topView.layer.contents=(id)[GetImagePath getImagePath:@"地图搜索_01"].CGImage;
-    [self.view addSubview:topView];
-    self.topView=topView;
-    
+    self.topView =[[UIView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth, 64.5)];
+    self.topView.layer.contents=(id)[GetImagePath getImagePath:@"地图搜索_01"].CGImage;
+    [self.view addSubview:self.topView];
 }
 
 - (void)didReceiveMemoryWarning
