@@ -9,6 +9,9 @@
 #import "Camera.h"
 #import "CameraSqlite.h"
 #import "GTMBase64.h"
+@interface Camera()
+@property(nonatomic)CGSize imageSize;
+@end
 @implementation Camera
 -(void)getCameraView:(UIViewController *)viewController flag:(int)flag aid:(NSString *)aid{
     if(flag == 0){
@@ -67,12 +70,15 @@
         
         UIImageWriteToSavedPhotosAlbum(photo, self, nil, nil);
         
+        UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, photo.size.width*.5, photo.size.height*.5)];
+        imageView.image=photo;
+        photo=[self convertViewAsImage:imageView];
         
         //压缩图片
         float kCompressionQuality = 0.4;
         NSData *photo2 = UIImageJPEGRepresentation(photo, kCompressionQuality);
         NSString* encoded = [[NSString alloc] initWithData:[GTMBase64 encodeData:photo2] encoding:NSUTF8StringEncoding];
-        
+        self.imageSize=imageView.frame.size;
         //NSLog(@"encoded : %@",encoded);
         [self setImage:encoded];
     }
@@ -105,7 +111,8 @@
     [dic setValue:@"localios" forKey:@"device"];
     CameraModel* model=[[CameraModel alloc]init];
     [model loadWithDB:dic];
-    model.imageWidth=model.imageHeight=640;
+    model.imageWidth=self.imageSize.width;
+    model.imageHeight=self.imageSize.height;
     //[CameraSqlite InsertData:dic];
     if ([self.delegate respondsToSelector:@selector(backCamera:)]){
         [self.delegate backCamera:model];
