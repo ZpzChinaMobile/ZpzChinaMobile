@@ -71,6 +71,17 @@
 @end
 
 @implementation ProgramDetailViewController
+-(void)viewDidAppear:(BOOL)animated{
+    [self.navigationController setEnableBackGesture:true];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [self.navigationController setEnableBackGesture:false];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+}
 
 -(CGFloat)loadNewViewStandardY{
     if (!self.zhuTiSheJi) {

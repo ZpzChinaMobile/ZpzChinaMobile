@@ -105,6 +105,7 @@
             UIViewController * centerViewController = [[HomePageCenterViewController alloc] init];
             UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:centerViewController];
             navigationController.navigationBarHidden = YES;
+            //[navigationController setEnableBackGesture:true];
             drawerController = [[MMDrawerController alloc]
                                 initWithCenterViewController:navigationController
                                 leftDrawerViewController:leftViewController

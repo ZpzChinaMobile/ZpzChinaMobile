@@ -36,7 +36,7 @@
         pickerController = [[UIImagePickerController alloc] init];
         pickerController.delegate = self;
         //设置拍照后的图片可被编辑
-        pickerController.allowsEditing = YES;
+        //pickerController.allowsEditing = YES;
         pickerController.sourceType = sourceType;
     
         [viewController presentViewController:pickerController animated:YES completion:Nil];
@@ -61,7 +61,7 @@
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:@"public.image"]) {
         
-        UIImage *photo = [info objectForKey:UIImagePickerControllerEditedImage];
+        UIImage *photo = [info objectForKey:UIImagePickerControllerOriginalImage];
         //[self.preview setImage:photo];
         //photo = [self convertViewAsImage:self.preview];
         

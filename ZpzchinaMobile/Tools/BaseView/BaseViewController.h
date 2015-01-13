@@ -14,6 +14,7 @@
 @property(nonatomic,assign)UIView *contentView;
 @property(nonatomic,assign)UIView *topView;
 @property(nonatomic,strong)UILabel* topLabel;
+@property(nonatomic,strong)UIButton* backButton;
 //返回按钮
 -(void)addBackButton;
 //中间title

@@ -80,10 +80,11 @@
         [formatter setDateFormat:@"yyyy-MM-dd"];
         NSString *confromTimespStr ;
         NSDate* confromTimesp = [NSDate dateWithTimeIntervalSince1970:[timeTempArray[i] intValue]];
-        if(![timeTempArray[i] isEqualToString:@""]){
-            confromTimespStr = [formatter stringFromDate:confromTimesp];
-        }else{
+        NSLog(@"timeTempArray ==> %@",timeTempArray[i]);
+        if([timeTempArray[i] isEqualToString:@""]||[timeTempArray[i] isEqualToString:@"/Date(0+0800)/"]){
             confromTimespStr = @"";
+        }else{
+            confromTimespStr = [formatter stringFromDate:confromTimesp];
         }
         [tempAry addObject:confromTimespStr];
     }

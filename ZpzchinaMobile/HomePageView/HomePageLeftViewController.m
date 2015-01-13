@@ -59,29 +59,29 @@
     
     //头像
     
-    UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(0,400,320,1)];
-    [lineImage setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:lineImage];
-    lineImage.alpha = 0.5;
+//    UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(0,400,320,1)];
+//    [lineImage setBackgroundColor:[UIColor whiteColor]];
+//    [self.view addSubview:lineImage];
+//    lineImage.alpha = 0.5;
     
     //清除本地数据
-    UIView *clearView = [[UIView alloc] initWithFrame:CGRectMake(0,402,320,50)];
-    [clearView setBackgroundColor:[UIColor clearColor]];
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(35,12.5,25,25)];
-    [image setImage:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_03"]];
-    [clearView addSubview:image];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(75, 12.5, 120, 25)];
-    label.font = [UIFont fontWithName:@"GurmukhiMN" size:17];
-    label.textColor = [UIColor whiteColor];
-    label.text = @"清除本地数据";
-    [clearView addSubview:label];
-    UIButton *btn =  [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.tag = 99;
-    [btn setBackgroundColor:[UIColor clearColor]];
-    btn.frame = CGRectMake(0, 0, 320, 50);
-    [btn addTarget:self action:@selector(AllBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [clearView addSubview:btn];
-    [self.view addSubview:clearView];
+//    UIView *clearView = [[UIView alloc] initWithFrame:CGRectMake(0,402,320,50)];
+//    [clearView setBackgroundColor:[UIColor clearColor]];
+//    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(35,12.5,25,25)];
+//    [image setImage:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_03"]];
+//    [clearView addSubview:image];
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(75, 12.5, 120, 25)];
+//    label.font = [UIFont fontWithName:@"GurmukhiMN" size:17];
+//    label.textColor = [UIColor whiteColor];
+//    label.text = @"清除本地数据";
+//    [clearView addSubview:label];
+//    UIButton *btn =  [UIButton buttonWithType:UIButtonTypeCustom];
+//    btn.tag = 99;
+//    [btn setBackgroundColor:[UIColor clearColor]];
+//    btn.frame = CGRectMake(0, 0, 320, 50);
+//    [btn addTarget:self action:@selector(AllBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [clearView addSubview:btn];
+//    [self.view addSubview:clearView];
     
     UIImageView *lineImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,450,320,1)];
     [lineImage1 setBackgroundColor:[UIColor whiteColor]];
