@@ -93,8 +93,6 @@
         }else{
             model=[ProjectSqlite loadList:self.dataDic[@"projectID"]][0];
         }
-        NSLog(@"=====%@",self.dataDic);
-        NSLog(@"=====%@",[ProjectStage JudgmentStr:model]);
         self.dataDic=[ProjectStage JudgmentStr:model];
         
         [self.contactAry removeAllObjects];
@@ -185,30 +183,10 @@
     [vc.imagesArray removeAllObjects];
     vc.imagesArray=imageAry;
     
-    //将base64的图放入CameraModel,然后放入GTMBase64里转出image,然后放入数组
-//    for (int i=0; i<imageAry.count; i++) {
-//        CameraModel *model = imageAry[i];
-//        UIImage *aimage;
-//        if (self.isRelease) {
-//            if([model.a_device isEqualToString:@"localios"]){
-//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-//            }else{
-//                aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_imgCompressionContent]];
-//            }
-//        }else{
-//            aimage = [UIImage imageWithData:[GTMBase64 decodeString:model.a_body]];
-//        }
-//        
-//        [vc.imagesArray addObject:aimage];
-//        NSLog(@"=====%ld",sizeof([GTMBase64 decodeString:model.a_body]));
-//    }
-    
     [self presentViewController:vc animated:NO completion:nil];
     [self.scrollViewloadAnimationView stopAnimating];
     [self.enterToScrollView removeFromSuperview];
 }
-
-
 
 -(void)getImages:(NSMutableArray*)array{
     if (array.count) {
@@ -218,11 +196,7 @@
         [opSecond setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operationSecond, id responseObjectSecond){
             NSLog(@"%@",responseObjectSecond);
             if([[NSString stringWithFormat:@"%@",[[[responseObjectSecond objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"]] isEqualToString:@"1312"]){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                message:@"在其他设备中登录，请退出重新登录"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"确定"
-                                                      otherButtonTitles:nil,nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"在其他设备中登录，请退出重新登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil,nil];
                 [alert show];
             }
             //将高清图的cameraModel放进字典
@@ -239,7 +213,6 @@
             }
             
         }failure:^(AFHTTPRequestOperation *operationSecond, NSError *errorSecond){
-            NSLog(@"fail");
             NSLog(@"Error: %@", errorSecond);
         }];
         [[NSOperationQueue mainQueue] addOperation:opSecond];
@@ -597,7 +570,6 @@
 }
 
 -(void)loadLocalImage:(NSString *)localProjectId{
-    NSLog(@"===>%@",localProjectId);
     [self.horizonImageArr removeAllObjects];
     [self.pilePitImageArr removeAllObjects];
     [self.mainConstructionImageArr removeAllObjects];
@@ -605,7 +577,7 @@
     [self.fireControlImageArr removeAllObjects];
     [self.electroweakImageArr removeAllObjects];
     [self.planImageArr removeAllObjects];
-    NSLog(@"=====");
+    
     self.horizonImageArr = [CameraSqlite loadAllHorizonList:localProjectId];
     self.pilePitImageArr = [CameraSqlite loadAllPilePitList:localProjectId];
     self.mainConstructionImageArr = [CameraSqlite loadAllMainConstructionList:localProjectId];
@@ -715,7 +687,7 @@
     UIImage* image=[GetImagePath getImagePath:path[section]];
     CGRect frame=CGRectMake(0, 0, image.size.width, image.size.height);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
-    imageView.center=CGPointMake(23.5, 37.5*.5);
+    imageView.center=CGPointMake(23.5, 20);
     imageView.image=image;
     [view addSubview:imageView];
     
@@ -913,7 +885,7 @@
     
     //大标题左边的大阶段图片
     UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
-    CGRect frame=CGRectMake(20, 12, image.size.width, image.size.height);
+    CGRect frame=CGRectMake(20, 14, image.size.width, image.size.height);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     self.bigStageImageView.image=image;
     [tempView addSubview:self.bigStageImageView];

@@ -325,7 +325,7 @@
     [view addSubview:jobLabel];
     
     //单位名称
-    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 250, 30)];
+    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 280, 30)];
     companyNameLabel.text=firstStr;
     companyNameLabel.textColor=[UIColor grayColor];
     companyNameLabel.textAlignment=NSTextAlignmentLeft;
@@ -333,7 +333,7 @@
     [view addSubview:companyNameLabel];
     
     //地址
-    UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 80, 250, 30)];
+    UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 80, 280, 30)];
     addressLabel.text=secondStr;
     addressLabel.textColor=[UIColor grayColor];
     addressLabel.textAlignment=NSTextAlignmentLeft;
@@ -346,7 +346,7 @@
     [view addSubview:imageView];
     
     //电话号码
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(178, 40, 110, 25)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(178, 40, 122, 25)];
     label.text=tel;
     label.font=[UIFont systemFontOfSize:14];
     label.textColor=[UIColor grayColor];
