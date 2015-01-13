@@ -223,6 +223,7 @@
 		D31B2B9F1990992300B05B03 /* LoginEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B2B9B1990992300B05B03 /* LoginEvent.m */; };
 		D31B2BA01990992300B05B03 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B2B9D1990992300B05B03 /* LoginViewController.m */; };
 		D3311C2819A59CE6003B2682 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3311C2719A59CE6003B2682 /* MapKit.framework */; };
+		D339B8661A651017000A3EE5 /* UINavigationController+YRBackGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = D339B8651A651017000A3EE5 /* UINavigationController+YRBackGesture.m */; };
 		D346A00B1961259200CDDBDF /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A00A1961259200CDDBDF /* LocationViewController.m */; };
 		D346A00E196166D800CDDBDF /* SinglePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A00D196166D800CDDBDF /* SinglePickerView.m */; };
 		D346A01919618DE100CDDBDF /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = D346A01819618DE100CDDBDF /* Camera.m */; };
@@ -994,6 +995,8 @@
 		D31B2B9C1990992300B05B03 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D31B2B9D1990992300B05B03 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		D3311C2719A59CE6003B2682 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D339B8641A651017000A3EE5 /* UINavigationController+YRBackGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+YRBackGesture.h"; sourceTree = "<group>"; };
+		D339B8651A651017000A3EE5 /* UINavigationController+YRBackGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+YRBackGesture.m"; sourceTree = "<group>"; };
 		D346A0091961259200CDDBDF /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
 		D346A00A1961259200CDDBDF /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
 		D346A00C196166D800CDDBDF /* SinglePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePickerView.h; sourceTree = "<group>"; };
@@ -2088,6 +2091,15 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
+		D339B8631A651017000A3EE5 /* YRBackGesture */ = {
+			isa = PBXGroup;
+			children = (
+				D339B8641A651017000A3EE5 /* UINavigationController+YRBackGesture.h */,
+				D339B8651A651017000A3EE5 /* UINavigationController+YRBackGesture.m */,
+			);
+			path = YRBackGesture;
+			sourceTree = "<group>";
+		};
 		D346A01619618D9700CDDBDF /* CameraView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2299,6 +2311,7 @@
 		D3A4893D194FEF9600EED32D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				D339B8631A651017000A3EE5 /* YRBackGesture */,
 				D3BAA7BA1A590151008E613F /* MBProgressHUD */,
 				5B9988CA1A2FF9F9007D9ADF /* EGOImageView */,
 				D3A62C1E19ED22BF0008DADA /* MD5 */,
@@ -3317,6 +3330,7 @@
 				D31B268719891F2600B05B03 /* GPUImageHighPassFilter.m in Sources */,
 				5BE93BC4199C704A00E2FF67 /* SevenTableViewController.m in Sources */,
 				D31B26AA19891F2600B05B03 /* GPUImageOpeningFilter.m in Sources */,
+				D339B8661A651017000A3EE5 /* UINavigationController+YRBackGesture.m in Sources */,
 				D3B27957195A6F800090632C /* LocateView.m in Sources */,
 				D31B267E19891F2600B05B03 /* GPUImageGaussianBlurPositionFilter.m in Sources */,
 				D3BDC23D19750D7A00DE5A78 /* GetBigImage.m in Sources */,

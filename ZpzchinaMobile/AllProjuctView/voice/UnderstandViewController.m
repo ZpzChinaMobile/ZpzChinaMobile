@@ -114,7 +114,9 @@ static bool startListen =YES;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-
+    [self.navigationController setEnableBackGesture:true];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -128,6 +130,9 @@ static bool startListen =YES;
     timeCount =0;
     //设置回非语义识别
     [_iFlySpeechUnderstander destroy];
+    [self.navigationController setEnableBackGesture:false];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
 }
 
 - (void)startListening1

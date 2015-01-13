@@ -120,6 +120,12 @@ int startIndex;
     }
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [self.navigationController setEnableBackGesture:false];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+}
+
 - (void)reachabilityChanged:(NSNotification *)note {
     Reachability* curReach = [note object];
     NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
@@ -158,6 +164,9 @@ int startIndex;
 
 -(void)viewDidAppear:(BOOL)animated{
     NSLog(@"flag %d",flag);
+    [self.navigationController setEnableBackGesture:true];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
     if(flag == 1){
         [self.showArr removeAllObjects];
         self.showArr = [ProjectSqlite loadList];

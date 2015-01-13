@@ -70,7 +70,7 @@ int startIndex;
     [self.view addSubview:topBgView];
     
     cancelBtn =  [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelBtn.frame = CGRectMake(260, 25, 60, 29);
+    cancelBtn.frame = CGRectMake(260, 24, 60, 29);
     [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
     cancelBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:14];
     [cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -111,10 +111,16 @@ int startIndex;
 -(void)viewWillAppear:(BOOL)animated
 {
     [self registerForKeyboardNotifications];
+    [self.navigationController setEnableBackGesture:true];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [self.navigationController setEnableBackGesture:false];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -296,6 +302,7 @@ int startIndex;
         [alert show];
         [cancelBtn setHidden:YES];
         [UIView animateWithDuration:0.5 animations:^{
+            self.backButton.alpha = 1;
             topBgView.frame = CGRectMake(30, 0,270, 64.5);
         }];
         _searchbar.text = @"";
@@ -309,8 +316,11 @@ int startIndex;
     [lineBgView setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:lineBgView];
     [UIView animateWithDuration:0.5 animations:^{
+        self.backButton.alpha = 0;
         topBgView.frame = CGRectMake(0, 0,270, 64.5);
-        [cancelBtn setHidden:NO];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [cancelBtn setHidden:NO];
+        });
     }];
     if(_recordView == nil){
         _recordView = [[RecordView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 287.5)];
@@ -323,6 +333,7 @@ int startIndex;
     [_searchbar resignFirstResponder];
     [cancelBtn setHidden:YES];
     [UIView animateWithDuration:0.5 animations:^{
+        self.backButton.alpha = 1;
         topBgView.frame = CGRectMake(30, 0,270, 64.5);
     }];
     [_recordView removeFromSuperview];
@@ -340,6 +351,7 @@ int startIndex;
     [_searchbar resignFirstResponder];
     [cancelBtn setHidden:YES];
     [UIView animateWithDuration:0.5 animations:^{
+        self.backButton.alpha = 1;
         topBgView.frame = CGRectMake(30, 0,270, 64.5);
     }];
     switch (index) {

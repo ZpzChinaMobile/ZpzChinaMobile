@@ -207,13 +207,13 @@ static __weak ProgramDetailViewController* myDelegate;
      */
     //获取预计施工时间以及预计竣工时间
     NSString *confromTimespStr;
-    if (![dataDic[@"actualStartTime"] isEqualToString:@""]) {
+    if ([dataDic[@"actualStartTime"] isEqualToString:@""]||[dataDic[@"actualStartTime"] isEqualToString:@"/Date(0+0800)/"]) {
+        confromTimespStr=@"";
+    }else{
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd"];
         NSDate* confromTimesp = [NSDate dateWithTimeIntervalSince1970:[dataDic[@"actualStartTime"] intValue]];
         confromTimespStr = [formatter stringFromDate:confromTimesp];
-    }else{
-        confromTimespStr=@"";
     }
     
     

@@ -20,6 +20,7 @@
     #import "UIViewController+MMDrawerController.h"
     #import "AFNetworking.h"
     #import "GetImagePath.h"
+    #import "UINavigationController+YRBackGesture.h"
 #endif
 //#define serverAddress "http://211.147.75.57/ZPZChina.svc"
 //#define  serverAddress "http://EIPQAS.zhongjichina.com/ZPZChina.svc"

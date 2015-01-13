@@ -134,19 +134,20 @@
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedStartTime"] intValue]];
+    NSLog(@"%@",[dic objectForKey:@"expectedStartTime"]);
     NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
-    if(![[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]){
-        startdateLabel.text = confromTimespStr;
-    }else{
+    if([[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]||[[dic objectForKey:@"expectedStartTime"] isEqualToString:@"/Date(0+0800)/"]){
         startdateLabel.text = @"";
+    }else{
+        startdateLabel.text = confromTimespStr;
     }
     
     NSDate *confromTimesp2 = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedFinishTime"] intValue]];
     NSString *confromTimespStr2 = [formatter stringFromDate:confromTimesp2];
-    if(![[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]){
-        enddateLabel.text = confromTimespStr2;
-    }else{
+    if([[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]||[[dic objectForKey:@"expectedFinishTime"] isEqualToString:@"/Date(0+0800)/"]){
         enddateLabel.text = @"";
+    }else{
+        enddateLabel.text = confromTimespStr2;
     }
     zoneLabel.text = [NSString stringWithFormat:@"%@ -",dic[@"district"]];
     addressLabel.text = [dic objectForKey:@"landAddress"];
