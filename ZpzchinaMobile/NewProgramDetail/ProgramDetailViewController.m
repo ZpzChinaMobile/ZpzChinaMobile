@@ -71,13 +71,13 @@
 @end
 
 @implementation ProgramDetailViewController
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setEnableBackGesture:true];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setEnableBackGesture:false];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
@@ -122,30 +122,55 @@
         }
         
         NSArray* array=[NSArray arrayWithObjects:self.tuDiXinXi,self.zhuTiSheJi,self.zhuTiShiGong,self.zhuangXiu, nil];
-        CGRect frames[4]={self.tuDiXinXi.frame,self.zhuTiSheJi.frame,self.zhuTiShiGong.frame,self.zhuangXiu.frame};
+        
+        CGSize size=self.myScrollView.bounds.size;
+        //预留下方动画高度
+        size.height=50+56;//50是上导航的位置,56是下方动画的预留位置
+        self.myScrollView.contentSize=size;
         
         CGFloat a,b,c;
         for (int i=0; i<array.count; i++) {
             if (i==0) {
                 [self.tuDiXinXi removeFromSuperview];
                 self.tuDiXinXi=[TuDiXinXi tuDiXinXiWithFirstViewHeight:&a delegate:self];
-                self.tuDiXinXi.frame=frames[i];
-                [self.myScrollView addSubview:self.tuDiXinXi];
+                CGRect frame=self.tuDiXinXi.frame;
+                frame.origin.y=50;
+                self.tuDiXinXi.frame=frame;
+                [self setOriginToView:self.tuDiXinXi];
+                
+                self.firstViewFirstStage=0;
+                self.firstViewSecondStage=a;
             }else if (i==1){
                 [self.zhuTiSheJi removeFromSuperview];
                 self.zhuTiSheJi=[ZhuTiSheJi zhuTiSheJiWithFirstViewHeight:&a secondView:&b delegate:self];
-                self.zhuTiSheJi.frame=frames[i];
-                [self.myScrollView addSubview:self.zhuTiSheJi];
+                CGRect frame=self.zhuTiSheJi.frame;
+                frame.origin.y=self.tuDiXinXi.frame.origin.y+self.tuDiXinXi.frame.size.height;
+                self.zhuTiSheJi.frame=frame;
+                [self setOriginToView:self.zhuTiSheJi];
+                
+                self.secondViewFirstStage=self.tuDiXinXi.frame.size.height;
+                self.secondViewSecondStage=a+self.tuDiXinXi.frame.size.height;
+                self.secondViewThirdStage=b+self.tuDiXinXi.frame.size.height;
+                
             }else if (i==2){
                 [self.zhuTiShiGong removeFromSuperview];
                 self.zhuTiShiGong=[ZhuTiShiGong zhuTiShiGongWithFirstViewHeight:&a secondView:&b thirdViewHeight:&c delegate:self];
-                self.zhuTiShiGong.frame=frames[i];
-                [self.myScrollView addSubview:self.zhuTiShiGong];
+                CGRect frame=self.zhuTiShiGong.frame;
+                frame.origin.y=self.zhuTiSheJi.frame.origin.y+self.zhuTiSheJi.frame.size.height;
+                self.zhuTiShiGong.frame=frame;
+                [self setOriginToView:self.zhuTiShiGong];
+                
+                self.thirdViewFirstStage=self.tuDiXinXi.frame.size.height+self.zhuTiSheJi.frame.size.height;
+                self.thirdViewSecondStage=a+self.tuDiXinXi.frame.size.height+self.zhuTiSheJi.frame.size.height;
+                self.thirdViewThirdStage=b+self.tuDiXinXi.frame.size.height+self.zhuTiSheJi.frame.size.height;
+                self.thirdViewFourthStage=c+self.tuDiXinXi.frame.size.height+self.zhuTiSheJi.frame.size.height;
             }else{
                 [self.zhuangXiu removeFromSuperview];
                 self.zhuangXiu=[ZhuangXiu zhuangXiuWithdelegate:self];
-                self.zhuangXiu.frame=frames[i];
-                [self.myScrollView addSubview:self.zhuangXiu];
+                CGRect frame=self.zhuangXiu.frame;
+                frame.origin.y=self.zhuTiShiGong.frame.origin.y+self.zhuTiShiGong.frame.size.height;
+                self.zhuangXiu.frame=frame;
+                [self setOriginToView:self.zhuangXiu];
             }
         }
         AppModel* appModel=[AppModel sharedInstance];
@@ -690,7 +715,6 @@
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    //NSString* mainPath=@"XiangMuXiangQing_ShaiXuan";
     NSArray* path=@[@"筛选中01",@"筛选中02",@"筛选中03",@"筛选中04"];
     
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 37.5)];
@@ -698,7 +722,7 @@
     UIImage* image=[GetImagePath getImagePath:path[section]];
     CGRect frame=CGRectMake(0, 0, image.size.width, image.size.height);
     UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
-    imageView.center=CGPointMake(23.5, 20);
+    imageView.center=CGPointMake(23.5, 19);
     imageView.image=image;
     [view addSubview:imageView];
     
@@ -896,7 +920,7 @@
     
     //大标题左边的大阶段图片
     UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
-    CGRect frame=CGRectMake(20, 14, image.size.width, image.size.height);
+    CGRect frame=CGRectMake(20, 15, image.size.width, image.size.height);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     self.bigStageImageView.image=image;
     [tempView addSubview:self.bigStageImageView];
