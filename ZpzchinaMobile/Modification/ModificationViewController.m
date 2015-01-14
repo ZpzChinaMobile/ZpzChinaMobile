@@ -322,7 +322,7 @@
     
     //table没有出现的时候才进行添加,避免反复添加
     if (![self.view.subviews containsObject:self.myTableView]) {
-        [self.view addSubview:self.myTableView];
+        [self.view insertSubview:self.myTableView belowSubview:self.topView];
         [UIView animateWithDuration:0.5 animations:^{
             self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
         }];

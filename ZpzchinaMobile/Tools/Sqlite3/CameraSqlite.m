@@ -93,7 +93,7 @@
         SqliteHelper *sqlite = [[SqliteHelper alloc] init];
         if ([sqlite open:DataBaseName]) {
             [sqlite executeQuery:@"INSERT INTO Camera(id,name ,baseCameraID,body,type,projectName,projectID,localProjectId,device,height,width,imgCompressionContent,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'2');",
-             model.a_id,model.a_name,model.a_baseCameraID,model.a_body,model.a_type,model.a_projectName,model.a_projectID,model.a_localProjectId,model.a_device,@"640",@"640",@""];
+             model.a_id,model.a_name,model.a_baseCameraID,model.a_body,model.a_type,model.a_projectName,model.a_projectID,model.a_localProjectId,model.a_device,[NSString stringWithFormat:@"%lf",model.imageHeight],[NSString stringWithFormat:@"%lf",model.imageWidth],@""];
         }
     }
 }
