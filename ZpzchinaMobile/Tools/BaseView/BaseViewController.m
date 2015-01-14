@@ -36,7 +36,8 @@
 
     
     self.topView =[[UIView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth, 64.5)];
-    self.topView.layer.contents=(id)[GetImagePath getImagePath:@"地图搜索_01"].CGImage;
+    self.topView.backgroundColor = RGBCOLOR(74, 100, 176);
+    //self.topView.layer.contents=(id)[GetImagePath getImagePath:@"地图搜索_01"].CGImage;
     [self.view addSubview:self.topView];
 }
 
@@ -59,9 +60,13 @@
 
 -(void)addBackButton
 {
+    UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(5,27,25,22)];
+    [backImage setImage:[UIImage imageNamed:@"013"]];
+    [self.topView addSubview:backImage];
+    
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.backButton.frame = CGRectMake(5,27,25,22);
-    [self.backButton setImage:[GetImagePath getImagePath:@"013"] forState:UIControlStateNormal];
+    self.backButton.frame = CGRectMake(5,0,50,64);
+    //self.backButton.backgroundColor = [UIColor yellowColor];
     [self.backButton addTarget:self action:@selector(leftAction) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:self.backButton];
 }

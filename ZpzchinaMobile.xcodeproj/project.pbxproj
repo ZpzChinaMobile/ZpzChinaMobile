@@ -365,6 +365,8 @@
 		D3C58EA81980BD5E003DD94F /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58E901980BD5E003DD94F /* CJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3C58EA91980BD5E003DD94F /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58E921980BD5E003DD94F /* CJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3C58EB31980D8C9003DD94F /* ProjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58EB21980D8C9003DD94F /* ProjectContentCell.m */; };
+		D3D5D9991A665CB40077C8C9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5D9971A665CB40077C8C9 /* background.png */; };
+		D3D5D99A1A665CB40077C8C9 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5D9981A665CB40077C8C9 /* background@2x.png */; };
 		D3E1AA5119ECE6C000750ACD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3E1AA5019ECE6C000750ACD /* Settings.bundle */; };
 		D3FC013219E7CE8400FF332C /* UpdataPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */; };
 		D3FC025C19E7DEE400FF332C /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC014019E7DEE400FF332C /* 01.png */; };
@@ -1327,6 +1329,8 @@
 		D3C58E931980BD5E003DD94F /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		D3C58EB11980D8C9003DD94F /* ProjectContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContentCell.h; sourceTree = "<group>"; };
 		D3C58EB21980D8C9003DD94F /* ProjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContentCell.m; sourceTree = "<group>"; };
+		D3D5D9971A665CB40077C8C9 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		D3D5D9981A665CB40077C8C9 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		D3E1AA5019ECE6C000750ACD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D3FC013019E7CE8400FF332C /* UpdataPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdataPassWordViewController.h; sourceTree = "<group>"; };
 		D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdataPassWordViewController.m; sourceTree = "<group>"; };
@@ -2785,6 +2789,8 @@
 		D3FC013F19E7DEE400FF332C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D3D5D9971A665CB40077C8C9 /* background.png */,
+				D3D5D9981A665CB40077C8C9 /* background@2x.png */,
 				5B63DA421A5E4E1000AB0550 /* 项目地图搜索01.png */,
 				5B63DA431A5E4E1000AB0550 /* 项目地图搜索01@2x.png */,
 				5B63DA441A5E4E1000AB0550 /* 项目地图搜索02.png */,
@@ -3191,6 +3197,7 @@
 				D3FC035E19E7DEE400FF332C /* 首页_07.png in Resources */,
 				D3FC02BF19E7DEE400FF332C /* 全部项目_17@2x.png in Resources */,
 				D3FC02E919E7DEE400FF332C /* 搜索_07@2x.png in Resources */,
+				D3D5D9991A665CB40077C8C9 /* background.png in Resources */,
 				D3FC028919E7DEE400FF332C /* controls_05@2x.png in Resources */,
 				D3FC02EC19E7DEE400FF332C /* 新建项目1_03.png in Resources */,
 				D3FC036219E7DEE400FF332C /* 首页_16.png in Resources */,
@@ -3227,6 +3234,7 @@
 				D3FC027C19E7DEE400FF332C /* 05.png in Resources */,
 				D3FC02D419E7DEE400FF332C /* 地图搜索1_16.png in Resources */,
 				D3FC02A919E7DEE400FF332C /* Selected@2x.png in Resources */,
+				D3D5D99A1A665CB40077C8C9 /* background@2x.png in Resources */,
 				D3FC033D19E7DEE400FF332C /* 语音搜索1_05@2x.png in Resources */,
 				D3FC031719E7DEE400FF332C /* 注册_09@2x.png in Resources */,
 				D3FC032019E7DEE400FF332C /* 登录_11.png in Resources */,
