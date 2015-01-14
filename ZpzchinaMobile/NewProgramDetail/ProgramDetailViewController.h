@@ -41,3 +41,5 @@
 @property(nonatomic)BOOL isFromAllProject;
 -(void)userChangeImageWithButtons:(UIButton *)button;
 @end
+#define NoDataColor RGBCOLOR(166, 166, 166)
+#define Heng @"－"

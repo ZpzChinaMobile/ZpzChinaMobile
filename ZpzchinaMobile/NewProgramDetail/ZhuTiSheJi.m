@@ -10,6 +10,8 @@
 #import "CameraModel.h"
 #import "GTMBase64.h"
 #import "MyView.h"
+#import "StringRule.h"
+
 @implementation ZhuTiSheJi
 static CGFloat height = 0;//统计总高
 static __weak ProgramDetailViewController* myDelegate;
@@ -80,10 +82,10 @@ static NSDictionary* dataDic;
     for (int i=0,j=myDelegate.ownerAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i];
             j--;
         }else {
-            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i];
         }
         
         [totalView addSubview:tempView];
@@ -138,10 +140,10 @@ static NSDictionary* dataDic;
     for (int i=0,j=myDelegate.designAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i];
             j--;
         }else {
-            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i];
         }
         
         [totalView addSubview:tempView];
@@ -216,10 +218,10 @@ static NSDictionary* dataDic;
     for (int i=0,j=myDelegate.explorationAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i];
             j--;
         }else {
-            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i];
         }
         
         [totalView addSubview:tempView];
@@ -249,32 +251,37 @@ static NSDictionary* dataDic;
         [view addSubview:line1];
     }
     
+    BOOL hasData=![name isEqualToString:@""];
     //名字
     UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 40)];
-    labelName.text=name;
+    labelName.text=hasData?name:@"姓名";
     labelName.textAlignment=NSTextAlignmentLeft;
-    labelName.textColor=RGBCOLOR(82, 125, 237);
+    labelName.textColor=hasData?RGBCOLOR(82, 125, 237):NoDataColor;
     labelName.font=[UIFont systemFontOfSize:15];
     [view addSubview:labelName];
     
     //职位
+    hasData=![job isEqualToString:@""];
     UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 40, 150, 30)];
-    jobLabel.text=job;
+    jobLabel.text=hasData?job:@"职位";
+    jobLabel.textColor=hasData?[UIColor blackColor]:NoDataColor;
     jobLabel.font=[UIFont systemFontOfSize:14];
     [view addSubview:jobLabel];
     
     //单位名称
+    hasData=![firstStr isEqualToString:@""];
     UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 280, 30)];
-    companyNameLabel.text=firstStr;
-    companyNameLabel.textColor=[UIColor grayColor];
+    companyNameLabel.text=hasData?firstStr:Heng;
+    companyNameLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
     companyNameLabel.textAlignment=NSTextAlignmentLeft;
     companyNameLabel.font=[UIFont systemFontOfSize:14];
     [view addSubview:companyNameLabel];
     
     //地址
+    hasData=![firstStr isEqualToString:@""];
     UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 80, 280, 30)];
-    addressLabel.text=secondStr;
-    addressLabel.textColor=[UIColor grayColor];
+    addressLabel.text=hasData?secondStr:Heng;
+    addressLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
     addressLabel.textAlignment=NSTextAlignmentLeft;
     addressLabel.font=[UIFont systemFontOfSize:14];
     [view addSubview:addressLabel];
@@ -286,9 +293,9 @@ static NSDictionary* dataDic;
     
     //电话号码
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(178, 40, 122, 25)];
-    label.text=tel;
+    label.text=hasData?tel:Heng;
     label.font=[UIFont systemFontOfSize:14];
-    label.textColor=[UIColor grayColor];
+    label.textColor=hasData?[UIColor grayColor]:NoDataColor;
     [view addSubview:label];
     
     return view;
@@ -308,7 +315,7 @@ static NSDictionary* dataDic;
     
     ///title部分
     //图片
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 18.5, 18.5)];
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 16, 16)];
     imageView.center=CGPointMake(160, 9.25+10);
     imageView.image=titleImage;
     [titleView addSubview:imageView];

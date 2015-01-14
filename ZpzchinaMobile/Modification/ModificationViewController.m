@@ -69,8 +69,8 @@
 
 @implementation ModificationViewController
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self.navigationController setEnableBackGesture:false];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [self.mm_drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
@@ -284,7 +284,7 @@
     [view addSubview:tempView];
     
     //大标题左边的大阶段图片
-    CGRect frame=CGRectMake(109, 13, 25, 22);
+    CGRect frame=CGRectMake(110, 16, 18, 18);
     self.bigStageImageView=[[UIImageView alloc]initWithFrame:frame];
     [tempView addSubview:self.bigStageImageView];
     
@@ -370,15 +370,15 @@
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    NSArray* path=@[@"01",@"02",@"03",@"04"];
+    NSArray* path=@[@"阶段跳转01",@"阶段跳转02",@"阶段跳转03",@"阶段跳转04"];
     
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 37.5)];
     view.backgroundColor=RGBCOLOR(234,234,234);
     
     UIImage* image=[GetImagePath getImagePath:path[section]];
-    CGRect frame=CGRectMake(0, 0, image.size.width, image.size.height);
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:frame];
-    imageView.center=CGPointMake(23.5, 37.5*.5);
+    //CGRect frame=CGRectMake(0, 0, image.size.width, image.size.height);
+    UIImageView* imageView=[[UIImageView alloc]initWithImage:image];
+    imageView.center=CGPointMake(23.5, 19.5);
     imageView.image=image;
     [view addSubview:imageView];
     
@@ -464,6 +464,7 @@
 -(void)leftAction
 {
     if (self.delegate&&self.fromView==1) {
+        //对这个if下的内容有疑问，暂时不删除
         if (self.isRelease==0) {
             AppModel* appModel=[AppModel sharedInstance];
             
@@ -476,6 +477,7 @@
                 }
             }
         }
+        //对这个if以上的内容疑问，暂时不删
         [self.delegate backToProgramDetailViewWithIsRelease:self.isRelease];
     }
     

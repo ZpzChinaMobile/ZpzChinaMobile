@@ -10,6 +10,8 @@
 #import "CameraModel.h"
 #import "GTMBase64.h"
 #import "MyView.h"
+#import "StringRule.h"
+
 @implementation ZhuTiShiGong
 static NSDictionary* dataDic;
 
@@ -185,10 +187,10 @@ static __weak ProgramDetailViewController* myDelegate;
     for (int i=0,j=myDelegate.pileAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i];
             j--;
         }else {
-            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i];
         }
         
         [totalView addSubview:tempView];
@@ -227,10 +229,10 @@ static __weak ProgramDetailViewController* myDelegate;
     for (int i=0,j=myDelegate.horizonAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]] tel:array1[i][@"mobilePhone"] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i];
             j--;
         }else {
-            tempView=[self personLable:@[@"联系人",@"联系人",@"联系人"][i] job:@[@"职位",@"职位",@"职位"][i] firstStr:@[@"单位名称",@"单位名称",@"单位名称"][i] secondStr:@[@"单位地址",@"单位地址",@"单位地址"][i] tel:@[@"",@"",@""][i] sequence:i];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i];
         }
         
         [totalView addSubview:tempView];
@@ -256,32 +258,37 @@ static __weak ProgramDetailViewController* myDelegate;
         [view addSubview:line1];
     }
     
+    BOOL hasData=![name isEqualToString:@""];
     //名字
     UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 40)];
-    labelName.text=name;
+    labelName.text=hasData?name:@"姓名";
     labelName.textAlignment=NSTextAlignmentLeft;
-    labelName.textColor=RGBCOLOR(82, 125, 237);
+    labelName.textColor=hasData?RGBCOLOR(82, 125, 237):NoDataColor;
     labelName.font=[UIFont systemFontOfSize:15];
     [view addSubview:labelName];
     
     //职位
+    hasData=![job isEqualToString:@""];
     UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 40, 150, 30)];
-    jobLabel.text=job;
+    jobLabel.text=hasData?job:@"职位";
+    jobLabel.textColor=hasData?[UIColor blackColor]:NoDataColor;
     jobLabel.font=[UIFont systemFontOfSize:14];
     [view addSubview:jobLabel];
     
     //单位名称
+    hasData=![firstStr isEqualToString:@""];
     UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 280, 30)];
-    companyNameLabel.text=firstStr;
-    companyNameLabel.textColor=[UIColor grayColor];
+    companyNameLabel.text=hasData?firstStr:Heng;
+    companyNameLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
     companyNameLabel.textAlignment=NSTextAlignmentLeft;
     companyNameLabel.font=[UIFont systemFontOfSize:14];
     [view addSubview:companyNameLabel];
     
     //地址
+    hasData=![firstStr isEqualToString:@""];
     UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 80, 280, 30)];
-    addressLabel.text=secondStr;
-    addressLabel.textColor=[UIColor grayColor];
+    addressLabel.text=hasData?secondStr:Heng;
+    addressLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
     addressLabel.textAlignment=NSTextAlignmentLeft;
     addressLabel.font=[UIFont systemFontOfSize:14];
     [view addSubview:addressLabel];
@@ -292,71 +299,15 @@ static __weak ProgramDetailViewController* myDelegate;
     [view addSubview:imageView];
     
     //电话号码
+    hasData=![tel isEqualToString:@""];
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(178, 40, 122, 25)];
-    label.text=tel;
+    label.text=hasData?tel:Heng;
     label.font=[UIFont systemFontOfSize:14];
-    label.textColor=[UIColor grayColor];
+    label.textColor=hasData?[UIColor grayColor]:NoDataColor;
     [view addSubview:label];
     
     return view;
 }
-
-
-////竖着的3个view,联系人,职位,地点,单位,手机
-//+(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel sequence:(int)sequence{
-//    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 150)];
-//
-//    //分割线1
-//    if (sequence!=0) {
-//        UIView* line1=[self getSeperatedLine];
-//        line1.center=CGPointMake(160, 10);
-//        [view addSubview:line1];
-//    }
-//
-//    //名字
-//    UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(20, 20, 200, 40)];
-//    labelName.text=name;
-//    labelName.textAlignment=NSTextAlignmentLeft;
-//    labelName.textColor=RGBCOLOR(82, 125, 237);
-//    labelName.font=[UIFont systemFontOfSize:17];
-//    [view addSubview:labelName];
-//
-//    //职位
-//    UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 50, 150, 30)];
-//    jobLabel.text=job;
-//    jobLabel.font=[UIFont boldSystemFontOfSize:15];
-//    [view addSubview:jobLabel];
-//
-//    //单位名称
-//    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 70, 250, 30)];
-//    companyNameLabel.text=firstStr;
-//    companyNameLabel.textColor=[UIColor grayColor];
-//    companyNameLabel.textAlignment=NSTextAlignmentLeft;
-//    companyNameLabel.font=[UIFont systemFontOfSize:14];
-//    [view addSubview:companyNameLabel];
-//
-//    //地址
-//    UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 90, 250, 30)];
-//    addressLabel.text=secondStr;
-//    addressLabel.textColor=[UIColor grayColor];
-//    addressLabel.textAlignment=NSTextAlignmentLeft;
-//    addressLabel.font=[UIFont systemFontOfSize:14];
-//    [view addSubview:addressLabel];
-//
-//    //电话图标
-//    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(197, 46, 12.5, 12.5)];
-//    imageView.image=[UIImage imageNamed:@"XiangMuXiangQing_2/phone@2x.png"];
-//    [view addSubview:imageView];
-//
-//    //电话号码
-//    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(215, 40, 100, 25)];
-//    label.text=tel;
-//    label.font=[UIFont systemFontOfSize:14];
-//    label.textColor=[UIColor grayColor];
-//    [view addSubview:label];
-//
-//    return view;
-//}
 
 //显示一个2行字的label
 +(UIView*)twoLineLable:(NSString*)firstStr secondStr:(NSString*)secondStr{
@@ -398,7 +349,7 @@ static __weak ProgramDetailViewController* myDelegate;
     
     ///title部分
     //图片
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 18.5, 18.5)];
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 16, 16)];
     imageView.center=CGPointMake(160, 9.25+10);
     imageView.image=titleImage;
     [titleView addSubview:imageView];

@@ -10,6 +10,8 @@
 #import "CameraModel.h"
 #import "GTMBase64.h"
 #import "MyView.h"
+#import "StringRule.h"
+
 @implementation ZhuangXiu
 
 static CGFloat height = 0;//统计总高
@@ -124,69 +126,6 @@ static NSDictionary* dataDic;
     //3个小2行label
     
 }
-
-//+(UIView*)getSeperatedLine{
-//    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 290, 1)];
-//    view.backgroundColor=[UIColor grayColor];
-//
-//    return view;
-//}
-
-////竖着的3个view,联系人,职位,地点,单位,手机
-//+(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel sequence:(int)sequence{
-//    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 150)];
-//
-//    //分割线1
-//    if (sequence!=0) {
-//        UIView* line1=[self getSeperatedLine];
-//        line1.center=CGPointMake(160, 10);
-//        [view addSubview:line1];
-//    }
-//
-//    //名字
-//    UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(20, 20, 200, 40)];
-//    labelName.text=name;
-//    labelName.textAlignment=NSTextAlignmentLeft;
-//    labelName.textColor=RGBCOLOR(82, 125, 237);
-//    labelName.font=[UIFont systemFontOfSize:17];
-//    [view addSubview:labelName];
-//
-//    //职位
-//    UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 50, 150, 30)];
-//    jobLabel.text=job;
-//    jobLabel.font=[UIFont systemFontOfSize:14];
-//    [view addSubview:jobLabel];
-//
-//    //单位名称
-//    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 70, 250, 30)];
-//    companyNameLabel.text=firstStr;
-//    companyNameLabel.textColor=[UIColor grayColor];
-//    companyNameLabel.textAlignment=NSTextAlignmentLeft;
-//    companyNameLabel.font=[UIFont systemFontOfSize:14];
-//    [view addSubview:companyNameLabel];
-//
-//    //地址
-//    UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 90, 250, 30)];
-//    addressLabel.text=secondStr;
-//    addressLabel.textColor=[UIColor grayColor];
-//    addressLabel.textAlignment=NSTextAlignmentLeft;
-//    addressLabel.font=[UIFont systemFontOfSize:14];
-//    [view addSubview:addressLabel];
-//
-//    //电话图标
-//    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(190, 40, 25, 25)];
-//    imageView.image=[UIImage imageNamed:@"地图搜索_01.png"];
-//    [view addSubview:imageView];
-//
-//    //电话号码
-//    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(215, 40, 100, 25)];
-//    label.text=tel;
-//    label.font=[UIFont systemFontOfSize:14];
-//    label.textColor=[UIColor grayColor];
-//    [view addSubview:label];
-//
-//    return view;
-//}
 
 //显示一个2行字的label
 +(UIView*)twoLineLable:(NSString*)firstStr secondStr:(NSString*)secondStr{
