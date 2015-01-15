@@ -187,15 +187,15 @@ static __weak ProgramDetailViewController* myDelegate;
     for (int i=0,j=myDelegate.pileAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:array1[i][@"accountName"] secondStr:[StringRule hasContent:array1[i][@"accountAddress"]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i contactCategory:@"桩基分包单位："];
             j--;
         }else {
-            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i contactCategory:@"桩基分包单位："];
         }
         
         [totalView addSubview:tempView];
-        tempView.center=CGPointMake(160, height+60);
-        height+=120;
+        tempView.center=CGPointMake(160, height+tempView.frame.size.height*.5);
+        height+=tempView.frame.size.height;
     }
 }
 
@@ -229,26 +229,26 @@ static __weak ProgramDetailViewController* myDelegate;
     for (int i=0,j=myDelegate.horizonAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:array1[i][@"accountName"] secondStr:[StringRule hasContent:array1[i][@"accountAddress"]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i contactCategory:@"施工总承包单位："];
             j--;
         }else {
-            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i contactCategory:@"施工总承包单位："];
         }
         
         [totalView addSubview:tempView];
-        tempView.center=CGPointMake(160, height+60);
-        height+=120;
+        tempView.center=CGPointMake(160, height+tempView.frame.size.height*.5);
+        height+=tempView.frame.size.height;
     }}
 
 +(UIView*)getSeperatedLine{
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 290, 1)];
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 295, 1)];
     view.backgroundColor=RGBCOLOR(206, 206, 206);
     
     return view;
 }
 
 //竖着的3个view,联系人,职位,地点,单位,手机
-+(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel sequence:(int)sequence{
++(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel sequence:(int)sequence contactCategory:(NSString*)contactCategory{
     UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 120)];
     
     //分割线1
@@ -278,7 +278,7 @@ static __weak ProgramDetailViewController* myDelegate;
     //单位名称
     hasData=![firstStr isEqualToString:@""];
     UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 280, 30)];
-    companyNameLabel.text=hasData?firstStr:Heng;
+    companyNameLabel.text=[contactCategory stringByAppendingString:hasData?firstStr:Heng];
     companyNameLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
     companyNameLabel.textAlignment=NSTextAlignmentLeft;
     companyNameLabel.font=[UIFont systemFontOfSize:14];

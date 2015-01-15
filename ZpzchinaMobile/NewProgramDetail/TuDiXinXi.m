@@ -107,15 +107,15 @@
     for (int i=0,j=self.myDelegate.ownerAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]]];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:array1[i][@"accountName"] secondStr:[StringRule hasContent:array1[i][@"accountAddress"]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] contactCategory:@"业主单位："];
             j--;
         }else {
-            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@""];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" contactCategory:@"业主单位："];
         }
         
         [self addSubview:tempView];
-        tempView.center=CGPointMake(160, height+60);
-        height+=120;
+        tempView.center=CGPointMake(160, height+tempView.frame.size.height*.5);
+        height+=tempView.frame.size.height;
     }
     
     
@@ -137,13 +137,13 @@
     [view addSubview:imageView];
     
     for (int i=0; i<owners.count; i++) {
-        UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(45+i%3*((320-45)*1.0/3), i/3*30, 200, 20)];//CGRectMake(45, height+5, 200, 25)];
-        label.text=owners[i];
-        label.font=[UIFont systemFontOfSize:17];
+        UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(45+i%4*((307.5-45)*1.0/4), i/4*25, 200, 20)];//CGRectMake(45, height+5, 200, 25)];
+        label.text=(i==owners.count-1)?owners[i]:[owners[i] stringByAppendingString:@"，"];
+        label.font=contentFont;
         [view addSubview:label];
     }
     
-    view.frame=CGRectMake(0, 0, 320, 35+(owners.count>0?(owners.count-1)/3*30:0));
+    view.frame=CGRectMake(0, 0, 320, 50);//35+(owners.count>0?(owners.count-1)/3*30:0));
     return view;
 }
 
@@ -205,28 +205,28 @@
     for (int i=0; i<2; i++) {
         NSInteger count=i?2:i;
         
-        UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 10+i*60, 140, 20)];
+        UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 10+i*60, 140, 20)];
         firstLabel.text=firstStrs[count];
         firstLabel.textColor=RGBCOLOR(82, 125, 237);
-        firstLabel.font=[UIFont systemFontOfSize:14];
+        firstLabel.font=titleFont;
         firstLabel.textAlignment=NSTextAlignmentLeft;
         [view addSubview:firstLabel];
         
         if (i) {
-            bounds=[secondStrs[count] boundingRectWithSize:CGSizeMake( 280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+            bounds=[secondStrs[count] boundingRectWithSize:CGSizeMake( 280, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:contentFont} context:nil];
         }
-        UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 30+i*60, i?280:140, i?bounds.size.height+5:20)];
+        UILabel* secondLabel=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 30+i*60, i?280:140, i?bounds.size.height+5:20)];
         secondLabel.text=secondStrs[count];
         secondLabel.numberOfLines=0;
         secondLabel.textColor=RGBCOLOR(125, 125, 125);
-        secondLabel.font=[UIFont systemFontOfSize:14];
+        secondLabel.font=contentFont;
         secondLabel.textAlignment=NSTextAlignmentLeft;
         [view addSubview:secondLabel];
     }
-    UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(160, 10, 160, 20)];
+    UILabel* firstLabel=[[UILabel alloc]initWithFrame:CGRectMake(180, 10, 160, 20)];
     firstLabel.text=firstStrs[1];
     firstLabel.textColor=RGBCOLOR(82, 125, 237);
-    firstLabel.font=[UIFont systemFontOfSize:14];
+    firstLabel.font=titleFont;
     firstLabel.textAlignment=NSTextAlignmentCenter;
     [view addSubview:firstLabel];
     
@@ -234,10 +234,10 @@
     secondLabel.text=secondStrs[1];
     secondLabel.numberOfLines=0;
     secondLabel.textColor=RGBCOLOR(125, 125, 125);
-    secondLabel.font=[UIFont systemFontOfSize:14];
+    secondLabel.font=contentFont;
     secondLabel.textAlignment=NSTextAlignmentCenter;
    
-    secondLabel.frame=CGRectMake(160, 30, 160, 20);
+    secondLabel.frame=CGRectMake(180, 30, 160, 20);
     [view addSubview:secondLabel];
     
     view.frame=CGRectMake(0, 0, 320, 120+bounds.size.height-15);
@@ -274,28 +274,29 @@
     for (int i=0,j=self.myDelegate.contactAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:[NSString stringWithFormat:@"拍卖单位 - %@",array1[i][@"accountName"]] secondStr:[StringRule hasContent:[NSString stringWithFormat:@"地址：%@",array1[i][@"accountAddress"]]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]]];
+            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:array1[i][@"accountName"] secondStr:[StringRule hasContent:array1[i][@"accountAddress"]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] contactCategory:@"拍卖单位："];
             j--;
         }else{
-            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@""];
+            tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" contactCategory:@"拍卖单位："];
         }
         
         [self addSubview:tempView];
-        tempView.center=CGPointMake(160, height+60);
-        height+=120;
+        tempView.center=CGPointMake(160, height+tempView.frame.size.height*.5);
+        height+=tempView.frame.size.height;
     }
 }
 
 -(UIView*)getSeperatedLine{
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 290, 1)];
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 295, 1)];
     view.backgroundColor=RGBCOLOR(206, 206, 206);
     
     return view;
 }
 
 //竖着的3个view,联系人,职位,地点,单位,手机
--(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel{
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 120)];
+-(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel contactCategory:(NSString*)contactCategory
+{
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 130)];
     
     //分割线1
     UIView* line1=[self getSeperatedLine];
@@ -304,49 +305,63 @@
     
     BOOL hasData=![name isEqualToString:@""];
     //名字
-    UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 40)];
+    UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 10, 295, 40)];
     labelName.text=hasData?name:@"姓名";
     labelName.textAlignment=NSTextAlignmentLeft;
     labelName.textColor=hasData?RGBCOLOR(82, 125, 237):NoDataColor;
-    labelName.font=[UIFont systemFontOfSize:15];
+    labelName.font=titleFont;
     [view addSubview:labelName];
     
     //职位
     hasData=![job isEqualToString:@""];
-    UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 40, 150, 30)];
+    UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 40, 130, 30)];
     jobLabel.text=hasData?job:@"职位";
     jobLabel.textColor=hasData?[UIColor blackColor]:NoDataColor;
-    jobLabel.font=[UIFont systemFontOfSize:14];
+    jobLabel.font=contentFont;
     [view addSubview:jobLabel];
     
     //单位名称
     hasData=![firstStr isEqualToString:@""];
-    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 280, 30)];
-    companyNameLabel.text=hasData?firstStr:Heng;
-    companyNameLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
+    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 60, 295, 30)];
+    NSMutableAttributedString* attributedString=[[NSMutableAttributedString alloc]initWithString:[contactCategory stringByAppendingString:hasData?firstStr:Heng]];
+    [attributedString addAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]} range:NSMakeRange(0, contactCategory.length)];
+    [attributedString addAttributes:@{NSForegroundColorAttributeName:hasData?[UIColor grayColor]:NoDataColor} range:NSMakeRange(contactCategory.length, attributedString.length-contactCategory.length)];
+    companyNameLabel.attributedText=attributedString;
     companyNameLabel.textAlignment=NSTextAlignmentLeft;
-    companyNameLabel.font=[UIFont systemFontOfSize:14];
+    companyNameLabel.font=contentFont;
     [view addSubview:companyNameLabel];
     
     //地址
+    UILabel* addressName=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 80, 70, 30)];
+    addressName.text=@"单位地址：";
+    addressName.textColor=[UIColor grayColor];
+    addressName.font=contentFont;
+    [view addSubview:addressName];
+    
+    
     hasData=![firstStr isEqualToString:@""];
-    UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 80, 280, 30)];
+    UITextView* addressLabel=[[UITextView alloc]initWithFrame:CGRectMake(77.5, 79, 240, 50)];
     addressLabel.text=hasData?secondStr:Heng;
     addressLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
     addressLabel.textAlignment=NSTextAlignmentLeft;
-    addressLabel.font=[UIFont systemFontOfSize:14];
+    addressLabel.textContainer.maximumNumberOfLines=2;
+    addressLabel.selectable=NO;
+    addressLabel.backgroundColor=[UIColor clearColor];
+    addressLabel.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
+    addressLabel.textContainer.lineBreakMode=NSLineBreakByTruncatingTail;
+    addressLabel.font=contentFont;
     [view addSubview:addressLabel];
     
     //电话图标
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(160, 46, 12.5, 12.5)];
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(148, 49, 12.5, 12.5)];
     imageView.image=[GetImagePath getImagePath:@"021"];
     [view addSubview:imageView];
     
     //电话号码
     hasData=![tel isEqualToString:@""];
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(178, 40, 122, 25)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(163, 43, 150, 25)];
     label.text=hasData?tel:Heng;
-    label.font=[UIFont systemFontOfSize:14];
+    label.font=contentFont;
     label.textColor=hasData?[UIColor grayColor]:NoDataColor;
     [view addSubview:label];
     
