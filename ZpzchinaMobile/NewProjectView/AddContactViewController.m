@@ -78,7 +78,7 @@
     addName.placeholder=@"添加姓名";
     addName.returnKeyType=UIReturnKeyDone;
     addName.tag = 0;
-    [addName setClearButtonMode:UITextFieldViewModeWhileEditing];
+    //[addName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:addName];
     
     addPhone = [[UITextField alloc] initWithFrame:CGRectMake(31, 55, 205, 32)];
@@ -86,9 +86,9 @@
     addPhone.textAlignment=NSTextAlignmentLeft;
     addPhone.placeholder=@"添加电话";
     addPhone.returnKeyType=UIReturnKeyDone;
-    addPhone.keyboardType = UIKeyboardTypeNumberPad;
+    addPhone.keyboardType = UIKeyboardTypePhonePad;
     addPhone.tag = 1;
-    [addPhone setClearButtonMode:UITextFieldViewModeWhileEditing];
+    //[addPhone setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:addPhone];
     
     title = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -110,7 +110,7 @@
     accountName.placeholder=@"单位名称";
     accountName.returnKeyType=UIReturnKeyDone;
     accountName.tag = 2;
-    [accountName setClearButtonMode:UITextFieldViewModeWhileEditing];
+    //[accountName setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:accountName];
     
     address = [[UITextField alloc] initWithFrame:CGRectMake(31, 190, 205, 32)];
@@ -119,11 +119,14 @@
     address.placeholder=@"单位地址";
     address.returnKeyType=UIReturnKeyDone;
     address.tag = 3;
-    [address setClearButtonMode:UITextFieldViewModeWhileEditing];
+    //[address setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:address];
     
     [self.view addSubview:contentView];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFiledEditChanged:)
+                                                name:@"UITextFieldTextDidChangeNotification"
+                                              object:addPhone];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFiledEditChanged:)
                                                 name:@"UITextFieldTextDidChangeNotification"
                                               object:accountName];
@@ -313,8 +316,10 @@
     int count = 0;
     if(textField == accountName){
         count = 15;
-    }else{
+    }else if(textField == address){
         count = 35;
+    }else{
+        count = 18;
     }
     NSString *toBeString = textField.text;
     NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
