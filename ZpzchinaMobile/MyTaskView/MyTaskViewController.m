@@ -370,7 +370,7 @@ int startIndex;
             [alert show];
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:@"同步数据"
+                                                            message:@"上传"
                                                            delegate:nil
                                                   cancelButtonTitle:@"取消"
                                                   otherButtonTitles:@"同步数据",nil];
@@ -461,7 +461,7 @@ int startIndex;
             NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
             NSLog(@"%@",[parametersdata[parametersdata.allKeys[i]] class]);
             if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){
-                [parametersdata setValue:@"" forKey:parametersdata.allKeys[i]];
+                [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
             }
         }
         
@@ -592,7 +592,7 @@ int startIndex;
         for(int i=0;i<parametersdata.allKeys.count;i++){
             //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
             if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){
-                [parametersdata setValue:@"" forKey:parametersdata.allKeys[i]];
+                [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
             }
         }
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
