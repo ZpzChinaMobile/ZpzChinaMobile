@@ -145,7 +145,7 @@ static __weak ProgramDetailViewController* myDelegate;
         //项目地点部分
         UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 45)];
         areaLabel.center=CGPointMake(320*1.0/2*(i+.5), height+42.5);
-        areaLabel.text=@[dataDic[@"fireControl"],dataDic[@"green"]][i];
+        areaLabel.text=@[[StringRule hasContent:dataDic[@"fireControl"]],[StringRule hasContent:dataDic[@"green"]]][i];
         areaLabel.font=[UIFont systemFontOfSize:14];
         areaLabel.textColor=RGBCOLOR(125, 125, 125);
         areaLabel.textAlignment=NSTextAlignmentCenter;
@@ -187,7 +187,7 @@ static __weak ProgramDetailViewController* myDelegate;
     for (int i=0,j=myDelegate.pileAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:array1[i][@"accountName"] secondStr:[StringRule hasContent:array1[i][@"accountAddress"]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i contactCategory:@"桩基分包单位："];
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i contactCategory:@"桩基分包单位："];
             j--;
         }else {
             tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i contactCategory:@"桩基分包单位："];
@@ -229,7 +229,7 @@ static __weak ProgramDetailViewController* myDelegate;
     for (int i=0,j=myDelegate.horizonAry.count; i<3; i++) {
         UIView* tempView;
         if (j) {
-            tempView=[self personLable:array1[i][@"contactName"] job:[StringRule hasContent:array1[i][@"duties"]] firstStr:array1[i][@"accountName"] secondStr:[StringRule hasContent:array1[i][@"accountAddress"]] tel:[StringRule hasContent:array1[i][@"mobilePhone"]] sequence:i contactCategory:@"施工总承包单位："];
+            tempView=[self personLable:array1[i][@"contactName"] job:array1[i][@"duties"] firstStr:array1[i][@"accountName"] secondStr:array1[i][@"accountAddress"] tel:array1[i][@"mobilePhone"] sequence:i contactCategory:@"施工总承包单位："];
             j--;
         }else {
             tempView=[self personLable:@"" job:@"" firstStr:@"" secondStr:@"" tel:@"" sequence:i contactCategory:@"施工总承包单位："];
@@ -249,61 +249,85 @@ static __weak ProgramDetailViewController* myDelegate;
 
 //竖着的3个view,联系人,职位,地点,单位,手机
 +(UIView*)personLable:(NSString*)name job:(NSString*)job firstStr:(NSString*)firstStr secondStr:(NSString*)secondStr tel:(NSString*)tel sequence:(int)sequence contactCategory:(NSString*)contactCategory{
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 120)];
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 150)];
     
     //分割线1
-    if (sequence!=0) {
-        UIView* line1=[self getSeperatedLine];
-        line1.center=CGPointMake(160, 1);
-        [view addSubview:line1];
-    }
+    UIView* line1=[self getSeperatedLine];
+    line1.center=CGPointMake(160, 1);
+    [view addSubview:line1];
     
     BOOL hasData=![name isEqualToString:@""];
     //名字
-    UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 40)];
+    UILabel* labelName=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 10, 295, 40)];
     labelName.text=hasData?name:@"姓名";
     labelName.textAlignment=NSTextAlignmentLeft;
     labelName.textColor=hasData?RGBCOLOR(82, 125, 237):NoDataColor;
-    labelName.font=[UIFont systemFontOfSize:15];
+    labelName.font=titleFont;
     [view addSubview:labelName];
     
     //职位
     hasData=![job isEqualToString:@""];
-    UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 40, 150, 30)];
+    UILabel* jobLabel=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 40, 130, 30)];
     jobLabel.text=hasData?job:@"职位";
     jobLabel.textColor=hasData?[UIColor blackColor]:NoDataColor;
-    jobLabel.font=[UIFont systemFontOfSize:14];
+    jobLabel.font=contentFont;
     [view addSubview:jobLabel];
     
     //单位名称
+    CGSize size=[contactCategory boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:contentFont} context:nil].size;
+    
+    UILabel* companyName=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 60, size.width, 30)];
+    companyName.text=contactCategory;
+    companyName.textColor=HasDataColor;
+    companyName.font=contentFont;
+    [view addSubview:companyName];
+    
     hasData=![firstStr isEqualToString:@""];
-    UILabel* companyNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 60, 280, 30)];
-    companyNameLabel.text=[contactCategory stringByAppendingString:hasData?firstStr:Heng];
-    companyNameLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
+    CGFloat orginX=companyName.frame.origin.x+companyName.frame.size.width-5;
+    UITextView* companyNameLabel=[[UITextView alloc]initWithFrame:CGRectMake(orginX, 59, 317.5-orginX, 50)];
+    companyNameLabel.text=hasData?firstStr:Heng;
+    companyNameLabel.textColor=hasData?HasDataColor:NoDataColor;
     companyNameLabel.textAlignment=NSTextAlignmentLeft;
-    companyNameLabel.font=[UIFont systemFontOfSize:14];
+    companyNameLabel.textContainer.maximumNumberOfLines=2;
+    companyNameLabel.selectable=NO;
+    companyNameLabel.backgroundColor=[UIColor clearColor];
+    companyNameLabel.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
+    companyNameLabel.textContainer.lineBreakMode=NSLineBreakByTruncatingTail;
+    companyNameLabel.font=contentFont;
     [view addSubview:companyNameLabel];
     
+    
     //地址
+    UILabel* addressName=[[UILabel alloc]initWithFrame:CGRectMake(12.5, 95, 70, 30)];
+    addressName.text=@"单位地址：";
+    addressName.textColor=HasDataColor;
+    addressName.font=contentFont;
+    [view addSubview:addressName];
+    
     hasData=![firstStr isEqualToString:@""];
-    UILabel* addressLabel=[[UILabel alloc]initWithFrame:CGRectMake(20, 80, 280, 30)];
+    UITextView* addressLabel=[[UITextView alloc]initWithFrame:CGRectMake(77.5, 94, 240, 50)];
     addressLabel.text=hasData?secondStr:Heng;
-    addressLabel.textColor=hasData?[UIColor grayColor]:NoDataColor;
+    addressLabel.textColor=hasData?HasDataColor:NoDataColor;
     addressLabel.textAlignment=NSTextAlignmentLeft;
-    addressLabel.font=[UIFont systemFontOfSize:14];
+    addressLabel.textContainer.maximumNumberOfLines=2;
+    addressLabel.selectable=NO;
+    addressLabel.backgroundColor=[UIColor clearColor];
+    addressLabel.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
+    addressLabel.textContainer.lineBreakMode=NSLineBreakByTruncatingTail;
+    addressLabel.font=contentFont;
     [view addSubview:addressLabel];
     
     //电话图标
-    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(160, 46, 12.5, 12.5)];
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(148, 49, 12.5, 12.5)];
     imageView.image=[GetImagePath getImagePath:@"021"];
     [view addSubview:imageView];
     
     //电话号码
     hasData=![tel isEqualToString:@""];
-    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(178, 40, 122, 25)];
+    UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(163, 43, 150, 25)];
     label.text=hasData?tel:Heng;
-    label.font=[UIFont systemFontOfSize:14];
-    label.textColor=hasData?[UIColor grayColor]:NoDataColor;
+    label.font=contentFont;
+    label.textColor=hasData?HasDataColor:NoDataColor;
     [view addSubview:label];
     
     return view;
@@ -379,11 +403,12 @@ static __weak ProgramDetailViewController* myDelegate;
             [titleView addSubview:programName];
             
             //项目地点部分
+            BOOL hasData=![address[i] isEqualToString:@""];
             UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
             areaLabel.center=CGPointMake(320*1.0/programTitle.count*(i+.5), 105);
-            areaLabel.text=address[i];
+            areaLabel.text=[StringRule hasContent:address[i]];
             areaLabel.font=[UIFont systemFontOfSize:14];
-            areaLabel.textColor=RGBCOLOR(125, 125, 125);
+            areaLabel.textColor=hasData?HasDataColor:NoDataColor;
             areaLabel.textAlignment=NSTextAlignmentCenter;
             [titleView addSubview:areaLabel];
         }

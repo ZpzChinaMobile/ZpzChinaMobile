@@ -101,6 +101,8 @@ static NSDictionary* dataDic;
      *
      *
      */
+    [totalView addSubview:[self getProgramViewWithTitleImage:[GetImagePath getImagePath:@"icon04"] stageTitle:@"装修阶段" programTitle:nil address:nil detailAddress:nil]];
+    
     //图片imageView
     [self getImageView:myDelegate.electroweakImageArr.count];
     
@@ -116,7 +118,7 @@ static NSDictionary* dataDic;
         //项目地点部分
         UILabel* areaLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320*1.0/3, 45)];
         areaLabel.center=CGPointMake(320*1.0/3*(i+.5), height+42.5);
-        areaLabel.text=@[dataDic[@"electroweakInstallation"],dataDic[@"decorationSituation"],dataDic[@"decorationProgress"]][i];
+        areaLabel.text=@[[StringRule hasContent:dataDic[@"electroweakInstallation"]],[StringRule hasContent:dataDic[@"decorationSituation"]],[StringRule hasContent:dataDic[@"decorationProgress"]]][i];
         areaLabel.font=[UIFont systemFontOfSize:14];
         areaLabel.textColor=RGBCOLOR(125, 125, 125);
         areaLabel.textAlignment=NSTextAlignmentCenter;
@@ -144,5 +146,42 @@ static NSDictionary* dataDic;
     [view addSubview:secondLabel];
     
     return view;
+}
+
++(UIView*)getProgramViewWithTitleImage:(UIImage*)titleImage stageTitle:(NSString*)stageTitle programTitle:(NSArray*)programTitle address:(NSArray*)address detailAddress:(NSArray*)detailAddress{
+    
+    //项目title及项目名称的画布
+    CGFloat  tempHeight=190;
+    if (!detailAddress) {
+        tempHeight-=60;
+    }
+    if (!programTitle) {
+        tempHeight-=65;
+    }
+    UIView* titleView=[[UIView alloc]initWithFrame:CGRectMake(0, height, 320, tempHeight)];
+    titleView.backgroundColor=RGBCOLOR(229, 229, 229);
+    height+=tempHeight;
+    
+    //阴影
+    UIImageView* shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 3.5)];
+    shadow.image=[GetImagePath getImagePath:@"Shadow-bottom"];
+    [titleView addSubview:shadow];
+    
+    ///title部分
+    //图片
+    UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 16, 16)];
+    imageView.center=CGPointMake(160, 9.25+10);
+    imageView.image=titleImage;
+    [titleView addSubview:imageView];
+    //title部分
+    UILabel* tuDiLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
+    tuDiLabel.center=CGPointMake(160, 45);
+    tuDiLabel.text=stageTitle;
+    tuDiLabel.font=[UIFont systemFontOfSize:16];
+    tuDiLabel.textAlignment=NSTextAlignmentCenter;
+    tuDiLabel.textColor=RGBCOLOR(82, 125, 237);
+    [titleView addSubview:tuDiLabel];
+    //==================================
+    return titleView;
 }
 @end

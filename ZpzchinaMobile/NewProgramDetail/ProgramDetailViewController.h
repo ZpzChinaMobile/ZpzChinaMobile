@@ -42,6 +42,7 @@
 -(void)userChangeImageWithButtons:(UIButton *)button;
 @end
 #define NoDataColor RGBCOLOR(166, 166, 166)
+#define HasDataColor RGBCOLOR(125, 125, 125)
 #define Heng @"－"
 #define titleFont [UIFont systemFontOfSize:15]
 #define contentFont [UIFont systemFontOfSize:14]
