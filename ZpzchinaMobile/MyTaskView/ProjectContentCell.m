@@ -43,7 +43,7 @@
     [self addSubview:nameLabel];
     
     investmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,51,85,20)];
-    investmentLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    investmentLabel.font = [UIFont systemFontOfSize:14];
     investmentLabel.textColor = BlueColor;
     investmentLabel.text = @"投资额(百万)";
     [self addSubview:investmentLabel];
@@ -61,7 +61,8 @@
     [self addSubview:areaLabel];
     
     areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,71,90,20)];
-    areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    //areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    areacountLabel.font = [UIFont systemFontOfSize:14];
     areacountLabel.textColor = [UIColor blackColor];
     //areacountLabel.backgroundColor = [UIColor redColor];
     [self addSubview:areacountLabel];
@@ -70,12 +71,12 @@
     [self addSubview:progressImage];
     
     startdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(234,57,65,20)];
-    startdateLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:12];
+    startdateLabel.font = [UIFont systemFontOfSize:12];
     startdateLabel.textColor = GrayColor;
     [self addSubview:startdateLabel];
     
     enddateLabel = [[UILabel alloc] initWithFrame:CGRectMake(234,71,65,20)];
-    enddateLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:12];
+    enddateLabel.font = [UIFont systemFontOfSize:12];
     enddateLabel.textColor = [UIColor orangeColor];
     [self addSubview:enddateLabel];
     

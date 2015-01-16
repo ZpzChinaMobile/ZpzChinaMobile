@@ -57,7 +57,7 @@
     [bgImgView addSubview:investmentLabel];
     
     UILabel *investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,71,90,20)];
-    investmentcountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    investmentcountLabel.font = [UIFont systemFontOfSize:14];
     if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
         investmentcountLabel.text = @"－";
         investmentcountLabel.textColor = RGBCOLOR(166, 166, 166);
@@ -79,7 +79,7 @@
     [bgImgView addSubview:areaLabel];
     
     UILabel *areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,71,90,20)];
-    areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    areacountLabel.font = [UIFont systemFontOfSize:14];
     if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]] isEqualToString:@"null"]){
         areacountLabel.text = @"－";
         areacountLabel.textColor = RGBCOLOR(166, 166, 166);
@@ -110,7 +110,7 @@
     [bgImgView addSubview:progressImage];
     
     UILabel *startdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(210,57,65,20)];
-    startdateLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:12];
+    startdateLabel.font = [UIFont systemFontOfSize:12];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedStartTime"] intValue]];
@@ -125,7 +125,7 @@
     [bgImgView addSubview:startdateLabel];
     
     UILabel *enddateLabel = [[UILabel alloc] initWithFrame:CGRectMake(210,71,65,20)];
-    enddateLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:12];
+    enddateLabel.font = [UIFont systemFontOfSize:12];
     NSDate *confromTimesp2 = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedFinishTime"] intValue]];
     NSString *confromTimespStr2 = [formatter stringFromDate:confromTimesp2];
     if([[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]||[[dic objectForKey:@"expectedFinishTime"] isEqualToString:@"/Date(0+0800)/"]){
