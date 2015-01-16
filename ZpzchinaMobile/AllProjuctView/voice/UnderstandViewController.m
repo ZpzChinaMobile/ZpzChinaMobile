@@ -54,15 +54,8 @@ static bool startListen =YES;
     [self addBackButton];
     
     //RightButton设置属性
-    UIButton *completeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [completeBtn setFrame:CGRectMake(280, 25, 30, 30)];
-    [completeBtn setBackgroundImage:[GetImagePath getImagePath:@"icon__09"] forState:UIControlStateNormal];
-    completeBtn.titleLabel.textColor = [UIColor whiteColor];
-    [completeBtn addTarget:self action:@selector(completeBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.topView addSubview:completeBtn];
-
-    
-    self.title = @"语音搜索";
+    [self addRightButton:CGRectMake(280, 23, 30, 30) title:@"搜索" iamge:nil];
+    [self addtittle:@"土地规划/拍卖"];
     
     
     UIPlaceHolderTextView *resultView = [[UIPlaceHolderTextView alloc] initWithFrame:
@@ -103,6 +96,7 @@ static bool startListen =YES;
     
     _iFlySpeechUnderstander = [IFlySpeechUnderstander sharedInstance];
     _iFlySpeechUnderstander.delegate = self;
+    [self startListening1];
 }
 
 -(void)leftBtnClick{

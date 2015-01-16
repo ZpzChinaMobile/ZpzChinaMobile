@@ -988,11 +988,11 @@
 -(void)initNaviAndScrollView{
     [self addBackButton];
     
-    CGRect frame=CGRectMake(285,30,25,22);
+    CGRect frame=CGRectMake(280,30,28,22);
     if (!self.isFromAllProject) {
         UIButton* modificationButton=[UIButton buttonWithType:UIButtonTypeCustom];
         modificationButton.frame=frame;
-        [modificationButton setImage:[GetImagePath getImagePath:@"019"] forState:UIControlStateNormal];
+        [modificationButton setImage:[GetImagePath getImagePath:@"More"] forState:UIControlStateNormal];
         [modificationButton addTarget:self action:@selector(gotoModificationVC) forControlEvents:UIControlEventTouchUpInside];
         [self.topView addSubview:modificationButton];
     }

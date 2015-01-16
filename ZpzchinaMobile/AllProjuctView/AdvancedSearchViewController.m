@@ -29,7 +29,7 @@
     // Do any additional setup after loading the view.
     [self addBackButton];
     [self addtittle:@"高级搜索"];
-    [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"icon__09"]];
+    [self addRightButton:CGRectMake(280, 23, 30, 30) title:@"搜索" iamge:nil];
     dataDic = [[NSMutableDictionary alloc] init];
     [dataDic setValue:@"" forKey:@"keyStr"];
     [dataDic setValue:@"" forKey:@"companyName"];

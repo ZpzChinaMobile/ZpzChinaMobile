@@ -402,6 +402,8 @@
 		D3C58EA81980BD5E003DD94F /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58E901980BD5E003DD94F /* CJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3C58EA91980BD5E003DD94F /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58E921980BD5E003DD94F /* CJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3C58EB31980D8C9003DD94F /* ProjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C58EB21980D8C9003DD94F /* ProjectContentCell.m */; };
+		D3D5AAD31A68B041009C2803 /* More.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5AAD11A68B041009C2803 /* More.png */; };
+		D3D5AAD41A68B041009C2803 /* More@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5AAD21A68B041009C2803 /* More@2x.png */; };
 		D3D5D9991A665CB40077C8C9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5D9971A665CB40077C8C9 /* background.png */; };
 		D3D5D99A1A665CB40077C8C9 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5D9981A665CB40077C8C9 /* background@2x.png */; };
 		D3E1AA5119ECE6C000750ACD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3E1AA5019ECE6C000750ACD /* Settings.bundle */; };
@@ -1377,6 +1379,8 @@
 		D3C58E931980BD5E003DD94F /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		D3C58EB11980D8C9003DD94F /* ProjectContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectContentCell.h; sourceTree = "<group>"; };
 		D3C58EB21980D8C9003DD94F /* ProjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectContentCell.m; sourceTree = "<group>"; };
+		D3D5AAD11A68B041009C2803 /* More.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = More.png; sourceTree = "<group>"; };
+		D3D5AAD21A68B041009C2803 /* More@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "More@2x.png"; sourceTree = "<group>"; };
 		D3D5D9971A665CB40077C8C9 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		D3D5D9981A665CB40077C8C9 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		D3E1AA5019ECE6C000750ACD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -2812,6 +2816,8 @@
 		D3FC013F19E7DEE400FF332C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D3D5AAD11A68B041009C2803 /* More.png */,
+				D3D5AAD21A68B041009C2803 /* More@2x.png */,
 				D35163CB1A674AB2000051F4 /* 地图搜索_01.png */,
 				D35163CC1A674AB2000051F4 /* 地图搜索_01@2X.png */,
 				D3D5D9971A665CB40077C8C9 /* background.png */,
@@ -3260,7 +3266,9 @@
 				D3FC02F719E7DEE400FF332C /* 新建项目5_03@2x.png in Resources */,
 				D3FC035619E7DEE400FF332C /* 面部采集_11.png in Resources */,
 				D3FC032219E7DEE400FF332C /* 登录_15.png in Resources */,
+				D3D5AAD31A68B041009C2803 /* More.png in Resources */,
 				5BA00F9F1A6636B600688E67 /* 阶段跳转01.png in Resources */,
+				D3D5AAD41A68B041009C2803 /* More@2x.png in Resources */,
 				D3FC02CA19E7DEE400FF332C /* 全部项目_37.png in Resources */,
 				D3E1AA5119ECE6C000750ACD /* Settings.bundle in Resources */,
 				5BA00FA01A6636B600688E67 /* 阶段跳转01@2x.png in Resources */,

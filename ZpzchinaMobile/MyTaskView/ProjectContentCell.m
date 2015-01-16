@@ -43,7 +43,7 @@
     [self addSubview:nameLabel];
     
     investmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,51,85,20)];
-    investmentLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    investmentLabel.font = [UIFont systemFontOfSize:14];
     investmentLabel.textColor = BlueColor;
     investmentLabel.text = @"投资额(百万)";
     [self addSubview:investmentLabel];
@@ -61,7 +61,8 @@
     [self addSubview:areaLabel];
     
     areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,71,90,20)];
-    areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    //areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    areacountLabel.font = [UIFont systemFontOfSize:14];
     areacountLabel.textColor = [UIColor blackColor];
     //areacountLabel.backgroundColor = [UIColor redColor];
     [self addSubview:areacountLabel];
@@ -70,12 +71,12 @@
     [self addSubview:progressImage];
     
     startdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(234,57,65,20)];
-    startdateLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:12];
+    startdateLabel.font = [UIFont systemFontOfSize:12];
     startdateLabel.textColor = GrayColor;
     [self addSubview:startdateLabel];
     
     enddateLabel = [[UILabel alloc] initWithFrame:CGRectMake(234,71,65,20)];
-    enddateLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:12];
+    enddateLabel.font = [UIFont systemFontOfSize:12];
     enddateLabel.textColor = [UIColor orangeColor];
     [self addSubview:enddateLabel];
     
@@ -102,7 +103,7 @@
     zoneLabel.textColor = BlueColor;
     [self addSubview:zoneLabel];
     
-    addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(114,225,160,20)];
+    addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,225,160,20)];
     addressLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     addressLabel.textColor = [UIColor blackColor];
     [self addSubview:addressLabel];
@@ -110,11 +111,25 @@
 
 -(void)setDic:(NSMutableDictionary *)dic{
     NSLog(@"%@",dic);
-    nameLabel.text = [dic objectForKey:@"projectName"];
-    if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
-        investmentcountLabel.text = @"0";
+    if([dic[@"projectName"] isEqualToString:@""]){
+        nameLabel.text = @"项目名称";
+        nameLabel.textColor = RGBCOLOR(166, 166, 166);
     }else{
-        investmentcountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]];
+        nameLabel.text = [dic objectForKey:@"projectName"];
+        nameLabel.textColor = [UIColor blackColor];
+    }
+    
+    if([[dic objectForKey:@"investment"] isEqualToString:@"null"]){
+        investmentcountLabel.text = @"－";
+        investmentcountLabel.textColor = RGBCOLOR(166, 166, 166);
+    }else{
+        if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]] isEqualToString:@"0"]){
+            investmentcountLabel.text = @"－";
+            investmentcountLabel.textColor = RGBCOLOR(166, 166, 166);
+        }else{
+            investmentcountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"investment"]];
+            investmentcountLabel.textColor = [UIColor blackColor];
+        }
     }
     if([dic[@"projectStage"] isEqualToString:@"1"]||[dic[@"projectStage"] isEqualToString:@"0"]){
         [progressImage setImage:[GetImagePath getImagePath:@"全部项目_16"]];
@@ -127,9 +142,16 @@
     }
     
     if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]] isEqualToString:@"null"]){
-        areacountLabel.text = @"0";
+        areacountLabel.text = @"－";
+        areacountLabel.textColor = RGBCOLOR(166, 166, 166);
     }else{
-        areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]];
+        if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]] isEqualToString:@"0"]){
+            areacountLabel.text = @"－";
+            areacountLabel.textColor = RGBCOLOR(166, 166, 166);
+        }else{
+            areacountLabel.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]];
+            areacountLabel.textColor = [UIColor blackColor];
+        }
     }
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
@@ -137,19 +159,37 @@
     NSLog(@"%@",[dic objectForKey:@"expectedStartTime"]);
     NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
     if([[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]||[[dic objectForKey:@"expectedStartTime"] isEqualToString:@"/Date(0+0800)/"]){
-        startdateLabel.text = @"";
+        startdateLabel.text = @"开工日期";
+        startdateLabel.textColor = RGBCOLOR(166, 166, 166);
     }else{
         startdateLabel.text = confromTimespStr;
+        startdateLabel.textColor = GrayColor;
     }
     
     NSDate *confromTimesp2 = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedFinishTime"] intValue]];
     NSString *confromTimespStr2 = [formatter stringFromDate:confromTimesp2];
     if([[dic objectForKey:@"expectedFinishTime"] isEqualToString:@""]||[[dic objectForKey:@"expectedFinishTime"] isEqualToString:@"/Date(0+0800)/"]){
-        enddateLabel.text = @"";
+        enddateLabel.text = @"竣工日期";
+        enddateLabel.textColor = RGBCOLOR(166, 166, 166);
     }else{
         enddateLabel.text = confromTimespStr2;
+        enddateLabel.textColor = [UIColor orangeColor];
     }
-    zoneLabel.text = [NSString stringWithFormat:@"%@ -",dic[@"district"]];
-    addressLabel.text = [dic objectForKey:@"landAddress"];
+    
+    if([dic[@"city"] isEqualToString:@""]){
+        zoneLabel.text = @"区域 -";
+        zoneLabel.textColor = RGBCOLOR(166, 166, 166);
+    }else{
+        zoneLabel.text = [NSString stringWithFormat:@"%@ - ",dic[@"city"]];
+        zoneLabel.textColor = BlueColor;
+    }
+    
+    if([[dic objectForKey:@"landAddress"] isEqualToString:@""]){
+        addressLabel.text = @"地址";
+        addressLabel.textColor = RGBCOLOR(166, 166, 166);
+    }else{
+        addressLabel.text = [dic objectForKey:@"landAddress"];
+        addressLabel.textColor = [UIColor blackColor];
+    }
 }
 @end
