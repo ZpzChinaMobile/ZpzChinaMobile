@@ -33,7 +33,7 @@
     [super viewDidLoad];
     [self addBackButton];
     [self addtittle:@"地图搜索"];
-    [self addRightButton:CGRectMake(280, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"icon__09"]];
+    [self addRightButton:CGRectMake(280, 23, 30, 30) title:@"保存" iamge:nil];
     [self setRightButtonClick:0];
     [self loadSelf];
 }

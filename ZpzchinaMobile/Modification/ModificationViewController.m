@@ -456,7 +456,7 @@
 
 -(void)initNavi{
     [self addBackButton];
-    [self addRightButton:CGRectMake(280, 25, 28, 28) title:nil iamge:[GetImagePath getImagePath:@"020"]];
+    [self addRightButton:CGRectMake(280, 23, 30, 30) title:@"保存" iamge:nil];
     [self addtittle:@"土地规划/拍卖"];
     self.topLabel.font=[UIFont fontWithName:@"GurmukhiMN-Bold" size:18];
 }

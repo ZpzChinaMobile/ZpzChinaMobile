@@ -95,7 +95,7 @@
     }
     if(title){
         [rightButton setTitle:title forState:UIControlStateNormal];
-        rightButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        rightButton.titleLabel.font = [UIFont systemFontOfSize:15];
     }
     [rightButton addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:rightButton];
