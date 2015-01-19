@@ -301,6 +301,8 @@
     for (int i=0; i<images.count+1; i++) {
         EGOImageView* imageView=[[EGOImageView alloc]initWithPlaceholderImage:[GetImagePath getImagePath:i==images.count?@"018":@"imgDefault"]];
         imageView.frame=CGRectMake(0, 0, 80, 80);
+        imageView.clipsToBounds=YES;
+        imageView.contentMode=UIViewContentModeScaleAspectFill;
         imageView.center=CGPointMake(320*1.0/3*(i%3+.5), cellHeight*(i/3+.5));
         [view addSubview:imageView];
         
