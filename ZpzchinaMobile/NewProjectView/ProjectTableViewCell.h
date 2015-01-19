@@ -17,8 +17,6 @@
     UIView *closeView;
     NSMutableDictionary *dataDic;
     UILabel *foreignparticipationLabel;
-    UITextField *ProjectName;
-    UITextField *ProjectMark;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dic:(NSMutableDictionary *)dic flag:(int)flag ownerArr:(NSMutableArray *)ownerArr singleDic:(NSMutableDictionary *)singleDic;
 @property(nonatomic ,weak) id <ProjectDelegate> delegate;
