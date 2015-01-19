@@ -21,6 +21,8 @@
 		5B4C196819FA09D200C6C57D /* 新建项目_211a.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C196419FA09D200C6C57D /* 新建项目_211a.png */; };
 		5B4C196919FA09D200C6C57D /* 新建项目_211a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4C196519FA09D200C6C57D /* 新建项目_211a@2x.png */; };
 		5B4C196C19FA0C3800C6C57D /* ModifiBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4C196B19FA0C3800C6C57D /* ModifiBaseViewController.m */; };
+		5B4E6CA01A68EFC50008E5D5 /* 项目详情默认.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4E6C9E1A68EFC50008E5D5 /* 项目详情默认.png */; };
+		5B4E6CA11A68EFC50008E5D5 /* 项目详情默认@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B4E6C9F1A68EFC50008E5D5 /* 项目详情默认@2x.png */; };
 		5B6030B81A67A82800DA903F /* 07.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B6030B61A67A82800DA903F /* 07.png */; };
 		5B6030B91A67A82800DA903F /* 07@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B6030B71A67A82800DA903F /* 07@2x.png */; };
 		5B63DA461A5E4E1000AB0550 /* 项目地图搜索01.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B63DA421A5E4E1000AB0550 /* 项目地图搜索01.png */; };
@@ -613,6 +615,8 @@
 		5B4C196519FA09D200C6C57D /* 新建项目_211a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "新建项目_211a@2x.png"; sourceTree = "<group>"; };
 		5B4C196A19FA0C3800C6C57D /* ModifiBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifiBaseViewController.h; sourceTree = "<group>"; };
 		5B4C196B19FA0C3800C6C57D /* ModifiBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifiBaseViewController.m; sourceTree = "<group>"; };
+		5B4E6C9E1A68EFC50008E5D5 /* 项目详情默认.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "项目详情默认.png"; sourceTree = "<group>"; };
+		5B4E6C9F1A68EFC50008E5D5 /* 项目详情默认@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "项目详情默认@2x.png"; sourceTree = "<group>"; };
 		5B6030B61A67A82800DA903F /* 07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 07.png; sourceTree = "<group>"; };
 		5B6030B71A67A82800DA903F /* 07@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07@2x.png"; sourceTree = "<group>"; };
 		5B63DA421A5E4E1000AB0550 /* 项目地图搜索01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "项目地图搜索01.png"; sourceTree = "<group>"; };
@@ -2816,6 +2820,8 @@
 		D3FC013F19E7DEE400FF332C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5B4E6C9E1A68EFC50008E5D5 /* 项目详情默认.png */,
+				5B4E6C9F1A68EFC50008E5D5 /* 项目详情默认@2x.png */,
 				D3D5AAD11A68B041009C2803 /* More.png */,
 				D3D5AAD21A68B041009C2803 /* More@2x.png */,
 				D35163CB1A674AB2000051F4 /* 地图搜索_01.png */,
@@ -3202,6 +3208,7 @@
 				D3FC026D19E7DEE400FF332C /* 018.png in Resources */,
 				D3FC037B19E7E36100FF332C /* 修改密码_03@2x.png in Resources */,
 				D3BB72FD19557D3100A3F626 /* mapapi.bundle in Resources */,
+				5B4E6CA11A68EFC50008E5D5 /* 项目详情默认@2x.png in Resources */,
 				D3FC031C19E7DEE400FF332C /* 登录_03.png in Resources */,
 				D3FC025F19E7DEE400FF332C /* 011.png in Resources */,
 				D3FC026A19E7DEE400FF332C /* 016@2x.png in Resources */,
@@ -3336,6 +3343,7 @@
 				D3FC034F19E7DEE400FF332C /* 面部采集_03@2x.png in Resources */,
 				D3FC033B19E7DEE400FF332C /* 补充切图_08@2x.png in Resources */,
 				D3FC02B819E7DEE400FF332C /* 全部项目_14.png in Resources */,
+				5B4E6CA01A68EFC50008E5D5 /* 项目详情默认.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
