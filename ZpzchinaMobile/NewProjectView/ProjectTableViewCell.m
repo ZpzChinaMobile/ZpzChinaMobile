@@ -29,7 +29,7 @@
         
         UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
         
-        UITextField *ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
+        ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
         ProjectName.delegate = self;
         ProjectName.textAlignment=NSTextAlignmentLeft;
         ProjectName.placeholder=@"项目名称";
@@ -51,6 +51,9 @@
         ProjectName.tag = 0;
         //[ProjectName setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:ProjectName];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFiledEditChanged:)
+                                                    name:@"UITextFieldTextDidChangeNotification"
+                                                  object:ProjectName];
         
         ProjectAddress = [UIButton buttonWithType:UIButtonTypeCustom];
         ProjectAddress.tag = 0;
@@ -89,7 +92,7 @@
         [mapImage addGestureRecognizer:mapImagetapGestureRecognizer];
         [self addSubview:mapImage];
         
-        UITextField *ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(20,114, 280, 30)];
+        ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(20,114, 280, 30)];
         ProjectMark.delegate = self;
         ProjectMark.textAlignment=NSTextAlignmentLeft;
         ProjectMark.placeholder=@"项目描述";
@@ -502,17 +505,21 @@
     }
     [self.delegate endEdit];
 }
-#define kMaxCount 150
-
 
 
 -(void)textFiledEditChanged:(NSNotification *)obj{
+    int kMaxCount = 0;
     UITextField *textField = (UITextField *)obj.object;
+    if(textField == ProjectMark){
+        kMaxCount = 150;
+    }else{
+        kMaxCount = 15;
+    }
     NSString *toBeString = textField.text;
     NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
     if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
         UITextRange *selectedRange = [textField markedTextRange];
-        //获取高亮部分
+        //获取高亮部分w
         UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {

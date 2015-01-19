@@ -370,10 +370,10 @@ int startIndex;
             [alert show];
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:@"上传"
+                                                            message:@"上传数据"
                                                            delegate:nil
                                                   cancelButtonTitle:@"取消"
-                                                  otherButtonTitles:@"同步数据",nil];
+                                                  otherButtonTitles:@"上传",nil];
             alert.delegate = self;
             alert.tag = 0;
             [alert show];
