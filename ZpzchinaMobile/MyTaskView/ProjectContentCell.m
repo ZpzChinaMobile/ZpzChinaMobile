@@ -176,6 +176,7 @@
         enddateLabel.textColor = [UIColor orangeColor];
     }
     
+    
     if([dic[@"city"] isEqualToString:@""]){
         zoneLabel.text = @"区域 -";
         zoneLabel.textColor = RGBCOLOR(166, 166, 166);

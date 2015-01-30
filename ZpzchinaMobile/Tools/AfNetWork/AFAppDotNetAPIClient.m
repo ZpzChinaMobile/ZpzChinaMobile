@@ -23,8 +23,8 @@
 #import "AFAppDotNetAPIClient.h"
 
 //static NSString * const AFAppDotNetAPIBaseURLString = @"http://211.147.75.57/";
-static NSString * const AFAppDotNetAPIBaseURLString = @"http://EIPQAS.zhongjichina.com/";
-//static NSString * const AFAppDotNetAPIBaseURLString = @"http://192.168.222.173:2015";
+//static NSString * const AFAppDotNetAPIBaseURLString = @"http://EIPQAS.zhongjichina.com/";
+static NSString * const AFAppDotNetAPIBaseURLString = @"http://192.168.222.173:2015";
 //static NSString * const AFAppDotNetAPIBaseURLString = @"http://192.168.222.95:802/";
 @implementation AFAppDotNetAPIClient
 
