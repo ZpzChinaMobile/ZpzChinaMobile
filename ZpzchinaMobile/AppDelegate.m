@@ -41,6 +41,16 @@
 //    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryErr];
 //    [[AVAudioSession sharedInstance] setActive: YES error: &activationErr];
 //    [self initSound];
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        [_locationManager startUpdatingLocation];
+        
+        //在ios 8.0下要授权
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+            [_locationManager requestWhenInUseAuthorization];  //调用了这句,就会弹出允许框了.
+    }
+    
     
     NSString *API_KEY = KAPI_KEY;
     NSString *API_SECRET = KAPI_SECRET;

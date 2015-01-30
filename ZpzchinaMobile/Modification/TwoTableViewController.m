@@ -290,14 +290,19 @@
 
 -(void)gotoMap:(NSString *)address city:(NSString *)city{
     NSLog(@"====>%@",city);
-    AppDelegate* app=[AppDelegate instance];
-    if (!app.locationView) {
-        app.locationView = [[LocationViewController alloc] init];
+    if([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请先打开定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+    }else{
+        AppDelegate* app=[AppDelegate instance];
+        if (!app.locationView) {
+            app.locationView = [[LocationViewController alloc] init];
+        }
+        app.locationView.delegate = self;
+        app.locationView.baseAddress = address;
+        app.locationView.baseCity = city;
+        [self.superVC.navigationController pushViewController:app.locationView animated:YES];
     }
-    app.locationView.delegate = self;
-    app.locationView.baseAddress = address;
-    app.locationView.baseCity = city;
-    [self.superVC.navigationController pushViewController:app.locationView animated:YES];
 }
 
 -(void)getLocationNil{
