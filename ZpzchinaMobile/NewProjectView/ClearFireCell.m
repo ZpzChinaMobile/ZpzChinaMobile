@@ -14,7 +14,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
+        UIFont* myFont=[UIFont systemFontOfSize:15];
 
         UIImageView *arrowImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(63,16, 10, 18)];
         [arrowImage1 setImage:[GetImagePath getImagePath:@"新建项目5_09"]];

@@ -47,7 +47,7 @@
         }
         [fireControl setTitleColor:BlueColor forState:UIControlStateNormal];
         fireControl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        fireControl.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        fireControl.titleLabel.font = [UIFont systemFontOfSize:16];
         [fireControl addTarget:self action:@selector(fireControl) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:fireControl];
         

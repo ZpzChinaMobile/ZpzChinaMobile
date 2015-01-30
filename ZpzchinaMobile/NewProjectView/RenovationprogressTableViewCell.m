@@ -41,7 +41,7 @@
         }
         [decorationProgress setTitleColor:BlueColor forState:UIControlStateNormal];
         decorationProgress.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        decorationProgress.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        decorationProgress.titleLabel.font = [UIFont systemFontOfSize:16];
         [decorationProgress addTarget:self action:@selector(decorationProgress) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:decorationProgress];
         

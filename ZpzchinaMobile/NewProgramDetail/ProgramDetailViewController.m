@@ -395,7 +395,7 @@
             }
         }
     }else{
-        self.bigStageLabel.text=@"土地信息";//大标题
+        self.bigStageLabel.text=@"土地信息阶段";//大标题
         
         UIImage* image=[GetImagePath getImagePath:@"筛选中01"];
         self.bigStageImageView.image=image;//大阶段图片
@@ -729,7 +729,7 @@
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(47, 12, 200, 16)];
     NSArray* ary=@[@"土地信息阶段",@"主体设计阶段",@"主体施工阶段",@"装修阶段"];
     label.text=ary[section];
-    label.font=[UIFont fontWithName:@"GurmukhiMN-Bold" size:16];
+    label.font=[UIFont boldSystemFontOfSize:16];
     [view addSubview:label];
     
     UIView* separatorLine=[[UIView alloc]initWithFrame:CGRectMake(47, 36.5, 273, 1)];
@@ -927,7 +927,7 @@
     
     //大阶段标题label
     self.bigStageLabel=[[UILabel alloc]initWithFrame:CGRectMake(50, 10, 150, 30)];
-    self.bigStageLabel.text=@"土地信息";
+    self.bigStageLabel.text=@"土地信息阶段";
     self.bigStageLabel.font=[UIFont systemFontOfSize:16];
     [tempView addSubview:self.bigStageLabel];
     

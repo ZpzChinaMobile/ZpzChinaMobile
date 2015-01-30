@@ -45,7 +45,7 @@
         }
         [green setTitleColor:BlueColor forState:UIControlStateNormal];
         green.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        green.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        green.titleLabel.font = [UIFont systemFontOfSize:16];
         [green addTarget:self action:@selector(green) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:green];
         

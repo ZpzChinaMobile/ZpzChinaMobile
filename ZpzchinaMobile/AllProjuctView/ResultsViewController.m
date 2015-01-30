@@ -154,7 +154,7 @@ int startIndex;
         UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 291.5, 50)];
         [bgView setBackgroundColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
         UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 10, 100, 20)];
-        countLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:12];
+        countLabel.font = [UIFont systemFontOfSize:12];
         countLabel.textColor = GrayColor;
         countLabel.text = [NSString stringWithFormat:@"共计%d条",[showArr count]];
         [bgView addSubview:countLabel];

@@ -32,63 +32,65 @@
 }
 
 -(void)addContent{
-    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14,0,291.5,260)];
-    [bgImgView setImage:[GetImagePath getImagePath:@"全部项目_10"]];
+    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14,0,291.5,270)];
+    [bgImgView setImage:[GetImagePath getImagePath:@"矩形-5"]];
     [self addSubview:bgImgView];
     
-    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,5,160,36)];
-    nameLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:15];
+    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,15,160,36)];
+    nameLabel.font = [UIFont boldSystemFontOfSize:15];
     nameLabel.textColor = [UIColor blackColor];
     //nameLabel.text = @"上海中技桩业项目名称";
     [self addSubview:nameLabel];
     
-    investmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,51,85,20)];
+    investmentLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,61,85,20)];
     investmentLabel.font = [UIFont systemFontOfSize:14];
     investmentLabel.textColor = BlueColor;
     investmentLabel.text = @"投资额(百万)";
     [self addSubview:investmentLabel];
     
-    investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,71,90,20)];
-    investmentcountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    investmentcountLabel = [[UILabel alloc] initWithFrame:CGRectMake(34,81,90,20)];
+    investmentcountLabel.font = [UIFont systemFontOfSize:14];
     //investmentcountLabel.backgroundColor = [UIColor yellowColor];
     investmentcountLabel.textColor = [UIColor blackColor];
     [self addSubview:investmentcountLabel];
     
-    areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,51,75,20)];
-    areaLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    areaLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,61,81,20)];
+    areaLabel.font = [UIFont systemFontOfSize:14];
     areaLabel.textColor = BlueColor;
-    areaLabel.text = @"建筑面积㎡";
+    areaLabel.text = @"建筑面积(㎡)";
     [self addSubview:areaLabel];
     
-    areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,71,90,20)];
+    areacountLabel = [[UILabel alloc] initWithFrame:CGRectMake(134,81,90,20)];
     //areacountLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
     areacountLabel.font = [UIFont systemFontOfSize:14];
     areacountLabel.textColor = [UIColor blackColor];
     //areacountLabel.backgroundColor = [UIColor redColor];
     [self addSubview:areacountLabel];
 
-    progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(234,5,52,52)];
+    progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(234,15,52,52)];
     [self addSubview:progressImage];
     
-    startdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(234,57,65,20)];
+    startdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(227.5,67,65,20)];
     startdateLabel.font = [UIFont systemFontOfSize:12];
+    startdateLabel.textAlignment=NSTextAlignmentCenter;
     startdateLabel.textColor = GrayColor;
     [self addSubview:startdateLabel];
     
-    enddateLabel = [[UILabel alloc] initWithFrame:CGRectMake(234,71,65,20)];
+    enddateLabel = [[UILabel alloc] initWithFrame:CGRectMake(227.5,81,65,20)];
     enddateLabel.font = [UIFont systemFontOfSize:12];
+    enddateLabel.textAlignment=NSTextAlignmentCenter;
     enddateLabel.textColor = [UIColor orangeColor];
     [self addSubview:enddateLabel];
     
-    UIImageView *bigImage = [[UIImageView alloc] initWithFrame:CGRectMake(16.5,100,286.5,109.5)];
+    UIImageView *bigImage = [[UIImageView alloc] initWithFrame:CGRectMake(16,110,287.5,109.5)];
     [bigImage setImage:[GetImagePath getImagePath:@"全部项目_37"]];
     [self addSubview:bigImage];
     
-    UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(34,225,20,20)];
+    UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(34,235,20,20)];
     [arrowImage setImage:[GetImagePath getImagePath:@"全部项目_17"]];
     [self addSubview:arrowImage];
     
-    UIImageView *dianImage = [[UIImageView alloc] initWithFrame:CGRectMake(284,225,3.5,18)];
+    UIImageView *dianImage = [[UIImageView alloc] initWithFrame:CGRectMake(284,235,3.5,18)];
     [dianImage setImage:[GetImagePath getImagePath:@"全部项目_19"]];
     dianImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *dianImagetapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
@@ -98,13 +100,13 @@
     [dianImage addGestureRecognizer:dianImagetapGestureRecognizer];
     [self addSubview:dianImage];
     
-    zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(64,225,60,20)];
-    zoneLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(64,235,60,20)];
+    zoneLabel.font = [UIFont systemFontOfSize:14];
     zoneLabel.textColor = BlueColor;
     [self addSubview:zoneLabel];
     
-    addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,225,160,20)];
-    addressLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:14];
+    addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(120,235,160,20)];
+    addressLabel.font = [UIFont systemFontOfSize:14];
     addressLabel.textColor = [UIColor blackColor];
     [self addSubview:addressLabel];
 }
@@ -132,13 +134,13 @@
         }
     }
     if([dic[@"projectStage"] isEqualToString:@"1"]||[dic[@"projectStage"] isEqualToString:@"0"]){
-        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_16"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"+项目-首页_21a"]];
     }else if([dic[@"projectStage"] isEqualToString:@"2"]){
-        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_15"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"+项目-首页_23a"]];
     }else if([dic[@"projectStage"] isEqualToString:@"3"]){
-        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_14"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"+项目-首页_25a"]];
     }else{
-        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_13"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"+项目-首页_27a"]];
     }
     
     if([[NSString stringWithFormat:@"%@",[dic objectForKey:@"areaOfStructure"]] isEqualToString:@"null"]){

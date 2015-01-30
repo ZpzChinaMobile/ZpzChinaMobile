@@ -26,7 +26,7 @@
 
 + (NSString*)hasAreaPart:(NSString*)string//判断是否为空，空则返回地块区域
 {
-    return [string isEqualToString:@""]?@"地块区域":string;
+    return [string isEqualToString:@"  "]?@"地块区域":string;
 }
 
 + (NSString*)hasAreaAddress:(NSString*)string//判断是否为空，空则返回地块地址
@@ -41,7 +41,7 @@
 
 + (NSString*)hasProgramAddress:(NSString*)string//判断是否为空，空则返回项目地址
 {
-    return [string isEqualToString:@""]?@"项目地址":string;
+    return [string isEqualToString:@"  "]?@"项目地址":string;
 }
 
 + (NSString*)hasProgramDescribe:(NSString*)string//判断是否为空，空则返回项目描述

@@ -27,7 +27,7 @@
                 
                 
         }
-        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
+        UIFont* myFont=[UIFont systemFontOfSize:15];
 
         UIButton *tempBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
         tempBtn1.frame = CGRectMake(15,11, 80, 30);

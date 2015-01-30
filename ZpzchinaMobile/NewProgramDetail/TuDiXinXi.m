@@ -465,7 +465,7 @@
     areaLabel.numberOfLines=2;
     areaLabel.font=[UIFont systemFontOfSize:14];
     areaLabel.textAlignment=NSTextAlignmentCenter;
-    areaLabel.textColor=[address isEqualToString:@""]?NoDataColor:[UIColor blackColor];
+    areaLabel.textColor=[address isEqualToString:@"  "]?NoDataColor:[UIColor blackColor];
     [titleView addSubview:areaLabel];
     tempHeight+=bounds.size.height>=18?36-14:bounds.size.height-14;
     

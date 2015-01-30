@@ -43,7 +43,7 @@
     
     UILabel *nameLabel = [[UILabel alloc] init];
     nameLabel.frame = CGRectMake(25, 20, 250, 28);
-    nameLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:19];
+    nameLabel.font = [UIFont systemFontOfSize:19];
     nameLabel.textColor = [UIColor whiteColor];
     NSArray *list = [UserSqlite loadList];
     UserModel *model = model = list[0];
@@ -52,7 +52,7 @@
     
     UILabel *welcomeLabel = [[UILabel alloc] init];
     welcomeLabel.frame = CGRectMake(25, 50, 250, 28);
-    welcomeLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:15];
+    welcomeLabel.font = [UIFont systemFontOfSize:15];
     welcomeLabel.textColor = [UIColor whiteColor];
     welcomeLabel.text = @"Welcome!";
     [self.view addSubview:welcomeLabel];

@@ -27,7 +27,7 @@
             [self addSubview:lingImage];
         }
         
-        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
+        UIFont* myFont=[UIFont systemFontOfSize:15];
         
         UITextField *ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
         ProjectName.delegate = self;

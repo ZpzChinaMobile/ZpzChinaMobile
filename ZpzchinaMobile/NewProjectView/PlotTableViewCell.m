@@ -15,7 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
+        UIFont* myFont=[UIFont systemFontOfSize:15];
         
         for (int i=0; i<8; i++) {
             UIImageView *lingImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50*(i+1), 280, 1)];

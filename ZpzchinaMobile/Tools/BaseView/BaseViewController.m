@@ -65,8 +65,7 @@
     [self.topView addSubview:backImage];
     
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.backButton.frame = CGRectMake(5,0,50,64);
-    //self.backButton.backgroundColor = [UIColor yellowColor];
+    self.backButton.frame = CGRectMake(0,0,80,64);
     [self.backButton addTarget:self action:@selector(leftAction) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:self.backButton];
 }

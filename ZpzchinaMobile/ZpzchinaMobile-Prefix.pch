@@ -25,10 +25,19 @@
 //#define serverAddress "http://211.147.75.57/ZPZChina.svc"
 //#define  serverAddress "http://EIPQAS.zhongjichina.com/ZPZChina.svc"
 //#define imageAddress "http://EIPQAS.zhongjichina.com:2016"
+
 //#define serverAddress "http://192.168.222.173:2015/ZPZChina.svc"
 //#define imageAddress "http://192.168.222.173:2016"
-#define  serverAddress "http://192.168.222.95:802/ZPZChina.svc"
-#define  imageAddress "http://192.168.222.95:801"
+
+//#define  serverAddress "http://192.168.222.95:802/ZPZChina.svc"
+//#define  imageAddress "http://192.168.222.95:801"
+
+//#define serverAddress "http://203.114.247.212:21203/ZPZChina.svc"
+//#define imageAddress "http://203.114.247.212:21202"
+
+#define serverAddress "http://10.1.5.102:804/ZPZChina.svc"
+#define imageAddress "http://10.1.5.102:801"
+
 #define  kScreenWidth  [[UIScreen mainScreen] bounds].size.width
 #define  kScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define  kContentHeight [[UIScreen mainScreen] bounds].size.height-64.5

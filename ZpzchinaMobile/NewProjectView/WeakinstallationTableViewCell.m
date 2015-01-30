@@ -47,7 +47,7 @@
         }
         [electroweakInstallation setTitleColor:BlueColor forState:UIControlStateNormal];
         electroweakInstallation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        electroweakInstallation.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        electroweakInstallation.titleLabel.font = [UIFont systemFontOfSize:16];
         [electroweakInstallation addTarget:self action:@selector(electroweakInstallation) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:electroweakInstallation];
         

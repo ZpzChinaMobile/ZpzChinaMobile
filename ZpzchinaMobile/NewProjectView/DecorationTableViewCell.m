@@ -45,7 +45,7 @@
         }
         [decorationSituation setTitleColor:BlueColor forState:UIControlStateNormal];
         decorationSituation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        decorationSituation.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        decorationSituation.titleLabel.font = [UIFont systemFontOfSize:16];
         [decorationSituation addTarget:self action:@selector(decorationSituation) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:decorationSituation];
         

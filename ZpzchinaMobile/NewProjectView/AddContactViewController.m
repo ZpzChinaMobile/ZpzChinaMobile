@@ -68,7 +68,7 @@
     [saveBtn setBackgroundColor:[UIColor clearColor]];
     [saveBtn setTitle:@"保  存" forState:UIControlStateNormal];
     [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    saveBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:16];;
+    saveBtn.titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:16];
     [saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:saveBtn];
     

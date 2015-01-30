@@ -16,7 +16,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIFont* myFont=[UIFont fontWithName:@"GurmukhiMN" size:15];
+        UIFont* myFont=[UIFont systemFontOfSize:15];
         
         UIImageView *lingImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 280, 1)];
         [lingImage2 setImage:[GetImagePath getImagePath:@"新建项目5_27"]];

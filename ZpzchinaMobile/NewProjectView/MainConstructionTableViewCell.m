@@ -26,7 +26,7 @@
         lingImage.alpha = 0.1;
         
         UILabel *titleName = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 50, 30)];
-        titleName.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        titleName.font = [UIFont systemFontOfSize:16];
         titleName.text = @"地平";
         [titleName setTextColor:BlueColor];
         [self addSubview:titleName];
@@ -70,7 +70,7 @@
         [self addSubview:view1];
         
         UILabel *titleName2 = [[UILabel alloc] initWithFrame:CGRectMake(40, 135, 100, 30)];
-        titleName2.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        titleName2.font = [UIFont systemFontOfSize:16];
         titleName2.text = @"桩基基坑";
         [titleName2 setTextColor:BlueColor];
         [self addSubview:titleName2];
@@ -113,7 +113,7 @@
         [self addSubview:view2];
         
         UILabel *titleName3 = [[UILabel alloc] initWithFrame:CGRectMake(40, 265, 100, 30)];
-        titleName3.font = [UIFont fontWithName:@"GurmukhiMN" size:16];
+        titleName3.font = [UIFont systemFontOfSize:16];
         titleName3.text = @"主体施工";
         [titleName3 setTextColor:BlueColor];
         [self addSubview:titleName3];
