@@ -892,7 +892,7 @@
         //触发动画,不位移，不延迟2秒
         CGRect frame=self.animationView.frame;
         frame.origin.x+=.0001;
-        [UIView animateWithDuration:2 animations:^{
+        [UIView animateWithDuration:1 animations:^{
             self.animationView.frame=frame;
             
         } completion:^(BOOL finished){

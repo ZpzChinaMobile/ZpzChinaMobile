@@ -88,7 +88,7 @@
         address.delegate = self;
         address.textAlignment=NSTextAlignmentLeft;
         address.font=myFont;
-        address.placeholder=@"地块地址(限20个字)";
+        address.placeholder=@"地块地址(限35个字)";
         if(flag == 0){
             if(![[dic objectForKey:@"landAddress"] isEqualToString:@""]){
                 [address setText:[dic objectForKey:@"landAddress"]];
@@ -320,7 +320,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([self.delegate respondsToSelector:@selector(addContent:index:)]){
-        NSString* tempStr=textField.text.length>20&&textField.tag==1?[textField.text substringToIndex:20]:textField.text;
+        NSString* tempStr=textField.text.length>35&&textField.tag==1?[textField.text substringToIndex:35]:textField.text;
         [self.delegate addContent:tempStr index:textField.tag];
     }
     [self.delegate endEdit];
