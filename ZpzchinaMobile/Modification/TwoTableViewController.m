@@ -16,6 +16,7 @@
 #import "LocationViewController.h"
 #import "AppModel.h"
 #import "AppDelegate.h"
+#import "networkConnect.h"
 @interface TwoTableViewController ()<ProjectDelegate,AddContactViewDelegate,MChoiceViewDelegate,LocationViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>{
     AddContactViewController* addcontactView;
     DatePickerView* datepickerview;
@@ -294,14 +295,23 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请先打开定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alertView show];
     }else{
-        AppDelegate* app=[AppDelegate instance];
-        if (!app.locationView) {
-            app.locationView = [[LocationViewController alloc] init];
+        if(![[networkConnect sharedInstance] connectedToNetwork]){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"当前网络不可用请检查连接"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil,nil];
+            [alert show];
+        }else{
+            AppDelegate* app=[AppDelegate instance];
+            if (!app.locationView) {
+                app.locationView = [[LocationViewController alloc] init];
+            }
+            app.locationView.delegate = self;
+            app.locationView.baseAddress = address;
+            app.locationView.baseCity = city;
+            [self.superVC.navigationController pushViewController:app.locationView animated:YES];
         }
-        app.locationView.delegate = self;
-        app.locationView.baseAddress = address;
-        app.locationView.baseCity = city;
-        [self.superVC.navigationController pushViewController:app.locationView animated:YES];
     }
 }
 

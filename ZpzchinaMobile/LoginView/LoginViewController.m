@@ -18,6 +18,7 @@
 #import "UserSqlite.h"
 #import "MD5.h"
 #import "MBProgressHUD.h"
+#import "networkConnect.h"
 @interface LoginViewController ()
 
 @end
@@ -152,58 +153,67 @@
 
 #pragma mark  登录－－－－－－－－－－
 -(void)loginBtnClick{
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:HUD];
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.delegate = self;
-    HUD.labelText = @"登录中...";
-    [HUD showWhileExecuting:@selector(myProgressTask) onTarget:self withObject:nil animated:YES];
-    //测试账号:zm 密码:123
-    //登录接口
-    NSLog(@"%@",[MD5 md5HexDigest:_passWordTextField.text]);
-    loginBtn.enabled=NO;
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:_userNameTextField.text,@"userName",[MD5 md5HexDigest:_passWordTextField.text],@"password" ,@"ios",@"deviceType",nil];
-    NSLog(@"%@",parameters);
-    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/login",serverAddress] parameters:parameters error:nil];
-    NSLog(@"==%@",[NSString stringWithFormat:@"%s/Users/login",serverAddress]);
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    op.responseSerializer = [AFJSONResponseSerializer serializer];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"==%@",responseObject);
-        NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
-        if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
-            NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
-            for(NSDictionary *item in a){
-                self.userToken = [item objectForKey:@"userToken"];
-                //NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
-                [LoginSqlite insertData:item[@"leaderLevel"] datakey:@"leaderLevel"];
-                [LoginSqlite insertData:self.userToken datakey:@"UserToken"];
-                [UserSqlite InsertData:item];
-//                if([[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""] isEqualToString:@""] &&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){//判断用户是否是第一次登陆并判断用户脸部识别的状态
-//                    [LoginSqlite insertData:@"1" datakey:@"firstPassWordLogin"];
-//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否要进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
-//                    
-//                    [alert show];
-//                }else{
-//                    NSLog(@"登录成功！");
-//                    [self loginSuccess];
-//                }
-                [self loginSuccess];
+    if(![[networkConnect sharedInstance] connectedToNetwork]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"当前网络不可用请检查连接"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil,nil];
+        [alert show];
+    }else{
+        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:HUD];
+        HUD.mode = MBProgressHUDModeIndeterminate;
+        HUD.delegate = self;
+        HUD.labelText = @"登录中...";
+        [HUD showWhileExecuting:@selector(myProgressTask) onTarget:self withObject:nil animated:YES];
+        //测试账号:zm 密码:123
+        //登录接口
+        NSLog(@"%@",[MD5 md5HexDigest:_passWordTextField.text]);
+        loginBtn.enabled=NO;
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjectsAndKeys:_userNameTextField.text,@"userName",[MD5 md5HexDigest:_passWordTextField.text],@"password" ,@"ios",@"deviceType",nil];
+        NSLog(@"%@",parameters);
+        NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%s/Users/login",serverAddress] parameters:parameters error:nil];
+        NSLog(@"==%@",[NSString stringWithFormat:@"%s/Users/login",serverAddress]);
+        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        op.responseSerializer = [AFJSONResponseSerializer serializer];
+        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"==%@",responseObject);
+            NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
+            if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
+                NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
+                for(NSDictionary *item in a){
+                    self.userToken = [item objectForKey:@"userToken"];
+                    //NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
+                    [LoginSqlite insertData:item[@"leaderLevel"] datakey:@"leaderLevel"];
+                    [LoginSqlite insertData:self.userToken datakey:@"UserToken"];
+                    [UserSqlite InsertData:item];
+                    //                if([[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""] isEqualToString:@""] &&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){//判断用户是否是第一次登陆并判断用户脸部识别的状态
+                    //                    [LoginSqlite insertData:@"1" datakey:@"firstPassWordLogin"];
+                    //                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否要进行脸部识别的注册" delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
+                    //
+                    //                    [alert show];
+                    //                }else{
+                    //                    NSLog(@"登录成功！");
+                    //                    [self loginSuccess];
+                    //                }
+                    [self loginSuccess];
+                }
+            }else{
+                NSLog(@"登录失败！");
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"登录失败！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                alert.tag = 1;
+                [alert show];
+                [HUD hide:YES];
+                loginBtn.enabled=YES;
             }
-        }else{
-            NSLog(@"登录失败！");
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"登录失败！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            alert.tag = 1;
-            [alert show];
-            [HUD hide:YES];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
             loginBtn.enabled=YES;
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        loginBtn.enabled=YES;
-    }];
-    [[NSOperationQueue mainQueue] addOperation:op];
+        }];
+        [[NSOperationQueue mainQueue] addOperation:op];
+    }
 }
 
 -(void)loginSuccess{             //登录成功
