@@ -149,7 +149,7 @@
     //NSLog(@"heading is %@",userLocation.heading);
 }
 
-- (void)didUpdateUserLocation:(BMKUserLocation *)userLocation{
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
     NSLog(@"定位跟新");
     BMKCoordinateRegion region;
     region.center.latitude = userLocation.location.coordinate.latitude;
