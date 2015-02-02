@@ -418,6 +418,10 @@
 		D3D5AAD41A68B041009C2803 /* More@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5AAD21A68B041009C2803 /* More@2x.png */; };
 		D3D5D9991A665CB40077C8C9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5D9971A665CB40077C8C9 /* background.png */; };
 		D3D5D99A1A665CB40077C8C9 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D5D9981A665CB40077C8C9 /* background@2x.png */; };
+		D3E07A901A7B6BEE00FFD490 /* flag.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E07A8C1A7B6BEE00FFD490 /* flag.png */; };
+		D3E07A911A7B6BEE00FFD490 /* flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E07A8D1A7B6BEE00FFD490 /* flag@2x.png */; };
+		D3E07A921A7B6BEE00FFD490 /* paper-plane.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E07A8E1A7B6BEE00FFD490 /* paper-plane.png */; };
+		D3E07A931A7B6BEE00FFD490 /* paper-plane@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E07A8F1A7B6BEE00FFD490 /* paper-plane@2x.png */; };
 		D3E1AA5119ECE6C000750ACD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3E1AA5019ECE6C000750ACD /* Settings.bundle */; };
 		D3FC013219E7CE8400FF332C /* UpdataPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */; };
 		D3FC025D19E7DEE400FF332C /* 010.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FC014119E7DEE400FF332C /* 010.png */; };
@@ -1407,6 +1411,10 @@
 		D3D5AAD21A68B041009C2803 /* More@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "More@2x.png"; sourceTree = "<group>"; };
 		D3D5D9971A665CB40077C8C9 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		D3D5D9981A665CB40077C8C9 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		D3E07A8C1A7B6BEE00FFD490 /* flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag.png; sourceTree = "<group>"; };
+		D3E07A8D1A7B6BEE00FFD490 /* flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flag@2x.png"; sourceTree = "<group>"; };
+		D3E07A8E1A7B6BEE00FFD490 /* paper-plane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paper-plane.png"; sourceTree = "<group>"; };
+		D3E07A8F1A7B6BEE00FFD490 /* paper-plane@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paper-plane@2x.png"; sourceTree = "<group>"; };
 		D3E1AA5019ECE6C000750ACD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D3FC013019E7CE8400FF332C /* UpdataPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdataPassWordViewController.h; sourceTree = "<group>"; };
 		D3FC013119E7CE8400FF332C /* UpdataPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdataPassWordViewController.m; sourceTree = "<group>"; };
@@ -2840,6 +2848,10 @@
 		D3FC013F19E7DEE400FF332C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D3E07A8C1A7B6BEE00FFD490 /* flag.png */,
+				D3E07A8D1A7B6BEE00FFD490 /* flag@2x.png */,
+				D3E07A8E1A7B6BEE00FFD490 /* paper-plane.png */,
+				D3E07A8F1A7B6BEE00FFD490 /* paper-plane@2x.png */,
 				5B3D70B91A7A1FC400778FE0 /* 矩形-5.png */,
 				5B3D70BA1A7A1FC400778FE0 /* 矩形-5@2x.png */,
 				5B3D70A91A7A1A2100778FE0 /* +项目-首页_21a.png */,
@@ -3306,6 +3318,7 @@
 				D3FC02C219E7DEE400FF332C /* 全部项目_21.png in Resources */,
 				D3FC02D519E7DEE400FF332C /* 地图搜索1_16@2x.png in Resources */,
 				D3FC028D19E7DEE400FF332C /* DRIBBBLE-icon45-blue-drops_03@2x.png in Resources */,
+				D3E07A901A7B6BEE00FFD490 /* flag.png in Resources */,
 				D3FC034D19E7DEE400FF332C /* 面部识别登录_07@2x.png in Resources */,
 				D3FC025E19E7DEE400FF332C /* 010@2x.png in Resources */,
 				D3FC028319E7DEE400FF332C /* 08@2x.png in Resources */,
@@ -3315,6 +3328,7 @@
 				D3D5AAD31A68B041009C2803 /* More.png in Resources */,
 				5BA00F9F1A6636B600688E67 /* 阶段跳转01.png in Resources */,
 				D3D5AAD41A68B041009C2803 /* More@2x.png in Resources */,
+				D3E07A931A7B6BEE00FFD490 /* paper-plane@2x.png in Resources */,
 				D3FC02CA19E7DEE400FF332C /* 全部项目_37.png in Resources */,
 				D3E1AA5119ECE6C000750ACD /* Settings.bundle in Resources */,
 				5BA00FA01A6636B600688E67 /* 阶段跳转01@2x.png in Resources */,
@@ -3327,6 +3341,7 @@
 				D3FC034819E7DEE400FF332C /* 面部识别登录1_03@2x.png in Resources */,
 				D3FC035319E7DEE400FF332C /* 面部采集_07@2x.png in Resources */,
 				D3FC028719E7DEE400FF332C /* controls_03@2x.png in Resources */,
+				D3E07A911A7B6BEE00FFD490 /* flag@2x.png in Resources */,
 				D3FC027C19E7DEE400FF332C /* 05.png in Resources */,
 				D3FC02D419E7DEE400FF332C /* 地图搜索1_16.png in Resources */,
 				D3FC02A919E7DEE400FF332C /* Selected@2x.png in Resources */,
@@ -3340,6 +3355,7 @@
 				D3AA5A12195D185E00565078 /* area.plist in Resources */,
 				D3FC036519E7DEE400FF332C /* 首页侧拉栏_01@2x.png in Resources */,
 				5B63DA471A5E4E1000AB0550 /* 项目地图搜索01@2x.png in Resources */,
+				D3E07A921A7B6BEE00FFD490 /* paper-plane.png in Resources */,
 				D3FC026119E7DEE400FF332C /* 012.png in Resources */,
 				D3FC031119E7DEE400FF332C /* 注册@2x.png in Resources */,
 				5B4C196819FA09D200C6C57D /* 新建项目_211a.png in Resources */,

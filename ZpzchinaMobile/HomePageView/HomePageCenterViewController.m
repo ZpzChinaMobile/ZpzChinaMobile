@@ -49,7 +49,7 @@
     }
     
     [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector (changeViewControllers:) name:@"changeViewControllers" object:nil];
-    
+
     album = [[Album alloc] init];
     //nav
     UIView *topView = [[UIView alloc] init];
@@ -128,13 +128,21 @@
     [newProjectView setBackgroundColor:[UIColor colorWithRed:(74/255.0)  green:(100/255.0)  blue:(176/255.0)  alpha:1.0]];
     
     UIImageView *contentImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(39,27.5,26,26)];
-    [contentImage1 setImage:[GetImagePath getImagePath:@"首页_03"]];
+    if([[LoginSqlite getdata:@"leaderLevel" defaultdata:@""] isEqualToString:@"9"]){
+        [contentImage1 setImage:[GetImagePath getImagePath:@"paper-plane"]];
+    }else{
+        [contentImage1 setImage:[GetImagePath getImagePath:@"首页_03"]];
+    }
     [newProjectView addSubview:contentImage1];
     
     UILabel *label1 = [[UILabel alloc] init];
     label1.frame = CGRectMake(25, 60, 140, 28);
     label1.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:14];
-    label1.textColor = [UIColor whiteColor];
+    if([[LoginSqlite getdata:@"leaderLevel" defaultdata:@""] isEqualToString:@"9"]){
+        label1.textColor = RGBCOLOR(119, 138, 170);
+    }else{
+        label1.textColor = [UIColor whiteColor];
+    }
     label1.text = @"新建项目";
     [newProjectView addSubview:label1];
     
@@ -151,6 +159,11 @@
     newProjectBtn.frame = CGRectMake(0, 0, 106, 112);
     [newProjectBtn addTarget:self action:@selector(AllBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [newProjectView addSubview:newProjectBtn];
+    if([[LoginSqlite getdata:@"leaderLevel" defaultdata:@""] isEqualToString:@"9"]){
+        newProjectBtn.enabled = NO;
+    }else{
+        newProjectBtn.enabled = YES;
+    }
     [self.view addSubview:newProjectView];
     
     UIImageView *lineImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(106,456,2,122)];
@@ -198,13 +211,21 @@
     [myTask setBackgroundColor:[UIColor colorWithRed:(74/255.0)  green:(100/255.0)  blue:(176/255.0)  alpha:1.0]];
     
     UIImageView *contentImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(45,28,18,23)];
-    [contentImage3 setImage:[GetImagePath getImagePath:@"首页_07"]];
+    if([[LoginSqlite getdata:@"leaderLevel" defaultdata:@""] isEqualToString:@"9"]){
+        [contentImage3 setImage:[GetImagePath getImagePath:@"flag"]];
+    }else{
+        [contentImage3 setImage:[GetImagePath getImagePath:@"首页_07"]];
+    }
     [myTask addSubview:contentImage3];
     
     UILabel *label3 = [[UILabel alloc] init];
     label3.frame = CGRectMake(25, 65, 140, 28);
     label3.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:14];
-    label3.textColor = [UIColor whiteColor];
+    if([[LoginSqlite getdata:@"leaderLevel" defaultdata:@""] isEqualToString:@"9"]){
+        label3.textColor = RGBCOLOR(119, 138, 170);
+    }else{
+        label3.textColor = [UIColor whiteColor];
+    }
     label3.text = @"我的任务";
     [myTask addSubview:label3];
     
@@ -221,6 +242,11 @@
     myTaskBtn.frame = CGRectMake(0, 0, 106, 112);
     [myTaskBtn addTarget:self action:@selector(AllBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [myTask addSubview:myTaskBtn];
+    if([[LoginSqlite getdata:@"leaderLevel" defaultdata:@""] isEqualToString:@"9"]){
+        myTaskBtn.enabled = NO;
+    }else{
+        myTaskBtn.enabled = YES;
+    }
     [self.view addSubview:myTask];
 }
 

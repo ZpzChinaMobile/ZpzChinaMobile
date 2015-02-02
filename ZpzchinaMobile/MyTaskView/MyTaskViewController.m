@@ -422,40 +422,91 @@ int startIndex;
         NSString *starttime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedStartTime];
         NSString *endtime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedFinishTime];
         NSString *actualStartTime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_actualStartTime];
-        NSMutableDictionary *parametersdata = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                        model.a_landName,@"landName",
-                                        model.a_projectName,@"projectName",
-                                        model.a_district,@"district",
-                                        model.a_province,@"province",
-                                        model.a_city,@"city",
-                                        model.a_landAddress,@"landAddress",
-                                        model.a_area,@"area",
-                                        model.a_usage,@"usage",
-                                        model.a_description,@"description",
-                                        starttime,@"expectedStartTime",
-                                        endtime,@"expectedFinishTime",
-                                        model.a_investment,@"investment",
-                                        model.a_areaOfStructure,@"areaOfStructure",
-                                        model.a_storeyHeight,@"storeyHeight",
-                                        model.a_foreignInvestment,@"foreignInvestment",
-                                        model.a_ownerType,@"ownerType",
-                                        model.a_plotRatio,@"plotRatio",
-                                        model.a_longitude,@"longitude",
-                                        model.a_latitude,@"latitude",
-                                        model.a_mainDesignStage,@"mainDesignStage",
-                                        model.a_propertyElevator,@"propertyElevator",
-                                        model.a_propertyAirCondition,@"propertyAirCondition",
-                                        model.a_propertyHeating,@"propertyHeating",
-                                               model.a_propertyExternalWallMeterial,@"propertyExternalWallMeterial",
-                                        model.a_propertyStealStructure,@"propertyStealStructure",
-                                        actualStartTime,@"actualStartTime",
-                                        model.a_fireControl,@"fireControl",
-                                        model.a_green,@"green",
-                                        model.a_electroweakInstallation,@"electroweakInstallation",
-                                        model.a_decorationSituation,@"decorationSituation",
-                                        model.a_decorationProgress,@"decorationProgress",
-                                        model.a_stage,@"projectStage",
-                                        nil];
+        NSMutableDictionary *parametersdata = [[NSMutableDictionary alloc] init];
+        [parametersdata setValue:model.a_landName forKey:@"landName"];
+        [parametersdata setValue:model.a_projectName forKey:@"projectName"];
+        [parametersdata setValue:model.a_district forKey:@"district"];
+        [parametersdata setValue:model.a_province forKey:@"province"];
+        [parametersdata setValue:model.a_city forKey:@"city"];
+        [parametersdata setValue:model.a_landAddress forKey:@"landAddress"];
+        [parametersdata setValue:model.a_area forKey:@"area"];
+        [parametersdata setValue:model.a_usage forKey:@"usage"];
+        [parametersdata setValue:model.a_description forKey:@"description"];
+        [parametersdata setValue:model.a_investment forKey:@"investment"];
+        [parametersdata setValue:model.a_areaOfStructure forKey:@"areaOfStructure"];
+        [parametersdata setValue:model.a_storeyHeight forKey:@"storeyHeight"];
+        [parametersdata setValue:model.a_ownerType forKey:@"ownerType"];
+        [parametersdata setValue:model.a_plotRatio forKey:@"plotRatio"];
+        [parametersdata setValue:model.a_plotRatio forKey:@"longitude"];
+        [parametersdata setValue:model.a_plotRatio forKey:@"latitude"];
+        [parametersdata setValue:model.a_mainDesignStage forKey:@"mainDesignStage"];
+        [parametersdata setValue:model.a_fireControl forKey:@"fireControl"];
+        [parametersdata setValue:model.a_green forKey:@"green"];
+        [parametersdata setValue:model.a_electroweakInstallation forKey:@"electroweakInstallation"];
+        [parametersdata setValue:model.a_decorationSituation forKey:@"decorationSituation"];
+        [parametersdata setValue:model.a_decorationProgress forKey:@"decorationProgress"];
+        [parametersdata setValue:model.a_stage forKey:@"projectStage"];
+        if(![model.a_expectedStartTime isEqualToString:@""]){
+            [parametersdata setValue:starttime forKey:@"expectedStartTime"];
+        }
+        if(![model.a_expectedFinishTime isEqualToString:@""]){
+            [parametersdata setValue:endtime forKey:@"expectedFinishTime"];
+        }
+        if(![model.a_actualStartTime isEqualToString:@""]){
+            [parametersdata setValue:actualStartTime forKey:@"actualStartTime"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_foreignInvestment] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_foreignInvestment forKey:@"foreignInvestment"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyElevator] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyElevator forKey:@"propertyElevator"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyAirCondition] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyAirCondition forKey:@"propertyAirCondition"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyHeating] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyHeating forKey:@"propertyHeating"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyExternalWallMeterial] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyExternalWallMeterial forKey:@"propertyExternalWallMeterial"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyStealStructure forKey:@"propertyStealStructure"];
+        }
+//        NSMutableDictionary *parametersdata = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+//                                        model.a_landName,@"landName",
+//                                        model.a_projectName,@"projectName",
+//                                        model.a_district,@"district",
+//                                        model.a_province,@"province",
+//                                        model.a_city,@"city",
+//                                        model.a_landAddress,@"landAddress",
+//                                        model.a_area,@"area",
+//                                        model.a_usage,@"usage",
+//                                        model.a_description,@"description",
+//                                        starttime,@"expectedStartTime",
+//                                        endtime,@"expectedFinishTime",
+//                                        model.a_investment,@"investment",
+//                                        model.a_areaOfStructure,@"areaOfStructure",
+//                                        model.a_storeyHeight,@"storeyHeight",
+//                                        model.a_foreignInvestment,@"foreignInvestment",
+//                                        model.a_ownerType,@"ownerType",
+//                                        model.a_plotRatio,@"plotRatio",
+//                                        model.a_longitude,@"longitude",
+//                                        model.a_latitude,@"latitude",
+//                                        model.a_mainDesignStage,@"mainDesignStage",
+//                                        model.a_propertyElevator,@"propertyElevator",
+//                                        model.a_propertyAirCondition,@"propertyAirCondition",
+//                                        model.a_propertyHeating,@"propertyHeating",
+//                                               model.a_propertyExternalWallMeterial,@"propertyExternalWallMeterial",
+//                                        model.a_propertyStealStructure,@"propertyStealStructure",
+//                                        actualStartTime,@"actualStartTime",
+//                                        model.a_fireControl,@"fireControl",
+//                                        model.a_green,@"green",
+//                                        model.a_electroweakInstallation,@"electroweakInstallation",
+//                                        model.a_decorationSituation,@"decorationSituation",
+//                                        model.a_decorationProgress,@"decorationProgress",
+//                                        model.a_stage,@"projectStage",
+//                                        nil];
         
         for(int i=0;i<parametersdata.allKeys.count;i++){
             NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
@@ -468,7 +519,7 @@ int startIndex;
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
-        //NSLog(@"%@",parameters);
+        NSLog(@"%@",parameters);
         [ProjectModel globalPostWithBlock:^(NSMutableArray *posts, NSError *error) {
             if (!error) {
                 int j = index+1;
@@ -553,42 +604,93 @@ int startIndex;
         NSString *starttime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedStartTime];
         NSString *endtime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedFinishTime];
         NSString *actualStartTime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_actualStartTime];
-        NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                        model.a_landName,@"landName",
-                                        model.a_projectName,@"projectName",
-                                        model.a_district,@"district",
-                                        model.a_province,@"province",
-                                        model.a_city,@"city",
-                                        model.a_landAddress,@"landAddress",
-                                        model.a_area,@"area",
-                                        model.a_usage,@"usage",
-                                        model.a_description,@"description",
-                                        starttime,@"expectedStartTime",
-                                        endtime,@"expectedFinishTime",
-                                        model.a_investment,@"investment",
-                                        model.a_areaOfStructure,@"areaOfStructure",
-                                        model.a_storeyHeight,@"storeyHeight",
-                                        model.a_foreignInvestment,@"foreignInvestment",
-                                        model.a_ownerType,@"ownerType",
-                                        model.a_plotRatio,@"plotRatio",
-                                        model.a_longitude,@"longitude",
-                                        model.a_latitude,@"latitude",
-                                        model.a_mainDesignStage,@"mainDesignStage",
-                                        model.a_propertyElevator,@"propertyElevator",
-                                        model.a_propertyAirCondition,@"propertyAirCondition",
-                                        model.a_propertyHeating,@"propertyHeating",
-                                        model.a_propertyExternalWallMeterial,@"propertyExternalWallMeterial",
-                                        model.a_propertyStealStructure,@"propertyStealStructure",
-                                        actualStartTime,@"actualStartTime",
-                                        model.a_fireControl,@"fireControl",
-                                        model.a_green,@"green",
-                                        model.a_electroweakInstallation,@"electroweakInstallation",
-                                        model.a_decorationSituation,@"decorationSituation",
-                                        model.a_decorationProgress,@"decorationProgress",
-                                        model.a_projectId,@"projectID",
-                                        model.a_projectCode,@"projectCode",
-                                        model.a_stage,@"projectStage",
-                                        nil];
+        NSMutableDictionary *parametersdata = [[NSMutableDictionary alloc] init];
+        [parametersdata setValue:model.a_landName forKey:@"landName"];
+        [parametersdata setValue:model.a_projectName forKey:@"projectName"];
+        [parametersdata setValue:model.a_district forKey:@"district"];
+        [parametersdata setValue:model.a_province forKey:@"province"];
+        [parametersdata setValue:model.a_city forKey:@"city"];
+        [parametersdata setValue:model.a_landAddress forKey:@"landAddress"];
+        [parametersdata setValue:model.a_area forKey:@"area"];
+        [parametersdata setValue:model.a_usage forKey:@"usage"];
+        [parametersdata setValue:model.a_description forKey:@"description"];
+        [parametersdata setValue:model.a_investment forKey:@"investment"];
+        [parametersdata setValue:model.a_areaOfStructure forKey:@"areaOfStructure"];
+        [parametersdata setValue:model.a_storeyHeight forKey:@"storeyHeight"];
+        [parametersdata setValue:model.a_ownerType forKey:@"ownerType"];
+        [parametersdata setValue:model.a_plotRatio forKey:@"plotRatio"];
+        [parametersdata setValue:model.a_plotRatio forKey:@"longitude"];
+        [parametersdata setValue:model.a_plotRatio forKey:@"latitude"];
+        [parametersdata setValue:model.a_mainDesignStage forKey:@"mainDesignStage"];
+        [parametersdata setValue:model.a_fireControl forKey:@"fireControl"];
+        [parametersdata setValue:model.a_green forKey:@"green"];
+        [parametersdata setValue:model.a_electroweakInstallation forKey:@"electroweakInstallation"];
+        [parametersdata setValue:model.a_decorationSituation forKey:@"decorationSituation"];
+        [parametersdata setValue:model.a_decorationProgress forKey:@"decorationProgress"];
+        [parametersdata setValue:model.a_stage forKey:@"projectStage"];
+        if(![model.a_expectedStartTime isEqualToString:@""]){
+            [parametersdata setValue:starttime forKey:@"expectedStartTime"];
+        }
+        if(![model.a_expectedFinishTime isEqualToString:@""]){
+            [parametersdata setValue:endtime forKey:@"expectedFinishTime"];
+        }
+        if(![model.a_actualStartTime isEqualToString:@""]){
+            [parametersdata setValue:actualStartTime forKey:@"actualStartTime"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_foreignInvestment] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_foreignInvestment forKey:@"foreignInvestment"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyElevator] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyElevator forKey:@"propertyElevator"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyAirCondition] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyAirCondition forKey:@"propertyAirCondition"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyHeating] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyHeating forKey:@"propertyHeating"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyExternalWallMeterial] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyExternalWallMeterial forKey:@"propertyExternalWallMeterial"];
+        }
+        if(![[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"null"]){
+            [parametersdata setValue:model.a_propertyStealStructure forKey:@"propertyStealStructure"];
+        }
+//        NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                                        model.a_landName,@"landName",
+//                                        model.a_projectName,@"projectName",
+//                                        model.a_district,@"district",
+//                                        model.a_province,@"province",
+//                                        model.a_city,@"city",
+//                                        model.a_landAddress,@"landAddress",
+//                                        model.a_area,@"area",
+//                                        model.a_usage,@"usage",
+//                                        model.a_description,@"description",
+//                                        starttime,@"expectedStartTime",
+//                                        endtime,@"expectedFinishTime",
+//                                        model.a_investment,@"investment",
+//                                        model.a_areaOfStructure,@"areaOfStructure",
+//                                        model.a_storeyHeight,@"storeyHeight",
+//                                        model.a_foreignInvestment,@"foreignInvestment",
+//                                        model.a_ownerType,@"ownerType",
+//                                        model.a_plotRatio,@"plotRatio",
+//                                        model.a_longitude,@"longitude",
+//                                        model.a_latitude,@"latitude",
+//                                        model.a_mainDesignStage,@"mainDesignStage",
+//                                        model.a_propertyElevator,@"propertyElevator",
+//                                        model.a_propertyAirCondition,@"propertyAirCondition",
+//                                        model.a_propertyHeating,@"propertyHeating",
+//                                        model.a_propertyExternalWallMeterial,@"propertyExternalWallMeterial",
+//                                        model.a_propertyStealStructure,@"propertyStealStructure",
+//                                        actualStartTime,@"actualStartTime",
+//                                        model.a_fireControl,@"fireControl",
+//                                        model.a_green,@"green",
+//                                        model.a_electroweakInstallation,@"electroweakInstallation",
+//                                        model.a_decorationSituation,@"decorationSituation",
+//                                        model.a_decorationProgress,@"decorationProgress",
+//                                        model.a_projectId,@"projectID",
+//                                        model.a_projectCode,@"projectCode",
+//                                        model.a_stage,@"projectStage",
+//                                        nil];
         for(int i=0;i<parametersdata.allKeys.count;i++){
             //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
             if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){

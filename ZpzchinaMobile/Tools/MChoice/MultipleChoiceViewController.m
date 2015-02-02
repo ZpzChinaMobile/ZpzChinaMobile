@@ -100,7 +100,7 @@
     [self.view addSubview:cancel];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 3, 270, 50)];
-    titleLabel.text = @"请选择搜索条件";
+    titleLabel.text = @"请选择";
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:18];
     [self.view addSubview:titleLabel];
