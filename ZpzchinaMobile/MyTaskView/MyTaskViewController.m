@@ -627,6 +627,8 @@ int startIndex;
         [parametersdata setValue:model.a_electroweakInstallation forKey:@"electroweakInstallation"];
         [parametersdata setValue:model.a_decorationSituation forKey:@"decorationSituation"];
         [parametersdata setValue:model.a_decorationProgress forKey:@"decorationProgress"];
+        [parametersdata setValue:model.a_projectId forKey:@"projectID"];
+        [parametersdata setValue:model.a_projectCode forKey:@"projectCode"];
         [parametersdata setValue:model.a_stage forKey:@"projectStage"];
         if(![model.a_expectedStartTime isEqualToString:@""]){
             [parametersdata setValue:starttime forKey:@"expectedStartTime"];
@@ -654,7 +656,7 @@ int startIndex;
         }
         if(![[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"null"]){
             [parametersdata setValue:model.a_propertyStealStructure forKey:@"propertyStealStructure"];
-        }
+        } 
 //        NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:
 //                                        model.a_landName,@"landName",
 //                                        model.a_projectName,@"projectName",

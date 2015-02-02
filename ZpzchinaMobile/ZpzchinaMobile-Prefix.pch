@@ -26,8 +26,8 @@
 //#define  serverAddress "http://EIPQAS.zhongjichina.com/ZPZChina.svc"
 //#define imageAddress "http://EIPQAS.zhongjichina.com:2016"
 
-//#define serverAddress "http://192.168.222.173:2015/ZPZChina.svc"
-//#define imageAddress "http://192.168.222.173:2016"
+#define serverAddress "http://192.168.222.173:2015/ZPZChina.svc"
+#define imageAddress "http://192.168.222.173:2016"
 
 //#define  serverAddress "http://192.168.222.95:802/ZPZChina.svc"
 //#define  imageAddress "http://192.168.222.95:801"
