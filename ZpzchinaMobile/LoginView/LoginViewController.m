@@ -176,6 +176,7 @@
             for(NSDictionary *item in a){
                 self.userToken = [item objectForKey:@"userToken"];
                 //NSString *isFaceRegisted = [item objectForKey:@"isFaceRegisted"];
+                [LoginSqlite insertData:item[@"leaderLevel"] datakey:@"leaderLevel"];
                 [LoginSqlite insertData:self.userToken datakey:@"UserToken"];
                 [UserSqlite InsertData:item];
 //                if([[LoginSqlite getdata:@"firstPassWordLogin" defaultdata:@""] isEqualToString:@""] &&![[NSString stringWithFormat:@"%@",isFaceRegisted] isEqualToString:@"1"]){//判断用户是否是第一次登陆并判断用户脸部识别的状态

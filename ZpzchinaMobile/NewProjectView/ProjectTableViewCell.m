@@ -29,7 +29,7 @@
         
         UIFont* myFont=[UIFont systemFontOfSize:15];
         
-        UITextField *ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
+        ProjectName = [[UITextField alloc] initWithFrame:CGRectMake(20,15, 280, 30)];
         ProjectName.delegate = self;
         ProjectName.textAlignment=NSTextAlignmentLeft;
         ProjectName.placeholder=@"项目名称";
@@ -51,6 +51,9 @@
         ProjectName.tag = 0;
         //[ProjectName setClearButtonMode:UITextFieldViewModeWhileEditing];
         [self addSubview:ProjectName];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFiledEditChanged:)
+                                                    name:@"UITextFieldTextDidChangeNotification"
+                                                  object:ProjectName];
         
         ProjectAddress = [UIButton buttonWithType:UIButtonTypeCustom];
         ProjectAddress.tag = 0;
@@ -89,7 +92,7 @@
         [mapImage addGestureRecognizer:mapImagetapGestureRecognizer];
         [self addSubview:mapImage];
         
-        UITextField *ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(20,114, 280, 30)];
+        ProjectMark = [[UITextField alloc] initWithFrame:CGRectMake(20,114, 280, 30)];
         ProjectMark.delegate = self;
         ProjectMark.textAlignment=NSTextAlignmentLeft;
         ProjectMark.placeholder=@"项目描述";
@@ -502,12 +505,16 @@
     }
     [self.delegate endEdit];
 }
-#define kMaxCount 150
-
 
 
 -(void)textFiledEditChanged:(NSNotification *)obj{
     UITextField *textField = (UITextField *)obj.object;
+    int count = 0;
+    if(textField == ProjectName){
+        count = 100;
+    }else{
+        count = 150;
+    }
     NSString *toBeString = textField.text;
     NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
     if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
@@ -516,8 +523,8 @@
         UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {
-            if (toBeString.length > kMaxCount) {
-                textField.text = [toBeString substringToIndex:kMaxCount];
+            if (toBeString.length > count) {
+                textField.text = [toBeString substringToIndex:count];
             }
         }
         // 有高亮选择的字符串，则暂不对文字进行统计和限制
@@ -526,8 +533,8 @@
         }
     }else{
         // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
-        if (toBeString.length > kMaxCount) {
-            textField.text = [toBeString substringToIndex:kMaxCount];
+        if (toBeString.length > count) {
+            textField.text = [toBeString substringToIndex:count];
         }
     }
 }
