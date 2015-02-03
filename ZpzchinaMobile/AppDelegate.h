@@ -10,6 +10,7 @@
 #import "BMapKit.h"
 #import "MMDrawerController.h"
 #import "LocationViewController.h"
+#import "Reachability.h"
 #import <AVFoundation/AVFoundation.h>
 #define KAPI_KEY @"7057bbc57c1f842fa8f8355cab2941c3"
 #define KAPI_SECRET @"R-6gNM2XsmWENxtDQjm87jm_JzWNH74X"
@@ -18,8 +19,8 @@
     MMDrawerController * drawerController;
     AVAudioPlayer *player;
     NSTimer *timer;
+    Reachability *hostReach;
 }
-
 @property (strong, nonatomic) UIWindow *window;
 @property(nonatomic,strong)LocationViewController* locationView;
 @property (nonatomic,strong)CLLocationManager *locationManager;

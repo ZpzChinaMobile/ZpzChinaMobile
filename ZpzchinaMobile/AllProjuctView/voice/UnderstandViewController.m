@@ -55,7 +55,7 @@ static bool startListen =YES;
     
     //RightButton设置属性
     [self addRightButton:CGRectMake(280, 23, 30, 30) title:@"搜索" iamge:nil];
-    [self addtittle:@"土地规划/拍卖"];
+    [self addtittle:@"语音搜索"];
     
     
     UIPlaceHolderTextView *resultView = [[UIPlaceHolderTextView alloc] initWithFrame:
@@ -161,7 +161,7 @@ static bool startListen =YES;
 }
 
 
-- (void)completeBtnAction{
+- (void)rightAction{
     
     
     NSString *string = [_textView.text stringByReplacingOccurrencesOfString:@"。" withString:@""];

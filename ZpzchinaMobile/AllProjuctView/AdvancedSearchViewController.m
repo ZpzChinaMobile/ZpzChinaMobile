@@ -7,7 +7,7 @@
 //
 
 #import "AdvancedSearchViewController.h"
-
+#import "networkConnect.h"
 @interface AdvancedSearchViewController ()
 
 @end
@@ -107,13 +107,22 @@
 
 -(void)rightAction{
     NSLog(@"%@",dataDic);
-    if(![dataDic[@"keyStr"] isEqualToString:@""]){
-        resultsview = [[ResultsViewController alloc] init];
-        resultsview.dataDic = dataDic;
-        [self.navigationController pushViewController:resultsview animated:YES];
+    if(![[networkConnect sharedInstance] connectedToNetwork]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"当前网络不可用请检查连接"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil,nil];
+        [alert show];
     }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请填写关键字" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
+        if(![dataDic[@"keyStr"] isEqualToString:@""]){
+            resultsview = [[ResultsViewController alloc] init];
+            resultsview.dataDic = dataDic;
+            [self.navigationController pushViewController:resultsview animated:YES];
+        }else{
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请填写关键字" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
     }
 }
 
