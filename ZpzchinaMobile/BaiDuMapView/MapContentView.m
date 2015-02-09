@@ -96,14 +96,15 @@
     
     UIImageView *progressImage = [[UIImageView alloc] initWithFrame:CGRectMake(220,5,52,52)];
     if([stage isEqualToString:@"1"]){
-        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_16"]];
-    }else if([stage isEqualToString:@"2"]){
-        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_15"]];
-    }else if([stage isEqualToString:@"3"]){
-        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_14"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"+项目-首页_21a"]];
+    }else if([dic[@"projectStage"] isEqualToString:@"2"]){
+        [progressImage setImage:[GetImagePath getImagePath:@"+项目-首页_23a"]];
+    }else if([dic[@"projectStage"] isEqualToString:@"3"]){
+        [progressImage setImage:[GetImagePath getImagePath:@"+项目-首页_25a"]];
     }else{
-        [progressImage setImage:[GetImagePath getImagePath:@"全部项目_13"]];
+        [progressImage setImage:[GetImagePath getImagePath:@"+项目-首页_27a"]];
     }
+    
     UIImageView *smailImage = [[UIImageView alloc] initWithFrame:CGRectMake(15,17,24.5,18.5)];
     [smailImage setImage:[GetImagePath getImagePath:@"全部项目_21"]];
     [progressImage addSubview:smailImage];

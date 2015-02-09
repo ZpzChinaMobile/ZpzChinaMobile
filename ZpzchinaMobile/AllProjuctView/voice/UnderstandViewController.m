@@ -19,7 +19,7 @@
 #import "PopupView.h"
 #import "AppDelegate.h"
 #import "JSONKit.h"
-
+#import <AVFoundation/AVAudioSession.h>
 
 
 @implementation UnderstandViewController
@@ -67,10 +67,9 @@ static bool startListen =YES;
     resultView.layer.borderWidth = 0;
     _textView = resultView;
     _textView.text =@"";
-    label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 140, 40)];
+    label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 160, 40)];
     label.font = [UIFont systemFontOfSize:25.0f];
     label.textColor = [UIColor colorWithRed:(151/255.0)  green:(151/255.0)  blue:(151/255.0)  alpha:1.0];
-    label.text =@"请开始说话";
     [resultView addSubview:label];
     UIImage *image = [GetImagePath getImagePath:@"语音搜索_04"];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(90, resultView.frame.origin.y+resultView.frame.size.height+103.5-56.5, 149, 149)];
@@ -96,7 +95,24 @@ static bool startListen =YES;
     
     _iFlySpeechUnderstander = [IFlySpeechUnderstander sharedInstance];
     _iFlySpeechUnderstander.delegate = self;
-    [self startListening1];
+    if ([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)]) {
+        [[AVAudioSession sharedInstance] performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
+            if (granted) {
+                // Microphone enabled code
+                NSLog(@"Microphone is enabled..");
+                [self startListening1];
+                button.enabled = YES;
+            }
+            else {
+                // Microphone disabled code
+                NSLog(@"Microphone is disabled..");
+                label.text =@"请打开麦克风";
+                button.enabled = NO;
+                // We're in a background thread here, so jump to main thread to do UI work.
+                
+            }
+        }];
+    };
 }
 
 -(void)leftBtnClick{
