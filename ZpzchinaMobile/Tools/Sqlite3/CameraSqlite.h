@@ -14,6 +14,7 @@
 +(void)delAll;
 
 +(NSMutableArray *)loadList;
++(NSMutableArray *)loadLocalList:(NSString *)projectID;
 
 +(NSMutableArray *)loadAllHorizonList:(NSString *)projectID;
 +(NSMutableArray *)loadAllPilePitList:(NSString *)projectID;

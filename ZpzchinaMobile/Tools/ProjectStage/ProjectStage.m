@@ -48,6 +48,23 @@
     //NSLog(@"%@",model.a_landName);
     NSLog(@"====>%@",model.a_stage);
     [dic setObject:model.a_stage forKey:@"projectStage"];
+    if([[NSString stringWithFormat:@"%@",model.a_imageLocation] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_imageLocation] isEqualToString:@"(null)"]){
+        [dic setObject:@"" forKey:@"CompressImage"];
+    }else{
+        [dic setObject:[NSString stringWithFormat:@"%@",model.a_imageLocation] forKey:@"CompressImage"];
+    }
+    if([[NSString stringWithFormat:@"%@",model.a_imageHeight] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_imageHeight] isEqualToString:@"(null)"]){
+        [dic setObject:@"" forKey:@"CompressImageHeight"];
+    }else{
+        [dic setObject:[NSString stringWithFormat:@"%@",model.a_imageHeight] forKey:@"CompressImageHeight"];
+    }
+    if([[NSString stringWithFormat:@"%@",model.a_imageWidth] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_imageWidth] isEqualToString:@"(null)"]){
+        [dic setObject:@"" forKey:@"CompressImageWidth"];
+    }else{
+        [dic setObject:[NSString stringWithFormat:@"%@",model.a_imageWidth] forKey:@"CompressImageWidth"];
+    }
+    
+    
     if([[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",model.a_id] isEqualToString:@"(null)"]){
         [dic setObject:@"" forKey:@"id"];
     }else{
@@ -388,9 +405,12 @@
 
 
 +(NSMutableDictionary *)JudgmentUpdataProjectStr:(NSMutableDictionary *)oldDic newDic:(NSMutableDictionary *)newDic{
-    NSLog(@"%@",oldDic);
+    NSLog(@"oldDic ==> %@",oldDic);
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[newDic objectForKey:@"id"] forKey:@"id"];
+    [dic setValue:oldDic[@"CompressImage"] forKey:@"CompressImage"];
+    [dic setValue:oldDic[@"CompressImageHeight"] forKey:@"CompressImageHeight"];
+    [dic setValue:oldDic[@"CompressImageWidth"] forKey:@"CompressImageWidth"];
     //土地规划/拍卖
     if(![newDic objectForKey:@"landName"]){
         [dic setObject:[oldDic objectForKey:@"landName"] forKey:@"landName"];

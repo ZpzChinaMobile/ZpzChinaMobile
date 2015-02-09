@@ -85,6 +85,10 @@
 //url
 @property (nonatomic,strong) NSString *a_url;
 @property (nonatomic,strong) NSString *a_stage;
+//列表显示图片
+@property (nonatomic,strong) NSString *a_imageLocation;
+@property (nonatomic,strong) NSString *a_imageHeight;
+@property (nonatomic,strong) NSString *a_imageWidth;
 -(void)loadWithDictionary:(NSDictionary*)dic;
 -(void)loadWithDB:(NSDictionary*)dic;
 + (NSURLSessionDataTask *)globalSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block str:(NSString *)str index:(int)index;

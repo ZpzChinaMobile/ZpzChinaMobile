@@ -54,6 +54,9 @@
     self.a_decorationSituation = [dic valueForKey:@"decorationSituation"];
     self.a_decorationProgress = [dic valueForKey:@"decorationProgress"];
     self.a_stage = [dic valueForKey:@"projectStage"];
+    self.a_imageLocation = [dic valueForKey:@"CompressImage"];
+    self.a_imageWidth = [dic valueForKey:@"CompressImageWidth"];
+    self.a_imageHeight = [dic valueForKey:@"CompressImageHeight"];
 }
 
 //服务器数据
@@ -97,6 +100,9 @@
     self.a_decorationProgress = [dic valueForKey:@"decorationProgress"];
     self.a_url = [dic valueForKey:@"url"];
     self.a_stage = [dic valueForKey:@"projectStage"];
+    self.a_imageLocation = [dic valueForKey:@"CompressImage"];
+    self.a_imageWidth = [dic valueForKey:@"CompressImageWidth"];
+    self.a_imageHeight = [dic valueForKey:@"CompressImageHeight"];
 }
 
 + (NSURLSessionDataTask *)globalSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block str:(NSString *)str index:(int)index{

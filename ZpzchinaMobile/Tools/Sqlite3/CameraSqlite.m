@@ -112,6 +112,21 @@
 	}
     return list;
 }
+
++(NSMutableArray *)loadLocalList:(NSString *)projectID{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+    if ([sqlite open:DataBaseName]) {
+        NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Camera WHERE  status <>'1' AND localProjectId = '%@'",projectID]];
+        for (NSDictionary * dict in results) {
+            CameraModel *model = [[CameraModel alloc]init];
+            [model loadWithDB:dict];
+            [list addObject:model];
+        }
+    }
+    return list;
+}
+
 +(NSMutableArray *)loadPlanList:(NSString *)projectID{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];

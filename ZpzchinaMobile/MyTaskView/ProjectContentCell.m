@@ -82,9 +82,10 @@
     enddateLabel.textColor = [UIColor orangeColor];
     [self addSubview:enddateLabel];
     
-    UIImageView *bigImage = [[UIImageView alloc] initWithFrame:CGRectMake(16,110,287.5,109.5)];
-    [bigImage setImage:[GetImagePath getImagePath:@"全部项目_37"]];
-    [self addSubview:bigImage];
+    bigImage = [[EGOImageView alloc] initWithPlaceholderImage:[GetImagePath getImagePath:@"mapdef"]];
+    bigImage.frame = CGRectMake(2.2,110,288,110);
+    bigImage.delegate = self;
+    [bgImgView addSubview:bigImage];
     
     UIImageView *arrowImage = [[UIImageView alloc] initWithFrame:CGRectMake(34,235,20,20)];
     [arrowImage setImage:[GetImagePath getImagePath:@"全部项目_17"]];
@@ -158,7 +159,6 @@
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"expectedStartTime"] intValue]];
-    NSLog(@"%@",[dic objectForKey:@"expectedStartTime"]);
     NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
     if([[dic objectForKey:@"expectedStartTime"] isEqualToString:@""]||[[dic objectForKey:@"expectedStartTime"] isEqualToString:@"/Date(0+0800)/"]){
         startdateLabel.text = @"开工日期";
@@ -194,5 +194,18 @@
         addressLabel.text = [dic objectForKey:@"landAddress"];
         addressLabel.textColor = [UIColor blackColor];
     }
+    
+    imageHight = [dic[@"CompressImageHeight"] floatValue];
+    imageWidth = [dic[@"CompressImageWidth"] floatValue];
+    bigImage.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,dic[@"CompressImage"]]];
+}
+
+- (void)imageViewLoadedImage:(EGOImageView*)imageView{
+    //图片裁剪
+    UIImage *srcimg = imageView.image;
+    CGRect rect =  CGRectMake((imageWidth-288)/2, (imageHight-110)/2, 288, 110);//要裁剪的图片区域，按照原图的像素大小来，超过原图大小的边自动适配
+    CGImageRef cgimg = CGImageCreateWithImageInRect([srcimg CGImage], rect);
+    bigImage.image = [UIImage imageWithCGImage:cgimg];
+    CGImageRelease(cgimg);//用完一定要释放，否则内存泄露
 }
 @end

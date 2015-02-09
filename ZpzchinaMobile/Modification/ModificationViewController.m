@@ -509,6 +509,9 @@
         NSArray *imgArr = [[NSArray alloc] initWithObjects:appModel.planImageArr,appModel.horizonImageArr,appModel.pilePitImageArr,appModel.mainConstructionImageArr,appModel.explorationImageArr,appModel.fireControlImageArr,appModel.electroweakImageArr,nil];
         NSString *stage = [ProjectStage JudgmentProjectStage:self.dataDic contactArr:contactArr imgArr:imgArr];
         [self.dataDic setValue:stage forKey:@"projectStage"];
+        [self.dataDic setValue:@"" forKey:@"CompressImage"];
+        [self.dataDic setValue:@"" forKey:@"CompressImageWidth"];
+        [self.dataDic setValue:@"" forKey:@"CompressImageHeight"];
         NSLog(@"%@",self.dataDic);
         if([self.dataDic[@"landName"] isEqualToString:@""]&&[self.dataDic[@"projectName"] isEqualToString:@""]){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请输入地块名称或者项目名称" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

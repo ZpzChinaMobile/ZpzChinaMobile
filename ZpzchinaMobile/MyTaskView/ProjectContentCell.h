@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface ProjectContentCell : UITableViewCell{
+#import "EGOImageView.h"
+@interface ProjectContentCell : UITableViewCell<EGOImageViewDelegate>{
     NSString *stage;
     UILabel *nameLabel;
     UILabel *investmentLabel;
@@ -19,6 +20,9 @@
     UILabel *enddateLabel;
     UILabel *addressLabel;
     UILabel *zoneLabel;
+    EGOImageView *bigImage;
+    float imageHight;
+    float imageWidth;
 }
 @property(nonatomic,strong)NSMutableDictionary *dic;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
