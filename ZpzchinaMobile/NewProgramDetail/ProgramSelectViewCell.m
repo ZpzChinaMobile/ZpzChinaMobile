@@ -47,13 +47,13 @@
         //右边三个小icon的左边2个，选择性显示，图同
         CGFloat tempX=270;
         if (secondIcon) {
-            UIImageView* tempImageView=[[UIImageView alloc]initWithFrame:CGRectMake(tempX, 8, 20, 20)];
+            UIImageView* tempImageView=[[UIImageView alloc]initWithFrame:CGRectMake(tempX, 10, 16, 16)];
             tempImageView.image=[GetImagePath getImagePath:@"06"];
             [cell.contentView addSubview:tempImageView];
             tempX-=30;
         }
         if (firstIcon) {
-            UIImageView* tempImageView=[[UIImageView alloc]initWithFrame:CGRectMake(tempX, 8, 20, 20)];
+            UIImageView* tempImageView=[[UIImageView alloc]initWithFrame:CGRectMake(tempX, 10, 16, 16)];
             tempImageView.image=[GetImagePath getImagePath:@"017"];
             [cell.contentView addSubview:tempImageView];
         }
