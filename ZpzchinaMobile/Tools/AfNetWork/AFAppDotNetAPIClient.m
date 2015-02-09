@@ -28,6 +28,7 @@
 //static NSString * const AFAppDotNetAPIBaseURLString = @"http://192.168.222.95:802/";
 //static NSString * const AFAppDotNetAPIBaseURLString = @"http://203.114.247.212:21203/ZPZChina.svc/";
 
+
 static NSString * const AFAppDotNetAPIBaseURLString = @"http://10.1.5.102:804/ZPZChina.svc";
 
 @implementation AFAppDotNetAPIClient

@@ -37,7 +37,7 @@
     
     //cell.sureImageView=nil;
     if (indexPath.row==number) {
-        cell.sureImageView=[[UIImageView alloc]initWithFrame:CGRectMake(270, 9, 18, 19)];
+        cell.sureImageView=[[UIImageView alloc]initWithFrame:CGRectMake(270, 9, 16, 16)];
         cell.sureImageView.image=[GetImagePath getImagePath:@"016"];
         [cell.contentView addSubview:cell.sureImageView];
     }
