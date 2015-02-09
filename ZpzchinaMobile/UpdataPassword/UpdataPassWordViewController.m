@@ -11,6 +11,7 @@
 #import "LoginSqlite.h"
 #import "UpdataPassWordEvent.h"
 #import "MD5.h"
+#import "networkConnect.h"
 @interface UpdataPassWordViewController ()
 
 @end
@@ -124,25 +125,43 @@
 
 
 -(void)updataPassWordAction{
-    if(![newPassWordTextField.text isEqualToString:newAgainPassWordTextField.text]){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"二次密码不一致" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
+    if(![[networkConnect sharedInstance] connectedToNetwork]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"当前网络不可用请检查连接"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil,nil];
+        [alert show];
     }else{
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setValue:[MD5 md5HexDigest:oldPassWordTextField.text] forKey:@"oldPassword"];
-        [dic setValue:[MD5 md5HexDigest:newPassWordTextField.text] forKey:@"newPassword"];
-        [dic setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
-        [UpdataPassWordEvent PutUserWithBlock:^(NSMutableArray *posts, NSError *error) {
-            if(!error){
-                if (posts) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"密码修改成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                    [alertView show];
-                }else{
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"原密码错误" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                    [alertView show];
+        if([newPassWordTextField.text isEqualToString:@""]){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"密码不能为空"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil,nil];
+            [alert show];
+            return;
+        }
+        if(![newPassWordTextField.text isEqualToString:newAgainPassWordTextField.text]){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"二次密码不一致" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+        }else{
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:[MD5 md5HexDigest:oldPassWordTextField.text] forKey:@"oldPassword"];
+            [dic setValue:[MD5 md5HexDigest:newPassWordTextField.text] forKey:@"newPassword"];
+            [dic setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
+            [UpdataPassWordEvent PutUserWithBlock:^(NSMutableArray *posts, NSError *error) {
+                if(!error){
+                    if (posts) {
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"密码修改成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                        [alertView show];
+                    }else{
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"原密码错误" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                        [alertView show];
+                    }
                 }
-            }
-        } dataDic:dic];
+            } dataDic:dic];
+        }
     }
 }
 

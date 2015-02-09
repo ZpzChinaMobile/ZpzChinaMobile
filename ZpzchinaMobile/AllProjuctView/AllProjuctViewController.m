@@ -17,6 +17,7 @@
 #import "RecordSqlite.h"
 #import "AFAppDotNetAPIClient.h"
 #import "ProgramDetailViewController.h"
+#import "networkConnect.h"
 @interface AllProjuctViewController ()
 
 @end
@@ -295,29 +296,38 @@ int startIndex;
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
-    NSLog(@"=====>%@",[_searchbar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]);
-    if(![[_searchbar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]){
-        startIndex = 0;
-        [self.showArr removeAllObjects];
-        [self loadServer:_searchbar.text startIndex:startIndex];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSString *time = [dateFormatter stringFromDate:[NSDate date]];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setValue:_searchbar.text forKey:@"name"];
-        [dic setValue:time forKey:@"time"];
-        [RecordSqlite InsertData:dic];
-    }else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请输入搜索内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    if(![[networkConnect sharedInstance] connectedToNetwork]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"当前网络不可用请检查连接"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil,nil];
         [alert show];
-        [cancelBtn setHidden:YES];
-        [UIView animateWithDuration:0.5 animations:^{
-            self.backButton.alpha = 1;
-            topBgView.frame = CGRectMake(30, 0,270, 64.5);
-        }];
-        _searchbar.text = @"";
-        [_recordView removeFromSuperview];
-        _recordView = nil;
+    }else{
+        NSLog(@"=====>%@",[_searchbar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]);
+        if(![[_searchbar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]){
+            startIndex = 0;
+            [self.showArr removeAllObjects];
+            [self loadServer:_searchbar.text startIndex:startIndex];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSString *time = [dateFormatter stringFromDate:[NSDate date]];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:_searchbar.text forKey:@"name"];
+            [dic setValue:time forKey:@"time"];
+            [RecordSqlite InsertData:dic];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请输入搜索内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            [cancelBtn setHidden:YES];
+            [UIView animateWithDuration:0.5 animations:^{
+                self.backButton.alpha = 1;
+                topBgView.frame = CGRectMake(30, 0,270, 64.5);
+            }];
+            _searchbar.text = @"";
+            [_recordView removeFromSuperview];
+            _recordView = nil;
+        }
     }
 }
 
@@ -356,38 +366,47 @@ int startIndex;
 }
 
 -(void)gotoView:(NSInteger)index{
-    [_recordView removeFromSuperview];
-    _recordView = nil;
-    [_searchbar resignFirstResponder];
-    [cancelBtn setHidden:YES];
-    [UIView animateWithDuration:0.5 animations:^{
-        self.backButton.alpha = 1;
-        topBgView.frame = CGRectMake(30, 0,270, 64.5);
-    }];
-    switch (index) {
-        case 0:
-            underStandVC = [[UnderstandViewController alloc] init];
-            underStandVC.delegate = self;
-            [self.navigationController pushViewController:underStandVC animated:YES];
-            break;
-        case 1:
-            ADsearchVIew = [[AdvancedSearchViewController alloc] init];
-            [self.navigationController pushViewController:ADsearchVIew animated:YES];
-            break;
-        case 2:
-        {
-            if([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请先打开定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alertView show];
-            }else{
-                BaiDuMapViewController*   mapView = [[BaiDuMapViewController alloc] init];
-                [self.navigationController pushViewController:mapView animated:YES];
+    if(![[networkConnect sharedInstance] connectedToNetwork]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"当前网络不可用请检查连接"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil,nil];
+        [alert show];
+    }else{
+        [_recordView removeFromSuperview];
+        _recordView = nil;
+        [_searchbar resignFirstResponder];
+        [cancelBtn setHidden:YES];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.backButton.alpha = 1;
+            topBgView.frame = CGRectMake(30, 0,270, 64.5);
+        }];
+        switch (index) {
+            case 0:
+                underStandVC = [[UnderstandViewController alloc] init];
+                underStandVC.delegate = self;
+                [self.navigationController pushViewController:underStandVC animated:YES];
+                break;
+            case 1:
+                ADsearchVIew = [[AdvancedSearchViewController alloc] init];
+                [self.navigationController pushViewController:ADsearchVIew animated:YES];
+                break;
+            case 2:
+            {
+                if([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请先打开定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alertView show];
+                }else{
+                    BaiDuMapViewController*   mapView = [[BaiDuMapViewController alloc] init];
+                    [self.navigationController pushViewController:mapView animated:YES];
+                }
             }
+                break;
+                
+            default:
+                break;
         }
-            break;
-            
-        default:
-            break;
     }
 }
 

@@ -86,7 +86,7 @@
     addPhone.textAlignment=NSTextAlignmentLeft;
     addPhone.placeholder=@"添加电话";
     addPhone.returnKeyType=UIReturnKeyDone;
-    addPhone.keyboardType = UIKeyboardTypePhonePad;
+    addPhone.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     addPhone.tag = 1;
     //[addPhone setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:addPhone];

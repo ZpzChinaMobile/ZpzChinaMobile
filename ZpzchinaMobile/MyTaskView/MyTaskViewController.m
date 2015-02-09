@@ -87,17 +87,9 @@ int startIndex;
     coverView.frame=CGRectMake(0, 64.5, 320, 568-64.5);
     [self.view addSubview:coverView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name: kReachabilityChangedNotification
-                                               object: nil];
-    hostReach = [Reachability reachabilityWithHostName:@"www.apple.com"];
-    [hostReach startNotifier];
-    
     if([[networkConnect sharedInstance] connectedToNetwork]){
         [self loadServer:startIndex];
     }else{
-        NSLog(@"asdfasdf");
         if (![self.view.subviews containsObject:coverView]) {
             [self.view addSubview:coverView];
         }
@@ -118,36 +110,36 @@ int startIndex;
         [indicator stopAnimating];
         releaseProjuctBtn.enabled = NO;
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notReachable) name:@"NotReachable" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isReachable) name:@"IsReachable" object:nil];
 }
 
-- (void)reachabilityChanged:(NSNotification *)note {
-    Reachability* curReach = [note object];
-    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
-    NetworkStatus status = [curReach currentReachabilityStatus];
-    
-    if (status == NotReachable) {
-        if (![self.view.subviews containsObject:coverView]) {
-            [self.view addSubview:coverView];
-        }
-        flag = 1;
-        [_tableView removeHeader];
-        [_tableView removeFooter];
-        [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_07"]];
-        [self.showArr removeAllObjects];
-        self.showArr = [ProjectSqlite loadList];
-        [_tableView reloadData];
-        [UIView animateWithDuration:0.5 animations:^{
-            [_lineImage setFrame:CGRectMake(205, 112.5, 71.5, 2)];
-        }completion:^(BOOL finish){
-            if ([self.view.subviews containsObject:coverView]) {
-                [coverView removeFromSuperview];
-            }
-        }];
-        [indicator stopAnimating];
-        releaseProjuctBtn.enabled = NO;
-    }else{
-        releaseProjuctBtn.enabled = YES;
+- (void)notReachable {
+    NSLog(@"reachabilityChanged");
+    if (![self.view.subviews containsObject:coverView]) {
+        [self.view addSubview:coverView];
     }
+    flag = 1;
+    [_tableView removeHeader];
+    [_tableView removeFooter];
+    [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_07"]];
+    [self.showArr removeAllObjects];
+    self.showArr = [ProjectSqlite loadList];
+    [_tableView reloadData];
+    [UIView animateWithDuration:0.5 animations:^{
+        [_lineImage setFrame:CGRectMake(205, 112.5, 71.5, 2)];
+    }completion:^(BOOL finish){
+        if ([self.view.subviews containsObject:coverView]) {
+            [coverView removeFromSuperview];
+        }
+    }];
+    [indicator stopAnimating];
+    releaseProjuctBtn.enabled = NO;
+}
+
+-(void)isReachable{
+    releaseProjuctBtn.enabled = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -751,5 +743,10 @@ int startIndex;
             
         }
     } index:startIndex];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NotReachable" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"IsReachable" object:nil];
 }
 @end

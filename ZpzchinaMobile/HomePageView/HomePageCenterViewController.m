@@ -272,9 +272,18 @@
             break;
         case 1:
             //全部项目
-            _allProjuct = [[AllProjuctViewController alloc] init];
-            [self.navigationController pushViewController:_allProjuct animated:YES];
-            _allProjuct=nil;
+            if(![[networkConnect sharedInstance] connectedToNetwork]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"当前网络不可用请检查连接"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil,nil];
+                [alert show];
+            }else{
+                _allProjuct = [[AllProjuctViewController alloc] init];
+                [self.navigationController pushViewController:_allProjuct animated:YES];
+                _allProjuct=nil;
+            }
             break;
         case 2:
             //我的任务

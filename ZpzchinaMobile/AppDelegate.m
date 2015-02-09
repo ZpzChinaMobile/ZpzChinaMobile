@@ -35,12 +35,14 @@
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    j=0;
-//    NSError *setCategoryErr = nil;
-//    NSError *activationErr  = nil;
-//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryErr];
-//    [[AVAudioSession sharedInstance] setActive: YES error: &activationErr];
-//    [self initSound];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name: kReachabilityChangedNotification
+                                               object: nil];
+    hostReach = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    [hostReach startNotifier];
+    
+    
     if ([CLLocationManager locationServicesEnabled]) {
         self.locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
@@ -147,33 +149,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-//    NSLog(@"applicationDidEnterBackground");
-//    UIApplication*   app = [UIApplication sharedApplication];
-//    __block    UIBackgroundTaskIdentifier bgTask;
-//    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"结束");
-//            if (bgTask != UIBackgroundTaskInvalid)
-//            {
-//                bgTask = UIBackgroundTaskInvalid;
-//            }
-//        });
-//    }];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            if (bgTask != UIBackgroundTaskInvalid)
-//            {
-//                bgTask = UIBackgroundTaskInvalid;
-//            }
-//        });
-//    });
-//    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
-//    
-//    [NSTimer scheduledTimerWithTimeInterval:5
-//                                     target:self
-//                                   selector:@selector(tik)
-//                                   userInfo:nil
-//                                    repeats:YES];
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -214,20 +190,17 @@
     }
 }
 
-//- (void)initSound
-//{
-//    player=[[AVAudioPlayer alloc] init];
-//}
-//
-//- (void)tik{
-//    NSLog(@"tik＝＝＝%d",j);
-//    if ([[UIApplication sharedApplication] backgroundTimeRemaining] < 61.0) {
-//        
-//        [player prepareToPlay];
-//        
-//        [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
-//        
-//    }
-//    j++;
-//}
+//网络链接改变时会调用的方法
+-(void)reachabilityChanged:(NSNotification *)note
+{
+    Reachability *currReach = [note object];
+    //对连接改变做出响应处理动作
+    NetworkStatus status = [currReach currentReachabilityStatus];
+    //如果没有连接到网络就弹出提醒实况
+    if(status == NotReachable){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotReachable" object:nil];
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"IsReachable" object:nil];
+    }
+}
 @end
