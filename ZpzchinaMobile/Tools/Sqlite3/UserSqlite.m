@@ -71,7 +71,7 @@
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
 	if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:@"INSERT INTO User(userToken,userID,isFaceRegisted,faceCount,department,company,city,leaderLevel,office,province,region ,street,supervisor,cellphone,district,realName) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
-         dic[@"userToken"],dic[@"userID"],dic[@"isFaceRegisted"],dic[@"faceCount"],dic[@"department"],dic[@"company"],dic[@"city"],dic[@"leaderLevel"],dic[@"office"],dic[@"province"],dic[@"region"],dic[@"street"],dic[@"supervisor"],dic[@"cellphone"],dic[@"district"],dic[@"realName"]];
+         dic[@"userToken"],dic[@"userID"],dic[@"isFaceRegisted"],dic[@"faceCount"],dic[@"department"],dic[@"company"],@"上海市",dic[@"leaderLevel"],dic[@"office"],@"上海市",dic[@"region"],dic[@"street"],dic[@"supervisor"],dic[@"cellphone"],@"虹口区",dic[@"realName"]];
 	}
 }
 

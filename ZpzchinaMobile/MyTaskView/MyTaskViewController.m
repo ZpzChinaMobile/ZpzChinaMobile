@@ -22,7 +22,10 @@
 #import "AFAppDotNetAPIClient.h"
 #import "ProgramDetailViewController.h"
 @interface MyTaskViewController ()
-
+@property(nonatomic,strong)NSString *localProjectId;
+@property(nonatomic,strong)NSString *serveProjectId;
+@property(nonatomic)int projectIndex;
+@property(nonatomic,strong)NSString *addOrPut;
 @end
 
 @implementation MyTaskViewController
@@ -38,6 +41,7 @@ int startIndex;
     indicator.color=[UIColor blackColor];
     [indicator startAnimating];
     flag =0;
+    self.projectIndex = 0;
     [self addBackButton];
     [self addtittle:@"我的任务"];
     [self setBgColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
@@ -45,7 +49,7 @@ int startIndex;
     getproject = [[GetProject alloc] init];
     self.showArr = [[NSMutableArray alloc] init];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88.5, 320, 503.5) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 88.5, 320, kScreenHeight-64.5) style:UITableViewStyleGrouped];
     [_tableView setBackgroundColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -248,6 +252,7 @@ int startIndex;
     [_tableView removeHeader];
     [_tableView removeFooter];
     [self addRightButton:CGRectMake(270, 25, 29, 28.5) title:nil iamge:[GetImagePath getImagePath:@"DRIBBBLE-icon45-blue-drops_07"]];
+    self.projectIndex = 0;
     [self.showArr removeAllObjects];
     self.showArr = [ProjectSqlite loadList];
     [_tableView reloadData];
@@ -409,6 +414,8 @@ int startIndex;
 }
 
 -(void)setServer:(NSInteger)index{
+    self.addOrPut = @"setServer";
+    NSLog(@"===>%d,,,%d",index,self.dataArr.count);
     if(index<self.dataArr.count){
         ProjectModel *model = [self.dataArr objectAtIndex:index];
         NSString *starttime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedStartTime];
@@ -429,8 +436,8 @@ int startIndex;
         [parametersdata setValue:model.a_storeyHeight forKey:@"storeyHeight"];
         [parametersdata setValue:model.a_ownerType forKey:@"ownerType"];
         [parametersdata setValue:model.a_plotRatio forKey:@"plotRatio"];
-        [parametersdata setValue:model.a_plotRatio forKey:@"longitude"];
-        [parametersdata setValue:model.a_plotRatio forKey:@"latitude"];
+        [parametersdata setValue:model.a_longitude forKey:@"longitude"];
+        [parametersdata setValue:model.a_latitude forKey:@"latitude"];
         [parametersdata setValue:model.a_mainDesignStage forKey:@"mainDesignStage"];
         [parametersdata setValue:model.a_fireControl forKey:@"fireControl"];
         [parametersdata setValue:model.a_green forKey:@"green"];
@@ -465,44 +472,9 @@ int startIndex;
         if(![[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"null"]){
             [parametersdata setValue:model.a_propertyStealStructure forKey:@"propertyStealStructure"];
         }
-//        NSMutableDictionary *parametersdata = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-//                                        model.a_landName,@"landName",
-//                                        model.a_projectName,@"projectName",
-//                                        model.a_district,@"district",
-//                                        model.a_province,@"province",
-//                                        model.a_city,@"city",
-//                                        model.a_landAddress,@"landAddress",
-//                                        model.a_area,@"area",
-//                                        model.a_usage,@"usage",
-//                                        model.a_description,@"description",
-//                                        starttime,@"expectedStartTime",
-//                                        endtime,@"expectedFinishTime",
-//                                        model.a_investment,@"investment",
-//                                        model.a_areaOfStructure,@"areaOfStructure",
-//                                        model.a_storeyHeight,@"storeyHeight",
-//                                        model.a_foreignInvestment,@"foreignInvestment",
-//                                        model.a_ownerType,@"ownerType",
-//                                        model.a_plotRatio,@"plotRatio",
-//                                        model.a_longitude,@"longitude",
-//                                        model.a_latitude,@"latitude",
-//                                        model.a_mainDesignStage,@"mainDesignStage",
-//                                        model.a_propertyElevator,@"propertyElevator",
-//                                        model.a_propertyAirCondition,@"propertyAirCondition",
-//                                        model.a_propertyHeating,@"propertyHeating",
-//                                               model.a_propertyExternalWallMeterial,@"propertyExternalWallMeterial",
-//                                        model.a_propertyStealStructure,@"propertyStealStructure",
-//                                        actualStartTime,@"actualStartTime",
-//                                        model.a_fireControl,@"fireControl",
-//                                        model.a_green,@"green",
-//                                        model.a_electroweakInstallation,@"electroweakInstallation",
-//                                        model.a_decorationSituation,@"decorationSituation",
-//                                        model.a_decorationProgress,@"decorationProgress",
-//                                        model.a_stage,@"projectStage",
-//                                        nil];
+        
         
         for(int i=0;i<parametersdata.allKeys.count;i++){
-            NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
-            NSLog(@"%@",[parametersdata[parametersdata.allKeys[i]] class]);
             if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){
                 [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
             }
@@ -511,11 +483,14 @@ int startIndex;
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
-        NSLog(@"%@",parameters);
         [ProjectModel globalPostWithBlock:^(NSMutableArray *posts, NSError *error) {
             if (!error) {
-                int j = index+1;
-                [self setServer:j];
+                self.projectIndex = index +1;
+                self.contactArr = [ContactSqlite loadServeWithProject:posts[0][@"projectID"]];
+                imageArr = [CameraSqlite loadServeWithProject:posts[0][@"projectID"]];
+                self.localProjectId = model.a_id;
+                self.serveProjectId = posts[0][@"projectID"];
+                [self setContactServer:0];
             }else{
                 [bgView removeFromSuperview];
                 bgView = nil;
@@ -523,9 +498,9 @@ int startIndex;
         } parameters:parameters aid:model.a_id];
     }else{
         NSLog(@"setServer结束");
-        self.contactArr = [ContactSqlite loadInsertData];
-        [self setContactServer:0];
-        
+        updataProjectArr = [ProjectSqlite loadUpdataData];
+        NSLog(@"%@",updataContactArr);
+        [self updataServer:0];
     }
 }
 
@@ -534,11 +509,9 @@ int startIndex;
         ContactModel *model = [self.contactArr objectAtIndex:index];
         //[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],@"userToken"
         NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:model.a_contactName,@"name",model.a_mobilePhone,@"telephone",model.a_projectName,@"project",model.a_category,@"category",model.a_duties,@"duties",model.a_accountName,@"workAt",model.a_accountAddress,@"workAddress",model.a_projectId,@"projectID",model.a_projectName,@"project",model.a_baseContactID,@"baseContactID",nil];
-        NSLog(@"%@",parametersdata);
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
-        //NSLog(@"%@",parameters);
         [ContactModel globalPostWithBlock:^(NSMutableArray *posts, NSError *error) {
             if (!error) {
                 int j = index+1;
@@ -550,7 +523,7 @@ int startIndex;
         } parameters:parameters aid:model.a_id];
     }else{
         NSLog(@"setContactServer结束");
-        imageArr = [CameraSqlite loadList];
+        //imageArr = [CameraSqlite loadList];
         [self setImageServer:0];
     }
 }
@@ -582,17 +555,26 @@ int startIndex;
         }
     }else{
         NSLog(@"setImageServer结束");
-        updataProjectArr = [ProjectSqlite loadUpdataData];
-        [self updataServer:0];
+        [ProjectModel NotificationWithBlock:^(NSMutableArray *posts, NSError *error) {
+            if(!error){
+                [ProjectSqlite delData:self.serveProjectId];
+                [ContactSqlite delAllData:self.serveProjectId];
+                [CameraSqlite delAllData:self.serveProjectId];
+                if([self.addOrPut isEqualToString:@"setServer"]){
+                    [self setServer:self.projectIndex];
+                }else{
+                    [self updataServer:self.projectIndex];
+                }
+            }
+        } projectId:self.serveProjectId];
     }
 }
 
 -(void)updataServer:(NSInteger)index{
-    NSLog(@"updataServer");
+    self.addOrPut = @"updataServer";
     if(index<updataProjectArr.count){
+        NSLog(@"updataServer");
         ProjectModel *model = [updataProjectArr objectAtIndex:index];
-        NSLog(@"%@",model.a_foreignInvestment);
-        //[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],@"userToken"
         NSString *starttime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedStartTime];
         NSString *endtime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_expectedFinishTime];
         NSString *actualStartTime = [NSString stringWithFormat:@"/Date(%@000+0800)/",model.a_actualStartTime];
@@ -611,8 +593,8 @@ int startIndex;
         [parametersdata setValue:model.a_storeyHeight forKey:@"storeyHeight"];
         [parametersdata setValue:model.a_ownerType forKey:@"ownerType"];
         [parametersdata setValue:model.a_plotRatio forKey:@"plotRatio"];
-        [parametersdata setValue:model.a_plotRatio forKey:@"longitude"];
-        [parametersdata setValue:model.a_plotRatio forKey:@"latitude"];
+        [parametersdata setValue:model.a_longitude forKey:@"longitude"];
+        [parametersdata setValue:model.a_latitude forKey:@"latitude"];
         [parametersdata setValue:model.a_mainDesignStage forKey:@"mainDesignStage"];
         [parametersdata setValue:model.a_fireControl forKey:@"fireControl"];
         [parametersdata setValue:model.a_green forKey:@"green"];
@@ -648,45 +630,9 @@ int startIndex;
         }
         if(![[NSString stringWithFormat:@"%@",model.a_propertyStealStructure] isEqualToString:@"null"]){
             [parametersdata setValue:model.a_propertyStealStructure forKey:@"propertyStealStructure"];
-        } 
-//        NSDictionary *parametersdata = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                                        model.a_landName,@"landName",
-//                                        model.a_projectName,@"projectName",
-//                                        model.a_district,@"district",
-//                                        model.a_province,@"province",
-//                                        model.a_city,@"city",
-//                                        model.a_landAddress,@"landAddress",
-//                                        model.a_area,@"area",
-//                                        model.a_usage,@"usage",
-//                                        model.a_description,@"description",
-//                                        starttime,@"expectedStartTime",
-//                                        endtime,@"expectedFinishTime",
-//                                        model.a_investment,@"investment",
-//                                        model.a_areaOfStructure,@"areaOfStructure",
-//                                        model.a_storeyHeight,@"storeyHeight",
-//                                        model.a_foreignInvestment,@"foreignInvestment",
-//                                        model.a_ownerType,@"ownerType",
-//                                        model.a_plotRatio,@"plotRatio",
-//                                        model.a_longitude,@"longitude",
-//                                        model.a_latitude,@"latitude",
-//                                        model.a_mainDesignStage,@"mainDesignStage",
-//                                        model.a_propertyElevator,@"propertyElevator",
-//                                        model.a_propertyAirCondition,@"propertyAirCondition",
-//                                        model.a_propertyHeating,@"propertyHeating",
-//                                        model.a_propertyExternalWallMeterial,@"propertyExternalWallMeterial",
-//                                        model.a_propertyStealStructure,@"propertyStealStructure",
-//                                        actualStartTime,@"actualStartTime",
-//                                        model.a_fireControl,@"fireControl",
-//                                        model.a_green,@"green",
-//                                        model.a_electroweakInstallation,@"electroweakInstallation",
-//                                        model.a_decorationSituation,@"decorationSituation",
-//                                        model.a_decorationProgress,@"decorationProgress",
-//                                        model.a_projectId,@"projectID",
-//                                        model.a_projectCode,@"projectCode",
-//                                        model.a_stage,@"projectStage",
-//                                        nil];
+        }
+        
         for(int i=0;i<parametersdata.allKeys.count;i++){
-            //NSLog(@"%@===>%@",parametersdata.allKeys[i],parametersdata[parametersdata.allKeys[i]]);
             if([[NSString stringWithFormat:@"%@",parametersdata[parametersdata.allKeys[i]]] isEqualToString:@"null"]){
                 [parametersdata setValue:@"0" forKey:parametersdata.allKeys[i]];
             }
@@ -694,13 +640,15 @@ int startIndex;
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setValue:parametersdata forKey:@"data"];
         [parameters setValue:[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"] forKey:@"token"];
-        //NSLog(@"parameters ===>%@",parameters);
         [ProjectModel globalPutWithBlock:^(NSMutableArray *posts, NSError *error) {
             if(!error){
-                int j = index+1;
-                [self updataServer:j];
+                self.projectIndex = index +1;
+                self.contactArr = [ContactSqlite loadServeWithProject:posts[0][@"projectID"]];
+                imageArr = [CameraSqlite loadServePutWithProject:posts[0][@"projectID"]];
+                self.localProjectId = model.a_id;
+                self.serveProjectId = posts[0][@"projectID"];
+                [self setContactServer:0];
             }else{
-                NSLog(@"%@",bgView);
                 [bgView removeFromSuperview];
                 bgView = nil;
             }

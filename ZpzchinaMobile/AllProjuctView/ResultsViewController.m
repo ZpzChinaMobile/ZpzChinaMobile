@@ -47,7 +47,7 @@ int startIndex;
 //    [indicator startAnimating];
     [self addBackButton];
     [self addtittle:@"高级搜索结果"];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 513) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64.5, 320, kScreenHeight-55) style:UITableViewStyleGrouped];
     [_tableView setBackgroundColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
     _tableView.delegate = self;
     _tableView.dataSource = self;

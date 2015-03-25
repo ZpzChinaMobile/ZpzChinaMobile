@@ -48,6 +48,7 @@ int startIndex;
     [self addBackButton];
     self.showArr = [[NSMutableArray alloc] init];
     startIndex = 0;
+    allCount = @"0";
     [self loadServer:@"" startIndex:startIndex];
     dataArr = [[NSMutableArray alloc] init];
     
@@ -80,7 +81,7 @@ int startIndex;
     [self.view addSubview:cancelBtn];
     [cancelBtn setHidden:YES];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 503.5) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64.5, 320, kScreenHeight-64.5) style:UITableViewStyleGrouped];
     [_tableView setBackgroundColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -236,7 +237,7 @@ int startIndex;
         cell = [[ProjectContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.dic = dic;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -343,7 +344,12 @@ int startIndex;
         });
     }];
     if(_recordView == nil){
-        _recordView = [[RecordView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 287.5)];
+        _recordView = [[RecordView alloc] init];
+        if(kScreenHeight == 480){
+            _recordView = [[RecordView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 200)];
+        }else{
+            _recordView = [[RecordView alloc] initWithFrame:CGRectMake(0, 64.5, 320, 287.5)];
+        }
         _recordView.delegate = self;
         [self.view addSubview:_recordView];
     }
@@ -449,7 +455,6 @@ int startIndex;
                 allCount = posts[1];
             }else{
                 [self.showArr addObjectsFromArray:posts];
-                allCount = @"0";
             }
             [dataArr removeAllObjects];
             for(int i=0;i<self.showArr.count;i++){

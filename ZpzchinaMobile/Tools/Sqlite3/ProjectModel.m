@@ -305,13 +305,11 @@
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
             NSArray *a = [[responseObject objectForKey:@"d"] objectForKey:@"data"];
             for(NSDictionary *item in a){
-                NSLog(@"%@",[item objectForKey:@"projectCode"]);
-                NSLog(@"%@",[item objectForKey:@"projectID"]);
                 projectId = [item objectForKey:@"projectID"];
                 projectName = [item objectForKey:@"projectName"];
                 [ContactSqlite UpdataProjectId:projectId aid:aid projectName:projectName];
                 [CameraSqlite UpdataProjectId:projectId aid:aid projectName:projectName];
-                [ProjectSqlite delData:aid];
+                [ProjectSqlite UpdataServeProjectId:projectId aid:aid];
             }
             if (block) {
                 block([NSMutableArray arrayWithArray:[[responseObject objectForKey:@"d"] objectForKey:@"data"]], nil);
@@ -368,5 +366,25 @@
         }
     }];
     [[NSOperationQueue mainQueue] addOperation:op];
+}
+
++ (NSURLSessionDataTask *)NotificationWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block projectId:(NSString *)projectId{
+    NSString *urlStr = [NSString stringWithFormat:@"/ZPZChina.svc/projects/IsReceived/%@?projectId=%@",[LoginSqlite getdata:@"UserToken" defaultdata:@"UserToken"],projectId];
+    
+    return [[AFAppDotNetAPIClient sharedClient] GET:urlStr parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
+        NSLog(@"JSON===>%@",JSON);
+        NSMutableArray *arr = [[NSMutableArray alloc] init];
+        NSNumber *statusCode = [[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
+        //NSLog(@"%@",[[[JSON objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"totalCount"]);
+        if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
+            if (block) {
+                block([NSMutableArray arrayWithArray:arr], nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *__unused task, NSError *error) {
+        if (block) {
+            block([NSMutableArray array], error);
+        }
+    }];
 }
 @end

@@ -80,21 +80,21 @@
     
     //上半部分背景
     UIView *bannerView = [[UIView alloc] init];
-    bannerView.frame = CGRectMake(0, 64, 320, 392);
+    bannerView.frame = CGRectMake(0, 64, 320, kScreenHeight-176);
     //[bannerView setBackgroundColor:[UIColor redColor]];
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 320, 392);
+    btn.frame = CGRectMake(0, 0, 320, kScreenHeight-176);
     btn.enabled = NO;
     [btn setImage:[GetImagePath getImagePath:@"background"] forState:UIControlStateDisabled];
     [bannerView addSubview:btn];
     
     //上半部分背景上的叠加图
     NSArray *colorArray = [@[[UIColor colorWithRed:(10/255.0)  green:(32/255.0)  blue:(64/255.0)  alpha:0.0],[UIColor colorWithRed:(10/255.0)  green:(32/255.0)  blue:(64/255.0)  alpha:0.8]] mutableCopy];
-    GradientView *footView = [[GradientView alloc] initWithFrame:CGRectMake(0, 270, 320, 122) colorArr:colorArray];
+    GradientView *footView = [[GradientView alloc] initWithFrame:CGRectMake(0, kScreenHeight-176-122, 320, 122) colorArr:colorArray];
     [bannerView addSubview:footView];
     
     UILabel *userNameLabel = [[UILabel alloc] init];
-    userNameLabel.frame = CGRectMake(10, 324, 200, 28);
+    userNameLabel.frame = CGRectMake(10, kScreenHeight-176-68, 200, 28);
     userNameLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:17];
     userNameLabel.textColor = [UIColor whiteColor];
     NSMutableArray *list = [UserSqlite loadList];
@@ -104,27 +104,27 @@
 
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.frame = CGRectMake(10, 355, 140, 28);
+    titleLabel.frame = CGRectMake(10, kScreenHeight-176-37, 140, 28);
     titleLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:12];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.text = model.a_department;
     [bannerView addSubview:titleLabel];
     
-    UIImageView *cityImgView = [[UIImageView alloc] initWithFrame:CGRectMake(200,361,12,17)];
-    [cityImgView setImage:[GetImagePath getImagePath:@"首页_10"]];
-    [bannerView addSubview:cityImgView];
-    
-    UILabel *cityLabel = [[UILabel alloc] init];
-    cityLabel.frame = CGRectMake(220, 355, 140, 28);
-    cityLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:12];
-    cityLabel.textColor = [UIColor whiteColor];
-    cityLabel.text = [NSString stringWithFormat:@"%@  %@",model.a_city,model.a_district];
-    [bannerView addSubview:cityLabel];
+//    UIImageView *cityImgView = [[UIImageView alloc] initWithFrame:CGRectMake(200,361,12,17)];
+//    [cityImgView setImage:[GetImagePath getImagePath:@"首页_10"]];
+//    [bannerView addSubview:cityImgView];
+//    
+//    UILabel *cityLabel = [[UILabel alloc] init];
+//    cityLabel.frame = CGRectMake(220, 355, 140, 28);
+//    cityLabel.font = [UIFont fontWithName:@"GurmukhiMN-Bold" size:12];
+//    cityLabel.textColor = [UIColor whiteColor];
+//    cityLabel.text = [NSString stringWithFormat:@"%@  %@",model.a_city,model.a_district];
+//    [bannerView addSubview:cityLabel];
     [self.view addSubview:bannerView];
     
     //新建项目
     UIView *newProjectView = [[UIView alloc] init];
-    [newProjectView setFrame:CGRectMake(0, 456, 106, 112)];
+    [newProjectView setFrame:CGRectMake(0, kScreenHeight-112, 106, 112)];
     [newProjectView setBackgroundColor:[UIColor colorWithRed:(74/255.0)  green:(100/255.0)  blue:(176/255.0)  alpha:1.0]];
     
     UIImageView *contentImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(39,27.5,26,26)];
@@ -166,13 +166,13 @@
     }
     [self.view addSubview:newProjectView];
     
-    UIImageView *lineImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(106,456,2,122)];
+    UIImageView *lineImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(106,kScreenHeight-112,2,112)];
     [lineImage1 setBackgroundColor:[UIColor colorWithRed:(109/255.0)  green:(131/255.0)  blue:(192/255.0)  alpha:1.0]];
     [self.view addSubview:lineImage1];
     
     //全部项目
     UIView *allProjectView = [[UIView alloc] init];
-    [allProjectView setFrame:CGRectMake(108, 456, 106, 112)];
+    [allProjectView setFrame:CGRectMake(108, kScreenHeight-112, 106, 112)];
     [allProjectView setBackgroundColor:[UIColor colorWithRed:(74/255.0)  green:(100/255.0)  blue:(176/255.0)  alpha:1.0]];
     
     UIImageView *contentImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(39,27.5,26,26)];
@@ -201,13 +201,13 @@
     [allProjectView addSubview:allProjectBtn];
     [self.view addSubview:allProjectView];
     
-    UIImageView *lineImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(214,456,2,122)];
+    UIImageView *lineImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(214,kScreenHeight-112,2,112)];
     [lineImage2 setBackgroundColor:[UIColor colorWithRed:(109/255.0)  green:(131/255.0)  blue:(192/255.0)  alpha:1.0]];
     [self.view addSubview:lineImage2];
     
     //我的任务
     UIView *myTask = [[UIView alloc] init];
-    [myTask setFrame:CGRectMake(216, 456, 106, 112)];
+    [myTask setFrame:CGRectMake(216, kScreenHeight-112, 106, 112)];
     [myTask setBackgroundColor:[UIColor colorWithRed:(74/255.0)  green:(100/255.0)  blue:(176/255.0)  alpha:1.0]];
     
     UIImageView *contentImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(45,28,18,23)];

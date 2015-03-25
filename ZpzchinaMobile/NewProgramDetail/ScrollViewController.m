@@ -61,12 +61,12 @@ static int number=0;//从第二张图开始
             [array addObject:image];
         }
         for (int i=0; i<5; i++) {
-            UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(320*i, 0, 320, 568-64)];
+            UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(320*i, 0, 320, kScreenHeight-64)];
             imageView.image=array[i];
             [self.myScrollView addSubview:imageView];
         }
         
-        [self.myScrollView scrollRectToVisible:CGRectMake(320+320, 0, 320, 568-64) animated:NO];
+        [self.myScrollView scrollRectToVisible:CGRectMake(320+320, 0, 320, kScreenHeight-64) animated:NO];
         
     }
 }
@@ -75,10 +75,10 @@ static int number=0;//从第二张图开始
 {
     [super viewDidLoad];
     
-    self.myScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 568)];
+    self.myScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, kScreenHeight)];
     self.myScrollView.backgroundColor=[UIColor redColor];
     self.myScrollView.pagingEnabled=YES;
-    self.myScrollView.contentSize=CGSizeMake(320*5, 568-64);
+    self.myScrollView.contentSize=CGSizeMake(320*5, kScreenHeight-64);
     self.myScrollView.delegate=self;
     
     
@@ -89,13 +89,13 @@ static int number=0;//从第二张图开始
             NSInteger b=(a>=0?a%self.imagesArray.count:((self.imagesArray.count+a%self.imagesArray.count)%self.imagesArray.count));
             
             UIImage* image=self.imagesArray[b];
-            UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(320*i, 0, 320, 568-64)];
+            UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(320*i, 0, 320, kScreenHeight-64)];
             imageView.image=image;
             [self.myScrollView addSubview:imageView];
             
         }
         
-        [self.myScrollView scrollRectToVisible:CGRectMake(320+320, 0, 320, 568-64) animated:NO];
+        [self.myScrollView scrollRectToVisible:CGRectMake(320+320, 0, 320, kScreenHeight-64) animated:NO];
         
         [self.view addSubview:self.myScrollView];
         

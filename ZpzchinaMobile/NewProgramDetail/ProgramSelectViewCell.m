@@ -70,11 +70,65 @@
     return cell;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath firstIcon:(BOOL)firstIcon secondIcon:(BOOL)secondIcon
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.backgroundColor=[UIColor clearColor];
+        
+        if (indexPath.section!=3) {
+            
+            //被点击的底色back
+            UIView* selectedBack=[[UIView alloc]initWithFrame:CGRectMake( 0, 0, 320, 34)];
+            selectedBack.backgroundColor=RGBCOLOR(234, 234, 234);
+            self.selectedBackgroundView=selectedBack;
+            
+            //被点击后左边的蓝色图
+            UIView* selectedIcon=[[UIView alloc]initWithFrame:CGRectMake( 0, 0, 2.5, 34+1)];//被选中后蓝的图片会稍微短1个坐标点，不知道原因
+            selectedIcon.backgroundColor=RGBCOLOR(82, 125, 237);
+            [selectedBack addSubview:selectedIcon];
+            
+            
+            NSArray* ary0=@[@"土地规划/拍卖",@"项目立项"];
+            NSArray* ary1=@[@"地勘阶段",@"设计阶段",@"出图阶段"];
+            NSArray* ary2=@[@"地平",@"桩基基坑",@"主体施工",@"消防/景观绿化"];
+            NSArray* arrayTotal=@[ary0,ary1,ary2];
+            
+            //小阶段名称label
+            self.stageLabel=[[UILabel alloc]initWithFrame:CGRectMake(47, 8, 150, 20)];
+            self.stageLabel.text=arrayTotal[indexPath.section][indexPath.row];
+            self.stageLabel.font=[UIFont systemFontOfSize:14];
+            [self.contentView addSubview:self.stageLabel];
+            
+            //        //右边三个小icon的最右边那个，必显示，但是图不同
+            //        UIImageView* imageView=[[UIImageView alloc]initWithFrame:CGRectMake(270, 4, 20, 20)];
+            //        imageView.image=[UIImage imageNamed:thirdIcon?@"XiangMuXiangQing_ShaiXuan/right@2x.png":@"XiangMuXiangQing_ShaiXuan/right@2x.png"];//1则是勾的图，0则是没勾的图
+            //        [cell.contentView addSubview:imageView];
+            
+            //右边三个小icon的左边2个，选择性显示，图同
+            CGFloat tempX=270;
+            if (secondIcon) {
+                UIImageView* tempImageView=[[UIImageView alloc]initWithFrame:CGRectMake(tempX, 10, 16, 16)];
+                tempImageView.image=[GetImagePath getImagePath:@"06"];
+                [self.contentView addSubview:tempImageView];
+                tempX-=30;
+            }
+            if (firstIcon) {
+                UIImageView* tempImageView=[[UIImageView alloc]initWithFrame:CGRectMake(tempX, 10, 16, 16)];
+                tempImageView.image=[GetImagePath getImagePath:@"017"];
+                [self.contentView addSubview:tempImageView];
+            }
+            
+        }else{
+            //secton==3 装修阶段的cell
+            
+            //上拉取消tableView的箭头
+            UIButton* cancel=[[UIButton alloc]initWithFrame:CGRectMake(145, 20, 24.5, 15.5)];
+            [cancel setBackgroundImage:[GetImagePath getImagePath:@"015"] forState:UIControlStateNormal];
+            [cancel addTarget:self.delegate action:@selector(selectCancel) forControlEvents:UIControlEventTouchUpInside];
+            [self.contentView addSubview:cancel];
+        }
     }
     return self;
 }

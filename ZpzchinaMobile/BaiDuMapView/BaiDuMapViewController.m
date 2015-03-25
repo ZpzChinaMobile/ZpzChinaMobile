@@ -56,7 +56,7 @@ int j;
     latArr = [[NSMutableArray alloc] init];
     pointArr = [[NSMutableArray alloc] init];
     coordinates = [[NSMutableArray alloc] init];
-    _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 505)];
+    _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, kScreenHeight-63)];
     _mapView.zoomEnabled = YES;//允许Zoom
     _mapView.scrollEnabled = YES;//允许Scroll
     _mapView.mapType = BMKMapTypeStandard;//地图类型为标准，可以为卫星，可以开启或关闭交通
@@ -505,7 +505,7 @@ int j;
         [self.view addSubview:bgView];
         ProjectModel *model = [showArr objectAtIndex:button.tag];
         NSMutableDictionary *dic = [ProjectStage JudgmentStr:model];
-        _MapContent = [[MapContentView alloc] initWithFrame:CGRectMake(0, 568, 320, 190) dic:dic number:[numberArr objectAtIndex:button.tag]];
+        _MapContent = [[MapContentView alloc] initWithFrame:CGRectMake(0, kScreenHeight, 320, 260) dic:dic number:[numberArr objectAtIndex:button.tag]];
         _MapContent.userInteractionEnabled = YES;
         _MapContent.tag=button.tag;
         [self.view addSubview:_MapContent];
@@ -513,7 +513,7 @@ int j;
         [_MapContent addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoProgramDetailViewController:)]];
         
         [UIView animateWithDuration:0.5 animations:^{
-            _MapContent.frame = CGRectMake(0, 378, 611, 260);
+            _MapContent.frame = CGRectMake(0, kScreenHeight-190, 611, 260);
         }];
     }else{
         if(!self.isSelect){
@@ -555,7 +555,7 @@ int j;
     [bgView removeFromSuperview];
     bgView=nil;
     [UIView animateWithDuration:0.5 animations:^{
-        _MapContent.frame = CGRectMake(0, 568, 611, 260);
+        _MapContent.frame = CGRectMake(0, kScreenHeight, 611, 260);
         [_MapContent removeFromSuperview];
         _MapContent = nil;
     }];

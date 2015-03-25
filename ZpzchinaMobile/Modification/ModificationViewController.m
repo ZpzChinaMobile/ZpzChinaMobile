@@ -166,7 +166,7 @@
 
 -(void)downTVCSpace{
     [UIView animateWithDuration:.5 animations:^{
-        self.tableViewSpace.center=CGPointMake(160, 50+(568-64.5-50)*.5);
+        self.tableViewSpace.center=CGPointMake(160, 50+(kScreenHeight-64.5-50)*.5);
     }];
 }
 
@@ -251,7 +251,7 @@
 }
 
 -(void)initTableViewSpace{
-    self.tableViewSpace=[[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, 568-64.5-50)];
+    self.tableViewSpace=[[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, kScreenHeight-64.5-50)];
     UISwipeGestureRecognizer* leftSwipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(userSwipe:)];
     leftSwipe.direction=UISwipeGestureRecognizerDirectionLeft;
     [self.tableViewSpace addGestureRecognizer:leftSwipe];
@@ -324,7 +324,7 @@
     if (![self.view.subviews containsObject:self.myTableView]) {
         [self.view insertSubview:self.myTableView belowSubview:self.topView];
         [UIView animateWithDuration:0.5 animations:^{
-            self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
+            self.myTableView.center=CGPointMake(160, (kScreenHeight-64.5)*.5+64.5);
         }];
     }
 }
@@ -334,7 +334,7 @@
     //table出现的时候才进行拉回去的以及移除的操作,避免反复移除
     if ([self.view.subviews containsObject:self.myTableView]) {
         [UIView animateWithDuration:0.5 animations:^{
-            self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
+            self.myTableView.center=CGPointMake(160, -(kScreenHeight-64.5)*.5);
         } completion:^(BOOL finished){
             [self.myTableView removeFromSuperview];
         }];
@@ -342,13 +342,13 @@
 }
 
 -(void)initTableView{
-    self.myTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5) style:UITableViewStylePlain];
+    self.myTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, kScreenHeight-64.5) style:UITableViewStylePlain];
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;
-    self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
+    self.myTableView.center=CGPointMake(160, -(kScreenHeight-64.5)*.5);
     [self.myTableView registerClass:[ModificationSelectViewCell class] forCellReuseIdentifier:@"Cell"];
-    self.myTableView.showsVerticalScrollIndicator=NO;
-    self.myTableView.scrollEnabled=NO;
+    //self.myTableView.showsVerticalScrollIndicator=NO;
+    //self.myTableView.scrollEnabled=NO;
     self.myTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.myTableView.backgroundColor=[UIColor whiteColor];
 }
@@ -493,7 +493,7 @@
     AppModel* appModel=[AppModel sharedInstance];
     NSLog(@"SAVE");
     
-    self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568)];
+    self.shadowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, kScreenHeight)];
     self.shadowView.backgroundColor=[UIColor blackColor];
     self.shadowView.alpha=.5;
     [self.view addSubview:self.shadowView];
@@ -1012,11 +1012,14 @@
     [self.dataDic setObject:@"" forKey:@"url"];
     
     if(self.fromView == 0){
-        NSMutableArray *arr = [UserSqlite loadList];
-        UserModel *model = arr[0];
-        [self.dataDic setObject:model.a_district forKey:@"district"];
-        [self.dataDic setObject:model.a_province forKey:@"province"];
-        [self.dataDic setObject:model.a_city forKey:@"city"];
+        //NSMutableArray *arr = [UserSqlite loadList];
+        //UserModel *model = arr[0];
+//        [self.dataDic setObject:model.a_district forKey:@"district"];
+//        [self.dataDic setObject:model.a_province forKey:@"province"];
+//        [self.dataDic setObject:model.a_city forKey:@"city"];
+        [self.dataDic setObject:@"" forKey:@"district"];
+        [self.dataDic setObject:@"" forKey:@"province"];
+        [self.dataDic setObject:@"" forKey:@"city"];
         
         [self.dataDic setObject:@"" forKey:@"landName"];
         [self.dataDic setObject:@"" forKey:@"landAddress"];

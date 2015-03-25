@@ -83,13 +83,13 @@
 //    [clearView addSubview:btn];
 //    [self.view addSubview:clearView];
     
-    UIImageView *lineImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,450,320,1)];
+    UIImageView *lineImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(0,kScreenHeight-118,320,1)];
     [lineImage1 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:lineImage1];
     lineImage1.alpha = 0.5;
     
     //修改密码
-    UIView *setView = [[UIView alloc] initWithFrame:CGRectMake(0,452,320,50)];
+    UIView *setView = [[UIView alloc] initWithFrame:CGRectMake(0,kScreenHeight-116,320,50)];
     [setView setBackgroundColor:[UIColor clearColor]];
     UIImageView *image1 = [[UIImageView alloc] initWithFrame:CGRectMake(35,12.5,25,25)];
     [image1 setImage:[GetImagePath getImagePath:@"补充切图_06"]];
@@ -107,14 +107,14 @@
     [setView addSubview:btn1];
     [self.view addSubview:setView];
     
-    UIImageView *lineImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,502,320,1)];
+    UIImageView *lineImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,kScreenHeight-66,320,1)];
     [lineImage2 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:lineImage2];
     lineImage2.alpha = 0.5;
     
     
      //退出
-    UIView *logoutView = [[UIView alloc] initWithFrame:CGRectMake(0,502,320,50)];
+    UIView *logoutView = [[UIView alloc] initWithFrame:CGRectMake(0,kScreenHeight-66,320,50)];
     [logoutView setBackgroundColor:[UIColor clearColor]];
     UIImageView *image2 = [[UIImageView alloc] initWithFrame:CGRectMake(35,12.5,25,25)];
     [image2 setImage:[GetImagePath getImagePath:@"补充切图_08"]];
@@ -132,7 +132,7 @@
     [logoutView addSubview:btn2];
     [self.view addSubview:logoutView];
     
-    UIImageView *lineImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(0,552,320,1)];
+    UIImageView *lineImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(0,kScreenHeight-16,320,1)];
     [lineImage3 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:lineImage3];
     lineImage3.alpha = 0.5;

@@ -39,7 +39,7 @@
 }
 
 -(void)loadSelf{
-    _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 505)];
+    _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, kScreenHeight-63)];
     //[_mapView setShowsUserLocation:YES];//显示定位的蓝点儿
     //_mapView.showsUserLocation = YES;//可以显示用户当前位置
     _mapView.zoomEnabled = YES;//允许Zoom

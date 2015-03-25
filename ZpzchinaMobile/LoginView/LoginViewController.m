@@ -142,6 +142,15 @@
     [bgBtn setFrame:CGRectMake(0, 0, 320, 352)];
     [bgBtn addTarget:self action:@selector(closeKeyBoard) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bgBtn];
+    if(kScreenHeight == 480){
+        self.view.transform = CGAffineTransformMakeTranslation(0,-75);
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if(kScreenHeight == 480){
+        self.view.transform = CGAffineTransformIdentity;
+    }
 }
 
 -(void)closeKeyBoard{

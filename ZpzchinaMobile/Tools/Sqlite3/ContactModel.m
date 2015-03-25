@@ -48,7 +48,7 @@
         NSLog(@"JSON: %@", responseObject);
         NSNumber *statusCode = [[[responseObject objectForKey:@"d"] objectForKey:@"status"] objectForKey:@"statusCode"];
         if([[NSString stringWithFormat:@"%@",statusCode] isEqualToString:@"200"]){
-            [ContactSqlite delData:aid];
+            //[ContactSqlite delData:aid];
             if (block) {
                 block([NSMutableArray arrayWithArray:[[responseObject objectForKey:@"d"] objectForKey:@"data"]], nil);
             }

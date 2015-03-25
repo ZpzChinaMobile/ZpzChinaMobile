@@ -159,7 +159,7 @@
         self.dataDic=dataDic;
         self.contacts=contacts;
         
-        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5-50) style:UITableViewStylePlain];
+        self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, kScreenHeight-64.5-50) style:UITableViewStylePlain];
         self.tableView.delegate=self;
         self.tableView.dataSource=self;
         self.tableView.separatorStyle=NO;

@@ -38,13 +38,15 @@
 +(NSMutableArray *)loadAllelectroweakList:(NSString *)projectID;
 +(NSMutableArray *)loadelectroweakSingleList:(NSString *)projectID;
 
-
++(NSMutableArray *)loadServeWithProject:(NSString *)aid;
++(NSMutableArray *)loadServePutWithProject:(NSString *)aid;
 +(NSMutableArray *)loadList:(NSString *)aid;
 +(NSMutableArray *)loadSingleList:(NSString *)aid;
 +(void)InsertData:(NSDictionary *)dic;
 +(void)delData:(NSString *)aid;
++(void)delAllData:(NSString *)projectId;
 +(void)UpdataProjectId:(NSString *)projectId aid:(NSString *)aid projectName:(NSString *)projectName;
 +(void)UpdataBaseId:(NSString *)baseCameraID aid:(NSString *)aid;
-
++(void)UpdataServeImage:(NSString *)aid;
 +(void)InsertNewData:(CameraModel *)model;
 @end

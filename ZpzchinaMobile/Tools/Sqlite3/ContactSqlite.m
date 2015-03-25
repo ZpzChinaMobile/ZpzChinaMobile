@@ -62,23 +62,23 @@
 
 +(void)delAll{
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:[NSString stringWithFormat:@"delete from Contact"]];
-	}
+    }
 }
 
 //获取所有数据
 +(NSMutableArray *)loadList{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Contact WHERE  status <>'1'"]];
         for (NSDictionary * dict in results) {
             ContactModel *model = [[ContactModel alloc]init];
             [model loadWithDB:dict];
             [list addObject:model];
         }
-	}
+    }
     return list;
 }
 
@@ -86,56 +86,56 @@
 +(NSMutableArray *)loadList:(NSString *)aid{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Contact WHERE localProjectId = '%@' AND status <>'1'",aid]];
         for (NSDictionary * dict in results) {
             ContactModel *model = [[ContactModel alloc]init];
             [model loadWithDB:dict];
             [list addObject:model];
         }
-	}
+    }
     return list;
 }
 
 +(NSMutableArray *)loadListWithProject:(NSString *)aid{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Contact WHERE id = '%@' AND status <>'1'",aid]];
         for (NSDictionary * dict in results) {
             ContactModel *model = [[ContactModel alloc]init];
             [model loadWithDB:dict];
             [list addObject:model];
         }
-	}
+    }
     return list;
 }
 
 +(NSMutableArray *)loadInsertData{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Contact WHERE status =='2'"]];
         for (NSDictionary * dict in results) {
             ContactModel *model = [[ContactModel alloc]init];
             [model loadWithDB:dict];
             [list addObject:model];
         }
-	}
+    }
     return list;
 }
 
 +(NSMutableArray *)loadUpdataData{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Contact WHERE status =='3'"]];
         for (NSDictionary * dict in results) {
             ContactModel *model = [[ContactModel alloc]init];
             [model loadWithDB:dict];
             [list addObject:model];
         }
-	}
+    }
     return list;
 }
 
@@ -143,10 +143,10 @@
 +(void)InsertData:(NSDictionary *)dic{
     NSLog(@"===>%@",dic);
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:@"INSERT INTO Contact(id, contactName,mobilePhone,accountName,accountAddress,projectId,projectName,localProjectId,baseContactID,duties,category,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,'2');",
          [dic objectForKey:@"id"],[dic objectForKey:@"contactName"],[dic objectForKey:@"mobilePhone"],[dic objectForKey:@"accountName"],[dic objectForKey:@"accountAddress"],[dic objectForKey:@"projectID"],[dic objectForKey:@"projectName"],[dic objectForKey:@"localProjectId"],[dic objectForKey:@"baseContactID"],[dic objectForKey:@"duties"],[dic objectForKey:@"category"]];
-	}
+    }
 }
 
 //修改在线数据
@@ -164,14 +164,14 @@
 +(NSArray *)loadServerDataStatus:(NSString *)aid{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Contact WHERE id = '%@';",aid]];
         for (NSDictionary * dict in results) {
             ContactModel *model = [[ContactModel alloc]init];
             [model loadWithDB:dict];
             [list addObject:model];
         }
-	}
+    }
     return list;
 }
 
@@ -189,14 +189,14 @@
 +(NSMutableArray *)loadDataStatus:(NSString *)aid{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Contact WHERE id = '%@' AND status = '2';",aid]];
         for (NSDictionary * dict in results) {
             ContactModel *model = [[ContactModel alloc]init];
             [model loadWithDB:dict];
             [list addObject:model];
         }
-	}
+    }
     return list;
 }
 
@@ -204,40 +204,61 @@
 //更新本地创建数据
 +(void)UpdataDataStatus2:(NSDictionary *)dic{
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:@"UPDATE Contact SET contactName=?,mobilePhone=?,accountName=?,accountAddress=?,duties=?,category=? WHERE id=?",
          [dic objectForKey:@"contactName"],[dic objectForKey:@"mobilePhone"],[dic objectForKey:@"accountName"],[dic objectForKey:@"accountAddress"],[dic objectForKey:@"duties"],[dic objectForKey:@"category"],[dic objectForKey:@"id"]];
-	}
+    }
 }
 
 //更新服务器下载数据
 +(void)UpdataDataStatus3:(NSDictionary *)dic{
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:@"UPDATE Contact SET contactName=?,mobilePhone=?,accountName=?,accountAddress=?,duties=?,category=?,status='3' WHERE id=?",
          [dic objectForKey:@"contactName"],[dic objectForKey:@"mobilePhone"],[dic objectForKey:@"accountName"],[dic objectForKey:@"accountAddress"],[dic objectForKey:@"duties"],[dic objectForKey:@"category"],[dic objectForKey:@"id"]];
-	}
+    }
 }
 
 //删除数据
 +(void)delData:(NSString *)aid{
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:[NSString stringWithFormat:@"DELETE FROM Contact WHERE id = '%@'",aid]];
-	}
+    }
+}
+
++(void)delAllData:(NSString *)projectId{
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+    if ([sqlite open:DataBaseName]) {
+        [sqlite executeQuery:[NSString stringWithFormat:@"DELETE FROM Contact WHERE projectId = '%@'",projectId]];
+    }
 }
 
 +(void)UpdataProjectId:(NSString *)projectId aid:(NSString *)aid projectName:(NSString *)projectName{
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
-        [sqlite executeQuery:[NSString stringWithFormat:@"UPDATE Contact SET projectId='%@',projectName='%@'  WHERE localProjectId ='%@'",projectId,projectName,aid]];
-	}
+    if ([sqlite open:DataBaseName]) {
+        [sqlite executeQuery:[NSString stringWithFormat:@"UPDATE Contact SET projectId='%@',localProjectId ='%@',projectName='%@'  WHERE localProjectId ='%@'",projectId,projectId,projectName,aid]];
+    }
 }
 
 +(void)UpdataBaseId:(NSString *)baseContactID aid:(NSString *)aid{
     SqliteHelper *sqlite = [[SqliteHelper alloc] init];
-	if ([sqlite open:DataBaseName]) {
+    if ([sqlite open:DataBaseName]) {
         [sqlite executeQuery:[NSString stringWithFormat:@"UPDATE Contact SET baseContactID='%@',status='0'  WHERE id ='%@'",baseContactID,aid]];
-	}
+    }
+}
+
++(NSMutableArray *)loadServeWithProject:(NSString*)aid{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    SqliteHelper *sqlite = [[SqliteHelper alloc] init];
+    if ([sqlite open:DataBaseName]) {
+        NSArray *results = [sqlite executeQuery:[NSString stringWithFormat:@"SELECT * FROM Contact WHERE projectId = '%@' AND status <>'1'",aid]];
+        for (NSDictionary * dict in results) {
+            ContactModel *model = [[ContactModel alloc]init];
+            [model loadWithDB:dict];
+            [list addObject:model];
+        }
+    }
+    return list;
 }
 @end

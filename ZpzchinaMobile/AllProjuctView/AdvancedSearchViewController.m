@@ -37,10 +37,11 @@
     [dataDic setValue:@"" forKey:@"province"];
     [dataDic setValue:@"" forKey:@"projectStage"];
     [dataDic setValue:@"" forKey:@"projectCategory"];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 513) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, kScreenHeight-55) style:UITableViewStylePlain];
     //[_tableView setBackgroundColor:[UIColor colorWithRed:(239/255.0)  green:(237/255.0)  blue:(237/255.0)  alpha:1.0]];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.scrollEnabled = NO;
     //_tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.contentView addSubview:_tableView];
     

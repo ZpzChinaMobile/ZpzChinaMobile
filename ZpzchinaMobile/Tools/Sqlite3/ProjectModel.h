@@ -99,4 +99,6 @@
 
 //地图搜索 精度,维度
 + (NSURLSessionDataTask *)GetMapSearchWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block longitude:(NSString*)longitude latitude:(NSString*)latitude radius:(NSString *)radius startIndex:(int)startIndex;
+
++ (NSURLSessionDataTask *)NotificationWithBlock:(void (^)(NSMutableArray *posts, NSError *error))block projectId:(NSString *)projectId;
 @end

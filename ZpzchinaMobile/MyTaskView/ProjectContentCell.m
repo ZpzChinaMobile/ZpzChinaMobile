@@ -197,6 +197,7 @@
     
     imageHight = [dic[@"CompressImageHeight"] floatValue];
     imageWidth = [dic[@"CompressImageWidth"] floatValue];
+    NSLog(@"%@",[NSString stringWithFormat:@"%s%@",imageAddress,dic[@"CompressImage"]]);
     bigImage.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%s%@",imageAddress,dic[@"CompressImage"]]];
 }
 
@@ -207,5 +208,9 @@
     CGImageRef cgimg = CGImageCreateWithImageInRect([srcimg CGImage], rect);
     bigImage.image = [UIImage imageWithCGImage:cgimg];
     CGImageRelease(cgimg);//用完一定要释放，否则内存泄露
+}
+
+-(void)imageViewFailedToLoadImage:(EGOImageView *)imageView error:(NSError *)error{
+    NSLog(@"%@",error);
 }
 @end

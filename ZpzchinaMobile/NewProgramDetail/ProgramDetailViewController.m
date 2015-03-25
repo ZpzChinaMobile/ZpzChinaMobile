@@ -35,6 +35,7 @@
 
 @property(nonatomic)CGFloat loadNewViewStandardY;//判断是否需要加载新大阶段view的标准线
 @property(nonatomic,strong)UITableView* myTableView;//筛选页面
+@property(nonatomic,strong)UIScrollView* myTableViewScrollView;
 
 @property(nonatomic,strong)UILabel* bigStageLabel;//上导航中 大阶段label
 @property(nonatomic,strong)UILabel* smallStageLabel;//上导航中 小阶段label
@@ -85,11 +86,11 @@
 
 -(CGFloat)loadNewViewStandardY{
     if (!self.zhuTiSheJi) {
-        return 50+56+self.tuDiXinXi.frame.size.height-568+64.5;//50和76分别为themeView和给之后预留的动画view的高,568为屏幕高,64.5为伪navi高
+        return 50+56+self.tuDiXinXi.frame.size.height-kScreenHeight+64.5;//50和76分别为themeView和给之后预留的动画view的高,568为屏幕高,64.5为伪navi高
     }else if(!self.zhuTiShiGong){
-        return 50+56+self.tuDiXinXi.frame.size.height-568+self.zhuTiSheJi.frame.size.height+64.5;
+        return 50+56+self.tuDiXinXi.frame.size.height-kScreenHeight+self.zhuTiSheJi.frame.size.height+64.5;
     }else if(!self.zhuangXiu){
-        return 50+56+self.tuDiXinXi.frame.size.height-568+self.zhuTiSheJi.frame.size.height+self.zhuTiShiGong.frame.size.height+64.5;
+        return 50+56+self.tuDiXinXi.frame.size.height-kScreenHeight+self.zhuTiSheJi.frame.size.height+self.zhuTiShiGong.frame.size.height+64.5;
     }else{
         //所有view 加载完成，无需再进行加载新view
         return CGFLOAT_MAX;
@@ -360,7 +361,7 @@
     CGFloat secondArray[3]={self.secondViewFirstStage,self.secondViewSecondStage,self.secondViewThirdStage};
     CGFloat thirdArray[4]={self.thirdViewFirstStage,self.thirdViewSecondStage,self.thirdViewThirdStage,self.thirdViewFourthStage};
     //    CGFloat fourthArray[1]={self.zhuangXiu.frame.origin.y-50};
-    if (self.zhuangXiu&&self.myScrollView.contentOffset.y>=self.zhuangXiu.frame.origin.y-568+64.5) {
+    if (self.zhuangXiu&&self.myScrollView.contentOffset.y>=self.zhuangXiu.frame.origin.y-kScreenHeight+64.5) {
         self.bigStageLabel.text=@"装修阶段";//大标题
         
         UIImage* image=[GetImagePath getImagePath:@"筛选中04"];
@@ -368,7 +369,7 @@
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width, image.size.height);
         
         self.smallStageLabel.text=ary3[0];//小标题
-    }else if(self.zhuTiShiGong&&self.myScrollView.contentOffset.y>=self.zhuTiShiGong.frame.origin.y-568+64.5){
+    }else if(self.zhuTiShiGong&&self.myScrollView.contentOffset.y>=self.zhuTiShiGong.frame.origin.y-kScreenHeight+64.5){
         self.bigStageLabel.text=@"主体施工阶段";//大标题
         
         UIImage* image=[GetImagePath getImagePath:@"筛选中03"];
@@ -376,12 +377,12 @@
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width, image.size.height);
         
         for (int i=3; i>=0; i--) {//小标题
-            if (self.myScrollView.contentOffset.y>=thirdArray[i]+50-568+64.5) {
+            if (self.myScrollView.contentOffset.y>=thirdArray[i]+50-kScreenHeight+64.5) {
                 self.smallStageLabel.text=ary2[i];
                 break;
             }
         }
-    }else if(self.zhuTiSheJi&&self.myScrollView.contentOffset.y>=self.zhuTiSheJi.frame.origin.y-568+64.5){
+    }else if(self.zhuTiSheJi&&self.myScrollView.contentOffset.y>=self.zhuTiSheJi.frame.origin.y-kScreenHeight+64.5){
         self.bigStageLabel.text=@"主体设计阶段";//大标题
         
         UIImage* image=[GetImagePath getImagePath:@"筛选中02"];
@@ -389,7 +390,7 @@
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width, image.size.height);
         
         for (int i=2; i>=0; i--) {//小标题
-            if (self.myScrollView.contentOffset.y>=secondArray[i]+50-568+64.5) {
+            if (self.myScrollView.contentOffset.y>=secondArray[i]+50-kScreenHeight+64.5) {
                 self.smallStageLabel.text=ary1[i];
                 break;
             }
@@ -402,7 +403,7 @@
         self.bigStageImageView.bounds=CGRectMake(0, 0, image.size.width, image.size.height);
         
         for (int i=1; i>=0; i--) {//小标题
-            if (self.myScrollView.contentOffset.y>=firstArray[i]+50-568+64.5) {
+            if (self.myScrollView.contentOffset.y>=firstArray[i]+50-kScreenHeight+64.5) {
                 self.smallStageLabel.text=ary0[i];
                 break;
             }
@@ -625,6 +626,7 @@
 
 //本地创建的联系人
 -(void)loadLocalContact:(NSString *)localProjectId{
+    NSLog(@"dataDic===> %@",[self.dataDic objectForKey:@"id"]);
     NSMutableArray *a = [ContactSqlite loadList:[self.dataDic objectForKey:@"id"]];
     for (int i=0; i<a.count; i++) {
         ContactModel *model = [a objectAtIndex:i];
@@ -675,7 +677,7 @@
     self.myTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5) style:UITableViewStylePlain];
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;
-    self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
+    //self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
     [self.myTableView registerClass:[ProgramSelectViewCell class] forCellReuseIdentifier:@"Cell"];
     self.myTableView.showsVerticalScrollIndicator=NO;
     self.myTableView.scrollEnabled=NO;
@@ -683,6 +685,11 @@
     self.myTableView.backgroundColor=[UIColor colorWithWhite:1 alpha:.90];
     //用于存放使sectionHeader可以被点击的button的array
     self.sectionButtonArray=[NSMutableArray array];
+    
+    self.myTableViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, kScreenHeight-64.5)];
+    self.myTableViewScrollView.contentSize = self.myTableView.frame.size;
+    self.myTableViewScrollView.center=CGPointMake(160, -(kScreenHeight-64.5)*.5);
+    [self.myTableViewScrollView addSubview:self.myTableView];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -810,9 +817,11 @@
 //筛选界面拉回去
 -(void)selectCancel{
     [UIView animateWithDuration:0.5 animations:^{
-        self.myTableView.center=CGPointMake(160, -(568-64.5)*.5);
+        //self.myTableView.center=CGPointMake(160, -(kScreenHeight-64.5)*.5);
+        self.myTableViewScrollView.center=CGPointMake(160, -(kScreenHeight-64.5)*.5);
     } completion:^(BOOL finished){
-        [self.myTableView removeFromSuperview];
+        //[self.myTableView removeFromSuperview];
+        [self.myTableViewScrollView removeFromSuperview];
     }];
 }
 
@@ -852,6 +861,12 @@
             second=NO;
         }
     }
+//    NSString *CellIdentifier = [NSString stringWithFormat:@"ProgramSelectViewCell"];
+//    ProgramSelectViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if(!cell){
+//        cell = [[ProgramSelectViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier indexPath:indexPath firstIcon:first secondIcon:second];
+//    }
+    
     
     ProgramSelectViewCell* cell=[ProgramSelectViewCell dequeueReusableCellWithTabelView:tableView identifier:@"Cell" indexPath:indexPath firstIcon:first secondIcon:second];
     cell.delegate=self;
@@ -960,9 +975,11 @@
     NSLog(@"用户选择了筛选");
     //暂时移除观察者,避免加新view时有动画
     
-    [self.view insertSubview:self.myTableView belowSubview:self.topView];
+    //[self.view insertSubview:self.myTableView belowSubview:self.topView];
+    [self.view insertSubview:self.myTableViewScrollView belowSubview:self.topView];
     [UIView animateWithDuration:0.5 animations:^{
-        self.myTableView.center=CGPointMake(160, (568-64.5)*.5+64.5);
+        //self.myTableView.center=CGPointMake(160, (kScreenHeight-64.5)*.5+64.5);
+        self.myTableViewScrollView.center=CGPointMake(160, (kScreenHeight-64.5)*.5+64.5);
     }];
 }
 
@@ -1015,7 +1032,7 @@
     self.animationView.color=[UIColor blackColor];
     
     //用来在加载新页面时,下方开始圈圈动画的时候,页面无法点击 该view初始
-    self.spaceView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 568-64.5)];
+    self.spaceView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, kScreenHeight-64.5)];
     self.spaceView.backgroundColor=[UIColor clearColor];
     
     [self addtittle:@"项目详情"];

@@ -37,12 +37,12 @@
         pickerview.dataSource = self;
         pickerview.showsSelectionIndicator = YES; //显示选中框
         [self addSubview:pickerview];
-        [pickerview selectRow:29 inComponent:0 animated:NO];
-        [self selectIndex:29];
+        [pickerview selectRow:0 inComponent:0 animated:NO];
+        [self selectIndex:0];
         [pickerview reloadAllComponents];
-        [self.proviceDictionary setObject:@"北京市" forKey:@"provice"];
-        [self.proviceDictionary setObject:@"北京市" forKey:@"city"];
-        [self.proviceDictionary setObject:@"东城区" forKey:@"county"];
+        [self.proviceDictionary setObject:@"上海市" forKey:@"provice"];
+        [self.proviceDictionary setObject:@"上海市" forKey:@"city"];
+        [self.proviceDictionary setObject:@"黄浦区" forKey:@"county"];
         
         UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
         cancel.frame = CGRectMake(10,7, 66.5, 29);

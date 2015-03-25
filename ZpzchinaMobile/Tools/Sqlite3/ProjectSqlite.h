@@ -24,5 +24,6 @@
 +(void)UpdataDataStatus2:(NSDictionary *)dic;
 +(void)delData:(NSString *)aid;
 +(void)UpdataProjectId:(NSString *)projectId aid:(NSString *)aid projectCode:(NSString *)projectCode;
++(void)UpdataServeProjectId:(NSString *)projectId aid:(NSString *)aid;
 +(void)InsertUpdataServerData:(NSDictionary *)dic;
 @end

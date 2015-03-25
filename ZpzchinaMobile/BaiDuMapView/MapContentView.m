@@ -107,7 +107,7 @@
     
     UIImageView *smailImage = [[UIImageView alloc] initWithFrame:CGRectMake(15,17,24.5,18.5)];
     [smailImage setImage:[GetImagePath getImagePath:@"全部项目_21"]];
-    [progressImage addSubview:smailImage];
+    //[progressImage addSubview:smailImage];
     [bgImgView addSubview:progressImage];
     
     UILabel *startdateLabel = [[UILabel alloc] initWithFrame:CGRectMake(210,57,65,20)];

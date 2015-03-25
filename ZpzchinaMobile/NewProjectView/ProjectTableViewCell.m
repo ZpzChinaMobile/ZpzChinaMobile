@@ -354,7 +354,11 @@
         foreignparticipationLabel.textAlignment = NSTextAlignmentLeft;
         if(flag == 0){
             if(![[dic objectForKey:@"foreignInvestment"] isEqualToString:@"null"]){
-                [foreignparticipationLabel setText:@"参与"];
+                if([[dic objectForKey:@"foreignInvestment"] isEqualToString:@"0"]){
+                    [foreignparticipationLabel setText:@"不参与"];
+                }else{
+                    [foreignparticipationLabel setText:@"参与"];
+                }
             }else{
                 [foreignparticipationLabel setText:@"不参与"];
             }

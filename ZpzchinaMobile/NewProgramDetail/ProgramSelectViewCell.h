@@ -18,4 +18,5 @@
 @property(nonatomic,weak)id<ProgramSelectViewCellDelegate>delegate;
 
 +(ProgramSelectViewCell*)dequeueReusableCellWithTabelView:(UITableView*)tableView identifier:(NSString*)identifier indexPath:(NSIndexPath*)indexPath firstIcon:(BOOL)firstIcon secondIcon:(BOOL)secondIcon;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath*)indexPath firstIcon:(BOOL)firstIcon secondIcon:(BOOL)secondIcon;
 @end

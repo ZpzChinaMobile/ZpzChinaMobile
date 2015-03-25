@@ -57,7 +57,7 @@
         zone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         zone.titleLabel.font = myFont;
         zone.tag = 0;
-        //[zone addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [zone addTarget:self action:@selector(BtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:zone];
         
         UILabel *zoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 64, 135, 30)];
